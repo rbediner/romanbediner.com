@@ -60,7 +60,7 @@
     .container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 96px 24px;
+      padding: 72px 24px;
     }
 
     h1 {
@@ -70,11 +70,82 @@
       margin-bottom: 20px;
     }
 
+    .hero h1 {
+      max-width: 100%;
+      text-wrap: balance;
+    }
+
+    .hero-wrap {
+      max-width: 100%;
+      margin: 0;
+      text-align: left;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    .hero-text {
+      max-width: 520px;
+      text-align: left;
+    }
+
+    .hero-content img {
+      width: 160px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+      object-position: center;
+      flex-shrink: 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-header svg,
+    .section-header img {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .section-header h2 {
+      margin: 0;
+    }
+
+    .section-body {
+      margin-top: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text {
+        text-align: center;
+      }
+
+      .hero-content img {
+        width: 120px;
+        height: auto;
+        margin-top: 16px;
+      }
+    }
+
     h2 {
       font-size: 28px;
       font-weight: 500;
-      margin-top: 64px;
-      margin-bottom: 16px;
+      margin-top: 48px;
+      margin-bottom: 12px;
     }
 
     p {
@@ -91,7 +162,15 @@
     }
 
     .hero {
-      margin-bottom: 96px;
+      margin-bottom: 32px;
+    }
+
+    section {
+      margin-top: 32px;
+    }
+
+    section:first-of-type {
+      margin-top: 24px;
     }
 
     .hero p {
@@ -142,43 +221,58 @@
   <main class="container">
 
     <section class="hero">
-      <h1>Building clarity, scale, and execution in complex environments.</h1>
-      <p>
-        I work at the intersection of operations, technology, and leadership.
-        My focus is helping teams and organizations simplify complexity, improve execution,
-        and scale with discipline.
-      </p>
+      <div class="hero-wrap">
+        <h1>Building clarity, scale, and execution in complex environments.</h1>
+        <div class="hero-content">
+          <div class="hero-text">
+            <p>
+              This site brings together leadership experience, advisory roles, and an operating perspective shaped by building and scaling complex organizations. The focus centers on treating Operations as a Product, something deliberately designed, built, and evolved over time, not just managed.
+            </p>
+          </div>
+          <div class="hero-photo">
+            <img src="assets/images/website-photo.png" alt="Roman Bediner" />
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <h2>What I do</h2>
+      <div class="section-header">
+        <img src="assets/icons/context.svg" alt="" aria-hidden="true" />
+        <h2>Context</h2>
+      </div>
       <div class="section-accent"></div>
-      <p>
-        I support organizations and leaders through executive roles, advisory work,
-        operational consulting, and coaching. My work centers on building systems,
-        aligning teams, and creating clear paths from strategy to execution.
-      </p>
+      <div class="section-body">
+        <p>
+          Most of the experience represented here centers on building teams, scaling platforms, and navigating growth in complex environments. That background shows up through executive roles, advisory engagements, and hands-on operating. This site pulls those threads together and reflects how that experience applies today.
+        </p>
+      </div>
     </section>
 
     <section>
-      <h2>How I work</h2>
+      <div class="section-header">
+        <img src="assets/icons/areas.svg" alt="" aria-hidden="true" />
+        <h2>Areas of focus</h2>
+      </div>
       <div class="section-accent"></div>
-      <p>
-        I value clarity over noise, structure over chaos, and progress over perfection.
-        Engagements are practical, outcome focused, and grounded in real operating experience.
-      </p>
+      <div class="section-body">
+        <p>
+          Current efforts span executive leadership roles, advisory and consulting engagements, and coaching for leaders operating in complex environments. Across all of it, the emphasis stays consistent: building durable operating systems, aligning teams, and turning strategy into execution that holds up under real-world pressure.
+        </p>
+      </div>
     </section>
 
     <section>
-      <h2>Get in touch</h2>
+      <div class="section-header">
+        <img src="assets/icons/how.svg" alt="" aria-hidden="true" />
+        <h2>How it shows up</h2>
+      </div>
       <div class="section-accent"></div>
-      <p>
-        If you would like to connect, discuss a role, or explore working together,
-        the best next step is a direct conversation.
-      </p>
-      <p>
-        <a href="mailto:hello@romanbediner.com">hello@romanbediner.com</a>
-      </p>
+      <div class="section-body">
+        <p>
+          The approach is practical, structured, and grounded in real operating experience. Preference leans toward clarity over noise, systems over heroics, and progress over perfection. The goal is not theory, but outcomes that last.
+        </p>
+      </div>
     </section>
 
   </main>
