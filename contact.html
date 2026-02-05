@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Simple contact form to start a conversation."
+    />
+    <title>Your Name | Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container nav-wrap">
+          <a class="brand" href="index.html">Your Name</a>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open menu">
+            Menu
+          </button>
+          <nav class="site-nav" aria-label="Primary">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a class="active" href="contact.html">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="container">
+        <section class="hero compact">
+          <p class="eyebrow">Contact</p>
+          <h1>Let’s start with a simple conversation.</h1>
+          <p class="lead">
+            Share what you are working on and what support you are looking for.
+          </p>
+        </section>
+
+        <section class="panel form-panel">
+          <form id="contact-form">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+
+            <label for="interest">What are you interested in?</label>
+            <select id="interest" name="interest" required>
+              <option value="">Select one</option>
+              <option value="Executive Advisory">Executive Advisory</option>
+              <option value="Operational Consulting">Operational Consulting</option>
+              <option value="Coaching">Coaching</option>
+              <option value="Full-Time Role">Full-Time Role</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <button class="button primary" type="submit">Send Message</button>
+            <p class="form-note" id="form-note">
+              Submitting opens your email app with a pre-filled message.
+            </p>
+          </form>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-wrap">
+          <p>© <span id="year"></span> Your Name</p>
+          <a href="index.html">Back to home</a>
+        </div>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
