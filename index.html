@@ -1,79 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="A clear, professional home base for leadership, advisory, consulting, coaching, and select projects."
-    />
-    <title>Your Name | Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="site-shell">
-      <header class="site-header">
-        <div class="container nav-wrap">
-          <a class="brand" href="index.html">Your Name</a>
-          <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open menu">
-            Menu
-          </button>
-          <nav class="site-nav" aria-label="Primary">
-            <a class="active" href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
-          </nav>
-        </div>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roman Bediner</title>
 
-      <main class="container">
-        <section class="hero">
-          <p class="eyebrow">Leadership · Advisory · Coaching</p>
-          <h1>A clear home base for how I work and who I work with.</h1>
-          <p class="lead">
-            I partner with founders, operators, and executive teams to improve
-            outcomes, strengthen execution, and navigate growth with clarity.
-          </p>
-          <p class="lead tight">
-            Open to full-time executive roles, advisory and consulting
-            engagements, coaching relationships, and select side projects.
-          </p>
-          <div class="cta-row">
-            <a class="button primary" href="services.html">View Services</a>
-            <a class="button ghost" href="contact.html">Start a Conversation</a>
-          </div>
-        </section>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --surface-color: #f6f7f8;
+      --text-color: #111111;
+      --muted-text: #6a6a6a;
+      --border-color: #e6e6e6;
 
-        <section class="panel split">
-          <div>
-            <h2>What you can expect</h2>
-            <p>
-              Structured thinking, practical execution, and a collaborative
-              style that keeps momentum high and priorities focused.
-            </p>
-          </div>
-          <ul class="clean-list">
-            <li>Executive-level perspective with operator depth</li>
-            <li>Calm, direct communication and aligned decision-making</li>
-            <li>Flexible engagement models based on your context</li>
-          </ul>
-        </section>
-      </main>
+      --accent-blue: #3b6cff;
+    }
 
-      <footer class="site-footer">
-        <div class="container footer-wrap">
-          <p>© <span id="year"></span> Your Name</p>
-          <a href="contact.html">Get in touch</a>
-        </div>
-      </footer>
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav .brand {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    .nav .links a {
+      margin-left: 28px;
+      font-size: 15px;
+      color: var(--text-color);
+    }
+
+    .nav .links a:hover {
+      color: var(--accent-blue);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 96px 24px;
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 500;
+      margin-top: 64px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 18px;
+      color: var(--muted-text);
+      max-width: 720px;
+    }
+
+    .section-accent {
+      width: 48px;
+      height: 2px;
+      background-color: var(--accent-blue);
+      margin: 24px 0 32px 0;
+    }
+
+    .hero {
+      margin-bottom: 96px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 760px;
+    }
+
+    .footer {
+      padding: 48px 24px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted-text);
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 20px 24px;
+      }
+
+      .nav .links a {
+        margin-left: 16px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .container {
+        padding: 72px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <div class="brand">Roman Bediner</div>
+    <div class="links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
     </div>
-    <script src="script.js"></script>
-  </body>
+  </nav>
+
+  <main class="container">
+
+    <section class="hero">
+      <h1>Building clarity, scale, and execution in complex environments.</h1>
+      <p>
+        I work at the intersection of operations, technology, and leadership.
+        My focus is helping teams and organizations simplify complexity, improve execution,
+        and scale with discipline.
+      </p>
+    </section>
+
+    <section>
+      <h2>What I do</h2>
+      <div class="section-accent"></div>
+      <p>
+        I support organizations and leaders through executive roles, advisory work,
+        operational consulting, and coaching. My work centers on building systems,
+        aligning teams, and creating clear paths from strategy to execution.
+      </p>
+    </section>
+
+    <section>
+      <h2>How I work</h2>
+      <div class="section-accent"></div>
+      <p>
+        I value clarity over noise, structure over chaos, and progress over perfection.
+        Engagements are practical, outcome focused, and grounded in real operating experience.
+      </p>
+    </section>
+
+    <section>
+      <h2>Get in touch</h2>
+      <div class="section-accent"></div>
+      <p>
+        If you would like to connect, discuss a role, or explore working together,
+        the best next step is a direct conversation.
+      </p>
+      <p>
+        <a href="mailto:hello@romanbediner.com">hello@romanbediner.com</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    © Roman Bediner
+  </footer>
+
+</body>
 </html>
