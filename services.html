@@ -38,6 +38,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
+      flex-wrap: nowrap;
       padding: 6px 48px;
       position: sticky;
       top: 0;
@@ -48,7 +50,8 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      min-width: 0;
     }
 
     .brand-logo {
@@ -64,6 +67,8 @@
       font-weight: 600;
       line-height: 1.1;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: var(--text-color);
     }
 
@@ -79,6 +84,68 @@
 
     .site-nav a:hover {
       color: var(--accent-blue);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      font-size: 16px;
+      color: var(--text-color);
+      cursor: pointer;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-toggle .menu-icon {
+      width: 18px;
+      height: 2px;
+      background-color: var(--text-color);
+      display: inline-block;
+      position: relative;
+    }
+
+    .menu-toggle .menu-icon::before,
+    .menu-toggle .menu-icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background-color: var(--text-color);
+    }
+
+    .menu-toggle .menu-icon::before {
+      top: -6px;
+    }
+
+    .menu-toggle .menu-icon::after {
+      top: 6px;
+    }
+
+    .mobile-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      background-color: var(--bg-color);
+      border-top: 1px solid var(--border-color);
+      display: none;
+      flex-direction: column;
+      padding: 12px 24px 20px 24px;
+      z-index: 20;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      font-size: 16px;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    .mobile-nav.open {
+      display: flex;
     }
 
     .header-divider {
@@ -180,6 +247,14 @@
         font-size: 22px;
       }
 
+      .site-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
       h1 {
         font-size: 36px;
       }
@@ -198,6 +273,16 @@
       <span class="brand-name">Roman Bediner</span>
     </div>
     <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+      <span class="menu-icon" aria-hidden="true"></span>
+      <span>Menu</span>
+    </button>
+    <nav id="mobile-nav" class="mobile-nav">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
@@ -265,5 +350,24 @@
   <footer class="footer">
     © Roman Bediner
   </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileNav = document.querySelector("#mobile-nav");
+
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mobileNav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      mobileNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileNav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
 </body>
 </html>
