@@ -13,7 +13,6 @@
       --text-color: #111111;
       --muted-text: #6a6a6a;
       --border-color: #e6e6e6;
-
       --accent-blue: #3b6cff;
     }
 
@@ -56,7 +55,6 @@
 
     .brand-logo {
       height: 100px;
-      width: auto;
       width: auto;
       flex-shrink: 0;
       display: block;
@@ -148,15 +146,8 @@
       display: flex;
     }
 
-    .header-divider {
-      margin: 4px 0 0 0;
-      border: none;
-      border-top: 1px solid #e5e5e5;
-      width: 100%;
-    }
-
     .container {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
       padding: 72px 24px;
     }
@@ -165,57 +156,41 @@
       font-size: 44px;
       font-weight: 500;
       letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
     }
 
     h2 {
       font-size: 28px;
       font-weight: 500;
-      margin-top: 48px;
-      margin-bottom: 12px;
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
     }
 
     p {
       font-size: 18px;
       color: var(--muted-text);
       max-width: 720px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-header svg,
-    .section-header img {
-      width: 24px;
-      height: 24px;
-      display: block;
-    }
-
-    .section-header h2 {
       margin: 0;
     }
 
-    .section-body {
-      margin-top: 12px;
-    }
-
-    .section-accent {
-      width: 48px;
-      height: 2px;
-      background-color: var(--accent-blue);
-      margin: 24px 0 32px 0;
-    }
-
     .hero {
-      margin-bottom: 32px;
+      max-width: 1040px;
     }
 
-    .hero p {
-      font-size: 20px;
-      max-width: 760px;
+    .about-subhead {
+      font-size: 22px;
+      color: var(--text-color);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin: 8px 0 0 0;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: inline-block;
     }
 
     section {
@@ -224,6 +199,87 @@
 
     section:first-of-type {
       margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-header img {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .section-accent {
+      width: 36px;
+      height: 2px;
+      background-color: var(--accent-blue);
+      margin: 16px 0 20px 0;
+    }
+
+    .section-body {
+      display: grid;
+      gap: 12px;
+    }
+
+    .context-bridge {
+      max-width: 720px;
+      color: var(--muted-text);
+      margin-top: 20px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .service-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .service-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .service-outcome {
+      color: var(--muted-text);
+    }
+
+    .label {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted-text);
+      margin-top: 8px;
+    }
+
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0 0;
+      color: #4f4f4f;
+    }
+
+    .service-list li {
+      margin: 6px 0;
     }
 
     .footer {
@@ -262,6 +318,10 @@
       .container {
         padding: 72px 20px;
       }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -289,60 +349,104 @@
       <a href="contact.html">Contact</a>
     </nav>
   </header>
+
   <main class="container">
     <section class="hero">
-      <h1>Services overview placeholder.</h1>
-      <p>
-        Placeholder copy for the services summary. This will be replaced with the
-        real offerings overview.
-      </p>
+      <h1>Services</h1>
+      <p class="about-subhead">PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK</p>
+    </section>
+
+    <p class="context-bridge">Teams engage when growth, change, or complexity begin to strain execution. The work often sits in the gap between strategy and delivery, where ownership is unclear, systems have not kept pace, and momentum slows across teams and platforms. The focus is on restoring clarity, structure, and forward motion without adding unnecessary process.</p>
+
+    <section>
+      <div class="section-header">
+        <img src="assets/icons/services-core.svg" alt="" aria-hidden="true" />
+        <h2>Core services</h2>
+      </div>
+      <div class="section-accent"></div>
+      <div class="section-body">
+        <p>The work typically shows up through a small number of focused service areas, depending on where clarity and execution are most constrained.</p>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-header">
+              <img class="service-icon" src="assets/icons/embedded-operating-leadership.svg" alt="" aria-hidden="true" />
+              <h3>Embedded Operating Leadership</h3>
+            </div>
+            <div class="service-outcome">Hands-on operating leadership embedded directly into the business to stabilize execution and drive momentum.</div>
+            <div class="label">Typical use cases</div>
+            <ul class="service-list">
+              <li>Interim COO or execution lead</li>
+              <li>Executive bandwidth gaps during scale or transition</li>
+              <li>Complex initiatives lacking ownership</li>
+            </ul>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <img class="service-icon" src="assets/icons/transformation-execution-alignment.svg" alt="" aria-hidden="true" />
+              <h3>Transformation and Execution Alignment</h3>
+            </div>
+            <div class="service-outcome">Translate strategic intent into clear operating plans teams can execute.</div>
+            <div class="label">Typical use cases</div>
+            <ul class="service-list">
+              <li>Strategy reset after growth or reorganization</li>
+              <li>Post-acquisition integration</li>
+              <li>Platform or AI-driven change programs</li>
+            </ul>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <img class="service-icon" src="assets/icons/execution-acceleration.svg" alt="" aria-hidden="true" />
+              <h3>Execution Acceleration and Program Alignment</h3>
+            </div>
+            <div class="service-outcome">Restore delivery confidence by aligning teams, timelines, and decisions.</div>
+            <div class="label">Typical use cases</div>
+            <ul class="service-list">
+              <li>Cross-functional initiatives at risk</li>
+              <li>Missed milestones or unclear accountability</li>
+              <li>Leadership friction slowing progress</li>
+            </ul>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <img class="service-icon" src="assets/icons/operating-model-cadence.svg" alt="" aria-hidden="true" />
+              <h3>Operating Model and Cadence Design</h3>
+            </div>
+            <div class="service-outcome">Design durable operating systems that scale with the organization.</div>
+            <div class="label">Typical use cases</div>
+            <ul class="service-list">
+              <li>Planning and review cadence redesign</li>
+              <li>Ownership and escalation clarity</li>
+              <li>Metrics that drive behavior</li>
+            </ul>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <img class="service-icon" src="assets/icons/platform-rollout-enablement.svg" alt="" aria-hidden="true" />
+              <h3>Platform Rollout and Team Enablement</h3>
+            </div>
+            <div class="service-outcome">Enable adoption of new platforms and ways of working without disrupting execution.</div>
+            <div class="label">Typical use cases</div>
+            <ul class="service-list">
+              <li>Platform rollouts</li>
+              <li>Organizational enablement</li>
+              <li>Performance uplift across distributed teams</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
       <div class="section-header">
-        <img src="assets/icons/areas.svg" alt="" aria-hidden="true" />
-        <h2>Service Placeholder</h2>
+        <h2>Engagement flexibility</h2>
       </div>
       <div class="section-accent"></div>
       <div class="section-body">
-        <p>Placeholder description for the first service offering.</p>
-        <p>Placeholder: outcomes or focus area.</p>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <img src="assets/icons/context.svg" alt="" aria-hidden="true" />
-        <h2>Service Placeholder</h2>
-      </div>
-      <div class="section-accent"></div>
-      <div class="section-body">
-        <p>Placeholder description for the second service offering.</p>
-        <p>Placeholder: outcomes or focus area.</p>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <img src="assets/icons/how.svg" alt="" aria-hidden="true" />
-        <h2>Service Placeholder</h2>
-      </div>
-      <div class="section-accent"></div>
-      <div class="section-body">
-        <p>Placeholder description for the third service offering.</p>
-        <p>Placeholder: outcomes or focus area.</p>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <img src="assets/icons/context.svg" alt="" aria-hidden="true" />
-        <h2>How engagements begin</h2>
-      </div>
-      <div class="section-accent"></div>
-      <div class="section-body">
-        <p>Placeholder: add a short note on intake, fit, and next steps.</p>
-        <p><a href="contact.html">Request details</a></p>
+        <p>Engagements range from short advisory support to deeply embedded operating leadership, depending on the needs of the organization.</p>
       </div>
     </section>
   </main>
