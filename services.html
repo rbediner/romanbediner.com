@@ -254,9 +254,21 @@
     }
 
     .service-icon {
-      width: 20px;
-      height: 20px;
+      height: 25px;
+      width: auto;
       flex-shrink: 0;
+    }
+
+    .service-icon.icon-embedded {
+      height: 25px;
+    }
+
+    .service-icon.icon-transformation {
+      height: 30px;
+    }
+
+    .service-icon.icon-operator {
+      height: 33px;
     }
 
     .service-outcome {
@@ -360,7 +372,6 @@
 
     <section>
       <div class="section-header">
-        <img src="assets/icons/services-core.svg" alt="" aria-hidden="true" />
         <h2>Core services</h2>
       </div>
       <div class="section-accent"></div>
@@ -369,13 +380,13 @@
         <div class="services-grid">
           <div class="service-card">
             <div class="service-header">
-              <img class="service-icon" src="assets/icons/embedded-operating-leadership.svg" alt="" aria-hidden="true" />
+              <img class="service-icon icon-embedded" src="assets/icons/embedded-operating-leadership.png" alt="" aria-hidden="true" />
               <h3>Embedded Operating Leadership</h3>
             </div>
             <div class="service-outcome">Hands-on operating leadership embedded directly into the business to stabilize execution and drive momentum.</div>
             <div class="label">Typical use cases</div>
             <ul class="service-list">
-              <li>Interim COO or execution lead</li>
+              <li>Advisory COO or execution lead</li>
               <li>Executive bandwidth gaps during scale or transition</li>
               <li>Complex initiatives lacking ownership</li>
             </ul>
@@ -383,7 +394,7 @@
 
           <div class="service-card">
             <div class="service-header">
-              <img class="service-icon" src="assets/icons/transformation-execution-alignment.svg" alt="" aria-hidden="true" />
+              <img class="service-icon icon-transformation" src="assets/icons/transformation-execution-alignment.png" alt="" aria-hidden="true" />
               <h3>Transformation and Execution Alignment</h3>
             </div>
             <div class="service-outcome">Translate strategic intent into clear operating plans teams can execute.</div>
@@ -397,21 +408,7 @@
 
           <div class="service-card">
             <div class="service-header">
-              <img class="service-icon" src="assets/icons/execution-acceleration.svg" alt="" aria-hidden="true" />
-              <h3>Execution Acceleration and Program Alignment</h3>
-            </div>
-            <div class="service-outcome">Restore delivery confidence by aligning teams, timelines, and decisions.</div>
-            <div class="label">Typical use cases</div>
-            <ul class="service-list">
-              <li>Cross-functional initiatives at risk</li>
-              <li>Missed milestones or unclear accountability</li>
-              <li>Leadership friction slowing progress</li>
-            </ul>
-          </div>
-
-          <div class="service-card">
-            <div class="service-header">
-              <img class="service-icon" src="assets/icons/operating-model-cadence.svg" alt="" aria-hidden="true" />
+              <img class="service-icon" src="assets/icons/operating-model-cadence.png" alt="" aria-hidden="true" />
               <h3>Operating Model and Cadence Design</h3>
             </div>
             <div class="service-outcome">Design durable operating systems that scale with the organization.</div>
@@ -425,7 +422,21 @@
 
           <div class="service-card">
             <div class="service-header">
-              <img class="service-icon" src="assets/icons/platform-rollout-enablement.svg" alt="" aria-hidden="true" />
+              <img class="service-icon" src="assets/icons/execution-acceleration.png" alt="" aria-hidden="true" />
+              <h3>Execution Acceleration and Program Alignment</h3>
+            </div>
+            <div class="service-outcome">Restore delivery confidence by aligning teams, timelines, and decisions.</div>
+            <div class="label">Typical use cases</div>
+            <ul class="service-list">
+              <li>Cross-functional initiatives at risk</li>
+              <li>Missed milestones or unclear accountability</li>
+              <li>Leadership friction slowing progress</li>
+            </ul>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <img class="service-icon icon-platform" src="assets/icons/platform-rollout-enablement.png" alt="" aria-hidden="true" />
               <h3>Platform Rollout and Team Enablement</h3>
             </div>
             <div class="service-outcome">Enable adoption of new platforms and ways of working without disrupting execution.</div>
@@ -434,6 +445,20 @@
               <li>Platform rollouts</li>
               <li>Organizational enablement</li>
               <li>Performance uplift across distributed teams</li>
+            </ul>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <img class="service-icon icon-operator" src="assets/icons/operator-coaching-decision-support.png" alt="" aria-hidden="true" />
+              <h3>Operator Coaching and Decision Support</h3>
+            </div>
+            <div class="service-outcome">One-to-one operating support for senior leaders navigating complex execution, focused on decisions, constraints, and momentum.</div>
+            <div class="label">Typical use cases</div>
+            <ul class="service-list">
+              <li>Senior leader stepping into expanded scope</li>
+              <li>Decision support during high-stakes initiatives</li>
+              <li>Operating mentorship alongside delivery responsibilities</li>
             </ul>
           </div>
         </div>
