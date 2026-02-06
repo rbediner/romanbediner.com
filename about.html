@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roman Bediner | About</title>
+  <link rel="icon" type="image/png" href="assets/logo/favicon.png" />
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --surface-color: #f6f7f8;
+      --text-color: #111111;
+      --muted-text: #6a6a6a;
+      --border-color: #e6e6e6;
+
+      --accent-blue: #3b6cff;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px 8px 48px;
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-color);
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      height: 168px;
+      width: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 49px;
+      font-weight: 600;
+      line-height: 1.1;
+      white-space: nowrap;
+      color: var(--text-color);
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 32px;
+      font-size: 16px;
+    }
+
+    .site-nav a {
+      color: var(--text-color);
+    }
+
+    .site-nav a:hover {
+      color: var(--accent-blue);
+    }
+
+    .header-divider {
+      margin: 4px 0 0 0;
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 52px 24px;
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 500;
+      margin-top: 48px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 18px;
+      color: var(--muted-text);
+      max-width: 720px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-header svg,
+    .section-header img {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .section-header h2 {
+      margin: 0;
+    }
+
+    .section-body {
+      margin-top: 12px;
+    }
+
+    .about {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .about-subhead {
+      font-size: 22px;
+      color: var(--text-color);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin: 8px 0 0 0;
+    }
+
+
+    .about {
+      max-width: 720px;
+      margin: 0;
+      margin-top: 16px;
+      border-left: 1px solid #e1e1e1;
+      padding-left: 16px;
+      line-height: 1.7;
+    }
+
+    .about p {
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .about p:first-child {
+      font-weight: 500;
+    }
+
+    .about p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-accent {
+      width: 48px;
+      height: 2px;
+      background-color: var(--accent-blue);
+      margin: 24px 0 32px 0;
+    }
+
+    .hero {
+      margin-bottom: 32px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 760px;
+    }
+
+    section {
+      margin-top: 32px;
+    }
+
+    section:first-of-type {
+      margin-top: 24px;
+    }
+
+    .footer {
+      padding: 48px 24px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted-text);
+    }
+
+    @media (max-width: 768px) {
+      .site-header {
+        padding: 16px 24px 6px 24px;
+      }
+
+      .brand-logo {
+        height: 56px;
+      }
+
+      .brand-name {
+        font-size: 20px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .container {
+        padding: 72px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo/mainlogo.png" alt="Logo" class="brand-logo" />
+      <span class="brand-name">Roman Bediner</span>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <h1>About</h1>
+      <p class="about-subhead">PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK</p>
+    </section>
+
+    <section class="about">
+      <p>Strong organizations are built when execution is treated as something that can be designed.</p>
+
+      <p>Early professional experience took shape in startup environments, where planning and delivery happened side by side. Work moved quickly, roles overlapped, and progress depended on whether systems were clear enough to support momentum. Clarity mattered. Ownership mattered. Simple structures made it possible for small teams to move decisively.</p>
+
+      <p>That foundation was later refined inside large, complex enterprises, including Amazon Web Services and The Walt Disney Company, as well as advisory work connected to an Accenture company. At scale, the challenge became less about intent and more about design. As organizations grew, operating models needed to evolve with the ambition they were meant to support.</p>
+
+      <p>Across both environments, a clear pattern emerged. Organizations moved with greater confidence when operations were treated as a product. Something intentionally designed, owned, measured, and improved over time. Not a collection of processes, but a coherent system with clear inputs, explicit accountability, and visible outcomes.</p>
+
+      <p>This perspective emphasizes outcomes over activity. Decisions have owners. Work follows defined paths. Cadence replaces improvisation. Teams understand not only what they are building, but how success is measured and sustained. When operations are productized in this way, execution becomes calmer, more predictable, and easier to scale.</p>
+
+      <p>Recent work has extended this approach into AI-enabled ways of working. The focus remains practical and outcome-based. New tools create leverage when they are embedded into real operating systems, aligned with decision boundaries, and accountable to results. Productized operations provide the structure that allows new capabilities to compound over time.</p>
+
+      <p>Today, this work shows up in advisory and embedded roles during moments of growth, transition, and increased expectation. The objective is consistent. Design operating systems that scale with the organization. Replace improvisation with intent. Build clarity that holds as conditions change.</p>
+
+      <p>Based in the Raleigh | Durham | Chapel Hill area, with family nearby. The preference for well-designed systems extends beyond work. Clear inputs. Useful feedback. Time spent deliberately.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © Roman Bediner
+  </footer>
+</body>
+</html>
