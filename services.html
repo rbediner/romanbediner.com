@@ -143,10 +143,19 @@
     @media (max-width: 768px) {
       .nav {
         padding: 20px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .nav .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
       }
 
       .nav .links a {
-        margin-left: 16px;
+        margin-left: 0;
       }
 
       h1 {
