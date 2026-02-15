@@ -476,7 +476,7 @@
     }
 
     // The provided LinkedIn PNG contains a baked checkerboard background.
-    // Convert checkerboard gray pixels to transparency at runtime.
+    // Keep only LinkedIn-blue pixels and make all other pixels transparent.
     const linkedinIcon = document.getElementById("linkedin-icon");
     if (linkedinIcon) {
       const sanitizeLinkedInIcon = () => {
@@ -495,9 +495,9 @@
           const r = data[i];
           const g = data[i + 1];
           const b = data[i + 2];
-          const isGray = Math.abs(r - g) <= 4 && Math.abs(g - b) <= 4;
-          const isCheckerTone = r >= 195 && r <= 245;
-          if (isGray && isCheckerTone) {
+          const a = data[i + 3];
+          const isBlueFamily = b > g && g > r && b > 80 && g > 50 && r < 100;
+          if (!isBlueFamily || a === 0) {
             data[i + 3] = 0;
           }
         }
