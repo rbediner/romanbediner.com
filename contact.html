@@ -445,7 +445,7 @@
 
     <section class="linkedin-block" aria-label="LinkedIn">
       <a class="linkedin-link" href="https://www.linkedin.com/in/romanbediner/" target="_blank" rel="noopener noreferrer">
-        <img class="linkedin-icon" src="assets/icons/LinkedIn.png" alt="" aria-hidden="true" />
+        <img id="linkedin-icon" class="linkedin-icon" src="assets/icons/LinkedIn.png" alt="" aria-hidden="true" />
         <span>Prefer LinkedIn? Connect with me here.</span>
       </a>
     </section>
@@ -473,6 +473,44 @@
           menuToggle.setAttribute("aria-expanded", "false");
         });
       });
+    }
+
+    // The provided LinkedIn PNG contains a baked checkerboard background.
+    // Convert checkerboard gray pixels to transparency at runtime.
+    const linkedinIcon = document.getElementById("linkedin-icon");
+    if (linkedinIcon) {
+      const sanitizeLinkedInIcon = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = linkedinIcon.naturalWidth;
+        canvas.height = linkedinIcon.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          return;
+        }
+        ctx.drawImage(linkedinIcon, 0, 0);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const isGray = Math.abs(r - g) <= 4 && Math.abs(g - b) <= 4;
+          const isCheckerTone = r >= 195 && r <= 245;
+          if (isGray && isCheckerTone) {
+            data[i + 3] = 0;
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+        linkedinIcon.src = canvas.toDataURL("image/png");
+      };
+
+      if (linkedinIcon.complete) {
+        sanitizeLinkedInIcon();
+      } else {
+        linkedinIcon.addEventListener("load", sanitizeLinkedInIcon, { once: true });
+      }
     }
 
     const SERVICE_ID = "service_gdy8zrq";
