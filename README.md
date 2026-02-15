@@ -35,19 +35,30 @@ Alias URL handler so `/home` works while canonical stays on `/index.html`.
 
 ## Contact Form Notes
 
-- Contact form lives in `contact.html`.
+- Contact form markup lives in `contact.html`.
 - Uses:
   - Quill (`cdn.quilljs.com`)
   - EmailJS browser SDK (`cdn.jsdelivr.net`)
-- EmailJS IDs are hardcoded in page script:
-  - `SERVICE_ID`
-  - `TEMPLATE_ID`
-  - `PUBLIC_KEY`
+- Contact form logic is in `scripts/contact-form-emailjs.js`.
+- Email service provider: **EmailJS**.
+- Current EmailJS config values (stored in `scripts/contact-form-emailjs.js`):
+  - `SERVICE_ID = service_gdy8zrq`
+  - `TEMPLATE_ID = template_ochbn5j`
+  - `PUBLIC_KEY = UfPL6R5QTMSffMppT`
+- EmailJS send payload currently includes:
+  - `to_email`
+  - `from_name`
+  - `from_email`
+  - `reply_to`
+  - `subject` (hardcoded to `Website contact`)
+  - `message`
+  - `message_html`
 - Recipient email is intentionally obfuscated in JS and not exposed in HTML markup.
 - Anti-spam protections:
   - Hidden honeypot field (`company`)
   - Client-side rate limit (`contact_last_submit`, 60s)
   - Minimum message length validation
+  - Draft autosave key (`contact_draft`)
 
 ## Social / Asset Caveat
 
@@ -83,4 +94,4 @@ bash scripts/check_og_urls.sh
 
 - Keep root page filenames as-is (`index.html`, `about.html`, `services.html`, `contact.html`) to preserve clean production URLs.
 - If additional URL aliases are needed, use redirect stubs like `home/index.html` and point canonical tags to the true source page.
-- If EmailJS credentials change, update only the constants in `contact.html`.
+- If EmailJS credentials change, update constants in `scripts/contact-form-emailjs.js`.
