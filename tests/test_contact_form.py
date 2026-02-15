@@ -53,7 +53,7 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn('id="submit-btn" type="submit">Send message</button>', self.html)
         self.assertIn('submitBtn.textContent = "Sending...";', self.js)
         self.assertIn(
-            "Thanks for reaching out. I'll review your message and respond directly.",
+            "Thank you for reaching out. I will review your message and respond shortly.",
             self.js,
         )
         self.assertIn('id="form-error" role="status" aria-live="polite"', self.html)
@@ -66,12 +66,12 @@ class ContactPageQATest(unittest.TestCase):
 
     def test_linkedin_section_uses_asset_icon(self):
         self.assertIn('href="https://linkedin.com/in/romanbediner"', self.html)
-        self.assertIn('src="icons/linkedin.png"', self.html)
+        self.assertIn('src="assets/icons/LinkedIn.png"', self.html)
         self.assertIn("Connect with me on LinkedIn", self.html)
 
     def test_mobile_and_layout_hooks_exist(self):
         self.assertIn("font-size: clamp(32px, 5vw, 40px);", self.html)
-        self.assertRegex(self.html, r"\.form-wrap\s*{\s*max-width: 720px;")
+        self.assertRegex(self.html, r"\.contact-shell\s*{\s*max-width: 720px;")
         self.assertRegex(self.html, r"\.card\s*{\s*background: #ffffff;")
         self.assertRegex(self.html, r"@media \(min-width: 768px\)")
         self.assertIn('<script src="scripts/site-navigation.js"></script>', self.html)

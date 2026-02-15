@@ -16,7 +16,7 @@ Contact page with EmailJS + Quill integration.
 - `assets/`:
 Images, icons, logos, OG image.
 - `scripts/`:
-Utility scripts used by development checks.
+All browser JS lives here (no root-level `.js` files), plus small dev check scripts.
 - `tests/`:
 Python `unittest` checks for contact page structure and behavior wiring.
 - `home/index.html`:
@@ -89,6 +89,15 @@ Validate OG metadata references:
 ```bash
 bash scripts/check_og_urls.sh
 ```
+
+## Script Inventory
+
+- `scripts/site-navigation.js`:
+Shared header/mobile navigation behavior used by all primary pages.
+- `scripts/contact-form-emailjs.js`:
+Contact page behavior: Quill editor init, honeypot/rate-limit validation, draft autosave, and EmailJS send flow.
+- `scripts/check_og_urls.sh`:
+Dev check to validate OG/Twitter image metadata references.
 
 ## Maintenance Notes
 
