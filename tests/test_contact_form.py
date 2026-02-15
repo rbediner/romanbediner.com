@@ -39,9 +39,9 @@ class ContactPageQATest(unittest.TestCase):
 
     def test_uses_emailjs_not_mailto(self):
         self.assertIn("https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js", self.html)
-        self.assertIn('const SERVICE_ID = "SERVICE_ID";', self.html)
-        self.assertIn('const TEMPLATE_ID = "TEMPLATE_ID";', self.html)
-        self.assertIn('const PUBLIC_KEY = "PUBLIC_KEY";', self.html)
+        self.assertRegex(self.html, r'const SERVICE_ID = "service_[A-Za-z0-9]+";')
+        self.assertRegex(self.html, r'const TEMPLATE_ID = "template_[A-Za-z0-9]+";')
+        self.assertRegex(self.html, r'const PUBLIC_KEY = "[A-Za-z0-9_-]+";')
         self.assertIn("await emailjs.send(SERVICE_ID, TEMPLATE_ID", self.html)
         self.assertNotIn("mailto:", self.html)
 
