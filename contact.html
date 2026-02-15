@@ -19,15 +19,20 @@
   <meta name="twitter:description" content="Operations as a Product (OaP)" />
   <meta name="twitter:image" content="https://rbediner.github.io/romanbediner.com/assets/og-logo/og.png" />
 
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+
   <style>
     :root {
       --bg-color: #ffffff;
-      --surface-color: #f6f7f8;
       --text-color: #111111;
-      --muted-text: #6a6a6a;
+      --muted-text: #5f5f5f;
       --border-color: #e6e6e6;
+      --surface-color: #ffffff;
+      --link-color: #3b6cff;
+    }
 
-      --accent-blue: #3b6cff;
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -39,7 +44,7 @@
     }
 
     a {
-      color: var(--accent-blue);
+      color: var(--link-color);
       text-decoration: none;
     }
 
@@ -63,7 +68,7 @@
       justify-content: space-between;
       gap: 12px;
       flex-wrap: nowrap;
-      padding: 0 48px;
+      padding: 0 24px;
     }
 
     .brand {
@@ -74,15 +79,14 @@
     }
 
     .brand-logo {
-      height: 100px;
-      width: auto;
+      height: 64px;
       width: auto;
       flex-shrink: 0;
       display: block;
     }
 
     .brand-name {
-      font-size: 40px;
+      font-size: 22px;
       font-weight: 600;
       line-height: 1.1;
       white-space: nowrap;
@@ -92,7 +96,7 @@
     }
 
     .site-nav {
-      display: flex;
+      display: none;
       gap: 32px;
       font-size: 16px;
     }
@@ -102,11 +106,11 @@
     }
 
     .site-nav a:hover {
-      color: var(--accent-blue);
+      color: var(--link-color);
     }
 
     .menu-toggle {
-      display: none;
+      display: inline-flex;
       background: none;
       border: none;
       padding: 6px 8px;
@@ -167,127 +171,170 @@
       display: flex;
     }
 
-    .header-divider {
-      margin: 4px 0 0 0;
-      border: none;
-      border-top: 1px solid #e5e5e5;
-      width: 100%;
-    }
-
     .container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 72px 24px;
+      padding: 48px 20px 72px 20px;
     }
 
-    h1 {
-      font-size: 44px;
+    .contact-hero {
+      text-align: center;
+      margin: 0 auto 32px auto;
+      max-width: 760px;
+    }
+
+    .contact-icon {
+      width: 64px;
+      height: 64px;
+      display: block;
+      margin: 0 auto 18px auto;
+    }
+
+    .contact-hero h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 40px);
       font-weight: 500;
       letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      line-height: 1.15;
     }
 
-    h2 {
-      font-size: 28px;
-      font-weight: 500;
-      margin-top: 48px;
-      margin-bottom: 12px;
-    }
-
-    p {
-      font-size: 18px;
+    .contact-hero p {
+      margin: 14px auto 0 auto;
+      font-size: 19px;
       color: var(--muted-text);
+      max-width: 680px;
+    }
+
+    .form-wrap {
       max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .form-card {
+      background: var(--surface-color);
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(17, 17, 17, 0.05);
+    }
+
+    .field {
+      margin-top: 20px;
+    }
+
+    .field:first-child {
+      margin-top: 0;
     }
 
     label {
       display: block;
       font-size: 14px;
       color: var(--text-color);
-      margin: 20px 0 8px 0;
+      margin-bottom: 8px;
+      font-weight: 500;
     }
 
-    input,
-    select,
-    textarea {
+    input {
       width: 100%;
       font-size: 16px;
       padding: 12px 14px;
       border: 1px solid var(--border-color);
-      border-radius: 6px;
+      border-radius: 8px;
       font-family: inherit;
       color: var(--text-color);
-      background-color: var(--bg-color);
-      box-sizing: border-box;
+      background-color: #ffffff;
     }
 
-    textarea {
-      resize: vertical;
+    input:focus,
+    .ql-container:focus-within,
+    .ql-toolbar:focus-within {
+      outline: none;
+      border-color: #b7b7b7;
     }
 
-    button {
+    .ql-toolbar.ql-snow {
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      background-color: #fcfcfc;
+    }
+
+    .ql-container.ql-snow {
+      border: 1px solid var(--border-color);
+      border-radius: 0 0 8px 8px;
+      min-height: 220px;
+      font-size: 16px;
+      color: var(--text-color);
+      font-family: inherit;
+    }
+
+    .ql-editor {
+      min-height: 220px;
+      line-height: 1.6;
+    }
+
+    .char-count {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted-text);
+      text-align: right;
+    }
+
+    .submit-btn {
       margin-top: 20px;
-      background-color: var(--accent-blue);
+      background-color: #111111;
       color: #ffffff;
       border: none;
-      padding: 12px 18px;
-      border-radius: 6px;
+      border-radius: 999px;
+      padding: 12px 24px;
       font-size: 15px;
+      font-weight: 500;
       cursor: pointer;
+      min-width: 148px;
     }
 
-    button:hover {
-      opacity: 0.9;
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
 
-    .form-note {
+    .form-error {
       margin-top: 12px;
       font-size: 14px;
+      color: #a42525;
+      min-height: 21px;
     }
 
-    .section-accent {
-      width: 48px;
-      height: 2px;
-      background-color: var(--accent-blue);
-      margin: 24px 0 32px 0;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-header svg,
-    .section-header img {
-      width: 24px;
-      height: 24px;
-      display: block;
-    }
-
-    .section-header h2 {
+    .success-message {
       margin: 0;
+      font-size: 18px;
+      color: var(--muted-text);
     }
 
-    .section-body {
-      margin-top: 12px;
+    .linkedin-block {
+      margin-top: 64px;
+      text-align: center;
     }
 
-    .hero {
-      margin-bottom: 32px;
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-color);
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
     }
 
-    .hero p {
-      font-size: 20px;
-      max-width: 760px;
+    .linkedin-link:hover {
+      text-decoration: underline;
     }
 
-    section {
-      margin-top: 32px;
-    }
-
-    section:first-of-type {
-      margin-top: 24px;
+    .linkedin-icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+      object-fit: contain;
     }
 
     .footer {
@@ -298,43 +345,33 @@
       color: var(--muted-text);
     }
 
-    @media (max-width: 768px) {
-      .site-header {
-        padding: 4px 0;
-      }
-
+    @media (min-width: 768px) {
       .header-inner {
-        padding: 0 24px;
+        padding: 0 48px;
       }
 
       .brand-logo {
-        height: 64px;
+        height: 84px;
       }
 
       .brand-name {
-        font-size: 22px;
+        font-size: 40px;
       }
 
       .site-nav {
-        display: none;
+        display: flex;
       }
 
       .menu-toggle {
-        display: inline-flex;
-      }
-
-      h1 {
-        font-size: 36px;
+        display: none;
       }
 
       .container {
-        padding: 72px 20px;
+        padding: 56px 24px 80px 24px;
       }
-    }
 
-    @media (min-width: 768px) {
-      .brand-logo {
-        height: 84px;
+      .form-card {
+        padding: 40px;
       }
     }
   </style>
@@ -347,7 +384,7 @@
         <img src="assets/logo/mainlogo-blue-white.jpg" alt="Logo" class="brand-logo" />
         <span class="brand-name">Roman Bediner</span>
       </div>
-      <nav class="site-nav">
+      <nav class="site-nav" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
@@ -357,7 +394,7 @@
         <span class="menu-icon" aria-hidden="true"></span>
         <span>Menu</span>
       </button>
-      <nav id="mobile-nav" class="mobile-nav">
+      <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
@@ -365,59 +402,61 @@
       </nav>
     </div>
   </header>
+
   <main class="container">
-    <section class="hero">
-      <h1>Contact section placeholder.</h1>
+    <section class="contact-hero">
+      <img src="assets/icons/contact.png" alt="Contact" class="contact-icon" />
+      <h1>Let's start a conversation.</h1>
       <p>
-        Placeholder copy for the contact intro. This will be replaced with your
-        preferred call to action.
+        If you are exploring a transition, scaling a team, or pressure-testing execution,
+        share a bit of context and I will respond directly.
       </p>
     </section>
 
-    <section>
-      <div class="section-header">
-        <img src="assets/icons/context.svg" alt="" aria-hidden="true" />
-        <h2>Start a conversation</h2>
-      </div>
-      <div class="section-accent"></div>
-      <div class="section-body">
-        <p>
-          Placeholder: this form is active for testing and will be updated with
-          the final contact flow.
-        </p>
+    <section class="form-wrap" aria-label="Contact form">
+      <div class="form-card" id="form-card">
         <form id="contact-form">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required />
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required aria-required="true" />
+          </div>
 
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required aria-required="true" />
+          </div>
 
-          <label for="interest">What are you interested in?</label>
-          <select id="interest" name="interest" required>
-            <option value="">Select one</option>
-            <option value="Executive Advisory">Executive Advisory</option>
-            <option value="Operational Consulting">Operational Consulting</option>
-            <option value="Coaching">Coaching</option>
-            <option value="Full-Time Role">Full-Time Role</option>
-            <option value="Other">Other</option>
-          </select>
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" />
+          </div>
 
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="6" required></textarea>
+          <div class="field">
+            <label for="message-editor">Message</label>
+            <div id="message-editor" aria-required="true"></div>
+            <div class="char-count" id="char-count">0 / 10000</div>
+          </div>
 
-          <button type="submit">Send Message</button>
-          <p class="form-note" id="form-note">
-            Placeholder: form submission currently opens your email app.
-          </p>
+          <button class="submit-btn" id="submit-btn" type="submit">Send message</button>
+          <p class="form-error" id="form-error" role="status" aria-live="polite"></p>
         </form>
       </div>
+    </section>
+
+    <section class="linkedin-block" aria-label="LinkedIn">
+      <a class="linkedin-link" href="https://www.linkedin.com/in/romanbediner/" target="_blank" rel="noopener noreferrer">
+        <img class="linkedin-icon" src="assets/icons/LinkedIn.png" alt="" aria-hidden="true" />
+        <span>Prefer LinkedIn? Connect with me here.</span>
+      </a>
     </section>
   </main>
 
   <footer class="footer">
-    © Roman Bediner
+    &copy; Roman Bediner
   </footer>
 
+  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     const menuToggle = document.querySelector(".menu-toggle");
     const mobileNav = document.querySelector("#mobile-nav");
@@ -435,6 +474,100 @@
         });
       });
     }
+
+    const SERVICE_ID = "SERVICE_ID";
+    const TEMPLATE_ID = "TEMPLATE_ID";
+    const PUBLIC_KEY = "PUBLIC_KEY";
+    const MAX_MESSAGE_CHARS = 10000;
+
+    const recipient = [
+      114, 98, 101, 100, 105, 110, 101, 114, 43, 119, 101, 98, 115, 105, 116, 101,
+      64, 103, 109, 97, 105, 108, 46, 99, 111, 109
+    ].map((c) => String.fromCharCode(c)).join("");
+
+    const contactForm = document.getElementById("contact-form");
+    const formCard = document.getElementById("form-card");
+    const submitBtn = document.getElementById("submit-btn");
+    const formError = document.getElementById("form-error");
+    const charCount = document.getElementById("char-count");
+
+    const quill = new Quill("#message-editor", {
+      theme: "snow",
+      placeholder: "Share a little context about what you are working on...",
+      modules: {
+        toolbar: [
+          [{ header: [2, 3, false] }],
+          ["bold", "italic", "underline"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["link"],
+          ["clean"]
+        ]
+      }
+    });
+
+    const getMessageText = () => {
+      const text = quill.getText();
+      return text.endsWith("\n") ? text.slice(0, -1) : text;
+    };
+
+    const updateCharCount = () => {
+      let text = getMessageText();
+      if (text.length > MAX_MESSAGE_CHARS) {
+        quill.deleteText(MAX_MESSAGE_CHARS, quill.getLength());
+        text = getMessageText();
+      }
+      charCount.textContent = `${text.length} / ${MAX_MESSAGE_CHARS}`;
+    };
+
+    quill.on("text-change", updateCharCount);
+    updateCharCount();
+
+    emailjs.init({ publicKey: PUBLIC_KEY });
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      formError.textContent = "";
+
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const subjectInput = document.getElementById("subject");
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const subject = subjectInput.value.trim();
+      const messageText = getMessageText().trim();
+      const messageHtml = quill.root.innerHTML.trim();
+
+      if (!contactForm.reportValidity()) {
+        return;
+      }
+
+      if (!messageText) {
+        formError.textContent = "Please enter a message.";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      try {
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+          to_email: recipient,
+          from_name: name,
+          reply_to: email,
+          from_email: email,
+          subject: subject || "Website contact form",
+          message: messageText,
+          message_html: messageHtml
+        });
+
+        formCard.innerHTML = "<p class=\"success-message\">Thanks for reaching out. I'll review your message and respond directly.</p>";
+      } catch (error) {
+        formError.textContent = "Something went wrong while sending. Please try again.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send message";
+      }
+    });
   </script>
 </body>
 </html>
