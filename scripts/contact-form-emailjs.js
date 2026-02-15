@@ -107,7 +107,7 @@
 
       localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
       localStorage.removeItem(draftKey);
-      formCard.innerHTML = "<p class=\"success-message\">Thanks for reaching out. I'll review your message and respond directly.</p>";
+      formCard.innerHTML = "<p class=\"success-message\">Thank you for reaching out. I will review your message and respond shortly.</p>";
     } catch (error) {
       formError.textContent = "Something went wrong while sending. Please try again.";
       submitBtn.disabled = false;

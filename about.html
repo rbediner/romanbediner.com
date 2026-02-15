@@ -7,7 +7,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Roman Bediner — Executive Operator" />
   <meta property="og:description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK" />
-  <meta property="og:image" content="icons/mainlogo.svg" />
+  <meta property="og:image" content="assets/icons/mainlogo.svg" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -17,12 +17,12 @@
 
   <title>Roman Bediner | About</title>
   <link rel="icon" type="image/png" href="assets/logo/favicon.png" />
-  <link rel="preload" as="image" href="icons/mainlogo.svg">
-  <link rel="preload" as="image" href="icons/contact.png">
+  <link rel="preload" as="image" href="assets/icons/mainlogo.svg">
+  <link rel="preload" as="image" href="assets/icons/contact.png">
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Roman Bediner — Executive Operator" />
   <meta name="twitter:description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK" />
-  <meta name="twitter:image" content="icons/mainlogo.svg" />
+  <meta name="twitter:image" content="assets/icons/mainlogo.svg" />
 
   <style>
     html {
@@ -215,20 +215,28 @@
     }
 
     .section-header {
-      display: flex;
-      align-items: center;
+      display: inline-flex;
+      align-items: baseline;
       gap: 12px;
+      line-height: 1;
     }
 
-    .section-header svg,
-    .section-header img {
-      width: 24px;
-      height: 24px;
-      display: block;
+    .section-header img,
+    .section-header svg {
+      height: 22px;
+      width: auto;
+      flex-shrink: 0;
+      position: relative;
+      top: 2px;
+    }
+
+    .section-header img.icon-areas {
+      height: 22px;
     }
 
     .section-header h2 {
       margin: 0;
+      line-height: 1.2;
     }
 
     .section-body {
@@ -414,8 +422,6 @@
     </section>
 
     <section class="about section">
-      <p>Strong organizations are built when execution is treated as something that can be designed.</p>
-
       <p>Early professional experience took shape in startup environments, where planning and delivery happened side by side. Work moved quickly, roles overlapped, and progress depended on whether systems were clear enough to support momentum. Clarity mattered. Ownership mattered. Simple structures made it possible for small teams to move decisively.</p>
 
       <p>That foundation was later refined inside large, complex enterprises, including Amazon Web Services and The Walt Disney Company, as well as advisory work connected to an Accenture company. At scale, the challenge became less about intent and more about design. As organizations grew, operating models needed to evolve with the ambition they were meant to support.</p>
