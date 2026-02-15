@@ -3,25 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com; connect-src https://api.emailjs.com;">
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Roman Bediner" />
-  <meta property="og:description" content="Operations as a Product (OaP)" />
-  <meta property="og:image" content="https://rbediner.github.io/romanbediner.com/assets/og-logo/og.png" />
+  <meta property="og:title" content="Roman Bediner — Executive Operator" />
+  <meta property="og:description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK" />
+  <meta property="og:image" content="icons/mainlogo.svg" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta name="description" content="Operations as a Product (OaP)" />
+  <meta name="description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK — Executive operator, operating clarity, execution alignment." />
   <!-- Canonical URL keeps homepage indexing consolidated on /index.html. -->
   <link rel="canonical" href="https://rbediner.github.io/romanbediner.com/index.html" />
 
   <title>Roman Bediner</title>
   <link rel="icon" type="image/png" href="assets/logo/favicon.png" />
+  <link rel="preload" as="image" href="icons/mainlogo.svg">
+  <link rel="preload" as="image" href="icons/contact.png">
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Roman Bediner" />
-  <meta name="twitter:description" content="Operations as a Product (OaP)" />
-  <meta name="twitter:image" content="https://rbediner.github.io/romanbediner.com/assets/og-logo/og.png" />
+  <meta name="twitter:title" content="Roman Bediner — Executive Operator" />
+  <meta name="twitter:description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK" />
+  <meta name="twitter:image" content="icons/mainlogo.svg" />
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     :root {
       --bg-color: #ffffff;
       --surface-color: #f6f7f8;
@@ -57,15 +64,16 @@
       z-index: 10;
     }
 
+    .site-header img {
+      height: 44px;
+    }
+
     .header-inner {
-      max-width: 960px;
-      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: nowrap;
-      padding: 0 48px;
     }
 
     .brand {
@@ -76,7 +84,7 @@
     }
 
     .brand-logo {
-      height: 100px;
+      height: 44px;
       width: auto;
       width: auto;
       flex-shrink: 0;
@@ -177,9 +185,13 @@
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 72px 24px;
+      padding: 0 24px;
+    }
+
+    .page-main {
+      padding: 72px 0;
     }
 
     h1 {
@@ -278,22 +290,56 @@
     }
 
     .section-accent {
-      width: 48px;
-      height: 2px;
-      background-color: var(--accent-blue);
-      margin: 24px 0 32px 0;
+      display: none;
     }
 
     .hero {
       margin-bottom: 32px;
     }
 
-    section {
-      margin-top: 32px;
+    .section {
+      margin: 72px 0;
     }
 
-    section:first-of-type {
-      margin-top: 24px;
+    .section h2,
+    .section h3 {
+      margin-bottom: 14px;
+    }
+
+    .section p {
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    button,
+    .btn {
+      transition: all 0.2s ease;
+    }
+
+    button:hover,
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    input:focus-visible,
+    textarea:focus-visible,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(45, 92, 255, 0.35);
+      outline-offset: 2px;
     }
 
     .hero p {
@@ -341,11 +387,11 @@
       }
 
       .header-inner {
-        padding: 0 24px;
+        padding: 0;
       }
 
       .brand-logo {
-        height: 64px;
+        height: 44px;
       }
 
       .brand-name {
@@ -365,13 +411,13 @@
       }
 
       .container {
-        padding: 72px 20px;
+        padding: 0 24px;
       }
     }
 
     @media (min-width: 768px) {
       .brand-logo {
-        height: 84px;
+        height: 44px;
       }
     }
   </style>
@@ -380,7 +426,7 @@
 <body>
 
   <header class="site-header">
-    <div class="header-inner">
+    <div class="container header-inner">
       <div class="brand">
         <img src="assets/logo/mainlogo-blue-white.jpg" alt="Logo" class="brand-logo" />
         <span class="brand-name">Roman Bediner</span>
@@ -403,9 +449,9 @@
       </nav>
     </div>
   </header>
-  <main class="container">
+  <main class="container page-main">
 
-    <section class="hero">
+    <section class="hero section">
       <div class="hero-wrap">
         <h1>PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK</h1>
         <div class="hero-content">
@@ -421,7 +467,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="section">
       <div class="section-header">
         <img src="assets/icons/context-blue-white.png" alt="" aria-hidden="true" />
         <h2>Context</h2>
@@ -434,7 +480,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="section">
       <div class="section-header">
         <img src="assets/icons/area-blue-white.png" alt="" aria-hidden="true" class="icon-areas" />
         <h2>Areas of focus</h2>
@@ -447,7 +493,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="section">
       <div class="section-header">
         <img src="assets/icons/how-blue-white.png" alt="" aria-hidden="true" />
         <h2>How it shows up</h2>
@@ -466,23 +512,6 @@
     © Roman Bediner
   </footer>
 
-  <script>
-    const menuToggle = document.querySelector(".menu-toggle");
-    const mobileNav = document.querySelector("#mobile-nav");
-
-    if (menuToggle && mobileNav) {
-      menuToggle.addEventListener("click", () => {
-        const isOpen = mobileNav.classList.toggle("open");
-        menuToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      mobileNav.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileNav.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-  </script>
+  <script src="scripts/site-navigation.js"></script>
 </body>
 </html>

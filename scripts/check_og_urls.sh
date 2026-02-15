@@ -3,8 +3,8 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-OG_IMAGE_URL="https://rbediner.github.io/romanbediner.com/assets/og-logo/og.png"
-OG_IMAGE_PATH="$ROOT_DIR/assets/og-logo/og.png"
+OG_IMAGE_URL="icons/mainlogo.svg"
+OG_IMAGE_PATH="$ROOT_DIR/icons/mainlogo.svg"
 
 PAGES=(
   "$ROOT_DIR/index.html"

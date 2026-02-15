@@ -3,27 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com; connect-src https://api.emailjs.com;">
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Roman Bediner" />
-  <meta property="og:description" content="Operations as a Product (OaP)" />
-  <meta property="og:image" content="https://rbediner.github.io/romanbediner.com/assets/og-logo/og.png" />
+  <meta property="og:title" content="Roman Bediner — Executive Operator" />
+  <meta property="og:description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK" />
+  <meta property="og:image" content="icons/mainlogo.svg" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta name="description" content="Operations as a Product (OaP)" />
+  <meta name="description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK — Executive operator, operating clarity, execution alignment." />
   <!-- Canonical URL prevents duplicate indexing if alternate paths are introduced. -->
   <link rel="canonical" href="https://rbediner.github.io/romanbediner.com/contact.html" />
 
   <title>Roman Bediner | Contact</title>
   <link rel="icon" type="image/png" href="assets/logo/favicon.png" />
+  <link rel="preload" as="image" href="icons/mainlogo.svg">
+  <link rel="preload" as="image" href="icons/contact.png">
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Roman Bediner" />
-  <meta name="twitter:description" content="Operations as a Product (OaP)" />
-  <meta name="twitter:image" content="https://rbediner.github.io/romanbediner.com/assets/og-logo/og.png" />
+  <meta name="twitter:title" content="Roman Bediner — Executive Operator" />
+  <meta name="twitter:description" content="PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK" />
+  <meta name="twitter:image" content="icons/mainlogo.svg" />
 
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     :root {
       --bg-color: #ffffff;
       --text-color: #111111;
@@ -62,15 +69,16 @@
       z-index: 10;
     }
 
+    .site-header img {
+      height: 44px;
+    }
+
     .header-inner {
-      max-width: 960px;
-      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: nowrap;
-      padding: 0 24px;
     }
 
     .brand {
@@ -81,7 +89,7 @@
     }
 
     .brand-logo {
-      height: 64px;
+      height: 44px;
       width: auto;
       flex-shrink: 0;
       display: block;
@@ -174,22 +182,36 @@
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 48px 20px 72px 20px;
+      padding: 0 24px;
+    }
+
+    .page-main {
+      padding: 72px 0;
+    }
+
+    .contact-shell {
+      max-width: 720px;
+      margin: 0 auto;
     }
 
     .contact-hero {
-      text-align: center;
-      margin: 0 auto 32px auto;
-      max-width: 760px;
+      margin: 0 0 40px 0;
+      max-width: none;
     }
 
-    .contact-icon {
-      width: 64px;
-      height: 64px;
-      display: block;
-      margin: 0 auto 18px auto;
+    .hero-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero-title img {
+      width: 52px;
+      height: auto;
+      flex-shrink: 0;
     }
 
     .contact-hero h1 {
@@ -201,23 +223,16 @@
     }
 
     .contact-hero p {
-      margin: 14px auto 0 auto;
+      margin: 14px 0 0 0;
       font-size: 19px;
       color: var(--muted-text);
-      max-width: 680px;
+      max-width: none;
+      text-align: center;
     }
 
     .form-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .form-card {
-      background: var(--surface-color);
-      border: 1px solid #e6e6e6;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 8px 24px rgba(17, 17, 17, 0.05);
+      max-width: none;
+      margin: 16px 0 0 0;
     }
 
     .field {
@@ -264,22 +279,13 @@
     .ql-container.ql-snow {
       border: 1px solid var(--border-color);
       border-radius: 0 0 8px 8px;
-      min-height: 220px;
       font-size: 16px;
       color: var(--text-color);
       font-family: inherit;
     }
 
     .ql-editor {
-      min-height: 220px;
       line-height: 1.6;
-    }
-
-    .char-count {
-      margin-top: 8px;
-      font-size: 13px;
-      color: var(--muted-text);
-      text-align: right;
     }
 
     .submit-btn {
@@ -295,11 +301,6 @@
       min-width: 148px;
     }
 
-    .submit-btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
     .form-error {
       margin-top: 12px;
       font-size: 14px;
@@ -313,30 +314,78 @@
       color: var(--muted-text);
     }
 
-    .linkedin-block {
-      margin-top: 64px;
+    .linkedin-band {
+      max-width: none;
+      margin: 80px 0 0 0;
+      padding: 48px 0;
+      background: rgba(0, 0, 0, 0.03);
       text-align: center;
     }
 
-    .linkedin-link {
+    .linkedin-inner a {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      color: var(--text-color);
-      font-size: 17px;
+      justify-content: center;
+      gap: 14px;
       font-weight: 500;
       text-decoration: none;
+      transition: opacity .2s ease, transform .2s ease;
     }
 
-    .linkedin-link:hover {
-      text-decoration: underline;
+    .linkedin-inner a:hover {
+      transform: translateY(-2px);
+      opacity: .85;
     }
 
     .linkedin-icon {
-      width: 20px;
-      height: 20px;
+      width: 36px;
+      height: 36px;
       display: block;
-      object-fit: contain;
+    }
+
+    .section {
+      margin: 72px 0;
+    }
+
+    .section h2,
+    .section h3 {
+      margin-bottom: 14px;
+    }
+
+    .section p {
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+
+    button,
+    .btn {
+      transition: all 0.2s ease;
+    }
+
+    button:hover,
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    input:focus-visible,
+    textarea:focus-visible,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(45,92,255,0.35);
+      outline-offset: 2px;
     }
 
     .footer {
@@ -349,11 +398,11 @@
 
     @media (min-width: 768px) {
       .header-inner {
-        padding: 0 48px;
+        padding: 0;
       }
 
       .brand-logo {
-        height: 84px;
+        height: 44px;
       }
 
       .brand-name {
@@ -369,11 +418,21 @@
       }
 
       .container {
-        padding: 56px 24px 80px 24px;
+        padding: 0 24px;
       }
 
       .form-card {
         padding: 40px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .hero-title {
+        align-items: center;
       }
     }
   </style>
@@ -381,7 +440,7 @@
 
 <body>
   <header class="site-header">
-    <div class="header-inner">
+    <div class="container header-inner">
       <div class="brand">
         <img src="assets/logo/mainlogo-blue-white.jpg" alt="Logo" class="brand-logo" />
         <span class="brand-name">Roman Bediner</span>
@@ -405,52 +464,56 @@
     </div>
   </header>
 
-  <main class="container">
-    <section class="contact-hero">
-      <img src="assets/icons/contact.png" alt="Contact" class="contact-icon" />
-      <h1>Let's start a conversation.</h1>
-      <p>
-        If you are exploring a transition, scaling a team, or pressure-testing execution,
-        share a bit of context and I will respond directly.
-      </p>
-    </section>
+  <main class="container page-main">
+    <div class="contact-shell">
+      <section class="contact-hero section">
+        <div class="hero-title">
+          <img src="assets/icons/contact.png" alt="Contact" />
+          <h1>Let's start a conversation.</h1>
+        </div>
+        <p>
+          Share what you're working on or just reach out to connect.
+        </p>
+      </section>
 
-    <section class="form-wrap" aria-label="Contact form">
-      <div class="form-card" id="form-card">
-        <form id="contact-form">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required aria-required="true" />
-          </div>
+      <section class="form-wrap section" aria-label="Contact form">
+        <div class="form-card card" id="form-card">
+          <form id="contact-form">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required aria-required="true" />
+            </div>
 
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required aria-required="true" />
-          </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required aria-required="true" />
+            </div>
 
-          <div class="field">
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" type="text" />
-          </div>
+            <div style="display:none;">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" autocomplete="off"/>
+            </div>
 
-          <div class="field">
-            <label for="message-editor">Message</label>
-            <div id="message-editor" aria-required="true"></div>
-            <div class="char-count" id="char-count">0 / 10000</div>
-          </div>
+            <div class="field">
+              <label for="message-editor">Message</label>
+              <div id="message-editor" aria-required="true"></div>
+            </div>
 
-          <button class="submit-btn" id="submit-btn" type="submit">Send message</button>
-          <p class="form-error" id="form-error" role="status" aria-live="polite"></p>
-        </form>
+            <button class="submit-btn" id="submit-btn" type="submit">Send message</button>
+            <p class="form-error" id="form-error" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <div class="linkedin-band">
+        <div class="linkedin-inner">
+          <a href="https://linkedin.com/in/romanbediner" target="_blank" rel="noopener noreferrer">
+            <img src="icons/linkedin.png" class="linkedin-icon" alt="LinkedIn"/>
+            <span>Connect with me on LinkedIn</span>
+          </a>
+        </div>
       </div>
-    </section>
-
-    <section class="linkedin-block" aria-label="LinkedIn">
-      <a class="linkedin-link" href="https://www.linkedin.com/in/romanbediner/" target="_blank" rel="noopener noreferrer">
-        <img id="linkedin-icon" class="linkedin-icon" src="assets/icons/LinkedIn.png" alt="" aria-hidden="true" />
-        <span>Prefer LinkedIn? Connect with me here.</span>
-      </a>
-    </section>
+    </div>
   </main>
 
   <footer class="footer">
@@ -459,155 +522,7 @@
 
   <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    const menuToggle = document.querySelector(".menu-toggle");
-    const mobileNav = document.querySelector("#mobile-nav");
-
-    if (menuToggle && mobileNav) {
-      menuToggle.addEventListener("click", () => {
-        const isOpen = mobileNav.classList.toggle("open");
-        menuToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      mobileNav.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileNav.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-
-    // The provided LinkedIn PNG contains a baked checkerboard background.
-    // Keep only LinkedIn-blue pixels and make all other pixels transparent.
-    const linkedinIcon = document.getElementById("linkedin-icon");
-    if (linkedinIcon) {
-      const sanitizeLinkedInIcon = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = linkedinIcon.naturalWidth;
-        canvas.height = linkedinIcon.naturalHeight;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) {
-          return;
-        }
-        ctx.drawImage(linkedinIcon, 0, 0);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-
-        for (let i = 0; i < data.length; i += 4) {
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-          const a = data[i + 3];
-          const isBlueFamily = b > g && g > r && b > 80 && g > 50 && r < 100;
-          if (!isBlueFamily || a === 0) {
-            data[i + 3] = 0;
-          }
-        }
-
-        ctx.putImageData(imageData, 0, 0);
-        linkedinIcon.src = canvas.toDataURL("image/png");
-      };
-
-      if (linkedinIcon.complete) {
-        sanitizeLinkedInIcon();
-      } else {
-        linkedinIcon.addEventListener("load", sanitizeLinkedInIcon, { once: true });
-      }
-    }
-
-    const SERVICE_ID = "service_gdy8zrq";
-    const TEMPLATE_ID = "template_ochbn5j";
-    const PUBLIC_KEY = "UfPL6R5QTMSffMppT";
-    const MAX_MESSAGE_CHARS = 10000;
-
-    const recipient = [
-      114, 98, 101, 100, 105, 110, 101, 114, 43, 119, 101, 98, 115, 105, 116, 101,
-      64, 103, 109, 97, 105, 108, 46, 99, 111, 109
-    ].map((c) => String.fromCharCode(c)).join("");
-
-    const contactForm = document.getElementById("contact-form");
-    const formCard = document.getElementById("form-card");
-    const submitBtn = document.getElementById("submit-btn");
-    const formError = document.getElementById("form-error");
-    const charCount = document.getElementById("char-count");
-
-    const quill = new Quill("#message-editor", {
-      theme: "snow",
-      placeholder: "Share a little context about what you are working on...",
-      modules: {
-        toolbar: [
-          [{ header: [2, 3, false] }],
-          ["bold", "italic", "underline"],
-          [{ list: "ordered" }, { list: "bullet" }],
-          ["link"],
-          ["clean"]
-        ]
-      }
-    });
-
-    const getMessageText = () => {
-      const text = quill.getText();
-      return text.endsWith("\n") ? text.slice(0, -1) : text;
-    };
-
-    const updateCharCount = () => {
-      let text = getMessageText();
-      if (text.length > MAX_MESSAGE_CHARS) {
-        quill.deleteText(MAX_MESSAGE_CHARS, quill.getLength());
-        text = getMessageText();
-      }
-      charCount.textContent = `${text.length} / ${MAX_MESSAGE_CHARS}`;
-    };
-
-    quill.on("text-change", updateCharCount);
-    updateCharCount();
-
-    emailjs.init({ publicKey: PUBLIC_KEY });
-
-    contactForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      formError.textContent = "";
-
-      const nameInput = document.getElementById("name");
-      const emailInput = document.getElementById("email");
-      const subjectInput = document.getElementById("subject");
-
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const subject = subjectInput.value.trim();
-      const messageText = getMessageText().trim();
-      const messageHtml = quill.root.innerHTML.trim();
-
-      if (!contactForm.reportValidity()) {
-        return;
-      }
-
-      if (!messageText) {
-        formError.textContent = "Please enter a message.";
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending...";
-
-      try {
-        await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-          to_email: recipient,
-          from_name: name,
-          reply_to: email,
-          from_email: email,
-          subject: subject || "Website contact form",
-          message: messageText,
-          message_html: messageHtml
-        });
-
-        formCard.innerHTML = "<p class=\"success-message\">Thanks for reaching out. I'll review your message and respond directly.</p>";
-      } catch (error) {
-        formError.textContent = "Something went wrong while sending. Please try again.";
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Send message";
-      }
-    });
-  </script>
+  <script src="scripts/site-navigation.js"></script>
+  <script src="scripts/contact-form-emailjs.js"></script>
 </body>
 </html>
