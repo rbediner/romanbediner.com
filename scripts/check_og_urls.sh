@@ -7,10 +7,10 @@ OG_IMAGE_URL="https://rbediner.github.io/romanbediner.com/assets/og-logo/og.png"
 OG_IMAGE_PATH="$ROOT_DIR/assets/og-logo/og.png"
 
 PAGES=(
-  "$ROOT_DIR/Pages/index.html"
-  "$ROOT_DIR/Pages/about.html"
-  "$ROOT_DIR/Pages/services.html"
-  "$ROOT_DIR/Pages/contact.html"
+  "$ROOT_DIR/index.html"
+  "$ROOT_DIR/about.html"
+  "$ROOT_DIR/services.html"
+  "$ROOT_DIR/contact.html"
 )
 
 fail=0
