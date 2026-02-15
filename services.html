@@ -368,11 +368,25 @@
       list-style: none;
       padding: 0;
       margin: 6px 0 0 0;
-      color: #4f4f4f;
     }
 
     .service-list li {
-      margin: 6px 0;
+      position: relative;
+      padding-left: 28px;
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+
+    .service-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 14px;
+      height: 14px;
+      background-image: url("assets/icons/bullet.png");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .footer {
