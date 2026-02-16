@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://romanbediner.com/sitemap.xml

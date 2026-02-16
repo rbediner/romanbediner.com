@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Primary SEO metadata -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Insights | Roman Bediner" />
+  <!-- Corrected metadata phrasing to enforce the authoritative sentence-case core phrase and standardized SEO wording. -->
+  <meta property="og:description" content="Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems." />
+  <!-- Corrected canonical-style URL formatting for Open Graph URL by removing trailing slash variants. -->
+  <meta property="og:url" content="https://romanbediner.com/insights" />
+  <meta property="og:image" content="https://romanbediner.com/assets/og-logo/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <!-- Corrected metadata phrasing to normalize casing and align with the authoritative core phrase. -->
+  <meta name="description" content="Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems." />
+  <!-- Corrected canonical URL to clean path format without .html or trailing slash variant. -->
+  <link rel="canonical" href="https://romanbediner.com/insights" />
+  <meta name="geo.region" content="US-NC" />
+  <meta name="geo.placename" content="Raleigh-Durham-Chapel Hill" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Insights | Roman Bediner" />
+  <!-- Corrected metadata phrasing so Twitter description matches normalized Open Graph and meta description text. -->
+  <meta name="twitter:description" content="Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems." />
+  <meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og.png" />
+  <title>Insights | Roman Bediner</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; connect-src https://www.google-analytics.com;">
+  <link rel="icon" type="image/png" href="../assets/logo/favicon.png" />
+  <link rel="preload" as="image" href="../assets/icons/mainlogo.svg">
+  <!-- Google Analytics 4: Replace G-XXXXXXXXXX with production Measurement ID. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX");
+  </script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --muted-text: #5f5f5f;
+      --border-color: #e6e6e6;
+      --accent-blue: #3b6cff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      padding: 6px 0;
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-color);
+      z-index: 10;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: nowrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      height: 44px;
+      width: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-color);
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 32px;
+      font-size: 16px;
+    }
+
+    .site-nav a {
+      color: var(--text-color);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      font-size: 16px;
+      color: var(--text-color);
+      cursor: pointer;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-toggle .menu-icon {
+      width: 18px;
+      height: 2px;
+      background-color: var(--text-color);
+      display: inline-block;
+      position: relative;
+    }
+
+    .menu-toggle .menu-icon::before,
+    .menu-toggle .menu-icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background-color: var(--text-color);
+    }
+
+    .menu-toggle .menu-icon::before {
+      top: -6px;
+    }
+
+    .menu-toggle .menu-icon::after {
+      top: 6px;
+    }
+
+    .mobile-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      background-color: var(--bg-color);
+      border-top: 1px solid var(--border-color);
+      display: none;
+      flex-direction: column;
+      padding: 12px 24px 20px 24px;
+      z-index: 20;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      font-size: 16px;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .page-main {
+      padding: 72px 0;
+    }
+
+    .essay-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0 0 24px 0;
+    }
+
+    h2 {
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 56px 0 14px 0;
+    }
+
+    p {
+      font-size: 18px;
+      color: var(--muted-text);
+      margin: 0 0 16px 0;
+    }
+
+    .footer {
+      padding: 48px 24px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted-text);
+    }
+
+    @media (max-width: 768px) {
+      .site-header {
+        padding: 4px 0;
+      }
+
+      .brand-logo {
+        height: 44px;
+      }
+
+      .brand-name {
+        font-size: 22px;
+      }
+
+      .site-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .brand-logo {
+        height: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="../assets/logo/mainlogo-blue-white.jpg" alt="Logo" class="brand-logo" />
+        <span class="brand-name">Roman Bediner</span>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../">Home</a>
+        <a href="../about/">About</a>
+        <a href="../services/">Services</a>
+        <a href="../connect/">Contact</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Menu</span>
+      </button>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+        <a href="../">Home</a>
+        <a href="../about/">About</a>
+        <a href="../services/">Services</a>
+        <a href="../connect/">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-main">
+    <div class="essay-wrap">
+      <h1>Insights</h1>
+
+      <article>
+        <h2>Productizing Operations for Modern, AI-Enabled Work</h2>
+        <p>Operations produce the operating reality of a business. In growth phases, teams often scale outputs faster than they scale the underlying system that coordinates decisions, ownership, and delivery. The result is not a lack of effort. The result is friction. Productizing operations reframes that challenge by treating operating design as a managed capability with a lifecycle, clear inputs, explicit governance, and measurable outcomes.</p>
+        <p>This model starts by defining operational users and core journeys in the same way product teams define customer journeys. Leaders, managers, and execution teams are each users of operating architecture. Planning cycles, escalation paths, decision forums, and measurement rhythms are the product surface they rely on daily. When that surface is inconsistent, execution quality degrades. When it is deliberate and coherent, strategic intent survives contact with complexity.</p>
+        <p>AI-enabled work increases the value of this discipline. New automation and intelligence layers amplify both strengths and weaknesses in operating systems. If decision rights are clear and data pathways are stable, AI can compress cycle times, improve forecasting quality, and raise execution precision. If those foundations are weak, AI compounds noise. Productized operations create the control plane that lets AI capabilities become durable performance gains rather than short-lived experiments.</p>
+      </article>
+
+      <article>
+        <h2>Designing AI-Enabled Operating Models</h2>
+        <p>An AI-enabled operating model is less about tooling selection and more about operating structure. Effective models define where machine support should influence decisions, where human judgment remains authoritative, and where accountability is measured. This requires architecture choices across planning cadence, role design, decision latency, and information quality. Without those choices, implementation efforts become fragmented and adoption remains shallow.</p>
+        <p>Design begins with critical workflows that carry economic and delivery risk. These workflows become anchor points for introducing AI-enabled capabilities in ways that improve throughput without compromising control. Successful operators map signals to decision windows, then establish owner accountability for each transition point. This approach avoids technology-led drift and keeps transformation tied to measurable execution outcomes.</p>
+        <p>At enterprise scale, repeatability is essential. Operating models need to absorb variation across product lines, geographies, and team maturity while maintaining common standards for governance and review. The most resilient designs balance local autonomy with enterprise constraints through explicit operating contracts. AI then operates within a predictable system of roles, metrics, and escalation, allowing organizations to compound learning over time.</p>
+      </article>
+
+      <article>
+        <h2>Aligning Product, Engineering &amp; Customer Systems</h2>
+        <p>Misalignment across product, engineering, and customer systems rarely appears as a single failure. It appears as a pattern of delayed commitments, contradictory priorities, and fragmented accountability. Addressing that pattern requires an integrated operating layer that links product intent, engineering execution, commercial realities, and customer outcomes. Alignment is not an event. It is an operating condition that must be maintained.</p>
+        <p>The practical mechanism is a shared execution framework: common planning horizons, explicit ownership boundaries, standardized tradeoff protocols, and metrics that connect development effort to customer and financial impact. When teams rely on separate definitions of progress, leadership spends capacity reconciling narratives instead of steering outcomes. A unified operating model reduces narrative overhead and increases decision velocity.</p>
+        <p>In AI-enabled environments, alignment work becomes more critical. Platform changes can alter product economics, support loads, and customer expectations simultaneously. High-performing organizations coordinate these shifts through integrated review cadences and transparent decision logs that tie technical choices to business priorities. That discipline creates consistency under pressure and preserves momentum through periods of rapid change.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; Roman Bediner
+  </footer>
+
+  <script src="../scripts/site-navigation.js"></script>
+</body>
+</html>

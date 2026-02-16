@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+/**
+ * Generates sitemap.xml for the canonical clean URLs.
+ * Update PAGE_PATHS when a new top-level page is added.
+ */
+const fs = require('fs');
+const path = require('path');
+
+const SITE_URL = 'https://romanbediner.com';
+const PAGE_PATHS = [
+  { path: '/', priority: '1.0' },
+  { path: '/about/', priority: '0.8' },
+  { path: '/services/', priority: '0.9' },
+  { path: '/contact/', priority: '0.7' }
+];
+
+const lastmod = new Date().toISOString().slice(0, 10);
+const items = PAGE_PATHS.map((page) => {
+  return [
+    '  <url>',
+    `    <loc>${SITE_URL}${page.path}</loc>`,
+    `    <lastmod>${lastmod}</lastmod>`,
+    `    <priority>${page.priority}</priority>`,
+    '  </url>'
+  ].join('\n');
+}).join('\n');
+
+const xml = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  items,
+  '</urlset>',
+  ''
+].join('\n');
+
+const outPath = path.resolve(__dirname, '..', 'sitemap.xml');
+fs.writeFileSync(outPath, xml, 'utf8');
+console.log(`Sitemap generated at ${outPath}`);

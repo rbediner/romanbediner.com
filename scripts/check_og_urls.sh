@@ -8,9 +8,10 @@ OG_IMAGE_PATH="$ROOT_DIR/assets/og-logo/og.png"
 
 PAGES=(
   "$ROOT_DIR/index.html"
-  "$ROOT_DIR/about.html"
-  "$ROOT_DIR/services.html"
-  "$ROOT_DIR/contact.html"
+  "$ROOT_DIR/about/index.html"
+  "$ROOT_DIR/services/index.html"
+  "$ROOT_DIR/connect/index.html"
+  "$ROOT_DIR/insights/index.html"
 )
 
 fail=0

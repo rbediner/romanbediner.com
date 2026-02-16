@@ -1,106 +1,197 @@
 # romanbediner.com
 
-Static website hosted on GitHub Pages for:
-`https://rbediner.github.io/romanbediner.com/`
+Production static site for [https://romanbediner.com](https://romanbediner.com), deployed from `main` via GitHub Pages with a custom domain.
 
-## Structure
+## Site Architecture
 
-- `index.html`:
-Canonical homepage source.
-- `about.html`:
-About page.
-- `services.html`:
-Services page.
-- `contact.html`:
-Contact page with EmailJS + Quill integration.
-- `assets/`:
-Images, icons, logos, OG image.
-- `scripts/`:
-All browser JS lives here (no root-level `.js` files), plus small dev check scripts.
-- `tests/`:
-Python `unittest` checks for contact page structure and behavior wiring.
-- `home/index.html`:
-Alias URL handler so `/home` works while canonical stays on `/index.html`.
+- `/index.html`: Homepage
+- `/about/index.html`: About page (clean URL `/about/`)
+- `/services/index.html`: Services page (clean URL `/services/`)
+- `/connect/index.html`: Contact experience page
+- `/contact/index.html`: Canonical clean Contact path (`/contact/`) redirecting to `/connect/`
+- `/insights/index.html`: Indexable long-form authority page (not linked in main nav)
+- `/assets/`: Static assets (logos, icons, photos, OG image)
+- `/scripts/`: Utility scripts and browser JavaScript
+- `/tests/`: Node and Python validation tests
 
-## URL Policy
+Compatibility redirects are kept at:
 
-- Canonical page URLs:
-  - `https://rbediner.github.io/romanbediner.com/index.html`
-  - `https://rbediner.github.io/romanbediner.com/about.html`
-  - `https://rbediner.github.io/romanbediner.com/services.html`
-  - `https://rbediner.github.io/romanbediner.com/contact.html`
-- `/home` support:
-  - `home/index.html` redirects to `../index.html`.
-  - It is marked `noindex,follow` to avoid duplicate homepage indexing.
+- `/about.html` -> `/about/`
+- `/services.html` -> `/services/`
+- `/contact.html` -> `/contact/`
 
-## Contact Form Notes
+## Clean URL Strategy
 
-- Contact form markup lives in `contact.html`.
-- Uses:
-  - Quill (`cdn.quilljs.com`)
-  - EmailJS browser SDK (`cdn.jsdelivr.net`)
-- Contact form logic is in `scripts/contact-form-emailjs.js`.
-- Email service provider: **EmailJS**.
-- Current EmailJS config values (stored in `scripts/contact-form-emailjs.js`):
-  - `SERVICE_ID = service_gdy8zrq`
-  - `TEMPLATE_ID = template_ochbn5j`
-  - `PUBLIC_KEY = UfPL6R5QTMSffMppT`
-- EmailJS send payload currently includes:
-  - `to_email`
-  - `from_name`
-  - `from_email`
-  - `reply_to`
-  - `subject` (hardcoded to `Website contact`)
-  - `message`
-  - `message_html`
-- Recipient email is intentionally obfuscated in JS and not exposed in HTML markup.
-- Anti-spam protections:
-  - Hidden honeypot field (`company`)
-  - Client-side rate limit (`contact_last_submit`, 60s)
-  - Minimum message length validation
-  - Draft autosave key (`contact_draft`)
+The site uses folder-based URLs with `index.html` files per route. This avoids `.html` in navigation and keeps canonical paths stable.
 
-## Social / Asset Caveat
+Canonical URLs:
 
-- LinkedIn icon path used by contact page:
-  - `assets/icons/LinkedIn.png`
-- Contact hero icon path:
-  - `assets/icons/contact.png`
+- `https://romanbediner.com/`
+- `https://romanbediner.com/about`
+- `https://romanbediner.com/services`
+- `https://romanbediner.com/contact`
+- `https://romanbediner.com/insights`
 
-## SEO / Social Preview
+## SEO Strategy
 
-- Each primary page includes:
-  - `canonical` link tag
-  - OG image metadata
-  - Twitter image metadata
-- OG image source of truth:
-  - `assets/og-logo/og.png`
+Each primary page includes:
 
-## Local Checks
+- Unique `<title>`
+- Unique `<meta name="description">`
+- Canonical URL
+- Open Graph tags
+- Twitter card tags
+- Geo metadata (`US-NC`, `Raleigh-Durham-Chapel Hill`)
 
-Run tests:
+Homepage additionally includes:
 
-```bash
-python3 -m unittest discover -s tests -v
-```
+- `Person` JSON-LD structured data with `knowsAbout`
+- Hidden semantic authority expansion block (non-visual)
 
-Validate OG metadata references:
+## Open Graph and Social Preview
 
-```bash
-bash scripts/check_og_urls.sh
-```
+Shared OG image:
 
-## Script Inventory
+- `https://romanbediner.com/assets/og-logo/og.png`
 
-- `scripts/site-navigation.js`:
-Shared header/mobile navigation behavior used by all primary pages.
-- `scripts/contact-form-emailjs.js`:
-Contact page behavior: Quill editor init, honeypot/rate-limit validation, draft autosave, and EmailJS send flow.
-- `scripts/check_og_urls.sh`:
-Dev check to validate OG/Twitter image metadata references.
+Every page includes explicit:
 
-## Maintenance Notes
+- `og:type`, `og:title`, `og:description`, `og:url`
+- `og:image`, `og:image:type`, `og:image:width`, `og:image:height`
+- `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
 
-- Keep root page filenames as-is (`index.html`, `about.html`, `services.html`, `contact.html`) to preserve clean production URLs.
-- If additional URL aliases are needed, use redirect stubs like `home/index.html` and point canonical tags to the true source page.
-- If EmailJS credentials change, update constants in `scripts/contact-form-emailjs.js`.
+## Analytics (GA4)
+
+All clean-URL pages include a GA4 script placeholder in `<head>`:
+
+- `G-XXXXXXXXXX`
+
+Update this value on each page with the production Measurement ID.
+
+## Sitemap and Robots
+
+- `sitemap.xml` includes `/`, `/about/`, `/services/`, `/contact/`
+- `robots.txt` allows crawling and points to sitemap:
+  - `Sitemap: https://romanbediner.com/sitemap.xml`
+
+## Scripts
+
+- `scripts/generate-sitemap.js`: regenerates `sitemap.xml` with current date
+- `scripts/validate-links.js`: verifies navigation avoids `.html` links
+- `scripts/site-navigation.js`: shared mobile nav interaction
+- `scripts/contact-form-emailjs.js`: contact form behavior and EmailJS handling
+
+## QA Documentation
+
+QA coverage is tracked in dedicated files:
+
+- `QA_TEST_CASES.md`
+- `QA_TEST_RESULTS.md`
+
+## How to Update Sitemap
+
+1. Add or remove route entries in `scripts/generate-sitemap.js`.
+2. Run:
+   ```bash
+   node scripts/generate-sitemap.js
+   ```
+3. Commit updated `sitemap.xml`.
+
+## How to Add a New Page
+
+1. Create `/new-page/index.html`.
+2. Add page-level SEO metadata (title, description, OG/Twitter, canonical).
+3. Add the route to `scripts/generate-sitemap.js` if indexable.
+4. Update navigation only if it is intended to be promoted.
+5. Run tests and fix failures.
+
+## Deployment Instructions
+
+1. Commit changes to `main`.
+2. Push to GitHub.
+3. GitHub Pages deploys from repository root on `main`.
+4. Validate live URLs and metadata after deployment.
+
+## Domain Setup
+
+- `CNAME` file is set to `romanbediner.com`.
+- DNS should point custom domain to GitHub Pages.
+- HTTPS should be enforced in repository Pages settings.
+
+## QA Checklist
+
+- [ ] All links use clean URLs
+- [ ] No `.html` visible in navigation
+- [ ] Canonicals point to clean URLs
+- [ ] `sitemap.xml` loads successfully
+- [ ] `robots.txt` loads successfully
+- [ ] JSON-LD validates in Google Rich Results test
+- [ ] No broken internal links
+- [ ] HTTPS enforced
+- [ ] GA4 script loads with production Measurement ID
+
+## SEO Metadata Normalization Update
+
+Date: 2026-02-16
+
+### Summary
+
+- Normalized metadata casing and phrasing across all SEO surfaces.
+- Enforced authoritative core phrase:
+  - `Productizing operations for modern, AI-enabled work`
+- Standardized meta description, Open Graph description, and Twitter description content format across primary pages.
+- Removed trailing-slash canonical variants for non-root pages.
+- Updated Contact canonical strategy to clean path: `https://romanbediner.com/contact`.
+- Updated homepage JSON-LD description casing and phrase alignment.
+
+### Files Modified
+
+- `index.html`
+- `about/index.html`
+- `services/index.html`
+- `connect/index.html`
+- `insights/index.html`
+- `about.html`
+- `services.html`
+- `contact.html`
+- `contact/index.html`
+- `sitemap.xml`
+- `scripts/generate-sitemap.js`
+- `tests/test-canonical.js`
+- `tests/test-meta.js`
+- `README.md`
+
+### Search/Replace Logic Used
+
+- Audited all HTML files for:
+  - `<meta name="description">`
+  - `og:description`, `twitter:description`
+  - `og:title`, `twitter:title`
+  - `<title>`
+  - `<link rel="canonical">`
+  - JSON-LD `"description"`, `"name"`, `"headline"`
+- Replaced inconsistent description strings with the normalized sentence-case standard.
+- Verified no typo variants (including `PRODUCITZING`) exist.
+
+### Canonical URL Changes
+
+- Home: `https://romanbediner.com/` (unchanged)
+- About: `https://romanbediner.com/about`
+- Services: `https://romanbediner.com/services`
+- Contact: `https://romanbediner.com/contact`
+- Insights: `https://romanbediner.com/insights`
+
+### Metadata Standard Adopted
+
+- Description standard (meta + OG + Twitter):
+  - `Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems.`
+- No ALL CAPS metadata values.
+- No typo variants.
+- AI-enabled remains hyphenated.
+
+### QA Tracking
+
+QA test case definitions and execution results are maintained outside this README in:
+
+- `QA_TEST_CASES.md`
+- `QA_TEST_RESULTS.md`

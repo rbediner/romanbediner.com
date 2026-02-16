@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CONTACT_HTML = ROOT / "contact.html"
+CONTACT_HTML = ROOT / "connect" / "index.html"
 CONTACT_JS = ROOT / "scripts" / "contact-form-emailjs.js"
 
 
@@ -15,7 +15,7 @@ class ContactPageQATest(unittest.TestCase):
         cls.js = CONTACT_JS.read_text(encoding="utf-8")
 
     def test_has_expected_hero_and_icon(self):
-        self.assertIn('src="assets/icons/contact.png"', self.html)
+        self.assertIn('src="../assets/icons/contact.png"', self.html)
         self.assertIn("<h1>Let's start a conversation.</h1>", self.html)
         self.assertIn("Share what you're working on or just reach out to connect.", self.html)
 
@@ -66,7 +66,7 @@ class ContactPageQATest(unittest.TestCase):
 
     def test_linkedin_section_uses_asset_icon(self):
         self.assertIn('href="https://linkedin.com/in/romanbediner"', self.html)
-        self.assertIn('src="assets/icons/LinkedIn.png"', self.html)
+        self.assertIn('src="../assets/icons/LinkedIn.png"', self.html)
         self.assertIn("Connect with me on LinkedIn", self.html)
 
     def test_mobile_and_layout_hooks_exist(self):
@@ -74,8 +74,8 @@ class ContactPageQATest(unittest.TestCase):
         self.assertRegex(self.html, r"\.contact-shell\s*{\s*max-width: 720px;")
         self.assertRegex(self.html, r"\.card\s*{\s*background: #ffffff;")
         self.assertRegex(self.html, r"@media \(min-width: 768px\)")
-        self.assertIn('<script src="scripts/site-navigation.js"></script>', self.html)
-        self.assertIn('<script src="scripts/contact-form-emailjs.js"></script>', self.html)
+        self.assertIn('<script src="../scripts/site-navigation.js"></script>', self.html)
+        self.assertIn('<script src="../scripts/contact-form-emailjs.js"></script>', self.html)
         self.assertIn("contact_draft", self.js)
 
 
