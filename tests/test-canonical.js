@@ -9,8 +9,8 @@ const checks = [
   { file: 'index.html', canonical: 'https://romanbediner.com/' },
   { file: 'about/index.html', canonical: 'https://romanbediner.com/about' },
   { file: 'services/index.html', canonical: 'https://romanbediner.com/services' },
-  { file: 'connect/index.html', canonical: 'https://romanbediner.com/contact' },
-  { file: 'contact/index.html', canonical: 'https://romanbediner.com/contact' },
+  // Refactor assertion: /connect/ is now the only canonical contact route.
+  { file: 'connect/index.html', canonical: 'https://romanbediner.com/connect/' },
   { file: 'insights/index.html', canonical: 'https://romanbediner.com/insights' }
 ];
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Test: no .html references remain in primary page navigation.
+ * Test: no .html references remain in primary page navigation and no /contact route references exist.
  */
 const fs = require('fs');
 const path = require('path');
@@ -21,6 +21,11 @@ for (const page of pages) {
     if (/href="[^"]*\.html"/i.test(block)) {
       failures += 1;
       console.error(`FAIL: .html nav link found in ${page}`);
+    }
+    // Refactor assertion: legacy /contact route must not appear in any nav block.
+    if (/\/contact\//i.test(block)) {
+      failures += 1;
+      console.error(`FAIL: legacy /contact nav link found in ${page}`);
     }
   }
 }

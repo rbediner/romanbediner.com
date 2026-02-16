@@ -10,7 +10,6 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'contact/index.html',
   'insights/index.html'
 ];
 
@@ -44,18 +43,21 @@ for (const rel of pages) {
     console.error(`FAIL: normalized core phrase missing in description for ${rel}`);
   }
 
-  // Redirect-only support page intentionally does not include OG/Twitter tags.
-  if (rel !== 'contact/index.html') {
-    if (!ogDescMatch || !twDescMatch) {
-      failures += 1;
-      console.error(`FAIL: missing OG or Twitter description in ${rel}`);
-      continue;
-    }
+  // Refactor assertion: metadata must not mention removed /contact route.
+  if (/\/contact\//i.test(description)) {
+    failures += 1;
+    console.error(`FAIL: metadata still references /contact in ${rel}`);
+  }
 
-    if (ogDescMatch[1].trim() !== description || twDescMatch[1].trim() !== description) {
-      failures += 1;
-      console.error(`FAIL: OG/Twitter descriptions do not match meta description in ${rel}`);
-    }
+  if (!ogDescMatch || !twDescMatch) {
+    failures += 1;
+    console.error(`FAIL: missing OG or Twitter description in ${rel}`);
+    continue;
+  }
+
+  if (ogDescMatch[1].trim() !== description || twDescMatch[1].trim() !== description) {
+    failures += 1;
+    console.error(`FAIL: OG/Twitter descriptions do not match meta description in ${rel}`);
   }
 
   seenTitles.add(title);

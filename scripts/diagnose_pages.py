@@ -77,8 +77,8 @@ def check_config_conflicts(repo_root: Path):
 
 
 def internal_link_check(repo_root: Path):
-    # Required by user request #3: ensure internal links are root-relative.
-    # This is intentionally a heuristic check for the four main pages.
+    # Refactor: ensure internal links align with clean URL routes and /connect/ contact path.
+    # This remains an intentionally heuristic check for the primary root pages.
     pages = [repo_root / f for f in REQUIRED_ROOT_FILES]
     non_root_hits = []
     root_hits = 0
@@ -89,7 +89,7 @@ def internal_link_check(repo_root: Path):
         for rel in ('href="index.html"', 'href="about.html"', 'href="services.html"', 'href="contact.html"'):
             if rel in text:
                 non_root_hits.append((page.name, rel))
-        for root_rel in ('href="/index.html"', 'href="/about.html"', 'href="/services.html"', 'href="/contact.html"'):
+        for root_rel in ('href="/"', 'href="/about/"', 'href="/services/"', 'href="/connect/"'):
             root_hits += text.count(root_rel)
     return {"root_relative_hits": root_hits, "non_root_hits": non_root_hits}
 
@@ -129,7 +129,7 @@ def main():
 
     if links["non_root_hits"]:
         warnings.append("Found non-root-relative internal links in primary pages.")
-        fixes.append("Use root-relative links such as /about.html and /services.html.")
+        fixes.append("Use clean root-relative links such as /about/, /services/, and /connect/.")
 
     if repo_code == 0:
         warnings.append("Repository API check could not run due to network/DNS error in current environment.")

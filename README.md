@@ -7,8 +7,7 @@ Production static site for [https://romanbediner.com](https://romanbediner.com),
 - `/index.html`: Homepage
 - `/about/index.html`: About page (clean URL `/about/`)
 - `/services/index.html`: Services page (clean URL `/services/`)
-- `/connect/index.html`: Contact experience page
-- `/contact/index.html`: Canonical clean Contact path (`/contact/`) redirecting to `/connect/`
+- `/connect/index.html`: Canonical Connect page (clean URL `/connect/`)
 - `/insights/index.html`: Indexable long-form authority page (not linked in main nav)
 - `/assets/`: Static assets (logos, icons, photos, OG image)
 - `/scripts/`: Utility scripts and browser JavaScript
@@ -18,7 +17,7 @@ Compatibility redirects are kept at:
 
 - `/about.html` -> `/about/`
 - `/services.html` -> `/services/`
-- `/contact.html` -> `/contact/`
+- `/contact.html` -> `/connect/`
 
 ## Clean URL Strategy
 
@@ -29,7 +28,7 @@ Canonical URLs:
 - `https://romanbediner.com/`
 - `https://romanbediner.com/about`
 - `https://romanbediner.com/services`
-- `https://romanbediner.com/contact`
+- `https://romanbediner.com/connect/`
 - `https://romanbediner.com/insights`
 
 ## SEO Strategy
@@ -70,7 +69,7 @@ Update this value on each page with the production Measurement ID.
 
 ## Sitemap and Robots
 
-- `sitemap.xml` includes `/`, `/about/`, `/services/`, `/contact/`
+- `sitemap.xml` includes `/`, `/about/`, `/services/`, `/connect/`, `/insights/`
 - `robots.txt` allows crawling and points to sitemap:
   - `Sitemap: https://romanbediner.com/sitemap.xml`
 
@@ -141,7 +140,7 @@ Date: 2026-02-16
   - `Productizing operations for modern, AI-enabled work`
 - Standardized meta description, Open Graph description, and Twitter description content format across primary pages.
 - Removed trailing-slash canonical variants for non-root pages.
-- Updated Contact canonical strategy to clean path: `https://romanbediner.com/contact`.
+- Updated Connect canonical strategy to clean path: `https://romanbediner.com/connect/`.
 - Updated homepage JSON-LD description casing and phrase alignment.
 
 ### Files Modified
@@ -154,7 +153,6 @@ Date: 2026-02-16
 - `about.html`
 - `services.html`
 - `contact.html`
-- `contact/index.html`
 - `sitemap.xml`
 - `scripts/generate-sitemap.js`
 - `tests/test-canonical.js`
@@ -178,7 +176,7 @@ Date: 2026-02-16
 - Home: `https://romanbediner.com/` (unchanged)
 - About: `https://romanbediner.com/about`
 - Services: `https://romanbediner.com/services`
-- Contact: `https://romanbediner.com/contact`
+- Connect: `https://romanbediner.com/connect/`
 - Insights: `https://romanbediner.com/insights`
 
 ### Metadata Standard Adopted

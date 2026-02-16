@@ -12,7 +12,8 @@ const pages = [
   path.resolve(__dirname, '..', 'connect', 'index.html')
 ];
 
-const disallowed = [/href="[^\"]*\.html"/i];
+// Refactor guardrail: reject legacy .html nav links and removed /contact route references.
+const disallowed = [/href="[^\"]*\.html"/i, /\/contact\//i];
 let hasError = false;
 
 for (const page of pages) {

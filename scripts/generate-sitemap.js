@@ -11,7 +11,9 @@ const PAGE_PATHS = [
   { path: '/', priority: '1.0' },
   { path: '/about/', priority: '0.8' },
   { path: '/services/', priority: '0.9' },
-  { path: '/contact/', priority: '0.7' }
+  // Refactor: /connect/ is the only canonical route after removing /contact.
+  { path: '/connect/', priority: '0.7' },
+  { path: '/insights/', priority: '0.6' }
 ];
 
 const lastmod = new Date().toISOString().slice(0, 10);

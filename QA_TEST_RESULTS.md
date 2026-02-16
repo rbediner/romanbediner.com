@@ -35,3 +35,20 @@ Date: 2026-02-16
 4. Description phrase normalization check
 - Result: PASS
 - Notes: required phrase appears in target page meta descriptions.
+
+## Connect Route Refactor Verification
+
+Date: 2026-02-16
+
+1. `/contact` route removal scan
+- Command: `rg -n 'legacy-contact-route-pattern' .` (route-specific string check executed separately)
+- Result: PASS
+- Notes: no legacy contact-route pattern references remain in runtime code.
+
+2. Sitemap route verification
+- Result: PASS
+- Notes: sitemap contains `/`, `/about/`, `/services/`, `/connect/`, `/insights/` and no legacy contact URL.
+
+3. Canonical and social URL verification for connect page
+- Result: PASS
+- Notes: `connect/index.html` canonical and `og:url` both point to `https://romanbediner.com/connect/`.

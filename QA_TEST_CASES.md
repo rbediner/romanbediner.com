@@ -19,7 +19,7 @@ This file defines the active QA test cases for romanbediner.com.
 
 2. `tests/test-canonical.js`
 - Objective: verify canonical URLs match expected clean URL paths.
-- Pass criteria: canonical tags match configured targets for home/about/services/contact/insights.
+- Pass criteria: canonical tags match configured targets for home/about/services/connect/insights.
 
 3. `tests/test-schema.js`
 - Objective: verify homepage contains valid `Person` JSON-LD.
@@ -45,7 +45,7 @@ This file defines the active QA test cases for romanbediner.com.
 1. Validate redirects
 - `/about.html` -> `/about/`
 - `/services.html` -> `/services/`
-- `/contact.html` -> `/contact/` (then to `/connect/`)
+- `/contact.html` -> `/connect/`
 
 2. Validate canonical output
 - Confirm each page emits canonical URL without `.html`.
