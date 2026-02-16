@@ -21,7 +21,8 @@ from pathlib import Path
 OWNER = "rbediner"
 REPO = "romanbediner.com"
 EXPECTED_DOMAIN = "romanbediner.com"
-REQUIRED_ROOT_FILES = ["index.html", "about.html", "services.html", "contact.html"]
+# Route refactor: clean URL folders are canonical; only homepage remains root-level HTML.
+REQUIRED_ROOT_FILES = ["index.html", "about/index.html", "services/index.html", "connect/index.html", "about/insights/index.html"]
 
 
 def api_get(url: str, token: str):
@@ -59,8 +60,8 @@ def check_cname(repo_root: Path):
 
 def check_required_files(repo_root: Path):
     out = {}
-    for name in REQUIRED_ROOT_FILES:
-        out[name] = (repo_root / name).exists()
+    for rel in REQUIRED_ROOT_FILES:
+        out[rel] = (repo_root / rel).exists()
     return out
 
 
@@ -77,19 +78,25 @@ def check_config_conflicts(repo_root: Path):
 
 
 def internal_link_check(repo_root: Path):
-    # Refactor: ensure internal links align with clean URL routes and /connect/ contact path.
-    # This remains an intentionally heuristic check for the primary root pages.
-    pages = [repo_root / f for f in REQUIRED_ROOT_FILES]
+    # Refactor: ensure internal links align with clean URL routes and reject removed /contact/ and /insights/ root routes.
+    pages = [repo_root / rel for rel in REQUIRED_ROOT_FILES]
     non_root_hits = []
     root_hits = 0
     for page in pages:
         if not page.exists():
             continue
         text = page.read_text(encoding="utf-8", errors="replace")
-        for rel in ('href="index.html"', 'href="about.html"', 'href="services.html"', 'href="contact.html"'):
+        for rel in (
+            'href="index.html"',
+            'href="about.html"',
+            'href="services.html"',
+            'href="contact.html"',
+            'href="/contact/"',
+            'href="/insights/"',
+        ):
             if rel in text:
                 non_root_hits.append((page.name, rel))
-        for root_rel in ('href="/"', 'href="/about/"', 'href="/services/"', 'href="/connect/"'):
+        for root_rel in ('href="/"', 'href="/about/"', 'href="/services/"', 'href="/connect/"', 'href="/about/insights/"'):
             root_hits += text.count(root_rel)
     return {"root_relative_hits": root_hits, "non_root_hits": non_root_hits}
 
@@ -121,7 +128,7 @@ def main():
     missing = [f for f, ok in files.items() if not ok]
     if missing:
         warnings.append(f"Missing required root files: {', '.join(missing)}")
-        fixes.append("Restore missing root HTML files: index.html, about.html, services.html, contact.html")
+        fixes.append("Restore canonical route files: index.html, about/index.html, services/index.html, connect/index.html, about/insights/index.html")
 
     if cfg["present"] and cfg["conflicts"]:
         warnings.append(f"_config.yml contains potentially conflicting keys: {', '.join(cfg['conflicts'])}")

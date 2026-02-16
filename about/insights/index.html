@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO: canonical metadata for Insights living under /about/insights/. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Insights | Productizing Operations for Modern, AI-Enabled Work" />
+  <meta property="og:description" content="Strategic briefs on operating architecture, AI-enabled execution, operations as a product, governance design, and enterprise operating models." />
+  <meta property="og:url" content="https://romanbediner.com/about/insights/" />
+  <meta property="og:image" content="https://romanbediner.com/assets/og-logo/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="description" content="Strategic briefs on operating architecture, AI-enabled execution, operations as a product, governance design, and enterprise operating models." />
+  <link rel="canonical" href="https://romanbediner.com/about/insights/" />
+  <meta name="geo.region" content="US-NC" />
+  <meta name="geo.placename" content="Raleigh-Durham-Chapel Hill" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Insights | Productizing Operations for Modern, AI-Enabled Work" />
+  <meta name="twitter:description" content="Strategic briefs on operating architecture, AI-enabled execution, operations as a product, governance design, and enterprise operating models." />
+  <meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og.png" />
+  <title>Insights | Productizing Operations for Modern, AI-Enabled Work</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com; connect-src https://api.emailjs.com https://www.google-analytics.com;">
+  <link rel="icon" type="image/png" href="../../assets/logo/favicon.png" />
+  <link rel="preload" as="image" href="../../assets/icons/mainlogo.svg">
+  <!-- // ADD: GA4 tag installed here - Measurement ID G-DVHD0KL633 -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DVHD0KL633"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DVHD0KL633');
+  </script>
+  <!-- Schema: Article entities for each brief on this page. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "Productizing Operations for Modern, AI-Enabled Work",
+          "author": {
+            "@type": "Person",
+            "name": "Roman Bediner"
+          },
+          "publisher": {
+            "@type": "Person",
+            "name": "Roman Bediner"
+          },
+          "mainEntityOfPage": "https://romanbediner.com/about/insights/#brief-1",
+          "dateModified": "2026-02-16"
+        },
+        {
+          "@type": "Article",
+          "headline": "Operations as a Product",
+          "author": {
+            "@type": "Person",
+            "name": "Roman Bediner"
+          },
+          "publisher": {
+            "@type": "Person",
+            "name": "Roman Bediner"
+          },
+          "mainEntityOfPage": "https://romanbediner.com/about/insights/#brief-2",
+          "dateModified": "2026-02-16"
+        },
+        {
+          "@type": "Article",
+          "headline": "AI as an Operating Layer",
+          "author": {
+            "@type": "Person",
+            "name": "Roman Bediner"
+          },
+          "publisher": {
+            "@type": "Person",
+            "name": "Roman Bediner"
+          },
+          "mainEntityOfPage": "https://romanbediner.com/about/insights/#brief-3",
+          "dateModified": "2026-02-16"
+        }
+      ]
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg-color: #ffffff;
+      --surface-color: #f6f7f8;
+      --text-color: #111111;
+      --muted-text: #6a6a6a;
+      --border-color: #e6e6e6;
+      --accent-blue: #3b6cff;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.75;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      padding: 6px 0;
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-color);
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: nowrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      height: 44px;
+      width: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-color);
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 32px;
+      font-size: 16px;
+    }
+
+    .site-nav a {
+      color: var(--text-color);
+    }
+
+    .site-nav a:hover {
+      color: var(--accent-blue);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      font-size: 16px;
+      color: var(--text-color);
+      cursor: pointer;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-toggle .menu-icon {
+      width: 18px;
+      height: 2px;
+      background-color: var(--text-color);
+      display: inline-block;
+      position: relative;
+    }
+
+    .menu-toggle .menu-icon::before,
+    .menu-toggle .menu-icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background-color: var(--text-color);
+    }
+
+    .menu-toggle .menu-icon::before {
+      top: -6px;
+    }
+
+    .menu-toggle .menu-icon::after {
+      top: 6px;
+    }
+
+    .mobile-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      background-color: var(--bg-color);
+      border-top: 1px solid var(--border-color);
+      display: none;
+      flex-direction: column;
+      padding: 12px 24px 20px 24px;
+      z-index: 20;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      font-size: 16px;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .page-main {
+      padding: 72px 0;
+    }
+
+    .insights-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0 0 18px 0;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 0 0 14px 0;
+    }
+
+    p {
+      font-size: 19px;
+      color: var(--muted-text);
+      margin: 0 0 18px 0;
+    }
+
+    .brief {
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .brief:first-of-type {
+      margin-top: 24px;
+    }
+
+    .footer {
+      padding: 48px 24px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted-text);
+    }
+
+    @media (max-width: 768px) {
+      .site-header {
+        padding: 4px 0;
+      }
+
+      .header-inner {
+        padding: 0;
+      }
+
+      .brand-logo {
+        height: 44px;
+      }
+
+      .brand-name {
+        font-size: 22px;
+      }
+
+      .site-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 0 24px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .brand-logo {
+        height: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="../../assets/logo/mainlogo-blue-white.jpg" alt="Logo" class="brand-logo" />
+        <span class="brand-name">Roman Bediner</span>
+      </div>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/services/">Services</a>
+        <a href="/connect/">Connect</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Menu</span>
+      </button>
+      <nav id="mobile-nav" class="mobile-nav">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/services/">Services</a>
+        <a href="/connect/">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-main">
+    <div class="insights-wrap">
+      <h1>Insights</h1>
+      <p>Strategic briefs on operating architecture, AI-enabled execution, and modern enterprise design.</p>
+
+      <article class="brief" id="brief-1">
+        <h2>Productizing Operations for Modern, AI-Enabled Work</h2>
+        <p>Modern organizations often treat operations as overhead rather than as a designed system. Productizing operations reframes execution as a structured, measurable capability. Instead of relying on individual heroics or reactive coordination, operating architecture becomes intentional, versioned, and continuously improved.</p>
+        <p>In AI-enabled environments, execution velocity increases, but so does complexity. Decision surfaces multiply, telemetry expands, and dependency chains grow. Without a defined operating layer, AI tools amplify fragmentation rather than clarity. Productizing operations establishes defined ownership, decision rights, portfolio governance, performance instrumentation, and structured feedback loops that convert AI from experimentation into disciplined capability.</p>
+        <p>This approach integrates governance, automation, cost-to-serve analytics, and performance monitoring directly into workflow design. Rather than layering reporting on top of delivery, measurement becomes native to execution. AI-assisted signal detection and prioritization strengthen decision velocity while preserving human accountability. The result is a scalable operating model where strategy, engineering execution, financial controls, and customer outcomes move in coordinated rhythm.</p>
+      </article>
+
+      <article class="brief" id="brief-2">
+        <h2>Operations as a Product</h2>
+        <p>When operations are treated as a product, they are designed with the same rigor as customer-facing platforms. They have architecture, lifecycle management, documentation, and performance metrics. This shifts execution from reactive coordination to engineered capability.</p>
+        <p>Operations as a product defines how initiatives are sequenced, how decisions are escalated, how risks are surfaced, and how performance is measured. Governance becomes lightweight but precise. Portfolio visibility becomes transparent. Cross-functional execution becomes predictable.</p>
+        <p>AI strengthens this model when embedded intentionally. Instrumentation feeds predictive insights into planning cycles. Automation reduces friction in routine coordination. Structured data models enable scenario simulation and portfolio stress testing. Instead of replacing human judgment, AI enhances signal clarity inside an already coherent operating framework.</p>
+        <p>Organizations that treat operations as a product reduce variance in execution, increase alignment across product and engineering, and create durable institutional knowledge that scales beyond individual contributors.</p>
+      </article>
+
+      <article class="brief" id="brief-3">
+        <h2>AI as an Operating Layer</h2>
+        <p>AI is most powerful when embedded into operating architecture rather than deployed as isolated tooling. As an operating layer, AI augments prioritization, forecasting, monitoring, and decision support. It reduces noise while elevating meaningful signal.</p>
+        <p>Embedding AI into operating cadence means integrating telemetry pipelines, workflow automation, anomaly detection, and structured review loops into daily execution. This enables earlier risk identification, improved resource allocation, and stronger cross-functional transparency.</p>
+        <p>The objective is not automation for its own sake. It is the creation of measurable operating clarity. AI becomes a force multiplier when decision architecture is well defined, governance boundaries are explicit, and accountability remains human-centered. In this model, AI does not replace leadership; it strengthens operational precision.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    © Roman Bediner
+  </footer>
+
+  <script src="../../scripts/site-navigation.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Test: homepage contains Person JSON-LD with required fields.
+ * Test: homepage contains Person JSON-LD and Insights page contains Article JSON-LD entries.
  */
 const fs = require('fs');
 const path = require('path');
@@ -36,3 +36,39 @@ if (schema['@type'] !== 'Person') {
 }
 
 console.log('PASS: homepage Person schema is present and complete.');
+
+const insightsPath = path.resolve(__dirname, '..', 'about', 'insights', 'index.html');
+const insightsHtml = fs.readFileSync(insightsPath, 'utf8');
+const insightsSchemaMatch = insightsHtml.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+
+if (!insightsSchemaMatch) {
+  console.error('FAIL: no JSON-LD block found on insights page.');
+  process.exit(1);
+}
+
+let insightsSchema;
+try {
+  insightsSchema = JSON.parse(insightsSchemaMatch[1]);
+} catch (error) {
+  console.error('FAIL: insights JSON-LD is not valid JSON.');
+  process.exit(1);
+}
+
+const graph = insightsSchema['@graph'];
+if (!Array.isArray(graph) || graph.length !== 3) {
+  console.error('FAIL: insights JSON-LD must include exactly 3 Article entries.');
+  process.exit(1);
+}
+
+for (const article of graph) {
+  if (article['@type'] !== 'Article') {
+    console.error('FAIL: insights JSON-LD graph includes non-Article entry.');
+    process.exit(1);
+  }
+  if (!article.headline || !article.mainEntityOfPage || !article.dateModified) {
+    console.error('FAIL: insights Article JSON-LD missing required fields.');
+    process.exit(1);
+  }
+}
+
+console.log('PASS: insights Article schema is present and complete.');

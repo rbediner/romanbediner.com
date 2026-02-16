@@ -7,12 +7,14 @@ const path = require('path');
 
 const checks = [
   { file: 'index.html', canonical: 'https://romanbediner.com/' },
-  { file: 'about/index.html', canonical: 'https://romanbediner.com/about' },
-  { file: 'services/index.html', canonical: 'https://romanbediner.com/services' },
+  { file: 'about/index.html', canonical: 'https://romanbediner.com/about/' },
+  { file: 'services/index.html', canonical: 'https://romanbediner.com/services/' },
   // Refactor assertion: /connect/ is now the only canonical contact route.
   { file: 'connect/index.html', canonical: 'https://romanbediner.com/connect/' },
-  { file: 'insights/index.html', canonical: 'https://romanbediner.com/insights' }
+  // Route refactor: Insights canonical is under About.
+  { file: 'about/insights/index.html', canonical: 'https://romanbediner.com/about/insights/' }
 ];
+const measurementId = 'G-DVHD0KL633';
 
 let failures = 0;
 for (const check of checks) {
@@ -23,9 +25,15 @@ for (const check of checks) {
     failures += 1;
     console.error(`FAIL: canonical mismatch in ${check.file} (expected ${check.canonical})`);
   }
+  // SEO consistency: og:url must mirror canonical URL.
+  const ogUrlMatch = html.match(/<meta property="og:url" content="([^"]+)"\s*\/>/i);
+  if (!ogUrlMatch || ogUrlMatch[1] !== check.canonical) {
+    failures += 1;
+    console.error(`FAIL: og:url mismatch in ${check.file} (expected ${check.canonical})`);
+  }
 
   // GA4 config assertion: each canonical page has exactly one config entry.
-  const gaConfigMatches = html.match(/gtag\('config', 'G-7LM57EMR6Y'/g) || [];
+  const gaConfigMatches = html.match(new RegExp(`gtag\\('config', '${measurementId}'\\)`, 'g')) || [];
   if (gaConfigMatches.length !== 1) {
     failures += 1;
     console.error(`FAIL: expected exactly one GA4 config call in ${check.file}`);

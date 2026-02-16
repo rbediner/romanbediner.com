@@ -1,59 +1,55 @@
 # romanbediner.com
 
-Production static site for [https://romanbediner.com](https://romanbediner.com), deployed from `main` via GitHub Pages with a custom domain.
+Production static site for [romanbediner.com](https://romanbediner.com), deployed from `main` via GitHub Pages.
 
 ## Site Architecture
 
-- `/index.html`: Homepage
-- `/about/index.html`: About page (clean URL `/about/`)
-- `/services/index.html`: Services page (clean URL `/services/`)
-- `/connect/index.html`: Canonical Connect page (clean URL `/connect/`)
-- `/insights/index.html`: Indexable long-form authority page (not linked in main nav)
-- `/assets/`: Static assets (logos, icons, photos, OG image)
-- `/scripts/`: Utility scripts and browser JavaScript
-- `/tests/`: Node and Python validation tests
+Canonical routes:
 
-Compatibility redirects are kept at:
+- `/` -> `/index.html`
+- `/about/` -> `/about/index.html`
+- `/services/` -> `/services/index.html`
+- `/connect/` -> `/connect/index.html`
+- `/about/insights/` -> `/about/insights/index.html`
 
-- `/about.html` -> `/about/`
-- `/services.html` -> `/services/`
-- `/contact.html` -> `/connect/`
+Content and support directories:
+
+- `/assets/` static media and brand assets
+- `/partials/ga4.html` GA4 snippet source-of-truth
+- `/scripts/` validation and utility scripts
+- `/tests/` automated QA checks
 
 ## Clean URL Strategy
 
-The site uses folder-based URLs with `index.html` files per route. This avoids `.html` in navigation and keeps canonical paths stable.
+The site uses folder-based clean URLs with `index.html` per route.
 
-Canonical URLs:
+Rules:
 
-- `https://romanbediner.com/`
-- `https://romanbediner.com/about`
-- `https://romanbediner.com/services`
-- `https://romanbediner.com/connect/`
-- `https://romanbediner.com/insights`
+- No `.html` links in navigation
+- No runtime `/contact/` route
+- No runtime root `/insights/` route
+- Insights is intentionally nested under About: `/about/insights/`
 
 ## SEO Strategy
 
-Each primary page includes:
+Each canonical page includes:
 
-- Unique `<title>`
-- Unique `<meta name="description">`
-- Canonical URL
-- Open Graph tags
-- Twitter card tags
-- Geo metadata (`US-NC`, `Raleigh-Durham-Chapel Hill`)
+- unique `<title>`
+- `<meta name="description">`
+- `<link rel="canonical">`
+- Open Graph (`og:*`) tags
+- Twitter tags
 
-Homepage additionally includes:
-
-- `Person` JSON-LD structured data with `knowsAbout`
-- Hidden semantic authority expansion block (non-visual)
+Homepage also includes `Person` JSON-LD.
+Insights includes `Article` JSON-LD entries for all three briefs.
 
 ## Open Graph and Social Preview
 
-Shared OG image:
+Shared social image:
 
 - `https://romanbediner.com/assets/og-logo/og.png`
 
-Every page includes explicit:
+All canonical pages include explicit:
 
 - `og:type`, `og:title`, `og:description`, `og:url`
 - `og:image`, `og:image:type`, `og:image:width`, `og:image:height`
@@ -61,139 +57,63 @@ Every page includes explicit:
 
 ## Analytics (GA4)
 
-All canonical pages include a production GA4 tag in `<head>`.
+- Measurement ID: `G-DVHD0KL633`
+- Snippet source: `/partials/ga4.html`
+- Installed in `<head>` on all canonical routes:
+  - `/`
+  - `/about/`
+  - `/services/`
+  - `/connect/`
+  - `/about/insights/`
 
-## Google Analytics 4
+Verification:
 
-- Measurement ID: `G-7LM57EMR6Y`
-- Installed in: head section of all canonical pages
-- Configuration: `anonymize_ip` enabled, `beacon` transport enabled
-- Installed date: 2026-02-16
-- Validation: verified via unit tests and manual DevTools Network check (`collect` requests)
+1. GA Realtime in Google Analytics
+2. Browser DevTools Network filter: `collect`
+3. Local script check: `node scripts/verify_ga4_id.js`
+
+Note: ad blockers/privacy extensions can block GA requests locally.
+
+## Insights Architecture
+
+- Path: `/about/insights/`
+- Navigation: not in main nav
+- Discovery: linked from About page content (`Selected Briefs` section)
+- Indexing: included in sitemap
 
 ## Sitemap and Robots
 
-- `sitemap.xml` includes `/`, `/about/`, `/services/`, `/connect/`, `/insights/`
-- `robots.txt` allows crawling and points to sitemap:
+- `sitemap.xml` contains only canonical routes:
+  - `/`
+  - `/about/`
+  - `/services/`
+  - `/connect/`
+  - `/about/insights/`
+- `robots.txt`:
+  - `User-agent: *`
+  - `Allow: /`
   - `Sitemap: https://romanbediner.com/sitemap.xml`
 
 ## Scripts
 
-- `scripts/generate-sitemap.js`: regenerates `sitemap.xml` with current date
-- `scripts/validate-links.js`: verifies navigation avoids `.html` links
-- `scripts/site-navigation.js`: shared mobile nav interaction
-- `scripts/contact-form-emailjs.js`: contact form behavior and EmailJS handling
+- `scripts/generate-sitemap.js` updates `sitemap.xml`
+- `scripts/validate-links.js` checks clean URLs + route policy + GA consistency
+- `scripts/verify_ga4_id.js` enforces GA ID and duplicate checks
+- `scripts/check_og_urls.sh` validates OG image references on canonical pages
+- `scripts/diagnose_pages.py` reports route/config issues
 
-## QA Documentation
+## Tests
 
-QA coverage is tracked in dedicated files:
-
-- `QA_TEST_CASES.md`
-- `QA_TEST_RESULTS.md`
-
-## How to Update Sitemap
-
-1. Add or remove route entries in `scripts/generate-sitemap.js`.
-2. Run:
-   ```bash
-   node scripts/generate-sitemap.js
-   ```
-3. Commit updated `sitemap.xml`.
-
-## How to Add a New Page
-
-1. Create `/new-page/index.html`.
-2. Add page-level SEO metadata (title, description, OG/Twitter, canonical).
-3. Add the route to `scripts/generate-sitemap.js` if indexable.
-4. Update navigation only if it is intended to be promoted.
-5. Run tests and fix failures.
-
-## Deployment Instructions
-
-1. Commit changes to `main`.
-2. Push to GitHub.
-3. GitHub Pages deploys from repository root on `main`.
-4. Validate live URLs and metadata after deployment.
-
-## Domain Setup
-
-- `CNAME` file is set to `romanbediner.com`.
-- DNS should point custom domain to GitHub Pages.
-- HTTPS should be enforced in repository Pages settings.
-
-## QA Checklist
-
-- [ ] All links use clean URLs
-- [ ] No `.html` visible in navigation
-- [ ] Canonicals point to clean URLs
-- [ ] `sitemap.xml` loads successfully
-- [ ] `robots.txt` loads successfully
-- [ ] JSON-LD validates in Google Rich Results test
-- [ ] No broken internal links
-- [ ] HTTPS enforced
-- [ ] GA4 script loads with production Measurement ID
-
-## SEO Metadata Normalization Update
-
-Date: 2026-02-16
-
-### Summary
-
-- Normalized metadata casing and phrasing across all SEO surfaces.
-- Enforced authoritative core phrase:
-  - `Productizing operations for modern, AI-enabled work`
-- Standardized meta description, Open Graph description, and Twitter description content format across primary pages.
-- Removed trailing-slash canonical variants for non-root pages.
-- Updated Connect canonical strategy to clean path: `https://romanbediner.com/connect/`.
-- Updated homepage JSON-LD description casing and phrase alignment.
-
-### Files Modified
-
-- `index.html`
-- `about/index.html`
-- `services/index.html`
-- `connect/index.html`
-- `insights/index.html`
-- `about.html`
-- `services.html`
-- `contact.html`
-- `sitemap.xml`
-- `scripts/generate-sitemap.js`
+- `tests/test-clean-urls.js`
 - `tests/test-canonical.js`
 - `tests/test-meta.js`
-- `README.md`
+- `tests/test-schema.js`
+- `tests/test-ga4-installation.js`
+- `tests/test_contact_form.py`
 
-### Search/Replace Logic Used
+## Deployment
 
-- Audited all HTML files for:
-  - `<meta name="description">`
-  - `og:description`, `twitter:description`
-  - `og:title`, `twitter:title`
-  - `<title>`
-  - `<link rel="canonical">`
-  - JSON-LD `"description"`, `"name"`, `"headline"`
-- Replaced inconsistent description strings with the normalized sentence-case standard.
-- Verified no typo variants (including `PRODUCITZING`) exist.
-
-### Canonical URL Changes
-
-- Home: `https://romanbediner.com/` (unchanged)
-- About: `https://romanbediner.com/about`
-- Services: `https://romanbediner.com/services`
-- Connect: `https://romanbediner.com/connect/`
-- Insights: `https://romanbediner.com/insights`
-
-### Metadata Standard Adopted
-
-- Description standard (meta + OG + Twitter):
-  - `Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems.`
-- No ALL CAPS metadata values.
-- No typo variants.
-- AI-enabled remains hyphenated.
-
-### QA Tracking
-
-QA test case definitions and execution results are maintained outside this README in:
-
-- `QA_TEST_CASES.md`
-- `QA_TEST_RESULTS.md`
+1. Commit changes to `main`
+2. Push to GitHub
+3. GitHub Pages deploys automatically from repo root
+4. Validate canonical routes, metadata, and analytics on live site

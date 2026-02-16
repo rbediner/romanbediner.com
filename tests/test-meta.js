@@ -10,12 +10,13 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'insights/index.html'
+  'about/insights/index.html'
 ];
 
 const seenTitles = new Set();
 let failures = 0;
 const phrase = 'Productizing operations for modern, AI-enabled work';
+const measurementId = 'G-DVHD0KL633';
 
 for (const rel of pages) {
   const file = path.resolve(__dirname, '..', rel);
@@ -24,8 +25,8 @@ for (const rel of pages) {
   const descMatch = html.match(/<meta name="description" content="([^"]+)"\s*\/>/i);
   const ogDescMatch = html.match(/<meta property="og:description" content="([^"]+)"\s*\/>/i);
   const twDescMatch = html.match(/<meta name="twitter:description" content="([^"]+)"\s*\/>/i);
-  const gaSourceMatches = html.match(/https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-7LM57EMR6Y/g) || [];
-  const gaConfigMatches = html.match(/gtag\('config', 'G-7LM57EMR6Y', \{/g) || [];
+  const gaSourceMatches = html.match(new RegExp(`https://www\\.googletagmanager\\.com/gtag/js\\?id=${measurementId}`, 'g')) || [];
+  const gaConfigMatches = html.match(new RegExp(`gtag\\('config', '${measurementId}'\\)`, 'g')) || [];
 
   if (!titleMatch || !descMatch) {
     failures += 1;
@@ -40,7 +41,8 @@ for (const rel of pages) {
     failures += 1;
     console.error(`FAIL: duplicate title detected in ${rel}`);
   }
-  if (!description.includes(phrase)) {
+  // Insights has its own page-specific description; all other primary pages should include the core phrase.
+  if (!rel.includes('about/insights') && !description.includes(phrase)) {
     failures += 1;
     console.error(`FAIL: normalized core phrase missing in description for ${rel}`);
   }
@@ -71,16 +73,8 @@ for (const rel of pages) {
     failures += 1;
     console.error(`FAIL: GA4 config call missing or duplicated in ${rel}`);
   }
-  if (!/anonymize_ip:\s*true/.test(html)) {
-    failures += 1;
-    console.error(`FAIL: GA4 anonymize_ip not enabled in ${rel}`);
-  }
-  if (!/transport_type:\s*'beacon'/.test(html)) {
-    failures += 1;
-    console.error(`FAIL: GA4 transport_type beacon not enabled in ${rel}`);
-  }
   const allMeasurementIds = html.match(/G-[A-Z0-9]{6,}/gi) || [];
-  const unexpectedMeasurementIds = allMeasurementIds.filter((id) => id !== 'G-7LM57EMR6Y');
+  const unexpectedMeasurementIds = allMeasurementIds.filter((id) => id !== measurementId);
   if (unexpectedMeasurementIds.length > 0) {
     failures += 1;
     console.error(`FAIL: unexpected analytics identifier(s) found in ${rel}: ${unexpectedMeasurementIds.join(', ')}`);

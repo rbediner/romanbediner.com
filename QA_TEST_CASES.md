@@ -1,60 +1,63 @@
 # QA Test Cases
 
-This file defines the active QA test cases for romanbediner.com.
+## Route and URL Integrity
 
-## Scope
+1. Clean URL navigation
+- File: `tests/test-clean-urls.js`
+- Asserts no `.html` links in nav blocks.
+- Asserts no `/contact/` or root `/insights/` nav links.
 
-- Clean URL architecture
-- Canonical URL correctness
-- SEO metadata consistency
-- Structured data presence
-- OG image metadata integrity
-- Contact form behavior and integrations
+2. Canonical route existence policy
+- File: `tests/test-clean-urls.js`
+- Asserts `/about/insights/index.html` exists.
+- Asserts `contact/index.html` does not exist.
+- Asserts `insights/index.html` does not exist.
 
-## Automated Test Cases
+3. About-only insights linking
+- File: `tests/test-clean-urls.js`
+- Asserts About page includes `/about/insights/` in content.
+- Asserts `/about/insights/` does not appear in main desktop nav.
 
-1. `tests/test-clean-urls.js`
-- Objective: verify navigation does not reference `.html` links.
-- Pass criteria: no `.html` links in nav blocks on primary pages.
+## Metadata and SEO
 
-2. `tests/test-canonical.js`
-- Objective: verify canonical URLs match expected clean URL paths.
-- Pass criteria: canonical tags match configured targets for home/about/services/connect/insights.
+4. Canonical + OG URL alignment
+- File: `tests/test-canonical.js`
+- Asserts canonical URL per canonical page.
+- Asserts `og:url` equals canonical URL.
 
-3. `tests/test-schema.js`
-- Objective: verify homepage contains valid `Person` JSON-LD.
-- Pass criteria: JSON parses and includes required keys (`@context`, `@type`, `name`, `url`, `jobTitle`, `description`, `sameAs`, `knowsAbout`).
+5. Title + description + social consistency
+- File: `tests/test-meta.js`
+- Asserts each canonical page has title and meta description.
+- Asserts OG/Twitter descriptions match meta description.
+- Asserts no `/contact/` references in metadata.
 
-4. `tests/test-meta.js`
-- Objective: verify metadata normalization and consistency.
-- Pass criteria:
-  - unique page titles;
-  - normalized core phrase present in page descriptions;
-  - OG and Twitter descriptions match page meta description for primary pages.
+6. Structured data coverage
+- File: `tests/test-schema.js`
+- Asserts homepage includes valid Person JSON-LD.
+- Asserts insights page includes 3 valid Article JSON-LD entries.
 
-5. `scripts/check_og_urls.sh`
-- Objective: verify OG image URL is present once in each primary page.
-- Pass criteria: exactly one `og:image` and one `twitter:image`, pointing to canonical OG asset URL.
+## Analytics
 
-6. `tests/test_contact_form.py`
-- Objective: verify contact experience markup and scripts.
-- Pass criteria: form fields, validation hooks, Quill and EmailJS integration, and UX/status behaviors present.
+7. GA4 installation across canonical pages
+- File: `tests/test-ga4-installation.js`
+- Asserts GA snippet appears once per canonical page.
+- Asserts `gtag('config', 'G-DVHD0KL633')` appears once per canonical page.
+- Asserts no unexpected GA measurement IDs exist.
 
-## Manual QA Cases
+8. Repository-wide GA4 ID enforcement
+- File: `scripts/verify_ga4_id.js`
+- Scans all HTML files.
+- Fails if any GA ID other than `G-DVHD0KL633` appears.
+- Fails on duplicate GA snippet in any file.
 
-1. Validate redirects
-- `/about.html` -> `/about/`
-- `/services.html` -> `/services/`
-- `/contact.html` -> `/connect/`
+## OG Validation
 
-2. Validate canonical output
-- Confirm each page emits canonical URL without `.html`.
+9. OG image URL consistency
+- File: `scripts/check_og_urls.sh`
+- Asserts canonical OG image URL appears once in each canonical page.
 
-3. Validate social metadata
-- Confirm OG/Twitter tags render expected title/description/image.
+## Contact Experience
 
-4. Validate structured data
-- Run homepage through rich results/schema validator.
-
-5. Validate live crawl assets
-- Confirm `robots.txt` and `sitemap.xml` are reachable in production.
+10. Connect form integration and UX hooks
+- File: `tests/test_contact_form.py`
+- Asserts form fields, editor integration, and script hooks remain intact.

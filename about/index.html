@@ -8,16 +8,16 @@
   <meta property="og:title" content="About Roman Bediner | AI-Enabled Operating Architect" />
   <!-- Corrected metadata phrasing to enforce the authoritative sentence-case core phrase and standardized SEO wording. -->
   <meta property="og:description" content="Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems." />
-  <!-- Corrected canonical-style URL formatting for Open Graph URL by removing trailing slash variants. -->
-  <meta property="og:url" content="https://romanbediner.com/about" />
+  <!-- Refactor: clean canonical route uses trailing slash for About page URL consistency. -->
+  <meta property="og:url" content="https://romanbediner.com/about/" />
   <meta property="og:image" content="https://romanbediner.com/assets/og-logo/og.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <!-- Corrected metadata phrasing to normalize casing and align with the authoritative core phrase. -->
   <meta name="description" content="Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems." />
-  <!-- Corrected canonical URL to clean path format without .html or trailing slash variant. -->
-  <link rel="canonical" href="https://romanbediner.com/about" />
+  <!-- Refactor: clean canonical route uses trailing slash for About page URL consistency. -->
+  <link rel="canonical" href="https://romanbediner.com/about/" />
   <meta name="geo.region" content="US-NC" />
   <meta name="geo.placename" content="Raleigh-Durham-Chapel Hill" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -26,22 +26,18 @@
   <meta name="twitter:description" content="Productizing operations for modern, AI-enabled work — Executive operator designing AI-enabled operating models that align product, engineering, and customer systems." />
   <meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og.png" />
   <title>About Roman Bediner | AI-Enabled Operating Architect</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com; connect-src https://api.emailjs.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com; connect-src https://api.emailjs.com https://www.google-analytics.com;">
   <link rel="icon" type="image/png" href="../assets/logo/favicon.png" />
   <link rel="preload" as="image" href="../assets/icons/mainlogo.svg">
   <link rel="preload" as="image" href="../assets/icons/contact.png">
-  <!-- // ADD: GA4 tag installed here - Measurement ID G-7LM57EMR6Y -->
-  <!-- Google Analytics 4 (GA4) -->
-  <!-- Measurement ID: G-7LM57EMR6Y -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7LM57EMR6Y"></script>
+  <!-- // ADD: GA4 tag installed here - Measurement ID G-DVHD0KL633 -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DVHD0KL633"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-7LM57EMR6Y', {
-      anonymize_ip: true,
-      transport_type: 'beacon'
-    });
+    gtag('config', 'G-DVHD0KL633');
   </script>
 
   <style>
@@ -299,6 +295,29 @@
       margin-bottom: 0;
     }
 
+    /* Added restrained briefs section link-out below About narrative without introducing card patterns. */
+    .briefs-linkout {
+      max-width: 720px;
+      margin: 56px 0 0 0;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .briefs-linkout h2 {
+      margin: 0 0 12px 0;
+      font-size: 28px;
+      font-weight: 500;
+    }
+
+    .briefs-linkout p {
+      margin: 0 0 12px 0;
+    }
+
+    .briefs-linkout a {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
     .section-accent {
       display: none;
     }
@@ -419,20 +438,20 @@
         <span class="brand-name">Roman Bediner</span>
       </div>
       <nav class="site-nav">
-        <a href="../">Home</a>
-        <a href="../about/">About</a>
-        <a href="../services/">Services</a>
-        <a href="../connect/">Connect</a>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/services/">Services</a>
+        <a href="/connect/">Connect</a>
       </nav>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
         <span class="menu-icon" aria-hidden="true"></span>
         <span>Menu</span>
       </button>
       <nav id="mobile-nav" class="mobile-nav">
-        <a href="../">Home</a>
-        <a href="../about/">About</a>
-        <a href="../services/">Services</a>
-        <a href="../connect/">Connect</a>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/services/">Services</a>
+        <a href="/connect/">Connect</a>
       </nav>
     </div>
   </header>
@@ -455,6 +474,13 @@
       <p>Today, this work shows up in advisory and embedded roles during moments of growth, transition, and increased expectation. The objective is consistent. Design operating systems that scale with the organization. Replace improvisation with intent. Build clarity that holds as conditions change.</p>
 
       <p>Based in the Raleigh | Durham | Chapel Hill area, with family nearby. The preference for well-designed systems extends beyond work. Clear inputs. Useful feedback. Time spent deliberately.</p>
+    </section>
+
+    <!-- Added non-nav Insights entry point in About content area per architecture requirement. -->
+    <section class="briefs-linkout" aria-label="Selected briefs">
+      <h2>Selected Briefs</h2>
+      <p>Strategic briefs on productizing operations for modern, AI-enabled work.</p>
+      <a href="/about/insights/">Explore Insights →</a>
     </section>
   </main>
 

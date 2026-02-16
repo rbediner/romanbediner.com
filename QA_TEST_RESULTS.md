@@ -1,54 +1,37 @@
 # QA Test Results
 
-## Latest Run
-
 Date: 2026-02-16
 
-## Automated Checks
+## Automated Results
 
-1. `bash scripts/check_og_urls.sh`
+1. `python3 -m unittest discover -s tests -v`
 - Result: PASS
-- Notes: OG image exists and each primary page references canonical OG URL exactly once.
+- Output summary: 8 tests run, 0 failures
 
-2. `python3 -m unittest discover -s tests -v`
+2. `bash scripts/check_og_urls.sh`
 - Result: PASS
-- Notes: all contact form tests passed.
+- Output summary: canonical OG image URL appears exactly once on each canonical page
 
-3. Node-based tests (`tests/test-clean-urls.js`, `tests/test-canonical.js`, `tests/test-schema.js`, `tests/test-meta.js`)
-- Result: NOT RUN IN CURRENT ENVIRONMENT
-- Notes: `node` runtime was not available locally at execution time.
+3. `python3 scripts/diagnose_pages.py`
+- Result: PASS (local file and route checks)
+- Note: GitHub API checks were not executable in this environment due to network/DNS restrictions
 
-## Manual Verification Snapshot
+## Runtime Route and Metadata Scans
 
-1. Canonical `.html` scan
+1. Runtime legacy route scan
+- Command: `rg -n "/contact/|href=\"/insights/\"|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect about/insights home partials assets -S`
 - Result: PASS
-- Notes: no canonical URL contains `.html`.
+- Notes: no matches in runtime page/content directories
 
-2. Metadata typo scan (`PRODUCITZING` and variants)
-- Result: PASS
-- Notes: no typo variants detected in site code.
+## Pending Node-based Checks
 
-3. Uppercase metadata phrase scan
-- Result: PASS
-- Notes: no all-caps metadata phrase remains.
+Node runtime is not installed in this environment (`node: command not found`), so the following checks are prepared but not executable locally:
 
-4. Description phrase normalization check
-- Result: PASS
-- Notes: required phrase appears in target page meta descriptions.
+- `node tests/test-clean-urls.js`
+- `node tests/test-canonical.js`
+- `node tests/test-meta.js`
+- `node tests/test-schema.js`
+- `node tests/test-ga4-installation.js`
+- `node scripts/verify_ga4_id.js`
 
-## Connect Route Refactor Verification
-
-Date: 2026-02-16
-
-1. `/contact` route removal scan
-- Command: `rg -n 'legacy-contact-route-pattern' .` (route-specific string check executed separately)
-- Result: PASS
-- Notes: no legacy contact-route pattern references remain in runtime code.
-
-2. Sitemap route verification
-- Result: PASS
-- Notes: sitemap contains `/`, `/about/`, `/services/`, `/connect/`, `/insights/` and no legacy contact URL.
-
-3. Canonical and social URL verification for connect page
-- Result: PASS
-- Notes: `connect/index.html` canonical and `og:url` both point to `https://romanbediner.com/connect/`.
+These should be run in a Node-enabled environment before release sign-off.

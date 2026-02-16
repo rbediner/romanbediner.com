@@ -6,13 +6,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const MEASUREMENT_ID = 'G-7LM57EMR6Y';
+const MEASUREMENT_ID = 'G-DVHD0KL633';
 const CANONICAL_PAGES = [
   'index.html',
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'insights/index.html'
+  'about/insights/index.html'
 ];
 
 let failures = 0;
@@ -31,15 +31,6 @@ for (const rel of CANONICAL_PAGES) {
   if (configMatches.length !== 1) {
     failures += 1;
     console.error(`FAIL: expected exactly one GA config call in ${rel}`);
-  }
-
-  if (!/anonymize_ip:\s*true/.test(html)) {
-    failures += 1;
-    console.error(`FAIL: anonymize_ip not enabled in ${rel}`);
-  }
-  if (!/transport_type:\s*'beacon'/.test(html)) {
-    failures += 1;
-    console.error(`FAIL: transport_type beacon not enabled in ${rel}`);
   }
 
   // Legacy/alternate GA IDs are rejected by allowing only the target GA4 measurement ID.

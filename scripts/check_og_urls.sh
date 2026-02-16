@@ -11,7 +11,8 @@ PAGES=(
   "$ROOT_DIR/about/index.html"
   "$ROOT_DIR/services/index.html"
   "$ROOT_DIR/connect/index.html"
-  "$ROOT_DIR/insights/index.html"
+  # Route refactor: Insights moved under About.
+  "$ROOT_DIR/about/insights/index.html"
 )
 
 fail=0
