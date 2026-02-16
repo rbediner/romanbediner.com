@@ -28,13 +28,18 @@
   <link rel="icon" type="image/png" href="assets/logo/favicon.png" />
   <link rel="preload" as="image" href="assets/icons/mainlogo.svg">
   <link rel="preload" as="image" href="assets/icons/contact.png">
-  <!-- Google Analytics 4: Replace G-XXXXXXXXXX with production Measurement ID. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- // ADD: GA4 tag installed here - Measurement ID G-7LM57EMR6Y -->
+  <!-- Google Analytics 4 (GA4) -->
+  <!-- Measurement ID: G-7LM57EMR6Y -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7LM57EMR6Y"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag("js", new Date());
-    gtag("config", "G-XXXXXXXXXX");
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7LM57EMR6Y', {
+      anonymize_ip: true,
+      transport_type: 'beacon'
+    });
   </script>
   <!-- Structured data: Person schema for homepage entity understanding -->
   <script type="application/ld+json">

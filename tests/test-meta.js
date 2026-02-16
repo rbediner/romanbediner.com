@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Test: key pages have unique titles and normalized metadata descriptions.
+ * Test: key pages have unique titles, normalized metadata descriptions, and correct GA4 settings.
  */
 const fs = require('fs');
 const path = require('path');
@@ -24,6 +24,8 @@ for (const rel of pages) {
   const descMatch = html.match(/<meta name="description" content="([^"]+)"\s*\/>/i);
   const ogDescMatch = html.match(/<meta property="og:description" content="([^"]+)"\s*\/>/i);
   const twDescMatch = html.match(/<meta name="twitter:description" content="([^"]+)"\s*\/>/i);
+  const gaSourceMatches = html.match(/https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-7LM57EMR6Y/g) || [];
+  const gaConfigMatches = html.match(/gtag\('config', 'G-7LM57EMR6Y', \{/g) || [];
 
   if (!titleMatch || !descMatch) {
     failures += 1;
@@ -58,6 +60,30 @@ for (const rel of pages) {
   if (ogDescMatch[1].trim() !== description || twDescMatch[1].trim() !== description) {
     failures += 1;
     console.error(`FAIL: OG/Twitter descriptions do not match meta description in ${rel}`);
+  }
+
+  // GA4 assertions: source/config present once, privacy and transport options set.
+  if (gaSourceMatches.length !== 1) {
+    failures += 1;
+    console.error(`FAIL: GA4 source script missing or duplicated in ${rel}`);
+  }
+  if (gaConfigMatches.length !== 1) {
+    failures += 1;
+    console.error(`FAIL: GA4 config call missing or duplicated in ${rel}`);
+  }
+  if (!/anonymize_ip:\s*true/.test(html)) {
+    failures += 1;
+    console.error(`FAIL: GA4 anonymize_ip not enabled in ${rel}`);
+  }
+  if (!/transport_type:\s*'beacon'/.test(html)) {
+    failures += 1;
+    console.error(`FAIL: GA4 transport_type beacon not enabled in ${rel}`);
+  }
+  const allMeasurementIds = html.match(/G-[A-Z0-9]{6,}/gi) || [];
+  const unexpectedMeasurementIds = allMeasurementIds.filter((id) => id !== 'G-7LM57EMR6Y');
+  if (unexpectedMeasurementIds.length > 0) {
+    failures += 1;
+    console.error(`FAIL: unexpected analytics identifier(s) found in ${rel}: ${unexpectedMeasurementIds.join(', ')}`);
   }
 
   seenTitles.add(title);

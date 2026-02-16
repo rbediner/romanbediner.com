@@ -61,11 +61,15 @@ Every page includes explicit:
 
 ## Analytics (GA4)
 
-All clean-URL pages include a GA4 script placeholder in `<head>`:
+All canonical pages include a production GA4 tag in `<head>`.
 
-- `G-XXXXXXXXXX`
+## Google Analytics 4
 
-Update this value on each page with the production Measurement ID.
+- Measurement ID: `G-7LM57EMR6Y`
+- Installed in: head section of all canonical pages
+- Configuration: `anonymize_ip` enabled, `beacon` transport enabled
+- Installed date: 2026-02-16
+- Validation: verified via unit tests and manual DevTools Network check (`collect` requests)
 
 ## Sitemap and Robots
 
