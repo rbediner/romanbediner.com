@@ -8,7 +8,8 @@ class InsightsLayoutTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.root = Path(__file__).resolve().parent.parent
+        # QA/tests is nested one level under the repository root.
+        cls.root = Path(__file__).resolve().parents[2]
         cls.insights_html = (cls.root / "insights/index.html").read_text(encoding="utf-8")
         cls.insights_css = (cls.root / "styles/insights.css").read_text(encoding="utf-8")
         cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
@@ -30,9 +31,15 @@ class InsightsLayoutTest(unittest.TestCase):
             self.assertIn('<div class="insight-expanded">', card_html)
 
     def test_expand_collapse_css_rules(self):
-        """Ensure expanded content is hidden by default and displayed when expanded."""
-        self.assertRegex(self.insights_css, r"\.insight-expanded\s*\{[^}]*display:\s*none;")
-        self.assertRegex(self.insights_css, r"\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*display:\s*block;")
+        """Ensure expanded content uses animated collapse/expand states."""
+        self.assertRegex(self.insights_css, r"\.insight-expanded\s*\{[^}]*max-height:\s*0;")
+        self.assertRegex(self.insights_css, r"\.insight-expanded\s*\{[^}]*opacity:\s*0;")
+        self.assertRegex(
+            self.insights_css,
+            r"\.insight-expanded\s*\{[^}]*transition:\s*max-height 280ms ease,\s*opacity 220ms ease;",
+        )
+        self.assertRegex(self.insights_css, r"\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*max-height:\s*960px;")
+        self.assertRegex(self.insights_css, r"\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*opacity:\s*1;")
 
     def test_hover_lift_and_spacing(self):
         """Ensure card hover lift and card spacing align with required behavior."""

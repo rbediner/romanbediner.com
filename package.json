@@ -5,10 +5,10 @@
   "description": "Static site quality checks for romanbediner.com",
   "scripts": {
     "generate:insight-links": "node scripts/generate-insight-links.js",
-    "test:node": "npm run generate:insight-links && node tests/test-clean-urls.js && node tests/test-canonical.js && node tests/test-meta.js && node tests/test-schema.js && node tests/test-ga4-installation.js && node tests/test-header-nav.js && node tests/test-metadata-consistency.js && node tests/test-favicon.js && node tests/test-insights-layout.js && node tests/insights.test.js && node tests/test-about-redesign.js && node tests/test-operating-philosophy.js && node scripts/validate-links.js && node scripts/verify_ga4_id.js",
-    "test:python": "python3 -m unittest discover -s tests -v",
-    "test:visual": "python3 -m unittest -v tests.test_visual_regression_playwright",
-    "test:visual:update": "UPDATE_VISUAL_BASELINES=1 python3 -m unittest -v tests.test_visual_regression_playwright",
+    "test:node": "npm run generate:insight-links && node QA/tests/test-clean-urls.js && node QA/tests/test-canonical.js && node QA/tests/test-meta.js && node QA/tests/test-schema.js && node QA/tests/test-ga4-installation.js && node QA/tests/test-header-nav.js && node QA/tests/test-metadata-consistency.js && node QA/tests/test-favicon.js && node QA/tests/test-insights-layout.js && node QA/tests/insights.test.js && node QA/tests/test-about-redesign.js && node QA/tests/test-operating-philosophy.js && node scripts/validate-links.js && node scripts/verify_ga4_id.js",
+    "test:python": "python3 -m unittest discover -s QA/tests -v",
+    "test:visual": "python3 -m unittest discover -s QA/tests -p test_visual_regression_playwright.py -v",
+    "test:visual:update": "UPDATE_VISUAL_BASELINES=1 python3 -m unittest discover -s QA/tests -p test_visual_regression_playwright.py -v",
     "test": "npm run test:node && npm run test:python"
   }
 }

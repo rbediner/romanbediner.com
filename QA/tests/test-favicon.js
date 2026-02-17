@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '..', '..');
 const faviconAssets = [
   'assets/favicon/favicon-16x16.png',
   'assets/favicon/favicon-32x32.png',

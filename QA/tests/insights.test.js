@@ -9,7 +9,7 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '..', '..');
 const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
 const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
 const { bindInsightToggle } = require(path.join(root, 'scripts/insights-briefs.js'));

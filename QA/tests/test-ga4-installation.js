@@ -18,7 +18,7 @@ const PAGES = [
 let failures = 0;
 
 for (const rel of PAGES) {
-  const html = fs.readFileSync(path.resolve(__dirname, '..', rel), 'utf8');
+  const html = fs.readFileSync(path.resolve(__dirname, '..', '..', rel), 'utf8');
 
   const metaMatches = html.match(new RegExp(`<meta name="ga4-measurement-id" content="${MEASUREMENT_ID}" \/>`, 'g')) || [];
   const bootstrapMatches = html.match(/<script src="\/scripts\/ga4\.js" defer><\/script>/g) || [];

@@ -7,7 +7,8 @@ class FaviconAssetsTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.root = Path(__file__).resolve().parent.parent
+        # QA/tests is nested one level under the repository root.
+        cls.root = Path(__file__).resolve().parents[2]
         cls.expected_assets = [
             cls.root / "assets/favicon/favicon-16x16.png",
             cls.root / "assets/favicon/favicon-32x32.png",

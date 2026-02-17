@@ -17,7 +17,7 @@ const seenTitles = new Set();
 let failures = 0;
 
 for (const rel of pages) {
-  const html = fs.readFileSync(path.resolve(__dirname, '..', rel), 'utf8');
+  const html = fs.readFileSync(path.resolve(__dirname, '..', '..', rel), 'utf8');
 
   const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
   const descMatch = html.match(/<meta name="description" content="([^"]+)"\s*\/>/i);

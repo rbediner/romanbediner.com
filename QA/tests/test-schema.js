@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const homepage = path.resolve(__dirname, '..', 'index.html');
+const homepage = path.resolve(__dirname, '..', '..', 'index.html');
 const html = fs.readFileSync(homepage, 'utf8');
 const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
 
@@ -37,7 +37,7 @@ if (schema['@type'] !== 'Person') {
 
 console.log('PASS: homepage Person schema is present and complete.');
 
-const insightsPath = path.resolve(__dirname, '..', 'insights', 'index.html');
+const insightsPath = path.resolve(__dirname, '..', '..', 'insights', 'index.html');
 const insightsHtml = fs.readFileSync(insightsPath, 'utf8');
 const insightsSchemaMatch = insightsHtml.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
 

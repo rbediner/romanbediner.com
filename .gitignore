@@ -11,5 +11,10 @@ __pycache__/
 *.pyc
 
 # Visual regression artifacts generated during local test runs.
-tests/visual-current/
-tests/visual-diff/
+QA/tests/visual-current/
+QA/tests/visual-diff/
+
+# Optional QA execution artifacts.
+QA/results/*
+!QA/results/.gitkeep
+!QA/results/README.md

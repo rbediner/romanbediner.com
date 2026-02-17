@@ -7,7 +7,8 @@ class AboutRedesignTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.root = Path(__file__).resolve().parent.parent
+        # QA/tests is nested one level under the repository root.
+        cls.root = Path(__file__).resolve().parents[2]
         cls.about_html = (cls.root / "about/index.html").read_text(encoding="utf-8")
         cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
         cls.about_css = (cls.root / "styles/about.css").read_text(encoding="utf-8")

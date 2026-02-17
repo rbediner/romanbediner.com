@@ -8,7 +8,8 @@ import unittest
 from pathlib import Path
 
 PLAYWRIGHT_AVAILABLE = importlib.util.find_spec("playwright") is not None
-ROOT = Path(__file__).resolve().parents[1]
+# QA/tests is nested one level under the repository root.
+ROOT = Path(__file__).resolve().parents[2]
 
 
 @unittest.skipUnless(PLAYWRIGHT_AVAILABLE, "playwright is not installed")

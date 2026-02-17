@@ -3,7 +3,8 @@ import unittest
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+# QA/tests is nested one level under the repository root.
+ROOT = Path(__file__).resolve().parents[2]
 CONTACT_HTML = ROOT / "connect" / "index.html"
 CONTACT_JS = ROOT / "scripts" / "contact-form-emailjs.js"
 

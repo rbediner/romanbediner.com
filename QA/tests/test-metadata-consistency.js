@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '..', '..');
 
 const expectedHomepageTitle = 'Roman Bediner | Operations & Transformation Leader';
 const expectedHomepageDescription = 'Executive operator designing scalable operating models that align product, engineering, and customer systems.';

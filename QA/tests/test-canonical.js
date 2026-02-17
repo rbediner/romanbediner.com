@@ -15,7 +15,7 @@ const checks = [
 
 let failures = 0;
 for (const check of checks) {
-  const html = fs.readFileSync(path.resolve(__dirname, '..', check.file), 'utf8');
+  const html = fs.readFileSync(path.resolve(__dirname, '..', '..', check.file), 'utf8');
 
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"\s*\/>/i);
   const ogUrl = html.match(/<meta property="og:url" content="([^"]+)"\s*\/>/i);

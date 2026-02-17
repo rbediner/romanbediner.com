@@ -24,7 +24,7 @@ Route policy:
 - `/styles.css` legacy stub pointing to `/styles/` architecture
 - `/scripts/ga4.js` GA4 bootstrap logic
 - `/scripts/` validation and utility scripts
-- `/tests/` automated guardrail tests
+- `/QA/tests/` automated guardrail tests
 - `/QA/` QA cases and QA results documents
 
 ## Analytics (GA4)
@@ -81,7 +81,7 @@ Guidelines:
   - Keep exactly one canonical tag per canonical page.
   - Keep canonical URLs aligned to route architecture without introducing legacy paths.
 - **Testing rules**
-  - `tests/test-metadata-consistency.js` verifies homepage title/description/H1, insights title, duplicate prevention, no em dashes in HTML, and one canonical per page.
+  - `QA/tests/test-metadata-consistency.js` verifies homepage title/description/H1, insights title, duplicate prevention, no em dashes in HTML, and one canonical per page.
 
 ## Testing
 
@@ -96,12 +96,12 @@ npm test
 
 Browser runtime GA check (included in `npm test` on CI):
 
-- `tests/test_ga_runtime_playwright.py`
+- `QA/tests/test_ga_runtime_playwright.py`
 - Requires Playwright and Chromium
 
 Visual regression and layout integrity checks (included in `npm test` on CI):
 
-- `tests/test_visual_regression_playwright.py`
+- `QA/tests/test_visual_regression_playwright.py`
 - Compares committed baselines for Home, About, Services, Insights, and Connect
 - Captures desktop full page (`1440px` width), desktop fold (`1200px` height), and mobile (`390px` width)
 - Enforces navigation alignment, active-state stability, spacing guardrails, bullet consistency, Insights expand behavior, and mobile overflow rules

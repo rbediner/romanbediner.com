@@ -14,10 +14,11 @@ from pathlib import Path
 PLAYWRIGHT_AVAILABLE = importlib.util.find_spec("playwright") is not None
 PIL_AVAILABLE = importlib.util.find_spec("PIL") is not None
 
-ROOT = Path(__file__).resolve().parents[1]
-BASELINE_DIR = ROOT / "tests" / "visual-baselines"
-CURRENT_DIR = ROOT / "tests" / "visual-current"
-DIFF_DIR = ROOT / "tests" / "visual-diff"
+# QA/tests is nested one level under the repository root.
+ROOT = Path(__file__).resolve().parents[2]
+BASELINE_DIR = ROOT / "QA" / "tests" / "visual-baselines"
+CURRENT_DIR = ROOT / "QA" / "tests" / "visual-current"
+DIFF_DIR = ROOT / "QA" / "tests" / "visual-diff"
 
 # Canonical routes under visual guardrails.
 ROUTES = {

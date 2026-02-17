@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '..', '..');
 const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
 const insightsCss = fs.readFileSync(path.join(root, 'styles/insights.css'), 'utf8');
 const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
@@ -59,13 +59,13 @@ if (!insightsHtml.includes('src="../scripts/insights-briefs.js"')) {
 }
 
 // Validate CSS behavior for collapse/expand and hover lift.
-if (!/\.insight-expanded\s*\{[^}]*display:\s*none;/s.test(insightsCss)) {
+if (!/\.insight-expanded\s*\{[^}]*max-height:\s*0;[^}]*opacity:\s*0;[^}]*transition:\s*max-height 280ms ease,\s*opacity 220ms ease;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: insight-expanded must be hidden by default.');
+  console.error('FAIL: insight-expanded must use collapsed animation defaults.');
 }
-if (!/\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*display:\s*block;/s.test(insightsCss)) {
+if (!/\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*max-height:\s*960px;[^}]*opacity:\s*1;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: expanded insight content display rule is missing.');
+  console.error('FAIL: expanded insight content animation rule is missing.');
 }
 if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;/s.test(insightsCss)) {
   failures += 1;

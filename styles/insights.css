@@ -87,12 +87,16 @@
 }
 
 .insight-expanded {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
   margin-top: 16px;
+  transition: max-height 280ms ease, opacity 220ms ease;
 }
 
 .insight-card.expanded .insight-expanded {
-  display: block;
+  max-height: 960px;
+  opacity: 1;
 }
 
 .insight-expanded p {

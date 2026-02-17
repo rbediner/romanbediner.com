@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '..', '..');
 const aboutHtml = fs.readFileSync(path.join(root, 'about/index.html'), 'utf8');
 const aboutCss = fs.readFileSync(path.join(root, 'styles/about.css'), 'utf8');
 const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
