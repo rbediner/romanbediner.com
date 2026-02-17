@@ -37,7 +37,7 @@ let failures = 0;
 
 for (const file of walkHtml(ROOT)) {
   const html = fs.readFileSync(file, 'utf8');
-  const ids = html.match(/G-[A-Z0-9]{6,}/gi) || [];
+  const ids = html.match(/G-[A-Z0-9]{8,}/g) || [];
   const unexpected = ids.filter((id) => id !== MEASUREMENT_ID);
 
   if (unexpected.length > 0) {

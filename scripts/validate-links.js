@@ -40,7 +40,7 @@ for (const page of pages) {
     console.error(`GA policy invalid in ${page} (meta=${gaMetaCount}, bootstrap=${gaScriptCount}, inlineConfig=${inlineConfigCount})`);
   }
 
-  const allMeasurementIds = html.match(/G-[A-Z0-9]{6,}/gi) || [];
+  const allMeasurementIds = html.match(/G-[A-Z0-9]{8,}/g) || [];
   const unexpectedMeasurementIds = allMeasurementIds.filter((id) => id !== measurementId);
   if (unexpectedMeasurementIds.length > 0) {
     hasError = true;

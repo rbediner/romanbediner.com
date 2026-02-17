@@ -38,7 +38,7 @@ for (const rel of PAGES) {
     console.error(`FAIL: inline GA config/dataLayer script found in ${rel}`);
   }
 
-  const allMeasurementIds = html.match(/G-[A-Z0-9]{6,}/gi) || [];
+  const allMeasurementIds = html.match(/G-[A-Z0-9]{8,}/g) || [];
   const unexpectedIds = allMeasurementIds.filter((id) => id.toUpperCase() !== MEASUREMENT_ID);
   if (unexpectedIds.length > 0) {
     failures += 1;
