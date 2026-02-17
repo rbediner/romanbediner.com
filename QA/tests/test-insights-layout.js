@@ -76,9 +76,9 @@ if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-4px\);/s.test(insi
   console.error('FAIL: insight-card hover lift must be translateY(-4px).');
 }
 
-if (!/\.insight-accent\s*\{[^}]*height:\s*3px;[^}]*background:\s*var\(--accent-blue, #3b6cff\);/s.test(insightsCss)) {
+if (!/\.insight-accent\s*\{[^}]*width:\s*56px;[^}]*height:\s*3px;[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: each insight card must include the subtle blue accent divider.');
+  console.error('FAIL: insight accent must be short (56px), light blue, and 3px tall.');
 }
 
 if (!/\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;/s.test(insightsCss) || !/\.insight-toggle\s*\{[^}]*border-radius:\s*999px;/s.test(insightsCss)) {

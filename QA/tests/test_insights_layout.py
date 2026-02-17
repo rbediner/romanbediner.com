@@ -46,7 +46,9 @@ class InsightsLayoutTest(unittest.TestCase):
         self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;")
         self.assertRegex(self.insights_css, r"\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-4px\);")
         self.assertRegex(self.insights_css, r"\.insight-card \+ \.insight-card\s*\{[^}]*margin-top:\s*64px;")
+        self.assertRegex(self.insights_css, r"\.insight-accent\s*\{[^}]*width:\s*56px;")
         self.assertRegex(self.insights_css, r"\.insight-accent\s*\{[^}]*height:\s*3px;")
+        self.assertRegex(self.insights_css, r"\.insight-accent\s*\{[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);")
         self.assertRegex(self.insights_css, r"\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;")
         self.assertRegex(self.insights_css, r"\.insight-toggle\s*\{[^}]*border-radius:\s*999px;")
 

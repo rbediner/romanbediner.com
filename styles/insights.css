@@ -1,3 +1,41 @@
+/* Insights uses the same typography and spacing baseline as the core pages. */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --surface-color: #f6f7f8;
+  --text-color: #111111;
+  --muted-text: #6a6a6a;
+  --border-color: #e6e6e6;
+  --accent-blue: #3b6cff;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Keep header/container width consistent with Home/About/Services/Connect. */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
 /* Insights page layout keeps a restrained, executive presentation. */
 .insights-main {
   max-width: 960px;
@@ -6,12 +44,17 @@
 }
 
 .insights-main h1 {
-  margin: 0 0 16px 0;
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
 }
 
 .insights-intro {
   max-width: 720px;
-  margin: 0 0 48px 0;
+  margin: 0 0 44px 0;
+  font-size: 18px;
+  color: var(--muted-text);
 }
 
 /* Cards are vertically stacked with consistent spacing and subtle lift. */
@@ -33,25 +76,28 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Accent is intentionally short and softer than the primary brand blue. */
 .insight-accent {
-  width: 100%;
+  width: 56px;
   height: 3px;
-  background: var(--accent-blue, #3b6cff);
+  background: rgba(59, 108, 255, 0.62);
   border-radius: 999px;
   margin-bottom: 16px;
 }
 
 .insight-card h2 {
   margin: 0 0 16px 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .insight-summary {
   margin: 0 0 16px 0;
   max-width: 720px;
+  font-size: 18px;
+  color: var(--muted-text);
 }
 
 .insight-card .service-list {
@@ -102,6 +148,8 @@
 .insight-expanded p {
   max-width: 720px;
   margin: 0 0 16px 0;
+  font-size: 18px;
+  color: var(--muted-text);
 }
 
 .insight-expanded p:last-child {
@@ -115,5 +163,9 @@
 
   .insight-card {
     padding: 22px;
+  }
+
+  .insights-main h1 {
+    font-size: 36px;
   }
 }
