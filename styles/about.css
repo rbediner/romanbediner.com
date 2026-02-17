@@ -385,79 +385,92 @@
       }
     }
 
-/* About full rebuild: timeline, thesis panel, and constrained readable blocks. */
+/* About narrative layout: timeline, grouped philosophy, and clean close. */
 .about-main {
   max-width: 960px;
   margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .about-main .section {
-  padding-top: 72px;
-  padding-bottom: 72px;
-  margin: 0;
+  margin-top: 96px;
+  margin-bottom: 96px;
 }
 
 .about-main h1 {
-  font-size: 44px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.75rem 0;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;
   max-width: 720px;
 }
 
 .about-main h2 {
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: normal;
-  margin: 0 0 0.75rem 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;
+  max-width: 720px;
+}
+
+.about-main h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;
+  max-width: 720px;
 }
 
 .about-main p {
   max-width: 720px;
-  margin: 0 0 1.1rem 0;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4b5563;
 }
 
 .about-hero {
-  padding-top: 72px;
-  padding-bottom: 48px;
+  margin-top: 96px;
+  margin-bottom: 0;
 }
 
 .about-hero::after {
   content: "";
   display: block;
   width: 100%;
-  border-top: 1px solid var(--border-color);
-  margin-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 32px;
   margin-bottom: 0;
 }
 
 .about-timeline {
-  padding-top: 48px;
-  padding-bottom: 72px;
+  margin-top: 80px;
+  margin-bottom: 0;
 }
 
 .timeline {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 72px;
+  gap: 0;
 }
 
 .timeline::before {
   content: "";
   position: absolute;
-  left: 7px;
-  top: 8px;
-  bottom: 8px;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
   width: 2px;
-  background: var(--border-color);
+  background: #e5e7eb;
 }
 
 .timeline-item {
-  position: relative;
-  display: flex;
-  gap: 1.25rem;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: start;
   margin-bottom: 64px;
 }
 
@@ -466,72 +479,90 @@
 }
 
 .timeline-marker {
-  width: 16px;
-  height: 16px;
-  background-image: url("/assets/icons/bullet.png");
-  background-size: 16px 16px;
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #2563eb;
+  background: #2563eb;
   border-radius: 50%;
   flex-shrink: 0;
-  margin-top: 0.4rem;
+  margin-top: 6px;
+  box-sizing: border-box;
 }
 
-.timeline-content h2 {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: normal;
-  line-height: normal;
-  margin-bottom: 0.75rem;
+.timeline-content p {
+  margin-bottom: 16px;
 }
 
-.operating-thesis-card {
-  padding: 40px;
-  border-radius: 16px;
-  background: var(--surface-color);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+.timeline-content .service-list {
+  margin-top: 12px;
+  margin-bottom: 0;
 }
 
-.about-thesis {
-  padding-top: 48px;
-  padding-bottom: 72px;
+.about-philosophy {
+  background: #f9fafb;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
-.about-ai {
-  padding-top: 64px;
-  padding-bottom: 64px;
+.philosophy-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  text-transform: uppercase;
+  margin: 0 0 24px 0;
 }
 
-.about-today {
-  padding-top: 64px;
-  padding-bottom: 72px;
+.philosophy-item {
+  margin-bottom: 56px;
 }
 
-.credential-line {
-  margin-top: 16px;
-  font-size: 0.9rem;
-  opacity: 0.7;
+.philosophy-item:last-child {
+  margin-bottom: 0;
+}
+
+.philosophy-item p {
+  margin-bottom: 16px;
+}
+
+.philosophy-item .service-list {
+  margin-top: 12px;
+  margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
+  .about-main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .about-main .section {
-    padding-top: 56px;
-    padding-bottom: 56px;
+    margin-top: 72px;
+    margin-bottom: 72px;
   }
 
   .about-main h1 {
-    font-size: 36px;
+    font-size: 34px;
   }
 
-  .timeline {
-    gap: 60px;
+  .about-main h2 {
+    font-size: 22px;
+  }
+
+  .about-main h3 {
+    font-size: 19px;
   }
 
   .timeline-item {
-    gap: 0.9rem;
+    column-gap: 18px;
+    margin-bottom: 56px;
   }
 
-  .operating-thesis-card {
-    padding: 28px;
+  .about-philosophy {
+    padding-top: 64px;
+    padding-bottom: 64px;
+    margin-top: 72px;
+    margin-bottom: 72px;
   }
 }

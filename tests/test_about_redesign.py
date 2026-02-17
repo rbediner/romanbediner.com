@@ -25,8 +25,8 @@ class AboutRedesignTest(unittest.TestCase):
 
     def test_about_structure_sections_present(self):
         """Ensure the required About page section structure is present."""
-        self.assertIn('<main class="container about-main">', self.about_html)
-        for section in ("about-hero", "about-timeline", "about-thesis", "about-ai", "about-today"):
+        self.assertIn('<main class="about-main">', self.about_html)
+        for section in ("about-hero", "about-timeline", "about-philosophy"):
             self.assertIn(f'class="section {section}"', self.about_html)
 
     def test_timeline_and_shared_bullet_usage(self):
@@ -38,11 +38,20 @@ class AboutRedesignTest(unittest.TestCase):
         """Ensure credential statement and required style blocks exist."""
         self.assertIn(".about-main", self.about_css)
         self.assertIn(".timeline", self.about_css)
-        self.assertIn(".operating-thesis-card", self.about_css)
+        self.assertIn(".about-philosophy", self.about_css)
         self.assertIn(".footer-meta", self.site_css)
         self.assertIn(".footer-primary", self.site_css)
         self.assertIn(".about-hero::after", self.about_css)
-        self.assertRegex(self.about_css, r"\.timeline-marker\s*\{[^}]*width:\s*16px;[^}]*height:\s*16px;")
+        self.assertRegex(self.about_css, r"\.timeline-marker\s*\{[^}]*width:\s*12px;[^}]*height:\s*12px;")
+
+    def test_embedded_operating_leadership_section_replaces_today(self):
+        """Ensure the close section uses the new heading and copy."""
+        self.assertNotIn("<h2>TODAY</h2>", self.about_html)
+        self.assertIn("<h3>Embedded Operating Leadership</h3>", self.about_html)
+        self.assertIn(
+            "This work shows up where scale, transition, or complexity begin to strain execution.",
+            self.about_html,
+        )
 
     def test_footer_meta_global_on_canonical_pages(self):
         """Ensure footer attribution is present globally and no em dashes are introduced."""

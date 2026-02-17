@@ -22,12 +22,12 @@ const footerLine = 'This site was developed with automated coding assistance fro
 const footerPrimary = '© Roman Bediner, PMP';
 let failures = 0;
 
-if (!aboutHtml.includes('<main class="container about-main">')) {
+if (!aboutHtml.includes('<main class="about-main">')) {
   failures += 1;
   console.error('FAIL: About page is missing the about-main container.');
 }
 
-const requiredSections = ['about-hero', 'about-timeline', 'about-thesis', 'about-ai', 'about-today'];
+const requiredSections = ['about-hero', 'about-timeline', 'about-philosophy'];
 for (const section of requiredSections) {
   if (!aboutHtml.includes(`class="section ${section}"`)) {
     failures += 1;
@@ -45,7 +45,7 @@ if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 5) {
   console.error('FAIL: About page should use shared service-list bullets across sections.');
 }
 
-if (!aboutCss.includes('.about-main') || !aboutCss.includes('.timeline') || !aboutCss.includes('.operating-thesis-card')) {
+if (!aboutCss.includes('.about-main') || !aboutCss.includes('.timeline') || !aboutCss.includes('.about-philosophy')) {
   failures += 1;
   console.error('FAIL: About CSS is missing required redesign style blocks.');
 }
@@ -58,13 +58,21 @@ if (!siteCss.includes('.footer-primary')) {
   failures += 1;
   console.error('FAIL: global footer-primary style is missing in styles/site.css.');
 }
-if (!/\.timeline-marker\s*\{[\s\S]*width:\s*16px;[\s\S]*height:\s*16px;/.test(aboutCss)) {
+if (!/\.timeline-marker\s*\{[\s\S]*width:\s*12px;[\s\S]*height:\s*12px;/.test(aboutCss)) {
   failures += 1;
-  console.error('FAIL: timeline marker size must be 16px.');
+  console.error('FAIL: timeline marker size must be 12px.');
 }
 if (!aboutCss.includes('.about-hero::after')) {
   failures += 1;
   console.error('FAIL: about hero divider style is missing.');
+}
+if (aboutHtml.includes('<h2>TODAY</h2>')) {
+  failures += 1;
+  console.error('FAIL: legacy TODAY heading should not appear in About content.');
+}
+if (!aboutHtml.includes('<h3>Embedded Operating Leadership</h3>')) {
+  failures += 1;
+  console.error('FAIL: Embedded Operating Leadership subsection is missing.');
 }
 
 for (const rel of canonicalPages) {
