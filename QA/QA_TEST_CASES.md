@@ -36,15 +36,21 @@
 - Asserts homepage includes valid Person JSON-LD.
 - Asserts insights page includes 3 valid Article JSON-LD entries.
 
+7. Favicon asset coverage and page references
+- File: `tests/test-favicon.js`
+- File: `tests/test_favicon_assets.py`
+- Asserts required favicon files exist in `assets/favicon/`.
+- Asserts each route references favicon `32x32`, `16x16`, Apple touch icon, and `.ico` fallback with correct relative paths.
+
 ## Analytics
 
-7. GA4 installation across canonical pages
+8. GA4 installation across canonical pages
 - File: `tests/test-ga4-installation.js`
 - Asserts GA snippet appears once per canonical page.
 - Asserts `gtag('config', 'G-DVHD0KL633')` appears once per canonical page.
 - Asserts no unexpected GA measurement IDs exist.
 
-8. Repository-wide GA4 ID enforcement
+9. Repository-wide GA4 ID enforcement
 - File: `scripts/verify_ga4_id.js`
 - Scans all HTML files.
 - Fails if any GA ID other than `G-DVHD0KL633` appears.
@@ -52,12 +58,12 @@
 
 ## OG Validation
 
-9. OG image URL consistency
+10. OG image URL consistency
 - File: `scripts/check_og_urls.sh`
 - Asserts canonical OG image URL appears once in each canonical page.
 
 ## Contact Experience
 
-10. Connect form integration and UX hooks
+11. Connect form integration and UX hooks
 - File: `tests/test_contact_form.py`
 - Asserts form fields, editor integration, and script hooks remain intact.

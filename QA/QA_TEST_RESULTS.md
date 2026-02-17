@@ -1,12 +1,13 @@
 # QA Test Results
 
-Date: 2026-02-16
+Date: 2026-02-17
 
 ## Automated Results
 
 1. `python3 -m unittest discover -s tests -v`
 - Result: PASS
-- Output summary: 8 tests run, 0 failures
+- Output summary: 10 tests run, 0 failures
+- Added coverage: favicon assets + favicon link references via `tests/test_favicon_assets.py`
 
 2. `bash scripts/check_og_urls.sh`
 - Result: PASS
@@ -32,6 +33,7 @@ Node runtime is not installed in this environment (`node: command not found`), s
 - `node tests/test-meta.js`
 - `node tests/test-schema.js`
 - `node tests/test-ga4-installation.js`
+- `node tests/test-favicon.js`
 - `node scripts/verify_ga4_id.js`
 
 These should be run in a Node-enabled environment before release sign-off.

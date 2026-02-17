@@ -56,6 +56,21 @@ All canonical pages include explicit:
 - `og:image`, `og:image:type`, `og:image:width`, `og:image:height`
 - `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
 
+## Favicon Strategy
+
+Favicon source asset:
+
+- `assets/icons/bullet.png`
+
+Generated favicon outputs:
+
+- `assets/favicon/favicon-16x16.png`
+- `assets/favicon/favicon-32x32.png`
+- `assets/favicon/apple-touch-icon.png`
+- `assets/favicon/favicon.ico`
+
+All primary pages include references to this favicon set in `<head>`.
+
 ## Analytics (GA4)
 
 - Measurement ID: `G-DVHD0KL633`
@@ -110,6 +125,7 @@ Note: ad blockers/privacy extensions can block GA requests locally.
 - `tests/test-meta.js`
 - `tests/test-schema.js`
 - `tests/test-ga4-installation.js`
+- `tests/test-favicon.js`
 - `tests/test_contact_form.py`
 
 ## Deployment
