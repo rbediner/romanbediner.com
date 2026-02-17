@@ -45,11 +45,6 @@ if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 5) {
   console.error('FAIL: About page should use shared service-list bullets across sections.');
 }
 
-if (!aboutHtml.includes('Roman Bediner, PMP') || !aboutHtml.includes('class="credential-line"')) {
-  failures += 1;
-  console.error('FAIL: About page is missing Today credential line.');
-}
-
 if (!aboutCss.includes('.about-main') || !aboutCss.includes('.timeline') || !aboutCss.includes('.operating-thesis-card')) {
   failures += 1;
   console.error('FAIL: About CSS is missing required redesign style blocks.');

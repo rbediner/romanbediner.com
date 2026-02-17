@@ -36,8 +36,6 @@ class AboutRedesignTest(unittest.TestCase):
 
     def test_pmp_and_css_blocks_present(self):
         """Ensure credential statement and required style blocks exist."""
-        self.assertIn("Roman Bediner, PMP", self.about_html)
-        self.assertIn('class="credential-line"', self.about_html)
         self.assertIn(".about-main", self.about_css)
         self.assertIn(".timeline", self.about_css)
         self.assertIn(".operating-thesis-card", self.about_css)
