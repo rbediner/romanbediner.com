@@ -14,6 +14,7 @@ class InsightsLayoutTest(unittest.TestCase):
         cls.insights_css = (cls.root / "styles/insights.css").read_text(encoding="utf-8")
         cls.services_css = (cls.root / "styles/services.css").read_text(encoding="utf-8")
         cls.services_html = (cls.root / "services/index.html").read_text(encoding="utf-8")
+        cls.insights_script = (cls.root / "scripts/insights-briefs.js").read_text(encoding="utf-8")
 
     def test_insights_has_grid_and_cards(self):
         """Ensure Insights page uses card grid classes."""
@@ -58,6 +59,25 @@ class InsightsLayoutTest(unittest.TestCase):
         self.assertGreaterEqual(self.insights_html.count('class="expand-brief"'), 3)
         self.assertGreaterEqual(self.insights_html.count('class="brief-full"'), 3)
         self.assertIn('src="../../scripts/insights-briefs.js"', self.insights_html)
+        self.assertIn('classList.toggle("open")', self.insights_script)
+
+    def test_insights_does_not_redefine_bullet_variables(self):
+        """Ensure Insights inherits shared bullet variables from site.css."""
+        self.assertNotRegex(self.insights_css, r"--bullet-size|--bullet-gap|--bullet-nudge-y")
+
+    def test_insight_heading_typography_matches_services_heading(self):
+        """Ensure insight card headings mirror Services h3 typographic values."""
+        self.assertRegex(self.insights_css, r"\.insight-card\s+h2\s*\{[^}]*font-size:\s*20px;")
+        self.assertRegex(self.insights_css, r"\.insight-card\s+h2\s*\{[^}]*font-weight:\s*600;")
+        self.assertRegex(self.insights_css, r"\.insight-card\s+h2\s*\{[^}]*letter-spacing:\s*normal;")
+        self.assertRegex(self.insights_css, r"\.insight-card\s+h2\s*\{[^}]*line-height:\s*normal;")
+
+    def test_divider_card_width_and_button_refinement(self):
+        """Ensure divider strength, card width, and editorial button styling are applied."""
+        self.assertRegex(self.insights_css, r"\.insight-divider\s*\{[^}]*height:\s*3px;[^}]*width:\s*60px;[^}]*margin:\s*1rem 0 1\.25rem 0;")
+        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*max-width:\s*960px;[^}]*margin-left:\s*auto;[^}]*margin-right:\s*auto;")
+        self.assertRegex(self.insights_css, r"\.expand-brief\s*\{[^}]*background:\s*none;[^}]*border:\s*none;[^}]*padding:\s*0;[^}]*margin-top:\s*1\.25rem;")
+        self.assertRegex(self.insights_css, r"\.expand-brief::after\s*\{[^}]*content:\s*\" \\2192\";")
 
 
 if __name__ == "__main__":

@@ -245,6 +245,9 @@
   background: #ffffff;
   box-shadow: 0 6px 24px rgba(0,0,0,0.06);
   transition: transform 200ms ease, box-shadow 200ms ease;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .insight-card:hover {
@@ -258,15 +261,19 @@
   gap: 10px;
 }
 
-.insight-card .service-header h2 {
+.insight-card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: normal;
   margin: 0;
 }
 
 .insight-divider {
-  height: 2px;
-  width: 40px;
+  height: 3px;
+  width: 60px;
   background: var(--accent-blue);
-  margin: 0.75rem 0 1rem 0;
+  margin: 1rem 0 1.25rem 0;
 }
 
 .insight-summary {
@@ -280,29 +287,39 @@
 }
 
 .expand-brief {
-  align-self: flex-start;
-  border: 1px solid var(--border-color);
-  background: #ffffff;
-  color: var(--text-color);
-  border-radius: 999px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 1.25rem;
   font-size: 0.9rem;
   font-weight: 500;
-  line-height: 1;
-  padding: 0.6rem 1rem;
+  color: var(--accent-blue);
   cursor: pointer;
+  transition: opacity 150ms ease;
 }
 
 .expand-brief:hover {
-  background: var(--surface-color);
+  opacity: 0.75;
+}
+
+.expand-brief:focus {
+  outline: none;
+}
+
+.expand-brief::after {
+  content: " \2192";
+  font-weight: 400;
 }
 
 .brief-full {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
   margin-top: 1rem;
+  transition: max-height 300ms ease;
 }
 
-.brief-full.is-open {
-  display: block;
+.brief-full.open {
+  max-height: 1000px;
 }
 
 .brief-full p {

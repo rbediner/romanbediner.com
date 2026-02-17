@@ -11,6 +11,7 @@ const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 const insightsCss = fs.readFileSync(path.join(root, 'styles/insights.css'), 'utf8');
 const servicesCss = fs.readFileSync(path.join(root, 'styles/services.css'), 'utf8');
 const servicesHtml = fs.readFileSync(path.join(root, 'services/index.html'), 'utf8');
+const insightsScript = fs.readFileSync(path.join(root, 'scripts/insights-briefs.js'), 'utf8');
 
 let failures = 0;
 
@@ -74,6 +75,36 @@ if ((insightsHtml.match(/class="expand-brief"/g) || []).length < 3 || (insightsH
 if (!insightsHtml.includes('src="../../scripts/insights-briefs.js"')) {
   failures += 1;
   console.error('FAIL: insights page must include the external expand/collapse script.');
+}
+
+if (!insightsScript.includes('classList.toggle("open")')) {
+  failures += 1;
+  console.error('FAIL: expand script must toggle the "open" class on brief panels.');
+}
+
+if (/--bullet-size|--bullet-gap|--bullet-nudge-y/.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insights.css must not redefine shared bullet variables.');
+}
+
+if (!/\.insight-card\s+h2\s*\{[^}]*font-size:\s*20px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*normal;[^}]*line-height:\s*normal;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insight-card h2 must mirror Services heading typography values.');
+}
+
+if (!/\.insight-divider\s*\{[^}]*height:\s*3px;[^}]*width:\s*60px;[^}]*margin:\s*1rem 0 1\.25rem 0;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insight-divider styling does not match the required stronger treatment.');
+}
+
+if (!/\.insight-card\s*\{[^}]*max-width:\s*960px;[^}]*margin-left:\s*auto;[^}]*margin-right:\s*auto;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insight-card readable width constraints are missing.');
+}
+
+if (!/\.expand-brief\s*\{[^}]*background:\s*none;[^}]*border:\s*none;[^}]*padding:\s*0;[^}]*margin-top:\s*1\.25rem;[^}]*transition:\s*opacity 150ms ease;/s.test(insightsCss) || !/\.expand-brief::after\s*\{[^}]*content:\s*" \\2192";/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: expand-brief must use the editorial link-style treatment.');
 }
 
 if (failures > 0) {

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     button.addEventListener("click", () => {
-      const isOpen = panel.classList.toggle("is-open");
+      const isOpen = panel.classList.toggle("open");
       button.setAttribute("aria-expanded", String(isOpen));
       button.textContent = isOpen ? "Hide full brief" : "Read full brief";
     });
