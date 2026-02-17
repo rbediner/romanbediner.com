@@ -19,6 +19,7 @@ const canonicalPages = [
 ];
 
 const footerLine = 'This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling.';
+const footerPrimary = '© Roman Bediner, PMP';
 let failures = 0;
 
 if (!aboutHtml.includes('<main class="container about-main">')) {
@@ -44,9 +45,9 @@ if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 5) {
   console.error('FAIL: About page should use shared service-list bullets across sections.');
 }
 
-if (!aboutHtml.includes('certified Project Management Professional')) {
+if (!aboutHtml.includes('Roman Bediner, PMP') || !aboutHtml.includes('class="credential-line"')) {
   failures += 1;
-  console.error('FAIL: About page is missing PMP credential statement.');
+  console.error('FAIL: About page is missing Today credential line.');
 }
 
 if (!aboutCss.includes('.about-main') || !aboutCss.includes('.timeline') || !aboutCss.includes('.operating-thesis-card')) {
@@ -58,12 +59,24 @@ if (!siteCss.includes('.footer-meta')) {
   failures += 1;
   console.error('FAIL: global footer-meta style is missing in styles/site.css.');
 }
+if (!siteCss.includes('.footer-primary')) {
+  failures += 1;
+  console.error('FAIL: global footer-primary style is missing in styles/site.css.');
+}
+if (!/\.timeline-marker\s*\{[\s\S]*width:\s*16px;[\s\S]*height:\s*16px;/.test(aboutCss)) {
+  failures += 1;
+  console.error('FAIL: timeline marker size must be 16px.');
+}
+if (!aboutCss.includes('.about-hero::after')) {
+  failures += 1;
+  console.error('FAIL: about hero divider style is missing.');
+}
 
 for (const rel of canonicalPages) {
   const html = fs.readFileSync(path.join(root, rel), 'utf8');
-  if (!html.includes(footerLine) || !html.includes('class="footer-meta"')) {
+  if (!html.includes(footerLine) || !html.includes('class="footer-meta"') || !html.includes(footerPrimary) || !html.includes('class="footer-primary"')) {
     failures += 1;
-    console.error(`FAIL: footer attribution line missing in ${rel}`);
+    console.error(`FAIL: footer content or classes missing in ${rel}`);
   }
   if (/—/.test(html)) {
     failures += 1;

@@ -149,12 +149,7 @@
   }
 }
 
-/* Centralized custom bullet system used across services and insights lists. */
-:root {
-  --bullet-size: 10px;
-  --bullet-gap: 10px;
-  --bullet-nudge-y: 0.05em;
-}
+/* Unified orb bullet system shared across About, Services, and Insights lists. */
 
 .service-list {
   list-style: none;
@@ -164,28 +159,41 @@
 
 .service-list li {
   position: relative;
-  margin: 0 0 0.6rem 0;
-  padding-left: calc(var(--bullet-size) + var(--bullet-gap) + 6px);
-  line-height: 1.5;
+  padding-left: 22px;
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
 }
 
 .service-list li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: calc((1em * 1.5) / 2);
-  transform: translateY(calc(-50% + var(--bullet-nudge-y)));
-  width: var(--bullet-size);
-  height: var(--bullet-size);
+  top: 0.5em;
+  width: 10px;
+  height: 10px;
   background-image: url("/assets/icons/bullet.png");
-  background-size: contain;
+  background-size: 10px 10px;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.footer {
+  border-top: 1px solid var(--border-color, #e6e6e6);
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.footer-primary {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color, #111111);
 }
 
 .footer-meta {
   font-size: 0.72rem;
   color: var(--muted-text, #6a6a6a);
   text-align: center;
-  margin-top: 1rem;
+  margin: 0.5rem auto 0;
+  max-width: 720px;
 }

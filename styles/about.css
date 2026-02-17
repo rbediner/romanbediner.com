@@ -385,59 +385,127 @@
       }
     }
 
-/* About hybrid redesign: timeline + thesis + AI + today sections. */
+/* About full rebuild: timeline, thesis panel, and constrained readable blocks. */
 .about-main {
   max-width: 960px;
   margin: 0 auto;
 }
 
 .about-main .section {
-  padding: 2.5rem 0;
+  padding-top: 80px;
+  padding-bottom: 80px;
   margin: 0;
 }
 
+.about-main h1 {
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem 0;
+  max-width: 720px;
+}
+
+.about-main h2 {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: normal;
+  margin: 0 0 0.75rem 0;
+}
+
+.about-main p {
+  max-width: 720px;
+  margin: 0 0 1.1rem 0;
+}
+
+.about-hero {
+  padding-bottom: 0;
+}
+
+.about-hero::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+  margin-bottom: 80px;
+}
+
 .timeline {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 72px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border-color);
 }
 
 .timeline-item {
+  position: relative;
   display: flex;
   gap: 1.25rem;
   align-items: flex-start;
 }
 
 .timeline-marker {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
+  background-image: url("/assets/icons/bullet.png");
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 50%;
-  background: var(--accent-blue);
-  margin-top: 0.5rem;
   flex-shrink: 0;
+  margin-top: 0.4rem;
 }
 
 .timeline-content h2 {
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
+  line-height: normal;
   margin-bottom: 0.75rem;
 }
 
 .operating-thesis-card {
-  padding: 2rem;
+  padding: 40px;
   border-radius: 16px;
+  background: var(--surface-color);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
 }
 
-.about-main h1,
-.about-main h2 {
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+.credential-line {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--muted-text);
 }
 
 @media (max-width: 768px) {
+  .about-main .section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .about-main h1 {
+    font-size: 36px;
+  }
+
+  .timeline {
+    gap: 60px;
+  }
+
   .timeline-item {
     gap: 0.9rem;
+  }
+
+  .operating-thesis-card {
+    padding: 28px;
   }
 }

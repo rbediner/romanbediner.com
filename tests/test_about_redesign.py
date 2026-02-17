@@ -21,6 +21,7 @@ class AboutRedesignTest(unittest.TestCase):
         cls.footer_line = (
             "This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling."
         )
+        cls.footer_primary = "© Roman Bediner, PMP"
 
     def test_about_structure_sections_present(self):
         """Ensure the required About page section structure is present."""
@@ -35,17 +36,23 @@ class AboutRedesignTest(unittest.TestCase):
 
     def test_pmp_and_css_blocks_present(self):
         """Ensure credential statement and required style blocks exist."""
-        self.assertIn("certified Project Management Professional", self.about_html)
+        self.assertIn("Roman Bediner, PMP", self.about_html)
+        self.assertIn('class="credential-line"', self.about_html)
         self.assertIn(".about-main", self.about_css)
         self.assertIn(".timeline", self.about_css)
         self.assertIn(".operating-thesis-card", self.about_css)
         self.assertIn(".footer-meta", self.site_css)
+        self.assertIn(".footer-primary", self.site_css)
+        self.assertIn(".about-hero::after", self.about_css)
+        self.assertRegex(self.about_css, r"\.timeline-marker\s*\{[^}]*width:\s*16px;[^}]*height:\s*16px;")
 
     def test_footer_meta_global_on_canonical_pages(self):
         """Ensure footer attribution is present globally and no em dashes are introduced."""
         for rel in self.canonical_pages:
             html = (self.root / rel).read_text(encoding="utf-8")
             self.assertIn(self.footer_line, html)
+            self.assertIn(self.footer_primary, html)
+            self.assertIn('class="footer-primary"', html)
             self.assertIn('class="footer-meta"', html)
             self.assertNotIn("—", html)
 
