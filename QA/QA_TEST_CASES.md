@@ -68,14 +68,21 @@
 - Asserts the same header/nav DOM structure across canonical pages.
 - Asserts desktop and mobile nav accessibility labels are present and consistent.
 
+12. Insights card layout + centralized bullets
+- File: `tests/test-insights-layout.js`
+- File: `tests/test_insights_layout.py`
+- Asserts Insights uses responsive card grid and card classes.
+- Asserts Insights and Services lists use `bullet-list`.
+- Asserts bullet pseudo-element definitions live in `styles/site.css` only.
+
 ## OG Validation
 
-12. OG image URL consistency
+13. OG image URL consistency
 - File: `scripts/check_og_urls.sh`
 - Asserts canonical OG image URL appears once in each canonical page.
 
 ## Contact Experience
 
-13. Connect form integration and UX hooks
+14. Connect form integration and UX hooks
 - File: `tests/test_contact_form.py`
 - Asserts form fields, editor integration, and script hooks remain intact.

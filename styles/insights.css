@@ -239,3 +239,37 @@
         height: 44px;
       }
     }
+
+/* Insights card grid aligned to Services visual rhythm and hover behavior. */
+.insights-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  margin-top: 2rem;
+}
+
+.insight-card {
+  padding: 2rem;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.insight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.insight-divider {
+  height: 2px;
+  width: 40px;
+  background: var(--accent-blue);
+  margin: 0.75rem 0 1rem 0;
+}
+
+.insight-summary {
+  font-size: 0.95rem;
+  color: var(--muted-text);
+  margin-bottom: 1rem;
+}

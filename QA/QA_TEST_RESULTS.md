@@ -4,16 +4,27 @@ Date: 2026-02-17
 
 ## Automated Results
 
-1. `python3 -m unittest discover -s tests -v`
+1. `npm run test:node`
 - Result: PASS
-- Output summary: 10 tests run, 0 failures
-- Added coverage: favicon assets + favicon link references via `tests/test_favicon_assets.py`
+- Output summary: all Node checks passed, including:
+  - route/canonical/metadata/schema checks
+  - GA4 architecture checks
+  - header/nav consistency checks
+  - favicon checks
+  - insights layout + centralized bullet checks
+  - repository link and GA policy validators
 
-2. `bash scripts/check_og_urls.sh`
+2. `npm run test:python`
+- Result: PASS
+- Output summary: 16 tests run, 0 failures
+- Includes Playwright runtime GA verification across all canonical routes
+- Includes new insights bullet centralization tests in `tests/test_insights_layout.py`
+
+3. `bash scripts/check_og_urls.sh`
 - Result: PASS
 - Output summary: canonical OG image URL appears exactly once on each canonical page
 
-3. `python3 scripts/diagnose_pages.py`
+4. `python3 scripts/diagnose_pages.py`
 - Result: PASS (local file and route checks)
 - Note: GitHub API checks were not executable in this environment due to network/DNS restrictions
 
@@ -24,22 +35,8 @@ Date: 2026-02-17
 - Result: PASS
 - Notes: no matches in runtime page/content directories
 
-## Pending Node-based Checks
+## Notes
 
-Node runtime is not installed in this environment (`node: command not found`), so the following checks are prepared but not executable locally:
-
-- `node tests/test-clean-urls.js`
-- `node tests/test-canonical.js`
-- `node tests/test-meta.js`
-- `node tests/test-schema.js`
-- `node tests/test-ga4-installation.js`
-- `node tests/test-header-nav.js`
-- `node tests/test-favicon.js`
-- `node scripts/validate-links.js`
-- `node scripts/verify_ga4_id.js`
-
-Playwright browser runtime test is also prepared but not executable locally in this environment:
-
-- `tests/test_ga_runtime_playwright.py` (skips when playwright is not installed)
-
-These should be run in a Node-enabled environment before release sign-off.
+- During QA, runtime GA test initially surfaced a CSP issue on `/about/insights/` (`img-src` blocked a Google Tag Manager image ping).
+- Fix applied: added `https://www.googletagmanager.com` to `img-src` in canonical page CSP meta tags.
+- Re-run after fix: full Node + Python suites passed.
