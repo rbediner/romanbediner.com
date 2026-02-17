@@ -178,22 +178,24 @@
 }
 
 .footer {
-  border-top: 1px solid var(--border-color, #e6e6e6);
+  padding: 48px 0;
+  border-top: 1px solid var(--neutral-border, var(--border-color, #e6e6e6));
+}
+
+.footer p {
+  max-width: 960px;
+  margin: 0 auto 12px auto;
   text-align: center;
-  padding: 40px 24px;
 }
 
 .footer-primary {
-  margin: 0;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-color, #111111);
 }
 
 .footer-meta {
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   color: var(--muted-text, #6a6a6a);
-  text-align: center;
-  margin: 0.5rem auto 0;
-  max-width: 720px;
+  opacity: 0.65;
 }
