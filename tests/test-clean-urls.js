@@ -66,12 +66,12 @@ if (fs.existsSync(path.join(root, 'home', 'index.html'))) {
   console.error('FAIL: legacy /home/ route still exists.');
 }
 
-// /insights/ must appear in main desktop navigation.
+// /insights/ must exist in shared navigation model.
 const aboutHtml = fs.readFileSync(path.join(root, 'about', 'index.html'), 'utf8');
-const desktopNavMatch = aboutHtml.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/i);
-if (!desktopNavMatch || !/\/insights\//.test(desktopNavMatch[1])) {
+const navScript = fs.readFileSync(path.join(root, 'scripts', 'site-navigation.js'), 'utf8');
+if (!aboutHtml.includes('<nav class="site-nav" aria-label="Primary"></nav>') || !/href:\s*["']\/insights\/["']/.test(navScript)) {
   failures += 1;
-  console.error('FAIL: /insights/ is missing from main navigation.');
+  console.error('FAIL: /insights/ is missing from shared navigation model.');
 }
 
 if (failures > 0) {

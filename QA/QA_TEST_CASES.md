@@ -75,7 +75,8 @@
 - File: `tests/insights.test.js`
 - Asserts each `.insight-card` slug is unique and derived from title.
 - Asserts README auto-generated direct links match Insight slugs exactly.
-- Asserts GA `insight_expand` event fires on expand only (not collapse).
+- Asserts GA `insight_expand` and `insight_collapse` fire with slug payloads.
+- Asserts warning behavior when `gtag` is unavailable.
 
 14. About hybrid redesign + global footer attribution
 - File: `tests/test-about-redesign.js`
@@ -96,3 +97,38 @@
 16. Connect form integration and UX hooks
 - File: `tests/test_contact_form.py`
 - Asserts form fields, editor integration, and script hooks remain intact.
+
+## Visual Regression and Layout Integrity
+
+17. Critical-page baseline snapshots
+- File: `tests/test_visual_regression_playwright.py`
+- Asserts Home/About/Services/Insights/Connect match committed baseline screenshots.
+- Captures desktop full page (`1440px` width), desktop fold (`1200px` height), and mobile full page (`390px` width).
+- Fails on low-threshold visual drift.
+
+18. Navigation visual alignment and active-state stability
+- File: `tests/test_visual_regression_playwright.py`
+- Asserts nav links remain horizontally aligned.
+- Asserts Insights link exists on all pages.
+- Asserts active indicator exists and no layout shift occurs when active state toggles.
+
+19. Insights card integrity and interaction safety
+- File: `tests/test_visual_regression_playwright.py`
+- Asserts card container, blue top divider, orb bullets, bottom-right toggle, and hover hook.
+- Asserts expanded state screenshot remains stable.
+- Asserts expand interaction does not break card width and uses smooth max-height animation.
+
+20. Operating Philosophy visual contract
+- File: `tests/test_visual_regression_playwright.py`
+- Asserts white card background, border radius, hover elevation, right-aligned link, and heading hierarchy.
+- Captures normal and hover state screenshots.
+
+21. Bullet and spacing guardrails
+- File: `tests/test_visual_regression_playwright.py`
+- Asserts all unordered lists use `.service-list` with `/icons/bullet.png` at `8px`.
+- Asserts no default browser bullets render.
+- Asserts vertical spacing stays on the defined scale and below anomaly thresholds.
+
+22. Mobile responsive integrity
+- File: `tests/test_visual_regression_playwright.py`
+- Asserts mobile nav behavior, no horizontal overflow, clean Insights card stacking, and no clipping containers.

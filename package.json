@@ -7,6 +7,8 @@
     "generate:insight-links": "node scripts/generate-insight-links.js",
     "test:node": "npm run generate:insight-links && node tests/test-clean-urls.js && node tests/test-canonical.js && node tests/test-meta.js && node tests/test-schema.js && node tests/test-ga4-installation.js && node tests/test-header-nav.js && node tests/test-metadata-consistency.js && node tests/test-favicon.js && node tests/test-insights-layout.js && node tests/insights.test.js && node tests/test-about-redesign.js && node tests/test-operating-philosophy.js && node scripts/validate-links.js && node scripts/verify_ga4_id.js",
     "test:python": "python3 -m unittest discover -s tests -v",
+    "test:visual": "python3 -m unittest -v tests.test_visual_regression_playwright",
+    "test:visual:update": "UPDATE_VISUAL_BASELINES=1 python3 -m unittest -v tests.test_visual_regression_playwright",
     "test": "npm run test:node && npm run test:python"
   }
 }

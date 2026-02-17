@@ -17,6 +17,10 @@ if (!aboutHtml.includes('class="card-philosophy"')) {
   failures += 1;
   console.error('FAIL: .card-philosophy container is missing in About page.');
 }
+if (!aboutHtml.includes('class="philosophy-card-title"')) {
+  failures += 1;
+  console.error('FAIL: Operating Philosophy title is missing from inside the unified card.');
+}
 
 // Test 2: ensure card hover elevation transform exists.
 if (!/\.card-philosophy:hover\s*\{[^}]*transform:\s*translateY\(-3px\);/s.test(aboutCss)) {
@@ -31,10 +35,10 @@ if (dividerCount !== 2) {
   console.error(`FAIL: expected 2 philosophy dividers, found ${dividerCount}.`);
 }
 
-// Test 4: ensure orb bullets use /icons/bullet.png and 12px sizing globally.
-if (!/\.service-list li::before\s*\{[^}]*width:\s*12px;[^}]*height:\s*12px;[^}]*margin-right:\s*10px;[^}]*background-image:\s*url\("\/icons\/bullet\.png"\);/s.test(siteCss)) {
+// Test 4: ensure orb bullets use /icons/bullet.png and 8px sizing globally.
+if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*margin-right:\s*14px;[^}]*background-image:\s*url\("\/icons\/bullet\.png"\);/s.test(siteCss)) {
   failures += 1;
-  console.error('FAIL: service-list orb bullet spec does not match required /icons/bullet.png and 12px sizing.');
+  console.error('FAIL: service-list orb bullet spec does not match required /icons/bullet.png and 8px sizing.');
 }
 
 // Test 5: ensure Insights micro-link exists and points to /insights/.

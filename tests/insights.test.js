@@ -3,7 +3,7 @@
  * Production Insights system validation:
  * 1) Card id/title/slug integrity
  * 2) README auto-generated link integrity
- * 3) GA expand event tracking behavior
+ * 3) GA expand/collapse event tracking behavior
  */
 const assert = require('assert');
 const fs = require('fs');
@@ -64,6 +64,14 @@ function testReadmeLinksMatchInsights() {
     cardSlugs,
     'README insight links must exactly match all insight card slugs with no extras or omissions.'
   );
+
+  // Ensure every generated hash link resolves to an actual element id.
+  for (const slug of readmeSlugs) {
+    assert(
+      insightsHtml.includes(`id="${slug}"`),
+      `README hash link #${slug} does not resolve to an element in insights/index.html.`
+    );
+  }
 }
 
 function createFakeToggleHarness(slug, title) {
@@ -122,6 +130,9 @@ function createFakeToggleHarness(slug, title) {
 
 function testGaExpandEventBehavior() {
   const calls = [];
+  const warnings = [];
+  const originalConsoleWarn = console.warn;
+  console.warn = (...args) => warnings.push(args);
   global.gtag = (...args) => calls.push(args);
 
   const { button, listeners, card } = createFakeToggleHarness('operations-as-a-product', 'Operations as a Product');
@@ -143,14 +154,26 @@ function testGaExpandEventBehavior() {
     }
   ]);
 
-  // Second click collapses and must not trigger a second GA event.
+  // Second click collapses and must emit insight_collapse.
   listeners.click();
   assert(!card.classList.contains('expanded'), 'Card should be collapsed after second click.');
   assert.strictEqual(button.attributes['aria-expanded'], 'false', 'Button aria-expanded should be false on collapse.');
   assert.strictEqual(button.textContent, 'Expand +', 'Button text should switch back to Expand + on collapse.');
-  assert.strictEqual(calls.length, 1, 'GA event must not fire on collapse.');
+  assert.strictEqual(calls.length, 2, 'GA collapse event must fire on second click.');
+  assert.deepStrictEqual(calls[1], [
+    'event',
+    'insight_collapse',
+    {
+      insight_slug: 'operations-as-a-product',
+      insight_title: 'Operations as a Product'
+    }
+  ]);
 
   delete global.gtag;
+  listeners.click();
+  assert.strictEqual(warnings.length, 1, 'Missing gtag should emit one warning.');
+  assert(String(warnings[0][0]).includes('gtag unavailable'), 'Warning should include gtag unavailable message.');
+  console.warn = originalConsoleWarn;
 }
 
 function run() {

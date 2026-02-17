@@ -22,7 +22,10 @@ class GARuntimePlaywrightTest(unittest.TestCase):
         from playwright.sync_api import sync_playwright
 
         handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(ROOT))
-        cls.server = socketserver.TCPServer(("127.0.0.1", 0), handler)
+        try:
+            cls.server = socketserver.TCPServer(("127.0.0.1", 0), handler)
+        except PermissionError as exc:
+            raise unittest.SkipTest(f"Local socket bind is blocked in this environment: {exc}")
         cls.port = cls.server.server_address[1]
         cls.server_thread = threading.Thread(target=cls.server.serve_forever, daemon=True)
         cls.server_thread.start()
@@ -83,6 +86,55 @@ class GARuntimePlaywrightTest(unittest.TestCase):
             )
 
             context.close()
+
+    def test_insights_expand_and_collapse_events_emit_collect_requests(self):
+        context = self.browser.new_context()
+        page = context.new_page()
+
+        requests = []
+        page.on("request", lambda request: requests.append(request.url))
+
+        page.goto(f"http://127.0.0.1:{self.port}/insights/", wait_until="networkidle")
+        page.wait_for_function("typeof window.gtag === 'function'")
+        time.sleep(2)
+        page.locator(".insight-toggle").first.click()
+        time.sleep(2)
+        page.locator(".insight-toggle").first.click()
+        time.sleep(2)
+
+        collect_requests = [u for u in requests if "google-analytics.com/g/collect" in u]
+        expand_hits = [u for u in collect_requests if "insight_expand" in u]
+        collapse_hits = [u for u in collect_requests if "insight_collapse" in u]
+        data_layer_events = page.evaluate(
+            """() => (window.dataLayer || [])
+              .map((item) => Array.from(item || []))
+              .filter((item) => item.length >= 3 && item[0] === 'event')
+              .map((item) => ({ name: item[1], payload: item[2] || {} }))"""
+        )
+        expand_data_layer_hits = [e for e in data_layer_events if e.get("name") == "insight_expand"]
+        collapse_data_layer_hits = [e for e in data_layer_events if e.get("name") == "insight_collapse"]
+
+        self.assertTrue(
+            len(expand_hits) >= 1 or len(expand_data_layer_hits) >= 1,
+            "No insight_expand telemetry observed in collect requests or dataLayer.",
+        )
+        self.assertTrue(
+            len(collapse_hits) >= 1 or len(collapse_data_layer_hits) >= 1,
+            "No insight_collapse telemetry observed in collect requests or dataLayer.",
+        )
+
+        if len(expand_hits) >= 1:
+            self.assertTrue(
+                any("ep.insight_slug=" in u and "ep.insight_title=" in u for u in expand_hits),
+                "insight_expand collect payload is missing insight_slug or insight_title parameters.",
+            )
+        else:
+            self.assertTrue(
+                any("insight_slug" in e.get("payload", {}) and "insight_title" in e.get("payload", {}) for e in expand_data_layer_hits),
+                "insight_expand dataLayer payload is missing insight_slug or insight_title.",
+            )
+
+        context.close()
 
 
 if __name__ == "__main__":

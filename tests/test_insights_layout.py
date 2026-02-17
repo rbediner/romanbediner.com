@@ -30,27 +30,32 @@ class InsightsLayoutTest(unittest.TestCase):
             self.assertIn('<div class="insight-expanded">', card_html)
 
     def test_expand_collapse_css_rules(self):
-        """Ensure expanded content is hidden by default and shown on expanded cards."""
+        """Ensure expanded content is hidden by default and displayed when expanded."""
         self.assertRegex(self.insights_css, r"\.insight-expanded\s*\{[^}]*display:\s*none;")
         self.assertRegex(self.insights_css, r"\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*display:\s*block;")
 
     def test_hover_lift_and_spacing(self):
         """Ensure card hover lift and card spacing align with required behavior."""
-        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*transition:\s*transform 150ms ease;")
-        self.assertRegex(self.insights_css, r"\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);")
+        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;")
+        self.assertRegex(self.insights_css, r"\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-4px\);")
         self.assertRegex(self.insights_css, r"\.insight-card \+ \.insight-card\s*\{[^}]*margin-top:\s*64px;")
+        self.assertRegex(self.insights_css, r"\.insight-accent\s*\{[^}]*height:\s*3px;")
+        self.assertRegex(self.insights_css, r"\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;")
+        self.assertRegex(self.insights_css, r"\.insight-toggle\s*\{[^}]*border-radius:\s*999px;")
 
     def test_shared_bullets_follow_orb_spec(self):
         """Ensure global orb bullet spec is centralized in site.css."""
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*width:\s*12px;")
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*height:\s*12px;")
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*margin-right:\s*10px;")
+        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*width:\s*8px;")
+        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*height:\s*8px;")
+        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*margin-right:\s*14px;")
         self.assertIn('background-image: url("/icons/bullet.png");', self.site_css)
 
     def test_ga_event_on_expand_contract(self):
-        """Ensure script sends insight_expand only for expansion and guards gtag."""
+        """Ensure script sends expand/collapse events and guards missing gtag."""
         self.assertIn("gtag('event', 'insight_expand'", self.insights_script)
-        self.assertIn("if (isExpanded && typeof gtag === 'function')", self.insights_script)
+        self.assertIn("gtag('event', 'insight_collapse'", self.insights_script)
+        self.assertIn("if (typeof gtag === 'function')", self.insights_script)
+        self.assertIn("console.warn('[insights] gtag unavailable; insight toggle event not sent'", self.insights_script)
         self.assertIn("insight_slug", self.insights_script)
         self.assertIn("insight_title", self.insights_script)
 

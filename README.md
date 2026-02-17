@@ -99,6 +99,25 @@ Browser runtime GA check (included in `npm test` on CI):
 - `tests/test_ga_runtime_playwright.py`
 - Requires Playwright and Chromium
 
+Visual regression and layout integrity checks (included in `npm test` on CI):
+
+- `tests/test_visual_regression_playwright.py`
+- Compares committed baselines for Home, About, Services, Insights, and Connect
+- Captures desktop full page (`1440px` width), desktop fold (`1200px` height), and mobile (`390px` width)
+- Enforces navigation alignment, active-state stability, spacing guardrails, bullet consistency, Insights expand behavior, and mobile overflow rules
+
+Refresh visual baselines intentionally:
+
+```bash
+npm run test:visual:update
+```
+
+Run only visual checks:
+
+```bash
+npm run test:visual
+```
+
 Run Node-only checks:
 
 ```bash
@@ -130,15 +149,15 @@ GitHub Actions workflow:
 
 ## Operating Philosophy Section Structure
 
-- Header placement: `OPERATING PHILOSOPHY` sits above the container with a single blue accent rule below it.
+- Header placement: `OPERATING PHILOSOPHY` sits at the top of the unified philosophy card with a single blue accent rule below it.
 - Card behavior: the three philosophy blocks are wrapped in one `.card-philosophy` container with subtle default elevation and restrained hover lift.
 - Divider rules: two `.philosophy-divider` lines separate the three blocks, using neutral gray only.
 - Blue usage rule: blue is used only for the section accent rule and the micro-link, not structural dividers.
-- Bullet sizing standard: shared `.service-list` bullets use `/icons/bullet.png` at `12px` by `12px` with `10px` right spacing.
+- Bullet sizing standard: shared `.service-list` bullets use `/icons/bullet.png` at `8px` by `8px` with `14px` right spacing.
 - Insights linkage rule: the card ends with the micro-link `Explore related insights →` targeting `/insights/`.
 
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
-## Insight Direct Links
+## INSIGHT DIRECT LINKS
 
 Productizing Operations for Modern AI-Enabled Work
 https://romanbediner.com/insights/#productizing-operations-for-modern-ai-enabled-work

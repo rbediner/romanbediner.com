@@ -17,11 +17,24 @@ function bindInsightToggle(button) {
     button.setAttribute('aria-expanded', String(isExpanded));
     button.textContent = isExpanded ? 'Collapse -' : 'Expand +';
 
-    // Fire analytics only on expansion, and fail safely if GA is unavailable.
-    if (isExpanded && typeof gtag === 'function') {
-      gtag('event', 'insight_expand', {
+    // Fire analytics with a safe gtag guard to avoid runtime errors when GA is unavailable.
+    if (typeof gtag === 'function') {
+      if (isExpanded) {
+        gtag('event', 'insight_expand', {
+          insight_slug: insightSlug,
+          insight_title: insightTitle
+        });
+      } else {
+        gtag('event', 'insight_collapse', {
+          insight_slug: insightSlug,
+          insight_title: insightTitle
+        });
+      }
+    } else if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+      // Keep diagnostics explicit so missing GA wiring is visible during QA.
+      console.warn('[insights] gtag unavailable; insight toggle event not sent', {
         insight_slug: insightSlug,
-        insight_title: insightTitle
+        is_expanded: isExpanded
       });
     }
   });

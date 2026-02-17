@@ -65,19 +65,29 @@ if (!/\.insight-expanded\s*\{[^}]*display:\s*none;/s.test(insightsCss)) {
 }
 if (!/\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*display:\s*block;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: expanded insight content rule is missing.');
+  console.error('FAIL: expanded insight content display rule is missing.');
 }
-if (!/\.insight-card\s*\{[^}]*transition:\s*transform 150ms ease;/s.test(insightsCss)) {
+if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: insight-card transition must use transform 150ms ease.');
+  console.error('FAIL: insight-card transition must use transform/box-shadow 180ms ease.');
 }
-if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);/s.test(insightsCss)) {
+if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-4px\);/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: insight-card hover lift must be translateY(-2px).');
+  console.error('FAIL: insight-card hover lift must be translateY(-4px).');
+}
+
+if (!/\.insight-accent\s*\{[^}]*height:\s*3px;[^}]*background:\s*var\(--accent-blue, #3b6cff\);/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: each insight card must include the subtle blue accent divider.');
+}
+
+if (!/\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;/s.test(insightsCss) || !/\.insight-toggle\s*\{[^}]*border-radius:\s*999px;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: bottom-right pill toggle styling is missing.');
 }
 
 // Validate shared orb bullet implementation in global CSS.
-if (!/\.service-list li::before\s*\{[^}]*width:\s*12px;[^}]*height:\s*12px;[^}]*margin-right:\s*10px;[^}]*background-image:\s*url\("\/icons\/bullet\.png"\);/s.test(siteCss)) {
+if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*margin-right:\s*14px;[^}]*background-image:\s*url\("\/icons\/bullet\.png"\);/s.test(siteCss)) {
   failures += 1;
   console.error('FAIL: shared orb bullet spec is not correctly defined in site.css.');
 }
@@ -87,9 +97,13 @@ if (!insightsScript.includes("gtag('event', 'insight_expand'")) {
   failures += 1;
   console.error('FAIL: insight_expand GA event call is missing.');
 }
-if (!/if \(isExpanded && typeof gtag === 'function'\)/.test(insightsScript)) {
+if (!insightsScript.includes("gtag('event', 'insight_collapse'")) {
   failures += 1;
-  console.error('FAIL: GA event must fire only on expand and guard missing gtag.');
+  console.error('FAIL: insight_collapse GA event call is missing.');
+}
+if (!/if \(typeof gtag === 'function'\)/.test(insightsScript)) {
+  failures += 1;
+  console.error('FAIL: GA event calls must guard missing gtag.');
 }
 
 if (failures > 0) {

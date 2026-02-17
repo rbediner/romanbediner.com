@@ -20,7 +20,7 @@ function parseInsights(html) {
 function buildSection(entries) {
   const lines = [
     START_MARKER,
-    '## Insight Direct Links',
+    '## INSIGHT DIRECT LINKS',
     ''
   ];
 

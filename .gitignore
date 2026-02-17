@@ -9,3 +9,7 @@ dist/
 .pytest_cache/
 __pycache__/
 *.pyc
+
+# Visual regression artifacts generated during local test runs.
+tests/visual-current/
+tests/visual-diff/
