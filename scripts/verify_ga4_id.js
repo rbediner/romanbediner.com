@@ -15,7 +15,7 @@ const canonicalPages = [
   path.join(ROOT, 'about', 'index.html'),
   path.join(ROOT, 'services', 'index.html'),
   path.join(ROOT, 'connect', 'index.html'),
-  path.join(ROOT, 'about', 'insights', 'index.html')
+  path.join(ROOT, 'insights', 'index.html')
 ];
 
 function walkHtml(dir, out = []) {

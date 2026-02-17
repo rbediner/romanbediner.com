@@ -37,7 +37,7 @@ if (schema['@type'] !== 'Person') {
 
 console.log('PASS: homepage Person schema is present and complete.');
 
-const insightsPath = path.resolve(__dirname, '..', 'about', 'insights', 'index.html');
+const insightsPath = path.resolve(__dirname, '..', 'insights', 'index.html');
 const insightsHtml = fs.readFileSync(insightsPath, 'utf8');
 const insightsSchemaMatch = insightsHtml.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
 

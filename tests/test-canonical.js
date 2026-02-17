@@ -10,7 +10,7 @@ const checks = [
   { file: 'about/index.html', canonical: 'https://romanbediner.com/about/' },
   { file: 'services/index.html', canonical: 'https://romanbediner.com/services/' },
   { file: 'connect/index.html', canonical: 'https://romanbediner.com/connect/' },
-  { file: 'about/insights/index.html', canonical: 'https://romanbediner.com/about/insights/' }
+  { file: 'insights/index.html', canonical: 'https://romanbediner.com/insights/' }
 ];
 
 let failures = 0;

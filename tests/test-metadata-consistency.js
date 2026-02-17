@@ -18,7 +18,7 @@ const htmlPages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'about/insights/index.html'
+  'insights/index.html'
 ];
 
 function extractSingle(regex, html, label, file, failures) {
@@ -34,7 +34,7 @@ function extractSingle(regex, html, label, file, failures) {
 const failures = { count: 0 };
 
 const homepageHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const insightsHtml = fs.readFileSync(path.join(root, 'about', 'insights', 'index.html'), 'utf8');
+const insightsHtml = fs.readFileSync(path.join(root, 'insights', 'index.html'), 'utf8');
 
 const homepageTitle = extractSingle(/<title>([^<]+)<\/title>/gi, homepageHtml, 'title', 'index.html', failures);
 const homepageDescription = extractSingle(/<meta\s+name="description"\s+content="([^"]*)"\s*\/?\s*>/gi, homepageHtml, 'meta description', 'index.html', failures);
@@ -42,12 +42,12 @@ const homepageH1 = extractSingle(/<h1>([^<]+)<\/h1>/gi, homepageHtml, 'h1', 'ind
 const homepageOgTitle = extractSingle(/<meta\s+property="og:title"\s+content="([^"]*)"\s*\/?\s*>/gi, homepageHtml, 'og:title', 'index.html', failures);
 const homepageOgDescription = extractSingle(/<meta\s+property="og:description"\s+content="([^"]*)"\s*\/?\s*>/gi, homepageHtml, 'og:description', 'index.html', failures);
 
-const insightsTitle = extractSingle(/<title>([^<]+)<\/title>/gi, insightsHtml, 'title', 'about/insights/index.html', failures);
-const insightsDescription = extractSingle(/<meta\s+name="description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'meta description', 'about/insights/index.html', failures);
-const insightsOgTitle = extractSingle(/<meta\s+property="og:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:title', 'about/insights/index.html', failures);
-const insightsOgDescription = extractSingle(/<meta\s+property="og:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:description', 'about/insights/index.html', failures);
-const insightsTwitterTitle = extractSingle(/<meta\s+name="twitter:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:title', 'about/insights/index.html', failures);
-const insightsTwitterDescription = extractSingle(/<meta\s+name="twitter:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:description', 'about/insights/index.html', failures);
+const insightsTitle = extractSingle(/<title>([^<]+)<\/title>/gi, insightsHtml, 'title', 'insights/index.html', failures);
+const insightsDescription = extractSingle(/<meta\s+name="description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'meta description', 'insights/index.html', failures);
+const insightsOgTitle = extractSingle(/<meta\s+property="og:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:title', 'insights/index.html', failures);
+const insightsOgDescription = extractSingle(/<meta\s+property="og:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:description', 'insights/index.html', failures);
+const insightsTwitterTitle = extractSingle(/<meta\s+name="twitter:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:title', 'insights/index.html', failures);
+const insightsTwitterDescription = extractSingle(/<meta\s+name="twitter:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:description', 'insights/index.html', failures);
 const insightsH1 = [...insightsHtml.matchAll(/<h1>([^<]+)<\/h1>/gi)].map((m) => m[1].trim());
 
 if (homepageTitle && homepageTitle !== expectedHomepageTitle) {

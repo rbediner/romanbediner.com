@@ -10,7 +10,7 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'about/insights/index.html'
+  'insights/index.html'
 ];
 
 const seenTitles = new Set();

@@ -41,7 +41,7 @@ class GARuntimePlaywrightTest(unittest.TestCase):
             cls.server.server_close()
 
     def test_ga_loader_and_collect_requests_fire(self):
-        routes = ["/", "/about/", "/services/", "/connect/", "/about/insights/"]
+        routes = ["/", "/about/", "/services/", "/connect/", "/insights/"]
 
         for route in routes:
             context = self.browser.new_context()

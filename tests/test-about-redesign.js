@@ -15,7 +15,7 @@ const canonicalPages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'about/insights/index.html'
+  'insights/index.html'
 ];
 
 const footerLine = 'This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling.';

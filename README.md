@@ -8,12 +8,12 @@ Production static site for [romanbediner.com](https://romanbediner.com), deploye
 - `/about/` -> `about/index.html`
 - `/services/` -> `services/index.html`
 - `/connect/` -> `connect/index.html`
-- `/about/insights/` -> `about/insights/index.html`
+- `/insights/` -> `insights/index.html`
 
 Route policy:
 
 - No runtime `/contact/`
-- No runtime root `/insights/`
+- No runtime `/about/insights/`
 - No runtime `/home/`
 - No `.html` links in navigation
 
@@ -127,3 +127,17 @@ GitHub Actions workflow:
 2. Push to GitHub
 3. GitHub Pages deploys from repository root
 4. Validate canonical routes and metadata on live site
+
+<!-- AUTO-GENERATED INSIGHT LINKS START -->
+## Insight Direct Links
+
+Productizing Operations for Modern AI-Enabled Work
+https://romanbediner.com/insights/#productizing-operations-for-modern-ai-enabled-work
+
+Operations as a Product
+https://romanbediner.com/insights/#operations-as-a-product
+
+AI as an Operating Layer
+https://romanbediner.com/insights/#ai-as-an-operating-layer
+
+<!-- AUTO-GENERATED INSIGHT LINKS END -->

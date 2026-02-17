@@ -12,7 +12,7 @@ const PAGES = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'about/insights/index.html'
+  'insights/index.html'
 ];
 
 let failures = 0;

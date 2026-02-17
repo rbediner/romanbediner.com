@@ -1,114 +1,99 @@
 #!/usr/bin/env node
 /**
- * Test: Insights card grid and centralized bullet system usage.
+ * Test: Insights structure, styling behavior, and shared orb bullet usage.
  */
 const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
-const insightsHtml = fs.readFileSync(path.join(root, 'about/insights/index.html'), 'utf8');
-const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
+const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
 const insightsCss = fs.readFileSync(path.join(root, 'styles/insights.css'), 'utf8');
-const servicesCss = fs.readFileSync(path.join(root, 'styles/services.css'), 'utf8');
-const servicesHtml = fs.readFileSync(path.join(root, 'services/index.html'), 'utf8');
+const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 const insightsScript = fs.readFileSync(path.join(root, 'scripts/insights-briefs.js'), 'utf8');
 
 let failures = 0;
 
-if (!insightsHtml.includes('class="insights-grid"')) {
+// Validate card markup and toggle wiring.
+const insightCards = [...insightsHtml.matchAll(/<section id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)<\/section>/g)];
+if (insightCards.length < 3) {
   failures += 1;
-  console.error('FAIL: Insights page is missing .insights-grid.');
+  console.error('FAIL: Insights page should contain at least 3 insight-card sections.');
 }
 
-const insightCardCount = (insightsHtml.match(/class="insight-card card"/g) || []).length;
-if (insightCardCount < 3) {
-  failures += 1;
-  console.error('FAIL: Insights page should contain at least 3 .insight-card.card entries.');
-}
+const seenSlugs = new Set();
+for (const card of insightCards) {
+  const slug = card[1];
+  const cardHtml = card[2];
+  const titleMatch = cardHtml.match(/<h2>([^<]+)<\/h2>/);
 
-const insightListMatches = [...insightsHtml.matchAll(/<ul class="([^"]*insight-points[^"]*)">/g)];
-if (insightListMatches.length < 3) {
-  failures += 1;
-  console.error('FAIL: Insights page should contain at least 3 insight point lists.');
-} else {
-  for (const match of insightListMatches) {
-    if (!match[1].includes('service-list')) {
-      failures += 1;
-      console.error('FAIL: insight-points list is missing shared service-list class.');
-    }
-  }
-}
-
-const serviceListMatches = [...servicesHtml.matchAll(/<ul class="([^"]*service-list[^"]*)">/g)];
-for (const match of serviceListMatches) {
-  if (match[1].includes('bullet-list')) {
+  if (!slug || seenSlugs.has(slug)) {
     failures += 1;
-    console.error('FAIL: legacy bullet-list class should not be present on Services lists.');
+    console.error(`FAIL: duplicate or missing card slug: ${slug}`);
+  }
+  seenSlugs.add(slug);
+
+  if (!titleMatch) {
+    failures += 1;
+    console.error(`FAIL: card ${slug} is missing an h2 title.`);
+  }
+
+  if (!/<button class="insight-toggle"[^>]*aria-expanded="false"/i.test(cardHtml)) {
+    failures += 1;
+    console.error(`FAIL: card ${slug} is missing the collapsed insight-toggle button.`);
+  }
+
+  if (!/<ul class="service-list">/i.test(cardHtml)) {
+    failures += 1;
+    console.error(`FAIL: card ${slug} is missing shared service-list bullets.`);
+  }
+
+  if (!/<div class="insight-expanded">/i.test(cardHtml)) {
+    failures += 1;
+    console.error(`FAIL: card ${slug} is missing insight-expanded content container.`);
   }
 }
 
-if (!siteCss.includes('.service-list') || !siteCss.includes('.service-list li::before') || !siteCss.includes('background-image: url("/assets/icons/bullet.png");')) {
+if (!insightsHtml.includes('src="../scripts/insights-briefs.js"')) {
   failures += 1;
-  console.error('FAIL: shared bullet system definition is incomplete in styles/site.css.');
+  console.error('FAIL: Insights page must include insights-briefs.js from ../scripts/.');
 }
 
-if (/service-list\s+li::before/.test(servicesCss) || /insight-points\s+li::before/.test(insightsCss) || /bullet-list\s+li::before/.test(insightsCss)) {
+// Validate CSS behavior for collapse/expand and hover lift.
+if (!/\.insight-expanded\s*\{[^}]*display:\s*none;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: page-level CSS should not override shared bullet pseudo-elements.');
+  console.error('FAIL: insight-expanded must be hidden by default.');
+}
+if (!/\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*display:\s*block;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: expanded insight content rule is missing.');
+}
+if (!/\.insight-card\s*\{[^}]*transition:\s*transform 150ms ease;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insight-card transition must use transform 150ms ease.');
+}
+if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insight-card hover lift must be translateY(-2px).');
 }
 
-if (!/\.insights-grid\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;/s.test(insightsCss)) {
+// Validate shared orb bullet implementation in global CSS.
+if (!/\.service-list li::before\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*margin-right:\s*12px;[^}]*background-image:\s*url\("\/assets\/icons\/bullet\.png"\);/s.test(siteCss)) {
   failures += 1;
-  console.error('FAIL: insights-grid must be a vertical flex stack.');
+  console.error('FAIL: shared orb bullet spec is not correctly defined in site.css.');
 }
 
-if (/grid-template-columns\s*:/s.test(insightsCss)) {
+// Validate GA tracking contract in script.
+if (!insightsScript.includes("gtag('event', 'insight_expand'")) {
   failures += 1;
-  console.error('FAIL: insights.css should not define grid-template-columns for insights-grid.');
+  console.error('FAIL: insight_expand GA event call is missing.');
 }
-
-if ((insightsHtml.match(/class="expand-brief"/g) || []).length < 3 || (insightsHtml.match(/class="brief-full"/g) || []).length < 3) {
+if (!/if \(isExpanded && typeof gtag === 'function'\)/.test(insightsScript)) {
   failures += 1;
-  console.error('FAIL: each insight card should include expand-brief and brief-full elements.');
-}
-
-if (!insightsHtml.includes('src="../../scripts/insights-briefs.js"')) {
-  failures += 1;
-  console.error('FAIL: insights page must include the external expand/collapse script.');
-}
-
-if (!insightsScript.includes('classList.toggle("open")')) {
-  failures += 1;
-  console.error('FAIL: expand script must toggle the "open" class on brief panels.');
-}
-
-if (/--bullet-size|--bullet-gap|--bullet-nudge-y/.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: insights.css must not redefine shared bullet variables.');
-}
-
-if (!/\.insight-card\s+h2\s*\{[^}]*font-size:\s*20px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*normal;[^}]*line-height:\s*normal;/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: insight-card h2 must mirror Services heading typography values.');
-}
-
-if (!/\.insight-divider\s*\{[^}]*height:\s*3px;[^}]*width:\s*60px;[^}]*margin:\s*1rem 0 1\.25rem 0;/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: insight-divider styling does not match the required stronger treatment.');
-}
-
-if (!/\.insight-card\s*\{[^}]*max-width:\s*960px;[^}]*margin-left:\s*auto;[^}]*margin-right:\s*auto;/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: insight-card readable width constraints are missing.');
-}
-
-if (!/\.expand-brief\s*\{[^}]*background:\s*none;[^}]*border:\s*none;[^}]*padding:\s*0;[^}]*margin-top:\s*1\.25rem;[^}]*transition:\s*opacity 150ms ease;/s.test(insightsCss) || !/\.expand-brief::after\s*\{[^}]*content:\s*" \\2192";/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: expand-brief must use the editorial link-style treatment.');
+  console.error('FAIL: GA event must fire only on expand and guard missing gtag.');
 }
 
 if (failures > 0) {
   process.exit(1);
 }
 
-console.log('PASS: insights cards and centralized bullet system are configured correctly.');
+console.log('PASS: insights structure, behavior, and orb bullet checks passed.');

@@ -10,7 +10,7 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'about/insights/index.html'
+  'insights/index.html'
 ];
 
 function normalizeHeader(html) {
@@ -31,6 +31,7 @@ let baseline = null;
 for (const rel of pages) {
   const html = fs.readFileSync(path.resolve(__dirname, '..', rel), 'utf8');
   const normalized = normalizeHeader(html);
+  const navOrderRegex = /<nav class="site-nav"[^>]*>\s*<a href="\/">Home<\/a>\s*<a href="\/about\/">About<\/a>\s*<a href="\/services\/">Services<\/a>\s*<a href="\/insights\/">Insights<\/a>\s*<a href="\/connect\/">Connect<\/a>\s*<\/nav>/i;
 
   if (!normalized) {
     failures += 1;
@@ -45,6 +46,10 @@ for (const rel of pages) {
   if (!html.includes('id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"')) {
     failures += 1;
     console.error(`FAIL: mobile nav aria label mismatch in ${rel}`);
+  }
+  if (!navOrderRegex.test(html)) {
+    failures += 1;
+    console.error(`FAIL: navigation order must be Home, About, Services, Insights, Connect in ${rel}`);
   }
 
   if (!baseline) {

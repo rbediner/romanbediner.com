@@ -19,7 +19,7 @@ class FaviconAssetsTest(unittest.TestCase):
             ("about/index.html", "../assets/favicon/"),
             ("services/index.html", "../assets/favicon/"),
             ("connect/index.html", "../assets/favicon/"),
-            ("about/insights/index.html", "../../assets/favicon/"),
+            ("insights/index.html", "../assets/favicon/"),
         ]
 
     def test_favicon_assets_exist(self):

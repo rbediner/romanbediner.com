@@ -5,18 +5,14 @@
 1. Clean URL navigation
 - File: `tests/test-clean-urls.js`
 - Asserts no `.html` links in nav blocks.
-- Asserts no `/contact/` or root `/insights/` nav links.
+- Asserts no `/contact/` nav links.
 
 2. Canonical route existence policy
 - File: `tests/test-clean-urls.js`
-- Asserts `/about/insights/index.html` exists.
+- Asserts `/insights/index.html` exists.
+- Asserts `/about/insights/index.html` does not exist.
 - Asserts `contact/index.html` does not exist.
-- Asserts `insights/index.html` does not exist.
-
-3. About-only insights linking
-- File: `tests/test-clean-urls.js`
-- Asserts About page includes `/about/insights/` in content.
-- Asserts `/about/insights/` does not appear in main desktop nav.
+- Asserts `/home/index.html` does not exist.
 
 ## Metadata and SEO
 
@@ -71,11 +67,17 @@
 12. Insights card layout + centralized bullets
 - File: `tests/test-insights-layout.js`
 - File: `tests/test_insights_layout.py`
-- Asserts Insights uses responsive card grid and card classes.
-- Asserts Insights and Services lists use `bullet-list`.
-- Asserts bullet pseudo-element definitions live in `styles/site.css` only.
+- Asserts Insight cards use slug ids + expected structure.
+- Asserts expand/collapse CSS behavior and subtle hover lift.
+- Asserts shared orb bullet spec is centralized in `styles/site.css`.
 
-13. About hybrid redesign + global footer attribution
+13. Insights production checks
+- File: `tests/insights.test.js`
+- Asserts each `.insight-card` slug is unique and derived from title.
+- Asserts README auto-generated direct links match Insight slugs exactly.
+- Asserts GA `insight_expand` event fires on expand only (not collapse).
+
+14. About hybrid redesign + global footer attribution
 - File: `tests/test-about-redesign.js`
 - File: `tests/test_about_redesign.py`
 - Asserts About page contains the approved hybrid structure and timeline sections.
@@ -85,12 +87,12 @@
 
 ## OG Validation
 
-14. OG image URL consistency
+15. OG image URL consistency
 - File: `scripts/check_og_urls.sh`
 - Asserts canonical OG image URL appears once in each canonical page.
 
 ## Contact Experience
 
-15. Connect form integration and UX hooks
+16. Connect form integration and UX hooks
 - File: `tests/test_contact_form.py`
 - Asserts form fields, editor integration, and script hooks remain intact.

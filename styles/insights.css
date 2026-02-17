@@ -1,329 +1,106 @@
-    html {
-      scroll-behavior: smooth;
-    }
-
-    :root {
-      --bg-color: #ffffff;
-      --surface-color: #f6f7f8;
-      --text-color: #111111;
-      --muted-text: #6a6a6a;
-      --border-color: #e6e6e6;
-      --accent-blue: #3b6cff;
-    }
-
-    body {
-      margin: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.75;
-    }
-
-    a {
-      color: var(--accent-blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .site-header {
-      padding: 6px 0;
-      position: sticky;
-      top: 0;
-      background-color: var(--bg-color);
-      z-index: 10;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: nowrap;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand-logo {
-      height: 44px;
-      width: auto;
-      flex-shrink: 0;
-      display: block;
-    }
-
-    .brand-name {
-      font-size: 40px;
-      font-weight: 600;
-      line-height: 1.1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--text-color);
-    }
-
-    .site-nav {
-      display: flex;
-      gap: 32px;
-      font-size: 16px;
-    }
-
-    .site-nav a {
-      color: var(--text-color);
-    }
-
-    .site-nav a:hover {
-      color: var(--accent-blue);
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      padding: 6px 8px;
-      font-size: 16px;
-      color: var(--text-color);
-      cursor: pointer;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .menu-toggle .menu-icon {
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-      display: inline-block;
-      position: relative;
-    }
-
-    .menu-toggle .menu-icon::before,
-    .menu-toggle .menu-icon::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-    }
-
-    .menu-toggle .menu-icon::before {
-      top: -6px;
-    }
-
-    .menu-toggle .menu-icon::after {
-      top: 6px;
-    }
-
-    .mobile-nav {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100%;
-      background-color: var(--bg-color);
-      border-top: 1px solid var(--border-color);
-      display: none;
-      flex-direction: column;
-      padding: 12px 24px 20px 24px;
-      z-index: 20;
-    }
-
-    .mobile-nav a {
-      padding: 12px 0;
-      font-size: 16px;
-      color: var(--text-color);
-      text-decoration: none;
-    }
-
-    .mobile-nav.open {
-      display: flex;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .page-main {
-      padding: 72px 0;
-    }
-
-    .insights-wrap {
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 44px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      margin: 0 0 18px 0;
-    }
-
-    h2 {
-      font-size: 32px;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      margin: 0 0 14px 0;
-    }
-
-    p {
-      font-size: 19px;
-      color: var(--muted-text);
-      margin: 0 0 18px 0;
-    }
-
-    .footer {
-      padding: 48px 24px;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted-text);
-    }
-
-    @media (max-width: 768px) {
-      .site-header {
-        padding: 4px 0;
-      }
-
-      .header-inner {
-        padding: 0;
-      }
-
-      .brand-logo {
-        height: 44px;
-      }
-
-      .brand-name {
-        font-size: 22px;
-      }
-
-      .site-nav {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      h2 {
-        font-size: 28px;
-      }
-
-      .container {
-        padding: 0 24px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .brand-logo {
-        height: 44px;
-      }
-    }
-
-/* Insights stack vertically to match Services full-width card rhythm. */
-.insights-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
+/* Insights page layout keeps a restrained, executive presentation. */
+.insights-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 72px 24px;
 }
 
+.insights-main h1 {
+  margin: 0 0 16px 0;
+}
+
+.insights-intro {
+  max-width: 720px;
+  margin: 0 0 48px 0;
+}
+
+/* Cards are vertically stacked with consistent spacing and subtle lift. */
 .insight-card {
-  padding: 2.5rem;
-  border-radius: 16px;
   background: #ffffff;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
-  transition: transform 200ms ease, box-shadow 200ms ease;
-  max-width: 960px;
-  margin-left: auto;
-  margin-right: auto;
+  border: 1px solid var(--border-color, #e6e6e6);
+  padding: 28px;
+  transition: transform 150ms ease;
+}
+
+.insight-card + .insight-card {
+  margin-top: 64px;
 }
 
 .insight-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
 }
 
-.insight-card .service-header {
+.insight-header {
   display: flex;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 10px;
+  gap: 16px;
 }
 
-.insight-card h2 {
-  font-size: 20px;
+.insight-header h2 {
+  margin: 0 0 16px 0;
+  font-size: 24px;
   font-weight: 600;
-  letter-spacing: normal;
-  line-height: normal;
-  margin: 0;
-}
-
-.insight-divider {
-  height: 3px;
-  width: 60px;
-  background: var(--accent-blue);
-  margin: 1rem 0 1.25rem 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .insight-summary {
-  font-size: 0.95rem;
-  color: var(--muted-text);
-  margin-bottom: 1rem;
+  margin: 0 0 16px 0;
+  max-width: 720px;
 }
 
-.insight-points {
-  margin: 0 0 1.25rem 0;
+.insight-card .service-list {
+  margin-top: 12px;
+  margin-bottom: 0;
 }
 
-.expand-brief {
+/* Toggle remains minimal and aligns with the page tone. */
+.insight-toggle {
   background: none;
-  border: none;
-  padding: 0;
-  margin-top: 1.25rem;
-  font-size: 0.9rem;
+  border: 1px solid var(--border-color, #e6e6e6);
+  color: var(--text-color, #111111);
+  font-size: 14px;
   font-weight: 500;
-  color: var(--accent-blue);
+  padding: 6px 10px;
   cursor: pointer;
-  transition: opacity 150ms ease;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.expand-brief:hover {
-  opacity: 0.75;
+.insight-toggle:hover {
+  border-color: var(--accent-blue, #3b6cff);
 }
 
-.expand-brief:focus {
-  outline: none;
+.insight-expanded {
+  display: none;
+  margin-top: 16px;
 }
 
-.expand-brief::after {
-  content: " \2192";
-  font-weight: 400;
+.insight-card.expanded .insight-expanded {
+  display: block;
 }
 
-.brief-full {
-  max-height: 0;
-  overflow: hidden;
-  margin-top: 1rem;
-  transition: max-height 300ms ease;
+.insight-expanded p {
+  max-width: 720px;
+  margin: 0 0 16px 0;
 }
 
-.brief-full.open {
-  max-height: 1000px;
+.insight-expanded p:last-child {
+  margin-bottom: 0;
 }
 
-.brief-full p {
-  font-size: 1rem;
-  color: var(--muted-text);
-  margin: 0 0 1rem 0;
+@media (max-width: 768px) {
+  .insights-main {
+    padding: 56px 24px;
+  }
+
+  .insight-card {
+    padding: 22px;
+  }
+
+  .insight-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

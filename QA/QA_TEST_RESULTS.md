@@ -11,14 +11,14 @@ Date: 2026-02-17
   - GA4 architecture checks
   - header/nav consistency checks
   - favicon checks
-  - insights layout + centralized bullet checks
+  - insights layout + slug/README/GA expand checks
   - repository link and GA policy validators
 
 2. `npm run test:python`
 - Result: PASS
-- Output summary: 25 tests run, 0 failures
+- Output summary: 21 tests run, 0 failures
 - Includes Playwright runtime GA verification across all canonical routes
-- Includes new insights bullet centralization tests in `tests/test_insights_layout.py`
+- Includes Insights structure and behavior tests in `tests/test_insights_layout.py`
 - Includes About redesign and global footer attribution checks in `tests/test_about_redesign.py`
 
 3. `bash scripts/check_og_urls.sh`
@@ -32,7 +32,7 @@ Date: 2026-02-17
 ## Runtime Route and Metadata Scans
 
 1. Runtime legacy route scan
-- Command: `rg -n "/contact/|href=\"/insights/\"|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect about/insights analytics assets -S`
+- Command: `rg -n "/contact/|/about/insights/|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect insights analytics assets -S`
 - Result: PASS
 - Notes: no matches in runtime page/content directories
 
@@ -42,6 +42,6 @@ Date: 2026-02-17
 
 ## Notes
 
-- During QA, runtime GA test initially surfaced a CSP issue on `/about/insights/` (`img-src` blocked a Google Tag Manager image ping).
+- During QA, runtime GA test initially surfaced a CSP issue on `/insights/` (`img-src` blocked a Google Tag Manager image ping).
 - Fix applied: added `https://www.googletagmanager.com` to `img-src` in canonical page CSP meta tags.
 - Re-run after fix: full Node + Python suites passed.

@@ -10,11 +10,11 @@ const pages = [
   path.resolve(__dirname, '..', 'about', 'index.html'),
   path.resolve(__dirname, '..', 'services', 'index.html'),
   path.resolve(__dirname, '..', 'connect', 'index.html'),
-  path.resolve(__dirname, '..', 'about', 'insights', 'index.html')
+  path.resolve(__dirname, '..', 'insights', 'index.html')
 ];
 
 const measurementId = 'G-DVHD0KL633';
-const disallowed = [/href="[^\"]*\.html"/i, /href="\/contact\//i, /href="\/insights\//i];
+const disallowed = [/href="[^\"]*\.html"/i, /href="\/contact\//i];
 let hasError = false;
 
 for (const page of pages) {

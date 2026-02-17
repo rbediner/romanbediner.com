@@ -11,7 +11,7 @@ const canonicalPages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'about/insights/index.html'
+  'insights/index.html'
 ];
 
 let failures = 0;
@@ -27,7 +27,7 @@ for (const rel of canonicalPages) {
       failures += 1;
       console.error(`FAIL: .html nav link found in ${rel}`);
     }
-    if (/href="\/contact\//i.test(block) || /href="\/insights\//i.test(block)) {
+    if (/href="\/contact\//i.test(block)) {
       failures += 1;
       console.error(`FAIL: legacy nav route found in ${rel}`);
     }
@@ -49,13 +49,13 @@ for (const rel of canonicalPages) {
 }
 
 // Route existence policy.
-if (!fs.existsSync(path.join(root, 'about', 'insights', 'index.html'))) {
+if (!fs.existsSync(path.join(root, 'insights', 'index.html'))) {
   failures += 1;
-  console.error('FAIL: /about/insights/ page is missing.');
+  console.error('FAIL: /insights/ page is missing.');
 }
-if (fs.existsSync(path.join(root, 'insights', 'index.html'))) {
+if (fs.existsSync(path.join(root, 'about', 'insights', 'index.html'))) {
   failures += 1;
-  console.error('FAIL: legacy /insights/ root page still exists.');
+  console.error('FAIL: legacy /about/insights/ page still exists.');
 }
 if (fs.existsSync(path.join(root, 'contact', 'index.html'))) {
   failures += 1;
@@ -66,12 +66,12 @@ if (fs.existsSync(path.join(root, 'home', 'index.html'))) {
   console.error('FAIL: legacy /home/ route still exists.');
 }
 
-// /about/insights/ must not appear in main desktop navigation.
+// /insights/ must appear in main desktop navigation.
 const aboutHtml = fs.readFileSync(path.join(root, 'about', 'index.html'), 'utf8');
 const desktopNavMatch = aboutHtml.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/i);
-if (desktopNavMatch && /\/about\/insights\//.test(desktopNavMatch[1])) {
+if (!desktopNavMatch || !/\/insights\//.test(desktopNavMatch[1])) {
   failures += 1;
-  console.error('FAIL: /about/insights/ appears in main navigation.');
+  console.error('FAIL: /insights/ is missing from main navigation.');
 }
 
 if (failures > 0) {
