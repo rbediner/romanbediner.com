@@ -18,6 +18,7 @@ Content and support directories:
 - `/partials/ga4.html` GA4 snippet source-of-truth
 - `/scripts/` validation and utility scripts
 - `/tests/` automated QA checks
+- `/QA/` QA documentation (`QA_TEST_CASES.md`, `QA_TEST_RESULTS.md`)
 
 ## Clean URL Strategy
 
