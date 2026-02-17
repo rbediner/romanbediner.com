@@ -44,6 +44,10 @@ Each canonical page includes:
 Homepage also includes `Person` JSON-LD.
 Insights includes `Article` JSON-LD entries for all three briefs.
 
+## Positioning
+
+Roman Bediner is positioned as an Operations & AI Transformation Executive focused on productizing execution systems for modern enterprises.
+
 ## Open Graph and Social Preview
 
 Shared social image:
@@ -126,6 +130,7 @@ Note: ad blockers/privacy extensions can block GA requests locally.
 - `tests/test-schema.js`
 - `tests/test-ga4-installation.js`
 - `tests/test-favicon.js`
+- `tests/test-metadata-consistency.js`
 - `tests/test_contact_form.py`
 
 ## Deployment
