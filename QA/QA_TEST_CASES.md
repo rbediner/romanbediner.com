@@ -24,6 +24,7 @@
 - File: `tests/test-canonical.js`
 - Asserts canonical URL per canonical page.
 - Asserts `og:url` equals canonical URL.
+- Asserts CSP `script-src` does not include `unsafe-inline`.
 
 5. Title + description + social consistency
 - File: `tests/test-meta.js`
@@ -46,24 +47,35 @@
 
 8. GA4 installation across canonical pages
 - File: `tests/test-ga4-installation.js`
-- Asserts GA snippet appears once per canonical page.
-- Asserts `gtag('config', 'G-DVHD0KL633')` appears once per canonical page.
+- Asserts one `ga4-measurement-id` meta tag exists per canonical page.
+- Asserts one `/scripts/ga4.js` include exists per canonical page.
+- Asserts no inline `gtag('config'...)` blocks remain.
 - Asserts no unexpected GA measurement IDs exist.
 
 9. Repository-wide GA4 ID enforcement
 - File: `scripts/verify_ga4_id.js`
 - Scans all HTML files.
 - Fails if any GA ID other than `G-DVHD0KL633` appears.
-- Fails on duplicate GA snippet in any file.
+- Fails on inline GA config blocks in any HTML file.
+
+10. Browser runtime GA verification
+- File: `tests/test_ga_runtime_playwright.py`
+- Asserts GA loader request and GA collect request on each canonical route.
+- Asserts no CSP console errors are emitted for GA at runtime.
+
+11. Header and navigation consistency
+- File: `tests/test-header-nav.js`
+- Asserts the same header/nav DOM structure across canonical pages.
+- Asserts desktop and mobile nav accessibility labels are present and consistent.
 
 ## OG Validation
 
-10. OG image URL consistency
+12. OG image URL consistency
 - File: `scripts/check_og_urls.sh`
 - Asserts canonical OG image URL appears once in each canonical page.
 
 ## Contact Experience
 
-11. Connect form integration and UX hooks
+13. Connect form integration and UX hooks
 - File: `tests/test_contact_form.py`
 - Asserts form fields, editor integration, and script hooks remain intact.

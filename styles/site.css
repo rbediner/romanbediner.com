@@ -1,0 +1,150 @@
+/* Shared site architecture styles.
+   This file normalizes header and navigation behavior across canonical routes. */
+
+.site-header {
+  padding: 6px 0;
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-color, #ffffff);
+  z-index: 10;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brand-logo {
+  height: 44px;
+  width: auto;
+  flex-shrink: 0;
+  display: block;
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-color, #111111);
+}
+
+.site-nav {
+  display: flex;
+  gap: 32px;
+  font-size: 16px;
+}
+
+.site-nav a {
+  color: var(--text-color, #111111);
+}
+
+.site-nav a:hover {
+  color: var(--accent-blue, #3b6cff);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 6px 8px;
+  font-size: 16px;
+  color: var(--text-color, #111111);
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-toggle .menu-icon {
+  width: 18px;
+  height: 2px;
+  background-color: var(--text-color, #111111);
+  display: inline-block;
+  position: relative;
+}
+
+.menu-toggle .menu-icon::before,
+.menu-toggle .menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background-color: var(--text-color, #111111);
+}
+
+.menu-toggle .menu-icon::before {
+  top: -6px;
+}
+
+.menu-toggle .menu-icon::after {
+  top: 6px;
+}
+
+.mobile-nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background-color: var(--bg-color, #ffffff);
+  border-top: 1px solid var(--border-color, #e6e6e6);
+  display: none;
+  flex-direction: column;
+  padding: 12px 24px 20px 24px;
+  z-index: 20;
+}
+
+.mobile-nav a {
+  padding: 12px 0;
+  font-size: 16px;
+  color: var(--text-color, #111111);
+  text-decoration: none;
+}
+
+.mobile-nav.open {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    padding: 4px 0;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .site-nav {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: none !important;
+  }
+
+  .brand-logo {
+    height: 44px;
+  }
+}

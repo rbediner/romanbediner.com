@@ -69,11 +69,9 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn('src="../assets/icons/LinkedIn.png"', self.html)
         self.assertIn("Connect with me on LinkedIn", self.html)
 
-    def test_mobile_and_layout_hooks_exist(self):
-        self.assertIn("font-size: clamp(32px, 5vw, 40px);", self.html)
-        self.assertRegex(self.html, r"\.contact-shell\s*{\s*max-width: 720px;")
-        self.assertRegex(self.html, r"\.card\s*{\s*background: #ffffff;")
-        self.assertRegex(self.html, r"@media \(min-width: 768px\)")
+    def test_externalized_css_and_layout_hooks_exist(self):
+        self.assertIn('<link rel="stylesheet" href="/styles/connect.css" />', self.html)
+        self.assertIn('<link rel="stylesheet" href="/styles/site.css" />', self.html)
         self.assertIn('<script src="../scripts/site-navigation.js"></script>', self.html)
         self.assertIn('<script src="../scripts/contact-form-emailjs.js"></script>', self.html)
         self.assertIn("contact_draft", self.js)

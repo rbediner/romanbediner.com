@@ -2,140 +2,107 @@
 
 Production static site for [romanbediner.com](https://romanbediner.com), deployed from `main` via GitHub Pages.
 
-## Site Architecture
+## Canonical Routes
 
-Canonical routes:
+- `/` -> `index.html`
+- `/about/` -> `about/index.html`
+- `/services/` -> `services/index.html`
+- `/connect/` -> `connect/index.html`
+- `/about/insights/` -> `about/insights/index.html`
 
-- `/` -> `/index.html`
-- `/about/` -> `/about/index.html`
-- `/services/` -> `/services/index.html`
-- `/connect/` -> `/connect/index.html`
-- `/about/insights/` -> `/about/insights/index.html`
+Route policy:
 
-Content and support directories:
-
-- `/assets/` static media and brand assets
-- `/analytics/ga4.html` GA4 snippet source-of-truth
-- `/scripts/` validation and utility scripts
-- `/tests/` automated QA checks
-- `/QA/` QA documentation (`QA_TEST_CASES.md`, `QA_TEST_RESULTS.md`)
-
-## Clean URL Strategy
-
-The site uses folder-based clean URLs with `index.html` per route.
-
-Rules:
-
+- No runtime `/contact/`
+- No runtime root `/insights/`
+- No runtime `/home/`
 - No `.html` links in navigation
-- No runtime `/contact/` route
-- No runtime root `/insights/` route
-- Insights is intentionally nested under About: `/about/insights/`
 
-## SEO Strategy
+## Project Structure
 
-Each canonical page includes:
-
-- unique `<title>`
-- `<meta name="description">`
-- `<link rel="canonical">`
-- Open Graph (`og:*`) tags
-- Twitter tags
-
-Homepage also includes `Person` JSON-LD.
-Insights includes `Article` JSON-LD entries for all three briefs.
-
-## Positioning
-
-Roman Bediner is positioned as an Operations & AI Transformation Executive focused on productizing execution systems for modern enterprises.
-
-## Open Graph and Social Preview
-
-Shared social image:
-
-- `https://romanbediner.com/assets/og-logo/og.png`
-
-All canonical pages include explicit:
-
-- `og:type`, `og:title`, `og:description`, `og:url`
-- `og:image`, `og:image:type`, `og:image:width`, `og:image:height`
-- `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
-
-## Favicon Strategy
-
-Favicon source asset:
-
-- `assets/icons/bullet.png`
-
-Generated favicon outputs:
-
-- `assets/favicon/favicon-16x16.png`
-- `assets/favicon/favicon-32x32.png`
-- `assets/favicon/apple-touch-icon.png`
-- `assets/favicon/favicon.ico`
-
-All primary pages include references to this favicon set in `<head>`.
+- `/styles/site.css` shared architecture styles (header/nav consistency)
+- `/styles/home.css`, `/styles/about.css`, `/styles/services.css`, `/styles/connect.css`, `/styles/insights.css` page styles
+- `/styles.css` legacy stub pointing to `/styles/` architecture
+- `/scripts/ga4.js` GA4 bootstrap logic
+- `/scripts/` validation and utility scripts
+- `/tests/` automated guardrail tests
+- `/QA/` QA cases and QA results documents
 
 ## Analytics (GA4)
 
 - Measurement ID: `G-DVHD0KL633`
-- Snippet source: `/analytics/ga4.html`
-- Installed in `<head>` on all canonical routes:
-  - `/`
-  - `/about/`
-  - `/services/`
-  - `/connect/`
-  - `/about/insights/`
+- Source of truth on each canonical page:
+  - `<meta name="ga4-measurement-id" content="G-DVHD0KL633" />`
+- Runtime bootstrap:
+  - `<script src="/scripts/ga4.js" defer></script>`
+  - `scripts/ga4.js` loads `gtag.js` asynchronously and initializes `gtag('config', id, { anonymize_ip: true })`
+- Defensive behavior:
+  - If the GA meta tag is missing, GA initialization exits silently.
 
-Verification:
+Reference snippet file (not server-included on GitHub Pages):
 
-1. GA Realtime in Google Analytics
-2. Browser DevTools Network filter: `collect`
-3. Local script check: `node scripts/verify_ga4_id.js`
+- `/analytics/ga4.html`
 
-Note: ad blockers/privacy extensions can block GA requests locally.
+## CSP Expectations
 
-## Insights Architecture
+Canonical pages include CSP via meta tag with:
 
-- Path: `/about/insights/`
-- Navigation: not in main nav
-- Discovery: linked from About page content (`Selected Briefs` section)
-- Indexing: included in sitemap
+- `script-src` allowing `https://www.googletagmanager.com`
+- `connect-src` allowing `https://www.google-analytics.com` and `https://analytics.google.com`
+- No `unsafe-inline` in `script-src`
 
-## Sitemap and Robots
+## SEO and Social
 
-- `sitemap.xml` contains only canonical routes:
-  - `/`
-  - `/about/`
-  - `/services/`
-  - `/connect/`
-  - `/about/insights/`
-- `robots.txt`:
-  - `User-agent: *`
-  - `Allow: /`
-  - `Sitemap: https://romanbediner.com/sitemap.xml`
+Each canonical page includes:
 
-## Scripts
+- `<title>`
+- `<meta name="description">`
+- canonical link
+- Open Graph tags
+- Twitter tags
 
-- `scripts/generate-sitemap.js` updates `sitemap.xml`
-- `scripts/validate-links.js` checks clean URLs + route policy + GA consistency
-- `scripts/verify_ga4_id.js` enforces GA ID and duplicate checks
-- `scripts/check_og_urls.sh` validates OG image references on canonical pages
-- `scripts/diagnose_pages.py` reports route/config issues
+Homepage includes Person JSON-LD. Insights includes Article JSON-LD entries.
 
-## Tests
+## Testing
 
-- `tests/test-clean-urls.js`
-- `tests/test-canonical.js`
-- `tests/test-meta.js`
-- `tests/test-schema.js`
-- `tests/test-ga4-installation.js`
-- `tests/test-favicon.js`
-- `tests/test-metadata-consistency.js`
-- `tests/test_contact_form.py`
+Node and Python tests are wired through npm scripts.
+
+Run all checks:
+
+```bash
+npm ci
+npm test
+```
+
+Browser runtime GA check (included in `npm test` on CI):
+
+- `tests/test_ga_runtime_playwright.py`
+- Requires Playwright and Chromium
+
+Run Node-only checks:
+
+```bash
+npm run test:node
+```
+
+Run Python-only checks:
+
+```bash
+npm run test:python
+```
+
+## CI
+
+GitHub Actions workflow:
+
+- File: `.github/workflows/ci.yml`
+- Runs on push and pull_request
+- Uses Node 20 and Python 3.11
+- Installs Playwright Chromium for runtime GA verification
+- Runs `npm ci` and `npm test`
 
 ## Deployment
 
-1. Commit changes to `main`
+1. Commit to `main`
 2. Push to GitHub
-3. GitHub Pages deploys automatically from repo root
-4. Validate canonical routes, metadata, and analytics on live site
+3. GitHub Pages deploys from repository root
+4. Validate canonical routes and metadata on live site

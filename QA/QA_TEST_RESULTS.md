@@ -20,7 +20,7 @@ Date: 2026-02-17
 ## Runtime Route and Metadata Scans
 
 1. Runtime legacy route scan
-- Command: `rg -n "/contact/|href=\"/insights/\"|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect about/insights home analytics assets -S`
+- Command: `rg -n "/contact/|href=\"/insights/\"|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect about/insights analytics assets -S`
 - Result: PASS
 - Notes: no matches in runtime page/content directories
 
@@ -33,7 +33,13 @@ Node runtime is not installed in this environment (`node: command not found`), s
 - `node tests/test-meta.js`
 - `node tests/test-schema.js`
 - `node tests/test-ga4-installation.js`
+- `node tests/test-header-nav.js`
 - `node tests/test-favicon.js`
+- `node scripts/validate-links.js`
 - `node scripts/verify_ga4_id.js`
+
+Playwright browser runtime test is also prepared but not executable locally in this environment:
+
+- `tests/test_ga_runtime_playwright.py` (skips when playwright is not installed)
 
 These should be run in a Node-enabled environment before release sign-off.

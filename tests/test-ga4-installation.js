@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * GA4 installation validation for canonical pages.
- * Enforces production measurement ID and required config options.
+ * GA4 architecture checks.
+ * Enforces meta-based measurement ID + shared /scripts/ga4.js bootstrap.
  */
 const fs = require('fs');
 const path = require('path');
 
 const MEASUREMENT_ID = 'G-DVHD0KL633';
-const CANONICAL_PAGES = [
+const PAGES = [
   'index.html',
   'about/index.html',
   'services/index.html',
@@ -17,28 +17,32 @@ const CANONICAL_PAGES = [
 
 let failures = 0;
 
-for (const rel of CANONICAL_PAGES) {
-  const file = path.resolve(__dirname, '..', rel);
-  const html = fs.readFileSync(file, 'utf8');
+for (const rel of PAGES) {
+  const html = fs.readFileSync(path.resolve(__dirname, '..', rel), 'utf8');
 
-  const sourceMatches = html.match(new RegExp(`https://www\\.googletagmanager\\.com/gtag/js\\?id=${MEASUREMENT_ID}`, 'g')) || [];
-  const configMatches = html.match(new RegExp(`gtag\\('config', '${MEASUREMENT_ID}'`, 'g')) || [];
+  const metaMatches = html.match(new RegExp(`<meta name="ga4-measurement-id" content="${MEASUREMENT_ID}" \/>`, 'g')) || [];
+  const bootstrapMatches = html.match(/<script src="\/scripts\/ga4\.js" defer><\/script>/g) || [];
+  const inlineConfigMatches = html.match(/gtag\('config'/g) || [];
+  const inlineDataLayerMatches = html.match(/window\.dataLayer\s*=\s*window\.dataLayer/g) || [];
 
-  if (sourceMatches.length !== 1) {
+  if (metaMatches.length !== 1) {
     failures += 1;
-    console.error(`FAIL: expected exactly one GA source include in ${rel}`);
+    console.error(`FAIL: expected one ga4-measurement-id meta tag in ${rel}`);
   }
-  if (configMatches.length !== 1) {
+  if (bootstrapMatches.length !== 1) {
     failures += 1;
-    console.error(`FAIL: expected exactly one GA config call in ${rel}`);
+    console.error(`FAIL: expected one /scripts/ga4.js include in ${rel}`);
+  }
+  if (inlineConfigMatches.length > 0 || inlineDataLayerMatches.length > 0) {
+    failures += 1;
+    console.error(`FAIL: inline GA config/dataLayer script found in ${rel}`);
   }
 
-  // Legacy/alternate GA IDs are rejected by allowing only the target GA4 measurement ID.
-  const otherMeasurementIds = html.match(/G-[A-Z0-9]{6,}/gi) || [];
-  const unexpectedIds = otherMeasurementIds.filter((id) => id.toUpperCase() !== MEASUREMENT_ID);
+  const allMeasurementIds = html.match(/G-[A-Z0-9]{6,}/gi) || [];
+  const unexpectedIds = allMeasurementIds.filter((id) => id.toUpperCase() !== MEASUREMENT_ID);
   if (unexpectedIds.length > 0) {
     failures += 1;
-    console.error(`FAIL: unexpected analytics IDs in ${rel}: ${unexpectedIds.join(', ')}`);
+    console.error(`FAIL: unexpected GA IDs in ${rel}: ${unexpectedIds.join(', ')}`);
   }
 }
 
@@ -46,4 +50,4 @@ if (failures > 0) {
   process.exit(1);
 }
 
-console.log('PASS: GA4 installation verified on all canonical pages.');
+console.log('PASS: GA4 meta/bootstrap architecture checks passed.');

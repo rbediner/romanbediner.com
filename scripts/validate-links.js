@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
- * Validates that navigation links use clean URLs and expected primary paths.
- * Also validates GA4 installation consistency on canonical pages.
+ * Validates canonical page links, route policy, shared CSS usage, and GA bootstrap policy.
  */
 const fs = require('fs');
 const path = require('path');
@@ -11,17 +10,16 @@ const pages = [
   path.resolve(__dirname, '..', 'about', 'index.html'),
   path.resolve(__dirname, '..', 'services', 'index.html'),
   path.resolve(__dirname, '..', 'connect', 'index.html'),
-  // Route refactor: canonical insights page moved under /about/insights/.
   path.resolve(__dirname, '..', 'about', 'insights', 'index.html')
 ];
 
 const measurementId = 'G-DVHD0KL633';
-// Refactor guardrails: reject legacy .html links, removed /contact/ route, and removed root /insights/ route.
-const disallowed = [/href="[^\"]*\.html"/i, /\/contact\//i, /href="\/insights\/"/i];
+const disallowed = [/href="[^\"]*\.html"/i, /href="\/contact\//i, /href="\/insights\//i];
 let hasError = false;
 
 for (const page of pages) {
   const html = fs.readFileSync(page, 'utf8');
+
   for (const pattern of disallowed) {
     if (pattern.test(html)) {
       hasError = true;
@@ -29,15 +27,19 @@ for (const page of pages) {
     }
   }
 
-  // GA4 validation: source and config should appear exactly once on canonical pages.
-  const gaSourceCount = (html.match(new RegExp(`https://www\\.googletagmanager\\.com/gtag/js\\?id=${measurementId}`, 'g')) || []).length;
-  const gaConfigCount = (html.match(new RegExp(`gtag\\('config', '${measurementId}'\\)`, 'g')) || []).length;
-  if (gaSourceCount !== 1 || gaConfigCount !== 1) {
+  if (!html.includes('href="/styles/site.css"')) {
     hasError = true;
-    console.error(`GA4 source/config count invalid in ${page} (source=${gaSourceCount}, config=${gaConfigCount})`);
+    console.error(`Missing shared stylesheet include in ${page}`);
   }
 
-  // Legacy analytics identifiers must not appear.
+  const gaMetaCount = (html.match(new RegExp(`<meta name="ga4-measurement-id" content="${measurementId}" \/>`, 'g')) || []).length;
+  const gaScriptCount = (html.match(/<script src="\/scripts\/ga4\.js" defer><\/script>/g) || []).length;
+  const inlineConfigCount = (html.match(/gtag\('config'/g) || []).length;
+  if (gaMetaCount !== 1 || gaScriptCount !== 1 || inlineConfigCount !== 0) {
+    hasError = true;
+    console.error(`GA policy invalid in ${page} (meta=${gaMetaCount}, bootstrap=${gaScriptCount}, inlineConfig=${inlineConfigCount})`);
+  }
+
   const allMeasurementIds = html.match(/G-[A-Z0-9]{6,}/gi) || [];
   const unexpectedMeasurementIds = allMeasurementIds.filter((id) => id !== measurementId);
   if (unexpectedMeasurementIds.length > 0) {
@@ -50,4 +52,4 @@ if (hasError) {
   process.exit(1);
 }
 
-console.log('Navigation link validation passed.');
+console.log('Navigation and GA policy validation passed.');
