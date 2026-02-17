@@ -128,6 +128,15 @@ GitHub Actions workflow:
 3. GitHub Pages deploys from repository root
 4. Validate canonical routes and metadata on live site
 
+## Operating Philosophy Section Structure
+
+- Header placement: `OPERATING PHILOSOPHY` sits above the container with a single blue accent rule below it.
+- Card behavior: the three philosophy blocks are wrapped in one `.card-philosophy` container with subtle default elevation and restrained hover lift.
+- Divider rules: two `.philosophy-divider` lines separate the three blocks, using neutral gray only.
+- Blue usage rule: blue is used only for the section accent rule and the micro-link, not structural dividers.
+- Bullet sizing standard: shared `.service-list` bullets use `/icons/bullet.png` at `12px` by `12px` with `10px` right spacing.
+- Insights linkage rule: the card ends with the micro-link `Explore related insights →` targeting `/insights/`.
+
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
 ## Insight Direct Links
 

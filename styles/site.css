@@ -55,6 +55,12 @@
   color: var(--accent-blue, #3b6cff);
 }
 
+.site-nav a.active,
+.mobile-nav a.active {
+  color: var(--accent-blue, #3b6cff);
+  font-weight: 600;
+}
+
 .menu-toggle {
   display: none;
   background: none;
@@ -167,12 +173,13 @@
 .service-list li::before {
   content: "";
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 12px;
-  margin-top: 6px;
+  width: 12px;
+  height: 12px;
+  margin-right: 10px;
+  margin-top: 0.28em;
+  vertical-align: middle;
   flex-shrink: 0;
-  background-image: url("/assets/icons/bullet.png");
+  background-image: url("/icons/bullet.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

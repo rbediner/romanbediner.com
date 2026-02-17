@@ -393,6 +393,12 @@
   padding-right: 24px;
 }
 
+/* Keeps About content aligned to the same readable column width used by Services. */
+.content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .about-main .section {
   margin-top: 96px;
   margin-bottom: 96px;
@@ -499,36 +505,80 @@
 }
 
 .about-philosophy {
-  background: #f9fafb;
-  padding-top: 80px;
-  padding-bottom: 80px;
-  margin-top: 80px;
+  margin-top: 56px;
   margin-bottom: 80px;
 }
 
 .philosophy-label {
-  font-size: 13px;
+  font-size: 0.95rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
-  color: #6b7280;
+  color: var(--text-color);
   text-transform: uppercase;
-  margin: 0 0 24px 0;
+  margin: 0 0 12px 0;
 }
 
-.philosophy-item {
-  margin-bottom: 56px;
+.philosophy-accent {
+  width: 48px;
+  height: 3px;
+  background: var(--accent-blue);
+  margin-bottom: 28px;
 }
 
-.philosophy-item:last-child {
-  margin-bottom: 0;
+.card-philosophy {
+  background: #f7f8fa;
+  border: 1px solid #e4e6ea;
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.card-philosophy:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.philosophy-item h3 {
+  margin-bottom: 12px;
 }
 
 .philosophy-item p {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .philosophy-item .service-list {
   margin-top: 12px;
   margin-bottom: 0;
+}
+
+.philosophy-item .service-list li {
+  margin-bottom: 8px;
+}
+
+.philosophy-item .service-list li:last-child {
+  margin-bottom: 0;
+}
+
+.philosophy-divider {
+  height: 1px;
+  background: #e3e5e8;
+  margin: 40px 0;
+}
+
+.philosophy-insights-link-wrap {
+  margin: 28px 0 0 0;
+  text-align: right;
+}
+
+.philosophy-insights-link {
+  font-size: 0.85rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.philosophy-insights-link:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -560,9 +610,11 @@
   }
 
   .about-philosophy {
-    padding-top: 64px;
-    padding-bottom: 64px;
     margin-top: 72px;
     margin-bottom: 72px;
+  }
+
+  .card-philosophy {
+    padding: 24px;
   }
 }

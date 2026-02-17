@@ -77,7 +77,7 @@ if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);/s.test(insi
 }
 
 // Validate shared orb bullet implementation in global CSS.
-if (!/\.service-list li::before\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*margin-right:\s*12px;[^}]*background-image:\s*url\("\/assets\/icons\/bullet\.png"\);/s.test(siteCss)) {
+if (!/\.service-list li::before\s*\{[^}]*width:\s*12px;[^}]*height:\s*12px;[^}]*margin-right:\s*10px;[^}]*background-image:\s*url\("\/icons\/bullet\.png"\);/s.test(siteCss)) {
   failures += 1;
   console.error('FAIL: shared orb bullet spec is not correctly defined in site.css.');
 }

@@ -42,10 +42,10 @@ class InsightsLayoutTest(unittest.TestCase):
 
     def test_shared_bullets_follow_orb_spec(self):
         """Ensure global orb bullet spec is centralized in site.css."""
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*width:\s*10px;")
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*height:\s*10px;")
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*margin-right:\s*12px;")
-        self.assertIn('background-image: url("/assets/icons/bullet.png");', self.site_css)
+        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*width:\s*12px;")
+        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*height:\s*12px;")
+        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*margin-right:\s*10px;")
+        self.assertIn('background-image: url("/icons/bullet.png");', self.site_css)
 
     def test_ga_event_on_expand_contract(self):
         """Ensure script sends insight_expand only for expansion and guards gtag."""
