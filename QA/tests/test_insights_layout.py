@@ -61,10 +61,11 @@ class InsightsLayoutTest(unittest.TestCase):
 
     def test_ga_event_on_expand_contract(self):
         """Ensure script sends expand/collapse events and guards missing gtag."""
-        self.assertIn("gtag('event', 'insight_expand'", self.insights_script)
-        self.assertIn("gtag('event', 'insight_collapse'", self.insights_script)
-        self.assertIn("if (typeof gtag === 'function')", self.insights_script)
-        self.assertIn("console.warn('[insights] gtag unavailable; insight toggle event not sent'", self.insights_script)
+        self.assertIn("const INSIGHT_EXPAND_EVENT = 'insight_expand'", self.insights_script)
+        self.assertIn("const INSIGHT_COLLAPSE_EVENT = 'insight_collapse'", self.insights_script)
+        self.assertIn("typeof window.gtag", self.insights_script)
+        self.assertIn("setTimeout(() =>", self.insights_script)
+        self.assertIn("ga_debug=1", self.insights_script)
         self.assertIn("insight_slug", self.insights_script)
         self.assertIn("insight_title", self.insights_script)
 

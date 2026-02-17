@@ -53,9 +53,9 @@ for (const card of insightCards) {
   }
 }
 
-if (!insightsHtml.includes('src="../scripts/insights-briefs.js"')) {
+if (!insightsHtml.includes('src="/scripts/insights-briefs.js" defer')) {
   failures += 1;
-  console.error('FAIL: Insights page must include insights-briefs.js from ../scripts/.');
+  console.error('FAIL: Insights page must include deferred /scripts/insights-briefs.js.');
 }
 
 // Validate CSS behavior for collapse/expand and hover lift.
@@ -93,17 +93,25 @@ if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*ma
 }
 
 // Validate GA tracking contract in script.
-if (!insightsScript.includes("gtag('event', 'insight_expand'")) {
+if (!insightsScript.includes("const INSIGHT_EXPAND_EVENT = 'insight_expand'")) {
   failures += 1;
-  console.error('FAIL: insight_expand GA event call is missing.');
+  console.error('FAIL: insight_expand GA event constant is missing.');
 }
-if (!insightsScript.includes("gtag('event', 'insight_collapse'")) {
+if (!insightsScript.includes("const INSIGHT_COLLAPSE_EVENT = 'insight_collapse'")) {
   failures += 1;
-  console.error('FAIL: insight_collapse GA event call is missing.');
+  console.error('FAIL: insight_collapse GA event constant is missing.');
 }
-if (!/if \(typeof gtag === 'function'\)/.test(insightsScript)) {
+if (!insightsScript.includes('typeof window.gtag')) {
   failures += 1;
-  console.error('FAIL: GA event calls must guard missing gtag.');
+  console.error('FAIL: GA event calls must guard missing window.gtag.');
+}
+if (!insightsScript.includes('setTimeout(() =>')) {
+  failures += 1;
+  console.error('FAIL: GA event calls must include a guarded retry path.');
+}
+if (!insightsScript.includes('ga_debug=1')) {
+  failures += 1;
+  console.error('FAIL: Insights diagnostics must support ?ga_debug=1.');
 }
 
 if (failures > 0) {

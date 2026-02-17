@@ -37,6 +37,7 @@ Route policy:
   - `scripts/ga4.js` loads `gtag.js` asynchronously and initializes `gtag('config', id, { anonymize_ip: true })`
 - Defensive behavior:
   - If the GA meta tag is missing, GA initialization exits silently.
+  - Insights expand/collapse analytics tracking is covered by automated tests in `/tests/insights-analytics.test.js`.
 
 Reference snippet file (not server-included on GitHub Pages):
 

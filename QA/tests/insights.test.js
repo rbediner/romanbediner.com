@@ -130,10 +130,7 @@ function createFakeToggleHarness(slug, title) {
 
 function testGaExpandEventBehavior() {
   const calls = [];
-  const warnings = [];
-  const originalConsoleWarn = console.warn;
-  console.warn = (...args) => warnings.push(args);
-  global.gtag = (...args) => calls.push(args);
+  global.window = { gtag: (...args) => calls.push(args), location: { hostname: 'example.com', search: '' } };
 
   const { button, listeners, card } = createFakeToggleHarness('operations-as-a-product', 'Operations as a Product');
   bindInsightToggle(button);
@@ -169,11 +166,10 @@ function testGaExpandEventBehavior() {
     }
   ]);
 
-  delete global.gtag;
-  listeners.click();
-  assert.strictEqual(warnings.length, 1, 'Missing gtag should emit one warning.');
-  assert(String(warnings[0][0]).includes('gtag unavailable'), 'Warning should include gtag unavailable message.');
-  console.warn = originalConsoleWarn;
+  // Missing gtag must stay safe and never throw.
+  delete global.window.gtag;
+  assert.doesNotThrow(() => listeners.click());
+  delete global.window;
 }
 
 function run() {
