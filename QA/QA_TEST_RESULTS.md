@@ -20,7 +20,7 @@ Date: 2026-02-17
 ## Runtime Route and Metadata Scans
 
 1. Runtime legacy route scan
-- Command: `rg -n "/contact/|href=\"/insights/\"|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect about/insights home partials assets -S`
+- Command: `rg -n "/contact/|href=\"/insights/\"|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect about/insights home analytics assets -S`
 - Result: PASS
 - Notes: no matches in runtime page/content directories
 

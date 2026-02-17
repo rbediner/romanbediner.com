@@ -15,7 +15,7 @@ Canonical routes:
 Content and support directories:
 
 - `/assets/` static media and brand assets
-- `/partials/ga4.html` GA4 snippet source-of-truth
+- `/analytics/ga4.html` GA4 snippet source-of-truth
 - `/scripts/` validation and utility scripts
 - `/tests/` automated QA checks
 - `/QA/` QA documentation (`QA_TEST_CASES.md`, `QA_TEST_RESULTS.md`)
@@ -78,7 +78,7 @@ All primary pages include references to this favicon set in `<head>`.
 ## Analytics (GA4)
 
 - Measurement ID: `G-DVHD0KL633`
-- Snippet source: `/partials/ga4.html`
+- Snippet source: `/analytics/ga4.html`
 - Installed in `<head>` on all canonical routes:
   - `/`
   - `/about/`
