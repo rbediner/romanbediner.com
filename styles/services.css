@@ -368,7 +368,7 @@
       top: 0.53em;
       width: 8px;
       height: 8px;
-      background-image: url("assets/icons/bullet.png");
+      background-image: url("/assets/icons/bullet.png");
       background-size: contain;
       background-repeat: no-repeat;
       opacity: 0.92;
