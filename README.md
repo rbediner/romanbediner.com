@@ -62,6 +62,27 @@ Each canonical page includes:
 
 Homepage includes Person JSON-LD. Insights includes Article JSON-LD entries.
 
+## Positioning
+
+Roman Bediner is positioned as an Operations & Transformation Leader focused on productizing execution systems for modern AI-enabled work.
+
+Guidelines:
+
+- **Homepage identity and thesis taxonomy**
+  - `<title>`: `Roman Bediner | Operations & Transformation Leader`
+  - `<h1>`: `Productizing Operations for Modern AI Enabled Work`
+  - `<meta name="description">`: `Executive operator designing scalable operating models that align product, engineering, and customer systems.`
+  - Keep a single `<title>`, a single `<meta name="description">`, and a single homepage `<h1>`.
+- **Insights page structure**
+  - `<title>`: `Insights on AI Enabled Operations | Roman Bediner`
+  - Keep exactly one `<h1>` with value `Insights`.
+  - Use the dedicated insights description focused on disciplined work systems.
+- **Canonical discipline**
+  - Keep exactly one canonical tag per canonical page.
+  - Keep canonical URLs aligned to route architecture without introducing legacy paths.
+- **Testing rules**
+  - `tests/test-metadata-consistency.js` verifies homepage title/description/H1, insights title, duplicate prevention, no em dashes in HTML, and one canonical per page.
+
 ## Testing
 
 Node and Python tests are wired through npm scripts.
