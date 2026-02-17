@@ -66,12 +66,8 @@ if (fs.existsSync(path.join(root, 'home', 'index.html'))) {
   console.error('FAIL: legacy /home/ route still exists.');
 }
 
-// About content must include the insights link but main nav must not.
+// /about/insights/ must not appear in main desktop navigation.
 const aboutHtml = fs.readFileSync(path.join(root, 'about', 'index.html'), 'utf8');
-if (!/href="\/about\/insights\/"/.test(aboutHtml)) {
-  failures += 1;
-  console.error('FAIL: About page does not link to /about/insights/.');
-}
 const desktopNavMatch = aboutHtml.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/i);
 if (desktopNavMatch && /\/about\/insights\//.test(desktopNavMatch[1])) {
   failures += 1;

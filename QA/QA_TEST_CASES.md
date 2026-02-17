@@ -75,14 +75,22 @@
 - Asserts Insights and Services lists use `bullet-list`.
 - Asserts bullet pseudo-element definitions live in `styles/site.css` only.
 
+13. About hybrid redesign + global footer attribution
+- File: `tests/test-about-redesign.js`
+- File: `tests/test_about_redesign.py`
+- Asserts About page contains the approved hybrid structure and timeline sections.
+- Asserts shared `service-list` bullets are used for About key points.
+- Asserts global footer attribution line appears on all canonical pages.
+- Asserts no em dashes are present in canonical page HTML.
+
 ## OG Validation
 
-13. OG image URL consistency
+14. OG image URL consistency
 - File: `scripts/check_og_urls.sh`
 - Asserts canonical OG image URL appears once in each canonical page.
 
 ## Contact Experience
 
-14. Connect form integration and UX hooks
+15. Connect form integration and UX hooks
 - File: `tests/test_contact_form.py`
 - Asserts form fields, editor integration, and script hooks remain intact.

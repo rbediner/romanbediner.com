@@ -384,3 +384,60 @@
         height: 44px;
       }
     }
+
+/* About hybrid redesign: timeline + thesis + AI + today sections. */
+.about-main {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.about-main .section {
+  padding: 2.5rem 0;
+  margin: 0;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.timeline-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+.timeline-content h2 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.operating-thesis-card {
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.about-main h1,
+.about-main h2 {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    gap: 0.9rem;
+  }
+}

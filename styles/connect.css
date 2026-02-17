@@ -214,6 +214,10 @@
       margin-top: 0;
     }
 
+    .field-hidden {
+      display: none;
+    }
+
     label {
       display: block;
       font-size: 14px;

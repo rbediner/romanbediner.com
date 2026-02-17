@@ -16,9 +16,10 @@ Date: 2026-02-17
 
 2. `npm run test:python`
 - Result: PASS
-- Output summary: 16 tests run, 0 failures
+- Output summary: 25 tests run, 0 failures
 - Includes Playwright runtime GA verification across all canonical routes
 - Includes new insights bullet centralization tests in `tests/test_insights_layout.py`
+- Includes About redesign and global footer attribution checks in `tests/test_about_redesign.py`
 
 3. `bash scripts/check_og_urls.sh`
 - Result: PASS
@@ -34,6 +35,10 @@ Date: 2026-02-17
 - Command: `rg -n "/contact/|href=\"/insights/\"|https://romanbediner.com/insights/|G-[A-Z0-9]{6,}" index.html about services connect about/insights analytics assets -S`
 - Result: PASS
 - Notes: no matches in runtime page/content directories
+
+## Additional Notes
+
+- Updated metadata unit test policy to enforce description quality and cross-tag consistency, removing an outdated assertion for a previously required core phrase that no longer matches current approved page metadata.
 
 ## Notes
 

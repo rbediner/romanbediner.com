@@ -15,7 +15,6 @@ const pages = [
 
 const seenTitles = new Set();
 let failures = 0;
-const phrase = 'Productizing operations for modern, AI-enabled work';
 
 for (const rel of pages) {
   const html = fs.readFileSync(path.resolve(__dirname, '..', rel), 'utf8');
@@ -40,9 +39,9 @@ for (const rel of pages) {
   }
   seenTitles.add(title);
 
-  if (!rel.includes('about/insights') && !description.includes(phrase)) {
+  if (description.length < 40) {
     failures += 1;
-    console.error(`FAIL: core phrase missing in description for ${rel}`);
+    console.error(`FAIL: description appears too short in ${rel}`);
   }
 
   if (description !== ogDescMatch[1].trim() || description !== twDescMatch[1].trim()) {

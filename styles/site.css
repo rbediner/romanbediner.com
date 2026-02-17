@@ -182,3 +182,10 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.footer-meta {
+  font-size: 0.72rem;
+  color: var(--muted-text, #6a6a6a);
+  text-align: center;
+  margin-top: 1rem;
+}
