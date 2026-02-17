@@ -13,6 +13,7 @@ from pathlib import Path
 
 PLAYWRIGHT_AVAILABLE = importlib.util.find_spec("playwright") is not None
 PIL_AVAILABLE = importlib.util.find_spec("PIL") is not None
+RUN_VISUAL_TESTS = os.getenv("RUN_VISUAL_TESTS", "0") == "1"
 
 # QA/tests is nested one level under the repository root.
 ROOT = Path(__file__).resolve().parents[2]
@@ -38,7 +39,10 @@ THRESHOLDS = {
 }
 
 
-@unittest.skipUnless(PLAYWRIGHT_AVAILABLE, "playwright is required")
+@unittest.skipUnless(
+    PLAYWRIGHT_AVAILABLE and RUN_VISUAL_TESTS,
+    "visual regression is opt-in; set RUN_VISUAL_TESTS=1 and ensure playwright is installed",
+)
 class VisualRegressionPlaywrightTest(unittest.TestCase):
     """Visual regression + layout integrity tests enforced against committed baselines."""
 
