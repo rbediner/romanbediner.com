@@ -156,20 +156,20 @@
   --bullet-nudge-y: 0.05em;
 }
 
-.bullet-list {
+.service-list {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
-.bullet-list li {
+.service-list li {
   position: relative;
   margin: 0 0 0.6rem 0;
   padding-left: calc(var(--bullet-size) + var(--bullet-gap) + 6px);
   line-height: 1.5;
 }
 
-.bullet-list li::before {
+.service-list li::before {
   content: "";
   position: absolute;
   left: 0;

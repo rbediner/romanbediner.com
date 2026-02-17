@@ -155,7 +155,7 @@
     }
 
     .insights-wrap {
-      max-width: 760px;
+      max-width: 1040px;
       margin: 0 auto;
     }
 
@@ -177,15 +177,6 @@
       font-size: 19px;
       color: var(--muted-text);
       margin: 0 0 18px 0;
-    }
-
-    .brief {
-      padding: 40px 0;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .brief:first-of-type {
-      margin-top: 24px;
     }
 
     .footer {
@@ -240,25 +231,35 @@
       }
     }
 
-/* Insights card grid aligned to Services visual rhythm and hover behavior. */
+/* Insights stack vertically to match Services full-width card rhythm. */
 .insights-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .insight-card {
-  padding: 2rem;
-  border-radius: 12px;
+  padding: 2.5rem;
+  border-radius: 16px;
   background: #ffffff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .insight-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+}
+
+.insight-card .service-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.insight-card .service-header h2 {
+  margin: 0;
 }
 
 .insight-divider {
@@ -272,4 +273,40 @@
   font-size: 0.95rem;
   color: var(--muted-text);
   margin-bottom: 1rem;
+}
+
+.insight-points {
+  margin: 0 0 1.25rem 0;
+}
+
+.expand-brief {
+  align-self: flex-start;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  color: var(--text-color);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+.expand-brief:hover {
+  background: var(--surface-color);
+}
+
+.brief-full {
+  display: none;
+  margin-top: 1rem;
+}
+
+.brief-full.is-open {
+  display: block;
+}
+
+.brief-full p {
+  font-size: 1rem;
+  color: var(--muted-text);
+  margin: 0 0 1rem 0;
 }

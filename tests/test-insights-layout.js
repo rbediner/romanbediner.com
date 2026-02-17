@@ -31,22 +31,22 @@ if (insightListMatches.length < 3) {
   console.error('FAIL: Insights page should contain at least 3 insight point lists.');
 } else {
   for (const match of insightListMatches) {
-    if (!match[1].includes('bullet-list')) {
+    if (!match[1].includes('service-list')) {
       failures += 1;
-      console.error('FAIL: insight-points list is missing bullet-list utility class.');
+      console.error('FAIL: insight-points list is missing shared service-list class.');
     }
   }
 }
 
 const serviceListMatches = [...servicesHtml.matchAll(/<ul class="([^"]*service-list[^"]*)">/g)];
 for (const match of serviceListMatches) {
-  if (!match[1].includes('bullet-list')) {
+  if (match[1].includes('bullet-list')) {
     failures += 1;
-    console.error('FAIL: service-list is missing bullet-list utility class.');
+    console.error('FAIL: legacy bullet-list class should not be present on Services lists.');
   }
 }
 
-if (!siteCss.includes('.bullet-list') || !siteCss.includes('.bullet-list li::before') || !siteCss.includes('background-image: url("/assets/icons/bullet.png");')) {
+if (!siteCss.includes('.service-list') || !siteCss.includes('.service-list li::before') || !siteCss.includes('background-image: url("/assets/icons/bullet.png");')) {
   failures += 1;
   console.error('FAIL: shared bullet system definition is incomplete in styles/site.css.');
 }
@@ -54,6 +54,26 @@ if (!siteCss.includes('.bullet-list') || !siteCss.includes('.bullet-list li::bef
 if (/service-list\s+li::before/.test(servicesCss) || /insight-points\s+li::before/.test(insightsCss) || /bullet-list\s+li::before/.test(insightsCss)) {
   failures += 1;
   console.error('FAIL: page-level CSS should not override shared bullet pseudo-elements.');
+}
+
+if (!/\.insights-grid\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insights-grid must be a vertical flex stack.');
+}
+
+if (/grid-template-columns\s*:/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insights.css should not define grid-template-columns for insights-grid.');
+}
+
+if ((insightsHtml.match(/class="expand-brief"/g) || []).length < 3 || (insightsHtml.match(/class="brief-full"/g) || []).length < 3) {
+  failures += 1;
+  console.error('FAIL: each insight card should include expand-brief and brief-full elements.');
+}
+
+if (!insightsHtml.includes('src="../../scripts/insights-briefs.js"')) {
+  failures += 1;
+  console.error('FAIL: insights page must include the external expand/collapse script.');
 }
 
 if (failures > 0) {
