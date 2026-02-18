@@ -161,6 +161,9 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
         )
 
     def _snapshot_and_assert(self, page, baseline_name, threshold, full_page=False, clip=None):
+        # Stabilize hover-sensitive captures by moving the pointer off interactive elements.
+        page.mouse.move(1, 1)
+        page.wait_for_timeout(60)
         screenshot_bytes = page.screenshot(full_page=full_page, clip=clip)
         self._compare_with_baseline(screenshot_bytes, baseline_name, threshold)
 

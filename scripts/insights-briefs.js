@@ -99,6 +99,9 @@ function fireInsightAnalytics(eventName, slug, title) {
   function fireEvent() {
     const gtag = getInsightGtagFunction();
     if (typeof gtag !== 'function') {
+      if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+        console.warn('[insights] gtag unavailable');
+      }
       return false;
     }
 
