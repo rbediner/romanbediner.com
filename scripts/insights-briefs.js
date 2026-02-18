@@ -36,23 +36,98 @@ function getInsightGtagFunction() {
   return null;
 }
 
+function normalizeInsightValue(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function buildInsightPayload(slug, title) {
+  // Normalize into plain string values so the GA payload is stable and JSON-safe.
+  const insightSlug = normalizeInsightValue(slug);
+  const insightTitle = normalizeInsightValue(title);
+
+  if (!insightSlug || !insightTitle) {
+    return null;
+  }
+
+  return {
+    insight_slug: insightSlug,
+    insight_title: insightTitle
+  };
+}
+
+function assertInsightPayloadInDebug(payload) {
+  if (!isInsightsDebugMode() || payload) {
+    return;
+  }
+
+  if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+    console.warn('[insights] missing analytics payload data', payload);
+  }
+
+  // Fail loudly in development to prevent silent analytics regressions.
+  throw new Error('[insights] missing analytics payload data');
+}
+
+function hasDataLayerEvent(eventName) {
+  if (typeof window === 'undefined' || !Array.isArray(window.dataLayer)) {
+    return false;
+  }
+
+  return window.dataLayer.some((entry) => {
+    if (Array.isArray(entry)) {
+      return entry[1] === eventName;
+    }
+
+    if (entry && typeof entry === 'object' && typeof entry[1] !== 'undefined') {
+      return entry[1] === eventName;
+    }
+
+    return false;
+  });
+}
+
 // Fire analytics safely and retry once if GA bootstrap is still racing.
 function fireInsightAnalytics(eventName, slug, title) {
+  const payload = buildInsightPayload(slug, title);
+  assertInsightPayloadInDebug(payload);
+
+  // In production, skip invalid payloads rather than sending partial events.
+  if (!payload) {
+    return false;
+  }
+
   function fireEvent() {
     const gtag = getInsightGtagFunction();
     if (typeof gtag !== 'function') {
       return false;
     }
 
-    gtag('event', eventName, {
-      insight_slug: slug,
-      insight_title: title
+    logInsightsDebug('[insights] sending payload:', {
+      event: eventName,
+      insight_slug: payload.insight_slug,
+      insight_title: payload.insight_title
     });
 
+    if (!payload.insight_slug || !payload.insight_title) {
+      if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+        console.warn('[insights] missing analytics payload data', payload);
+      }
+      return false;
+    }
+
+    gtag('event', eventName, payload);
+
     if (eventName === INSIGHT_EXPAND_EVENT) {
-      logInsightsDebug('[insights] expand fired', { slug, title });
+      logInsightsDebug('[insights] expand fired', payload);
     } else if (eventName === INSIGHT_COLLAPSE_EVENT) {
-      logInsightsDebug('[insights] collapse fired', { slug, title });
+      logInsightsDebug('[insights] collapse fired', payload);
+    }
+
+    // Optional runtime assertion: in debug mode, verify event reached dataLayer.
+    if (isInsightsDebugMode() && !hasDataLayerEvent(eventName)) {
+      if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+        console.warn('[insights] event not pushed to dataLayer');
+      }
     }
     return true;
   }
@@ -116,10 +191,13 @@ if (typeof module !== 'undefined') {
   module.exports = {
     INSIGHT_EXPAND_EVENT,
     INSIGHT_COLLAPSE_EVENT,
+    buildInsightPayload,
     bindInsightToggle,
     fireInsightAnalytics,
     getInsightGtagFunction,
+    hasDataLayerEvent,
     initializeInsightToggles,
+    normalizeInsightValue,
     isInsightsDebugMode
   };
 }

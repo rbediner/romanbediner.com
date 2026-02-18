@@ -34,6 +34,19 @@ Automated coverage exists in `/tests/insights-analytics.test.js` and validates:
 - `insight_expand`
 - `insight_collapse`
 
+## Verifying Parameter Transmission
+
+1. Open `http://localhost:8000/insights/?ga_debug=1` (or your local port).
+2. Click `Expand +` on an insight card.
+3. Confirm console output includes `[insights] sending payload:` and shows:
+   - `insight_slug`
+   - `insight_title`
+4. Open GA4 DebugView.
+5. Select the `insight_expand` event.
+6. Confirm the event parameters include:
+   - `insight_slug`
+   - `insight_title`
+
 ## Debug Mode Controls
 
 Debug logs are enabled only when either condition is true:
