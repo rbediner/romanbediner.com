@@ -108,6 +108,14 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
         page.goto(f"http://127.0.0.1:{self.port}{route}", wait_until="networkidle")
         # Let fonts/layout settle before any geometry or screenshot assertions.
         page.wait_for_timeout(250)
+        with contextlib.suppress(Exception):
+            page.wait_for_function("() => document.fonts && document.fonts.status === 'loaded'", timeout=2500)
+
+        # /connect/ depends on deferred third-party editor bootstrap for stable geometry.
+        if route == "/connect/":
+            with contextlib.suppress(Exception):
+                page.wait_for_selector(".ql-toolbar", timeout=5000)
+                page.wait_for_selector(".ql-editor", timeout=5000)
 
     def _compare_with_baseline(self, image_bytes, baseline_name, threshold):
         baseline_path = BASELINE_DIR / baseline_name

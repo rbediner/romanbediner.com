@@ -4,7 +4,6 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 OG_IMAGE_URL_PRIMARY="https://romanbediner.com/assets/og-logo/og-final.png?v=4"
-OG_IMAGE_URL_SECONDARY="/assets/og-logo/og-final.png?v=4"
 OG_IMAGE_PATH="$ROOT_DIR/assets/og-logo/og-final.png"
 
 PAGES=(
@@ -42,8 +41,8 @@ for page in "${PAGES[@]}"; do
     fail=1
   fi
 
-  if ! grep -Fq "$OG_IMAGE_URL_PRIMARY" "$page" && ! grep -Fq "$OG_IMAGE_URL_SECONDARY" "$page"; then
-    echo "FAIL: $page does not reference $OG_IMAGE_URL_PRIMARY or $OG_IMAGE_URL_SECONDARY"
+  if ! grep -Fq "$OG_IMAGE_URL_PRIMARY" "$page"; then
+    echo "FAIL: $page does not reference $OG_IMAGE_URL_PRIMARY"
     fail=1
   fi
 done
