@@ -3,8 +3,9 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-OG_IMAGE_URL="https://romanbediner.com/assets/og-logo/og.png"
-OG_IMAGE_PATH="$ROOT_DIR/assets/og-logo/og.png"
+OG_IMAGE_URL_PRIMARY="https://romanbediner.com/assets/og-logo/og-final.png?v=4"
+OG_IMAGE_URL_SECONDARY="/assets/og-logo/og-final.png?v=4"
+OG_IMAGE_PATH="$ROOT_DIR/assets/og-logo/og-final.png"
 
 PAGES=(
   "$ROOT_DIR/index.html"
@@ -41,14 +42,14 @@ for page in "${PAGES[@]}"; do
     fail=1
   fi
 
-  if ! grep -q "$OG_IMAGE_URL" "$page"; then
-    echo "FAIL: $page does not reference $OG_IMAGE_URL"
+  if ! grep -Fq "$OG_IMAGE_URL_PRIMARY" "$page" && ! grep -Fq "$OG_IMAGE_URL_SECONDARY" "$page"; then
+    echo "FAIL: $page does not reference $OG_IMAGE_URL_PRIMARY or $OG_IMAGE_URL_SECONDARY"
     fail=1
   fi
 done
 
 if [[ "$fail" -eq 0 ]]; then
-  echo "PASS: OG image file exists and all pages reference $OG_IMAGE_URL exactly once."
+  echo "PASS: OG image file exists and all pages reference the v4 OG image URL exactly once."
   exit 0
 fi
 

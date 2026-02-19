@@ -82,6 +82,35 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
 
             context.close()
 
+    def test_insights_link_persists_across_route_clicks(self):
+        routes = ["/", "/about/", "/services/", "/insights/", "/connect/"]
+
+        for route in routes:
+            context = self.browser.new_context()
+            page = context.new_page()
+            page.goto(f"http://127.0.0.1:{self.port}{route}", wait_until="networkidle")
+
+            desktop_before = page.eval_on_selector_all(".site-nav a", "nodes => nodes.map(n => n.getAttribute('href'))")
+            mobile_before = page.eval_on_selector_all("#mobile-nav a", "nodes => nodes.map(n => n.getAttribute('href'))")
+            self.assertIn("/insights/", desktop_before, f"Desktop nav missing /insights/ on {route}")
+            self.assertIn("/insights/", mobile_before, f"Mobile nav missing /insights/ on {route}")
+
+            page.click('.site-nav a[href="/insights/"]')
+            page.wait_for_url(f"http://127.0.0.1:{self.port}/insights/")
+
+            desktop_after = page.eval_on_selector_all(".site-nav a", "nodes => nodes.map(n => n.getAttribute('href'))")
+            mobile_after = page.eval_on_selector_all("#mobile-nav a", "nodes => nodes.map(n => n.getAttribute('href'))")
+            self.assertIn("/insights/", desktop_after, f"Desktop nav lost /insights/ after click from {route}")
+            self.assertIn("/insights/", mobile_after, f"Mobile nav lost /insights/ after click from {route}")
+
+            insights_label_count = page.eval_on_selector_all(
+                '.site-nav a[href="/insights/"]',
+                "nodes => nodes.filter(n => n.textContent.trim() === 'Insights').length",
+            )
+            self.assertEqual(insights_label_count, 1, f"Insights label mismatch after navigation from {route}")
+
+            context.close()
+
 
 if __name__ == "__main__":
     unittest.main()
