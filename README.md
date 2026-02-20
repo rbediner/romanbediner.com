@@ -163,10 +163,13 @@ GitHub Actions workflow:
 Productizing Operations for Modern AI-Enabled Work
 https://romanbediner.com/insights/#productizing-operations-ai-enabled-work
 
-Operations as a Product
+Operations as a Product for Scalable Execution
 https://romanbediner.com/insights/#operations-as-a-product-scalable-execution
 
-AI as an Operating Layer
+Integrating AI as an Operating Layer
 https://romanbediner.com/insights/#ai-as-an-operating-layer
+
+Steering Execution with Operational Signals
+https://romanbediner.com/insights/#steering-execution-with-operational-signals
 
 <!-- AUTO-GENERATED INSIGHT LINKS END -->

@@ -55,8 +55,8 @@ try {
 }
 
 const graph = insightsSchema['@graph'];
-if (!Array.isArray(graph) || graph.length !== 3) {
-  console.error('FAIL: insights JSON-LD must include exactly 3 Article entries.');
+if (!Array.isArray(graph) || graph.length !== 4) {
+  console.error('FAIL: insights JSON-LD must include exactly 4 Article entries.');
   process.exit(1);
 }
 
