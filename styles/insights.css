@@ -100,14 +100,21 @@ a:hover {
   color: var(--muted-text);
 }
 
-/* Phase marker keeps thesis context visually lightweight under each title. */
+/* Phase marker uses a high-contrast chip so the phase label remains distinct from body copy. */
 .brief-phase {
-  margin: 0 0 10px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 14px 0;
+  padding: 4px 10px;
+  border: 1px solid rgba(59, 108, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(59, 108, 255, 0.09);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted-text);
+  color: #24408f;
 }
 
 .insight-card .service-list {
