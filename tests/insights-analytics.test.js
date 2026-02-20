@@ -107,7 +107,7 @@ describe('Insights analytics runtime', () => {
   });
 
   test('fires insight_toggle collapse with required payload', () => {
-    const { target } = createToggleHarness({ initiallyExpanded: true, title: 'Operations as a Product' });
+    const { target } = createToggleHarness({ initiallyExpanded: true, title: 'Operations as a Product for Scalable Execution' });
     window.gtag = jest.fn();
 
     onInsightToggleClick({ target });
@@ -117,7 +117,7 @@ describe('Insights analytics runtime', () => {
       'insight_toggle',
       expect.objectContaining({
         action: 'collapse',
-        insight_title: 'Operations as a Product'
+        insight_title: 'Operations as a Product for Scalable Execution'
       })
     );
   });
@@ -127,12 +127,12 @@ describe('Insights analytics runtime', () => {
 
     onInsightToggleClick({ target });
     expect(button.getAttribute('aria-expanded')).toBe('true');
-    expect(button.textContent).toBe('Collapse -');
+    expect(button.textContent).toBe('- Collapse');
     expect(content.attributes.hidden).toBeUndefined();
 
     onInsightToggleClick({ target });
     expect(button.getAttribute('aria-expanded')).toBe('false');
-    expect(button.textContent).toBe('Expand +');
+    expect(button.textContent).toBe('+ Expand');
     expect(content.attributes).toHaveProperty('hidden');
   });
 

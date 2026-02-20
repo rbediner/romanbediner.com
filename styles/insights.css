@@ -100,37 +100,16 @@ a:hover {
   color: var(--muted-text);
 }
 
-/* Phase marker uses a high-contrast chip so the phase label remains distinct from body copy. */
+/* Phase marker is plain text metadata, not an interactive control. */
 .brief-phase {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 14px 0;
-  padding: 5px 12px 5px 8px;
-  border: 1px solid rgba(59, 108, 255, 0.28);
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(59, 108, 255, 0.11), rgba(59, 108, 255, 0.06));
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #1f3573;
-}
-
-/* Icon token gives the phase marker a clear visual anchor independent from muted summary text. */
-.brief-phase::before {
-  content: "↗";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(59, 108, 255, 0.18);
-  color: #2749a5;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
+  margin: -2px 0 10px 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 0.88em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #333333;
 }
 
 .insight-card .service-list {

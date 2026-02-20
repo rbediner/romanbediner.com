@@ -128,12 +128,15 @@ function testGaInsightToggleEventBehavior() {
     location: { hostname: 'example.com', search: '', pathname: '/insights/' }
   };
 
-  const { button, target, content } = createFakeToggleHarness('operations-as-a-product-scalable-execution', 'Operations as a Product');
+  const { button, target, content } = createFakeToggleHarness(
+    'operations-as-a-product-scalable-execution',
+    'Operations as a Product for Scalable Execution'
+  );
 
   // First click expands and must trigger one GA event.
   onInsightToggleClick({ target });
   assert.strictEqual(button.attributes['aria-expanded'], 'true', 'Button aria-expanded should be true on expand.');
-  assert.strictEqual(button.textContent, 'Collapse -', 'Button text should switch to Collapse - on expand.');
+  assert.strictEqual(button.textContent, '- Collapse', 'Button text should switch to - Collapse on expand.');
   assert.strictEqual(content.hidden, false, 'Content should be visible after expand.');
   assert.strictEqual(calls.length, 1, 'GA event must fire once on expand.');
   assert.deepStrictEqual(calls[0], [
@@ -141,7 +144,7 @@ function testGaInsightToggleEventBehavior() {
     'insight_toggle',
     {
       insight_slug: 'operations-as-a-product-scalable-execution',
-      insight_title: 'Operations as a Product',
+      insight_title: 'Operations as a Product for Scalable Execution',
       action: 'expand',
       page_path: '/insights/'
     }
@@ -150,7 +153,7 @@ function testGaInsightToggleEventBehavior() {
   // Second click collapses and must emit insight_toggle with collapse action.
   onInsightToggleClick({ target });
   assert.strictEqual(button.attributes['aria-expanded'], 'false', 'Button aria-expanded should be false on collapse.');
-  assert.strictEqual(button.textContent, 'Expand +', 'Button text should switch back to Expand + on collapse.');
+  assert.strictEqual(button.textContent, '+ Expand', 'Button text should switch back to + Expand on collapse.');
   assert.strictEqual(content.hidden, true, 'Content should be hidden after collapse.');
   assert.strictEqual(calls.length, 2, 'GA collapse event must fire on second click.');
   assert.deepStrictEqual(calls[1], [
@@ -158,7 +161,7 @@ function testGaInsightToggleEventBehavior() {
     'insight_toggle',
     {
       insight_slug: 'operations-as-a-product-scalable-execution',
-      insight_title: 'Operations as a Product',
+      insight_title: 'Operations as a Product for Scalable Execution',
       action: 'collapse',
       page_path: '/insights/'
     }

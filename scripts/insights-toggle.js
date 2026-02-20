@@ -19,8 +19,8 @@
 
     // Keep control state, label, and visibility synchronized for accessibility and analytics accuracy.
     button.setAttribute('aria-expanded', String(!expanded));
-    // Keep explicit plus/minus tokens in labels for quick scan of next action.
-    button.textContent = expanded ? 'Expand +' : 'Collapse -';
+    // Keep explicit prefix tokens so the next action is scannable at a glance.
+    button.textContent = expanded ? '+ Expand' : '- Collapse';
     content.toggleAttribute('hidden', expanded);
 
     // Derive analytics values from page structure to avoid duplicate hard-coded metadata.
