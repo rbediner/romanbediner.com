@@ -13,7 +13,7 @@ const END_MARKER = '<!-- AUTO-GENERATED INSIGHT LINKS END -->';
 
 function parseInsights(html) {
   // Each card id and h2 pair is used to produce stable anchor links.
-  const matches = [...html.matchAll(/<section id="([a-z0-9-]+)" class="insight-card">[\s\S]*?<h2>([^<]+)<\/h2>/g)];
+  const matches = [...html.matchAll(/<article id="([a-z0-9-]+)" class="insight-card">[\s\S]*?<h2>([^<]+)<\/h2>/g)];
   return matches.map((match) => ({ slug: match[1], title: match[2].trim() }));
 }
 

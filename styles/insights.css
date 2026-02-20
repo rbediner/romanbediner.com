@@ -100,6 +100,16 @@ a:hover {
   color: var(--muted-text);
 }
 
+/* Phase marker keeps thesis context visually lightweight under each title. */
+.brief-phase {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-text);
+}
+
 .insight-card .service-list {
   margin-top: 12px;
   margin-bottom: 0;
@@ -130,6 +140,22 @@ a:hover {
   border-color: var(--accent-blue, #3b6cff);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Brief body region uses the same typography and spacing rhythm as existing insight copy. */
+.brief-content {
+  margin-top: 16px;
+}
+
+.brief-content p {
+  max-width: 720px;
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: var(--muted-text);
+}
+
+.brief-content p:last-child {
+  margin-bottom: 0;
 }
 
 .insight-expanded {

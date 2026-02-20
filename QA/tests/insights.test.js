@@ -3,7 +3,7 @@
  * Production Insights system validation:
  * 1) Card id/title/slug integrity
  * 2) README auto-generated link integrity
- * 3) GA expand/collapse event tracking behavior
+ * 3) GA insight_toggle event tracking behavior
  */
 const assert = require('assert');
 const fs = require('fs');
@@ -12,17 +12,10 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
 const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
-const { bindInsightToggle } = require(path.join(root, 'scripts/insights-briefs.js'));
-
-function slugify(title) {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+const { onInsightToggleClick } = require(path.join(root, 'scripts/insights-toggle.js'));
 
 function parseInsightCards(html) {
-  const matches = [...html.matchAll(/<section id="([a-z0-9-]+)" class="insight-card">[\s\S]*?<h2>([^<]+)<\/h2>/g)];
+  const matches = [...html.matchAll(/<article id="([a-z0-9-]+)" class="insight-card">[\s\S]*?<h2>([^<]+)<\/h2>/g)];
   return matches.map((match) => ({ slug: match[1], title: match[2].trim() }));
 }
 
@@ -45,12 +38,7 @@ function testCardSlugStructure() {
     seen.add(card.slug);
 
     assert(card.title, `Insight card ${card.slug} is missing h2 title.`);
-    const expectedSlug = slugify(card.title);
-    assert.strictEqual(
-      card.slug,
-      expectedSlug,
-      `Insight slug does not match title for "${card.title}". Expected ${expectedSlug} but got ${card.slug}.`
-    );
+    assert(/^[a-z0-9-]+$/.test(card.slug), `Insight slug is not semantic kebab-case: ${card.slug}`);
   }
 }
 
@@ -75,8 +63,15 @@ function testReadmeLinksMatchInsights() {
 }
 
 function createFakeToggleHarness(slug, title) {
-  const listeners = {};
-  const classSet = new Set();
+  const content = {
+    hidden: false,
+    toggleAttribute(name, force) {
+      if (name !== 'hidden') {
+        return;
+      }
+      this.hidden = Boolean(force);
+    }
+  };
 
   const card = {
     id: slug,
@@ -86,96 +81,100 @@ function createFakeToggleHarness(slug, title) {
       }
       return null;
     },
-    classList: {
-      contains(name) {
-        return classSet.has(name);
-      },
-      toggle(name, force) {
-        if (typeof force === 'boolean') {
-          if (force) {
-            classSet.add(name);
-          } else {
-            classSet.delete(name);
-          }
-          return;
-        }
-        if (classSet.has(name)) {
-          classSet.delete(name);
-        } else {
-          classSet.add(name);
-        }
-      }
-    }
   };
 
   const button = {
-    textContent: 'Expand +',
-    attributes: {},
+    textContent: 'Expand',
+    attributes: {
+      'aria-expanded': 'false',
+      'aria-controls': `${slug}-content`
+    },
+    getAttribute(name) {
+      return this.attributes[name];
+    },
     closest(selector) {
-      if (selector === '.insight-card') {
+      if (selector === 'article') {
         return card;
       }
       return null;
-    },
-    addEventListener(name, callback) {
-      listeners[name] = callback;
     },
     setAttribute(name, value) {
       this.attributes[name] = value;
     }
   };
 
-  return { button, listeners, card };
+  global.document = {
+    getElementById(id) {
+      return id === `${slug}-content` ? content : null;
+    }
+  };
+
+  const target = {
+    closest(selector) {
+      if (selector === '.insight-toggle') {
+        return button;
+      }
+      return null;
+    }
+  };
+
+  return { button, target, card, content };
 }
 
-function testGaExpandEventBehavior() {
+function testGaInsightToggleEventBehavior() {
   const calls = [];
-  global.window = { gtag: (...args) => calls.push(args), location: { hostname: 'example.com', search: '' } };
+  global.window = {
+    gtag: (...args) => calls.push(args),
+    location: { hostname: 'example.com', search: '', pathname: '/insights/' }
+  };
 
-  const { button, listeners, card } = createFakeToggleHarness('operations-as-a-product', 'Operations as a Product');
-  bindInsightToggle(button);
-  assert(typeof listeners.click === 'function', 'Toggle click handler was not bound.');
+  const { button, target, content } = createFakeToggleHarness('operations-as-a-product-scalable-execution', 'Operations as a Product');
 
   // First click expands and must trigger one GA event.
-  listeners.click();
-  assert(card.classList.contains('expanded'), 'Card should be expanded after first click.');
+  onInsightToggleClick({ target });
   assert.strictEqual(button.attributes['aria-expanded'], 'true', 'Button aria-expanded should be true on expand.');
-  assert.strictEqual(button.textContent, 'Collapse -', 'Button text should switch to Collapse - on expand.');
+  assert.strictEqual(button.textContent, 'Collapse', 'Button text should switch to Collapse on expand.');
+  assert.strictEqual(content.hidden, false, 'Content should be visible after expand.');
   assert.strictEqual(calls.length, 1, 'GA event must fire once on expand.');
   assert.deepStrictEqual(calls[0], [
     'event',
-    'insight_expand',
+    'insight_toggle',
     {
-      insight_slug: 'operations-as-a-product',
-      insight_title: 'Operations as a Product'
+      insight_slug: 'operations-as-a-product-scalable-execution',
+      insight_title: 'Operations as a Product',
+      action: 'expand',
+      page_path: '/insights/'
     }
   ]);
 
-  // Second click collapses and must emit insight_collapse.
-  listeners.click();
-  assert(!card.classList.contains('expanded'), 'Card should be collapsed after second click.');
+  // Second click collapses and must emit insight_toggle with collapse action.
+  onInsightToggleClick({ target });
   assert.strictEqual(button.attributes['aria-expanded'], 'false', 'Button aria-expanded should be false on collapse.');
-  assert.strictEqual(button.textContent, 'Expand +', 'Button text should switch back to Expand + on collapse.');
+  assert.strictEqual(button.textContent, 'Expand', 'Button text should switch back to Expand on collapse.');
+  assert.strictEqual(content.hidden, true, 'Content should be hidden after collapse.');
   assert.strictEqual(calls.length, 2, 'GA collapse event must fire on second click.');
   assert.deepStrictEqual(calls[1], [
     'event',
-    'insight_collapse',
+    'insight_toggle',
     {
-      insight_slug: 'operations-as-a-product',
-      insight_title: 'Operations as a Product'
+      insight_slug: 'operations-as-a-product-scalable-execution',
+      insight_title: 'Operations as a Product',
+      action: 'collapse',
+      page_path: '/insights/'
     }
   ]);
 
   // Missing gtag must stay safe and never throw.
   delete global.window.gtag;
-  assert.doesNotThrow(() => listeners.click());
+  assert.doesNotThrow(() => onInsightToggleClick({ target }));
+  delete global.document;
   delete global.window;
 }
 
 function run() {
   testCardSlugStructure();
   testReadmeLinksMatchInsights();
-  testGaExpandEventBehavior();
+  testGaInsightToggleEventBehavior();
   console.log('PASS: insights.test.js validations passed.');
 }
 

@@ -1,189 +1,155 @@
 /**
- * Regression tests for Insights expand/collapse analytics.
- * These tests enforce event names, payload shape, and automatic card coverage.
+ * Regression tests for Insights toggle analytics and structural wiring.
  */
 const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
-const {
-  INSIGHT_COLLAPSE_EVENT,
-  INSIGHT_EXPAND_EVENT,
-  bindInsightToggle,
-  fireInsightAnalytics
-} = require(path.join(root, 'scripts/insights-briefs.js'));
+const { onInsightToggleClick } = require(path.join(root, 'scripts/insights-toggle.js'));
 
-function createToggleHarness(slug, title) {
-  const listeners = {};
-  const classSet = new Set();
+function createToggleHarness(options = {}) {
+  const slug = options.slug || 'expected-slug';
+  const title = options.title || 'Expected Title';
+  const initiallyExpanded = options.initiallyExpanded || false;
+  const pathname = options.pathname || '/insights/';
 
-  const card = {
+  const content = {
+    attributes: {},
+    toggleAttribute(name, force) {
+      if (force) {
+        this.attributes[name] = '';
+      } else {
+        delete this.attributes[name];
+      }
+    }
+  };
+
+  const article = {
     id: slug,
     querySelector(selector) {
       if (selector === 'h2') {
         return { textContent: title };
       }
       return null;
-    },
-    classList: {
-      contains(className) {
-        return classSet.has(className);
-      },
-      toggle(className, shouldExist) {
-        if (shouldExist) {
-          classSet.add(className);
-        } else {
-          classSet.delete(className);
-        }
-      }
     }
   };
 
   const button = {
-    attributes: { 'aria-expanded': 'false' },
-    textContent: 'Expand +',
-    closest(selector) {
-      if (selector === '.insight-card') {
-        return card;
-      }
-      return null;
+    textContent: initiallyExpanded ? 'Collapse' : 'Expand',
+    attributes: {
+      'aria-controls': `${slug}-content`,
+      'aria-expanded': String(initiallyExpanded)
     },
-    addEventListener(eventName, callback) {
-      listeners[eventName] = callback;
+    getAttribute(name) {
+      return this.attributes[name];
     },
     setAttribute(name, value) {
       this.attributes[name] = value;
+    },
+    closest(selector) {
+      if (selector === 'article') {
+        return article;
+      }
+      return null;
     }
   };
 
-  return { button, listeners };
+  const target = {
+    closest(selector) {
+      if (selector === '.insight-toggle') {
+        return button;
+      }
+      return null;
+    }
+  };
+
+  global.document = {
+    getElementById(id) {
+      return id === `${slug}-content` ? content : null;
+    }
+  };
+
+  global.window = {
+    location: { pathname }
+  };
+
+  return { article, button, content, target };
 }
 
-function extractInsightCards(html) {
-  return [...html.matchAll(/<section id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)<\/section>/g)]
-    .map((match) => ({ slug: match[1], sectionHtml: match[2] }));
+function extractInsightArticles(html) {
+  return [...html.matchAll(/<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)<\/article>/g)]
+    .map((match) => ({ slug: match[1], articleHtml: match[2] }));
 }
 
 describe('Insights analytics runtime', () => {
-  beforeEach(() => {
-    // Use fake timers so the guarded retry can be deterministically asserted.
-    jest.useFakeTimers();
-
-    global.window = {
-      location: {
-        hostname: 'example.com',
-        search: ''
-      }
-    };
-  });
-
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
     delete global.window;
+    delete global.document;
   });
 
-  test('fires insight_expand then insight_collapse with required payload', () => {
+  test('fires insight_toggle expand with required payload', () => {
+    const { target } = createToggleHarness({ initiallyExpanded: false });
     window.gtag = jest.fn();
 
-    const { button, listeners } = createToggleHarness('expected-slug', 'Expected Title');
-    bindInsightToggle(button);
-
-    expect(typeof listeners.click).toBe('function');
-
-    // Strict expand assertion: event name and payload keys must be present and correct.
-    listeners.click();
-    expect(window.gtag).toHaveBeenCalledWith(
-      'event',
-      INSIGHT_EXPAND_EVENT,
-      expect.objectContaining({
-        insight_slug: 'expected-slug',
-        insight_title: 'Expected Title'
-      })
-    );
-    expect(window.gtag).not.toHaveBeenCalledWith('event', INSIGHT_EXPAND_EVENT);
-
-    // Strict collapse assertion with payload integrity.
-    listeners.click();
-    expect(window.gtag).toHaveBeenCalledWith(
-      'event',
-      INSIGHT_COLLAPSE_EVENT,
-      expect.objectContaining({
-        insight_slug: 'expected-slug',
-        insight_title: 'Expected Title'
-      })
-    );
-    expect(window.gtag).not.toHaveBeenCalledWith('event', INSIGHT_COLLAPSE_EVENT);
-  });
-
-  test('does not throw when window.gtag is undefined and retry remains guarded', () => {
-    const { button, listeners } = createToggleHarness('test-slug', 'Test Insight');
-    bindInsightToggle(button);
-
-    expect(() => listeners.click()).not.toThrow();
-    expect(() => jest.advanceTimersByTime(300)).not.toThrow();
-  });
-
-  test('does not send analytics when slug is empty', () => {
-    window.gtag = jest.fn();
-    const { button, listeners } = createToggleHarness('', 'Expected Title');
-    bindInsightToggle(button);
-
-    listeners.click();
-    expect(window.gtag).not.toHaveBeenCalled();
-  });
-
-  test('does not send analytics when title is empty', () => {
-    window.gtag = jest.fn();
-    const { button, listeners } = createToggleHarness('expected-slug', '');
-    bindInsightToggle(button);
-
-    listeners.click();
-    expect(window.gtag).not.toHaveBeenCalled();
-  });
-
-  test('retry sends full payload once gtag becomes available before retry', () => {
-    const { button, listeners } = createToggleHarness('expected-slug', 'Expected Title');
-    bindInsightToggle(button);
-
-    // First click schedules retry while gtag is unavailable.
-    listeners.click();
-    window.gtag = jest.fn();
-    jest.advanceTimersByTime(300);
+    onInsightToggleClick({ target });
 
     expect(window.gtag).toHaveBeenCalledWith(
       'event',
-      INSIGHT_EXPAND_EVENT,
+      'insight_toggle',
       expect.objectContaining({
         insight_slug: 'expected-slug',
-        insight_title: 'Expected Title'
+        insight_title: 'Expected Title',
+        action: 'expand',
+        page_path: '/insights/'
       })
     );
-    expect(window.gtag).not.toHaveBeenCalledWith('event', INSIGHT_EXPAND_EVENT);
   });
 
-  test('throws in debug mode when payload data is missing', () => {
-    window.location.hostname = 'localhost';
-    expect(() => fireInsightAnalytics(INSIGHT_EXPAND_EVENT, '', 'Expected Title')).toThrow(
-      '[insights] missing analytics payload data'
+  test('fires insight_toggle collapse with required payload', () => {
+    const { target } = createToggleHarness({ initiallyExpanded: true, title: 'Operations as a Product' });
+    window.gtag = jest.fn();
+
+    onInsightToggleClick({ target });
+
+    expect(window.gtag).toHaveBeenCalledWith(
+      'event',
+      'insight_toggle',
+      expect.objectContaining({
+        action: 'collapse',
+        insight_title: 'Operations as a Product'
+      })
     );
   });
 
-  test('event names are exact and protected against accidental renames', () => {
-    expect(INSIGHT_EXPAND_EVENT).toBe('insight_expand');
-    expect(INSIGHT_COLLAPSE_EVENT).toBe('insight_collapse');
+  test('toggles aria-expanded, button text, and hidden attribute', () => {
+    const { target, button, content } = createToggleHarness({ initiallyExpanded: false });
+
+    onInsightToggleClick({ target });
+    expect(button.getAttribute('aria-expanded')).toBe('true');
+    expect(button.textContent).toBe('Collapse');
+    expect(content.attributes.hidden).toBeUndefined();
+
+    onInsightToggleClick({ target });
+    expect(button.getAttribute('aria-expanded')).toBe('false');
+    expect(button.textContent).toBe('Expand');
+    expect(content.attributes).toHaveProperty('hidden');
+  });
+
+  test('fails silently when gtag is unavailable', () => {
+    const { target } = createToggleHarness({ initiallyExpanded: false });
+    expect(() => onInsightToggleClick({ target })).not.toThrow();
   });
 });
 
 describe('Insights auto-discovery coverage', () => {
-  test('every insight-card section has an insight-toggle button', () => {
-    const cards = extractInsightCards(insightsHtml);
+  test('every insight article has a toggle with aria-controls wiring', () => {
+    const cards = extractInsightArticles(insightsHtml);
     expect(cards.length).toBeGreaterThan(0);
 
     for (const card of cards) {
-      // Every new card must contain the standard toggle class to inherit analytics binding.
-      expect(card.sectionHtml).toMatch(/class="insight-toggle"/);
+      expect(card.articleHtml).toMatch(/class="insight-toggle"/);
+      expect(card.articleHtml).toMatch(/aria-controls="[a-z0-9-]+-content"/);
     }
   });
 });

@@ -104,35 +104,40 @@ class GARuntimePlaywrightTest(unittest.TestCase):
         time.sleep(2)
 
         collect_requests = [u for u in requests if "google-analytics.com/g/collect" in u]
-        expand_hits = [u for u in collect_requests if "insight_expand" in u]
-        collapse_hits = [u for u in collect_requests if "insight_collapse" in u]
+        toggle_hits = [u for u in collect_requests if "insight_toggle" in u]
         data_layer_events = page.evaluate(
             """() => (window.dataLayer || [])
               .map((item) => Array.from(item || []))
               .filter((item) => item.length >= 3 && item[0] === 'event')
               .map((item) => ({ name: item[1], payload: item[2] || {} }))"""
         )
-        expand_data_layer_hits = [e for e in data_layer_events if e.get("name") == "insight_expand"]
-        collapse_data_layer_hits = [e for e in data_layer_events if e.get("name") == "insight_collapse"]
+        toggle_data_layer_hits = [e for e in data_layer_events if e.get("name") == "insight_toggle"]
+        expand_data_layer_hits = [e for e in toggle_data_layer_hits if e.get("payload", {}).get("action") == "expand"]
+        collapse_data_layer_hits = [e for e in toggle_data_layer_hits if e.get("payload", {}).get("action") == "collapse"]
 
         self.assertTrue(
-            len(expand_hits) >= 1 or len(expand_data_layer_hits) >= 1,
-            "No insight_expand telemetry observed in collect requests or dataLayer.",
+            len(toggle_hits) >= 1 or len(toggle_data_layer_hits) >= 1,
+            "No insight_toggle telemetry observed in collect requests or dataLayer.",
         )
         self.assertTrue(
-            len(collapse_hits) >= 1 or len(collapse_data_layer_hits) >= 1,
-            "No insight_collapse telemetry observed in collect requests or dataLayer.",
+            len(collapse_data_layer_hits) >= 1,
+            "No insight_toggle collapse action observed in dataLayer.",
         )
 
-        if len(expand_hits) >= 1:
+        if len(toggle_hits) >= 1:
             self.assertTrue(
-                any("ep.insight_slug=" in u and "ep.insight_title=" in u for u in expand_hits),
-                "insight_expand collect payload is missing insight_slug or insight_title parameters.",
+                any("ep.insight_slug=" in u and "ep.insight_title=" in u and "ep.action=" in u for u in toggle_hits),
+                "insight_toggle collect payload is missing required parameters.",
             )
         else:
             self.assertTrue(
-                any("insight_slug" in e.get("payload", {}) and "insight_title" in e.get("payload", {}) for e in expand_data_layer_hits),
-                "insight_expand dataLayer payload is missing insight_slug or insight_title.",
+                any(
+                    "insight_slug" in e.get("payload", {})
+                    and "insight_title" in e.get("payload", {})
+                    and "page_path" in e.get("payload", {})
+                    for e in toggle_data_layer_hits
+                ),
+                "insight_toggle dataLayer payload is missing required parameters.",
             )
 
         context.close()

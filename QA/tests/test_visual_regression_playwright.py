@@ -520,8 +520,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
             self.assertGreaterEqual(len(events), 2, "Expected at least expand and collapse analytics events")
 
             event_names = [event[1] for event in events if len(event) >= 2]
-            self.assertIn("insight_expand", event_names, "Missing insight_expand GA event")
-            self.assertIn("insight_collapse", event_names, "Missing insight_collapse GA event")
+            self.assertIn("insight_toggle", event_names, "Missing insight_toggle GA event")
 
             matching_payloads = [
                 event[2]
@@ -529,14 +528,18 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 if len(event) >= 3 and isinstance(event[2], dict) and event[2].get("insight_slug") == slug
             ]
             self.assertGreaterEqual(len(matching_payloads), 2, "Event payloads must include the expanded card slug")
+            self.assertTrue(
+                any(payload.get("action") == "expand" for payload in matching_payloads),
+                "insight_toggle payload must include an expand action."
+            )
+            self.assertTrue(
+                any(payload.get("action") == "collapse" for payload in matching_payloads),
+                "insight_toggle payload must include a collapse action."
+            )
 
-            # Simulate missing gtag and require a warning, not a crash.
+            # Simulate missing gtag and require a safe no-op.
             page.evaluate("() => { window.gtag = undefined; }")
-            toggle.click()
-            page.wait_for_timeout(120)
-            warnings = page.evaluate("() => window.__qaWarnings")
-            warning_text = "\n".join(warnings)
-            self.assertIn("gtag unavailable", warning_text, "Missing warning when gtag is unavailable")
+            self.assertIsNone(toggle.click(timeout=1000))
         finally:
             context.close()
 

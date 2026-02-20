@@ -13,11 +13,11 @@ class InsightsLayoutTest(unittest.TestCase):
         cls.insights_html = (cls.root / "insights/index.html").read_text(encoding="utf-8")
         cls.insights_css = (cls.root / "styles/insights.css").read_text(encoding="utf-8")
         cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
-        cls.insights_script = (cls.root / "scripts/insights-briefs.js").read_text(encoding="utf-8")
+        cls.insights_script = (cls.root / "scripts/insights-toggle.js").read_text(encoding="utf-8")
 
     def test_cards_have_slug_title_and_toggle(self):
         """Ensure each insight card has a slug id, title, and collapsed toggle."""
-        cards = re.findall(r'<section id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)</section>', self.insights_html)
+        cards = re.findall(r'<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)</article>', self.insights_html)
         self.assertGreaterEqual(len(cards), 3)
 
         seen = set()
@@ -26,20 +26,13 @@ class InsightsLayoutTest(unittest.TestCase):
             self.assertNotIn(slug, seen)
             seen.add(slug)
             self.assertRegex(card_html, r"<h2>[^<]+</h2>")
-            self.assertRegex(card_html, r'class="insight-toggle"[^>]*aria-expanded="false"')
+            self.assertRegex(card_html, r'class="insight-toggle"[^>]*aria-expanded="(true|false)"')
             self.assertIn('<ul class="service-list">', card_html)
-            self.assertIn('<div class="insight-expanded">', card_html)
+            self.assertRegex(card_html, r'id="[a-z0-9-]+-content"\s+class="brief-content"')
 
     def test_expand_collapse_css_rules(self):
-        """Ensure expanded content uses animated collapse/expand states."""
-        self.assertRegex(self.insights_css, r"\.insight-expanded\s*\{[^}]*max-height:\s*0;")
-        self.assertRegex(self.insights_css, r"\.insight-expanded\s*\{[^}]*opacity:\s*0;")
-        self.assertRegex(
-            self.insights_css,
-            r"\.insight-expanded\s*\{[^}]*transition:\s*max-height 280ms ease,\s*opacity 220ms ease;",
-        )
-        self.assertRegex(self.insights_css, r"\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*max-height:\s*960px;")
-        self.assertRegex(self.insights_css, r"\.insight-card\.expanded\s+\.insight-expanded\s*\{[^}]*opacity:\s*1;")
+        """Ensure brief content region has dedicated styling."""
+        self.assertRegex(self.insights_css, r"\.brief-content\s*\{[^}]*margin-top:\s*16px;")
 
     def test_hover_lift_and_spacing(self):
         """Ensure card hover lift and card spacing align with required behavior."""
@@ -60,14 +53,12 @@ class InsightsLayoutTest(unittest.TestCase):
         self.assertIn('background-image: url("/icons/bullet.png");', self.site_css)
 
     def test_ga_event_on_expand_contract(self):
-        """Ensure script sends expand/collapse events and guards missing gtag."""
-        self.assertIn("const INSIGHT_EXPAND_EVENT = 'insight_expand'", self.insights_script)
-        self.assertIn("const INSIGHT_COLLAPSE_EVENT = 'insight_collapse'", self.insights_script)
-        self.assertIn("typeof window.gtag", self.insights_script)
-        self.assertIn("setTimeout(() =>", self.insights_script)
-        self.assertIn("ga_debug=1", self.insights_script)
+        """Ensure script sends required insight_toggle GA event payload fields."""
+        self.assertIn("window.gtag('event', 'insight_toggle'", self.insights_script)
         self.assertIn("insight_slug", self.insights_script)
         self.assertIn("insight_title", self.insights_script)
+        self.assertIn("action: expanded ? 'collapse' : 'expand'", self.insights_script)
+        self.assertIn("page_path: window.location.pathname", self.insights_script)
 
 
 if __name__ == "__main__":

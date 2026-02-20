@@ -36,8 +36,8 @@
   <!-- Analytics: GA4 measurement ID source of truth for /scripts/ga4.js -->
   <meta name="ga4-measurement-id" content="G-DVHD0KL633" />
   <script src="/scripts/ga4.js" defer></script>
-  <!-- Insights interactions are initialized by shared runtime script with deferred loading. -->
-  <script src="/scripts/insights-briefs.js" defer></script>
+  <!-- Insights interactions use a delegated toggle controller for all insight cards. -->
+  <script src="/scripts/insights-toggle.js" defer></script>
   <!-- Structured data for each insight entry. -->
   <script type="application/ld+json">
     {
@@ -48,15 +48,15 @@
           "headline": "Productizing Operations for Modern AI-Enabled Work",
           "author": {"@type": "Person", "name": "Roman Bediner"},
           "publisher": {"@type": "Person", "name": "Roman Bediner"},
-          "mainEntityOfPage": "https://romanbediner.com/insights/#productizing-operations-for-modern-ai-enabled-work",
-          "dateModified": "2026-02-17"
+          "mainEntityOfPage": "https://romanbediner.com/insights/#productizing-operations-ai-enabled-work",
+          "dateModified": "2026-02-20"
         },
         {
           "@type": "Article",
           "headline": "Operations as a Product",
           "author": {"@type": "Person", "name": "Roman Bediner"},
           "publisher": {"@type": "Person", "name": "Roman Bediner"},
-          "mainEntityOfPage": "https://romanbediner.com/insights/#operations-as-a-product",
+          "mainEntityOfPage": "https://romanbediner.com/insights/#operations-as-a-product-scalable-execution",
           "dateModified": "2026-02-17"
         },
         {
@@ -92,65 +92,81 @@
     <p class="insights-intro">Strategic briefs on operating architecture, AI-enabled execution, and modern enterprise design.</p>
 
     <!-- Insight cards use a consistent executive format with collapsible expansion. -->
-    <section id="productizing-operations-for-modern-ai-enabled-work" class="insight-card">
+    <article id="productizing-operations-ai-enabled-work" class="insight-card">
       <div class="insight-accent" aria-hidden="true"></div>
       <h2>Productizing Operations for Modern AI-Enabled Work</h2>
-      <p class="insight-summary">Execution becomes scalable when operations are treated as a designed system, not reactive overhead.</p>
+      <p class="brief-phase">→ Thesis</p>
+      <p class="insight-summary">Scalable execution emerges when operations are engineered as a system and managed as a product.</p>
       <ul class="service-list">
-        <li>Define ownership, decision rights, and portfolio governance explicitly.</li>
-        <li>Embed measurement into workflows instead of after-the-fact reporting.</li>
-        <li>Use AI-assisted signal detection to improve decision velocity with accountability.</li>
-        <li>Align strategy, delivery, and customer outcomes inside one operating rhythm.</li>
+        <li>Establish clear ownership, decision rights, and escalation logic across human and AI-enabled work.</li>
+        <li>Make telemetry and measurement native to execution rather than layered on afterward.</li>
+        <li>Align strategy, delivery, and customer outcomes within a shared operating rhythm.</li>
+        <li>Run operations as a lifecycle-managed product with defined standards, measurable performance outcomes, and continuous refinement.</li>
+        <li>Design the operating model to scale alongside increasing automation and AI-driven decision velocity.</li>
       </ul>
-      <div class="insight-expanded">
-        <p>Modern organizations often treat operations as overhead rather than a designed execution system. Productizing operations reframes execution as a measurable capability with explicit architecture, ownership, and standards that can scale.</p>
-        <p>In AI-enabled environments, complexity expands as decision surfaces multiply and dependency chains deepen. Without a defined operating layer, AI accelerates noise. A productized operations model creates clear governance, measurable flow, and accountable decision paths.</p>
-        <p>This approach integrates governance, automation, and performance telemetry directly into delivery cadence. Measurement becomes native to execution, helping teams move faster while protecting quality, financial discipline, and customer outcomes.</p>
+      <button
+        class="insight-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="productizing-operations-ai-enabled-work-content">
+        Expand
+      </button>
+      <div id="productizing-operations-ai-enabled-work-content" class="brief-content" hidden>
+        <p>Modern product organizations already apply lifecycle discipline to features. Roadmaps are prioritized. Releases are versioned. Performance is measured and iterated. Productizing operations extends that same discipline to the operating system itself, recognizing that in AI-enabled environments, how the company executes becomes as important as what it ships.</p>
+        <p>As automation and agentic systems begin participating directly in workflows, execution changes shape. Decision velocity increases. Human judgment and machine-assisted reasoning interleave. Exceptions surface differently. Policies are interpreted through both human discretion and algorithmic logic. In this environment, an operational product lifecycle ensures that the structure of execution evolves intentionally rather than implicitly.</p>
+        <p>That lifecycle must account for AI participation explicitly. It includes defined ownership for how AI operates within workflows, clear decision rights between humans and agents, and structured review cadences that evaluate not only performance outcomes but also patterns of AI adoption, override frequency, exception behavior, and decision latency. An AI-enabled execution scorecard becomes part of the operating system itself, providing visibility into how automation is influencing throughput, quality, risk exposure, and customer impact.</p>
+        <p>Engineering operations as a system and managing it as a product introduces measurable discipline to execution. Standards are defined. Performance outcomes are tracked. Escalation logic is documented. Workflows are versioned. Refinement is deliberate. The operating model becomes something that can be improved with the same rigor applied to customer-facing products.</p>
+        <p>Over time, this creates compounding operational intelligence. Feedback from human decisions and AI behavior informs policy evolution. Exception patterns shape refinement. Telemetry drives adaptation. Execution becomes more predictable, more scalable, and more resilient as automation expands. In AI-enabled organizations, this operational product lifecycle becomes a durable advantage because it ensures that how the company runs evolves at the same pace as the technology it adopts.</p>
       </div>
-      <div class="insight-actions">
-        <button class="insight-toggle" type="button" aria-expanded="false">Expand +</button>
-      </div>
-    </section>
+    </article>
 
-    <section id="operations-as-a-product" class="insight-card">
+    <article id="operations-as-a-product-scalable-execution" class="insight-card">
       <div class="insight-accent" aria-hidden="true"></div>
       <h2>Operations as a Product</h2>
-      <p class="insight-summary">Operating systems need lifecycle ownership and instrumentation, just like customer-facing products.</p>
-      <ul class="service-list">
-        <li>Engineer how initiatives are sequenced, escalated, and measured.</li>
-        <li>Keep governance lightweight while preserving role and decision clarity.</li>
-        <li>Use structured data to run scenario simulation and portfolio stress testing.</li>
-        <li>Reduce delivery variance while increasing cross-functional alignment.</li>
-      </ul>
-      <div class="insight-expanded">
+      <button
+        class="insight-toggle"
+        type="button"
+        aria-expanded="true"
+        aria-controls="operations-as-a-product-scalable-execution-content">
+        Collapse
+      </button>
+      <div id="operations-as-a-product-scalable-execution-content" class="brief-content">
+        <p class="insight-summary">Operating systems need lifecycle ownership and instrumentation, just like customer-facing products.</p>
+        <ul class="service-list">
+          <li>Engineer how initiatives are sequenced, escalated, and measured.</li>
+          <li>Keep governance lightweight while preserving role and decision clarity.</li>
+          <li>Use structured data to run scenario simulation and portfolio stress testing.</li>
+          <li>Reduce delivery variance while increasing cross-functional alignment.</li>
+        </ul>
         <p>Treating operations as a product brings lifecycle rigor to execution systems. The operating model is intentionally designed, documented, and instrumented, rather than rebuilt ad hoc for each initiative.</p>
         <p>Teams gain predictable pathways for sequencing work, escalating decisions, and resolving execution risk. Governance remains lightweight but precise, so progress remains visible without introducing process drag.</p>
         <p>When AI is embedded into this framework, data quality and decision clarity improve. The result is lower variance, stronger cross-functional alignment, and institutional knowledge that compounds over time.</p>
       </div>
-      <div class="insight-actions">
-        <button class="insight-toggle" type="button" aria-expanded="false">Expand +</button>
-      </div>
-    </section>
+    </article>
 
-    <section id="ai-as-an-operating-layer" class="insight-card">
+    <article id="ai-as-an-operating-layer" class="insight-card">
       <div class="insight-accent" aria-hidden="true"></div>
       <h2>AI as an Operating Layer</h2>
-      <p class="insight-summary">AI delivers real leverage when embedded into cadence, telemetry, and decision architecture.</p>
-      <ul class="service-list">
-        <li>Integrate telemetry, automation, and anomaly detection into daily execution.</li>
-        <li>Surface earlier risk signals and improve resource allocation decisions.</li>
-        <li>Keep governance boundaries explicit while preserving human accountability.</li>
-        <li>Use AI to strengthen operational precision, not replace leadership judgment.</li>
-      </ul>
-      <div class="insight-expanded">
+      <button
+        class="insight-toggle"
+        type="button"
+        aria-expanded="true"
+        aria-controls="ai-as-an-operating-layer-content">
+        Collapse
+      </button>
+      <div id="ai-as-an-operating-layer-content" class="brief-content">
+        <p class="insight-summary">AI delivers real leverage when embedded into cadence, telemetry, and decision architecture.</p>
+        <ul class="service-list">
+          <li>Integrate telemetry, automation, and anomaly detection into daily execution.</li>
+          <li>Surface earlier risk signals and improve resource allocation decisions.</li>
+          <li>Keep governance boundaries explicit while preserving human accountability.</li>
+          <li>Use AI to strengthen operational precision, not replace leadership judgment.</li>
+        </ul>
         <p>AI is most effective when embedded inside operating cadence, not layered on as isolated tooling. It should support prioritization, forecasting, and monitoring where decisions are made.</p>
         <p>Organizations gain leverage by integrating telemetry pipelines, anomaly detection, and structured review loops into recurring execution rhythms. This strengthens early risk detection and improves resource allocation.</p>
         <p>The objective is operational clarity with human accountability. In this model, AI does not replace leadership judgment. It improves the precision and speed of leadership decisions.</p>
       </div>
-      <div class="insight-actions">
-        <button class="insight-toggle" type="button" aria-expanded="false">Expand +</button>
-      </div>
-    </section>
+    </article>
   </main>
 
   <footer class="footer">
