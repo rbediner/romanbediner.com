@@ -36,7 +36,7 @@ function createToggleHarness(options = {}) {
   };
 
   const button = {
-    textContent: initiallyExpanded ? 'Collapse' : 'Expand',
+    textContent: initiallyExpanded ? 'Collapse -' : 'Expand +',
     attributes: {
       'aria-controls': `${slug}-content`,
       'aria-expanded': String(initiallyExpanded)
@@ -127,12 +127,12 @@ describe('Insights analytics runtime', () => {
 
     onInsightToggleClick({ target });
     expect(button.getAttribute('aria-expanded')).toBe('true');
-    expect(button.textContent).toBe('Collapse');
+    expect(button.textContent).toBe('Collapse -');
     expect(content.attributes.hidden).toBeUndefined();
 
     onInsightToggleClick({ target });
     expect(button.getAttribute('aria-expanded')).toBe('false');
-    expect(button.textContent).toBe('Expand');
+    expect(button.textContent).toBe('Expand +');
     expect(content.attributes).toHaveProperty('hidden');
   });
 
