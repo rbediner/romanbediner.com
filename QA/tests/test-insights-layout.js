@@ -51,6 +51,16 @@ for (const card of insightCards) {
     failures += 1;
     console.error(`FAIL: card ${slug} is missing brief-content container with semantic id.`);
   }
+
+  // Guardrail: summary and bullets must remain visible in collapsed state, outside the hidden brief-content block.
+  const contentMarker = `id="${slug}-content" class="brief-content`;
+  const contentStart = cardHtml.indexOf(contentMarker);
+  const summaryStart = cardHtml.indexOf('<p class="insight-summary">');
+  const listStart = cardHtml.indexOf('<ul class="service-list">');
+  if (contentStart === -1 || summaryStart === -1 || listStart === -1 || summaryStart > contentStart || listStart > contentStart) {
+    failures += 1;
+    console.error(`FAIL: card ${slug} must keep summary and service-list outside hidden brief-content.`);
+  }
 }
 
 if (!insightsHtml.includes('src="/scripts/insights-toggle.js" defer')) {

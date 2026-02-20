@@ -30,6 +30,22 @@ class InsightsLayoutTest(unittest.TestCase):
             self.assertIn('<ul class="service-list">', card_html)
             self.assertRegex(card_html, r'id="[a-z0-9-]+-content"\s+class="brief-content"')
 
+    def test_summary_and_bullets_stay_outside_hidden_content(self):
+        """Guardrail: summary and bullets must remain visible when a card is collapsed."""
+        cards = re.findall(r'<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)</article>', self.insights_html)
+        self.assertGreaterEqual(len(cards), 3)
+
+        for slug, card_html in cards:
+            content_marker = f'id="{slug}-content" class="brief-content'
+            content_start = card_html.find(content_marker)
+            summary_start = card_html.find('<p class="insight-summary">')
+            list_start = card_html.find('<ul class="service-list">')
+            self.assertGreaterEqual(content_start, 0, f"{slug} is missing brief-content marker.")
+            self.assertGreaterEqual(summary_start, 0, f"{slug} is missing insight summary.")
+            self.assertGreaterEqual(list_start, 0, f"{slug} is missing service list.")
+            self.assertLess(summary_start, content_start, f"{slug} summary must be outside hidden brief-content.")
+            self.assertLess(list_start, content_start, f"{slug} service-list must be outside hidden brief-content.")
+
     def test_expand_collapse_css_rules(self):
         """Ensure brief content region has dedicated styling."""
         self.assertRegex(self.insights_css, r"\.brief-content\s*\{[^}]*margin-top:\s*16px;")
