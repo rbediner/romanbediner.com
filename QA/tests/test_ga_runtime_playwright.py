@@ -142,6 +142,65 @@ class GARuntimePlaywrightTest(unittest.TestCase):
 
         context.close()
 
+    def test_insights_each_card_emits_matching_slug_and_title(self):
+        context = self.browser.new_context()
+        page = context.new_page()
+
+        page.goto(f"http://127.0.0.1:{self.port}/insights/", wait_until="networkidle")
+        page.wait_for_function("typeof window.gtag === 'function'")
+        time.sleep(1)
+
+        # Capture analytics payloads while preserving original gtag behavior.
+        page.evaluate(
+            """
+            () => {
+              window.__qaInsightEvents = [];
+              const originalGtag = window.gtag;
+              window.gtag = (...args) => {
+                window.__qaInsightEvents.push(args);
+                if (typeof originalGtag === 'function') {
+                  try {
+                    originalGtag(...args);
+                  } catch (_err) {
+                    // Keep test harness resilient if network transport fails.
+                  }
+                }
+              };
+            }
+            """
+        )
+
+        expected_cards = page.evaluate(
+            """() => Array.from(document.querySelectorAll('.insight-card')).map((card) => ({
+              slug: card.id,
+              title: (card.querySelector('h2')?.textContent || '').trim()
+            }))"""
+        )
+
+        toggles = page.locator(".insight-card .insight-toggle")
+        toggle_count = toggles.count()
+        self.assertEqual(toggle_count, len(expected_cards), "Each insight card should expose one toggle.")
+
+        for index in range(toggle_count):
+            toggles.nth(index).click()
+            time.sleep(0.2)
+
+        events = page.evaluate(
+            """() => (window.__qaInsightEvents || [])
+              .filter((args) => args.length >= 3 && args[0] === 'event' && args[1] === 'insight_toggle')
+              .map((args) => args[2] || {})"""
+        )
+        self.assertGreaterEqual(len(events), len(expected_cards), "Expected one insight_toggle event per card expand.")
+
+        seen = {(e.get("insight_slug"), e.get("insight_title")) for e in events if e.get("action") == "expand"}
+        expected = {(card["slug"], card["title"]) for card in expected_cards}
+        self.assertTrue(
+            expected.issubset(seen),
+            f"Missing slug/title payload pairs. expected={expected} seen={seen}",
+        )
+
+        context.close()
+
 
 if __name__ == "__main__":
     unittest.main()
