@@ -31,8 +31,8 @@ const expected = [
   {
     file: 'insights/index.html',
     canonical: 'https://romanbediner.com/insights/',
-    ogTitle: 'Operational Architecture & OaP Briefs | Roman Bediner',
-    ogDescription: 'Short operational essays on scaling systems, AI-enabled execution, and treating operations as a product.'
+    ogTitle: 'Productizing Operations for Modern AI-Enabled Work | Roman Bediner',
+    ogDescription: 'Working briefs on modern AI-enabled work, productizing operations, and treating execution as a designed operating system.'
   },
   {
     file: 'connect/index.html',
@@ -85,6 +85,7 @@ for (const page of expected) {
   const ogDescription = getMetaByProperty(html, 'og:description');
   const twitterTitle = getMetaByName(html, 'twitter:title');
   const twitterDescription = getMetaByName(html, 'twitter:description');
+  const metaDescription = getMetaByName(html, 'description');
 
   summaryRows.push({
     page: page.canonical,
@@ -144,6 +145,10 @@ for (const page of expected) {
     failures += 1;
     console.error(`FAIL: twitter:description must mirror og:description in ${page.file}`);
   }
+  if (!metaDescription || metaDescription !== ogDescription) {
+    failures += 1;
+    console.error(`FAIL: meta description must match og:description in ${page.file}`);
+  }
   if (getMetaByProperty(html, 'og:image') !== OG_IMAGE) {
     failures += 1;
     console.error(`FAIL: og:image mismatch in ${page.file}`);
@@ -183,6 +188,33 @@ for (const page of expected) {
   if (getMetaByName(html, 'twitter:card') !== 'summary_large_image') {
     failures += 1;
     console.error(`FAIL: twitter:card mismatch in ${page.file}`);
+  }
+
+  // Guardrail: metadata descriptions must not include en or em dashes.
+  for (const [name, value] of [
+    ['meta description', metaDescription || ''],
+    ['og:description', ogDescription || ''],
+    ['twitter:description', twitterDescription || '']
+  ]) {
+    if (/[—–]/.test(value)) {
+      failures += 1;
+      console.error(`FAIL: ${name} contains en/em dash in ${page.file}`);
+    }
+  }
+
+  // Guardrail: old Insights phrase must not appear in Insights metadata.
+  if (page.file === 'insights/index.html') {
+    const metadataValues = [
+      ogTitle || '',
+      ogDescription || '',
+      twitterTitle || '',
+      twitterDescription || '',
+      metaDescription || ''
+    ].join(' ');
+    if (/Short operational essays/i.test(metadataValues)) {
+      failures += 1;
+      console.error('FAIL: legacy phrase "Short operational essays" remains in Insights metadata');
+    }
   }
 }
 

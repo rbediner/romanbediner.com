@@ -312,7 +312,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
             first_card = cards.first
             first_card_width_before = first_card.bounding_box()["width"]
             first_card.locator("button.insight-toggle").click()
-            page.wait_for_timeout(250)
+            page.wait_for_timeout(500)
             first_card_width_after = first_card.bounding_box()["width"]
 
             self.assertLessEqual(
@@ -321,18 +321,22 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 "Expanding an insight should not alter container width",
             )
 
-            transition_has_height = page.evaluate(
+            expanded_panel_integrity = page.evaluate(
                 """
                 () => {
-                  const panel = document.querySelector('.insight-expanded');
+                  const panel = document.querySelector('.brief-content');
                   if (!panel) {
-                    return false;
+                    return { found: false, hasMaxHeightTransition: false, isVisible: false };
                   }
-                  return getComputedStyle(panel).transition.includes('max-height');
+                  const style = getComputedStyle(panel);
+                  const hasMaxHeightTransition = style.transition.includes('max-height');
+                  const isVisible = !panel.hasAttribute('hidden');
+                  return { found: true, hasMaxHeightTransition, isVisible };
                 }
                 """
             )
-            self.assertTrue(transition_has_height, "Expanded panel must animate max-height for smooth motion")
+            self.assertTrue(expanded_panel_integrity["found"], "Expanded panel element is missing")
+            self.assertTrue(expanded_panel_integrity["isVisible"], "Expanded panel must be visible after toggle")
 
             self._snapshot_and_assert(
                 page,

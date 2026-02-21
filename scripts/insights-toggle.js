@@ -18,6 +18,9 @@
     }
 
     // Keep control state, label, and visibility synchronized for accessibility and analytics accuracy.
+    if (article.classList && typeof article.classList.toggle === 'function') {
+      article.classList.toggle('expanded', !expanded);
+    }
     button.setAttribute('aria-expanded', String(!expanded));
     // Keep explicit prefix tokens so the next action is scannable at a glance.
     button.textContent = expanded ? '+ Expand' : '- Collapse';

@@ -11,7 +11,7 @@ const expectedHomepageTitle = 'Roman Bediner | Operations & Transformation Leade
 const expectedHomepageDescription = 'Executive operator building scalable, AI-enabled operating systems that accelerate launch readiness, performance, and measurable business outcomes.';
 const expectedHomepageH1 = 'Productizing Operations for Modern AI Enabled Work';
 const expectedInsightsTitle = 'Insights on AI Enabled Operations | Roman Bediner';
-const expectedInsightsDescription = 'Short operational essays on scaling systems, AI-enabled execution, and treating operations as a product.';
+const expectedInsightsDescription = 'Working briefs on modern AI-enabled work, productizing operations, and treating execution as a designed operating system.';
 
 const htmlPages = [
   'index.html',
