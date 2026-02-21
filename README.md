@@ -172,4 +172,7 @@ https://romanbediner.com/insights/#ai-as-an-operating-layer
 Steering Execution with Operational Signals
 https://romanbediner.com/insights/#steering-execution-with-operational-signals
 
+Designing Adaptive Guardrails for Agentic Work
+https://romanbediner.com/insights/#designing-adaptive-guardrails-for-agentic-work
+
 <!-- AUTO-GENERATED INSIGHT LINKS END -->
