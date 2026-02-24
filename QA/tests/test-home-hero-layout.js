@@ -30,33 +30,29 @@ if (!heroMatch) {
   }
 
   // Guard for required structural hooks used by shared CSS layout rules.
-  if (!/class="hero-grid"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-grid" container.');
+  if (!/class="hero-bio"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-bio" container.');
   }
 
-  if (!/class="hero-head"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-head" container.');
+  if (!/class="hero-bio-text"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-bio-text" container.');
   }
 
-  if (!/class="hero-support"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-support" container.');
+  if (!/class="hero-bio-photo"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-bio-photo" container.');
   }
 
-  if (!/class="hero-media"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-media" container.');
+  // The support copy must remain inside the hero bio text column.
+  const bioTextMatch = heroHtml.match(/<p class="hero-bio-text">([\s\S]*?)<\/p>/i);
+  if (!bioTextMatch) {
+    failures.push('Unable to inspect ".hero-bio-text" contents in hero section.');
+  } else if (!/Former executive at The Walt Disney Company/i.test(bioTextMatch[1])) {
+    failures.push('Support copy is not inside ".hero-bio-text".');
   }
 
-  // The support copy must remain in the text column so it is not aligned to image bottom.
-  const supportMatch = heroHtml.match(/<div class="hero-support">([\s\S]*?)<\/div>/i);
-  if (!supportMatch) {
-    failures.push('Unable to inspect ".hero-support" contents in hero section.');
-  } else if (!/Former executive at The Walt Disney Company/i.test(supportMatch[1])) {
-    failures.push('Support copy is not inside ".hero-support".');
-  }
-
-  // Ensure the desktop grid areas keep support copy and media in the same row.
-  if (!/grid-template-areas:\s*"head spacer"\s*"support media"/i.test(homeCss)) {
-    failures.push('Home hero CSS must keep "support media" on the same grid row.');
+  // Ensure CSS uses top alignment for the hero bio row.
+  if (!/\.hero-bio\s*\{[\s\S]*align-items:\s*flex-start/i.test(homeCss)) {
+    failures.push('Home hero CSS must keep ".hero-bio" aligned with align-items: flex-start.');
   }
 }
 
