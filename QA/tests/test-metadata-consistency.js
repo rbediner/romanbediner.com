@@ -8,7 +8,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 
 const expectedHomepageTitle = 'Roman Bediner | Operations & Transformation Leader';
-const expectedHomepageDescription = 'Executive operator building scalable operating systems for growth, transformation, and AI adoption.';
+const expectedHomepageDescription = 'Roman Bediner helps product and engineering organizations modernize execution during growth and AI adoption by treating operations as a product.';
 // Homepage hero headline is intentionally all caps for executive visual hierarchy.
 const expectedHomepageH1 = 'DESIGNING OPERATIONS AS A PRODUCT FOR THE AI ERA';
 const expectedInsightsTitle = 'Insights on AI Enabled Operations | Roman Bediner';

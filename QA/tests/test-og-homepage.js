@@ -24,7 +24,6 @@ function getMetaByName(name) {
 
 const requiredPropertyTags = [
   'og:image',
-  'og:logo',
   'og:image:width',
   'og:image:height',
   'og:image:type',
@@ -44,17 +43,12 @@ if (!getMetaByName('twitter:card')) {
 }
 
 const expectedImage = 'https://romanbediner.com/assets/og-logo/og-final.png?v=4';
-const expectedLogo = 'https://romanbediner.com/assets/og-logo/og.png';
 const expectedWidth = '1200';
 const expectedHeight = '630';
 
 if (getMetaByProperty('og:image') !== expectedImage) {
   failures += 1;
   console.error(`FAIL: og:image must be ${expectedImage}`);
-}
-if (getMetaByProperty('og:logo') !== expectedLogo) {
-  failures += 1;
-  console.error(`FAIL: og:logo must be ${expectedLogo}`);
 }
 if (getMetaByProperty('og:image:width') !== expectedWidth) {
   failures += 1;

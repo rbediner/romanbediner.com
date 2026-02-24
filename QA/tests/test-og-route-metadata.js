@@ -13,8 +13,8 @@ const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Roman Bediner, PMP | Operations as a Product (OaP)',
-    ogDescription: 'Executive operator building scalable operating systems for growth, transformation, and AI adoption.'
+    ogTitle: 'Designing Operations as a Product for the AI Era | Roman Bediner',
+    ogDescription: 'Roman Bediner helps product and engineering organizations modernize execution during growth and AI adoption by treating operations as a product.'
   },
   {
     file: 'about/index.html',
@@ -114,10 +114,6 @@ for (const page of expected) {
       console.error(`FAIL: expected exactly one ${prop} in ${page.file}`);
     }
   }
-  if (page.file === 'index.html' && countMetaByProperty(html, 'og:logo') !== 1) {
-    failures += 1;
-    console.error('FAIL: expected exactly one og:logo in index.html');
-  }
   for (const name of requiredNames) {
     if (countMetaByName(html, name) !== 1) {
       failures += 1;
@@ -176,10 +172,6 @@ for (const page of expected) {
   if (getMetaByProperty(html, 'og:image:alt') !== OG_ALT) {
     failures += 1;
     console.error(`FAIL: og:image:alt mismatch in ${page.file}`);
-  }
-  if (page.file === 'index.html' && getMetaByProperty(html, 'og:logo') !== 'https://romanbediner.com/assets/og-logo/og.png') {
-    failures += 1;
-    console.error('FAIL: og:logo mismatch in index.html');
   }
   if (getMetaByProperty(html, 'og:locale') !== 'en_US') {
     failures += 1;
