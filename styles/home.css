@@ -70,6 +70,7 @@ p {
    row 2 = blurb + photo (same row keeps photo top aligned to blurb first line) */
 .home-hero.section {
   padding: 0;
+  margin-bottom: 0;
 }
 
 .hero-grid {
@@ -130,14 +131,13 @@ p {
   border-radius: 12px;
 }
 
+/* Structural Safeguard:
+   Use padding exclusively for macro section spacing.
+   Do NOT use margin between full-width sections.
+   This prevents margin stacking and collapsing bugs. */
 /* Section rhythm uses padding rather than stacked margins for deterministic spacing. */
 .section {
   padding: 56px 0;
-}
-
-.home-hero.section + .section {
-  margin-top: 48px;
-  padding-top: 48px;
 }
 
 .section-title {
@@ -252,11 +252,6 @@ a:focus-visible {
 
   .home-hero.section {
     padding-bottom: 0;
-  }
-
-  .home-hero.section + .section {
-    margin-top: 32px;
-    padding-top: 32px;
   }
 
   .section-body {

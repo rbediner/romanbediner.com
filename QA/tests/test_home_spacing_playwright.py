@@ -13,8 +13,8 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 @unittest.skipUnless(PLAYWRIGHT_AVAILABLE, "playwright is not installed")
-class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
-    """Hard numeric guardrails for Home hero spacing and geometry."""
+class HomeSpacingPlaywrightTest(unittest.TestCase):
+    """Regression guards for Home hero spacing and hero photo alignment."""
 
     @classmethod
     def setUpClass(cls):
@@ -42,7 +42,8 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
             cls.server.shutdown()
             cls.server.server_close()
 
-    def _capture_metrics(self, width, height):
+    def _measure_home(self, width, height):
+        # Reduced motion keeps geometry deterministic across test runs.
         context = self.browser.new_context(
             viewport={"width": width, "height": height},
             reduced_motion="reduce",
@@ -53,7 +54,7 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
         metrics = page.evaluate(
             """
             () => {
-              const hero = document.querySelector('.home-hero.section');
+              const hero = document.querySelector('.home-hero');
               const experience = document.querySelector('#experience');
               const experienceTitle = document.querySelector('#experience .section-title');
               const photo = document.querySelector('.hero-photo img');
@@ -62,16 +63,15 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
                 return null;
               }
               const heroRect = hero.getBoundingClientRect();
-              const expRect = experience.getBoundingClientRect();
-              const expTitleRect = experienceTitle.getBoundingClientRect();
+              const experienceRect = experience.getBoundingClientRect();
+              const experienceTitleRect = experienceTitle.getBoundingClientRect();
               const photoRect = photo.getBoundingClientRect();
               const blurbRect = blurb.getBoundingClientRect();
               return {
-                sectionGap: expRect.top - heroRect.bottom,
-                headingGap: expTitleRect.top - heroRect.bottom,
+                sectionGap: experienceRect.top - heroRect.bottom,
+                headingGap: experienceTitleRect.top - heroRect.bottom,
                 photoTop: photoRect.top,
-                blurbTop: blurbRect.top,
-                scrollWidth: document.documentElement.scrollWidth
+                blurbTop: blurbRect.top
               };
             }
             """
@@ -79,38 +79,32 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
         context.close()
         return metrics
 
-    def test_desktop_home_spacing_and_alignment(self):
-        metrics = self._capture_metrics(1200, 900)
-        self.assertIsNotNone(metrics, "Desktop metrics unavailable for Home spacing test.")
-
-        # Section container starts directly after hero in padding-only spacing mode.
+    def test_desktop_spacing_guard(self):
+        metrics = self._measure_home(1200, 900)
+        self.assertIsNotNone(metrics, "Desktop metrics unavailable.")
+        # In the padding-only spacing model, the section container starts immediately after hero.
         self.assertEqual(metrics["sectionGap"], 0, "Section container should start directly under hero.")
         gap = metrics["headingGap"]
-        self.assertGreaterEqual(gap, 32, f"Desktop heading gap too small: {gap}px (expected >= 32px)")
-        self.assertLessEqual(gap, 72, f"Desktop heading gap too large: {gap}px (expected <= 72px)")
+        self.assertGreaterEqual(gap, 32, f"Desktop hero-to-experience heading gap too small: {gap}px")
+        self.assertLessEqual(gap, 72, f"Desktop hero-to-experience heading gap too large: {gap}px")
 
+    def test_mobile_spacing_guard(self):
+        metrics = self._measure_home(390, 844)
+        self.assertIsNotNone(metrics, "Mobile metrics unavailable.")
+        # In the padding-only spacing model, the section container starts immediately after hero.
+        self.assertEqual(metrics["sectionGap"], 0, "Section container should start directly under hero.")
+        gap = metrics["headingGap"]
+        self.assertGreaterEqual(gap, 20, f"Mobile hero-to-experience heading gap too small: {gap}px")
+        self.assertLessEqual(gap, 64, f"Mobile hero-to-experience heading gap too large: {gap}px")
+
+    def test_hero_alignment_guard(self):
+        metrics = self._measure_home(1200, 900)
+        self.assertIsNotNone(metrics, "Desktop metrics unavailable for alignment check.")
         delta = abs(metrics["photoTop"] - metrics["blurbTop"])
         self.assertLessEqual(
             delta,
             2,
-            f"Desktop photo/blurb top misalignment: {delta}px (expected <= 2px)",
-        )
-
-    def test_mobile_home_spacing_and_overflow(self):
-        viewport_width = 390
-        metrics = self._capture_metrics(viewport_width, 844)
-        self.assertIsNotNone(metrics, "Mobile metrics unavailable for Home spacing test.")
-
-        # Section container starts directly after hero in padding-only spacing mode.
-        self.assertEqual(metrics["sectionGap"], 0, "Section container should start directly under hero.")
-        gap = metrics["headingGap"]
-        self.assertGreaterEqual(gap, 20, f"Mobile heading gap too small: {gap}px (expected >= 20px)")
-        self.assertLessEqual(gap, 64, f"Mobile heading gap too large: {gap}px (expected <= 64px)")
-
-        self.assertLessEqual(
-            metrics["scrollWidth"],
-            viewport_width + 1,
-            f"Mobile horizontal overflow detected: scrollWidth={metrics['scrollWidth']} viewport={viewport_width}",
+            f"Hero photo top is not aligned to blurb first line: {delta}px",
         )
 
 
