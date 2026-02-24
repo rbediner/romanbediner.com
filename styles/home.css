@@ -92,10 +92,11 @@ p {
 /* Subhead fills the grid width and aligns with photo edge. */
 .master-head .subhead {
   width: 100%;
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.45;
-  color: var(--text-color);
+  max-width: none;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--muted-text);
   margin: 0;
 }
 
@@ -230,7 +231,7 @@ a:focus-visible {
   }
 
   .master-head .subhead {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .master-blurb {
