@@ -176,12 +176,11 @@
 
     .hero h1 {
       max-width: 100%;
-      /* Avoid forced balanced wraps and keep the headline on one line when viewport allows. */
       text-wrap: wrap;
-      font-size: clamp(30px, 2.4vw, 36px);
+      font-size: clamp(28px, 2.1vw, 34px);
     }
 
-    @media (min-width: 1100px) {
+    @media (min-width: 768px) {
       .hero h1 {
         white-space: nowrap;
       }
