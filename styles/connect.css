@@ -9,6 +9,7 @@
       --border-color: #e6e6e6;
       --surface-color: #ffffff;
       --link-color: #3b6cff;
+      --accent-blue: #3b6cff;
     }
 
     * {
@@ -289,33 +290,54 @@
       color: var(--muted-text);
     }
 
-    .linkedin-band {
-      max-width: none;
-      margin: 80px 0 0 0;
-      padding: 48px 0;
-      background: rgba(0, 0, 0, 0.03);
-      text-align: center;
-    }
-
-    .linkedin-inner a {
-      display: inline-flex;
+    /* Executive Action Block (Connect Page) */
+    .executive-action-block {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 14px;
-      font-weight: 500;
+      justify-content: space-between;
+      padding: 24px 32px;
+      margin: 32px 0;
+      border-left: 4px solid var(--accent-blue);
+      background-color: rgba(59, 108, 255, 0.04);
+      border-radius: 0 8px 8px 0;
       text-decoration: none;
-      transition: opacity .2s ease, transform .2s ease;
+      transition: all 0.25s ease;
+      color: var(--text-color);
     }
 
-    .linkedin-inner a:hover {
-      transform: translateY(-2px);
-      opacity: .85;
+    .executive-action-block:hover {
+      background-color: rgba(59, 108, 255, 0.10);
+      transform: translateX(4px);
+      text-decoration: none;
     }
 
-    .linkedin-icon {
-      width: 36px;
-      height: 36px;
-      display: block;
+    .action-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .action-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin: 0;
+    }
+
+    .action-desc {
+      font-size: 16px;
+      color: var(--muted-text);
+      margin: 0;
+    }
+
+    .action-arrow {
+      font-size: 24px;
+      color: var(--accent-blue);
+      transition: transform 0.25s ease;
+    }
+
+    .executive-action-block:hover .action-arrow {
+      transform: translateX(4px);
     }
 
     .section {
@@ -408,5 +430,20 @@
 
       .hero-title {
         align-items: center;
+      }
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+      .executive-action-block {
+        padding: 20px 24px;
+      }
+
+      .action-title {
+        font-size: 18px;
+      }
+
+      .action-desc {
+        font-size: 15px;
       }
     }

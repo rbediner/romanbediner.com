@@ -65,10 +65,11 @@ class ContactPageQATest(unittest.TestCase):
         self.assertNotIn("rbediner+website@gmail.com", self.html)
         self.assertRegex(self.js, r"const recipient = \[\s*114, 98, 101, 100")
 
-    def test_linkedin_section_uses_asset_icon(self):
-        self.assertIn('href="https://linkedin.com/in/romanbediner"', self.html)
-        self.assertIn('src="../assets/icons/LinkedIn.png"', self.html)
-        self.assertIn("Connect with me on LinkedIn", self.html)
+    def test_linkedin_uses_executive_action_block(self):
+        self.assertIn('class="executive-action-block"', self.html)
+        self.assertIn('href="https://www.linkedin.com/in/romanbediner"', self.html)
+        self.assertIn("Connect on LinkedIn", self.html)
+        self.assertIn("For executive search, advisory opportunities, and professional networking.", self.html)
 
     def test_externalized_css_and_layout_hooks_exist(self):
         self.assertIn('<link rel="stylesheet" href="/styles/connect.css" />', self.html)
