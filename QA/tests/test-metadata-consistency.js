@@ -8,8 +8,8 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 
 const expectedHomepageTitle = 'Roman Bediner | Operations & Transformation Leader';
-const expectedHomepageDescription = 'Executive operator building scalable, AI-enabled operating systems that accelerate launch readiness, performance, and measurable business outcomes.';
-const expectedHomepageH1 = 'Productizing Operations for Modern AI Enabled Work';
+const expectedHomepageDescription = 'Roman Bediner helps product and engineering organizations modernize execution during growth and AI adoption by treating operations as a product.';
+const expectedHomepageH1 = 'Designing Operations as a Product for the AI Era';
 const expectedInsightsTitle = 'Insights on AI Enabled Operations | Roman Bediner';
 const expectedInsightsDescription = 'Working briefs on modern AI-enabled work, productizing operations, and treating execution as a designed operating system.';
 

@@ -13,8 +13,8 @@ const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Roman Bediner, PMP | Operations as a Product',
-    ogDescription: 'Executive operator building scalable, AI-enabled operating systems that accelerate launch readiness, performance, and measurable business outcomes.'
+    ogTitle: 'Designing Operations as a Product for the AI Era | Roman Bediner',
+    ogDescription: 'Roman Bediner helps product and engineering organizations modernize execution during growth and AI adoption by treating operations as a product.'
   },
   {
     file: 'about/index.html',
