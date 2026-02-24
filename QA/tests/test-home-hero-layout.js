@@ -8,7 +8,9 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const homepagePath = path.join(root, 'index.html');
+const homeCssPath = path.join(root, 'styles', 'home.css');
 const html = fs.readFileSync(homepagePath, 'utf8');
+const homeCss = fs.readFileSync(homeCssPath, 'utf8');
 
 const failures = [];
 
@@ -32,8 +34,12 @@ if (!heroMatch) {
     failures.push('Hero section is missing required ".hero-grid" container.');
   }
 
-  if (!/class="hero-copy"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-copy" container.');
+  if (!/class="hero-head"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-head" container.');
+  }
+
+  if (!/class="hero-support"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-support" container.');
   }
 
   if (!/class="hero-media"/i.test(heroHtml)) {
@@ -41,11 +47,16 @@ if (!heroMatch) {
   }
 
   // The support copy must remain in the text column so it is not aligned to image bottom.
-  const copyMatch = heroHtml.match(/<div class="hero-copy">([\s\S]*?)<\/div>/i);
-  if (!copyMatch) {
-    failures.push('Unable to inspect ".hero-copy" contents in hero section.');
-  } else if (!/Former executive at The Walt Disney Company/i.test(copyMatch[1])) {
-    failures.push('Support copy is not inside ".hero-copy"; it must remain under the subhead.');
+  const supportMatch = heroHtml.match(/<div class="hero-support">([\s\S]*?)<\/div>/i);
+  if (!supportMatch) {
+    failures.push('Unable to inspect ".hero-support" contents in hero section.');
+  } else if (!/Former executive at The Walt Disney Company/i.test(supportMatch[1])) {
+    failures.push('Support copy is not inside ".hero-support".');
+  }
+
+  // Ensure the desktop grid areas keep support copy and media in the same row.
+  if (!/grid-template-areas:\s*"head spacer"\s*"support media"/i.test(homeCss)) {
+    failures.push('Home hero CSS must keep "support media" on the same grid row.');
   }
 }
 
