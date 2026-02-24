@@ -7,10 +7,10 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 
-const expectedHomepageTitle = 'Roman Bediner | Operations & Transformation Leader';
-const expectedHomepageDescription = 'Roman Bediner helps product and engineering organizations modernize execution during growth and AI adoption by treating operations as a product.';
+const expectedHomepageTitle = 'Roman Bediner | Productizing Operations for Modern, AI-Enabled Work';
+const expectedHomepageDescription = 'Roman Bediner is an operations executive specializing in scalable delivery. He aligns product and engineering teams by treating Operations as a Product.';
 // Homepage hero headline is intentionally all caps for executive visual hierarchy.
-const expectedHomepageH1 = 'DESIGNING OPERATIONS AS A PRODUCT FOR THE AI ERA';
+const expectedHomepageH1 = 'PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK';
 const expectedInsightsTitle = 'Insights on AI Enabled Operations | Roman Bediner';
 const expectedInsightsDescription = 'Working briefs on modern AI-enabled work, productizing operations, and treating execution as a designed operating system.';
 

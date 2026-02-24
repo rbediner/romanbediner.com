@@ -50,8 +50,8 @@ if (!mainMatch) {
   const bioTextMatch = mainHtml.match(/<div class="master-blurb">\s*<p>([\s\S]*?)<\/p>\s*<\/div>/i);
   if (!bioTextMatch) {
     failures.push('Unable to inspect ".master-blurb" contents in home main.');
-  } else if (!/Former executive at The Walt Disney Company/i.test(bioTextMatch[1])) {
-    failures.push('Support copy is not inside ".master-blurb".');
+  } else if (!/The Walt Disney Company/i.test(bioTextMatch[1])) {
+    failures.push('Support copy text in ".master-blurb" no longer matches expected Disney anchor.');
   }
 
   // Ensure key content blocks keep expected IDs.

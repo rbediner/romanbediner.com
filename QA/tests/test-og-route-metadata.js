@@ -13,8 +13,8 @@ const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Designing Operations as a Product for the AI Era | Roman Bediner',
-    ogDescription: 'Roman Bediner helps product and engineering organizations modernize execution during growth and AI adoption by treating operations as a product.'
+    ogTitle: 'Roman Bediner | Productizing Operations for Modern, AI-Enabled Work',
+    ogDescription: 'Roman Bediner is an operations executive specializing in scalable delivery. He aligns product and engineering teams by treating Operations as a Product.'
   },
   {
     file: 'about/index.html',
