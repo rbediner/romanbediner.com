@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @unittest.skipUnless(PLAYWRIGHT_AVAILABLE, "playwright is not installed")
 class HomeSpacingPlaywrightTest(unittest.TestCase):
-    """Regression guards for Home hero spacing and hero photo alignment."""
+    """Regression guards for Home master-grid spacing and photo alignment."""
 
     @classmethod
     def setUpClass(cls):
@@ -54,22 +54,29 @@ class HomeSpacingPlaywrightTest(unittest.TestCase):
         metrics = page.evaluate(
             """
             () => {
-              const hero = document.querySelector('.home-hero');
+              const grid = document.querySelector('.master-layout-grid');
               const experience = document.querySelector('#experience');
               const experienceTitle = document.querySelector('#experience .section-title');
-              const photo = document.querySelector('.hero-photo img');
-              const blurb = document.querySelector('.hero-blurb p');
-              if (!hero || !experience || !experienceTitle || !photo || !blurb) {
+              const focus = document.querySelector('#areas-of-focus');
+              const photo = document.querySelector('.master-photo img');
+              const blurb = document.querySelector('.master-blurb p');
+              const heading = document.querySelector('.master-head h1');
+              if (!grid || !experience || !experienceTitle || !focus || !photo || !blurb || !heading) {
                 return null;
               }
-              const heroRect = hero.getBoundingClientRect();
+              const gridRect = grid.getBoundingClientRect();
               const experienceRect = experience.getBoundingClientRect();
               const experienceTitleRect = experienceTitle.getBoundingClientRect();
+              const focusRect = focus.getBoundingClientRect();
               const photoRect = photo.getBoundingClientRect();
               const blurbRect = blurb.getBoundingClientRect();
+              const headingRect = heading.getBoundingClientRect();
               return {
-                sectionGap: experienceRect.top - heroRect.bottom,
-                headingGap: experienceTitleRect.top - heroRect.bottom,
+                headingHeight: headingRect.height,
+                gridToExperienceGap: experienceRect.top - gridRect.top,
+                headingGap: experienceTitleRect.top - blurbRect.bottom,
+                photoGap: experienceTitleRect.top - photoRect.bottom,
+                experienceToFocusGap: focusRect.top - experienceRect.bottom,
                 photoTop: photoRect.top,
                 blurbTop: blurbRect.top
               };
@@ -82,20 +89,27 @@ class HomeSpacingPlaywrightTest(unittest.TestCase):
     def test_desktop_spacing_guard(self):
         metrics = self._measure_home(1200, 900)
         self.assertIsNotNone(metrics, "Desktop metrics unavailable.")
-        # In the padding-only spacing model, the section container starts immediately after hero.
-        self.assertEqual(metrics["sectionGap"], 0, "Section container should start directly under hero.")
+        self.assertLessEqual(metrics["headingHeight"], 52, f"Desktop H1 appears to wrap: {metrics['headingHeight']}px")
         gap = metrics["headingGap"]
-        self.assertGreaterEqual(gap, 32, f"Desktop hero-to-experience heading gap too small: {gap}px")
-        self.assertLessEqual(gap, 72, f"Desktop hero-to-experience heading gap too large: {gap}px")
+        self.assertGreaterEqual(gap, 40, f"Desktop blurb-to-experience heading gap too small: {gap}px")
+        self.assertLessEqual(gap, 96, f"Desktop blurb-to-experience heading gap too large: {gap}px")
+        self.assertGreaterEqual(
+            metrics["experienceToFocusGap"],
+            40,
+            f"Desktop experience-to-focus gap too small: {metrics['experienceToFocusGap']}px",
+        )
+        self.assertLessEqual(
+            metrics["experienceToFocusGap"],
+            96,
+            f"Desktop experience-to-focus gap too large: {metrics['experienceToFocusGap']}px",
+        )
 
     def test_mobile_spacing_guard(self):
         metrics = self._measure_home(390, 844)
         self.assertIsNotNone(metrics, "Mobile metrics unavailable.")
-        # In the padding-only spacing model, the section container starts immediately after hero.
-        self.assertEqual(metrics["sectionGap"], 0, "Section container should start directly under hero.")
-        gap = metrics["headingGap"]
-        self.assertGreaterEqual(gap, 20, f"Mobile hero-to-experience heading gap too small: {gap}px")
-        self.assertLessEqual(gap, 64, f"Mobile hero-to-experience heading gap too large: {gap}px")
+        gap = metrics["photoGap"]
+        self.assertGreaterEqual(gap, 24, f"Mobile photo-to-experience heading gap too small: {gap}px")
+        self.assertLessEqual(gap, 96, f"Mobile photo-to-experience heading gap too large: {gap}px")
 
     def test_hero_alignment_guard(self):
         metrics = self._measure_home(1200, 900)

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Home hero layout regression guardrails.
- * Prevents reintroducing inline direction/alignment overrides that created large vertical gaps.
+ * Prevents geometry regressions in the master-grid layout.
  */
 const fs = require('fs');
 const path = require('path');
@@ -14,53 +14,84 @@ const homeCss = fs.readFileSync(homeCssPath, 'utf8');
 
 const failures = [];
 
-const heroMatch = html.match(/<section class="home-hero section"[^>]*>([\s\S]*?)<\/section>/i);
-if (!heroMatch) {
-  failures.push('Missing hero section in index.html.');
+const mainMatch = html.match(/<main class="page-main">([\s\S]*?)<section class="semantic-authority"/i);
+if (!mainMatch) {
+  failures.push('Missing page-main content block in index.html.');
 } else {
-  const heroHtml = heroMatch[1];
+  const mainHtml = mainMatch[1];
 
   // Guard against the exact inline styles that previously caused vertical spacing breakage.
-  if (/direction\s*:\s*rtl/i.test(heroHtml)) {
-    failures.push('Hero section contains forbidden "direction: rtl" override.');
+  if (/direction\s*:\s*rtl/i.test(mainHtml)) {
+    failures.push('Home main contains forbidden "direction: rtl" override.');
   }
 
-  if (/align-items\s*:\s*flex-end/i.test(heroHtml)) {
-    failures.push('Hero section contains forbidden "align-items: flex-end" override.');
+  if (/align-items\s*:\s*flex-end/i.test(mainHtml)) {
+    failures.push('Home main contains forbidden "align-items: flex-end" override.');
   }
 
-  // Guard for required structural hooks used by shared CSS layout rules.
-  if (!/class="hero-grid"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-grid" container.');
+  // Guard for required structural hooks used by master-grid layout rules.
+  if (!/class="container master-layout-grid"/i.test(mainHtml)) {
+    failures.push('Home main is missing required ".master-layout-grid" container.');
   }
 
-  if (!/class="hero-head"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-head" container.');
+  if (!/class="master-head"/i.test(mainHtml)) {
+    failures.push('Home main is missing required ".master-head" container.');
   }
 
-  if (!/class="hero-photo"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-photo" container.');
+  if (!/class="master-photo"/i.test(mainHtml)) {
+    failures.push('Home main is missing required ".master-photo" container.');
   }
 
-  if (!/class="hero-blurb"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-blurb" container.');
+  if (!/class="master-blurb"/i.test(mainHtml)) {
+    failures.push('Home main is missing required ".master-blurb" container.');
   }
 
   // The support copy must remain inside the hero bio text column.
-  const bioTextMatch = heroHtml.match(/<div class="hero-blurb">\s*<p>([\s\S]*?)<\/p>\s*<\/div>/i);
+  const bioTextMatch = mainHtml.match(/<div class="master-blurb">\s*<p>([\s\S]*?)<\/p>\s*<\/div>/i);
   if (!bioTextMatch) {
-    failures.push('Unable to inspect ".hero-blurb" contents in hero section.');
+    failures.push('Unable to inspect ".master-blurb" contents in home main.');
   } else if (!/Former executive at The Walt Disney Company/i.test(bioTextMatch[1])) {
-    failures.push('Support copy is not inside ".hero-blurb".');
+    failures.push('Support copy is not inside ".master-blurb".');
   }
 
-  // Ensure CSS keeps the hero in a deterministic grid layout.
-  if (!/\.hero-grid\s*\{[\s\S]*display:\s*grid/i.test(homeCss)) {
-    failures.push('Home hero CSS must keep ".hero-grid" on CSS Grid.');
+  // Ensure key content blocks keep expected IDs.
+  if (!/id="experience"/i.test(mainHtml)) {
+    failures.push('Missing #experience block.');
+  }
+  if (!/id="areas-of-focus"/i.test(mainHtml)) {
+    failures.push('Missing #areas-of-focus block.');
+  }
+  if (!/id="operating-principles"/i.test(mainHtml)) {
+    failures.push('Missing #operating-principles block.');
   }
 
-  if (!/\.hero-photo\s*\{[\s\S]*grid-row:\s*2/i.test(homeCss)) {
-    failures.push('Home hero CSS must keep ".hero-photo" aligned to the blurb row.');
+  // Ensure CSS keeps the home in deterministic master-grid layout.
+  if (!/\.master-layout-grid\s*\{[\s\S]*display:\s*grid/i.test(homeCss)) {
+    failures.push('Home CSS must keep ".master-layout-grid" on CSS Grid.');
+  }
+
+  if (!/\.master-head\s*\{[\s\S]*grid-column:\s*1\s*\/\s*-1/i.test(homeCss)) {
+    failures.push('Home CSS must keep ".master-head" spanning both grid columns.');
+  }
+
+  if (!/\.master-layout-grid\s*\{[\s\S]*row-gap:\s*56px/i.test(homeCss)) {
+    failures.push('Home CSS must keep ".master-layout-grid" row-gap at 56px.');
+  }
+
+  if (!/\.master-photo\s*\{[\s\S]*grid-row:\s*2/i.test(homeCss)) {
+    failures.push('Home CSS must keep ".master-photo" starting on row 2.');
+  }
+
+  if (!/\.master-blurb\s*\{[\s\S]*grid-row:\s*2/i.test(homeCss)) {
+    failures.push('Home CSS must keep ".master-blurb" on row 2.');
+  }
+
+  if (!/#experience\.master-section\s*\{[\s\S]*grid-column:\s*1/i.test(homeCss)) {
+    failures.push('Home CSS must keep "#experience" in left grid column.');
+  }
+
+  if (!/#areas-of-focus\.master-section\s*\{[\s\S]*grid-column:\s*1/i.test(homeCss)) {
+    failures.push('Home CSS must keep "#areas-of-focus" in left grid column.');
   }
 }
 

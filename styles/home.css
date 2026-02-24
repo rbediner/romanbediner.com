@@ -65,77 +65,80 @@ p {
   margin: 0;
 }
 
-/* Hero layout:
-   row 1 = headline + subhead
-   row 2 = blurb + photo (same row keeps photo top aligned to blurb first line) */
-.home-hero.section {
-  padding: 0;
-  margin-bottom: 0;
-}
-
-.hero-grid {
+/* =========================================
+   MASTER LAYOUT GRID
+   ========================================= */
+.master-layout-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  grid-template-rows: auto auto;
   column-gap: 48px;
-  row-gap: 24px;
+  row-gap: 56px;
   align-items: start;
+  padding-bottom: 56px;
 }
 
-.hero-head {
+/* Header spans both columns so subhead reaches grid right edge. */
+.master-head {
   grid-column: 1 / -1;
   grid-row: 1;
-  min-width: 0;
 }
 
-.hero-head h1 {
+.master-head h1 {
   font-size: clamp(30px, 2.2vw, 34px);
   margin-bottom: 18px;
   max-width: 100%;
-  text-wrap: wrap;
 }
 
-.hero-head .subhead {
+/* Subhead fills the grid width and aligns with photo edge. */
+.master-head .subhead {
   width: 100%;
-  max-width: 760px;
   font-size: 28px;
   font-weight: 500;
   line-height: 1.45;
   color: var(--text-color);
-}
-
-.hero-blurb {
-  grid-column: 1;
-  grid-row: 2;
-  align-self: start;
-  margin-top: 0;
-}
-
-.hero-blurb p {
-  font-size: 20px;
-  max-width: 760px;
   margin: 0;
 }
 
-.hero-photo {
+/* Photo column starts at the same row as blurb for top-edge alignment. */
+.master-photo {
   grid-column: 2;
-  grid-row: 2;
-  align-self: start;
-  margin-top: 0;
+  grid-row: 2 / span 4;
+  margin: 0;
 }
 
-.hero-photo img {
-  max-height: 400px;
-  width: auto;
-  object-fit: contain;
+.master-photo img {
+  width: 100%;
   height: auto;
   display: block;
   border-radius: 12px;
 }
 
-/* Structural Safeguard: Use single-direction padding (padding-top only) for macro section spacing. This preserves scroll-anchor offsets for the sticky header while preventing the additive padding (112px gaps) that occurs when sections have both top and bottom padding. */
-.section {
-  padding: 56px 0 0 0;
+/* Left column content stack under the shared rhythm. */
+.master-blurb {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.master-blurb p {
+  font-size: 20px;
+  max-width: 760px;
+  margin: 0;
+}
+
+#experience.master-section {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#areas-of-focus.master-section {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+/* Operating principles expands across both columns as final row. */
+#operating-principles.master-section-full {
+  grid-column: 1 / -1;
+  grid-row: 5;
 }
 
 .section-title {
@@ -195,15 +198,14 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-/* Keep desktop one-line hero headline behavior. */
 @media (min-width: 900px) {
-  .hero-head h1 {
+  .master-head h1 {
     white-space: nowrap;
   }
 }
 
 @media (max-width: 900px) {
-  .hero-head h1 {
+  .master-head h1 {
     white-space: normal;
   }
 }
@@ -217,39 +219,44 @@ a:focus-visible {
     font-size: 22px;
   }
 
-  .hero-grid {
+  .master-layout-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    row-gap: 18px;
-    column-gap: 0;
+    row-gap: 40px;
   }
 
-  .hero-head {
+  .master-head {
     grid-column: 1;
     grid-row: 1;
   }
 
-  .hero-blurb {
+  .master-head .subhead {
+    font-size: 22px;
+  }
+
+  .master-blurb {
     grid-column: 1;
     grid-row: 2;
   }
 
-  .hero-photo {
+  .master-photo {
     grid-column: 1;
     grid-row: 3;
     max-width: 360px;
   }
 
-  .hero-head .subhead {
-    font-size: 22px;
+  #experience.master-section {
+    grid-column: 1;
+    grid-row: 4;
   }
 
-  .section {
-    padding: 40px 0 0 0;
+  #areas-of-focus.master-section {
+    grid-column: 1;
+    grid-row: 5;
   }
 
-  .home-hero.section {
-    padding-bottom: 0;
+  #operating-principles.master-section-full {
+    grid-column: 1;
+    grid-row: 6;
   }
 
   .section-body {

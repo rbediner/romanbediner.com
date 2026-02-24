@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @unittest.skipUnless(PLAYWRIGHT_AVAILABLE, "playwright is not installed")
 class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
-    """Hard numeric guardrails for Home hero spacing and geometry."""
+    """Hard numeric guardrails for Home master-grid spacing and geometry."""
 
     @classmethod
     def setUpClass(cls):
@@ -54,21 +54,29 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
             """
             () => {
               const hero = document.querySelector('.home-hero.section');
+              const grid = document.querySelector('.master-layout-grid');
               const experience = document.querySelector('#experience');
               const experienceTitle = document.querySelector('#experience .section-title');
-              const photo = document.querySelector('.hero-photo img');
-              const blurb = document.querySelector('.hero-blurb p');
-              if (!hero || !experience || !experienceTitle || !photo || !blurb) {
+              const focus = document.querySelector('#areas-of-focus');
+              const photo = document.querySelector('.master-photo img');
+              const blurb = document.querySelector('.master-blurb p');
+              const heading = document.querySelector('.master-head h1');
+              if (!grid || !experience || !experienceTitle || !focus || !photo || !blurb || !heading) {
                 return null;
               }
-              const heroRect = hero.getBoundingClientRect();
+              const gridRect = grid.getBoundingClientRect();
               const expRect = experience.getBoundingClientRect();
               const expTitleRect = experienceTitle.getBoundingClientRect();
+              const focusRect = focus.getBoundingClientRect();
               const photoRect = photo.getBoundingClientRect();
               const blurbRect = blurb.getBoundingClientRect();
+              const headingRect = heading.getBoundingClientRect();
               return {
-                sectionGap: expRect.top - heroRect.bottom,
-                headingGap: expTitleRect.top - heroRect.bottom,
+                headingHeight: headingRect.height,
+                gridToExperienceGap: expRect.top - gridRect.top,
+                blurbToExperienceGap: expTitleRect.top - blurbRect.bottom,
+                photoToExperienceGap: expTitleRect.top - photoRect.bottom,
+                experienceToFocusGap: focusRect.top - expRect.bottom,
                 photoTop: photoRect.top,
                 blurbTop: blurbRect.top,
                 scrollWidth: document.documentElement.scrollWidth
@@ -83,11 +91,29 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
         metrics = self._capture_metrics(1200, 900)
         self.assertIsNotNone(metrics, "Desktop metrics unavailable for Home spacing test.")
 
-        # Section container starts directly after hero in padding-only spacing mode.
-        self.assertEqual(metrics["sectionGap"], 0, "Section container should start directly under hero.")
-        gap = metrics["headingGap"]
-        self.assertGreaterEqual(gap, 32, f"Desktop heading gap too small: {gap}px (expected >= 32px)")
-        self.assertLessEqual(gap, 72, f"Desktop heading gap too large: {gap}px (expected <= 72px)")
+        # Desktop headline should stay on a single line.
+        self.assertLessEqual(metrics["headingHeight"], 52, f"Desktop H1 appears to wrap: {metrics['headingHeight']}px")
+        # Experience should sit below blurb on tight grid rhythm with no giant void.
+        self.assertGreaterEqual(
+            metrics["blurbToExperienceGap"],
+            40,
+            f"Desktop blurb-to-experience gap too small: {metrics['blurbToExperienceGap']}px",
+        )
+        self.assertLessEqual(
+            metrics["blurbToExperienceGap"],
+            96,
+            f"Desktop blurb-to-experience gap too large: {metrics['blurbToExperienceGap']}px",
+        )
+        self.assertGreaterEqual(
+            metrics["experienceToFocusGap"],
+            40,
+            f"Desktop experience-to-focus gap too small: {metrics['experienceToFocusGap']}px",
+        )
+        self.assertLessEqual(
+            metrics["experienceToFocusGap"],
+            96,
+            f"Desktop experience-to-focus gap too large: {metrics['experienceToFocusGap']}px",
+        )
 
         delta = abs(metrics["photoTop"] - metrics["blurbTop"])
         self.assertLessEqual(
@@ -101,11 +127,16 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
         metrics = self._capture_metrics(viewport_width, 844)
         self.assertIsNotNone(metrics, "Mobile metrics unavailable for Home spacing test.")
 
-        # Section container starts directly after hero in padding-only spacing mode.
-        self.assertEqual(metrics["sectionGap"], 0, "Section container should start directly under hero.")
-        gap = metrics["headingGap"]
-        self.assertGreaterEqual(gap, 20, f"Mobile heading gap too small: {gap}px (expected >= 20px)")
-        self.assertLessEqual(gap, 64, f"Mobile heading gap too large: {gap}px (expected <= 64px)")
+        self.assertGreaterEqual(
+            metrics["photoToExperienceGap"],
+            24,
+            f"Mobile photo-to-experience gap too small: {metrics['photoToExperienceGap']}px",
+        )
+        self.assertLessEqual(
+            metrics["photoToExperienceGap"],
+            96,
+            f"Mobile photo-to-experience gap too large: {metrics['photoToExperienceGap']}px",
+        )
 
         self.assertLessEqual(
             metrics["scrollWidth"],
