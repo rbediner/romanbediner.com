@@ -195,7 +195,7 @@
     }
 
     .hero.section {
-      margin-bottom: 80px;
+      margin-bottom: 0;
     }
 
     /* Hidden semantic support copy for search indexing without visual impact. */
@@ -235,7 +235,8 @@
     }
 
     .hero-bio-photo {
-      flex: 0 0 320px;
+      flex: 0 0 340px;
+      align-self: flex-start;
     }
 
     .hero-bio-photo img {
@@ -272,7 +273,7 @@
     }
 
     .section-body {
-      margin-top: 48px;
+      margin-top: 24px;
     }
 
     @media (max-width: 900px) {
@@ -303,7 +304,12 @@
     }
 
     .section {
-      margin: 80px 0;
+      margin: 56px 0;
+    }
+
+    /* Keep hero-to-first-section rhythm tight without impacting subsequent sections. */
+    .hero.section + .section {
+      margin-top: 48px;
     }
 
     .section h2,
@@ -380,6 +386,19 @@
 
       .hero-bio-photo img {
         margin: 0 auto;
+      }
+
+      /* Mobile spacing guardrails keep the fold compact and readable. */
+      .hero.section + .section {
+        margin-top: 32px;
+      }
+
+      .section {
+        margin: 40px 0;
+      }
+
+      .section-body {
+        margin-top: 20px;
       }
 
       .hero {
