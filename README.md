@@ -125,6 +125,11 @@ Run Node-only checks:
 npm run test:node
 ```
 
+Home hero regression guards:
+
+- `QA/tests/test-home-hero-layout.js` blocks reintroduction of hero-specific inline overrides such as `direction: rtl` and `align-items: flex-end`, and verifies the `.hero-grid`, `.hero-copy`, and `.hero-media` structure.
+- `QA/tests/test_visual_regression_playwright.py` includes `home--hero-region-desktop.png` to catch spacing/alignment regressions around the homepage hero headline, subhead, support copy, and media.
+
 Run Python-only checks:
 
 ```bash

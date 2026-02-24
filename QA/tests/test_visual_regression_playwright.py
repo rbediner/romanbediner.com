@@ -199,6 +199,15 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                     THRESHOLDS["desktop-fold"],
                     full_page=False,
                 )
+
+                # Home hero-specific regression guard: captures headline, subhead, support copy, and media alignment.
+                if page_name == "home":
+                    self._snapshot_and_assert(
+                        page,
+                        "home--hero-region-desktop.png",
+                        THRESHOLDS["state-shot"],
+                        clip={"x": 0, "y": 0, "width": 1440, "height": 760},
+                    )
             finally:
                 context.close()
 
