@@ -42,7 +42,7 @@ a:hover {
 }
 
 .page-main {
-  padding: 72px 0 0 0;
+  padding: 72px 0 56px 0;
 }
 
 h1 {
@@ -131,13 +131,9 @@ p {
   border-radius: 12px;
 }
 
-/* Structural Safeguard:
-   Use padding exclusively for macro section spacing.
-   Do NOT use margin between full-width sections.
-   This prevents margin stacking and collapsing bugs. */
-/* Section rhythm uses padding rather than stacked margins for deterministic spacing. */
+/* Structural Safeguard: Use single-direction padding (padding-top only) for macro section spacing. This preserves scroll-anchor offsets for the sticky header while preventing the additive padding (112px gaps) that occurs when sections have both top and bottom padding. */
 .section {
-  padding: 56px 0;
+  padding: 56px 0 0 0;
 }
 
 .section-title {
@@ -212,7 +208,7 @@ a:focus-visible {
 
 @media (max-width: 768px) {
   .page-main {
-    padding-top: 48px;
+    padding: 48px 0 40px 0;
   }
 
   .brand-name {
@@ -247,7 +243,7 @@ a:focus-visible {
   }
 
   .section {
-    padding: 40px 0;
+    padding: 40px 0 0 0;
   }
 
   .home-hero.section {
