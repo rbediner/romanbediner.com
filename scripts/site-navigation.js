@@ -23,6 +23,32 @@ function renderSharedNav(navElement) {
   navElement.innerHTML = NAV_LINKS.map((link) => `<a href="${link.href}">${link.label}</a>`).join("");
 }
 
+// Emit lightweight nav telemetry on Home without breaking pages where GA is unavailable.
+function trackHeaderNavClick(label) {
+  if (normalizePath(window.location.pathname) !== "/") {
+    return;
+  }
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "nav_click", {
+      label,
+      location: "header"
+    });
+  }
+}
+
+// Attach nav click tracking to a rendered nav element.
+function bindHeaderNavTracking(navElement) {
+  if (!navElement) {
+    return;
+  }
+  navElement.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      const label = (link.textContent || "").trim();
+      trackHeaderNavClick(label);
+    });
+  });
+}
+
 // Apply active styling to whichever link matches the current route.
 function applyActiveNavState(navElement, activePath) {
   if (!navElement) {
@@ -49,6 +75,8 @@ function applyActiveNavState(navElement, activePath) {
 
   renderSharedNav(desktopNav);
   renderSharedNav(mobileNav);
+  bindHeaderNavTracking(desktopNav);
+  bindHeaderNavTracking(mobileNav);
 
   if (!menuToggle || !mobileNav) {
     return;

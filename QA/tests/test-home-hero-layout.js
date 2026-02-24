@@ -14,7 +14,7 @@ const homeCss = fs.readFileSync(homeCssPath, 'utf8');
 
 const failures = [];
 
-const heroMatch = html.match(/<section class="hero section">([\s\S]*?)<\/section>/i);
+const heroMatch = html.match(/<section class="home-hero section"[^>]*>([\s\S]*?)<\/section>/i);
 if (!heroMatch) {
   failures.push('Missing hero section in index.html.');
 } else {
@@ -30,29 +30,37 @@ if (!heroMatch) {
   }
 
   // Guard for required structural hooks used by shared CSS layout rules.
-  if (!/class="hero-bio"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-bio" container.');
+  if (!/class="hero-grid"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-grid" container.');
   }
 
-  if (!/class="hero-bio-text"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-bio-text" container.');
+  if (!/class="hero-head"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-head" container.');
   }
 
-  if (!/class="hero-bio-photo"/i.test(heroHtml)) {
-    failures.push('Hero section is missing required ".hero-bio-photo" container.');
+  if (!/class="hero-photo"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-photo" container.');
+  }
+
+  if (!/class="hero-blurb"/i.test(heroHtml)) {
+    failures.push('Hero section is missing required ".hero-blurb" container.');
   }
 
   // The support copy must remain inside the hero bio text column.
-  const bioTextMatch = heroHtml.match(/<p class="hero-bio-text">([\s\S]*?)<\/p>/i);
+  const bioTextMatch = heroHtml.match(/<div class="hero-blurb">\s*<p>([\s\S]*?)<\/p>\s*<\/div>/i);
   if (!bioTextMatch) {
-    failures.push('Unable to inspect ".hero-bio-text" contents in hero section.');
+    failures.push('Unable to inspect ".hero-blurb" contents in hero section.');
   } else if (!/Former executive at The Walt Disney Company/i.test(bioTextMatch[1])) {
-    failures.push('Support copy is not inside ".hero-bio-text".');
+    failures.push('Support copy is not inside ".hero-blurb".');
   }
 
-  // Ensure CSS uses top alignment for the hero bio row.
-  if (!/\.hero-bio\s*\{[\s\S]*align-items:\s*flex-start/i.test(homeCss)) {
-    failures.push('Home hero CSS must keep ".hero-bio" aligned with align-items: flex-start.');
+  // Ensure CSS keeps the hero in a deterministic grid layout.
+  if (!/\.hero-grid\s*\{[\s\S]*display:\s*grid/i.test(homeCss)) {
+    failures.push('Home hero CSS must keep ".hero-grid" on CSS Grid.');
+  }
+
+  if (!/\.hero-photo\s*\{[\s\S]*grid-row:\s*2/i.test(homeCss)) {
+    failures.push('Home hero CSS must keep ".hero-photo" aligned to the blurb row.');
   }
 }
 

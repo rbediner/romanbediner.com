@@ -132,3 +132,16 @@
 22. Mobile responsive integrity
 - File: `QA/tests/test_visual_regression_playwright.py`
 - Asserts mobile nav behavior, no horizontal overflow, clean Insights card stacking, and no clipping containers.
+
+23. Home hero spacing + geometry hard guard
+- File: `QA/tests/test_home_layout_spacing_playwright.py`
+- Asserts desktop Home hero-to-Experience gap is bounded (`24px` to `72px`).
+- Asserts mobile Home hero-to-Experience gap is bounded (`16px` to `64px`).
+- Asserts photo top aligns to Home blurb top (`<= 2px` delta).
+- Asserts no mobile horizontal overflow.
+
+24. Home nav consistency + Home nav telemetry
+- File: `QA/tests/test_home_nav_consistency_playwright.py`
+- Asserts desktop and mobile nav contain `Home/About/Services/Insights/Connect` across canonical routes.
+- Asserts active route nav state stays correct per route.
+- Asserts Home header nav clicks emit `nav_click` with `{label, location:"header"}` when `gtag` is available.

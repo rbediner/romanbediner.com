@@ -1,451 +1,265 @@
-    html {
-      scroll-behavior: smooth;
-    }
-
-    :root {
-      --bg-color: #ffffff;
-      --surface-color: #f6f7f8;
-      --text-color: #111111;
-      --muted-text: #6a6a6a;
-      --border-color: #e6e6e6;
-
-      --accent-blue: #3b6cff;
-    }
-
-    body {
-      margin: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
-    }
-
-    a {
-      color: var(--accent-blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .site-header {
-      padding: 6px 0;
-      position: sticky;
-      top: 0;
-      background-color: var(--bg-color);
-      z-index: 10;
-    }
-
-    .site-header img {
-      height: 44px;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: nowrap;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand-logo {
-      height: 44px;
-      width: auto;
-      width: auto;
-      flex-shrink: 0;
-      display: block;
-    }
-
-    .brand-name {
-      font-size: 40px;
-      font-weight: 600;
-      line-height: 1.1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--text-color);
-    }
-
-    .site-nav {
-      display: flex;
-      gap: 32px;
-      font-size: 16px;
-    }
-
-    .site-nav a {
-      color: var(--text-color);
-    }
-
-    .site-nav a:hover {
-      color: var(--accent-blue);
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      padding: 6px 8px;
-      font-size: 16px;
-      color: var(--text-color);
-      cursor: pointer;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .menu-toggle .menu-icon {
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-      display: inline-block;
-      position: relative;
-    }
-
-    .menu-toggle .menu-icon::before,
-    .menu-toggle .menu-icon::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-    }
-
-    .menu-toggle .menu-icon::before {
-      top: -6px;
-    }
-
-    .menu-toggle .menu-icon::after {
-      top: 6px;
-    }
-
-    .mobile-nav {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100%;
-      background-color: var(--bg-color);
-      border-top: 1px solid var(--border-color);
-      display: none;
-      flex-direction: column;
-      padding: 12px 24px 20px 24px;
-      z-index: 20;
-    }
-
-    .mobile-nav a {
-      padding: 12px 0;
-      font-size: 16px;
-      color: var(--text-color);
-      text-decoration: none;
-    }
-
-    .mobile-nav.open {
-      display: flex;
-    }
-
-    .header-divider {
-      margin: 4px 0 0 0;
-      border: none;
-      border-top: 1px solid #e5e5e5;
-      width: 100%;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .page-main {
-      padding: 72px 0;
-    }
-
-    h1 {
-      font-size: 44px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      max-width: 100%;
-      text-wrap: wrap;
-      margin-bottom: 18px;
-      font-size: clamp(30px, 2.2vw, 34px);
-    }
-
-    @media (min-width: 900px) {
-      /* Keep the homepage hero headline on one line at desktop widths. */
-      .hero h1 {
-        white-space: nowrap;
-      }
-    }
-
-    .hero-wrap {
-      max-width: 100%;
-      margin: 0;
-      text-align: left;
-    }
-
-    .hero.section {
-      margin-bottom: 0;
-    }
-
-    /* Hidden semantic support copy for search indexing without visual impact. */
-    .semantic-authority {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-      white-space: nowrap;
-    }
-
-    .hero .subhead {
-      width: 100%;
-      max-width: none;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 1.45;
-      margin: 48px 0 0 0;
-      color: inherit;
-    }
-
-    /* Top-align bio copy and photo without directional hacks. */
-    .hero-bio {
-      display: flex;
-      gap: 48px;
-      align-items: flex-start;
-      margin-top: 48px;
-    }
-
-    .hero-bio-text {
-      flex: 1 1 auto;
-      margin: 0;
-    }
-
-    .hero-bio-photo {
-      flex: 0 0 340px;
-      align-self: flex-start;
-    }
-
-    .hero-bio-photo img {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
-    }
-
-    .section-header {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 12px;
-      line-height: 1;
-    }
-
-    .section-header img,
-    .section-header svg {
-      height: 22px;
-      width: auto;
-      flex-shrink: 0;
-      position: relative;
-      top: 2px;
-    }
-
-    .section-header img.icon-areas {
-      height: 22px;
-    }
-
-    .section-header h2 {
-      margin: 0;
-      line-height: 1.2;
-    }
-
-    .section-body {
-      margin-top: 24px;
-    }
-
-    @media (max-width: 900px) {
-      .hero h1 {
-        white-space: normal;
-      }
-    }
-
-    h2 {
-      font-size: 28px;
-      font-weight: 500;
-      margin-top: 48px;
-      margin-bottom: 12px;
-    }
-
-    p {
-      font-size: 18px;
-      color: var(--muted-text);
-      max-width: 720px;
-    }
-
-    .section-accent {
-      display: none;
-    }
-
-    .hero {
-      margin-bottom: 0;
-    }
-
-    .section {
-      margin: 56px 0;
-    }
-
-    /* Keep hero-to-first-section rhythm tight without impacting subsequent sections. */
-    .hero.section + .section {
-      margin-top: 48px;
-    }
-
-    .section h2,
-    .section h3 {
-      margin-bottom: 14px;
-    }
-
-    .section p {
-      margin-bottom: 18px;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      padding: 28px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-    }
-
-    button,
-    .btn {
-      transition: all 0.2s ease;
-    }
-
-    button:hover,
-    .btn:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    }
-
-    input:focus-visible,
-    textarea:focus-visible,
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid rgba(45, 92, 255, 0.35);
-      outline-offset: 2px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      max-width: 760px;
-    }
-
-    .footer {
-      padding: 48px 24px;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted-text);
-    }
-
-    @media (max-width: 768px) {
-      .hero .subhead {
-        font-size: 22px;
-        margin-top: 28px;
-      }
-
-      .hero-bio {
-        flex-direction: column;
-        gap: 18px;
-        margin-top: 22px;
-      }
-
-      .hero-bio-photo {
-        flex: none;
-        width: 100%;
-        max-width: 360px;
-      }
-
-      .hero-bio-photo img {
-        margin: 0 auto;
-      }
-
-      /* Mobile spacing guardrails keep the fold compact and readable. */
-      .hero.section + .section {
-        margin-top: 32px;
-      }
-
-      .section {
-        margin: 40px 0;
-      }
-
-      .section-body {
-        margin-top: 20px;
-      }
-
-      .hero {
-        text-align: left;
-      }
-
-      .hero p {
-        text-align: left !important;
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      .site-header {
-        padding: 4px 0;
-      }
-
-      .header-inner {
-        padding: 0;
-      }
-
-      .brand-logo {
-        height: 44px;
-      }
-
-      .brand-name {
-        font-size: 22px;
-      }
-
-      .site-nav {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      .container {
-        padding: 0 24px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .brand-logo {
-        height: 44px;
-      }
-    }
+/* Home page layout system.
+   This stylesheet intentionally owns only Home-specific structure and spacing. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --muted-text: #6a6a6a;
+  --border-color: #e6e6e6;
+  --accent-blue: #3b6cff;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Keep homepage brand lockup scale aligned with current visual intent. */
+.brand-name {
+  font-size: 40px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.page-main {
+  padding: 72px 0 0 0;
+}
+
+h1 {
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0;
+}
+
+p {
+  font-size: 18px;
+  color: var(--muted-text);
+  max-width: 720px;
+  margin: 0;
+}
+
+/* Hero layout:
+   row 1 = headline + subhead
+   row 2 = blurb + photo (same row keeps photo top aligned to blurb first line) */
+.home-hero.section {
+  padding: 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-rows: auto auto;
+  column-gap: 48px;
+  row-gap: 24px;
+  align-items: start;
+}
+
+.hero-head {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.hero-head h1 {
+  font-size: clamp(30px, 2.2vw, 34px);
+  margin-bottom: 18px;
+  max-width: 100%;
+  text-wrap: wrap;
+}
+
+.hero-head .subhead {
+  width: 100%;
+  max-width: 760px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-color);
+}
+
+.hero-blurb {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  margin-top: 0;
+}
+
+.hero-blurb p {
+  font-size: 20px;
+  max-width: 760px;
+  margin: 0;
+}
+
+.hero-photo {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin-top: 0;
+}
+
+.hero-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Section rhythm uses padding rather than stacked margins for deterministic spacing. */
+.section {
+  padding: 56px 0;
+}
+
+.home-hero.section + .section {
+  margin-top: 48px;
+  padding-top: 48px;
+}
+
+.section-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.section-icon {
+  width: auto;
+  height: 22px;
+  flex-shrink: 0;
+  position: relative;
+  top: 2px;
+}
+
+.section-body {
+  margin-top: 24px;
+}
+
+.section-body p {
+  margin: 0;
+}
+
+/* Hidden semantic support copy for search indexing without visual impact. */
+.semantic-authority {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+/* Preserve existing interactive affordances used across pages. */
+button,
+.btn {
+  transition: all 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(45, 92, 255, 0.35);
+  outline-offset: 2px;
+}
+
+/* Keep desktop one-line hero headline behavior. */
+@media (min-width: 900px) {
+  .hero-head h1 {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-head h1 {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-main {
+    padding-top: 48px;
+  }
+
+  .brand-name {
+    font-size: 22px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: 18px;
+    column-gap: 0;
+  }
+
+  .hero-head {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hero-blurb {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .hero-photo {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: 360px;
+  }
+
+  .hero-head .subhead {
+    font-size: 22px;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .home-hero.section {
+    padding-bottom: 0;
+  }
+
+  .home-hero.section + .section {
+    margin-top: 32px;
+    padding-top: 32px;
+  }
+
+  .section-body {
+    margin-top: 20px;
+  }
+}
