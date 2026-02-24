@@ -317,6 +317,22 @@
       gap: 4px;
     }
 
+    /* Groups the icon and text together on the left */
+    .action-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Styles the SVG to match the brand accent color */
+    .action-icon {
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
     .action-title {
       font-size: 20px;
       font-weight: 600;
@@ -437,6 +453,15 @@
     @media (max-width: 768px) {
       .executive-action-block {
         padding: 20px 24px;
+      }
+
+      .action-left {
+        gap: 16px;
+      }
+
+      .action-icon svg {
+        width: 28px;
+        height: 28px;
       }
 
       .action-title {
