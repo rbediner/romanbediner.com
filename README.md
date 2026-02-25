@@ -190,7 +190,8 @@ First-time machine setup:
 ```bash
 npm ci
 npx playwright install chromium
-python3 -m pip install playwright==1.58.2 pillow==11.3.0
+# Keep Python Playwright pinned to a published CI-compatible version.
+python3 -m pip install playwright==1.58.0 pillow==11.3.0
 python3 -m playwright install chromium
 ```
 
