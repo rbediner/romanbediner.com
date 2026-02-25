@@ -71,6 +71,12 @@ p {
 .master-layout-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-areas:
+    "head head"
+    "blurb photo"
+    "experience photo"
+    "focus photo"
+    "principles principles";
   column-gap: 48px;
   row-gap: 56px;
   align-items: start;
@@ -79,6 +85,7 @@ p {
 
 /* Header spans both columns so subhead reaches grid right edge. */
 .master-head {
+  grid-area: head;
   grid-column: 1 / -1;
   grid-row: 1;
 }
@@ -110,22 +117,29 @@ p {
   color: var(--accent-blue);
 }
 
-/* Photo column starts at the same row as blurb for top-edge alignment. */
+/* Photo container enforces the native source aspect ratio and rounded crop. */
 .master-photo {
-  grid-column: 2;
-  grid-row: 2 / span 4;
-  margin: 0;
+  grid-area: photo;
+  width: 100%;
+  /* Matches the source ratio (1022 / 1360). */
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: var(--surface-color);
 }
 
 .master-photo img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  /* Fill the 3:4 frame without distorting pixels. */
+  object-fit: cover;
+  object-position: center;
   display: block;
-  border-radius: 12px;
 }
 
 /* Left column content stack under the shared rhythm. */
 .master-blurb {
+  grid-area: blurb;
   grid-column: 1;
   grid-row: 2;
 }
@@ -137,17 +151,20 @@ p {
 }
 
 #experience.master-section {
+  grid-area: experience;
   grid-column: 1;
   grid-row: 3;
 }
 
 #areas-of-focus.master-section {
+  grid-area: focus;
   grid-column: 1;
   grid-row: 4;
 }
 
 /* Operating principles expands across both columns as final row. */
 #operating-principles.master-section-full {
+  grid-area: principles;
   grid-column: 1 / -1;
   grid-row: 5;
 }
@@ -253,7 +270,9 @@ a:focus-visible {
   .master-photo {
     grid-column: 1;
     grid-row: 3;
-    max-width: 360px;
+    max-width: 400px;
+    margin: 0 auto 32px auto;
+    aspect-ratio: 3 / 4;
   }
 
   #experience.master-section {
