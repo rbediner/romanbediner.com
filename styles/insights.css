@@ -60,14 +60,19 @@ a:hover {
   margin-bottom: 24px;
 }
 
+.insights-main .section-accent {
+  margin-bottom: 12px !important;
+}
+
 /* Integrated callout framing the insights narrative. */
 .executive-callout {
-  padding: 24px 32px;
-  border-left: 4px solid var(--accent-blue);
-  background-color: rgba(59, 108, 255, 0.08);
-  border-radius: 0 8px 8px 0;
-  font-size: 20px;
   margin-top: 0;
+  padding: 0;
+  border-left: 3px solid var(--accent-blue);
+  padding-left: 24px;
+  background: none;
+  border-radius: 0;
+  font-size: 20px;
   margin-bottom: 48px;
   line-height: 1.6;
   color: var(--text-color);
@@ -115,6 +120,10 @@ a:hover {
   line-height: 1.2;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+.brief-header time {
+  display: none;
 }
 
 .brief-intro p {
