@@ -14,8 +14,10 @@ const failures = [];
 
 for (const required of [
   'class="about-container"',
-  'class="about-hero"',
-  'class="about-text-content"',
+  'class="about-hero-refactored"',
+  'class="manifesto-callout"',
+  'class="callout-border"',
+  'class="callout-content"',
   'class="manifesto-h1"'
 ]) {
   if (!aboutHtml.includes(required)) {
@@ -33,8 +35,11 @@ if (aboutHtml.includes('About Roman Bediner')) {
 
 for (const cssNeedle of [
   'body .about-container',
-  '.about-hero',
-  'display: block !important',
+  '.about-hero-refactored',
+  '.manifesto-callout',
+  '.callout-border',
+  '.callout-content',
+  '.lede-description',
   '.about-timeline',
   '.about-main .section:has(> #professional-arc:first-child)'
 ]) {

@@ -28,8 +28,9 @@ class AboutRedesignTest(unittest.TestCase):
         """Ensure the current About manifesto hero and section wrappers are present."""
         self.assertIn('<main class="about-main">', self.about_html)
         self.assertIn('class="about-container"', self.about_html)
-        self.assertIn('class="about-hero"', self.about_html)
-        self.assertIn('class="about-text-content"', self.about_html)
+        self.assertIn('class="about-hero-refactored"', self.about_html)
+        self.assertIn('class="manifesto-callout"', self.about_html)
+        self.assertIn('class="callout-content"', self.about_html)
         self.assertNotIn('class="about-photo-wrapper"', self.about_html)
         self.assertNotIn('class="hero-photo"', self.about_html)
         for section in ("about-timeline", "about-philosophy"):
@@ -39,13 +40,14 @@ class AboutRedesignTest(unittest.TestCase):
         """Ensure professional arc structure and shared service-list bullets are used."""
         self.assertIn('id="professional-arc"', self.about_html)
         self.assertEqual(self.about_html.count('class="era-header"'), 3)
-        self.assertIn('class="about-lede"', self.about_html)
+        self.assertIn('class="lede-primary"', self.about_html)
+        self.assertIn('class="lede-description"', self.about_html)
         self.assertIn(
-            "Modern organizations do not struggle from lack of strategy. They stall when execution fragments across teams, tools, and decision layers.",
+            "Restoring clarity at the point of delivery through durable operating architecture.",
             self.about_html,
         )
         self.assertIn(
-            "The objective is not additional process. It is durable operating architecture that scales with complexity.",
+            "High-growth environments require the re-architecting of underlying systems - aligning engineering, product, and finance to turn strategy into reality.",
             self.about_html,
         )
         self.assertGreaterEqual(self.about_html.count('<ul class="service-list">'), 2)
@@ -54,13 +56,14 @@ class AboutRedesignTest(unittest.TestCase):
         """Ensure required About layout/style hooks and footer classes exist."""
         self.assertIn(".about-main", self.about_css)
         self.assertIn(".about-container", self.about_css)
-        self.assertIn(".about-hero", self.about_css)
+        self.assertIn(".about-hero-refactored", self.about_css)
+        self.assertIn(".manifesto-callout", self.about_css)
+        self.assertIn(".callout-border", self.about_css)
         self.assertIn(".about-timeline", self.about_css)
         self.assertIn(".about-philosophy", self.about_css)
         self.assertIn(".philosophy-stack", self.about_css)
         self.assertIn(".manifesto-h1", self.about_css)
-        self.assertIn(".about-lede", self.about_css)
-        self.assertIn(".about-main .section-accent", self.about_css)
+        self.assertIn(".lede-description", self.about_css)
         self.assertIn(".footer-meta", self.site_css)
         self.assertIn(".footer-primary", self.site_css)
         self.assertIn("#professional-arc", self.about_css)

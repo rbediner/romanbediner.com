@@ -639,37 +639,73 @@ body .about-container {
 }
 
 /* =========================================
-   ABOUT PAGE HEADER RHYTHM + PROFESSIONAL ARC
+   ABOUT HERO REFACTOR + PROFESSIONAL ARC SPACING
    ========================================= */
 
-/* Tighten hero-to-arc spacing so narrative flows without a floating box gap. */
-.about-main .section-accent {
-  display: block;
-  margin-top: 4px;
-  margin-bottom: 8px !important;
+/* Refactored hero keeps neutral narrative and compact vertical rhythm. */
+.about-hero-refactored {
+  margin-top: 60px;
+  margin-bottom: 0;
 }
 
-.about-lede {
-  margin-top: -4px;
-  margin-bottom: 40px;
+.manifesto-h1 {
+  font-size: 56px !important;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 32px !important;
+  color: var(--text-color);
 }
 
-.lede-secondary p {
-  font-size: 20px;
-  color: var(--muted-text);
+.manifesto-callout {
+  display: flex;
+  background-color: var(--surface-color);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  max-width: 900px;
+}
+
+.callout-border {
+  width: 4px;
+  background-color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.callout-content {
+  padding: 32px 40px;
+}
+
+.lede-primary {
+  font-size: 26px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  color: var(--text-color);
+  margin-bottom: 16px !important;
+}
+
+.lede-description {
+  font-size: 19px !important;
   line-height: 1.6;
-  margin-bottom: 20px;
-  max-width: 780px;
+  color: var(--muted-text);
+  margin: 0 !important;
 }
 
+/* Surgical gap fix: remove top push and keep divider close to hero callout. */
 .era-header {
-  margin-top: 48px !important;
+  margin-top: 0 !important;
+  padding-top: 48px;
   border-top: 1px solid var(--border-color);
-  padding-top: 24px;
 }
 
 #professional-arc {
   margin-top: 0;
+}
+
+/* Keep timeline section tight to the hero callout. */
+.about-timeline {
+  margin-top: 0 !important;
+  margin-bottom: 0;
 }
 
 /* Reduces top gap before the timeline heading without changing global .section rhythm. */
@@ -702,21 +738,34 @@ body .about-container {
 }
 
 @media (max-width: 768px) {
-  .about-lede p {
-    font-size: 19px;
-  }
-
-  /* Preserve manifesto layout on mobile without horizontal overflow. */
+  /* Preserve manifesto callout readability on mobile widths. */
   body .about-container {
     max-width: none !important;
     padding: 0 24px !important;
   }
 
-  .about-hero {
-    margin-top: 24px !important;
+  .about-hero-refactored {
+    margin-top: 40px;
   }
 
-  .about-text-content {
-    max-width: none !important;
+  .manifesto-h1 {
+    font-size: 44px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .manifesto-callout {
+    margin-bottom: 36px;
+  }
+
+  .callout-content {
+    padding: 24px;
+  }
+
+  .lede-primary {
+    font-size: 22px !important;
+  }
+
+  .lede-description {
+    font-size: 17px !important;
   }
 }

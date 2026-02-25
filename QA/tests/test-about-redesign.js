@@ -30,11 +30,13 @@ if (!aboutHtml.includes('<main class="about-main">')) {
   console.error('FAIL: About page is missing the about-main container.');
 }
 
-// The About hero is a manifesto-led text block, not a profile-photo layout.
+// The About hero is a manifesto-led text block with a blue callout block.
 const requiredContainers = [
   'class="about-container"',
-  'class="about-hero"',
-  'class="about-text-content"',
+  'class="about-hero-refactored"',
+  'class="manifesto-callout"',
+  'class="callout-border"',
+  'class="callout-content"',
   'class="manifesto-h1"'
 ];
 for (const marker of requiredContainers) {
@@ -67,7 +69,11 @@ if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 2) {
 // Keep guardrails around the photo ratio lock and manifesto typography hooks.
 for (const cssSelector of [
   'body .about-container',
-  '.about-hero',
+  '.about-hero-refactored',
+  '.manifesto-callout',
+  '.callout-border',
+  '.callout-content',
+  '.lede-description',
   '.about-timeline',
   '.manifesto-h1',
   '.lede-primary',
