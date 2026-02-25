@@ -74,6 +74,7 @@ Routing requirements:
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
 - CI executes `npm test`.
+- Jest is required as a direct dev dependency and is invoked with `jest --passWithNoTests` to keep CI stable when no Jest specs are detected.
 - CI fails on:
   - CSP violations
   - GA misconfiguration
