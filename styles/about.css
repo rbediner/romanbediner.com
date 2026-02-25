@@ -116,7 +116,7 @@
 
 .arc-item {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 330px 1fr;
   column-gap: 48px;
   align-items: start;
   padding: 48px 0;
@@ -135,24 +135,26 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: var(--accent-blue);
-  line-height: 1.25;
+  line-height: 1.2;
   margin: 0;
 }
 
 .era-title {
   display: block;
+  white-space: nowrap;
 }
 
 .era-sub {
   display: block;
+  white-space: nowrap;
   font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.025em;
   margin-top: 6px;
   color: var(--accent-blue);
   position: relative;
