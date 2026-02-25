@@ -1,15 +1,19 @@
 /*
  * Purpose:
- * - contact-form-emailjs.js supports static-site runtime or QA automation behavior.
+ * - Manage Connect page form runtime behavior including validation, editor state, and EmailJS submission flow.
  *
  * Architectural role:
- * - Encodes shared implementation contracts used by CI and production pages.
+ * - Provides the client-side submission orchestration for a static deployment with no backend form processor.
  *
  * Dependencies:
- * - Node.js and the repository file structure for canonical routes/assets.
+ * - Browser DOM APIs, Quill, and EmailJS runtime libraries loaded by the Connect page.
+ *
+ * Security/CSP considerations:
+ * - Avoids inline handlers and keeps execution in an external script to remain CSP-compatible.
+ * - Uses honeypot and client-side rate limiting to reduce automated abuse.
  *
  * Migration considerations:
- * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ * - If form providers or CSP allowlists change, update loader origins and rerun QA runtime tests.
  */
 // Contact page form behavior:
 // - Quill editor initialization

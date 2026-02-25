@@ -19,11 +19,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Verify lockfile exists
+        run: test -f package-lock.json
+
       - name: Install Node dependencies
         run: npm ci
 
       - name: Install Playwright browsers for Node tests
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps chromium
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -36,8 +39,5 @@ jobs:
           pip install playwright==1.58.2 pillow==11.3.0
           python -m playwright install --with-deps chromium
 
-      - name: Run architecture and QA test suite
-        run: npm run test:qa-full
-
-      - name: Run Playwright browser regression suite
-        run: npm run test:playwright
+      - name: Run full test suite
+        run: npm test

@@ -1,15 +1,19 @@
 /*
  * Purpose:
- * - ga4.js supports static-site runtime or QA automation behavior.
+ * - Bootstrap Google Analytics from page metadata without inline scripts.
  *
  * Architectural role:
- * - Encodes shared implementation contracts used by CI and production pages.
+ * - Central analytics entrypoint reused by all canonical pages.
  *
  * Dependencies:
- * - Node.js and the repository file structure for canonical routes/assets.
+ * - Browser DOM APIs and Google Tag Manager hosted gtag loader.
+ *
+ * Security/CSP considerations:
+ * - Keeps analytics initialization in an external file to avoid inline script requirements.
+ * - Must stay compatible with strict CSP script-src/connect-src allowlists.
  *
  * Migration considerations:
- * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ * - Preserve the meta-tag based measurement contract when moving hosts or templating systems.
  */
 /*
   Shared GA4 bootstrap.

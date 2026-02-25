@@ -1,16 +1,18 @@
-#!/usr/bin/env node
 /*
  * Purpose:
- * - generate-insight-links.js supports static-site runtime or QA automation behavior.
+ * - Regenerate README insight deep-link section from canonical Insights page cards.
  *
  * Architectural role:
- * - Encodes shared implementation contracts used by CI and production pages.
+ * - Keeps documentation synchronized with content slugs as part of QA and CI workflows.
  *
  * Dependencies:
- * - Node.js and the repository file structure for canonical routes/assets.
+ * - Node.js filesystem APIs and stable Insights card markup structure.
+ *
+ * Security/CSP considerations:
+ * - Build-time utility only; does not execute in browser and does not affect CSP runtime policy.
  *
  * Migration considerations:
- * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ * - Update input/output paths if repository routing or documentation location changes.
  */
 /**
  * Auto-generates direct anchor links for Insights cards in README.md.

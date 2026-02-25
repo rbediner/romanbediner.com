@@ -10,6 +10,10 @@
  * - Insight cards with `.insight-toggle` controls and `aria-controls` wiring.
  * - Optional GA runtime (`window.gtag`) for `insight_toggle` telemetry.
  *
+ * Security/CSP considerations:
+ * - Uses delegated listeners in external JavaScript to avoid inline event handlers.
+ * - Sends analytics only through pre-approved GA runtime to preserve CSP policy.
+ *
  * Migration considerations:
  * - Preserves dynamic slug/title derivation from DOM structure to avoid hard-coded analytics values.
  * - Requires external script loading to remain CSP-compliant (no inline handlers/scripts).

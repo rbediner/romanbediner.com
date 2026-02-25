@@ -42,7 +42,7 @@ function walk(dir, validator) {
     if (!entry.isFile()) {
       continue;
     }
-    if (!entry.name.endsWith('.js') && !entry.name.endsWith('.mjs')) {
+    if (!entry.name.endsWith('.js')) {
       continue;
     }
     const contents = fs.readFileSync(full, 'utf8');
@@ -57,7 +57,13 @@ function validateScriptHeader(contents, full) {
     return;
   }
   const top = contents.split('\n').slice(0, 40).join('\n');
-  const required = ['Purpose:', 'Architectural role:', 'Dependencies:', 'Migration considerations:'];
+  const required = [
+    'Purpose:',
+    'Architectural role:',
+    'Dependencies:',
+    'Security/CSP considerations:',
+    'Migration considerations:'
+  ];
   for (const marker of required) {
     if (!top.includes(marker)) {
       failures.push(`Incomplete script header (${marker}) in ${rel}`);

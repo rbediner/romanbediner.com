@@ -1,16 +1,19 @@
-#!/usr/bin/env node
 /*
  * Purpose:
- * - validate-links.js supports static-site runtime or QA automation behavior.
+ * - Enforce canonical route/link policy and shared asset requirements at build/test time.
  *
  * Architectural role:
- * - Encodes shared implementation contracts used by CI and production pages.
+ * - Static policy gate in CI for architecture, metadata, and analytics bootstrap contracts.
  *
  * Dependencies:
- * - Node.js and the repository file structure for canonical routes/assets.
+ * - Node.js filesystem APIs and canonical page file locations.
+ *
+ * Security/CSP considerations:
+ * - Detects policy regressions such as inline style/script anti-patterns and unsupported routes.
+ * - Guards external script bootstrap conventions that must remain CSP-compatible.
  *
  * Migration considerations:
- * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ * - Update canonical page list and route allowlist when hosting/routing model changes.
  */
 /**
  * Validates canonical page links, route policy, shared CSS usage, and GA bootstrap policy.

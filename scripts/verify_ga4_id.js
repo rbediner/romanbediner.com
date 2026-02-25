@@ -1,16 +1,19 @@
-#!/usr/bin/env node
 /*
  * Purpose:
- * - verify_ga4_id.js supports static-site runtime or QA automation behavior.
+ * - Verify GA4 measurement ID and bootstrap usage across canonical and non-canonical HTML files.
  *
  * Architectural role:
- * - Encodes shared implementation contracts used by CI and production pages.
+ * - CI policy gate that prevents analytics drift and unsupported tracking IDs.
  *
  * Dependencies:
- * - Node.js and the repository file structure for canonical routes/assets.
+ * - Node.js filesystem APIs and stable repository route/file structure.
+ *
+ * Security/CSP considerations:
+ * - Enforces no-inline GA policy required for strict CSP compatibility.
+ * - Rejects unauthorized measurement IDs that could leak telemetry.
  *
  * Migration considerations:
- * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ * - Keep canonical page inventory and GA contract rules synchronized with new deployment topology.
  */
 /**
  * Verifies GA4 measurement ID usage across HTML files.

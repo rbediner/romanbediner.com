@@ -1,15 +1,19 @@
 /*
  * Purpose:
- * - site-navigation.js supports static-site runtime or QA automation behavior.
+ * - Render and manage shared header navigation across canonical pages.
  *
  * Architectural role:
- * - Encodes shared implementation contracts used by CI and production pages.
+ * - Single source of truth for nav links and active-route behavior in static HTML pages.
  *
  * Dependencies:
- * - Node.js and the repository file structure for canonical routes/assets.
+ * - Browser DOM APIs and canonical route map defined in this file.
+ *
+ * Security/CSP considerations:
+ * - Keeps nav behavior external to markup to avoid inline scripts and handlers.
+ * - Optional GA click telemetry fails silently when GA runtime is unavailable.
  *
  * Migration considerations:
- * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ * - Update route normalization and link map if canonical URL scheme changes on new hosts.
  */
 // Shared global navigation model used by all pages.
 const NAV_LINKS = [

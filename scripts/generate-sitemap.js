@@ -1,16 +1,18 @@
-#!/usr/bin/env node
 /*
  * Purpose:
- * - generate-sitemap.js supports static-site runtime or QA automation behavior.
+ * - Generate sitemap.xml entries from canonical route definitions.
  *
  * Architectural role:
- * - Encodes shared implementation contracts used by CI and production pages.
+ * - Provides deterministic search-index routing output for static hosting deployments.
  *
  * Dependencies:
- * - Node.js and the repository file structure for canonical routes/assets.
+ * - Node.js filesystem APIs and canonical route list maintained in this script.
+ *
+ * Security/CSP considerations:
+ * - Build-time utility only; no browser execution and no CSP policy impact.
  *
  * Migration considerations:
- * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ * - Keep canonical route outputs aligned with redirects/rewrite behavior on new hosting platforms.
  */
 /**
  * Generates sitemap.xml for the canonical clean URLs.
