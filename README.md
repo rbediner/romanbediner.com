@@ -66,6 +66,7 @@ Routing requirements:
 - Policy-as-code: architecture requirements are test-enforced, not convention-enforced.
 - Invariants cover routing, metadata, analytics, CSP, DOM contracts, and repo hygiene.
 - README contract validation is centralized in Jest under `/tests/readme_structure.test.js` and `/tests/readme_integrity.test.js`.
+- Local README drift enforcement now uses commit-aware fallback logic (`git diff --name-only HEAD`) when `origin/main...HEAD` and `HEAD~1...HEAD` ranges are unavailable, and only skips when git history is genuinely unavailable.
 - CI fails fast when contracts break to prevent production drift.
 
 ## Continuous Integration

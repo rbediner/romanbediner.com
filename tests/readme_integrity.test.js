@@ -45,24 +45,56 @@ function tryDiff(command) {
   }
 }
 
+function hasCommitHistory() {
+  try {
+    execSync('git rev-parse --verify HEAD', {
+      cwd: ROOT,
+      stdio: ['ignore', 'ignore', 'ignore']
+    });
+    return true;
+  } catch (_error) {
+    return false;
+  }
+}
+
 function resolveChangedFiles() {
   const primary = tryDiff('git diff --name-only origin/main...HEAD');
-  if (primary.ok) {
-    return primary.files;
-  }
-
   const fallback = tryDiff('git diff --name-only HEAD~1...HEAD');
-  if (fallback.ok) {
-    return fallback.files;
-  }
+  const hasHistory = hasCommitHistory();
 
   if (process.env.CI) {
+    if (primary.ok) {
+      return primary.files;
+    }
+    if (fallback.ok) {
+      return fallback.files;
+    }
     throw new Error(
       `Unable to determine changed files in CI. origin/main diff error: ${primary.error}; HEAD~1 fallback error: ${fallback.error}`
     );
   }
 
-  return null;
+  if (!hasHistory) {
+    return null;
+  }
+
+  // Local strict mode:
+  // 1) Use branch-aware diff when available.
+  // 2) Always merge working-tree diff so unstaged/staged local architectural edits are enforced.
+  const rangeFiles = primary.ok ? primary.files : fallback.ok ? fallback.files : [];
+  const workingTree = tryDiff('git diff --name-only HEAD');
+
+  if (!primary.ok && !fallback.ok && !workingTree.ok) {
+    return null;
+  }
+
+  const merged = new Set(rangeFiles);
+  if (workingTree.ok) {
+    for (const file of workingTree.files) {
+      merged.add(file);
+    }
+  }
+  return Array.from(merged);
 }
 
 describe('README integrity for architectural changes', () => {
