@@ -65,6 +65,7 @@ Routing requirements:
 ## Testing Philosophy
 - Policy-as-code: architecture requirements are test-enforced, not convention-enforced.
 - Invariants cover routing, metadata, analytics, CSP, DOM contracts, and repo hygiene.
+- README contract validation is centralized in Jest under `/tests/readme_structure.test.js` and `/tests/readme_integrity.test.js`.
 - CI fails fast when contracts break to prevent production drift.
 
 ## Continuous Integration
