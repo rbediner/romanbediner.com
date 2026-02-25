@@ -113,6 +113,15 @@ a:hover {
   box-shadow: none;
 }
 
+/* Preserve the top blue divider used as the card identity marker. */
+.insight-accent {
+  width: 56px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(59, 108, 255, 0.62);
+  margin: 0 0 16px 0;
+}
+
 .brief-header h2 {
   font-size: 32px;
   margin-top: 0;
