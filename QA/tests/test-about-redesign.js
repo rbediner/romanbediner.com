@@ -35,19 +35,29 @@ for (const section of requiredSections) {
   }
 }
 
-if ((aboutHtml.match(/class="timeline-item"/g) || []).length !== 3) {
+if (!aboutHtml.includes('id="professional-arc"')) {
   failures += 1;
-  console.error('FAIL: About timeline must include exactly 3 timeline items.');
+  console.error('FAIL: About timeline section must include #professional-arc.');
 }
 
-if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 5) {
+if ((aboutHtml.match(/class="era-header"/g) || []).length !== 3) {
   failures += 1;
-  console.error('FAIL: About page should use shared service-list bullets across sections.');
+  console.error('FAIL: About professional arc must include exactly 3 era headers.');
 }
 
-if (!aboutCss.includes('.about-main') || !aboutCss.includes('.timeline') || !aboutCss.includes('.about-philosophy')) {
+if ((aboutHtml.match(/class="executive-callout"/g) || []).length < 1) {
   failures += 1;
-  console.error('FAIL: About CSS is missing required redesign style blocks.');
+  console.error('FAIL: About professional arc must include an executive callout.');
+}
+
+if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 2) {
+  failures += 1;
+  console.error('FAIL: About page should keep service-list bullets in the philosophy grid.');
+}
+
+if (!aboutCss.includes('.about-main') || !aboutCss.includes('.about-philosophy') || !aboutCss.includes('.philosophy-grid')) {
+  failures += 1;
+  console.error('FAIL: About CSS is missing required upgraded style blocks.');
 }
 
 if (!siteCss.includes('.footer-meta')) {
@@ -57,10 +67,6 @@ if (!siteCss.includes('.footer-meta')) {
 if (!siteCss.includes('.footer-primary')) {
   failures += 1;
   console.error('FAIL: global footer-primary style is missing in styles/site.css.');
-}
-if (!/\.timeline-marker\s*\{[\s\S]*width:\s*12px;[\s\S]*height:\s*12px;/.test(aboutCss)) {
-  failures += 1;
-  console.error('FAIL: timeline marker size must be 12px.');
 }
 if (!aboutCss.includes('.about-hero::after')) {
   failures += 1;
@@ -73,6 +79,10 @@ if (aboutHtml.includes('<h2>TODAY</h2>')) {
 if (!aboutHtml.includes('<h3>Embedded Operating Leadership</h3>')) {
   failures += 1;
   console.error('FAIL: Embedded Operating Leadership subsection is missing.');
+}
+if (!aboutHtml.includes('<h3>Systems Over Heroics</h3>')) {
+  failures += 1;
+  console.error('FAIL: Systems Over Heroics subsection is missing.');
 }
 
 for (const rel of canonicalPages) {

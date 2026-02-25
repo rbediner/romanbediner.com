@@ -618,3 +618,61 @@
     padding: 24px;
   }
 }
+
+/* =========================================
+   ABOUT PAGE UPGRADES: Callout, Pillars, Grid
+   ========================================= */
+
+/* 1. Executive TL;DR Callout */
+.executive-callout {
+  padding: 20px 28px;
+  border-left: 4px solid var(--accent-blue);
+  background-color: rgba(59, 108, 255, 0.08);
+  border-radius: 0 8px 8px 0;
+  font-size: 20px;
+  color: var(--text-color);
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+
+/* 2. Chronological Pillars (Era Headers) */
+#professional-arc h3.era-header {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 48px 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#professional-arc h3.era-header:first-of-type {
+  margin-top: 16px;
+}
+
+/* 3. Philosophy Grid (Desktop 2-Column) */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 32px;
+  align-items: start;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .executive-callout {
+    padding: 16px 20px;
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+
+  #professional-arc h3.era-header {
+    font-size: 22px;
+    margin: 40px 0 16px 0;
+  }
+
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

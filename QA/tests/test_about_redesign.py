@@ -31,24 +31,26 @@ class AboutRedesignTest(unittest.TestCase):
             self.assertIn(f'class="section {section}"', self.about_html)
 
     def test_timeline_and_shared_bullet_usage(self):
-        """Ensure timeline count and shared service-list bullets are used."""
-        self.assertEqual(self.about_html.count('class="timeline-item"'), 3)
-        self.assertGreaterEqual(self.about_html.count('<ul class="service-list">'), 5)
+        """Ensure professional arc structure and shared service-list bullets are used."""
+        self.assertIn('id="professional-arc"', self.about_html)
+        self.assertEqual(self.about_html.count('class="era-header"'), 3)
+        self.assertIn('class="executive-callout"', self.about_html)
+        self.assertGreaterEqual(self.about_html.count('<ul class="service-list">'), 2)
 
     def test_pmp_and_css_blocks_present(self):
         """Ensure credential statement and required style blocks exist."""
         self.assertIn(".about-main", self.about_css)
-        self.assertIn(".timeline", self.about_css)
         self.assertIn(".about-philosophy", self.about_css)
+        self.assertIn(".philosophy-grid", self.about_css)
         self.assertIn(".footer-meta", self.site_css)
         self.assertIn(".footer-primary", self.site_css)
         self.assertIn(".about-hero::after", self.about_css)
-        self.assertRegex(self.about_css, r"\.timeline-marker\s*\{[^}]*width:\s*12px;[^}]*height:\s*12px;")
 
     def test_embedded_operating_leadership_section_replaces_today(self):
         """Ensure the close section uses the new heading and copy."""
         self.assertNotIn("<h2>TODAY</h2>", self.about_html)
         self.assertIn("<h3>Embedded Operating Leadership</h3>", self.about_html)
+        self.assertIn("<h3>Systems Over Heroics</h3>", self.about_html)
         self.assertIn(
             "This work shows up where scale, transition, or complexity begin to strain execution.",
             self.about_html,

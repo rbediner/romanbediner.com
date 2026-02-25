@@ -13,7 +13,7 @@ const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 let failures = 0;
 
 // Test 1: ensure unified philosophy card exists.
-if (!aboutHtml.includes('class="card-philosophy"')) {
+if (!/class="[^"]*\bcard-philosophy\b[^"]*"/.test(aboutHtml)) {
   failures += 1;
   console.error('FAIL: .card-philosophy container is missing in About page.');
 }
@@ -28,11 +28,19 @@ if (!/\.card-philosophy:hover\s*\{[^}]*transform:\s*translateY\(-3px\);/s.test(a
   console.error('FAIL: .card-philosophy hover transform is missing.');
 }
 
-// Test 3: ensure exactly two internal dividers are rendered.
+// Test 3: ensure philosophy dividers are removed in favor of grid layout.
 const dividerCount = (aboutHtml.match(/class="philosophy-divider"/g) || []).length;
-if (dividerCount !== 2) {
+if (dividerCount !== 0) {
   failures += 1;
-  console.error(`FAIL: expected 2 philosophy dividers, found ${dividerCount}.`);
+  console.error(`FAIL: expected 0 philosophy dividers after grid refactor, found ${dividerCount}.`);
+}
+if (!aboutHtml.includes('class="philosophy-grid"')) {
+  failures += 1;
+  console.error('FAIL: philosophy-grid container is missing.');
+}
+if ((aboutHtml.match(/class="philosophy-item"/g) || []).length !== 2) {
+  failures += 1;
+  console.error('FAIL: expected exactly 2 philosophy items in the new grid.');
 }
 
 // Test 4: ensure orb bullets use /icons/bullet.png and 8px sizing globally.
@@ -42,7 +50,7 @@ if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*ma
 }
 
 // Test 5: ensure Insights micro-link exists and points to /insights/.
-if (!/<a[^>]*href="\/insights\/"[^>]*class="philosophy-insights-link"/.test(aboutHtml) || !aboutHtml.includes('Explore related insights →')) {
+if (!/<a[^>]*href="\/insights\/"[^>]*class="philosophy-insights-link"/.test(aboutHtml) || !/Explore related insights (→|&rarr;)/.test(aboutHtml)) {
   failures += 1;
   console.error('FAIL: Insights micro-link is missing or incorrectly routed.');
 }
