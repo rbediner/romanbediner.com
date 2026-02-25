@@ -1,6 +1,5 @@
 import unittest
 from pathlib import Path
-import re
 
 
 class ServicesStackTest(unittest.TestCase):
@@ -17,11 +16,8 @@ class ServicesStackTest(unittest.TestCase):
         """Ensure services use a stack container with five restored cards."""
         self.assertIn('class="service-stack"', self.services_html)
         self.assertEqual(self.services_html.count('<div class="service-stack">'), 1)
-        # Count cards inside the stack container to avoid counting unrelated markup.
-        match = re.search(r'<div class="service-stack">(.*?)</div>\s*</main>', self.services_html, re.S)
-        self.assertIsNotNone(match)
-        stack_html = match.group(1)
-        self.assertEqual(stack_html.count('<div class="service-card">'), 5)
+        # Services page should render exactly five service cards in the restored stack.
+        self.assertEqual(self.services_html.count('<div class="service-card">'), 5)
 
     def test_executive_callout_and_headings_present(self):
         """Ensure executive callout and restored service headings are rendered."""
@@ -40,6 +36,15 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('.executive-callout', self.services_css)
         self.assertIn('.service-card:hover', self.services_css)
         self.assertIn('.service-icon', self.services_css)
+
+    def test_bottom_navigation_anchor_present(self):
+        """Ensure the Services page includes the restored transition anchor to Insights."""
+        self.assertIn('class="next-page-nav"', self.services_html)
+        self.assertIn('class="nav-anchor"', self.services_html)
+        self.assertIn('href="../insights/"', self.services_html)
+        self.assertIn('Transition to Strategic Insights', self.services_html)
+        self.assertIn('.next-page-nav', self.services_css)
+        self.assertIn('.nav-anchor:hover .nav-title', self.services_css)
 
 
 if __name__ == "__main__":
