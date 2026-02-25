@@ -67,14 +67,6 @@
   margin: 0;
 }
 
-.service-list {
-  margin-top: 12px;
-}
-
-.service-list li {
-  line-height: 1.6;
-}
-
 .label {
   margin-top: 32px;
   border-top: 1px solid var(--border-color);

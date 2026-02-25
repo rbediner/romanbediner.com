@@ -2,11 +2,31 @@
    This file normalizes header and navigation behavior across canonical routes. */
 
 :root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --h1-size: 44px;
+  --h1-weight: 800;
+  --lede-size: 26px;
+  --lede-weight: 600;
+  --body-size: 16px;
+  --body-line: 1.55;
+  --list-gap: 12px;
+  --list-indent: 18px;
+  --list-item-gap: 10px;
   --accent-blue: #3b6cff;
   --brand-tint: rgba(59, 108, 255, 0.05);
   --border-color: #e6e8ec;
   --text-primary: #111111;
   --text-secondary: #555555;
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .site-header {
@@ -182,9 +202,19 @@
   color: var(--text-primary);
 }
 
+.page-main h1,
+main h1 {
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 60px 0 32px;
+}
+
 .lede-primary {
-  font-size: 26px;
-  font-weight: 600;
+  font-size: var(--lede-size);
+  font-weight: var(--lede-weight);
   line-height: 1.35;
   margin: 0 0 12px 0;
   color: var(--text-primary);
@@ -200,6 +230,25 @@
 .brand-highlight {
   color: var(--accent-blue);
   font-weight: 700;
+}
+
+.manifesto-callout {
+  display: flex;
+  width: 100%;
+  background: rgba(59, 108, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 64px;
+}
+
+.callout-border {
+  width: 4px;
+  background-color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.callout-content {
+  padding: 32px 40px;
 }
 
 .shelf-callout {
@@ -233,16 +282,32 @@
 
 /* Unified orb bullet system shared across About, Services, and Insights lists. */
 
+.page-main ul,
+main ul {
+  margin: var(--list-gap) 0 0;
+  padding-left: var(--list-indent);
+}
+
+.page-main li,
+main li {
+  margin: 0 0 var(--list-item-gap);
+}
+
+.page-main li:last-child,
+main li:last-child {
+  margin-bottom: 0;
+}
+
 .service-list {
   list-style: none;
-  padding-left: 0;
-  margin: 0;
+  margin-top: var(--list-gap);
+  padding-left: var(--list-indent);
 }
 
 .service-list li {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 0.6rem;
+  margin-bottom: var(--list-item-gap);
   line-height: 1.6;
   list-style-type: none;
 }
@@ -294,6 +359,12 @@
   .page-title {
     font-size: 42px;
     margin: 40px 0 24px 0;
+  }
+
+  .page-main h1,
+  main h1 {
+    font-size: 36px;
+    margin: 44px 0 24px;
   }
 
   .lede-primary {

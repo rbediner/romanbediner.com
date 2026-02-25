@@ -103,18 +103,6 @@
   color: var(--text-secondary);
 }
 
-.philosophy-item .service-list {
-  margin-top: 12px;
-}
-
-.philosophy-item .service-list li {
-  margin-bottom: 8px;
-}
-
-.philosophy-item .service-list li:last-child {
-  margin-bottom: 0;
-}
-
 .philosophy-insights-link-wrap {
   margin: 28px 0 0 0;
   text-align: right;
