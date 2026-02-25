@@ -666,6 +666,11 @@
   margin-top: 0;
 }
 
+/* Reduces top gap before the timeline heading without changing global .section rhythm. */
+.about-main .section:has(> #professional-arc:first-child) {
+  padding-top: 24px;
+}
+
 /* Stacks philosophy blocks vertically for exact left-edge alignment. */
 .philosophy-stack {
   display: flex;
