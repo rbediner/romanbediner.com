@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 /**
+ * Invariant:
+ * - Regression guardrails for insights.test.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
+/**
  * Production Insights system validation:
  * 1) Card id/title/slug integrity
  * 2) README auto-generated link integrity

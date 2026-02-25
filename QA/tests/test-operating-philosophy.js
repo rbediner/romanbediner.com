@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 /**
+ * Invariant:
+ * - Regression guardrails for test-operating-philosophy.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
+/**
  * Test: About Operating Philosophy structure and styling refinements.
  */
 const fs = require('fs');

@@ -1,3 +1,19 @@
+/*
+ * Purpose:
+ * - Provide one reusable expand/collapse controller for all Insights cards.
+ *
+ * Architectural role:
+ * - Keeps UI state, accessibility attributes, and analytics payloads synchronized in one place.
+ * - Uses event delegation so newly added cards inherit behavior without extra listeners.
+ *
+ * Dependencies:
+ * - Insight cards with `.insight-toggle` controls and `aria-controls` wiring.
+ * - Optional GA runtime (`window.gtag`) for `insight_toggle` telemetry.
+ *
+ * Migration considerations:
+ * - Preserves dynamic slug/title derivation from DOM structure to avoid hard-coded analytics values.
+ * - Requires external script loading to remain CSP-compliant (no inline handlers/scripts).
+ */
 (function () {
   'use strict';
 

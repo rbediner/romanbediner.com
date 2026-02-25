@@ -1,184 +1,208 @@
 # romanbediner.com
 
-Production static site for [romanbediner.com](https://romanbediner.com), deployed from `main` via GitHub Pages.
+Static production site for [romanbediner.com](https://romanbediner.com), published from `main` via GitHub Pages.
 
-## Canonical Routes
+## System Overview
+
+### Canonical routes
 
 - `/` -> `index.html`
 - `/about/` -> `about/index.html`
 - `/services/` -> `services/index.html`
-- `/connect/` -> `connect/index.html`
 - `/insights/` -> `insights/index.html`
+- `/connect/` -> `connect/index.html`
 
-Route policy:
+### Routing model
 
-- No runtime `/contact/`
-- No runtime `/about/insights/`
-- No runtime `/home/`
-- No `.html` links in navigation
+- Folder-based routing is the public URL contract.
+- Public navigation must never link to `.html` files.
+- Legacy paths such as `/home/`, `/contact/`, and `/about/insights/` are disallowed.
+- Canonical URLs must always use trailing slashes.
 
-## Project Structure
+### GitHub Pages assumptions
 
-- `/styles/site.css` shared architecture styles (header/nav consistency)
-- `/styles/home.css`, `/styles/about.css`, `/styles/services.css`, `/styles/connect.css`, `/styles/insights.css` page styles
-- `/scripts/ga4.js` GA4 bootstrap logic
-- `/scripts/` validation and utility scripts
-- `/QA/tests/` automated guardrail tests
-- `/QA/` QA cases and QA results documents
+- Repository root serves static files directly.
+- No server-side templating/includes at runtime.
+- Navigation is injected by `/scripts/site-navigation.js` into static placeholders.
 
-## Analytics (GA4)
+## Hosting Assumptions
 
-- Measurement ID: `G-DVHD0KL633`
-- Source of truth on each canonical page:
+- Fully static hosting (no backend dependency).
+- CSP is enforced through HTML `<meta http-equiv="Content-Security-Policy">`.
+- Analytics bootstrap is externalized via `/scripts/ga4.js`.
+- Inline script bootstraps are forbidden because they break CSP hardening.
+
+## Analytics Architecture
+
+### GA contract
+
+- Each canonical page must contain exactly one:
   - `<meta name="ga4-measurement-id" content="G-DVHD0KL633" />`
-- Runtime bootstrap:
   - `<script src="/scripts/ga4.js" defer></script>`
-  - `scripts/ga4.js` loads `gtag.js` asynchronously and initializes `gtag('config', id, { anonymize_ip: true })`
-- Defensive behavior:
-  - If the GA meta tag is missing, GA initialization exits silently.
-  - Insights expand/collapse analytics tracking is covered by automated tests in `/tests/insights-analytics.test.js`.
 
-Reference snippet file (not server-included on GitHub Pages):
+### Bootstrap behavior
 
-- `/analytics/ga4.html`
+- `/scripts/ga4.js` reads measurement ID from the meta tag.
+- It asynchronously loads `https://www.googletagmanager.com/gtag/js`.
+- It initializes `gtag('config', id, { anonymize_ip: true })`.
 
-## CSP Expectations
+### Security constraints
 
-Canonical pages include CSP via meta tag with:
+- Inline `gtag`, inline `dataLayer` setup, and inline GA config are disallowed.
+- Runtime GA and CSP behavior is validated by automated Playwright tests in CI.
 
-- `script-src` allowing `https://www.googletagmanager.com`
-- `connect-src` allowing `https://www.google-analytics.com` and `https://analytics.google.com`
-- No `unsafe-inline` in `script-src`
+## CSP Policy Definition
 
-## SEO and Social
+### Required `script-src` origins
 
-Each canonical page includes:
+- `'self'`
+- `https://www.googletagmanager.com`
+- `https://cdn.jsdelivr.net`
+- `https://cdn.quilljs.com`
+- `https://www.emailjs.com`
 
-- `<title>`
-- `<meta name="description">`
-- canonical link
-- Open Graph tags
-- Twitter tags
+### Required `connect-src` origins
 
-Homepage includes Person JSON-LD. Insights includes Article JSON-LD entries.
+- `https://www.google-analytics.com`
+- `https://analytics.google.com`
+- `https://api.emailjs.com`
 
-## Positioning
+### Never allow
 
-Roman Bediner is positioned as an Operations & Transformation Leader focused on productizing execution systems for modern AI-enabled work.
+- `unsafe-inline` inside `script-src`
+- Inline script tags for runtime logic/analytics bootstrapping
+- Unapproved GA IDs
 
-Guidelines:
+## Testing Invariants
 
-- **Homepage identity and thesis taxonomy**
-  - `<title>`: `Roman Bediner | Productizing Operations for AI-Enabled Organizations`
-  - `<h1>`: `PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK`
-  - `<meta name="description">`: `Roman Bediner designs AI-enabled operating models that align product, engineering, finance, and customer teams into scalable execution systems.`
-  - Keep a single `<title>`, a single `<meta name="description">`, and a single homepage `<h1>`.
-- **Insights page structure**
-  - `<title>`: `Working Briefs on AI-Enabled Operations | Roman Bediner`
-  - Keep exactly one `<h1>` with value `Insights & Briefs`.
-  - Use the dedicated insights description focused on disciplined work systems.
-- **About page hero structure**
-  - Keep manifesto-led hero wrappers: `.about-container`, `.about-hero`, `.about-text-content`.
-  - Keep About hero text-only (no profile photo in the About hero block).
-- **Canonical discipline**
-  - Keep exactly one canonical tag per canonical page.
-  - Keep canonical URLs aligned to route architecture without introducing legacy paths.
-- **Testing rules**
-  - `QA/tests/test-metadata-consistency.js` verifies homepage title/description/H1, insights title, duplicate prevention, no em dashes in HTML, and one canonical per page.
+### CI-enforced contracts
 
-## Testing
+- Canonical URLs and OG URL parity
+- CSP presence and `script-src` hardening
+- GA meta/bootstrap uniqueness and no inline GA code
+- Header DOM consistency across canonical pages
+- No `.DS_Store`, no nested `.git`, no legacy `/home/` references
+- Shared typography and spacing guardrails
+- Insights analytics event payload contracts
+- README drift detection for architectural changes
+- Runtime Playwright checks for:
+  - Home H1 alignment contract
+  - Home vs Connect H1 inheritance parity
+  - CSP violation detection in browser console
+  - GA loader + collect request visibility on canonical routes
 
-Node and Python tests are wired through npm scripts.
+### What failing tests prevent
 
-Run Playwright alignment checks:
+- Silent CSP breakages in production
+- Analytics outages caused by bootstrap drift
+- Route/canonical regressions
+- Documentation drift during architecture changes
+- Repo hygiene issues that destabilize CI/deploy workflows
+
+## Local Development
+
+### Environment
+
+- Node.js `20.x` (matches CI)
+- Python `3.11` for Python QA suite
+
+### Setup
 
 ```bash
 npm ci
+npx playwright install chromium
+python3 -m pip install playwright==1.58.2 pillow==11.3.0
+python3 -m playwright install chromium
+```
+
+### Run locally
+
+Serve static files from repo root (example):
+
+```bash
+python3 -m http.server 4173
+```
+
+### Run tests
+
+```bash
+# Full architecture + QA contract checks
+npm run test:qa-full
+
+# Playwright browser suite
+npm run test:playwright
+
+# Combined CI-equivalent flow
 npm test
 ```
 
-Run full legacy QA suite (Node + Python + Jest):
+### H1 calibration utility
+
+If Home hero geometry changes:
 
 ```bash
-npm run test:qa-full
+npm run calibrate:h1
 ```
 
-Browser runtime GA check (included in `npm test` on CI):
+This updates `--h1-size-desktop` in `/styles/site.css` by measured browser geometry. Do not hand-tune per page.
 
-- `QA/tests/test_ga_runtime_playwright.py`
-- Requires Playwright and Chromium
+## Migration Off GitHub Pages
 
-Visual regression and layout integrity checks (included in `npm test` on CI):
+### GitHub Pages-specific assumptions
 
-- `QA/tests/test_visual_regression_playwright.py`
-- Compares committed baselines for Home, About, Services, Insights, and Connect
-- Captures desktop full page (`1440px` width), desktop fold (`1200px` height), and mobile (`390px` width)
-- Enforces navigation alignment, active-state stability, spacing guardrails, bullet consistency, Insights expand behavior, and mobile overflow rules
+- Root-level static publish behavior
+- Folder route resolution by static `index.html`
+- No runtime server rewrite logic
 
-Refresh visual baselines intentionally:
+### Must preserve on any host
 
-```bash
-npm run test:visual:update
-```
+- Clean folder routes and trailing-slash canonical URLs
+- Canonical + OG URL alignment
+- CSP policy and runtime CSP cleanliness
+- GA architecture (`ga4-measurement-id` + `/scripts/ga4.js`)
+- No inline scripts for runtime bootstrapping
 
-Run only visual checks:
+### Migration targets
 
-```bash
-npm run test:visual
-```
+#### S3 + CloudFront
 
-Run Node Playwright hero-alignment check:
+- Configure default root object and per-folder `index.html` behavior.
+- Add redirect/rewrite rules for clean routes.
+- Preserve headers/CSP and cache policy for HTML vs assets.
 
-```bash
-npx playwright install chromium
-npm run test:playwright:node
-```
+#### Vercel
 
-Run Node-only checks:
+- Map folder routes cleanly in static output.
+- Keep canonical URLs unchanged.
+- Preserve CSP in HTML meta and verify runtime console is clean.
 
-```bash
-npm run test:node
-```
+#### Netlify
 
-Home hero regression guards:
+- Ensure static route handling keeps trailing slash behavior.
+- Avoid transform/inject features that alter CSP or GA tags.
+- Validate runtime GA + CSP tests after deploy.
 
-- `QA/tests/test-home-hero-layout.js` blocks reintroduction of hero-specific inline overrides such as `direction: rtl` and `align-items: flex-end`, and verifies the `.master-layout-grid`, `.master-head`, and `.master-photo` structure.
-- `QA/tests/test-home-hero-alignment-node-playwright.js` validates at `1440x900` that the homepage H1 right edge aligns to `.executive-callout` within `±1px` and remains a single line.
-- `QA/tests/test_visual_regression_playwright.py` includes `home--hero-region-desktop.png` to catch spacing/alignment regressions around the homepage hero headline, subhead, support copy, and media.
-- `QA/tests/test-about-hero-contract.js` ensures the manifesto-led About hero contract stays text-only and photo-free.
-- `QA/tests/test-no-legacy-references.js` blocks references to removed legacy files (unused icons and deprecated scripts/stylesheets).
+#### Traditional server (Nginx/Apache)
 
-Run Python-only checks:
+- Add explicit rewrite rules for folder routes.
+- Serve `index.html` for canonical folders only.
+- Preserve CSP and external script loading behavior.
 
-```bash
-npm run test:python
-```
+## Documentation Drift Policy
 
-## CI
+- Any commit touching architecture-relevant paths must update `README.md`.
+- Enforced by `QA/tests/test-readme-drift.js`.
+- Failure message:
+  - `Architectural changes require README update.`
 
-GitHub Actions workflow:
+## Typography Architecture Rules
 
-- File: `.github/workflows/ci.yml`
-- Runs on push and pull_request
-- Uses Node 20 and Python 3.11
-- Installs Playwright Chromium for runtime GA verification
-- Runs `npm ci` and `npm test`
-
-## Deployment
-
-1. Commit to `main`
-2. Push to GitHub
-3. GitHub Pages deploys from repository root
-4. Validate canonical routes and metadata on live site
-
-## Operating Philosophy Section Structure
-
-- Header placement: `OPERATING PHILOSOPHY` sits at the top of the unified philosophy card with a single blue accent rule below it.
-- Card behavior: the three philosophy blocks are wrapped in one `.card-philosophy` container with subtle default elevation and restrained hover lift.
-- Divider rules: two `.philosophy-divider` lines separate the three blocks, using neutral gray only.
-- Blue usage rule: blue is used only for the section accent rule and the micro-link, not structural dividers.
-- Bullet sizing standard: shared `.service-list` bullets use `/icons/bullet.png` at `8px` by `8px` with `14px` right spacing.
-- Insights linkage rule: the card ends with the micro-link `Explore related insights →` targeting `/insights/`.
+- Global typography tokens live in `/styles/site.css`.
+- Page styles must not define global `h1` font-size overrides.
+- Global H1 tokens:
+  - `--h1-size-desktop`
+  - `--h1-size-mobile`
+- Runtime inheritance is verified between Home and Connect in Playwright.
 
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
 ## INSIGHT DIRECT LINKS
@@ -199,15 +223,3 @@ Designing Adaptive Guardrails for Agentic Work
 https://romanbediner.com/insights/#designing-adaptive-guardrails-for-agentic-work
 
 <!-- AUTO-GENERATED INSIGHT LINKS END -->
-
-## Typography Architecture Rules
-
-- All global typography must be defined in `/styles/site.css`.
-- No page-specific font-size overrides for h1, h2, body text.
-- Homepage hero title must respect hero container width.
-- The hero container defines the maximum horizontal boundary for all hero content.
-- Tinted callouts in hero must span full hero container width.
-- Any new page must not introduce a separate typography system.
-- H1 desktop/mobile source of truth is `--h1-size-desktop` and `--h1-size-mobile` in `/styles/site.css`.
-- Do not hand-tune H1 size in page CSS. Run `npm run calibrate:h1` if hero geometry changes.
-- CI/runtime guard for this contract is `tests/h1-alignment.spec.js` (run via `npm test`).

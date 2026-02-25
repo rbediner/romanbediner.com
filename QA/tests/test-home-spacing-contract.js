@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 /**
+ * Invariant:
+ * - Regression guardrails for test-home-spacing-contract.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
+/**
  * Home spacing contract test.
  * Locks master-grid geometry values to prevent whitespace regressions.
  */
@@ -25,9 +33,9 @@ if (!/--page-top-spacing:\s*72px\s*;/i.test(siteCss)) {
   failures.push('Expected "--page-top-spacing: 72px" in styles/site.css.');
 }
 if (
-  !/\.page-main,\s*[\s\S]*?\.insights-main,\s*[\s\S]*?\.about-main,\s*[\s\S]*?\.services-main,\s*[\s\S]*?\.connect-main\s*\{[\s\S]*?padding-top:\s*var\(--page-top-spacing\)\s*;/i.test(siteCss)
+  !/\.page-main,\s*[\s\S]*?\.insights-main,\s*[\s\S]*?\.about-main,\s*[\s\S]*?\.services-main,\s*[\s\S]*?\.connect-main,\s*[\s\S]*?body\s*>\s*main\s*\{[\s\S]*?padding-top:\s*var\(--page-top-spacing\)\s*!important\s*;/i.test(siteCss)
 ) {
-  failures.push('Expected shared top-spacing rule for .page-main/.insights-main/.about-main/.services-main/.connect-main in styles/site.css.');
+  failures.push('Expected shared top-spacing rule for .page-main/.insights-main/.about-main/.services-main/.connect-main/body>main in styles/site.css.');
 }
 
 // Home page keeps only bottom padding; top spacing is owned globally.

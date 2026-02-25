@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 /**
+ * Invariant:
+ * - Regression guardrails for test-home-hero-alignment-node-playwright.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
+/**
  * Node Playwright QA: verifies homepage hero alignment contract.
  * - Viewport is fixed to desktop contract: 1440x900.
  * - H1 right edge must align to executive callout right edge within ±1px.

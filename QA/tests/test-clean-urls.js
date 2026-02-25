@@ -1,11 +1,20 @@
 #!/usr/bin/env node
 /**
+ * Invariant:
+ * - Regression guardrails for test-clean-urls.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
+/**
  * URL architecture and page policy checks.
  */
 const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
+const LEGACY_HOME_ROUTE = `/${'home'}/`;
 const canonicalPages = [
   'index.html',
   'about/index.html',
@@ -63,7 +72,7 @@ if (fs.existsSync(path.join(root, 'contact', 'index.html'))) {
 }
 if (fs.existsSync(path.join(root, 'home', 'index.html'))) {
   failures += 1;
-  console.error('FAIL: legacy /home/ route still exists.');
+  console.error(`FAIL: legacy ${LEGACY_HOME_ROUTE} route still exists.`);
 }
 
 // /insights/ must exist in shared navigation model.

@@ -1,4 +1,17 @@
 #!/usr/bin/env node
+/*
+ * Purpose:
+ * - generate-sitemap.js supports static-site runtime or QA automation behavior.
+ *
+ * Architectural role:
+ * - Encodes shared implementation contracts used by CI and production pages.
+ *
+ * Dependencies:
+ * - Node.js and the repository file structure for canonical routes/assets.
+ *
+ * Migration considerations:
+ * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ */
 /**
  * Generates sitemap.xml for the canonical clean URLs.
  * Update PAGE_PATHS when a new top-level page is added.

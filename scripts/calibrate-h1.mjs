@@ -1,3 +1,19 @@
+/*
+ * Purpose:
+ * - Automatically calibrate the global desktop H1 size token against the Home hero callout boundary.
+ *
+ * Architectural role:
+ * - Updates `--h1-size-desktop` in `/styles/site.css` as the single source of truth for H1 sizing.
+ * - Produces deterministic artifacts and logs for visual alignment debugging.
+ *
+ * Dependencies:
+ * - Node.js runtime
+ * - Playwright Chromium (`playwright` package and installed browser binary)
+ *
+ * Migration considerations:
+ * - Assumes static file serving from repository root and folder-based clean routes.
+ * - If hosting or route resolution changes, update `resolvePath`, route targets, and static server assumptions.
+ */
 import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";

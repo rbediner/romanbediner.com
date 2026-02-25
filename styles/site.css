@@ -196,7 +196,7 @@ body {
 }
 
 .page-title {
-  margin: 60px 0 32px 0;
+  margin: 0 0 32px 0;
 }
 
 h1 {
@@ -215,8 +215,9 @@ h1 {
 .insights-main,
 .about-main,
 .services-main,
-.connect-main {
-  padding-top: var(--page-top-spacing);
+.connect-main,
+body > main {
+  padding-top: var(--page-top-spacing) !important;
 }
 
 .lede-primary {

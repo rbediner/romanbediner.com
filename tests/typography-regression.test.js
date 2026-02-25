@@ -1,3 +1,11 @@
+/**
+ * Invariant:
+ * - Regression guardrails for typography-regression.test.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
 const fs = require('fs');
 const path = require('path');
 

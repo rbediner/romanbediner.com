@@ -1,5 +1,10 @@
 /**
- * Regression tests for Insights toggle analytics and structural wiring.
+ * Invariant: Insights toggle interactions must always emit GA events with the expected
+ * payload and preserve article slug/title mapping.
+ * Why this exists: Analytics reporting and downstream dashboards depend on stable
+ * event naming and parameters.
+ * What breaks if it fails: Expand/collapse telemetry becomes incomplete or incorrect,
+ * causing reporting drift and loss of behavior visibility.
  */
 const fs = require('fs');
 const path = require('path');

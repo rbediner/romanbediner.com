@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 /**
+ * Invariant:
+ * - Regression guardrails for test-shared-design-system.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
+/**
  * Design-system architecture guardrail for About/Services:
  * - shared tokens/components are defined in site.css
  * - page CSS files do not reintroduce root tokens or !important overrides

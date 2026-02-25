@@ -1,3 +1,11 @@
+/**
+ * Invariant:
+ * - Regression guardrails for h1-alignment.spec.js.
+ * Why this exists:
+ * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * What breaks if it fails:
+ * - CI blocks deployment to prevent production regressions.
+ */
 const fs = require("fs");
 const http = require("http");
 const path = require("path");

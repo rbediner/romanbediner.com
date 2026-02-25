@@ -1,3 +1,16 @@
+/*
+ * Purpose:
+ * - site-navigation.js supports static-site runtime or QA automation behavior.
+ *
+ * Architectural role:
+ * - Encodes shared implementation contracts used by CI and production pages.
+ *
+ * Dependencies:
+ * - Node.js and the repository file structure for canonical routes/assets.
+ *
+ * Migration considerations:
+ * - If hosting model or route structure changes, update path assumptions and re-run QA.
+ */
 // Shared global navigation model used by all pages.
 const NAV_LINKS = [
   { label: "Home", href: "/" },
