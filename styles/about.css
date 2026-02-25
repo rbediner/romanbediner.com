@@ -399,6 +399,45 @@
   margin: 0 auto;
 }
 
+/* About content hugging width: applies the requested container geometry to the active wrapper. */
+.about-container,
+.content-wrapper {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Hero/photo alignment contract: top-align media and copy so text height cannot squash image geometry. */
+.about-hero {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+
+/* Photo frame lock: fixed column width prevents stretch while preserving responsive behavior. */
+.about-photo-wrapper {
+  flex: 0 0 380px;
+  max-width: 380px;
+  width: 100%;
+}
+
+/* Exact source-ratio lock (1022x1360) to keep the portrait undistorted. */
+.about-photo-wrapper img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1022 / 1360;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Reading measure guard: keep body copy dense enough for executive scanning without overlong lines. */
+.about-text-content {
+  flex: 1;
+  max-width: 600px;
+}
+
 .about-main .section {
   margin-top: 96px;
   margin-bottom: 96px;
