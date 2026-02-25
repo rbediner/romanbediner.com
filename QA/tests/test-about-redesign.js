@@ -30,13 +30,11 @@ if (!aboutHtml.includes('<main class="about-main">')) {
   console.error('FAIL: About page is missing the about-main container.');
 }
 
-// The About hero is now a manifesto + photo layout block, not a generic section heading.
+// The About hero is a manifesto-led text block, not a profile-photo layout.
 const requiredContainers = [
   'class="about-container"',
   'class="about-hero"',
   'class="about-text-content"',
-  'class="about-photo-wrapper"',
-  'class="hero-photo"',
   'class="manifesto-h1"'
 ];
 for (const marker of requiredContainers) {
@@ -70,7 +68,7 @@ if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 2) {
 for (const cssSelector of [
   'body .about-container',
   '.about-hero',
-  '.about-photo-wrapper img.hero-photo',
+  '.about-timeline',
   '.manifesto-h1',
   '.lede-primary',
   '.about-main .section:has(> #professional-arc:first-child)'
@@ -119,3 +117,7 @@ if (failures > 0) {
 }
 
 console.log('PASS: about redesign and global footer attribution checks passed.');
+if (aboutHtml.includes('class="about-photo-wrapper"') || aboutHtml.includes('class="hero-photo"')) {
+  failures += 1;
+  console.error('FAIL: About hero should not include a profile photo wrapper or hero-photo image.');
+}

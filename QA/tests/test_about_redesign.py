@@ -30,7 +30,8 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertIn('class="about-container"', self.about_html)
         self.assertIn('class="about-hero"', self.about_html)
         self.assertIn('class="about-text-content"', self.about_html)
-        self.assertIn('class="about-photo-wrapper"', self.about_html)
+        self.assertNotIn('class="about-photo-wrapper"', self.about_html)
+        self.assertNotIn('class="hero-photo"', self.about_html)
         for section in ("about-timeline", "about-philosophy"):
             self.assertIn(f'class="section {section}"', self.about_html)
 
@@ -54,7 +55,7 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertIn(".about-main", self.about_css)
         self.assertIn(".about-container", self.about_css)
         self.assertIn(".about-hero", self.about_css)
-        self.assertIn(".about-photo-wrapper", self.about_css)
+        self.assertIn(".about-timeline", self.about_css)
         self.assertIn(".about-philosophy", self.about_css)
         self.assertIn(".philosophy-stack", self.about_css)
         self.assertIn(".manifesto-h1", self.about_css)

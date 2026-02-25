@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 /**
- * Guardrail: About hero must keep the manifesto/photo contract.
- * This prevents regressions that reintroduce the old heading-first layout
- * or break portrait rendering by dropping required class hooks.
+ * Guardrail: About hero must keep the manifesto-only contract.
+ * This prevents regressions that reintroduce legacy headings or profile photos.
  */
 const fs = require('fs');
 const path = require('path');
@@ -17,8 +16,6 @@ for (const required of [
   'class="about-container"',
   'class="about-hero"',
   'class="about-text-content"',
-  'class="about-photo-wrapper"',
-  'class="hero-photo"',
   'class="manifesto-h1"'
 ]) {
   if (!aboutHtml.includes(required)) {
@@ -26,8 +23,8 @@ for (const required of [
   }
 }
 
-if (!aboutHtml.includes('src="../assets/images/website-photo.png"')) {
-  failures.push('About hero portrait must use ../assets/images/website-photo.png.');
+if (aboutHtml.includes('class="about-photo-wrapper"') || aboutHtml.includes('class="hero-photo"')) {
+  failures.push('About hero must not include a profile photo.');
 }
 
 if (aboutHtml.includes('About Roman Bediner')) {
@@ -37,9 +34,9 @@ if (aboutHtml.includes('About Roman Bediner')) {
 for (const cssNeedle of [
   'body .about-container',
   '.about-hero',
-  'align-items: flex-start',
-  '.about-photo-wrapper img.hero-photo',
-  'aspect-ratio: 1022 / 1360'
+  'display: block !important',
+  '.about-timeline',
+  '.about-main .section:has(> #professional-arc:first-child)'
 ]) {
   if (!aboutCss.includes(cssNeedle)) {
     failures.push(`Missing About CSS guardrail: ${cssNeedle}`);

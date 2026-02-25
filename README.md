@@ -78,8 +78,8 @@ Guidelines:
   - Keep exactly one `<h1>` with value `Insights & Briefs`.
   - Use the dedicated insights description focused on disciplined work systems.
 - **About page hero structure**
-  - Keep manifesto-led hero wrappers: `.about-container`, `.about-hero`, `.about-text-content`, `.about-photo-wrapper`.
-  - Keep the portrait ratio lock on `.about-photo-wrapper img.hero-photo` using `aspect-ratio: 1022 / 1360`.
+  - Keep manifesto-led hero wrappers: `.about-container`, `.about-hero`, `.about-text-content`.
+  - Keep About hero text-only (no profile photo in the About hero block).
 - **Canonical discipline**
   - Keep exactly one canonical tag per canonical page.
   - Keep canonical URLs aligned to route architecture without introducing legacy paths.
@@ -131,7 +131,7 @@ Home hero regression guards:
 
 - `QA/tests/test-home-hero-layout.js` blocks reintroduction of hero-specific inline overrides such as `direction: rtl` and `align-items: flex-end`, and verifies the `.master-layout-grid`, `.master-head`, and `.master-photo` structure.
 - `QA/tests/test_visual_regression_playwright.py` includes `home--hero-region-desktop.png` to catch spacing/alignment regressions around the homepage hero headline, subhead, support copy, and media.
-- `QA/tests/test-about-hero-contract.js` ensures the manifesto-led About hero contract and portrait class hooks stay intact.
+- `QA/tests/test-about-hero-contract.js` ensures the manifesto-led About hero contract stays text-only and photo-free.
 - `QA/tests/test-no-legacy-references.js` blocks references to removed legacy files (unused icons and deprecated scripts/stylesheets).
 
 Run Python-only checks:

@@ -402,27 +402,10 @@ body .about-container {
   display: block !important;
 }
 
-/* 2. FIX THE PHOTO DISTORTION */
-/* We target the image precisely to lock the 1022x1360 proportion */
+/* Keep About hero as a single-column narrative block. */
 .about-hero {
-  display: flex !important;
-  gap: 60px !important;
-  align-items: flex-start !important;
+  display: block !important;
   margin-top: 40px !important;
-}
-
-.about-photo-wrapper {
-  flex: 0 0 380px !important;
-  max-width: 380px !important;
-  width: 380px !important;
-}
-
-.about-photo-wrapper img.hero-photo {
-  width: 100% !important;
-  height: auto !important;
-  aspect-ratio: 1022 / 1360 !important;
-  object-fit: cover !important;
-  border-radius: 12px !important;
 }
 
 /* 3. TIGHTEN THE SUBHEADERS & MANIFESTO */
@@ -485,7 +468,8 @@ body .about-container {
 }
 
 .about-timeline {
-  margin-top: 0;
+  /* Pull timeline divider close to manifesto subheader block. */
+  margin-top: 16px !important;
   margin-bottom: 0;
 }
 
@@ -690,7 +674,7 @@ body .about-container {
 
 /* Reduces top gap before the timeline heading without changing global .section rhythm. */
 .about-main .section:has(> #professional-arc:first-child) {
-  padding-top: 24px;
+  padding-top: 0;
 }
 
 /* Stacks philosophy blocks vertically for exact left-edge alignment. */
@@ -729,18 +713,10 @@ body .about-container {
   }
 
   .about-hero {
-    flex-direction: column !important;
-    gap: 28px !important;
     margin-top: 24px !important;
   }
 
   .about-text-content {
     max-width: none !important;
-  }
-
-  .about-photo-wrapper {
-    flex: 0 0 auto !important;
-    width: 100% !important;
-    max-width: 360px !important;
   }
 }
