@@ -438,6 +438,59 @@
   max-width: 600px;
 }
 
+/* Definitive About layout override: container hugging, portrait ratio lock, and manifesto tuning. */
+/* 1. FORCE THE HUGGING CONTAINER */
+/* We use the body class to ensure this overrides generic container rules */
+body .about-container {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 40px !important;
+  display: block !important;
+}
+
+/* 2. FIX THE PHOTO DISTORTION */
+/* We target the image precisely to lock the 1022x1360 proportion */
+.about-hero {
+  display: flex !important;
+  gap: 60px !important;
+  align-items: flex-start !important;
+  margin-top: 40px !important;
+}
+
+.about-photo-wrapper {
+  flex: 0 0 380px !important;
+  max-width: 380px !important;
+  width: 380px !important;
+}
+
+.about-photo-wrapper img.hero-photo {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1022 / 1360 !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+  display: block !important;
+}
+
+/* 3. TIGHTEN THE SUBHEADERS & MANIFESTO */
+.about-text-content {
+  flex: 1 !important;
+  max-width: 600px !important;
+}
+
+.manifesto-h1 {
+  font-size: 52px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.1 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Remove 'About Roman Bediner' if still present in HTML */
+.about-header h1:contains("About Roman Bediner") {
+  display: none !important;
+}
+
 .about-main .section {
   margin-top: 96px;
   margin-bottom: 96px;
