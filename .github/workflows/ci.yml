@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers for Node tests
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install chromium
 
       - name: Setup Python
         uses: actions/setup-python@v5
