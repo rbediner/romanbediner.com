@@ -77,9 +77,13 @@ if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180
   failures += 1;
   console.error('FAIL: insight-card transition must use transform/box-shadow 180ms ease.');
 }
-if (!/\.insight-card\s*\{[^}]*margin-bottom:\s*64px;[^}]*padding-bottom:\s*32px;/s.test(insightsCss)) {
+if (!/\.insight-card\s*\{[^}]*margin-bottom:\s*64px;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: insight-card must use the premium briefing spacing (64px/32px).');
+  console.error('FAIL: insight-card must preserve the premium briefing vertical rhythm (64px spacing).');
+}
+if (!/\.insight-card,\s*[\s\S]*?\.philosophy-card\s*\{[^}]*padding:\s*40px;[^}]*border-radius:\s*8px;/s.test(siteCss)) {
+  failures += 1;
+  console.error('FAIL: site.css must own shared card geometry (40px padding, 8px radius).');
 }
 if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);/s.test(insightsCss)) {
   failures += 1;

@@ -45,13 +45,6 @@ a:hover {
   padding: 72px 0 56px 0;
 }
 
-h1 {
-  font-size: 44px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
 h2 {
   font-size: 28px;
   font-weight: 500;
@@ -97,7 +90,6 @@ p + .divider {
 }
 
 main .master-head h1 {
-  font-size: clamp(30px, 2.2vw, 34px);
   margin-bottom: 18px;
   max-width: 100%;
 }

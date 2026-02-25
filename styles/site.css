@@ -194,22 +194,18 @@ body {
 }
 
 .page-title {
-  font-size: 56px;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
   margin: 60px 0 32px 0;
-  color: var(--text-primary);
 }
 
-.page-main h1,
-main h1 {
+h1 {
+  font-family: var(--font-sans);
   font-size: var(--h1-size);
   font-weight: var(--h1-weight);
   line-height: 1.12;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  margin: 60px 0 32px;
+  margin: 60px 0 32px 0;
+  color: var(--text-primary);
 }
 
 .lede-primary {
@@ -304,6 +300,15 @@ main li:last-child {
   padding-left: var(--list-indent);
 }
 
+.page-main p + ul,
+.page-main p + .service-list {
+  margin-top: 20px;
+}
+
+.service-card ul {
+  margin-top: 20px;
+}
+
 .service-list li {
   display: flex;
   align-items: flex-start;
@@ -326,6 +331,13 @@ main li:last-child {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.service-card,
+.insight-card,
+.philosophy-card {
+  padding: 40px;
+  border-radius: 8px;
 }
 
 .footer {
@@ -361,8 +373,7 @@ main li:last-child {
     margin: 40px 0 24px 0;
   }
 
-  .page-main h1,
-  main h1 {
+  h1 {
     font-size: 36px;
     margin: 44px 0 24px;
   }
@@ -378,4 +389,13 @@ main li:last-child {
   .shelf-content {
     padding: 24px;
   }
+}
+
+/* Typography Guardrail */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans) !important;
+}
+
+body {
+  font-family: var(--font-sans) !important;
 }

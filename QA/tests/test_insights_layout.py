@@ -54,8 +54,8 @@ class InsightsLayoutTest(unittest.TestCase):
         """Ensure card hover lift and card spacing align with required behavior."""
         self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;")
         self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*margin-bottom:\s*64px;")
-        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*padding-bottom:\s*32px;")
         self.assertRegex(self.insights_css, r"\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);")
+        self.assertRegex(self.site_css, r"\.service-card,\s*[\s\S]*?\.philosophy-card\s*\{[^}]*padding:\s*40px;")
         self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*width:\s*56px;")
         self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*height:\s*3px;")
         self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);")

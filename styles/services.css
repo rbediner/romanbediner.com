@@ -23,8 +23,6 @@
 /* Premium off-white service card with elevated interaction depth. */
 .service-card {
   background: var(--surface-color, #f6f7f8);
-  padding: 40px;
-  border-radius: 12px;
   border: 1px solid var(--border-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
@@ -139,10 +137,6 @@
 }
 
 @media (max-width: 768px) {
-  .service-card {
-    padding: 28px;
-  }
-
   .service-header-row {
     gap: 16px;
   }
