@@ -91,13 +91,13 @@ p + .divider {
 
 main .master-head h1 {
   margin-bottom: 18px;
-  max-width: 100%;
+  max-width: 760px;
 }
 
 /* Subhead fills the grid width and aligns with photo edge. */
 .master-head .subhead.executive-callout {
   width: 100%;
-  max-width: none;
+  max-width: 760px;
   box-sizing: border-box;
   font-size: 24px;
   font-weight: 400;
