@@ -29,7 +29,7 @@ describe('Typography regression guardrails', () => {
   });
 
   test('site.css is the only file that defines h1 font-size', () => {
-    expect(siteCss).toMatch(/h1\s*\{[\s\S]*font-size\s*:\s*clamp\(22px,\s*2\.2vw,\s*26px\)/);
+    expect(siteCss).toMatch(/h1\s*\{[\s\S]*font-size\s*:\s*26px/);
     expect(homeCss).not.toMatch(/h1\s*\{[^}]*font-size\s*:/);
     expect(aboutCss).not.toMatch(/h1\s*\{[^}]*font-size\s*:/);
     expect(servicesCss).not.toMatch(/h1\s*\{[^}]*font-size\s*:/);
