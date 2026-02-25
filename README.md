@@ -185,3 +185,12 @@ Designing Adaptive Guardrails for Agentic Work
 https://romanbediner.com/insights/#designing-adaptive-guardrails-for-agentic-work
 
 <!-- AUTO-GENERATED INSIGHT LINKS END -->
+
+## Typography Architecture Rules
+
+- All global typography must be defined in `/styles/site.css`.
+- No page-specific font-size overrides for h1, h2, body text.
+- Homepage hero title must respect hero container width.
+- The hero container defines the maximum horizontal boundary for all hero content.
+- Tinted callouts in hero must span full hero container width.
+- Any new page must not introduce a separate typography system.

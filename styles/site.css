@@ -198,12 +198,12 @@ body {
 }
 
 h1 {
-  font-family: var(--font-sans);
-  font-size: var(--h1-size);
-  font-weight: var(--h1-weight);
-  line-height: 1.12;
-  letter-spacing: 0.04em;
+  font-size: clamp(22px, 2.2vw, 26px);
   text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  font-family: var(--font-sans);
+  font-weight: var(--h1-weight);
   margin: 60px 0 32px 0;
   color: var(--text-primary);
 }
@@ -392,11 +392,6 @@ main li:last-child {
   .page-title {
     font-size: 42px;
     margin: 40px 0 24px 0;
-  }
-
-  h1 {
-    font-size: 36px;
-    margin: 44px 0 24px;
   }
 
   .lede-primary {
