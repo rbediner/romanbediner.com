@@ -35,8 +35,15 @@ class AboutRedesignTest(unittest.TestCase):
         """Ensure professional arc structure and shared service-list bullets are used."""
         self.assertIn('id="professional-arc"', self.about_html)
         self.assertEqual(self.about_html.count('class="era-header"'), 3)
-        self.assertIn('class="executive-intro"', self.about_html)
-        self.assertIn('class="hero-hook"', self.about_html)
+        self.assertIn('class="about-lede"', self.about_html)
+        self.assertIn(
+            "Modern organizations do not struggle from lack of strategy. They stall when execution fragments across teams, tools, and decision layers.",
+            self.about_html,
+        )
+        self.assertIn(
+            "The objective is not additional process. It is durable operating architecture that scales with complexity.",
+            self.about_html,
+        )
         self.assertGreaterEqual(self.about_html.count('<ul class="service-list">'), 2)
 
     def test_pmp_and_css_blocks_present(self):
@@ -45,10 +52,11 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertIn(".about-philosophy", self.about_css)
         self.assertIn(".philosophy-stack", self.about_css)
         self.assertIn(".about-header", self.about_css)
-        self.assertIn(".executive-intro", self.about_css)
+        self.assertIn(".about-lede", self.about_css)
+        self.assertIn(".about-main .section-accent", self.about_css)
         self.assertIn(".footer-meta", self.site_css)
         self.assertIn(".footer-primary", self.site_css)
-        self.assertIn(".hero-hook", self.about_css)
+        self.assertIn("#professional-arc", self.about_css)
 
     def test_embedded_operating_leadership_section_replaces_today(self):
         """Ensure the close section uses the new heading and copy."""

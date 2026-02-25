@@ -614,6 +614,24 @@
   margin-bottom: 32px;
 }
 
+.about-main .section-accent {
+  display: block;
+  margin-bottom: 16px !important;
+}
+
+.about-lede {
+  margin-bottom: 40px;
+}
+
+.about-lede p {
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text-color);
+  font-weight: 500;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+
 .executive-intro {
   margin-top: 24px;
   padding-left: 28px;
@@ -641,6 +659,10 @@
   padding-top: 24px;
 }
 
+#professional-arc {
+  margin-top: 0;
+}
+
 /* Stacks philosophy blocks vertically for exact left-edge alignment. */
 .philosophy-stack {
   display: flex;
@@ -666,6 +688,10 @@
 }
 
 @media (max-width: 768px) {
+  .about-lede p {
+    font-size: 19px;
+  }
+
   .hero-hook {
     font-size: 20px;
   }
