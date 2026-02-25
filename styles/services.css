@@ -356,6 +356,58 @@
       margin-bottom: 0;
     }
 
+    /* Executive callout frames the page narrative before service offerings. */
+    .executive-callout {
+      padding: 24px 32px;
+      border-left: 4px solid var(--accent-blue);
+      background-color: rgba(59, 108, 255, 0.08);
+      border-radius: 0 8px 8px 0;
+      font-size: 20px;
+      margin-bottom: 56px;
+      line-height: 1.6;
+      color: var(--text-color);
+      max-width: 100%;
+    }
+
+    .executive-callout strong {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* Service stack replaces grid layout for tighter vertical rhythm. */
+    .service-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .service-stack .service-card {
+      background: var(--surface-color);
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .service-header-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .service-header-row h3 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--text-color);
+    }
+
+    .service-stack .service-card .label {
+      margin-top: 32px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-bottom: 8px;
+    }
+
     .footer {
       padding: 48px 24px;
       border-top: 1px solid var(--border-color);
@@ -399,6 +451,16 @@
 
       .services-grid {
         grid-template-columns: 1fr;
+      }
+
+      .service-stack .service-card {
+        padding: 28px;
+      }
+
+      .executive-callout {
+        padding: 20px 22px;
+        font-size: 18px;
+        margin-bottom: 40px;
       }
 
       .about-subhead {
