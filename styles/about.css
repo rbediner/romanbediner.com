@@ -436,22 +436,8 @@
   color: #4b5563;
 }
 
-.about-hero {
-  margin-top: 96px;
-  margin-bottom: 0;
-}
-
-.about-hero::after {
-  content: "";
-  display: block;
-  width: 100%;
-  border-top: 1px solid #e5e7eb;
-  margin-top: 32px;
-  margin-bottom: 0;
-}
-
 .about-timeline {
-  margin-top: 80px;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -620,46 +606,39 @@
 }
 
 /* =========================================
-   ABOUT PAGE UPGRADES: Hook, Callout, and Vertical Philosophy Stack
+   ABOUT PAGE HEADER RHYTHM + PROFESSIONAL ARC
    ========================================= */
 
-/* Keeps the narrative hook readable and avoids compressed leading paragraphs. */
-.about-hero-statement {
-  margin-bottom: 40px;
+/* Tighten hero-to-arc spacing so narrative flows without a floating box gap. */
+.about-header {
+  margin-bottom: 32px;
 }
 
-.about-hero-statement p {
-  font-size: 22px;
-  line-height: 1.5;
-  font-weight: 500;
-  margin-bottom: 20px;
-  color: var(--text-color);
+.executive-intro {
+  margin-top: 24px;
+  padding-left: 28px;
+  border-left: 3px solid var(--accent-blue);
 }
 
-.about-hero-statement p:last-child {
-  margin-bottom: 0;
-}
-
-/* Highlights the callout as the transition from hook to chronology. */
-.executive-callout {
-  padding: 24px 32px;
-  border-left: 4px solid var(--accent-blue);
-  background-color: rgba(59, 108, 255, 0.08);
-  border-radius: 0 8px 8px 0;
-  font-size: 19px;
-  margin-bottom: 56px;
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
-/* Preserves clear chronological section markers. */
-#professional-arc h3.era-header {
+.hero-hook {
   font-size: 24px;
-  font-weight: 600;
+  line-height: 1.4;
+  font-weight: 500;
   color: var(--text-color);
-  margin: 48px 0 16px 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 12px;
+}
+
+.hero-summary {
+  font-size: 18px;
+  color: var(--muted-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.era-header {
+  margin-top: 48px !important;
+  border-top: 1px solid var(--border-color);
+  padding-top: 24px;
 }
 
 /* Stacks philosophy blocks vertically for exact left-edge alignment. */
@@ -684,4 +663,14 @@
   font-size: 24px;
   margin-bottom: 12px;
   color: var(--accent-blue);
+}
+
+@media (max-width: 768px) {
+  .hero-hook {
+    font-size: 20px;
+  }
+
+  .about-header {
+    margin-bottom: 24px;
+  }
 }
