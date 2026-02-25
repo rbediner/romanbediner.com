@@ -40,7 +40,7 @@ a:hover {
 .insights-main {
   max-width: 960px;
   margin: 0 auto;
-  padding: 72px 24px;
+  padding: 0 24px;
 }
 
 /* Section accent reinforces the briefing heading. */
@@ -207,7 +207,7 @@ a:hover {
 
 @media (max-width: 768px) {
   .insights-main {
-    padding: 56px 24px;
+    padding: 0 24px;
   }
 
   .brief-header h2 {

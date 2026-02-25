@@ -8,7 +8,9 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const homeCssPath = path.join(root, 'styles', 'home.css');
+const siteCssPath = path.join(root, 'styles', 'site.css');
 const css = fs.readFileSync(homeCssPath, 'utf8');
+const siteCss = fs.readFileSync(siteCssPath, 'utf8');
 
 const failures = [];
 
@@ -18,10 +20,20 @@ function assertMatches(regex, message) {
   }
 }
 
-// Base page padding contract.
+// Shared nav-to-H1 spacing token contract (centralized in site.css).
+if (!/--page-top-spacing:\s*72px\s*;/i.test(siteCss)) {
+  failures.push('Expected "--page-top-spacing: 72px" in styles/site.css.');
+}
+if (
+  !/\.page-main,\s*[\s\S]*?\.insights-main,\s*[\s\S]*?\.about-main,\s*[\s\S]*?\.services-main,\s*[\s\S]*?\.connect-main\s*\{[\s\S]*?padding-top:\s*var\(--page-top-spacing\)\s*;/i.test(siteCss)
+) {
+  failures.push('Expected shared top-spacing rule for .page-main/.insights-main/.about-main/.services-main/.connect-main in styles/site.css.');
+}
+
+// Home page keeps only bottom padding; top spacing is owned globally.
 assertMatches(
-  /\.page-main\s*\{[\s\S]*?padding:\s*72px\s+0\s+56px\s+0\s*;/i,
-  'Expected ".page-main" desktop padding to be "72px 0 56px 0".'
+  /\.page-main\s*\{[\s\S]*?padding:\s*0\s+0\s+56px\s+0\s*;/i,
+  'Expected ".page-main" desktop padding to be "0 0 56px 0".'
 );
 
 // Master grid desktop geometry contract.
@@ -65,8 +77,8 @@ if (!mobileBlockMatch) {
 } else {
   const mobileBlock = mobileBlockMatch[1];
 
-  if (!/\.page-main\s*\{[\s\S]*?padding:\s*48px\s+0\s+40px\s+0\s*;/i.test(mobileBlock)) {
-    failures.push('Expected mobile ".page-main" padding to be "48px 0 40px 0".');
+  if (!/\.page-main\s*\{[\s\S]*?padding:\s*0\s+0\s+40px\s+0\s*;/i.test(mobileBlock)) {
+    failures.push('Expected mobile ".page-main" padding to be "0 0 40px 0".');
   }
 
   if (!/\.master-layout-grid\s*\{[\s\S]*?grid-template-columns:\s*1fr\s*;/i.test(mobileBlock)) {
