@@ -85,6 +85,10 @@ a:hover {
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
+.insight-card:last-child {
+  border-bottom: none;
+}
+
 .insight-card + .insight-card {
   margin-top: 0;
 }
@@ -94,19 +98,10 @@ a:hover {
   box-shadow: none;
 }
 
-.brief-header time {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent-blue);
-  font-weight: 600;
-  display: block;
-  margin-bottom: 8px;
-}
-
 .brief-header h2 {
   font-size: 32px;
-  margin: 0 0 24px 0;
+  margin-top: 0;
+  margin-bottom: 24px;
   line-height: 1.2;
   font-weight: 600;
   letter-spacing: -0.01em;
