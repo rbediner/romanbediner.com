@@ -38,8 +38,12 @@ assertMatches(
   'Expected ".master-head" to span both grid columns.'
 );
 assertMatches(
-  /\.master-photo\s*\{[\s\S]*?grid-row:\s*2\s*\/\s*span\s*4\s*;/i,
-  'Expected ".master-photo" to start at row 2 and span rows.'
+  /\.master-layout-grid\s*\{[\s\S]*?grid-template-areas:\s*[\s\S]*?"blurb\s+photo"/i,
+  'Expected ".master-layout-grid" template to place "blurb photo" on the same row.'
+);
+assertMatches(
+  /\.master-photo\s*\{[\s\S]*?grid-area:\s*photo\s*;/i,
+  'Expected ".master-photo" to use grid-area: photo.'
 );
 assertMatches(
   /\.master-blurb\s*\{[\s\S]*?grid-row:\s*2\s*;/i,

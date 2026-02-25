@@ -21,7 +21,6 @@ Route policy:
 
 - `/styles/site.css` shared architecture styles (header/nav consistency)
 - `/styles/home.css`, `/styles/about.css`, `/styles/services.css`, `/styles/connect.css`, `/styles/insights.css` page styles
-- `/styles.css` legacy stub pointing to `/styles/` architecture
 - `/scripts/ga4.js` GA4 bootstrap logic
 - `/scripts/` validation and utility scripts
 - `/QA/tests/` automated guardrail tests
@@ -70,14 +69,17 @@ Roman Bediner is positioned as an Operations & Transformation Leader focused on 
 Guidelines:
 
 - **Homepage identity and thesis taxonomy**
-  - `<title>`: `Roman Bediner | Operations & Transformation Leader`
-  - `<h1>`: `Productizing Operations for Modern AI Enabled Work`
-  - `<meta name="description">`: `Executive operator designing scalable operating models that align product, engineering, and customer systems.`
+  - `<title>`: `Roman Bediner | Productizing Operations for AI-Enabled Organizations`
+  - `<h1>`: `PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK`
+  - `<meta name="description">`: `Roman Bediner designs AI-enabled operating models that align product, engineering, finance, and customer teams into scalable execution systems.`
   - Keep a single `<title>`, a single `<meta name="description">`, and a single homepage `<h1>`.
 - **Insights page structure**
-  - `<title>`: `Insights on AI Enabled Operations | Roman Bediner`
-  - Keep exactly one `<h1>` with value `Insights`.
+  - `<title>`: `Working Briefs on AI-Enabled Operations | Roman Bediner`
+  - Keep exactly one `<h1>` with value `Insights & Briefs`.
   - Use the dedicated insights description focused on disciplined work systems.
+- **About page hero structure**
+  - Keep manifesto-led hero wrappers: `.about-container`, `.about-hero`, `.about-text-content`, `.about-photo-wrapper`.
+  - Keep the portrait ratio lock on `.about-photo-wrapper img.hero-photo` using `aspect-ratio: 1022 / 1360`.
 - **Canonical discipline**
   - Keep exactly one canonical tag per canonical page.
   - Keep canonical URLs aligned to route architecture without introducing legacy paths.
@@ -127,8 +129,10 @@ npm run test:node
 
 Home hero regression guards:
 
-- `QA/tests/test-home-hero-layout.js` blocks reintroduction of hero-specific inline overrides such as `direction: rtl` and `align-items: flex-end`, and verifies the `.hero-grid`, `.hero-copy`, and `.hero-media` structure.
+- `QA/tests/test-home-hero-layout.js` blocks reintroduction of hero-specific inline overrides such as `direction: rtl` and `align-items: flex-end`, and verifies the `.master-layout-grid`, `.master-head`, and `.master-photo` structure.
 - `QA/tests/test_visual_regression_playwright.py` includes `home--hero-region-desktop.png` to catch spacing/alignment regressions around the homepage hero headline, subhead, support copy, and media.
+- `QA/tests/test-about-hero-contract.js` ensures the manifesto-led About hero contract and portrait class hooks stay intact.
+- `QA/tests/test-no-legacy-references.js` blocks references to removed legacy files (unused icons and deprecated scripts/stylesheets).
 
 Run Python-only checks:
 

@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 /**
- * Test: About page hybrid redesign structure and global footer attribution.
+ * About page contract test:
+ * - manifesto-led hero structure
+ * - timeline and philosophy sections
+ * - global footer attribution consistency
  */
 const fs = require('fs');
 const path = require('path');
@@ -27,12 +30,25 @@ if (!aboutHtml.includes('<main class="about-main">')) {
   console.error('FAIL: About page is missing the about-main container.');
 }
 
-const requiredSections = ['about-hero', 'about-timeline', 'about-philosophy'];
-for (const section of requiredSections) {
-  if (!aboutHtml.includes(`class="section ${section}"`)) {
+// The About hero is now a manifesto + photo layout block, not a generic section heading.
+const requiredContainers = [
+  'class="about-container"',
+  'class="about-hero"',
+  'class="about-text-content"',
+  'class="about-photo-wrapper"',
+  'class="hero-photo"',
+  'class="manifesto-h1"'
+];
+for (const marker of requiredContainers) {
+  if (!aboutHtml.includes(marker)) {
     failures += 1;
-    console.error(`FAIL: About page is missing section ${section}.`);
+    console.error(`FAIL: About page is missing required container marker ${marker}.`);
   }
+}
+
+if (aboutHtml.includes('About Roman Bediner')) {
+  failures += 1;
+  console.error('FAIL: legacy "About Roman Bediner" heading should not appear in About hero.');
 }
 
 if (!aboutHtml.includes('id="professional-arc"')) {
@@ -45,19 +61,24 @@ if ((aboutHtml.match(/class="era-header"/g) || []).length !== 3) {
   console.error('FAIL: About professional arc must include exactly 3 era headers.');
 }
 
-if ((aboutHtml.match(/class="executive-callout"/g) || []).length < 1) {
-  failures += 1;
-  console.error('FAIL: About professional arc must include an executive callout.');
-}
-
 if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 2) {
   failures += 1;
-  console.error('FAIL: About page should keep service-list bullets in the philosophy grid.');
+  console.error('FAIL: About page should keep shared service-list bullets in philosophy blocks.');
 }
 
-if (!aboutCss.includes('.about-main') || !aboutCss.includes('.about-philosophy') || !aboutCss.includes('.philosophy-grid')) {
-  failures += 1;
-  console.error('FAIL: About CSS is missing required upgraded style blocks.');
+// Keep guardrails around the photo ratio lock and manifesto typography hooks.
+for (const cssSelector of [
+  'body .about-container',
+  '.about-hero',
+  '.about-photo-wrapper img.hero-photo',
+  '.manifesto-h1',
+  '.lede-primary',
+  '.about-main .section:has(> #professional-arc:first-child)'
+]) {
+  if (!aboutCss.includes(cssSelector)) {
+    failures += 1;
+    console.error(`FAIL: About CSS is missing selector ${cssSelector}.`);
+  }
 }
 
 if (!siteCss.includes('.footer-meta')) {
@@ -67,10 +88,6 @@ if (!siteCss.includes('.footer-meta')) {
 if (!siteCss.includes('.footer-primary')) {
   failures += 1;
   console.error('FAIL: global footer-primary style is missing in styles/site.css.');
-}
-if (!aboutCss.includes('.about-hero::after')) {
-  failures += 1;
-  console.error('FAIL: about hero divider style is missing.');
 }
 if (aboutHtml.includes('<h2>TODAY</h2>')) {
   failures += 1;

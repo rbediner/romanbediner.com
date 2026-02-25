@@ -7,12 +7,12 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 
-const expectedHomepageTitle = 'Roman Bediner | Productizing Operations for Modern, AI-Enabled Work';
-const expectedHomepageDescription = 'Roman Bediner is an operations executive specializing in scalable delivery. He aligns product and engineering teams by treating Operations as a Product.';
+const expectedHomepageTitle = 'Roman Bediner | Productizing Operations for AI-Enabled Organizations';
+const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operating models that align product, engineering, finance, and customer teams into scalable execution systems.';
 // Homepage hero headline is intentionally all caps for executive visual hierarchy.
 const expectedHomepageH1 = 'PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK';
-const expectedInsightsTitle = 'Insights on AI Enabled Operations | Roman Bediner';
-const expectedInsightsDescription = 'Working briefs on modern AI-enabled work, productizing operations, and treating execution as a designed operating system.';
+const expectedInsightsTitle = 'Working Briefs on AI-Enabled Operations | Roman Bediner';
+const expectedInsightsDescription = 'Strategic working briefs on productizing operations, AI as an operating layer, and designing execution systems for modern organizations.';
 
 const htmlPages = [
   'index.html',
@@ -32,6 +32,15 @@ function extractSingle(regex, html, label, file, failures) {
   return matches[0];
 }
 
+function decodeBasicEntities(value) {
+  return value
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
 const failures = { count: 0 };
 
 const homepageHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
@@ -49,7 +58,7 @@ const insightsOgTitle = extractSingle(/<meta\s+property="og:title"\s+content="([
 const insightsOgDescription = extractSingle(/<meta\s+property="og:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:description', 'insights/index.html', failures);
 const insightsTwitterTitle = extractSingle(/<meta\s+name="twitter:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:title', 'insights/index.html', failures);
 const insightsTwitterDescription = extractSingle(/<meta\s+name="twitter:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:description', 'insights/index.html', failures);
-const insightsH1 = [...insightsHtml.matchAll(/<h1>([^<]+)<\/h1>/gi)].map((m) => m[1].trim());
+const insightsH1 = [...insightsHtml.matchAll(/<h1>([^<]+)<\/h1>/gi)].map((m) => decodeBasicEntities(m[1].trim()));
 
 if (homepageTitle && homepageTitle !== expectedHomepageTitle) {
   failures.count += 1;
@@ -80,9 +89,9 @@ if (insightsDescription && insightsDescription !== expectedInsightsDescription) 
   failures.count += 1;
   console.error('FAIL: insights meta description mismatch.');
 }
-if (insightsH1.length !== 1 || insightsH1[0] !== 'Insights') {
+if (insightsH1.length !== 1 || insightsH1[0] !== 'Insights & Briefs') {
   failures.count += 1;
-  console.error('FAIL: insights page must contain exactly one h1 with value "Insights".');
+  console.error('FAIL: insights page must contain exactly one h1 with value "Insights & Briefs".');
 }
 if (insightsOgTitle && !insightsOgTitle.length) {
   failures.count += 1;

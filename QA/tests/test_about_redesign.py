@@ -25,9 +25,12 @@ class AboutRedesignTest(unittest.TestCase):
         cls.footer_primary = "© Roman Bediner, PMP"
 
     def test_about_structure_sections_present(self):
-        """Ensure the required About page section structure is present."""
+        """Ensure the current About manifesto hero and section wrappers are present."""
         self.assertIn('<main class="about-main">', self.about_html)
-        self.assertIn('class="about-header"', self.about_html)
+        self.assertIn('class="about-container"', self.about_html)
+        self.assertIn('class="about-hero"', self.about_html)
+        self.assertIn('class="about-text-content"', self.about_html)
+        self.assertIn('class="about-photo-wrapper"', self.about_html)
         for section in ("about-timeline", "about-philosophy"):
             self.assertIn(f'class="section {section}"', self.about_html)
 
@@ -47,11 +50,14 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertGreaterEqual(self.about_html.count('<ul class="service-list">'), 2)
 
     def test_pmp_and_css_blocks_present(self):
-        """Ensure credential statement and required style blocks exist."""
+        """Ensure required About layout/style hooks and footer classes exist."""
         self.assertIn(".about-main", self.about_css)
+        self.assertIn(".about-container", self.about_css)
+        self.assertIn(".about-hero", self.about_css)
+        self.assertIn(".about-photo-wrapper", self.about_css)
         self.assertIn(".about-philosophy", self.about_css)
         self.assertIn(".philosophy-stack", self.about_css)
-        self.assertIn(".about-header", self.about_css)
+        self.assertIn(".manifesto-h1", self.about_css)
         self.assertIn(".about-lede", self.about_css)
         self.assertIn(".about-main .section-accent", self.about_css)
         self.assertIn(".footer-meta", self.site_css)

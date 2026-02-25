@@ -7,37 +7,38 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const OG_IMAGE = 'https://romanbediner.com/assets/og-logo/og-final.png?v=4';
-const OG_ALT = 'Roman Bediner brand mark on light editorial gradient background';
+// Shared OG image alt text must match the production metadata contract across pages.
+const OG_ALT = 'Roman Bediner brand mark on editorial gradient background';
 
 const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Roman Bediner | Productizing Operations for Modern, AI-Enabled Work',
-    ogDescription: 'Roman Bediner is an operations executive specializing in scalable delivery. He aligns product and engineering teams by treating Operations as a Product.'
+    ogTitle: 'Roman Bediner | Productizing Operations for AI-Enabled Organizations',
+    ogDescription: 'Roman Bediner designs AI-enabled operating models that align product, engineering, finance, and customer teams into scalable execution systems.'
   },
   {
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
-    ogTitle: 'Roman Bediner | Operator Background & Operating Philosophy',
-    ogDescription: 'From digital transformation in early sports platforms to AI-enabled operating systems, a story of building scalable execution engines.'
+    ogTitle: 'Roman Bediner | Operating Philosophy & Leadership Background',
+    ogDescription: 'Operating philosophy and leadership background of a global operations executive specializing in productized execution systems and AI-enabled delivery models.'
   },
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
-    ogTitle: 'Operating Model Design & AI-Enabled Systems | Roman Bediner',
-    ogDescription: 'Structured operating architecture, productized operations, and embedded execution systems designed to scale teams and performance.'
+    ogTitle: 'Operating Model Design & AI-Enabled Execution Systems | Roman Bediner',
+    ogDescription: 'Operating model design, embedded leadership, and AI-enabled execution systems that scale product and engineering organizations with measurable accountability.'
   },
   {
     file: 'insights/index.html',
     canonical: 'https://romanbediner.com/insights/',
-    ogTitle: 'Productizing Operations for Modern AI-Enabled Work | Roman Bediner',
-    ogDescription: 'Working briefs on modern AI-enabled work, productizing operations, and treating execution as a designed operating system.'
+    ogTitle: 'Working Briefs on AI-Enabled Operations | Roman Bediner',
+    ogDescription: 'Strategic working briefs on productizing operations, AI as an operating layer, and designing execution systems for modern organizations.'
   },
   {
     file: 'connect/index.html',
     canonical: 'https://romanbediner.com/connect/',
-    ogTitle: 'Connect with Roman Bediner',
+    ogTitle: 'Connect with Roman Bediner | Operating Model Advisory',
     ogDescription: 'Start a conversation about operating model design, AI-enabled systems, or embedded operational leadership.'
   }
 ];

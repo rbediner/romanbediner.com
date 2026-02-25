@@ -77,9 +77,9 @@ if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180
   failures += 1;
   console.error('FAIL: insight-card transition must use transform/box-shadow 180ms ease.');
 }
-if (!/\.insight-card\s*\{[^}]*margin-bottom:\s*80px;[^}]*padding-bottom:\s*48px;/s.test(insightsCss)) {
+if (!/\.insight-card\s*\{[^}]*margin-bottom:\s*64px;[^}]*padding-bottom:\s*32px;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: insight-card must use the premium briefing spacing (80px/48px).');
+  console.error('FAIL: insight-card must use the premium briefing spacing (64px/32px).');
 }
 if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);/s.test(insightsCss)) {
   failures += 1;

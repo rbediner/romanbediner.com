@@ -393,12 +393,6 @@
   padding-right: 24px;
 }
 
-/* Keeps About content aligned to the same readable column width used by Services. */
-.content-wrapper {
-  max-width: 880px;
-  margin: 0 auto;
-}
-
 /* 1. FORCE THE HUGGING CONTAINER */
 /* We use the body class to ensure this overrides generic container rules */
 body .about-container {
@@ -665,10 +659,6 @@ body .about-container {
    ========================================= */
 
 /* Tighten hero-to-arc spacing so narrative flows without a floating box gap. */
-.about-header {
-  margin-bottom: 32px;
-}
-
 .about-main .section-accent {
   display: block;
   margin-top: 4px;
@@ -680,51 +670,12 @@ body .about-container {
   margin-bottom: 40px;
 }
 
-.manifesto-h1 {
-  font-size: 56px;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  margin-bottom: 12px;
-  color: var(--text-color);
-}
-
-.lede-primary {
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1.3;
-  margin-top: 24px;
-  margin-bottom: 24px;
-  color: var(--text-color);
-  max-width: 900px;
-}
-
 .lede-secondary p {
   font-size: 20px;
   color: var(--muted-text);
   line-height: 1.6;
   margin-bottom: 20px;
   max-width: 780px;
-}
-
-.executive-intro {
-  margin-top: 24px;
-  padding-left: 28px;
-  border-left: 3px solid var(--accent-blue);
-}
-
-.hero-hook {
-  font-size: 24px;
-  line-height: 1.4;
-  font-weight: 500;
-  color: var(--text-color);
-  margin-bottom: 12px;
-}
-
-.hero-summary {
-  font-size: 18px;
-  color: var(--muted-text);
-  line-height: 1.6;
-  margin: 0;
 }
 
 .era-header {
@@ -771,11 +722,25 @@ body .about-container {
     font-size: 19px;
   }
 
-  .hero-hook {
-    font-size: 20px;
+  /* Preserve manifesto layout on mobile without horizontal overflow. */
+  body .about-container {
+    max-width: none !important;
+    padding: 0 24px !important;
   }
 
-  .about-header {
-    margin-bottom: 24px;
+  .about-hero {
+    flex-direction: column !important;
+    gap: 28px !important;
+    margin-top: 24px !important;
+  }
+
+  .about-text-content {
+    max-width: none !important;
+  }
+
+  .about-photo-wrapper {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 360px !important;
   }
 }

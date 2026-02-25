@@ -28,19 +28,19 @@ if (!/\.card-philosophy:hover\s*\{[^}]*transform:\s*translateY\(-3px\);/s.test(a
   console.error('FAIL: .card-philosophy hover transform is missing.');
 }
 
-// Test 3: ensure philosophy dividers are removed in favor of grid layout.
+// Test 3: ensure philosophy dividers are removed in favor of stacked layout.
 const dividerCount = (aboutHtml.match(/class="philosophy-divider"/g) || []).length;
 if (dividerCount !== 0) {
   failures += 1;
-  console.error(`FAIL: expected 0 philosophy dividers after grid refactor, found ${dividerCount}.`);
+  console.error(`FAIL: expected 0 philosophy dividers after stack refactor, found ${dividerCount}.`);
 }
-if (!aboutHtml.includes('class="philosophy-grid"')) {
+if (!aboutHtml.includes('class="philosophy-stack"')) {
   failures += 1;
-  console.error('FAIL: philosophy-grid container is missing.');
+  console.error('FAIL: philosophy-stack container is missing.');
 }
 if ((aboutHtml.match(/class="philosophy-item"/g) || []).length !== 2) {
   failures += 1;
-  console.error('FAIL: expected exactly 2 philosophy items in the new grid.');
+  console.error('FAIL: expected exactly 2 philosophy items in the stack.');
 }
 
 // Test 4: ensure orb bullets use /icons/bullet.png and 8px sizing globally.
