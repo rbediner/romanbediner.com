@@ -378,24 +378,32 @@
       margin-bottom: 64px;
     }
 
+    /* Premium off-white service card with elevated interaction depth. */
     .service-card {
-      background: var(--surface-color);
+      background: var(--surface-color, #f6f7f8);
       padding: 40px;
       border-radius: 12px;
       border: 1px solid var(--border-color);
-      transition: transform 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
     }
 
+    /* Lift and brighten the card on hover to create a clear active-state affordance. */
     .service-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px);
+      background: #ffffff;
       border-color: var(--accent-blue);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      z-index: 2;
     }
 
     .service-header-row {
       display: flex;
       align-items: center;
       gap: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .service-header-row h3 {
@@ -404,9 +412,13 @@
       color: var(--text-color);
     }
 
+    /* Blend logo whites into off-white card surfaces for cleaner visual integration. */
     .service-icon {
       height: 36px;
       width: auto;
+      display: block;
+      mix-blend-mode: multiply;
+      filter: contrast(1.1);
     }
 
     .label {
