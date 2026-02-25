@@ -161,6 +161,37 @@ npm test
 python3 -m http.server 4173
 ```
 
+## CLI Tooling Reference
+Use this checklist when setting up a new computer for this repository.
+
+Required tools:
+- `git` - source control, branch and remote operations
+- `node` (20.x) - JavaScript runtime for scripts and tests
+- `npm` - dependency install and test orchestration (`npm ci`, `npm test`)
+- `python3` (3.11 recommended) - Python QA and Playwright-backed unittest suite
+- `npx playwright` - browser runtime used for CSP/GA and regression tests
+
+Optional but useful:
+- `ripgrep` (`rg`) - fast codebase search while debugging and auditing contracts
+
+Version checks:
+```bash
+git --version
+node --version
+npm --version
+python3 --version
+npx playwright --version
+rg --version
+```
+
+First-time machine setup:
+```bash
+npm ci
+npx playwright install chromium
+python3 -m pip install playwright==1.58.2 pillow==11.3.0
+python3 -m playwright install chromium
+```
+
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
 ## INSIGHT DIRECT LINKS
 
