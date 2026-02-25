@@ -18,3 +18,7 @@ QA/tests/visual-diff/
 QA/results/*
 !QA/results/.gitkeep
 !QA/results/README.md
+
+# Playwright runtime artifacts.
+artifacts/
+test-results/

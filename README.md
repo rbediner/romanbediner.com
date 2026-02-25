@@ -90,11 +90,17 @@ Guidelines:
 
 Node and Python tests are wired through npm scripts.
 
-Run all checks:
+Run Playwright alignment checks:
 
 ```bash
 npm ci
 npm test
+```
+
+Run full legacy QA suite (Node + Python + Jest):
+
+```bash
+npm run test:qa-full
 ```
 
 Browser runtime GA check (included in `npm test` on CI):
@@ -202,3 +208,6 @@ https://romanbediner.com/insights/#designing-adaptive-guardrails-for-agentic-wor
 - The hero container defines the maximum horizontal boundary for all hero content.
 - Tinted callouts in hero must span full hero container width.
 - Any new page must not introduce a separate typography system.
+- H1 desktop/mobile source of truth is `--h1-size-desktop` and `--h1-size-mobile` in `/styles/site.css`.
+- Do not hand-tune H1 size in page CSS. Run `npm run calibrate:h1` if hero geometry changes.
+- CI/runtime guard for this contract is `tests/h1-alignment.spec.js` (run via `npm test`).
