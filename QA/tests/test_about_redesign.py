@@ -52,7 +52,7 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertIn("<h3>Embedded Operating Leadership</h3>", self.about_html)
         self.assertIn("<h3>Systems Over Heroics</h3>", self.about_html)
         self.assertIn(
-            "This work shows up where scale, transition, or complexity begin to strain execution.",
+            "This is not about advising from the sidelines. It is about embedding operational discipline directly into the product and engineering lifecycles, ensuring that delivery commitments are met reliably and scalably.",
             self.about_html,
         )
 
