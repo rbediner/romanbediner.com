@@ -399,46 +399,6 @@
   margin: 0 auto;
 }
 
-/* About content hugging width: applies the requested container geometry to the active wrapper. */
-.about-container,
-.content-wrapper {
-  max-width: 1050px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-/* Hero/photo alignment contract: top-align media and copy so text height cannot squash image geometry. */
-.about-hero {
-  display: flex;
-  gap: 60px;
-  align-items: flex-start;
-  margin-top: 40px;
-}
-
-/* Photo frame lock: fixed column width prevents stretch while preserving responsive behavior. */
-.about-photo-wrapper {
-  flex: 0 0 380px;
-  max-width: 380px;
-  width: 100%;
-}
-
-/* Exact source-ratio lock (1022x1360) to keep the portrait undistorted. */
-.about-photo-wrapper img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1022 / 1360;
-  object-fit: cover;
-  border-radius: 12px;
-  display: block;
-}
-
-/* Reading measure guard: keep body copy dense enough for executive scanning without overlong lines. */
-.about-text-content {
-  flex: 1;
-  max-width: 600px;
-}
-
-/* Definitive About layout override: container hugging, portrait ratio lock, and manifesto tuning. */
 /* 1. FORCE THE HUGGING CONTAINER */
 /* We use the body class to ensure this overrides generic container rules */
 body .about-container {
@@ -469,7 +429,6 @@ body .about-container {
   aspect-ratio: 1022 / 1360 !important;
   object-fit: cover !important;
   border-radius: 12px !important;
-  display: block !important;
 }
 
 /* 3. TIGHTEN THE SUBHEADERS & MANIFESTO */
@@ -480,15 +439,18 @@ body .about-container {
 
 .manifesto-h1 {
   font-size: 52px !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.04em !important;
-  line-height: 1.1 !important;
-  margin-bottom: 12px !important;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  color: var(--text-color);
 }
 
-/* Remove 'About Roman Bediner' if still present in HTML */
-.about-header h1:contains("About Roman Bediner") {
-  display: none !important;
+.lede-primary {
+  font-size: 26px !important;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 24px;
 }
 
 .about-main .section {
