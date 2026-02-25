@@ -620,22 +620,39 @@
 }
 
 /* =========================================
-   ABOUT PAGE UPGRADES: Callout, Pillars, Grid
+   ABOUT PAGE UPGRADES: Hook, Callout, and Vertical Philosophy Stack
    ========================================= */
 
-/* 1. Executive TL;DR Callout */
+/* Keeps the narrative hook readable and avoids compressed leading paragraphs. */
+.about-hero-statement {
+  margin-bottom: 40px;
+}
+
+.about-hero-statement p {
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.about-hero-statement p:last-child {
+  margin-bottom: 0;
+}
+
+/* Highlights the callout as the transition from hook to chronology. */
 .executive-callout {
-  padding: 20px 28px;
+  padding: 24px 32px;
   border-left: 4px solid var(--accent-blue);
   background-color: rgba(59, 108, 255, 0.08);
   border-radius: 0 8px 8px 0;
-  font-size: 20px;
-  color: var(--text-color);
-  margin-bottom: 48px;
+  font-size: 19px;
+  margin-bottom: 56px;
   line-height: 1.6;
+  color: var(--text-color);
 }
 
-/* 2. Chronological Pillars (Era Headers) */
+/* Preserves clear chronological section markers. */
 #professional-arc h3.era-header {
   font-size: 24px;
   font-weight: 600;
@@ -645,34 +662,26 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-#professional-arc h3.era-header:first-of-type {
-  margin-top: 16px;
+/* Stacks philosophy blocks vertically for exact left-edge alignment. */
+.philosophy-stack {
+  display: flex;
+  flex-direction: column;
 }
 
-/* 3. Philosophy Grid (Desktop 2-Column) */
-.philosophy-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  margin-top: 32px;
-  align-items: start;
+.philosophy-item {
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-  .executive-callout {
-    padding: 16px 20px;
-    font-size: 18px;
-    margin-bottom: 32px;
-  }
+.philosophy-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 
-  #professional-arc h3.era-header {
-    font-size: 22px;
-    margin: 40px 0 16px 0;
-  }
-
-  .philosophy-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+.philosophy-item h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: var(--accent-blue);
 }

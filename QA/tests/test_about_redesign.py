@@ -41,7 +41,7 @@ class AboutRedesignTest(unittest.TestCase):
         """Ensure credential statement and required style blocks exist."""
         self.assertIn(".about-main", self.about_css)
         self.assertIn(".about-philosophy", self.about_css)
-        self.assertIn(".philosophy-grid", self.about_css)
+        self.assertIn(".philosophy-stack", self.about_css)
         self.assertIn(".footer-meta", self.site_css)
         self.assertIn(".footer-primary", self.site_css)
         self.assertIn(".about-hero::after", self.about_css)
@@ -52,7 +52,7 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertIn("<h3>Embedded Operating Leadership</h3>", self.about_html)
         self.assertIn("<h3>Systems Over Heroics</h3>", self.about_html)
         self.assertIn(
-            "This is not about advising from the sidelines. It is about embedding operational discipline directly into the product and engineering lifecycles, ensuring that delivery commitments are met reliably and scalably.",
+            "This is not about advising from the sidelines. It is about embedding operational discipline directly into workflows, ensuring that delivery commitments are met reliably and strategy is translated into daily execution.",
             self.about_html,
         )
 
