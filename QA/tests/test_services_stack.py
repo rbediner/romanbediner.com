@@ -25,11 +25,11 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('class="shelf-callout"', self.services_html)
         self.assertIn('class="brand-highlight"', self.services_html)
         self.assertIn('Services &amp; Expertise', self.services_html)
-        self.assertIn('Strategic Operating Architecture', self.services_html)
-        self.assertIn('Execution &amp; Scalable Delivery', self.services_html)
-        self.assertIn('Embedded Operating Leadership', self.services_html)
-        self.assertIn('AI-Enabled Operating Systems', self.services_html)
-        self.assertIn('Performance Instrumentation', self.services_html)
+        self.assertIn('Executive Operating Leadership', self.services_html)
+        self.assertIn('Fractional Operating Leadership', self.services_html)
+        self.assertIn('Execution Leadership Coaching', self.services_html)
+        self.assertIn('Strategic Program and Initiative Leadership', self.services_html)
+        self.assertIn('Productizing Operations for Modern AI-Enabled Work', self.services_html)
 
     def test_stack_css_rules_present(self):
         """Ensure stack, hover, and icon rules exist in the services stylesheet."""
