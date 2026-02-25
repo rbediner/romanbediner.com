@@ -53,13 +53,14 @@ class InsightsLayoutTest(unittest.TestCase):
     def test_hover_lift_and_spacing(self):
         """Ensure card hover lift and card spacing align with required behavior."""
         self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;")
-        self.assertRegex(self.insights_css, r"\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-4px\);")
-        self.assertRegex(self.insights_css, r"\.insight-card \+ \.insight-card\s*\{[^}]*margin-top:\s*64px;")
-        self.assertRegex(self.insights_css, r"\.insight-accent\s*\{[^}]*width:\s*56px;")
-        self.assertRegex(self.insights_css, r"\.insight-accent\s*\{[^}]*height:\s*3px;")
-        self.assertRegex(self.insights_css, r"\.insight-accent\s*\{[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);")
+        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*margin-bottom:\s*80px;")
+        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*padding-bottom:\s*48px;")
+        self.assertRegex(self.insights_css, r"\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);")
+        self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*width:\s*56px;")
+        self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*height:\s*3px;")
+        self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);")
         self.assertRegex(self.insights_css, r"\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;")
-        self.assertRegex(self.insights_css, r"\.insight-toggle\s*\{[^}]*border-radius:\s*999px;")
+        self.assertRegex(self.insights_css, r"\.insight-toggle\s*\{[^}]*border-radius:\s*6px;")
 
     def test_shared_bullets_follow_orb_spec(self):
         """Ensure global orb bullet spec is centralized in site.css."""

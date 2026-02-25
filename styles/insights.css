@@ -47,57 +47,80 @@ a:hover {
   font-size: 44px;
   font-weight: 500;
   letter-spacing: -0.02em;
-  margin: 0 0 8px 0;
+  margin: 0;
 }
 
-.insights-intro {
-  max-width: 720px;
-  margin: 0 0 44px 0;
-  font-size: 18px;
-  color: var(--muted-text);
-}
-
-/* Cards are vertically stacked with consistent spacing and subtle lift. */
-.insight-card {
-  background: #ffffff;
-  border: 1px solid var(--border-color, #e6e6e6);
-  border-radius: 12px;
-  padding: 28px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.insight-card + .insight-card {
-  margin-top: 64px;
-}
-
-.insight-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-}
-
-/* Accent is intentionally short and softer than the primary brand blue. */
-.insight-accent {
+/* Section accent reinforces the briefing heading. */
+.section-accent {
   width: 56px;
   height: 3px;
   background: rgba(59, 108, 255, 0.62);
   border-radius: 999px;
-  margin-bottom: 16px;
+  margin: 12px 0 28px 0;
 }
 
-.insight-card h2 {
-  margin: 0 0 16px 0;
+/* Integrated callout framing the insights narrative. */
+.executive-callout {
+  padding: 24px 32px;
+  border-left: 4px solid var(--accent-blue);
+  background-color: rgba(59, 108, 255, 0.08);
+  border-radius: 0 8px 8px 0;
   font-size: 20px;
+  margin: 0 0 64px 0;
+  line-height: 1.6;
+  color: var(--text-color);
+  max-width: 100%;
+}
+
+.executive-callout strong {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+/* Brief cards use editorial spacing with a restrained divider rhythm. */
+.insight-card {
+  margin-bottom: 80px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 48px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.insight-card + .insight-card {
+  margin-top: 0;
+}
+
+.insight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.brief-header time {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-blue);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.brief-header h2 {
+  font-size: 32px;
+  margin: 0 0 24px 0;
+  line-height: 1.2;
   font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1.25;
+}
+
+.brief-intro p {
+  font-size: 19px;
+  color: var(--text-color);
+  max-width: 760px;
+  margin-bottom: 24px;
 }
 
 .insight-summary {
-  margin: 0 0 16px 0;
-  max-width: 720px;
-  font-size: 18px;
-  color: var(--muted-text);
+  margin: 0;
 }
 
 /* Phase marker is plain text metadata, not an interactive control. */
@@ -125,13 +148,13 @@ a:hover {
 }
 
 .insight-toggle {
-  background: none;
-  border: 1px solid var(--border-color, #e6e6e6);
-  border-radius: 999px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   color: var(--text-color, #111111);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
-  padding: 8px 14px;
+  padding: 10px 20px;
   cursor: pointer;
   line-height: 1.2;
   white-space: nowrap;
@@ -139,9 +162,11 @@ a:hover {
 }
 
 .insight-toggle:hover {
-  border-color: var(--accent-blue, #3b6cff);
+  border-color: var(--accent-blue);
+  background-color: #fff;
+  color: var(--accent-blue);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
 }
 
 /* Brief body region uses the same typography and spacing rhythm as existing insight copy. */
@@ -189,11 +214,22 @@ a:hover {
     padding: 56px 24px;
   }
 
-  .insight-card {
-    padding: 22px;
-  }
-
   .insights-main h1 {
     font-size: 36px;
+  }
+
+  .brief-header h2 {
+    font-size: 28px;
+  }
+
+  .executive-callout {
+    padding: 20px 22px;
+    font-size: 18px;
+    margin-bottom: 48px;
+  }
+
+  .insight-card {
+    margin-bottom: 64px;
+    padding-bottom: 40px;
   }
 }

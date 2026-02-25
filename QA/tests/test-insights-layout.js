@@ -77,19 +77,23 @@ if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180
   failures += 1;
   console.error('FAIL: insight-card transition must use transform/box-shadow 180ms ease.');
 }
-if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-4px\);/s.test(insightsCss)) {
+if (!/\.insight-card\s*\{[^}]*margin-bottom:\s*80px;[^}]*padding-bottom:\s*48px;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: insight-card hover lift must be translateY(-4px).');
+  console.error('FAIL: insight-card must use the premium briefing spacing (80px/48px).');
+}
+if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: insight-card hover lift must be translateY(-2px).');
 }
 
-if (!/\.insight-accent\s*\{[^}]*width:\s*56px;[^}]*height:\s*3px;[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);/s.test(insightsCss)) {
+if (!/\.section-accent\s*\{[^}]*width:\s*56px;[^}]*height:\s*3px;[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: insight accent must be short (56px), light blue, and 3px tall.');
+  console.error('FAIL: section accent must be short (56px), light blue, and 3px tall.');
 }
 
-if (!/\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;/s.test(insightsCss) || !/\.insight-toggle\s*\{[^}]*border-radius:\s*999px;/s.test(insightsCss)) {
+if (!/\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;/s.test(insightsCss) || !/\.insight-toggle\s*\{[^}]*border-radius:\s*6px;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: bottom-right pill toggle styling is missing.');
+  console.error('FAIL: bottom-right executive toggle styling is missing.');
 }
 
 // Validate shared orb bullet implementation in global CSS.
