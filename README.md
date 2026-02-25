@@ -121,6 +121,13 @@ Run only visual checks:
 npm run test:visual
 ```
 
+Run Node Playwright hero-alignment check:
+
+```bash
+npx playwright install chromium
+npm run test:playwright:node
+```
+
 Run Node-only checks:
 
 ```bash
@@ -130,6 +137,7 @@ npm run test:node
 Home hero regression guards:
 
 - `QA/tests/test-home-hero-layout.js` blocks reintroduction of hero-specific inline overrides such as `direction: rtl` and `align-items: flex-end`, and verifies the `.master-layout-grid`, `.master-head`, and `.master-photo` structure.
+- `QA/tests/test-home-hero-alignment-node-playwright.js` validates at `1440x900` that the homepage H1 right edge aligns to `.executive-callout` within `±1px` and remains a single line.
 - `QA/tests/test_visual_regression_playwright.py` includes `home--hero-region-desktop.png` to catch spacing/alignment regressions around the homepage hero headline, subhead, support copy, and media.
 - `QA/tests/test-about-hero-contract.js` ensures the manifesto-led About hero contract stays text-only and photo-free.
 - `QA/tests/test-no-legacy-references.js` blocks references to removed legacy files (unused icons and deprecated scripts/stylesheets).
