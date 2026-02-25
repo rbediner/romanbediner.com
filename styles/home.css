@@ -65,6 +65,12 @@ p {
   margin: 0;
 }
 
+/* Tighten paragraph-to-divider spacing only when they are directly adjacent. */
+p + hr,
+p + .divider {
+  margin-top: 24px;
+}
+
 /* =========================================
    MASTER LAYOUT GRID
    ========================================= */
