@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 const siteCssPath = path.join(rootDir, "styles", "site.css");
 const artifactsDir = path.join(rootDir, "artifacts", "h1-calibration");
+const finalHeroShotPath = path.join(rootDir, "artifacts", "h1-final.png");
 const viewport = { width: 1440, height: 900 };
 const host = "127.0.0.1";
 const port = 4173;
@@ -88,6 +89,8 @@ async function measure(page) {
   await page.goto(`http://${host}:${port}/`, { waitUntil: "networkidle" });
   await page.evaluate(async () => {
     if (document.fonts?.ready) await document.fonts.ready;
+    await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+    await new Promise((resolve) => requestAnimationFrame(() => resolve()));
   });
   return page.evaluate(({ h1Sel, targetSel }) => {
     const h1 = document.querySelector(h1Sel);
@@ -107,6 +110,22 @@ async function measure(page) {
       computedFontPx: fontSize,
     };
   }, { h1Sel: h1Selector, targetSel: targetSelector });
+}
+
+async function measureConnectFontSize(page) {
+  await page.goto(`http://${host}:${port}/connect/`, { waitUntil: "networkidle" });
+  await page.evaluate(async () => {
+    if (document.fonts?.ready) await document.fonts.ready;
+    await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+    await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+  });
+  return page.evaluate(() => {
+    const h1 = document.querySelector("h1");
+    if (!h1) {
+      throw new Error("Connect H1 not found.");
+    }
+    return Number.parseFloat(getComputedStyle(h1).fontSize);
+  });
 }
 
 async function run() {
@@ -141,12 +160,22 @@ async function run() {
 
       if (Math.abs(result.delta) <= tolerancePx) {
         await page.screenshot({ path: path.join(artifactsDir, "iteration-final.png"), fullPage: true });
+        await page.screenshot({ path: finalHeroShotPath, fullPage: false });
+        const connectFontPx = await measureConnectFontSize(page);
+        const inheritancePass = connectFontPx === result.computedFontPx;
+        const alignmentPass = Math.abs(result.delta) <= tolerancePx;
         fs.writeFileSync(path.join(artifactsDir, "calibration-log.json"), JSON.stringify(logs, null, 2), "utf8");
-        console.log(JSON.stringify({
-          finalSizePx: currentSize,
-          finalDeltaPx: result.delta,
-          selectors: { h1Selector, targetSelector },
-        }, null, 2));
+        console.log(`Final calibrated size: ${currentSize}px`);
+        console.log(`Final delta: ${result.delta}px`);
+        console.log(`Iterations used: ${i + 1}`);
+        console.log(`Global inheritance check: ${inheritancePass ? "PASS" : "FAIL"}`);
+        console.log(`Alignment check: ${alignmentPass ? "PASS" : "FAIL"}`);
+        console.log(`Selectors used: ${h1Selector} | ${targetSelector}`);
+        if (!inheritancePass || !alignmentPass) {
+          throw new Error(
+            `Validation failed (inheritancePass=${inheritancePass}, alignmentPass=${alignmentPass}, connectFontPx=${connectFontPx}, homeFontPx=${result.computedFontPx}, delta=${result.delta})`
+          );
+        }
         return;
       }
 
@@ -174,4 +203,3 @@ run().catch((error) => {
   console.error(`Calibration failed: ${error.message}`);
   process.exit(1);
 });
-
