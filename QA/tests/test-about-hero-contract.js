@@ -9,16 +9,17 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const aboutHtml = fs.readFileSync(path.join(root, 'about/index.html'), 'utf8');
 const aboutCss = fs.readFileSync(path.join(root, 'styles/about.css'), 'utf8');
+const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 
 const failures = [];
 
 for (const required of [
-  'class="about-container"',
+  'class="container"',
   'class="about-hero-refactored"',
-  'class="manifesto-callout"',
-  'class="callout-border"',
-  'class="callout-content"',
-  'class="manifesto-h1"'
+  'class="page-title"',
+  'class="shelf-callout"',
+  'class="shelf-border"',
+  'class="shelf-content"'
 ]) {
   if (!aboutHtml.includes(required)) {
     failures.push(`Missing About hero contract marker: ${required}`);
@@ -33,18 +34,23 @@ if (aboutHtml.includes('About Roman Bediner')) {
   failures.push('Legacy About heading copy should not appear in the manifesto hero.');
 }
 
-for (const cssNeedle of [
-  'body .about-container',
-  '.about-hero-refactored',
-  '.manifesto-callout',
-  '.callout-border',
-  '.callout-content',
-  '.lede-description',
-  '.about-timeline',
-  '.about-main .section:has(> #professional-arc:first-child)'
-]) {
+for (const cssNeedle of ['.about-hero-refactored', '.about-timeline', '.philosophy-stack']) {
   if (!aboutCss.includes(cssNeedle)) {
     failures.push(`Missing About CSS guardrail: ${cssNeedle}`);
+  }
+}
+
+for (const sharedNeedle of [
+  '.container,\n.about-container',
+  '.page-title',
+  '.shelf-callout',
+  '.shelf-border',
+  '.shelf-content',
+  '.lede-description',
+  '.section-divider'
+]) {
+  if (!siteCss.includes(sharedNeedle)) {
+    failures.push(`Missing shared CSS guardrail in site.css: ${sharedNeedle}`);
   }
 }
 

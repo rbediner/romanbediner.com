@@ -11,6 +11,7 @@ class ServicesStackTest(unittest.TestCase):
         cls.root = Path(__file__).resolve().parents[2]
         cls.services_html = (cls.root / "services/index.html").read_text(encoding="utf-8")
         cls.services_css = (cls.root / "styles/services.css").read_text(encoding="utf-8")
+        cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
 
     def test_service_stack_structure_present(self):
         """Ensure services use a stack container with five restored cards."""
@@ -21,7 +22,8 @@ class ServicesStackTest(unittest.TestCase):
 
     def test_executive_callout_and_headings_present(self):
         """Ensure executive callout and restored service headings are rendered."""
-        self.assertIn('class="executive-callout"', self.services_html)
+        self.assertIn('class="shelf-callout"', self.services_html)
+        self.assertIn('class="brand-highlight"', self.services_html)
         self.assertIn('Services &amp; Expertise', self.services_html)
         self.assertIn('Strategic Operating Architecture', self.services_html)
         self.assertIn('Execution &amp; Scalable Delivery', self.services_html)
@@ -33,7 +35,7 @@ class ServicesStackTest(unittest.TestCase):
         """Ensure stack, hover, and icon rules exist in the services stylesheet."""
         self.assertIn('.service-stack', self.services_css)
         self.assertIn('.service-header-row', self.services_css)
-        self.assertIn('.executive-callout', self.services_css)
+        self.assertIn('.shelf-callout', self.site_css)
         self.assertIn('.service-card:hover', self.services_css)
         self.assertIn('.service-icon', self.services_css)
 

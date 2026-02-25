@@ -1,535 +1,51 @@
-    html {
-      scroll-behavior: smooth;
-    }
+/* About page specific styling.
+   Shared layout tokens, callouts, typography, and section rhythm live in styles/site.css. */
 
-    :root {
-      --bg-color: #ffffff;
-      --surface-color: #f6f7f8;
-      --text-color: #111111;
-      --muted-text: #6a6a6a;
-      --border-color: #e6e6e6;
-
-      --accent-blue: #3b6cff;
-    }
-
-    body {
-      margin: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
-    }
-
-    a {
-      color: var(--accent-blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .site-header {
-      padding: 6px 0;
-      position: sticky;
-      top: 0;
-      background-color: var(--bg-color);
-      z-index: 10;
-    }
-
-    .site-header img {
-      height: 44px;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: nowrap;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand-logo {
-      height: 44px;
-      width: auto;
-      width: auto;
-      flex-shrink: 0;
-      display: block;
-    }
-
-    .brand-name {
-      font-size: 40px;
-      font-weight: 600;
-      line-height: 1.1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--text-color);
-    }
-
-    .site-nav {
-      display: flex;
-      gap: 32px;
-      font-size: 16px;
-    }
-
-    .site-nav a {
-      color: var(--text-color);
-    }
-
-    .site-nav a:hover {
-      color: var(--accent-blue);
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      padding: 6px 8px;
-      font-size: 16px;
-      color: var(--text-color);
-      cursor: pointer;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .menu-toggle .menu-icon {
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-      display: inline-block;
-      position: relative;
-    }
-
-    .menu-toggle .menu-icon::before,
-    .menu-toggle .menu-icon::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-    }
-
-    .menu-toggle .menu-icon::before {
-      top: -6px;
-    }
-
-    .menu-toggle .menu-icon::after {
-      top: 6px;
-    }
-
-    .mobile-nav {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100%;
-      background-color: var(--bg-color);
-      border-top: 1px solid var(--border-color);
-      display: none;
-      flex-direction: column;
-      padding: 12px 24px 20px 24px;
-      z-index: 20;
-    }
-
-    .mobile-nav a {
-      padding: 12px 0;
-      font-size: 16px;
-      color: var(--text-color);
-      text-decoration: none;
-    }
-
-    .mobile-nav.open {
-      display: flex;
-    }
-
-    .header-divider {
-      margin: 4px 0 0 0;
-      border: none;
-      border-top: 1px solid #e5e5e5;
-      width: 100%;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .page-main {
-      padding: 72px 0;
-    }
-
-    h1 {
-      font-size: 44px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-    h2 {
-      font-size: 28px;
-      font-weight: 500;
-      margin-top: 48px;
-      margin-bottom: 12px;
-    }
-
-    p {
-      font-size: 18px;
-      color: var(--muted-text);
-      max-width: 720px;
-    }
-
-    .section-header {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 12px;
-      line-height: 1;
-    }
-
-    .section-header img,
-    .section-header svg {
-      height: 22px;
-      width: auto;
-      flex-shrink: 0;
-      position: relative;
-      top: 2px;
-    }
-
-    .section-header img.icon-areas {
-      height: 22px;
-    }
-
-    .section-header h2 {
-      margin: 0;
-      line-height: 1.2;
-    }
-
-    .section-body {
-      margin-top: 12px;
-    }
-
-    .about {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .about-subhead {
-      font-size: 22px;
-      color: var(--text-color);
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      margin: 8px 0 0 0;
-    }
-
-
-    .about {
-      max-width: 720px;
-      margin: 0;
-      margin-top: 16px;
-      border-left: 1px solid #e1e1e1;
-      padding-left: 16px;
-      line-height: 1.7;
-    }
-
-    .about p {
-      margin-bottom: 20px;
-      font-weight: 400;
-    }
-
-    .about p:first-child {
-      font-weight: 400;
-    }
-
-    .about p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Added restrained briefs section link-out below About narrative without introducing card patterns. */
-    .briefs-linkout {
-      max-width: 720px;
-      margin: 56px 0 0 0;
-      padding-top: 28px;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .briefs-linkout h2 {
-      margin: 0 0 12px 0;
-      font-size: 28px;
-      font-weight: 500;
-    }
-
-    .briefs-linkout p {
-      margin: 0 0 12px 0;
-    }
-
-    .briefs-linkout a {
-      font-size: 18px;
-      font-weight: 500;
-    }
-
-    .section-accent {
-      display: none;
-    }
-
-    .hero {
-      margin-bottom: 32px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      max-width: 760px;
-    }
-
-    .section {
-      margin: 72px 0;
-    }
-
-    .section h2,
-    .section h3 {
-      margin-bottom: 14px;
-    }
-
-    .section p {
-      margin-bottom: 18px;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      padding: 28px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-    }
-
-    button,
-    .btn {
-      transition: all 0.2s ease;
-    }
-
-    button:hover,
-    .btn:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    }
-
-    input:focus-visible,
-    textarea:focus-visible,
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid rgba(45, 92, 255, 0.35);
-      outline-offset: 2px;
-    }
-
-    .footer {
-      padding: 48px 24px;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted-text);
-    }
-
-    @media (max-width: 768px) {
-      .site-header {
-        padding: 4px 0;
-      }
-
-      .header-inner {
-        padding: 0;
-      }
-
-      .brand-logo {
-        height: 44px;
-      }
-
-      .brand-name {
-        font-size: 22px;
-      }
-
-      .site-nav {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      .container {
-        padding: 0 24px;
-      }
-
-      .about-subhead {
-        white-space: normal;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .brand-logo {
-        height: 44px;
-      }
-    }
-
-/* About narrative layout: timeline, grouped philosophy, and clean close. */
 .about-main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-bottom: 56px;
 }
 
-/* 1. FORCE THE HUGGING CONTAINER */
-/* We use the body class to ensure this overrides generic container rules */
-body .about-container {
-  max-width: 1000px !important;
-  margin: 0 auto !important;
-  padding: 0 40px !important;
-  display: block !important;
-}
-
-/* Keep About hero as a single-column narrative block. */
-.about-hero {
-  display: block !important;
-  margin-top: 40px !important;
-}
-
-/* 3. TIGHTEN THE SUBHEADERS & MANIFESTO */
-.about-text-content {
-  flex: 1 !important;
-  max-width: 600px !important;
-}
-
-.manifesto-h1 {
-  font-size: 52px !important;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  margin-bottom: 8px;
-  color: var(--text-color);
-}
-
-.lede-primary {
-  font-size: 26px !important;
-  font-weight: 600;
-  line-height: 1.35;
-  margin-bottom: 24px;
-}
-
-.about-main .section {
-  margin-top: 96px;
-  margin-bottom: 96px;
-}
-
-.about-main h1 {
-  font-size: 40px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0 0 16px 0;
-  max-width: 720px;
-}
-
-.about-main h2 {
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0 0 16px 0;
-  max-width: 720px;
-}
-
-.about-main h3 {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0 0 16px 0;
-  max-width: 720px;
-}
-
-.about-main p {
-  max-width: 720px;
-  margin: 0 0 16px 0;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #4b5563;
+.about-hero-refactored {
+  margin: 0;
 }
 
 .about-timeline {
-  /* Pull timeline divider close to manifesto subheader block. */
-  margin-top: 16px !important;
-  margin-bottom: 0;
+  margin-top: 0;
 }
 
-.timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+#professional-arc {
+  margin-top: 0;
 }
 
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 5px;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  background: #e5e7eb;
+/* Era headers use the shared section divider as the macro anchor.
+   This keeps timeline hierarchy readable without stacking margin hacks. */
+.era-header {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
 }
 
-.timeline-item {
-  display: grid;
-  grid-template-columns: 12px minmax(0, 1fr);
-  column-gap: 24px;
-  align-items: start;
-  margin-bottom: 64px;
+#professional-arc p {
+  max-width: 760px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
 }
 
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-.timeline-marker {
-  width: 12px;
-  height: 12px;
-  border: 2px solid #2563eb;
-  background: #2563eb;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 6px;
-  box-sizing: border-box;
-}
-
-.timeline-content p {
-  margin-bottom: 16px;
-}
-
-.timeline-content .service-list {
-  margin-top: 12px;
+#professional-arc p:last-of-type {
   margin-bottom: 0;
 }
 
 .about-philosophy {
-  margin-top: 48px;
-  margin-bottom: 64px;
+  margin-top: 0;
 }
 
 .card-philosophy {
   background: #ffffff;
-  border: 1px solid #e4e6ea;
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -541,14 +57,14 @@ body .about-container {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
-.about-main .philosophy-card-title {
+.philosophy-card-title {
   margin: 0;
-  /* Keep title hierarchy unambiguously above subsection headers in all root font-size contexts. */
   font-size: 36px;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   line-height: 1.1;
+  color: var(--text-primary);
 }
 
 .philosophy-card-accent {
@@ -558,162 +74,6 @@ body .about-container {
   margin: 12px 0 28px 0;
 }
 
-.philosophy-item h3 {
-  margin-bottom: 12px;
-}
-
-.philosophy-item p {
-  margin-bottom: 14px;
-}
-
-.philosophy-item .service-list {
-  margin-top: 12px;
-  margin-bottom: 0;
-}
-
-.philosophy-item .service-list li {
-  margin-bottom: 8px;
-}
-
-.philosophy-item .service-list li:last-child {
-  margin-bottom: 0;
-}
-
-.philosophy-divider {
-  height: 1px;
-  background: #e3e5e8;
-  margin: 40px 0;
-}
-
-.philosophy-insights-link-wrap {
-  margin: 28px 0 0 0;
-  text-align: right;
-}
-
-.philosophy-insights-link {
-  font-size: 0.85rem;
-  color: var(--accent-blue);
-  text-decoration: none;
-}
-
-.philosophy-insights-link:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-  .about-main {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .about-main .section {
-    margin-top: 72px;
-    margin-bottom: 72px;
-  }
-
-  .about-main h1 {
-    font-size: 34px;
-  }
-
-  .about-main h2 {
-    font-size: 22px;
-  }
-
-  .about-main h3 {
-    font-size: 19px;
-  }
-
-  .timeline-item {
-    column-gap: 18px;
-    margin-bottom: 56px;
-  }
-
-  .about-philosophy {
-    margin-top: 72px;
-    margin-bottom: 72px;
-  }
-
-  .card-philosophy {
-    padding: 24px;
-  }
-}
-
-/* =========================================
-   ABOUT HERO REFACTOR + PROFESSIONAL ARC SPACING
-   ========================================= */
-
-/* Refactored hero keeps neutral narrative and compact vertical rhythm. */
-.about-hero-refactored {
-  margin-top: 60px;
-  margin-bottom: 0;
-}
-
-.manifesto-h1 {
-  font-size: 56px !important;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  margin-bottom: 32px !important;
-  color: var(--text-color);
-}
-
-.manifesto-callout {
-  display: flex;
-  background-color: var(--surface-color);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 48px;
-  max-width: 900px;
-}
-
-.callout-border {
-  width: 4px;
-  background-color: var(--accent-blue);
-  flex-shrink: 0;
-}
-
-.callout-content {
-  padding: 32px 40px;
-}
-
-.lede-primary {
-  font-size: 26px !important;
-  font-weight: 600 !important;
-  line-height: 1.35 !important;
-  color: var(--text-color);
-  margin-bottom: 16px !important;
-}
-
-.lede-description {
-  font-size: 19px !important;
-  line-height: 1.6;
-  color: var(--muted-text);
-  margin: 0 !important;
-}
-
-/* Surgical gap fix: remove top push and keep divider close to hero callout. */
-.era-header {
-  margin-top: 0 !important;
-  padding-top: 48px;
-  border-top: 1px solid var(--border-color);
-}
-
-#professional-arc {
-  margin-top: 0;
-}
-
-/* Keep timeline section tight to the hero callout. */
-.about-timeline {
-  margin-top: 0 !important;
-  margin-bottom: 0;
-}
-
-/* Reduces top gap before the timeline heading without changing global .section rhythm. */
-.about-main .section:has(> #professional-arc:first-child) {
-  padding-top: 0;
-}
-
-/* Stacks philosophy blocks vertically for exact left-edge alignment. */
 .philosophy-stack {
   display: flex;
   flex-direction: column;
@@ -733,39 +93,61 @@ body .about-container {
 
 .philosophy-item h3 {
   font-size: 24px;
-  margin-bottom: 12px;
+  margin: 0 0 12px 0;
   color: var(--accent-blue);
 }
 
+.philosophy-item p {
+  max-width: 760px;
+  margin: 0 0 14px 0;
+  color: var(--text-secondary);
+}
+
+.philosophy-item .service-list {
+  margin-top: 12px;
+}
+
+.philosophy-item .service-list li {
+  margin-bottom: 8px;
+}
+
+.philosophy-item .service-list li:last-child {
+  margin-bottom: 0;
+}
+
+.philosophy-insights-link-wrap {
+  margin: 28px 0 0 0;
+  text-align: right;
+}
+
+.philosophy-insights-link {
+  font-size: 0.9rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.philosophy-insights-link:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
-  /* Preserve manifesto callout readability on mobile widths. */
-  body .about-container {
-    max-width: none !important;
-    padding: 0 24px !important;
+  #professional-arc p {
+    font-size: 16px;
   }
 
-  .about-hero-refactored {
-    margin-top: 40px;
+  .era-header {
+    font-size: 22px;
   }
 
-  .manifesto-h1 {
-    font-size: 44px !important;
-    margin-bottom: 24px !important;
-  }
-
-  .manifesto-callout {
-    margin-bottom: 36px;
-  }
-
-  .callout-content {
+  .card-philosophy {
     padding: 24px;
   }
 
-  .lede-primary {
-    font-size: 22px !important;
+  .philosophy-card-title {
+    font-size: 28px;
   }
 
-  .lede-description {
-    font-size: 17px !important;
+  .philosophy-item h3 {
+    font-size: 22px;
   }
 }

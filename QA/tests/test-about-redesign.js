@@ -32,12 +32,12 @@ if (!aboutHtml.includes('<main class="about-main">')) {
 
 // The About hero is a manifesto-led text block with a blue callout block.
 const requiredContainers = [
-  'class="about-container"',
+  'class="container"',
   'class="about-hero-refactored"',
-  'class="manifesto-callout"',
-  'class="callout-border"',
-  'class="callout-content"',
-  'class="manifesto-h1"'
+  'class="page-title"',
+  'class="shelf-callout"',
+  'class="shelf-border"',
+  'class="shelf-content"'
 ];
 for (const marker of requiredContainers) {
   if (!aboutHtml.includes(marker)) {
@@ -66,22 +66,27 @@ if ((aboutHtml.match(/<ul class="service-list">/g) || []).length < 2) {
   console.error('FAIL: About page should keep shared service-list bullets in philosophy blocks.');
 }
 
-// Keep guardrails around the photo ratio lock and manifesto typography hooks.
-for (const cssSelector of [
-  'body .about-container',
-  '.about-hero-refactored',
-  '.manifesto-callout',
-  '.callout-border',
-  '.callout-content',
-  '.lede-description',
-  '.about-timeline',
-  '.manifesto-h1',
-  '.lede-primary',
-  '.about-main .section:has(> #professional-arc:first-child)'
-]) {
+// Page-specific selectors stay in about.css.
+for (const cssSelector of ['.about-hero-refactored', '.about-timeline', '.philosophy-stack']) {
   if (!aboutCss.includes(cssSelector)) {
     failures += 1;
-    console.error(`FAIL: About CSS is missing selector ${cssSelector}.`);
+    console.error(`FAIL: About CSS is missing page selector ${cssSelector}.`);
+  }
+}
+
+// Shared selectors are centralized in site.css.
+for (const sharedSelector of [
+  '.container,\n.about-container',
+  '.page-title',
+  '.shelf-callout',
+  '.shelf-border',
+  '.shelf-content',
+  '.lede-description',
+  '.section-divider'
+]) {
+  if (!siteCss.includes(sharedSelector)) {
+    failures += 1;
+    console.error(`FAIL: site.css is missing shared selector ${sharedSelector}.`);
   }
 }
 

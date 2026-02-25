@@ -27,14 +27,14 @@ class AboutRedesignTest(unittest.TestCase):
     def test_about_structure_sections_present(self):
         """Ensure the current About manifesto hero and section wrappers are present."""
         self.assertIn('<main class="about-main">', self.about_html)
-        self.assertIn('class="about-container"', self.about_html)
+        self.assertIn('class="container"', self.about_html)
         self.assertIn('class="about-hero-refactored"', self.about_html)
-        self.assertIn('class="manifesto-callout"', self.about_html)
-        self.assertIn('class="callout-content"', self.about_html)
+        self.assertIn('class="shelf-callout"', self.about_html)
+        self.assertIn('class="shelf-content"', self.about_html)
         self.assertNotIn('class="about-photo-wrapper"', self.about_html)
         self.assertNotIn('class="hero-photo"', self.about_html)
-        for section in ("about-timeline", "about-philosophy"):
-            self.assertIn(f'class="section {section}"', self.about_html)
+        self.assertRegex(self.about_html, r'class="[^"]*about-timeline[^"]*"')
+        self.assertRegex(self.about_html, r'class="[^"]*about-philosophy[^"]*"')
 
     def test_timeline_and_shared_bullet_usage(self):
         """Ensure professional arc structure and shared service-list bullets are used."""
@@ -55,15 +55,15 @@ class AboutRedesignTest(unittest.TestCase):
     def test_pmp_and_css_blocks_present(self):
         """Ensure required About layout/style hooks and footer classes exist."""
         self.assertIn(".about-main", self.about_css)
-        self.assertIn(".about-container", self.about_css)
+        self.assertIn(".container", self.site_css)
         self.assertIn(".about-hero-refactored", self.about_css)
-        self.assertIn(".manifesto-callout", self.about_css)
-        self.assertIn(".callout-border", self.about_css)
+        self.assertIn(".page-title", self.site_css)
+        self.assertIn(".shelf-callout", self.site_css)
+        self.assertIn(".shelf-border", self.site_css)
         self.assertIn(".about-timeline", self.about_css)
         self.assertIn(".about-philosophy", self.about_css)
         self.assertIn(".philosophy-stack", self.about_css)
-        self.assertIn(".manifesto-h1", self.about_css)
-        self.assertIn(".lede-description", self.about_css)
+        self.assertIn(".lede-description", self.site_css)
         self.assertIn(".footer-meta", self.site_css)
         self.assertIn(".footer-primary", self.site_css)
         self.assertIn("#professional-arc", self.about_css)

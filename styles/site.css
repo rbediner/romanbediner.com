@@ -1,6 +1,14 @@
 /* Shared site architecture styles.
    This file normalizes header and navigation behavior across canonical routes. */
 
+:root {
+  --accent-blue: #3b6cff;
+  --brand-tint: rgba(59, 108, 255, 0.05);
+  --border-color: #e6e8ec;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+}
+
 .site-header {
   padding: 6px 0;
   position: sticky;
@@ -147,12 +155,80 @@
   }
 
   .mobile-nav {
-    display: none !important;
+    display: none;
   }
 
   .brand-logo {
     height: 44px;
   }
+}
+
+/* Shared layout and type system for About and Services pages. */
+
+.container,
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.page-title {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 60px 0 32px 0;
+  color: var(--text-primary);
+}
+
+.lede-primary {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+}
+
+.lede-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.brand-highlight {
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+.shelf-callout {
+  display: flex;
+  width: 100%;
+  background: var(--brand-tint);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.shelf-border {
+  width: 4px;
+  background-color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.shelf-content {
+  padding: 32px 40px;
+}
+
+.section {
+  padding-top: 48px;
+}
+
+.section-divider {
+  border-top: 1px solid var(--border-color);
+  padding-top: 24px;
+  margin-top: 24px;
 }
 
 /* Unified orb bullet system shared across About, Services, and Insights lists. */
@@ -208,4 +284,27 @@
   font-size: 0.85rem;
   color: var(--muted-text, #6a6a6a);
   opacity: 0.65;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: 32px;
+  }
+
+  .page-title {
+    font-size: 42px;
+    margin: 40px 0 24px 0;
+  }
+
+  .lede-primary {
+    font-size: 22px;
+  }
+
+  .lede-description {
+    font-size: 17px;
+  }
+
+  .shelf-content {
+    padding: 24px;
+  }
 }
