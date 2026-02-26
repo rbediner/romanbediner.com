@@ -59,7 +59,7 @@ if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*ma
 
 // Test 5: ensure standardized About transition CTA routes to /services/.
 if (
-  !/<section[^>]*class="next-page-nav"/.test(aboutHtml) ||
+  !/<section[^>]*class="[^"]*\bnext-page-nav\b[^"]*"/.test(aboutHtml) ||
   !/<a[^>]*href="\/services\/"[^>]*class="nav-anchor"/.test(aboutHtml) ||
   !/The Execution Layer/.test(aboutHtml) ||
   !/Transition to Strategic Services/.test(aboutHtml)
