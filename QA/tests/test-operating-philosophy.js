@@ -57,10 +57,15 @@ if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*ma
   console.error('FAIL: service-list orb bullet spec does not match required /icons/bullet.png and 8px sizing.');
 }
 
-// Test 5: ensure Insights micro-link exists and points to /insights/.
-if (!/<a[^>]*href="\/insights\/"[^>]*class="philosophy-insights-link"/.test(aboutHtml) || !/Explore related insights (→|&rarr;)/.test(aboutHtml)) {
+// Test 5: ensure standardized About transition CTA routes to /services/.
+if (
+  !/<section[^>]*class="next-page-nav"/.test(aboutHtml) ||
+  !/<a[^>]*href="\/services\/"[^>]*class="nav-anchor"/.test(aboutHtml) ||
+  !/The Execution Layer/.test(aboutHtml) ||
+  !/Transition to Strategic Services/.test(aboutHtml)
+) {
   failures += 1;
-  console.error('FAIL: Insights micro-link is missing or incorrectly routed.');
+  console.error('FAIL: About transition CTA is missing or incorrectly routed.');
 }
 
 if (failures > 0) {
