@@ -82,60 +82,6 @@
   line-height: 1.6;
 }
 
-/* Services-to-Insights transition anchor for bottom-page narrative flow. */
-.next-page-nav {
-  margin-top: 100px;
-  margin-bottom: 60px;
-}
-
-.next-page-nav .section-accent {
-  margin-bottom: 32px;
-  width: 100%;
-}
-
-.nav-anchor {
-  display: block;
-  text-decoration: none;
-  max-width: fit-content;
-}
-
-.nav-header-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.nav-label {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--accent-blue);
-  font-weight: 700;
-}
-
-.nav-title {
-  font-size: 34px;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.03em;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-arrow {
-  color: var(--accent-blue);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.nav-anchor:hover .nav-title {
-  color: var(--accent-blue);
-  transform: translateX(4px);
-}
-
-.nav-anchor:hover .nav-arrow {
-  transform: translateX(12px);
-}
-
 @media (max-width: 768px) {
   .service-header-row {
     gap: 16px;
@@ -145,7 +91,4 @@
     font-size: 22px;
   }
 
-  .nav-title {
-    font-size: 28px;
-  }
 }

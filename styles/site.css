@@ -309,6 +309,60 @@ body > main {
   margin: 24px 0 32px 0;
 }
 
+/* Shared bottom-page transition component used across primary pages. */
+.next-page-nav {
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+
+.next-page-nav .section-accent {
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.nav-anchor {
+  display: block;
+  text-decoration: none;
+  max-width: fit-content;
+}
+
+.nav-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.nav-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+.nav-title {
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-arrow {
+  color: var(--accent-blue);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.nav-anchor:hover .nav-title {
+  color: var(--accent-blue);
+  transform: translateX(4px);
+}
+
+.nav-anchor:hover .nav-arrow {
+  transform: translateX(12px);
+}
+
 /* Unified orb bullet system shared across About, Services, and Insights lists. */
 
 .page-main ul,
@@ -421,6 +475,10 @@ main li:last-child {
 
   .shelf-content {
     padding: 24px;
+  }
+
+  .nav-title {
+    font-size: 28px;
   }
 }
 

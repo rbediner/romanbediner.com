@@ -130,10 +130,24 @@ Routing requirements:
    - Install Playwright Chromium.
    - Execute node, python, jest, and Playwright checks through `npm test`.
 
+9. **Standardized page transition blocks**
+   - Primary narrative pages end with a shared transition component using the same structure and classes.
+   - Transition flow architecture is: `Home -> About -> Services -> Insights -> Connect`.
+   - Transition component styles are centralized in `styles/site.css` and must not be duplicated in page-level CSS.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
   "routes": ["/", "/about/", "/services/", "/connect/", "/insights/"],
+  "transitions": {
+    "flow": [
+      {"from": "/", "to": "/about/", "label": "THE EXECUTION LAYER", "title": "Transition to Operating Philosophy"},
+      {"from": "/about/", "to": "/services/", "label": "The Execution Layer", "title": "Transition to Strategic Services"},
+      {"from": "/services/", "to": "/insights/", "label": "The Strategy Layer", "title": "Transition to Strategic Insights"},
+      {"from": "/insights/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect"}
+    ],
+    "intent": "Guide a linear narrative from operating context to engagement."
+  },
   "canonical_domain": "romanbediner.com",
   "requires_trailing_slash": true,
   "ga": {
