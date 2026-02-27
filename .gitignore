@@ -21,3 +21,4 @@ QA/results/*
 
 # Playwright runtime artifacts and duplicated local output folders.
 test-results*/
+.npm-cache/
