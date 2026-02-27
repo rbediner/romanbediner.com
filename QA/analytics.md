@@ -2,7 +2,7 @@
 
 ## Insights Expand Tracking
 
-Automated coverage exists in `/tests/insights-analytics.test.js` and validates:
+Automated coverage exists in `/QA/tests/jest/insights-analytics.test.js` and validates:
 
 - `insight_expand` event name and payload contract
 - `insight_collapse` event name and payload contract

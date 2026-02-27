@@ -11,7 +11,8 @@ const http = require('http');
 const path = require('path');
 const { test, expect } = require('playwright/test');
 
-const rootDir = path.resolve(__dirname, '..');
+// Playwright specs now live under QA/tests/playwright, so repo root is three levels up.
+const rootDir = path.resolve(__dirname, '..', '..', '..');
 const host = '127.0.0.1';
 const port = 4175;
 const routes = ['/', '/about/', '/services/', '/connect/', '/insights/'];
@@ -108,4 +109,3 @@ test.describe('CSP and GA runtime contract', () => {
     });
   }
 });
-

@@ -9,18 +9,19 @@
 const { execSync } = require('child_process');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+// Jest specs are nested under QA/tests/jest, so repository root is three levels up.
+const ROOT = path.resolve(__dirname, '..', '..', '..');
 
 const ARCHITECTURE_PATH_MATCHERS = [
   (file) => file.startsWith('scripts/'),
-  (file) => file.startsWith('tests/'),
+  (file) => file.startsWith('QA/tests/'),
   (file) => file.startsWith('styles/'),
   (file) => file.startsWith('.github/workflows/'),
   (file) => file === 'index.html',
   (file) => file === 'about/index.html',
   (file) => file === 'services/index.html',
   (file) => file === 'connect/index.html',
-  (file) => file === 'about/insights/index.html',
+  (file) => file === 'insights/index.html',
   (file) => file === 'package.json',
   (file) => file === 'package-lock.json'
 ];

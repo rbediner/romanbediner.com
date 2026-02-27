@@ -24,8 +24,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 const siteCssPath = path.join(rootDir, "styles", "site.css");
-const artifactsDir = path.join(rootDir, "artifacts", "h1-calibration");
-const finalHeroShotPath = path.join(rootDir, "artifacts", "h1-final.png");
+// Store calibration outputs under QA/results to keep root clean and purpose-driven.
+const artifactsDir = path.join(rootDir, "QA", "results", "h1-calibration");
+const finalHeroShotPath = path.join(rootDir, "QA", "results", "h1-calibration", "h1-final.png");
 const viewport = { width: 1440, height: 900 };
 const host = "127.0.0.1";
 const port = 4173;

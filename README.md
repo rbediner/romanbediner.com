@@ -13,7 +13,7 @@ Canonical public routes:
 - `/about/`
 - `/services/`
 - `/connect/`
-- `/about/insights/`
+- `/insights/`
 
 Routing requirements:
 - Trailing slash is required for canonical URLs.
@@ -57,15 +57,29 @@ Routing requirements:
   - `/insights/index.html`
   - `/connect/index.html`
 - JavaScript runtime and automation scripts live in `/scripts`.
-- Automated tests live in `/tests` and `/QA/tests`.
+- Automated tests live in `/QA/tests`.
+- Jest policy/readme tests live in `/QA/tests/jest`.
+- Generated QA and calibration outputs are consolidated under `/QA/results`.
 - Legacy paths are disallowed.
 - `.DS_Store` files are disallowed.
 - Nested `.git` directories are disallowed.
 
+## Directory Hygiene Rules
+- Keep production assets under `/assets/*` and avoid duplicate root-level asset folders.
+- Keep executable/runtime scripts under `/scripts`.
+- Keep test definitions under `/QA/tests` only.
+- Keep Jest unit/policy tests under `/QA/tests/jest`.
+- Keep Playwright browser specs under `/QA/tests/playwright`.
+- Keep generated test output out of root:
+  - Playwright output: `/QA/results/playwright`
+  - Calibration output: `/QA/results/h1-calibration`
+- Remove stale local result folders such as `test-results` and `test-results (1)` before commit.
+- Remove unused legacy folders when references are fully migrated.
+
 ## Testing Philosophy
 - Policy-as-code: architecture requirements are test-enforced, not convention-enforced.
 - Invariants cover routing, metadata, analytics, CSP, DOM contracts, and repo hygiene.
-- README contract validation is centralized in Jest under `/tests/readme_structure.test.js` and `/tests/readme_integrity.test.js`.
+- README contract validation is centralized in Jest under `/QA/tests/jest/readme_structure.test.js` and `/QA/tests/jest/readme_integrity.test.js`.
 - Local README drift enforcement now uses commit-aware fallback logic (`git diff --name-only HEAD`) when `origin/main...HEAD` and `HEAD~1...HEAD` ranges are unavailable, and only skips when git history is genuinely unavailable.
 - CI fails fast when contracts break to prevent production drift.
 
@@ -74,7 +88,7 @@ Routing requirements:
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
 - CI executes `npm test`.
-- Jest is required as a direct dev dependency and is invoked with `jest --passWithNoTests` to keep CI stable when no Jest specs are detected.
+- Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/run-jest-suite.js` to keep local/CI behavior deterministic.
 - CI fails on:
   - CSP violations
   - GA misconfiguration
@@ -119,7 +133,7 @@ Routing requirements:
 ## Machine-Readable Architecture Summary
 ```json
 {
-  "routes": ["/", "/about/", "/services/", "/connect/", "/about/insights/"],
+  "routes": ["/", "/about/", "/services/", "/connect/", "/insights/"],
   "canonical_domain": "romanbediner.com",
   "requires_trailing_slash": true,
   "ga": {
@@ -158,10 +172,23 @@ npx playwright install chromium
 ```bash
 npm test
 ```
+- Run all local QA checks from any directory (recommended operator entrypoint):
+```bash
+cd "/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com" && ./scripts/run-all-qa.sh
+```
+- Export a plain-text copy baseline for regression comparison:
+```bash
+node scripts/export-copy-baseline.js
+```
 - Serve locally (example):
 ```bash
 python3 -m http.server 4173
 ```
+
+Notes:
+- `node_modules` is dependency cache created by `npm ci` for tests and scripts.
+- `node_modules` is intentionally ignored by git and should remain local-only.
+- If sync tools duplicate module folders (for example with suffixes like ` (1)`), delete `node_modules` and re-run `npm ci`.
 
 ## CLI Tooling Reference
 Use this checklist when setting up a new computer for this repository.

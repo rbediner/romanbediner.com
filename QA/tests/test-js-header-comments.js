@@ -12,7 +12,8 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const SCRIPT_DIR = path.join(ROOT, 'scripts');
-const TEST_DIRS = [path.join(ROOT, 'QA', 'tests'), path.join(ROOT, 'tests')];
+// All automated tests are consolidated under QA/tests.
+const TEST_DIRS = [path.join(ROOT, 'QA', 'tests')];
 
 const failures = [];
 
@@ -36,7 +37,8 @@ function walk(dir, validator) {
     }
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      walk(full);
+      // Preserve validator callback during recursive traversal.
+      walk(full, validator);
       continue;
     }
     if (!entry.isFile()) {

@@ -67,7 +67,7 @@ class InsightsLayoutTest(unittest.TestCase):
         self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*width:\s*8px;")
         self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*height:\s*8px;")
         self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*margin-right:\s*14px;")
-        self.assertIn('background-image: url("/icons/bullet.png");', self.site_css)
+        self.assertIn('background-image: url("/assets/icons/bullet.png");', self.site_css)
 
     def test_ga_event_on_expand_contract(self):
         """Ensure script sends required insight_toggle GA event payload fields."""

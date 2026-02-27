@@ -19,6 +19,5 @@ QA/results/*
 !QA/results/.gitkeep
 !QA/results/README.md
 
-# Playwright runtime artifacts.
-artifacts/
-test-results/
+# Playwright runtime artifacts and duplicated local output folders.
+test-results*/

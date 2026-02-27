@@ -46,8 +46,7 @@ function scanForLegacyHomeRoute() {
     path.join(ROOT, 'connect'),
     path.join(ROOT, 'scripts'),
     path.join(ROOT, 'styles'),
-    path.join(ROOT, 'QA', 'tests'),
-    path.join(ROOT, 'tests')
+    path.join(ROOT, 'QA', 'tests')
   ];
   for (const root of roots) {
     if (!fs.existsSync(root)) continue;
@@ -78,8 +77,20 @@ function scanForLegacyHomeRoute() {
   }
 }
 
+function scanForLegacyRootFolders() {
+  // Keep root directories purpose-driven and prevent reintroducing migrated folders.
+  const disallowedRootDirs = ['analytics', 'icons', 'artifacts', 'test-results', 'test-results (1)'];
+  for (const dirName of disallowedRootDirs) {
+    const candidate = path.join(ROOT, dirName);
+    if (fs.existsSync(candidate)) {
+      failures.push(`Legacy root folder must not exist: ${dirName}`);
+    }
+  }
+}
+
 walk(ROOT);
 scanForLegacyHomeRoute();
+scanForLegacyRootFolders();
 
 if (failures.length) {
   failures.forEach((f) => console.error(`FAIL: ${f}`));

@@ -9,7 +9,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+// Tests now live under QA/tests/jest, so repo root is three levels up.
+const root = path.resolve(__dirname, '..', '..', '..');
 const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
 const { onInsightToggleClick } = require(path.join(root, 'scripts/insights-toggle.js'));
 

@@ -9,7 +9,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+// Jest specs are nested under QA/tests/jest, so repository root is three levels up.
+const ROOT = path.resolve(__dirname, '..', '..', '..');
 const README_PATH = path.join(ROOT, 'README.md');
 const README_TEXT = fs.readFileSync(README_PATH, 'utf8');
 
@@ -57,7 +58,7 @@ describe('README structure contract', () => {
       throw new Error(`Machine-readable JSON failed to parse: ${error.message}`);
     }
 
-    const expectedRoutes = ['/', '/about/', '/services/', '/connect/', '/about/insights/'];
+    const expectedRoutes = ['/', '/about/', '/services/', '/connect/', '/insights/'];
     expect(parsed.routes).toEqual(expectedRoutes);
     expect(parsed.canonical_domain).toBe('romanbediner.com');
     expect(parsed.requires_trailing_slash).toBe(true);

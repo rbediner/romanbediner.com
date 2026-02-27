@@ -9,7 +9,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+// Tests now live under QA/tests/jest, so repo root is three levels up.
+const root = path.resolve(__dirname, '..', '..', '..');
 
 const read = (relPath) => fs.readFileSync(path.join(root, relPath), 'utf8');
 

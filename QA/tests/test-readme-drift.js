@@ -13,7 +13,6 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ARCH_PATHS = [
   'scripts/',
-  'tests/',
   'QA/tests/',
   'styles/',
   '.github/workflows/',

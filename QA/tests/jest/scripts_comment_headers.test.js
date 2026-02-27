@@ -9,7 +9,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+// Tests now live under QA/tests/jest, so repo root is three levels up.
+const ROOT = path.resolve(__dirname, '..', '..', '..');
 const SCRIPTS_DIR = path.join(ROOT, 'scripts');
 
 const REQUIRED_LABELS = [
@@ -46,8 +47,10 @@ describe('Script header comment contract', () => {
       const rel = path.relative(ROOT, file);
       const text = fs.readFileSync(file, 'utf8');
       const trimmed = text.trimStart();
+      // Allow a Node shebang before the mandatory multi-line header comment.
+      const normalized = trimmed.startsWith('#!') ? trimmed.replace(/^#![^\n]*\n/, '') : trimmed;
 
-      const headerMatch = trimmed.match(/^\/\*([\s\S]*?)\*\//);
+      const headerMatch = normalized.match(/^\/\*([\s\S]*?)\*\//);
       if (!headerMatch) {
         failures.push(`${rel}: missing top-of-file multi-line block comment header.`);
         continue;

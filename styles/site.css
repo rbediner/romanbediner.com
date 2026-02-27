@@ -360,7 +360,8 @@ main li:last-child {
   transform: translateY(-50%);
   vertical-align: middle;
   flex-shrink: 0;
-  background-image: url("/icons/bullet.png");
+  /* Use canonical bullet icon path under assets/icons to avoid duplicate root icon folders. */
+  background-image: url("/assets/icons/bullet.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

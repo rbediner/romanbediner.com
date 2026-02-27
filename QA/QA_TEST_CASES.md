@@ -125,7 +125,7 @@
 
 21. Bullet and spacing guardrails
 - File: `QA/tests/test_visual_regression_playwright.py`
-- Asserts all unordered lists use `.service-list` with `/icons/bullet.png` at `8px`.
+- Asserts all unordered lists use `.service-list` with `/assets/icons/bullet.png` at `8px`.
 - Asserts no default browser bullets render.
 - Asserts vertical spacing stays on the defined scale and below anomaly thresholds.
 
