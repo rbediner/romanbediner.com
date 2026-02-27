@@ -135,6 +135,9 @@ Routing requirements:
    - Transition flow architecture is: `Home -> About -> Services -> Insights -> Connect`.
    - Transition component styles are centralized in `styles/site.css` and must not be duplicated in page-level CSS.
 
+10. **About philosophy heading standard**
+   - The philosophy card heading on `/about/` uses the canonical label `Operating Philosophy`.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
