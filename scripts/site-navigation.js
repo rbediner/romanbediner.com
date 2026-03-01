@@ -123,35 +123,47 @@ function applyActiveNavState(navElement, activePath) {
       return;
     }
 
-    const items = wrapper.querySelectorAll(".arc-item");
-    if (items.length < 3) {
+    const headers = wrapper.querySelectorAll(".arc-item .era-header");
+    if (headers.length !== 3) {
       return;
     }
 
     const wrapperRect = wrapper.getBoundingClientRect();
-    const firstRect = items[0].getBoundingClientRect();
-    const item1Rect = items[0].getBoundingClientRect();
-    const item2Rect = items[1].getBoundingClientRect();
-    const lastRect = items[items.length - 1].getBoundingClientRect();
+    const wrapperHeight = wrapperRect.height;
+    const centers = Array.from(headers).map((header) => {
+      const headerRect = header.getBoundingClientRect();
+      return headerRect.top + headerRect.height / 2 - wrapperRect.top;
+    });
 
-    const orb1 = firstRect.top - wrapperRect.top;
-    const orb2 = item1Rect.bottom - wrapperRect.top;
-    const orb3 = item2Rect.bottom - wrapperRect.top;
-    const orb4 = lastRect.bottom - wrapperRect.top;
+    const orb1 = centers[0];
+    const orb2 = centers[1];
+    const orb3 = centers[2];
+
+    let orb4 = wrapperHeight - orb1;
+    const minGap = 48;
+    if (orb4 < orb3 + minGap) {
+      orb4 = orb3 + minGap;
+    }
 
     wrapper.style.setProperty("--orb1", `${orb1}px`);
     wrapper.style.setProperty("--orb2", `${orb2}px`);
     wrapper.style.setProperty("--orb3", `${orb3}px`);
     wrapper.style.setProperty("--orb4", `${orb4}px`);
+
+    wrapper.style.setProperty("--spine-top", `${orb1}px`);
+    wrapper.style.setProperty("--spine-bottom", `${orb4}px`);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function schedule() {
     positionTimeline();
     setTimeout(positionTimeline, 50);
-  });
+    setTimeout(positionTimeline, 150);
+  }
+
+  document.addEventListener("DOMContentLoaded", schedule);
 
   window.addEventListener("resize", () => {
     clearTimeout(window.__tl);
-    window.__tl = setTimeout(positionTimeline, 80);
+    window.__tl = setTimeout(schedule, 80);
   });
 })();

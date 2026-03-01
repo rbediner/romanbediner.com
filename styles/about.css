@@ -25,8 +25,8 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 0;
-  bottom: 0;
+  top: var(--spine-top, 0px);
+  height: calc(var(--spine-bottom, 100%) - var(--spine-top, 0px));
   width: 2px;
   background: var(--border-color);
   opacity: 0.95;
