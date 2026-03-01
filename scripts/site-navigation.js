@@ -123,35 +123,20 @@ function applyActiveNavState(navElement, activePath) {
       return;
     }
 
-    const headers = wrapper.querySelectorAll(".arc-item .era-header");
-    if (headers.length !== 3) {
+    const items = wrapper.querySelectorAll(".arc-item");
+    if (items.length !== 3) {
       return;
     }
 
     const wrapperRect = wrapper.getBoundingClientRect();
-    const wrapperHeight = wrapperRect.height;
-    const centers = Array.from(headers).map((header) => {
-      const headerRect = header.getBoundingClientRect();
-      return headerRect.top + headerRect.height / 2 - wrapperRect.top;
+    const centers = Array.from(items).map((item) => {
+      const itemRect = item.getBoundingClientRect();
+      return itemRect.top + itemRect.height / 2 - wrapperRect.top;
     });
 
-    const orb1 = centers[0];
-    const orb2 = centers[1];
-    const orb3 = centers[2];
-
-    let orb4 = wrapperHeight - orb1;
-    const minGap = 48;
-    if (orb4 < orb3 + minGap) {
-      orb4 = orb3 + minGap;
-    }
-
-    wrapper.style.setProperty("--orb1", `${orb1}px`);
-    wrapper.style.setProperty("--orb2", `${orb2}px`);
-    wrapper.style.setProperty("--orb3", `${orb3}px`);
-    wrapper.style.setProperty("--orb4", `${orb4}px`);
-
-    wrapper.style.setProperty("--spine-top", `${orb1}px`);
-    wrapper.style.setProperty("--spine-bottom", `${orb4}px`);
+    wrapper.style.setProperty("--orb1", `${centers[0]}px`);
+    wrapper.style.setProperty("--orb2", `${centers[1]}px`);
+    wrapper.style.setProperty("--orb3", `${centers[2]}px`);
   }
 
   function schedule() {

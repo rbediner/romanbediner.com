@@ -25,39 +25,34 @@
   content: "";
   position: absolute;
   left: 0;
-  top: var(--spine-top, 0px);
-  height: calc(var(--spine-bottom, 100%) - var(--spine-top, 0px));
+  top: 0;
+  bottom: 0;
   width: 2px;
   background: var(--border-color);
-  opacity: 0.95;
+  opacity: 0.9;
   z-index: 3;
 }
 
 .timeline-orb {
   position: absolute;
   left: -7px;
-  width: 16px;
-  height: 16px;
-  background-image: url("/assets/icons/timeline-orb.png");
-  background-size: cover;
-  background-position: center;
-  border-radius: 999px;
-  opacity: 0.75;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #4f7cff, #1f3fa8);
+  opacity: 0.9;
   z-index: 2;
-  box-shadow: 0 0 0 4px rgba(70, 108, 255, 0.08);
 }
 
 .timeline-orb.orb-1,
 .timeline-orb.orb-2,
-.timeline-orb.orb-3,
-.timeline-orb.orb-4 {
+.timeline-orb.orb-3 {
   transform: translateY(-50%);
 }
 
 .timeline-orb.orb-1 { top: var(--orb1, 0px); }
 .timeline-orb.orb-2 { top: var(--orb2, 0px); }
 .timeline-orb.orb-3 { top: var(--orb3, 0px); }
-.timeline-orb.orb-4 { top: var(--orb4, 0px); }
 
 .about-philosophy {
   margin-top: 0;
