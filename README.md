@@ -138,6 +138,12 @@ Routing requirements:
 10. **About philosophy heading standard**
    - The philosophy card heading on `/about/` uses the canonical label `Operating Philosophy`.
 
+11. **About professional arc timeline structure**
+   - `/about/` professional arc content is wrapped by `.arc-timeline-wrapper` with a left accent spine rendered via `::before`.
+   - Timeline orbs use `/assets/icons/timeline-orb.png` and are styled through `.timeline-orb` classes (size/opacity/glow controlled in CSS).
+   - Middle orb alignment is computed dynamically in `/scripts/site-navigation.js` using `.arc-item + .arc-item` divider offsets and CSS custom properties.
+   - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
