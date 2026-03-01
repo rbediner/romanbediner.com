@@ -88,6 +88,7 @@ Routing requirements:
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
 - CI executes `npm test`.
+- Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/run-jest-suite.js` to keep local/CI behavior deterministic.
 - CI fails on:
   - CSP violations
