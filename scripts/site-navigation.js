@@ -119,36 +119,35 @@ function applyActiveNavState(navElement, activePath) {
 (function syncAboutTimelineOrbs() {
   function positionTimeline() {
     const wrapper = document.querySelector(".arc-timeline-wrapper");
-    if (!wrapper) {
-      return;
-    }
+    if (!wrapper) return;
 
-    const items = wrapper.querySelectorAll(".arc-item");
-    if (items.length !== 3) {
-      return;
-    }
+    const sections = wrapper.querySelectorAll(".arc-item");
+    const orbs = wrapper.querySelectorAll(".timeline-orb");
+
+    if (sections.length !== 3 || orbs.length !== 3) return;
 
     const wrapperRect = wrapper.getBoundingClientRect();
-    const centers = Array.from(items).map((item) => {
-      const itemRect = item.getBoundingClientRect();
-      return itemRect.top + itemRect.height / 2 - wrapperRect.top;
-    });
 
-    wrapper.style.setProperty("--orb1", `${centers[0]}px`);
-    wrapper.style.setProperty("--orb2", `${centers[1]}px`);
-    wrapper.style.setProperty("--orb3", `${centers[2]}px`);
+    sections.forEach((section, index) => {
+      const narrative = section.querySelector(".arc-narrative");
+      if (!narrative) return;
+
+      const rect = narrative.getBoundingClientRect();
+      const visualCenter = rect.top + rect.height / 2 - wrapperRect.top;
+      orbs[index].style.top = `${visualCenter}px`;
+    });
   }
 
   function schedule() {
     positionTimeline();
-    setTimeout(positionTimeline, 50);
-    setTimeout(positionTimeline, 150);
+    setTimeout(positionTimeline, 60);
+    setTimeout(positionTimeline, 160);
   }
 
   document.addEventListener("DOMContentLoaded", schedule);
 
-  window.addEventListener("resize", () => {
-    clearTimeout(window.__tl);
-    window.__tl = setTimeout(schedule, 80);
+  window.addEventListener("resize", function () {
+    clearTimeout(window.__timeline);
+    window.__timeline = setTimeout(schedule, 100);
   });
 })();
