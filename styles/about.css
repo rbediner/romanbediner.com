@@ -17,6 +17,59 @@
   margin-top: 0;
 }
 
+.arc-timeline-wrapper {
+  position: relative;
+}
+
+.arc-timeline-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-blue);
+  opacity: 0.75;
+  z-index: 1;
+}
+
+.timeline-orb {
+  position: absolute;
+  left: -7px;
+  width: 16px;
+  height: 16px;
+  background-image: url("/assets/icons/timeline-orb.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  opacity: 0.85;
+  z-index: 2;
+  box-shadow: 0 0 0 4px rgba(70, 108, 255, 0.15);
+}
+
+.top-orb {
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.bottom-orb {
+  bottom: 0;
+  transform: translateY(50%);
+}
+
+.mid-orb-1,
+.mid-orb-2 {
+  transform: translateY(-50%);
+}
+
+.mid-orb-1 {
+  top: calc(var(--divider-1-offset, 0px));
+}
+
+.mid-orb-2 {
+  top: calc(var(--divider-2-offset, 0px));
+}
+
 .about-philosophy {
   margin-top: 0;
 }
@@ -190,6 +243,11 @@
 /* Responsive Stack */
 
 @media (max-width: 900px) {
+  .arc-timeline-wrapper::before,
+  .timeline-orb {
+    display: none;
+  }
+
   .arc-item {
     grid-template-columns: 1fr;
     gap: 20px;

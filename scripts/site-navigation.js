@@ -115,3 +115,30 @@ function applyActiveNavState(navElement, activePath) {
   applyActiveNavState(desktopNav, activePath);
   applyActiveNavState(mobileNav, activePath);
 })();
+
+function syncArcTimelineOrbs() {
+  const wrapper = document.querySelector(".arc-timeline-wrapper");
+  if (!wrapper) {
+    return;
+  }
+
+  const dividers = wrapper.querySelectorAll(".arc-item + .arc-item");
+  if (dividers.length < 2) {
+    return;
+  }
+
+  const rect1 = dividers[0].getBoundingClientRect();
+  const rect2 = dividers[1].getBoundingClientRect();
+  const wrapperRect = wrapper.getBoundingClientRect();
+
+  wrapper.style.setProperty("--divider-1-offset", `${rect1.top - wrapperRect.top}px`);
+  wrapper.style.setProperty("--divider-2-offset", `${rect2.top - wrapperRect.top}px`);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  syncArcTimelineOrbs();
+});
+
+window.addEventListener("resize", () => {
+  syncArcTimelineOrbs();
+});
