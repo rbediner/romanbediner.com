@@ -140,9 +140,10 @@ Routing requirements:
    - The philosophy card heading on `/about/` uses the canonical label `Operating Philosophy`.
 
 11. **About professional arc timeline structure**
-   - `/about/` professional arc content is wrapped by `.arc-timeline-wrapper` with a left accent spine rendered via `::before`.
-   - Timeline orbs use `/assets/icons/timeline-orb.png` and are styled through `.timeline-orb` classes (size/opacity/glow controlled in CSS).
-   - Middle orb alignment is computed dynamically in `/scripts/site-navigation.js` using `.arc-item + .arc-item` divider offsets and CSS custom properties.
+   - `/about/` professional arc content is wrapped by `.arc-timeline-wrapper` with a neutral grey structural spine rendered via `::before`.
+   - Exactly four orbs are rendered (`.orb-1` through `.orb-4`) using `/assets/icons/timeline-orb.png`; spine layering is above orb center to create a bisected structural mark.
+   - Orb alignment is computed dynamically in `/scripts/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb4`) with resize recalculation.
+   - Timeline dividers are constrained to `.arc-item + .arc-item .arc-narrative` (right column only) so divider lines do not intersect the timeline spine.
    - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
 
 ## Machine-Readable Architecture Summary

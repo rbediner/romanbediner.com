@@ -27,10 +27,10 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: var(--accent-blue);
-  opacity: 0.75;
-  z-index: 1;
+  width: 2px;
+  background: var(--border-color);
+  opacity: 0.95;
+  z-index: 3;
 }
 
 .timeline-orb {
@@ -41,34 +41,23 @@
   background-image: url("/assets/icons/timeline-orb.png");
   background-size: cover;
   background-position: center;
-  border-radius: 50%;
-  opacity: 0.85;
+  border-radius: 999px;
+  opacity: 0.75;
   z-index: 2;
-  box-shadow: 0 0 0 4px rgba(70, 108, 255, 0.15);
+  box-shadow: 0 0 0 4px rgba(70, 108, 255, 0.08);
 }
 
-.top-orb {
-  top: 0;
+.timeline-orb.orb-1,
+.timeline-orb.orb-2,
+.timeline-orb.orb-3,
+.timeline-orb.orb-4 {
   transform: translateY(-50%);
 }
 
-.bottom-orb {
-  bottom: 0;
-  transform: translateY(50%);
-}
-
-.mid-orb-1,
-.mid-orb-2 {
-  transform: translateY(-50%);
-}
-
-.mid-orb-1 {
-  top: calc(var(--divider-1-offset, 0px));
-}
-
-.mid-orb-2 {
-  top: calc(var(--divider-2-offset, 0px));
-}
+.timeline-orb.orb-1 { top: var(--orb1, 0px); }
+.timeline-orb.orb-2 { top: var(--orb2, 0px); }
+.timeline-orb.orb-3 { top: var(--orb3, 0px); }
+.timeline-orb.orb-4 { top: var(--orb4, 0px); }
 
 .about-philosophy {
   margin-top: 0;
@@ -173,11 +162,9 @@
   column-gap: 48px;
   align-items: start;
   padding: 48px 0;
-  border-top: 1px solid var(--border-color);
 }
 
 .arc-item:first-of-type {
-  border-top: none;
   padding-top: 32px;
 }
 
@@ -230,6 +217,11 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
+}
+
+.arc-item + .arc-item .arc-narrative {
+  border-top: 1px solid var(--border-color);
+  padding-top: 40px;
 }
 
 .arc-narrative p {

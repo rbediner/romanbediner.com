@@ -116,29 +116,42 @@ function applyActiveNavState(navElement, activePath) {
   applyActiveNavState(mobileNav, activePath);
 })();
 
-function syncArcTimelineOrbs() {
-  const wrapper = document.querySelector(".arc-timeline-wrapper");
-  if (!wrapper) {
-    return;
+(function syncAboutTimelineOrbs() {
+  function positionTimeline() {
+    const wrapper = document.querySelector(".arc-timeline-wrapper");
+    if (!wrapper) {
+      return;
+    }
+
+    const items = wrapper.querySelectorAll(".arc-item");
+    if (items.length < 3) {
+      return;
+    }
+
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const firstRect = items[0].getBoundingClientRect();
+    const item1Rect = items[0].getBoundingClientRect();
+    const item2Rect = items[1].getBoundingClientRect();
+    const lastRect = items[items.length - 1].getBoundingClientRect();
+
+    const orb1 = firstRect.top - wrapperRect.top;
+    const orb2 = item1Rect.bottom - wrapperRect.top;
+    const orb3 = item2Rect.bottom - wrapperRect.top;
+    const orb4 = lastRect.bottom - wrapperRect.top;
+
+    wrapper.style.setProperty("--orb1", `${orb1}px`);
+    wrapper.style.setProperty("--orb2", `${orb2}px`);
+    wrapper.style.setProperty("--orb3", `${orb3}px`);
+    wrapper.style.setProperty("--orb4", `${orb4}px`);
   }
 
-  const dividers = wrapper.querySelectorAll(".arc-item + .arc-item");
-  if (dividers.length < 2) {
-    return;
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    positionTimeline();
+    setTimeout(positionTimeline, 50);
+  });
 
-  const rect1 = dividers[0].getBoundingClientRect();
-  const rect2 = dividers[1].getBoundingClientRect();
-  const wrapperRect = wrapper.getBoundingClientRect();
-
-  wrapper.style.setProperty("--divider-1-offset", `${rect1.top - wrapperRect.top}px`);
-  wrapper.style.setProperty("--divider-2-offset", `${rect2.top - wrapperRect.top}px`);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  syncArcTimelineOrbs();
-});
-
-window.addEventListener("resize", () => {
-  syncArcTimelineOrbs();
-});
+  window.addEventListener("resize", () => {
+    clearTimeout(window.__tl);
+    window.__tl = setTimeout(positionTimeline, 80);
+  });
+})();
