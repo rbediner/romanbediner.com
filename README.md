@@ -89,6 +89,7 @@ Routing requirements:
 - Playwright browser installation is required in CI.
 - CI executes `npm test`.
 - Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
+- Playwright defaults to parallel workers via `scripts/run-playwright-local.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/run-jest-suite.js` to keep local/CI behavior deterministic.
 - CI fails on:
   - CSP violations
@@ -196,6 +197,14 @@ npx playwright install chromium
 - Run architecture and regression tests:
 ```bash
 npm test
+```
+- Run Playwright with the default parallel worker profile (same behavior used by `npm test`):
+```bash
+bash scripts/run-playwright-local.sh
+```
+- Override worker count when needed for debugging or stability:
+```bash
+bash scripts/run-playwright-local.sh --workers=1
 ```
 - Run all local QA checks from any directory (recommended operator entrypoint):
 ```bash

@@ -5,6 +5,7 @@ set -euo pipefail
 # when reading node_modules in synced workspace paths.
 
 PLAYWRIGHT_VERSION="1.58.2"
+PLAYWRIGHT_DEFAULT_WORKERS="${PLAYWRIGHT_DEFAULT_WORKERS:-50%}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 TMP_ROOT="${TMPDIR:-/tmp}/rb-playwright-runtime"
@@ -56,5 +57,17 @@ mkdir -p "$RUN_DIR/node_modules"
 ln -sfn "$PKG_ROOT/playwright/package" "$RUN_DIR/node_modules/playwright"
 ln -sfn "$PKG_ROOT/playwright-core/package" "$RUN_DIR/node_modules/playwright-core"
 
+PLAYWRIGHT_ARGS=("$@")
+HAS_WORKERS_FLAG=0
+for arg in "${PLAYWRIGHT_ARGS[@]}"; do
+  if [[ "$arg" == "--workers" || "$arg" == --workers=* ]]; then
+    HAS_WORKERS_FLAG=1
+    break
+  fi
+done
+if [[ "$HAS_WORKERS_FLAG" -eq 0 ]]; then
+  PLAYWRIGHT_ARGS+=("--workers=$PLAYWRIGHT_DEFAULT_WORKERS")
+fi
+
 cd "$RUN_DIR"
-node --preserve-symlinks --preserve-symlinks-main node_modules/playwright/cli.js test "$@"
+node --preserve-symlinks --preserve-symlinks-main node_modules/playwright/cli.js test "${PLAYWRIGHT_ARGS[@]}"
