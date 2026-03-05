@@ -59,7 +59,13 @@ function hasCommitHistory() {
 }
 
 function resolveChangedFiles() {
-  const primary = tryDiff('git diff --name-only origin/main...HEAD');
+  const preferredBase = process.env.GITHUB_REF_NAME === 'prod' ? 'origin/staging' : 'origin/main';
+  const primary = tryDiff(`git diff --name-only ${preferredBase}...HEAD`);
+  const secondary = tryDiff(
+    preferredBase === 'origin/staging'
+      ? 'git diff --name-only origin/main...HEAD'
+      : 'git diff --name-only origin/staging...HEAD'
+  );
   const fallback = tryDiff('git diff --name-only HEAD~1...HEAD');
   const hasHistory = hasCommitHistory();
 
@@ -67,11 +73,14 @@ function resolveChangedFiles() {
     if (primary.ok) {
       return primary.files;
     }
+    if (secondary.ok) {
+      return secondary.files;
+    }
     if (fallback.ok) {
       return fallback.files;
     }
     throw new Error(
-      `Unable to determine changed files in CI. origin/main diff error: ${primary.error}; HEAD~1 fallback error: ${fallback.error}`
+      `Unable to determine changed files in CI. primary diff error: ${primary.error}; secondary diff error: ${secondary.error}; HEAD~1 fallback error: ${fallback.error}`
     );
   }
 
@@ -82,10 +91,16 @@ function resolveChangedFiles() {
   // Local strict mode:
   // 1) Use branch-aware diff when available.
   // 2) Always merge working-tree diff so unstaged/staged local architectural edits are enforced.
-  const rangeFiles = primary.ok ? primary.files : fallback.ok ? fallback.files : [];
+  const rangeFiles = primary.ok
+    ? primary.files
+    : secondary.ok
+      ? secondary.files
+      : fallback.ok
+        ? fallback.files
+        : [];
   const workingTree = tryDiff('git diff --name-only HEAD');
 
-  if (!primary.ok && !fallback.ok && !workingTree.ok) {
+  if (!primary.ok && !secondary.ok && !fallback.ok && !workingTree.ok) {
     return null;
   }
 

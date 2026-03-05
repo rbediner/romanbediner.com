@@ -144,9 +144,11 @@ def main():
         warnings.append(f"Repository API check failed with HTTP {repo_code}.")
         fixes.append("Verify repository owner/name and API access.")
     else:
-        if repo_data.get("default_branch") != "main":
-            warnings.append(f"Default branch is {repo_data.get('default_branch')!r}, expected 'main'.")
-            fixes.append("Set default branch to main in repository settings.")
+        if repo_data.get("default_branch") not in {"staging", "main"}:
+            warnings.append(
+                f"Default branch is {repo_data.get('default_branch')!r}, expected 'staging' (preferred) or 'main' (legacy)."
+            )
+            fixes.append("Set default branch to staging in repository settings.")
 
     if pages_code == 0:
         warnings.append("Pages API check could not run due to network/DNS error in current environment.")
@@ -156,7 +158,7 @@ def main():
             f"Pages API endpoint returned HTTP {pages_code}; unable to verify source path/domain state from API."
         )
         fixes.append(
-            "Set GITHUB_TOKEN (repo admin scope) and rerun script to fetch /pages details; verify Pages source is main + /(root)."
+            "Set GITHUB_TOKEN (repo admin scope) and rerun script to fetch /pages details; verify Pages source is GitHub Actions deploying from prod."
         )
 
     print("GitHub Pages Diagnostic Report")
@@ -203,6 +205,12 @@ def main():
         print(f"- source branch: {source.get('branch')}")
         print(f"- source path: {source.get('path')}")
         print(f"- status: {pages_data.get('status')}")
+        source_branch = source.get("branch")
+        if source_branch and source_branch != "prod":
+            warnings.append(
+                f"Pages source branch is {source_branch!r}, expected 'prod' for staging->prod release flow."
+            )
+            fixes.append("Set GitHub Pages publishing source to prod (or GitHub Actions workflow triggered by prod).")
     else:
         print(f"- Pages API response: {pages_data}")
     print()
