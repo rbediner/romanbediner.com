@@ -161,6 +161,7 @@ Routing requirements:
    - Exactly four orbs are rendered (`.orb-1` through `.orb-4`) using `/assets/icons/timeline-orb.png`; spine layering is above orb center to create a bisected structural mark.
    - Orb alignment is computed dynamically in `/scripts/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb4`) with resize recalculation.
    - Timeline dividers are constrained to `.arc-item + .arc-item .arc-narrative` (right column only) so divider lines do not intersect the timeline spine.
+   - Era subtitle labels use plain text without decorative bracket pseudo-elements.
    - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
 
 ## Machine-Readable Architecture Summary
