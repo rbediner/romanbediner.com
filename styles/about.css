@@ -195,17 +195,6 @@
   position: relative;
 }
 
-/* Add bracket styling via pseudo elements */
-.era-sub::before {
-  content: "[";
-  margin-right: 4px;
-}
-
-.era-sub::after {
-  content: "]";
-  margin-left: 4px;
-}
-
 /* Narrative Column */
 
 .arc-narrative {
