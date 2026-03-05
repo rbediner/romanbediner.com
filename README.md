@@ -97,7 +97,12 @@ Routing requirements:
 - Node is pinned to version 20.
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
-- CI executes `npm test`.
+- CI is split into parallel jobs:
+  - `qa-node` (`npm run test:node`)
+  - `qa-python` (`npm run test:python`)
+  - `qa-jest` (`npm run test:jest`)
+  - `qa-playwright` (`npm run test:playwright -- --workers=2`)
+- A final `deploy-gate` job depends on all QA jobs and is the required branch-protection status for release readiness.
 - Production deployment is separate from validation and runs only on pushes to `prod`.
 - Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/run-playwright-local.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
