@@ -26,11 +26,21 @@ Routing requirements:
 - Runtime model: static-only delivery.
 - No server-side includes or server-rendered composition.
 - CSP is enforced in HTML via `<meta http-equiv="Content-Security-Policy">`.
+- Production publish flow uses GitHub Actions deployment from the `prod` branch (`.github/workflows/deploy-pages.yml`).
 - Hosting portability is mandatory for:
   - S3 + CloudFront
   - Vercel
   - Netlify
   - Nginx/Apache
+
+## Branch and Release Model
+- `staging`: integration branch for active development and test validation.
+- `prod`: deployment branch that publishes to GitHub Pages.
+- Promotion rule:
+  1. validate changes on `staging`
+  2. promote the exact tested commit to `prod`
+  3. GitHub Actions deploys Pages from `prod`
+- Keep `prod` fast-forward only from tested commits to preserve release traceability.
 
 ## Google Analytics Architecture
 - Each canonical page provides exactly one GA metadata source via a measurement ID meta tag.
@@ -88,6 +98,7 @@ Routing requirements:
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
 - CI executes `npm test`.
+- Production deployment is separate from validation and runs only on pushes to `prod`.
 - Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/run-playwright-local.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/run-jest-suite.js` to keep local/CI behavior deterministic.
