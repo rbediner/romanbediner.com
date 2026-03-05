@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 class AboutRedesignTest(unittest.TestCase):
-    """Validate About hybrid redesign content blocks and global footer attribution."""
+    """Validate About hybrid redesign content blocks and current footer contract."""
 
     @classmethod
     def setUpClass(cls):
@@ -19,9 +19,6 @@ class AboutRedesignTest(unittest.TestCase):
             "connect/index.html",
             "insights/index.html",
         ]
-        cls.footer_line = (
-            "This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling."
-        )
         cls.footer_primary = "© Roman Bediner, PMP"
 
     def test_about_structure_sections_present(self):
@@ -64,7 +61,6 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertIn(".about-philosophy", self.about_css)
         self.assertIn(".philosophy-stack", self.about_css)
         self.assertIn(".lede-description", self.site_css)
-        self.assertIn(".footer-meta", self.site_css)
         self.assertIn(".footer-primary", self.site_css)
         self.assertIn("#professional-arc", self.about_css)
 
@@ -78,14 +74,16 @@ class AboutRedesignTest(unittest.TestCase):
             self.about_html,
         )
 
-    def test_footer_meta_global_on_canonical_pages(self):
-        """Ensure footer attribution is present globally and no em dashes are introduced."""
+    def test_footer_contract_global_on_canonical_pages(self):
+        """Ensure legacy disclaimer is removed and footer attribution remains globally."""
         for rel in self.canonical_pages:
             html = (self.root / rel).read_text(encoding="utf-8")
-            self.assertIn(self.footer_line, html)
+            self.assertNotIn(
+                "This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling.",
+                html,
+            )
             self.assertIn(self.footer_primary, html)
             self.assertIn('class="footer-primary"', html)
-            self.assertIn('class="footer-meta"', html)
             self.assertNotIn("—", html)
 
 

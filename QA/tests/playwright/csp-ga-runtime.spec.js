@@ -91,7 +91,8 @@ test.describe('CSP and GA runtime contract', () => {
         }
       });
 
-      await page.goto(`http://${host}:${port}${route}`, { waitUntil: 'networkidle' });
+      // `networkidle` can hang on third-party CDN activity; DOM readiness is deterministic for this contract.
+      await page.goto(`http://${host}:${port}${route}`, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(2000);
 
       const cspLikeErrors = consoleErrors.filter((entry) => {

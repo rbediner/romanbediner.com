@@ -68,7 +68,8 @@ async function startServer() {
 }
 
 async function measureHome(page) {
-  await page.goto(`http://${host}:${port}/`, { waitUntil: "networkidle" });
+  // Use DOM readiness to avoid timeouts from long-lived third-party network activity.
+  await page.goto(`http://${host}:${port}/`, { waitUntil: "domcontentloaded" });
   await page.evaluate(async () => {
     if (document.fonts?.ready) await document.fonts.ready;
   });
@@ -113,7 +114,7 @@ test("home H1 aligns to manifesto callout right edge", async ({ page }) => {
 
 test("connect page H1 inherits same computed size as home H1", async ({ page }) => {
   const home = await measureHome(page);
-  await page.goto(`http://${host}:${port}/connect/`, { waitUntil: "networkidle" });
+  await page.goto(`http://${host}:${port}/connect/`, { waitUntil: "domcontentloaded" });
   await page.evaluate(async () => {
     if (document.fonts?.ready) await document.fonts.ready;
   });

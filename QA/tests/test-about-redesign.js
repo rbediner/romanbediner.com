@@ -11,7 +11,7 @@
  * About page contract test:
  * - manifesto-led hero structure
  * - timeline and philosophy sections
- * - global footer attribution consistency
+ * - global footer consistency after disclaimer removal
  */
 const fs = require('fs');
 const path = require('path');
@@ -29,7 +29,6 @@ const canonicalPages = [
   'insights/index.html'
 ];
 
-const footerLine = 'This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling.';
 const footerPrimary = '© Roman Bediner, PMP';
 let failures = 0;
 
@@ -98,10 +97,6 @@ for (const sharedSelector of [
   }
 }
 
-if (!siteCss.includes('.footer-meta')) {
-  failures += 1;
-  console.error('FAIL: global footer-meta style is missing in styles/site.css.');
-}
 if (!siteCss.includes('.footer-primary')) {
   failures += 1;
   console.error('FAIL: global footer-primary style is missing in styles/site.css.');
@@ -121,9 +116,13 @@ if (!aboutHtml.includes('<h3>Systems Over Heroics</h3>')) {
 
 for (const rel of canonicalPages) {
   const html = fs.readFileSync(path.join(root, rel), 'utf8');
-  if (!html.includes(footerLine) || !html.includes('class="footer-meta"') || !html.includes(footerPrimary) || !html.includes('class="footer-primary"')) {
+  if (html.includes('This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling.')) {
     failures += 1;
-    console.error(`FAIL: footer content or classes missing in ${rel}`);
+    console.error(`FAIL: legacy footer disclaimer should be removed from ${rel}`);
+  }
+  if (!html.includes(footerPrimary) || !html.includes('class="footer-primary"')) {
+    failures += 1;
+    console.error(`FAIL: primary footer attribution missing in ${rel}`);
   }
   if (/—/.test(html)) {
     failures += 1;

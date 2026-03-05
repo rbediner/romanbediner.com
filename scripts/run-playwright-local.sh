@@ -57,9 +57,9 @@ mkdir -p "$RUN_DIR/node_modules"
 ln -sfn "$PKG_ROOT/playwright/package" "$RUN_DIR/node_modules/playwright"
 ln -sfn "$PKG_ROOT/playwright-core/package" "$RUN_DIR/node_modules/playwright-core"
 
-PLAYWRIGHT_ARGS=("$@")
+declare -a PLAYWRIGHT_ARGS=("$@")
 HAS_WORKERS_FLAG=0
-for arg in "${PLAYWRIGHT_ARGS[@]}"; do
+for arg in "${PLAYWRIGHT_ARGS[@]-}"; do
   if [[ "$arg" == "--workers" || "$arg" == --workers=* ]]; then
     HAS_WORKERS_FLAG=1
     break
