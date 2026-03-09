@@ -53,6 +53,12 @@ Routing requirements:
   - No inline GA snippets
   - Runtime request visibility checks
 
+## Connect Form Delivery Contract
+- `/connect/` form submission is handled client-side via EmailJS in `/scripts/contact-form-emailjs.js`.
+- Email recipient target for website inquiries is `connect@romanbediner.com`.
+- Recipient address must remain obfuscated in JavaScript and must not appear as plaintext in page HTML.
+- If EmailJS ownership/account changes, update `SERVICE_ID`, `TEMPLATE_ID`, and `PUBLIC_KEY` in `/scripts/contact-form-emailjs.js` and rerun QA.
+
 ## Content Security Policy
 - `script-src` must include approved sources only, including `'self'` and `https://www.googletagmanager.com`.
 - `connect-src` must include Google Analytics endpoints required for event delivery.

@@ -30,8 +30,8 @@
   const draftKey = "contact_draft";
 
   const recipient = [
-    114, 98, 101, 100, 105, 110, 101, 114, 43, 119, 101, 98, 115, 105, 116, 101,
-    64, 103, 109, 97, 105, 108, 46, 99, 111, 109
+    99, 111, 110, 110, 101, 99, 116, 64, 114, 111, 109, 97, 110, 98, 101, 100,
+    105, 110, 101, 114, 46, 99, 111, 109
   ].map((c) => String.fromCharCode(c)).join("");
 
   const contactForm = document.getElementById("contact-form");

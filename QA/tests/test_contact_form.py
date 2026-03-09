@@ -61,9 +61,10 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn('Please provide a bit more detail.', self.js)
         self.assertIn("Please wait before sending another message.", self.js)
 
-    def test_hides_direct_gmail_address(self):
+    def test_hides_direct_recipient_address(self):
         self.assertNotIn("rbediner+website@gmail.com", self.html)
-        self.assertRegex(self.js, r"const recipient = \[\s*114, 98, 101, 100")
+        self.assertNotIn("connect@romanbediner.com", self.html)
+        self.assertRegex(self.js, r"const recipient = \[\s*99,\s*111,\s*110,\s*110,\s*101,\s*99,\s*116,\s*64")
 
     def test_linkedin_uses_executive_action_block(self):
         self.assertIn('class="executive-action-block"', self.html)
