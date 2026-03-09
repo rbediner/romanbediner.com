@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Regression guardrails for test-schema.js.
+ * - Regression guardrails for test-jsonld-schema.js.
  * Why this exists:
  * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
  * What breaks if it fails:

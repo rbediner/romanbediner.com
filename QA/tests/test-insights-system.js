@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Regression guardrails for insights.test.js.
+ * - Regression guardrails for test-insights-system.js.
  * Why this exists:
  * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
  * What breaks if it fails:
@@ -186,7 +186,7 @@ function run() {
   testCardSlugStructure();
   testReadmeLinksMatchInsights();
   testGaInsightToggleEventBehavior();
-  console.log('PASS: insights.test.js validations passed.');
+  console.log('PASS: test-insights-system.js validations passed.');
 }
 
 run();
