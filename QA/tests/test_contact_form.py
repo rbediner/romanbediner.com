@@ -47,6 +47,10 @@ class ContactPageQATest(unittest.TestCase):
         self.assertRegex(self.js, r'const TEMPLATE_ID = "template_[A-Za-z0-9]+";')
         self.assertRegex(self.js, r'const PUBLIC_KEY = "[A-Za-z0-9_-]+";')
         self.assertIn("await emailjs.send(SERVICE_ID, TEMPLATE_ID", self.js)
+        self.assertIn("to_email: recipient,", self.js)
+        self.assertIn("to: recipient,", self.js)
+        self.assertIn("recipient_email: recipient,", self.js)
+        self.assertIn("recipient: recipient,", self.js)
         self.assertIn('subject: "Website contact"', self.js)
         self.assertNotIn("mailto:", self.html)
 

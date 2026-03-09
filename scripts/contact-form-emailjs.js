@@ -114,6 +114,9 @@
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         to_email: recipient,
+        to: recipient,
+        recipient_email: recipient,
+        recipient: recipient,
         from_name: name,
         from_email: email,
         reply_to: email,

@@ -57,6 +57,7 @@ Routing requirements:
 - `/connect/` form submission is handled client-side via EmailJS in `/scripts/contact-form-emailjs.js`.
 - Email recipient target for website inquiries is `connect@romanbediner.com`.
 - Recipient address must remain obfuscated in JavaScript and must not appear as plaintext in page HTML.
+- EmailJS payload includes `to_email`, `to`, `recipient_email`, and `recipient` mapped to the same recipient to tolerate template-variable naming drift across account migrations.
 - If EmailJS ownership/account changes, update `SERVICE_ID`, `TEMPLATE_ID`, and `PUBLIC_KEY` in `/scripts/contact-form-emailjs.js` and rerun QA.
 
 ## Content Security Policy
