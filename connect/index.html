@@ -37,7 +37,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
   <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
   <link rel="stylesheet" href="/styles/site.css" />
-  <link rel="stylesheet" href="/styles/connect.css" />
+  <!-- Cache-bust connect stylesheet so production reflects recent visual refinements immediately. -->
+  <link rel="stylesheet" href="/styles/connect.css?v=20260309b" />
   <link rel="preload" as="image" href="../assets/icons/mainlogo.svg">
   <link rel="preload" as="image" href="../assets/icons/contact.png">
   <!-- Analytics: GA4 measurement ID source of truth for /scripts/ga4.js -->

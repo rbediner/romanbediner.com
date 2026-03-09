@@ -95,7 +95,8 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn("For executive search, advisory opportunities, and professional networking.", self.html)
 
     def test_externalized_css_and_layout_hooks_exist(self):
-        self.assertIn('<link rel="stylesheet" href="/styles/connect.css" />', self.html)
+        # Allow optional cache-busting query strings while enforcing the canonical connect stylesheet path.
+        self.assertRegex(self.html, r'<link rel="stylesheet" href="/styles/connect\.css(?:\?[^"]+)?"\s*/>')
         self.assertIn('<link rel="stylesheet" href="/styles/site.css" />', self.html)
         self.assertIn('<script src="../scripts/site-navigation.js"></script>', self.html)
         self.assertIn('<script src="../scripts/contact-form-emailjs.js"></script>', self.html)

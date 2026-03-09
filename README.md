@@ -193,6 +193,7 @@ Routing requirements:
    - Ambient decorative orbs on `/connect/` are CSS-only pseudo-elements (`.connect-main::before` and `.connect-main::after`) with low-to-moderate opacity, subtle drift, and no interaction impact.
    - Decorative layers remain behind content (`z-index` control plus container safety rules) and must never alter contact form structure, IDs, or handler behavior.
    - Mobile experience keeps static, reduced-opacity orbs at `max-width: 768px` (no animation) to preserve viewport clarity and form usability.
+   - Connect page stylesheet can include a version query string (`/styles/connect.css?v=...`) to force immediate cache refresh after visual hotfixes.
 
 14. **Global page-top spacing contract**
    - Header-to-content distance is controlled centrally in `styles/site.css` by `--page-top-spacing`.
