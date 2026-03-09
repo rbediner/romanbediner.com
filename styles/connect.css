@@ -163,10 +163,17 @@
       padding: 0;
     }
 
-    /* Connect page ambient-layer container: keeps decorative orbs clipped and behind content. */
+    /* Connect page ambient-layer container: keeps decorative effects clipped and behind content. */
     .connect-main {
       position: relative;
       overflow: hidden;
+      /* Soft ambient wash adds depth without changing layout structure. */
+      background:
+        radial-gradient(
+          circle at 75% 20%,
+          rgba(90, 120, 255, 0.08),
+          transparent 60%
+        );
     }
 
     /* Preserve content legibility above background orbs. */
@@ -175,66 +182,54 @@
       z-index: 1;
     }
 
-    /* Ambient orb 1: upper-right, larger, subtle premium motion with visible presence. */
+    /* Ambient orb 1: upper-right light source, mostly off-canvas. */
     .connect-main::before {
       content: "";
       position: absolute;
-      top: 88px;
-      right: -92px;
-      width: 320px;
-      height: 320px;
+      top: 120px;
+      right: -140px;
+      width: 700px;
+      height: 700px;
       border-radius: 50%;
       background:
         radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 22%),
         radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
-      opacity: 0.18;
-      filter: blur(1px);
+      opacity: 0.12;
+      filter: blur(70px);
       z-index: 0;
       pointer-events: none;
-      animation: connect-orb-float-primary 32s ease-in-out infinite;
+      animation: floatOrb 36s ease-in-out infinite;
     }
 
-    /* Ambient orb 2: lower-right, medium, restrained but visible. */
+    /* Ambient orb 2: lower-right ambient glow pushed behind footer region. */
     .connect-main::after {
       content: "";
       position: absolute;
-      right: 14px;
-      bottom: 80px;
-      width: 208px;
-      height: 208px;
+      right: 120px;
+      bottom: -80px;
+      width: 520px;
+      height: 520px;
       border-radius: 50%;
       background:
         radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 24%),
         radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
-      opacity: 0.12;
-      filter: blur(1.4px);
+      opacity: 0.08;
+      filter: blur(70px);
       z-index: 0;
       pointer-events: none;
-      animation: connect-orb-float-secondary 42s ease-in-out infinite;
+      animation: floatOrb 36s ease-in-out infinite;
     }
 
-    /* Motion stays intentionally restrained: small drift plus subtle breathing scale. */
-    @keyframes connect-orb-float-primary {
+    /* Single calm animation curve for both ambient orbs. */
+    @keyframes floatOrb {
       0% {
-        transform: translate3d(0, 0, 0) scale(1);
+        transform: translate(0px, 0px) scale(1);
       }
       50% {
-        transform: translate3d(-12px, -10px, 0) scale(1.02);
+        transform: translate(8px, 12px) scale(1.03);
       }
       100% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-    }
-
-    @keyframes connect-orb-float-secondary {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      50% {
-        transform: translate3d(-8px, 8px, 0) scale(1.015);
-      }
-      100% {
-        transform: translate3d(0, 0, 0) scale(1);
+        transform: translate(0px, 0px) scale(1);
       }
     }
 
@@ -362,23 +357,26 @@
     }
 
     /* Executive Action Block (Connect Page) */
-    .executive-action-block {
+    /* LinkedIn secondary CTA polish with restrained interaction. */
+    .executive-action-block,
+    .linkedin-connect {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 24px 32px;
       margin: 32px 0;
       border-left: 4px solid var(--accent-blue);
-      background-color: rgba(59, 108, 255, 0.04);
+      background: rgba(70, 100, 255, 0.04);
       border-radius: 0 8px 8px 0;
       text-decoration: none;
       transition: all 0.25s ease;
       color: var(--text-color);
     }
 
-    .executive-action-block:hover {
-      background-color: rgba(59, 108, 255, 0.10);
-      transform: translateX(4px);
+    .executive-action-block:hover,
+    .linkedin-connect:hover {
+      background: rgba(70, 100, 255, 0.07);
+      transform: translateY(-2px);
       text-decoration: none;
     }
 
@@ -404,7 +402,8 @@
       flex-shrink: 0;
     }
 
-    .action-title {
+    .action-title,
+    .linkedin-connect h3 {
       font-size: 20px;
       font-weight: 600;
       color: var(--accent-blue);
@@ -417,14 +416,16 @@
       margin: 0;
     }
 
-    .action-arrow {
+    .action-arrow,
+    .arrow {
       font-size: 24px;
       color: var(--accent-blue);
       transition: transform 0.25s ease;
     }
 
-    .executive-action-block:hover .action-arrow {
-      transform: translateX(4px);
+    .executive-action-block:hover .action-arrow,
+    .linkedin-connect:hover .arrow {
+      transform: translateX(6px);
     }
 
     /* Keep Connect vertical rhythm aligned with global page-top spacing from site.css. */
@@ -507,10 +508,17 @@
       box-shadow: 0 12px 28px rgba(0,0,0,0.08);
     }
 
-    /* Form card polish: premium but restrained elevation with no layout changes. */
-    .form-card {
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    /* Premium glass-like card polish without changing form layout or spacing. */
+    .form-card,
+    .contact-card {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.96),
+          rgba(255, 255, 255, 0.92)
+        );
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
@@ -588,21 +596,10 @@
 
     /* Mobile Adjustments */
     @media (max-width: 768px) {
-      /* Keep brand orbs visible on mobile while disabling motion for stability. */
+      /* Mobile safety: disable ambient orb layers to keep viewport clean. */
       .connect-main::before,
       .connect-main::after {
-        animation: none;
-      }
-
-      /* Reduce mobile orb footprint so it stays ambient and does not crowd form content. */
-      .connect-main::before {
-        opacity: 0.1;
-        transform: scale(0.82);
-      }
-
-      .connect-main::after {
-        opacity: 0.08;
-        transform: scale(0.78);
+        display: none;
       }
 
       .executive-action-block {

@@ -73,16 +73,16 @@ if (!connectCss.includes('.connect-main::before') || !connectCss.includes('.conn
   fail('Connect CSS must keep the ambient orb pseudo-elements.');
 }
 
-if (!/\.connect-main::before\s*\{[^}]*animation:\s*connect-orb-float-primary/s.test(connectCss)) {
-  fail('Connect CSS must animate the primary orb on desktop.');
+if (!/\.connect-main::before\s*\{[^}]*animation:\s*floatOrb/s.test(connectCss)) {
+  fail('Connect CSS must animate the primary orb with floatOrb on desktop.');
 }
 
-if (!/\.connect-main::after\s*\{[^}]*animation:\s*connect-orb-float-secondary/s.test(connectCss)) {
-  fail('Connect CSS must animate the secondary orb on desktop.');
+if (!/\.connect-main::after\s*\{[^}]*animation:\s*floatOrb/s.test(connectCss)) {
+  fail('Connect CSS must animate the secondary orb with floatOrb on desktop.');
 }
 
-if (/\.connect-main::before\s*,\s*\.connect-main::after\s*\{[^}]*display:\s*none/s.test(connectCss)) {
-  fail('Connect CSS must not fully hide both ambient orbs on mobile.');
+if (!/@media\s*\(max-width:\s*768px\)\s*\{[\s\S]*\.connect-main::before[\s\S]*\.connect-main::after[\s\S]*display:\s*none/s.test(connectCss)) {
+  fail('Connect CSS must hide both ambient orb pseudo-elements on mobile (max-width: 768px).');
 }
 
 if (!/\.service-list li::before\s*\{[^}]*background-image:\s*url\("\/assets\/icons\/bullet\.png"\);/s.test(siteCss)) {
