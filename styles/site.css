@@ -52,6 +52,13 @@ body {
   align-items: center;
   gap: 10px;
   min-width: 0;
+  text-decoration: none;
+  color: var(--text-color, #111111);
+}
+
+.brand:hover {
+  text-decoration: none;
+  color: var(--text-color, #111111);
 }
 
 .brand-logo {

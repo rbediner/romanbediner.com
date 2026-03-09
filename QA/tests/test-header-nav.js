@@ -61,6 +61,10 @@ for (const rel of pages) {
     failures += 1;
     console.error(`FAIL: desktop nav aria label mismatch in ${rel}`);
   }
+  if (!/<a class="brand" href="\/" aria-label="Roman Bediner home">/i.test(html)) {
+    failures += 1;
+    console.error(`FAIL: brand lockup must link to home in ${rel}`);
+  }
   if (!html.includes('id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"')) {
     failures += 1;
     console.error(`FAIL: mobile nav aria label mismatch in ${rel}`);
