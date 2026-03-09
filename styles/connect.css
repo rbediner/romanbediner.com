@@ -163,6 +163,81 @@
       padding: 0;
     }
 
+    /* Connect page ambient-layer container: keeps decorative orbs clipped and behind content. */
+    .connect-main {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Preserve content legibility above background orbs. */
+    .connect-main > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Ambient orb 1: upper-right, larger, very subtle premium motion. */
+    .connect-main::before {
+      content: "";
+      position: absolute;
+      top: 108px;
+      right: -132px;
+      width: 352px;
+      height: 352px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 22%),
+        radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
+      opacity: 0.12;
+      filter: blur(1.6px);
+      z-index: 0;
+      pointer-events: none;
+      animation: connect-orb-float-primary 32s ease-in-out infinite;
+    }
+
+    /* Ambient orb 2: lower-right, medium, lower opacity to avoid visual competition. */
+    .connect-main::after {
+      content: "";
+      position: absolute;
+      right: 28px;
+      bottom: 96px;
+      width: 224px;
+      height: 224px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 24%),
+        radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
+      opacity: 0.08;
+      filter: blur(2.2px);
+      z-index: 0;
+      pointer-events: none;
+      animation: connect-orb-float-secondary 42s ease-in-out infinite;
+    }
+
+    /* Motion stays intentionally restrained: small drift plus subtle breathing scale. */
+    @keyframes connect-orb-float-primary {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(-12px, -10px, 0) scale(1.02);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @keyframes connect-orb-float-secondary {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(-8px, 8px, 0) scale(1.015);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
     .contact-shell {
       max-width: 720px;
       margin: 0 auto;
@@ -367,7 +442,7 @@
 
     /* Conversation themes block aligns Connect rhythm with Services without duplicating service content. */
     .connect-themes {
-      margin-top: 56px;
+      margin-top: 46px;
       margin-bottom: 64px;
     }
 
@@ -404,7 +479,8 @@
     .connect-expectation {
       margin-bottom: 0;
       font-size: 0.95rem;
-      opacity: 0.86;
+      color: #666666;
+      opacity: 1;
     }
 
     .card {
@@ -418,6 +494,18 @@
     .card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+
+    /* Form card polish: premium but restrained elevation with no layout changes. */
+    .form-card {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .form-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
     }
 
     button,
@@ -489,6 +577,12 @@
 
     /* Mobile Adjustments */
     @media (max-width: 768px) {
+      /* Disable ambient motion on mobile to keep the viewport clean and stable. */
+      .connect-main::before,
+      .connect-main::after {
+        display: none;
+      }
+
       .executive-action-block {
         padding: 20px 24px;
       }

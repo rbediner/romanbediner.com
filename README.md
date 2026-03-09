@@ -189,6 +189,11 @@ Routing requirements:
    - Theme bullets in this section must use shared `.service-list` orb bullets from `styles/site.css` with `/assets/icons/bullet.png` (no page-level bullet redefinition).
    - Closing expectation lines are present and visually muted to keep the bullet themes as primary visual focus.
 
+13. **Connect ambient polish contract**
+   - Ambient decorative orbs on `/connect/` are CSS-only pseudo-elements (`.connect-main::before` and `.connect-main::after`) with low opacity, subtle drift, and no interaction impact.
+   - Decorative layers remain behind content (`z-index` control plus container safety rules) and must never alter contact form structure, IDs, or handler behavior.
+   - Mobile experience disables ambient orb rendering at `max-width: 768px` to preserve viewport clarity and form usability.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
