@@ -5,6 +5,7 @@
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   --h1-size-desktop: 32px;
   --h1-size-mobile: 22px;
+  /* Global header-to-content spacing token used across canonical page mains. */
   --page-top-spacing: 72px;
   --h1-weight: 800;
   --lede-size: 26px;
@@ -218,6 +219,8 @@ h1 {
   white-space: nowrap;
 }
 
+/* Canonical page-main spacing contract.
+   Page-specific styles must not set their own top offsets. */
 .page-main,
 .insights-main,
 .about-main,

@@ -244,7 +244,7 @@
     }
 
     .contact-hero {
-      margin: 0 0 40px 0;
+      margin: 0;
       max-width: none;
     }
 
@@ -275,7 +275,7 @@
 
     .form-wrap {
       max-width: none;
-      margin: 16px 0 0 0;
+      margin: 0;
     }
 
     .field {
@@ -427,8 +427,14 @@
       transform: translateX(4px);
     }
 
-    .section {
-      margin: 72px 0;
+    /* Keep Connect vertical rhythm aligned with global page-top spacing from site.css. */
+    .connect-main .section {
+      margin: 0;
+    }
+
+    /* Section-to-section spacing only, so the first section does not drift below global top spacing. */
+    .connect-main .section + .section {
+      margin-top: 56px;
     }
 
     .section h2,
@@ -442,8 +448,7 @@
 
     /* Conversation themes block aligns Connect rhythm with Services without duplicating service content. */
     .connect-themes {
-      margin-top: 46px;
-      margin-bottom: 64px;
+      margin: 0;
     }
 
     /* Subtle structural divider above "How we might connect" content. */

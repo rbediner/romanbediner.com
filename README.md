@@ -194,6 +194,11 @@ Routing requirements:
    - Decorative layers remain behind content (`z-index` control plus container safety rules) and must never alter contact form structure, IDs, or handler behavior.
    - Mobile experience disables ambient orb rendering at `max-width: 768px` to preserve viewport clarity and form usability.
 
+14. **Global page-top spacing contract**
+   - Header-to-content distance is controlled centrally in `styles/site.css` by `--page-top-spacing`.
+   - Canonical main containers (`.page-main`, `.about-main`, `.services-main`, `.insights-main`, `.connect-main`, and `body > main`) inherit this token through a shared `padding-top` rule.
+   - Page-level styles must not set independent top offsets for the first section on a canonical route.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
