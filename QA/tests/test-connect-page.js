@@ -69,6 +69,22 @@ if (!connectCss.includes('.connect-closing') || !connectCss.includes('.connect-e
   fail('Connect CSS must include muted styles for closing lines.');
 }
 
+if (!connectCss.includes('.connect-main::before') || !connectCss.includes('.connect-main::after')) {
+  fail('Connect CSS must keep the ambient orb pseudo-elements.');
+}
+
+if (!/\.connect-main::before\s*\{[^}]*animation:\s*connect-orb-float-primary/s.test(connectCss)) {
+  fail('Connect CSS must animate the primary orb on desktop.');
+}
+
+if (!/\.connect-main::after\s*\{[^}]*animation:\s*connect-orb-float-secondary/s.test(connectCss)) {
+  fail('Connect CSS must animate the secondary orb on desktop.');
+}
+
+if (/\.connect-main::before\s*,\s*\.connect-main::after\s*\{[^}]*display:\s*none/s.test(connectCss)) {
+  fail('Connect CSS must not fully hide both ambient orbs on mobile.');
+}
+
 if (!/\.service-list li::before\s*\{[^}]*background-image:\s*url\("\/assets\/icons\/bullet\.png"\);/s.test(siteCss)) {
   fail('Shared orb bullet source must remain /assets/icons/bullet.png in site.css.');
 }

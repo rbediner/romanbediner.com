@@ -175,39 +175,39 @@
       z-index: 1;
     }
 
-    /* Ambient orb 1: upper-right, larger, very subtle premium motion. */
+    /* Ambient orb 1: upper-right, larger, subtle premium motion with visible presence. */
     .connect-main::before {
       content: "";
       position: absolute;
-      top: 108px;
-      right: -132px;
-      width: 352px;
-      height: 352px;
+      top: 88px;
+      right: -92px;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
       background:
         radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 22%),
         radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
-      opacity: 0.12;
-      filter: blur(1.6px);
+      opacity: 0.18;
+      filter: blur(1px);
       z-index: 0;
       pointer-events: none;
       animation: connect-orb-float-primary 32s ease-in-out infinite;
     }
 
-    /* Ambient orb 2: lower-right, medium, lower opacity to avoid visual competition. */
+    /* Ambient orb 2: lower-right, medium, restrained but visible. */
     .connect-main::after {
       content: "";
       position: absolute;
-      right: 28px;
-      bottom: 96px;
-      width: 224px;
-      height: 224px;
+      right: 14px;
+      bottom: 80px;
+      width: 208px;
+      height: 208px;
       border-radius: 50%;
       background:
         radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 24%),
         radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
-      opacity: 0.08;
-      filter: blur(2.2px);
+      opacity: 0.12;
+      filter: blur(1.4px);
       z-index: 0;
       pointer-events: none;
       animation: connect-orb-float-secondary 42s ease-in-out infinite;
@@ -432,6 +432,12 @@
       margin: 0;
     }
 
+    /* Explicitly pin first hero to shared top-spacing contract from site.css. */
+    .connect-main .contact-hero.section {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
     /* Section-to-section spacing only, so the first section does not drift below global top spacing. */
     .connect-main .section + .section {
       margin-top: 56px;
@@ -582,10 +588,21 @@
 
     /* Mobile Adjustments */
     @media (max-width: 768px) {
-      /* Disable ambient motion on mobile to keep the viewport clean and stable. */
+      /* Keep brand orbs visible on mobile while disabling motion for stability. */
       .connect-main::before,
       .connect-main::after {
-        display: none;
+        animation: none;
+      }
+
+      /* Reduce mobile orb footprint so it stays ambient and does not crowd form content. */
+      .connect-main::before {
+        opacity: 0.1;
+        transform: scale(0.82);
+      }
+
+      .connect-main::after {
+        opacity: 0.08;
+        transform: scale(0.78);
       }
 
       .executive-action-block {
