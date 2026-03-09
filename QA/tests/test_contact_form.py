@@ -29,7 +29,10 @@ class ContactPageQATest(unittest.TestCase):
             self.html,
             r'<input id="email" name="email" type="email" required aria-required="true" ?/>',
         )
-        self.assertIn('<input id="company" name="company" type="text" autocomplete="off"/>', self.html)
+        self.assertIn(
+            '<input id="company" name="company" type="hidden" autocomplete="off" tabindex="-1" aria-hidden="true" />',
+            self.html,
+        )
         self.assertIn('<label for="message-editor">Message</label>', self.html)
         self.assertIn('<div id="message-editor" aria-required="true"></div>', self.html)
         self.assertNotIn('id="subject"', self.html)
@@ -38,6 +41,10 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn("https://cdn.quilljs.com/1.3.6/quill.min.js", self.html)
         self.assertNotIn("char-count", self.html)
         self.assertIn("const MAX_MESSAGE_CHARS = 10000;", self.js)
+        self.assertIn("const MIN_SUBMIT_AGE_MS = 4000;", self.js)
+        self.assertIn("const COOLDOWN_MS = 15000;", self.js)
+        self.assertIn("const MAX_SUBMISSIONS_PER_HOUR = 5;", self.js)
+        self.assertIn("const MAX_SUBMISSIONS_PER_DAY = 25;", self.js)
         self.assertIn('["bold", "italic"]', self.js)
         self.assertIn('[{ list: "bullet" }]', self.js)
 
@@ -62,8 +69,19 @@ class ContactPageQATest(unittest.TestCase):
             self.js,
         )
         self.assertIn('id="form-error" role="status" aria-live="polite"', self.html)
-        self.assertIn('Please provide a bit more detail.', self.js)
-        self.assertIn("Please wait before sending another message.", self.js)
+        self.assertIn(
+            'const ANTI_ABUSE_MESSAGE = "Your message could not be submitted right now. Please try again later.";',
+            self.js,
+        )
+        self.assertIn("formError.textContent = ANTI_ABUSE_MESSAGE;", self.js)
+
+    def test_has_anti_abuse_rule_signals(self):
+        self.assertIn("if (now - pageLoadAt < MIN_SUBMIT_AGE_MS)", self.js)
+        self.assertIn("if (submissionsLastHour >= MAX_SUBMISSIONS_PER_HOUR)", self.js)
+        self.assertIn("if (normalized.length >= MAX_SUBMISSIONS_PER_DAY)", self.js)
+        self.assertIn("if (countUrls(trimmedMessage) > 2)", self.js)
+        self.assertIn("if (hasSpamKeyword(trimmedMessage))", self.js)
+        self.assertIn("if (isDisposableEmailDomain(email))", self.js)
 
     def test_hides_direct_recipient_address(self):
         self.assertNotIn("rbediner+website@gmail.com", self.html)

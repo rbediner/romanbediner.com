@@ -58,7 +58,20 @@ Routing requirements:
 - Email recipient target for website inquiries is `connect@romanbediner.com`.
 - Recipient address must remain obfuscated in JavaScript and must not appear as plaintext in page HTML.
 - EmailJS payload includes `to_email`, `to`, `recipient_email`, and `recipient` mapped to the same recipient to tolerate template-variable naming drift across account migrations.
+- Anti-abuse protections (no CAPTCHA, static-site compatible):
+  - honeypot field (`company`) blocks scripted autofill submissions
+  - minimum time-to-submit gate (`>= 4` seconds from page load)
+  - cooldown between accepted submissions (`>= 15` seconds)
+  - client-side rate limits (`max 5/hour`, `max 25/day`) using `localStorage`
+  - spam heuristics: minimum content length, URL stuffing detection, repeated-character detection, spam keyword detection
+  - disposable email-domain deny list (extensible in script constants)
+- Anti-abuse rejections use a generic message and do not expose internal rule details.
+- Static-site limitation: these controls reduce abuse but cannot fully prevent hostile automation because enforcement is client-side and can be bypassed by advanced attackers.
 - If EmailJS ownership/account changes, update `SERVICE_ID`, `TEMPLATE_ID`, and `PUBLIC_KEY` in `/scripts/contact-form-emailjs.js` and rerun QA.
+- To tune spam filters after deployment:
+  - update `SPAM_KEYWORDS` and `BLOCKED_EMAIL_DOMAINS` in `/scripts/contact-form-emailjs.js`
+  - rerun `python3 -m unittest discover -s QA/tests -p test_contact_form.py -v`
+  - rerun `npm run test:jest`
 
 ## Content Security Policy
 - `script-src` must include approved sources only, including `'self'` and `https://www.googletagmanager.com`.
