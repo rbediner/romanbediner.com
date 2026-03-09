@@ -9,10 +9,18 @@
  */
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const failures = [];
 const LEGACY_HOME_ROUTE = `/${'home'}/`;
+// Use git index as source of truth so CI only fails on committed artifacts.
+const trackedFiles = new Set(
+  execSync('git ls-files', { cwd: ROOT, encoding: 'utf8' })
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+);
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -24,7 +32,9 @@ function walk(dir) {
       continue;
     }
     if (entry.name === '.DS_Store') {
-      failures.push(`macOS artifact committed: ${rel}`);
+      if (trackedFiles.has(rel)) {
+        failures.push(`macOS artifact committed: ${rel}`);
+      }
       continue;
     }
     if (entry.isDirectory()) {
