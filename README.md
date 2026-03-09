@@ -184,6 +184,11 @@ Routing requirements:
    - Era subtitle labels use plain text without decorative bracket pseudo-elements.
    - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
 
+12. **Connect page conversation section contract**
+   - `/connect/` includes a dedicated `How we might connect` section above the form to frame the page as conversation-first rather than service-offering duplication.
+   - Theme bullets in this section must use shared `.service-list` orb bullets from `styles/site.css` with `/assets/icons/bullet.png` (no page-level bullet redefinition).
+   - Closing expectation lines are present and visually muted to keep the bullet themes as primary visual focus.
+
 ## Machine-Readable Architecture Summary
 ```json
 {

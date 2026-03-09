@@ -365,6 +365,48 @@
       margin-bottom: 18px;
     }
 
+    /* Conversation themes block aligns Connect rhythm with Services without duplicating service content. */
+    .connect-themes {
+      margin-top: 56px;
+      margin-bottom: 64px;
+    }
+
+    /* Subtle structural divider above "How we might connect" content. */
+    .connect-themes-divider {
+      width: 100%;
+      border-top: 1px solid var(--border-color);
+      margin: 0 0 28px 0;
+    }
+
+    .connect-themes h2 {
+      margin: 0 0 14px 0;
+      font-size: 26px;
+      line-height: 1.25;
+      color: var(--text-color);
+    }
+
+    .connect-themes p {
+      color: var(--text-color);
+      margin: 0 0 16px 0;
+    }
+
+    /* Shared orb bullets are inherited from styles/site.css via .service-list. */
+    .connect-themes .service-list {
+      margin-bottom: 20px;
+    }
+
+    /* De-emphasize closing guidance so bullet themes remain the visual focus. */
+    .connect-closing,
+    .connect-expectation {
+      color: var(--muted-text);
+    }
+
+    .connect-expectation {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      opacity: 0.86;
+    }
+
     .card {
       background: #ffffff;
       border-radius: 12px;
@@ -438,6 +480,10 @@
 
       .hero-title {
         align-items: center;
+      }
+
+      .connect-themes h2 {
+        font-size: 24px;
       }
     }
 
