@@ -167,12 +167,13 @@
     .connect-main {
       position: relative;
       overflow: hidden;
-      /* Soft ambient wash adds depth without changing layout structure. */
+      /* Anchor ambient light closer to the hero for intentional top-of-page composition. */
       background:
         radial-gradient(
-          circle at 75% 20%,
-          rgba(90, 120, 255, 0.08),
-          transparent 60%
+          circle at 78% 14%,
+          rgba(90, 120, 255, 0.12),
+          rgba(90, 120, 255, 0.05) 40%,
+          transparent 70%
         );
     }
 
@@ -258,6 +259,9 @@
 
     .contact-hero h1 {
       margin: 0;
+      /* Subtle premium-type polish: tighter tracking and cleaner line rhythm. */
+      letter-spacing: -0.02em;
+      line-height: 1.15;
     }
 
     .contact-hero p {
