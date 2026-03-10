@@ -90,6 +90,7 @@ jobs:
         run: npm run test:jest
 
   # Node Playwright runtime checks; workers pinned for deterministic CI load.
+  # Policy: run with at least 3 concurrent workers for regression throughput.
   qa-playwright:
     runs-on: ubuntu-latest
 
@@ -114,7 +115,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright runtime suite (deterministic worker count)
-        run: npm run test:playwright -- --workers=2
+        run: npm run test:playwright -- --workers=3
 
   # Final release gate: all parallel QA jobs must pass before branch protection can allow promotion.
   deploy-gate:

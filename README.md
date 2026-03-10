@@ -122,11 +122,12 @@ Routing requirements:
   - `qa-node` (`npm run test:node`)
   - `qa-python` (`npm run test:python`)
   - `qa-jest` (`npm run test:jest`)
-  - `qa-playwright` (`npm run test:playwright -- --workers=2`)
+  - `qa-playwright` (`npm run test:playwright -- --workers=3`)
 - A final `deploy-gate` job depends on all QA jobs and is the required branch-protection status for release readiness.
 - Production deployment is separate from validation and runs only on pushes to `prod`.
 - Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/run-playwright-local.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
+- Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.
 - Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/run-jest-suite.js` to keep local/CI behavior deterministic.
 - CI fails on:
   - CSP violations

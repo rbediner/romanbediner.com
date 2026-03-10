@@ -24,8 +24,8 @@ CI=1 npm run test:jest
 echo "[ci-parity] Running Python QA suite"
 npm run test:python
 
-echo "[ci-parity] Running Playwright runtime suite with deterministic workers"
-npm run test:playwright -- --workers=2
+echo "[ci-parity] Running Playwright runtime suite with deterministic workers (minimum 3)"
+npm run test:playwright -- --workers=3
 
 echo "[ci-parity] Running visual regression suite"
 npm run test:visual

@@ -36,6 +36,7 @@ describe('Deployment SOP documentation contract', () => {
   test('documents pre-push QA gate, release script, and persistent prefix approvals', () => {
     expect(README.includes('npm run qa:ci-parity')).toBe(true);
     expect(README.includes('npm run release:staging-prod')).toBe(true);
+    expect(README.includes('--workers>=3')).toBe(true);
     expect(README.includes('SKIP_PREPUSH_QA=1')).toBe(true);
     expect(README.includes('approved command prefixes')).toBe(true);
     expect(README.includes('persist approvals beyond a single command')).toBe(true);

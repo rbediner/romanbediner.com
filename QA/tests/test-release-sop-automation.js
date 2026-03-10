@@ -36,7 +36,7 @@ const ciParityText = fs.readFileSync(ciParityPath, 'utf8');
 assert(ciParityText.includes('CI=1 npm run test:node'), 'run-ci-parity.sh missing CI node test gate');
 assert(ciParityText.includes('CI=1 npm run test:jest'), 'run-ci-parity.sh missing CI jest test gate');
 assert(ciParityText.includes('npm run test:python'), 'run-ci-parity.sh missing python test gate');
-assert(ciParityText.includes('npm run test:playwright -- --workers=2'), 'run-ci-parity.sh missing playwright test gate');
+assert(ciParityText.includes('npm run test:playwright -- --workers=3'), 'run-ci-parity.sh missing playwright test gate');
 assert(ciParityText.includes('npm run test:visual'), 'run-ci-parity.sh missing visual test gate');
 
 const releasePath = path.join(ROOT, 'scripts', 'release-staging-to-prod.sh');
@@ -51,6 +51,10 @@ const monitorPath = path.join(ROOT, 'scripts', 'monitor-ci-run.js');
 const monitorText = fs.readFileSync(monitorPath, 'utf8');
 assert(monitorText.includes('/actions/runs?branch='), 'monitor script must poll Actions runs by branch');
 assert(monitorText.includes('/check-runs/'), 'monitor script must attempt failed-job annotation lookup');
+
+const ciWorkflowPath = path.join(ROOT, '.github', 'workflows', 'ci.yml');
+const ciWorkflowText = fs.readFileSync(ciWorkflowPath, 'utf8');
+assert(ciWorkflowText.includes('npm run test:playwright -- --workers=3'), 'ci.yml must run Playwright with at least 3 workers');
 
 const huskyPrePushPath = path.join(ROOT, '.husky', 'pre-push');
 assert(fs.existsSync(huskyPrePushPath), '.husky/pre-push must exist');
