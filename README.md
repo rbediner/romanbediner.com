@@ -204,6 +204,11 @@ Routing requirements:
    - Canonical main containers (`.page-main`, `.about-main`, `.services-main`, `.insights-main`, `.connect-main`, and `body > main`) inherit this token through a shared `padding-top` rule.
    - Page-level styles must not set independent top offsets for the first section on a canonical route.
 
+15. **Connect hero icon transparency and mobile sizing contract**
+   - `/connect/` hero icon uses a transparent-background asset at `/assets/icons/contact-transparent.png` to prevent white-box rendering against ambient backgrounds.
+   - The hero image preload and `<img>` source on `/connect/index.html` must reference the same transparent asset path.
+   - Mobile styling keeps the icon centered above the headline with `max-width: 72px`, `display: block`, and `margin-left/right: auto` plus `margin-bottom: 16px`.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
