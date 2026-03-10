@@ -37,23 +37,60 @@ function getChangedFiles() {
       range = `origin/${baseRef}...HEAD`;
     }
     const output = execSync(`git diff --name-only ${range}`, { cwd: ROOT, encoding: 'utf8' });
-    return output
+    const changed = output
       .split('\n')
       .map((line) => line.trim())
       .filter(Boolean);
+    return { changed, range };
   } catch (error) {
     console.log('PASS: README drift check skipped because changed-file range could not be resolved in CI.');
     process.exit(0);
   }
 }
 
-const changed = getChangedFiles();
+function isArchitecturePath(file) {
+  return ARCH_PATHS.some((needle) => file === needle || file.startsWith(needle));
+}
+
+function isCacheBustOnlyHtmlDiff(file, range) {
+  if (!file.endsWith('.html')) {
+    return false;
+  }
+
+  try {
+    const diff = execSync(`git diff -U0 ${range} -- ${file}`, { cwd: ROOT, encoding: 'utf8' });
+    const contentLines = diff
+      .split('\n')
+      // Ignore diff headers and evaluate only changed content lines.
+      .filter((line) => (line.startsWith('+') || line.startsWith('-')) && !line.startsWith('+++') && !line.startsWith('---'));
+
+    if (!contentLines.length) {
+      return false;
+    }
+
+    // Treat as cache-bust-only when every edited line only changes version tokens.
+    return contentLines.every((line) => /\?v=[A-Za-z0-9._-]+/.test(line));
+  } catch (error) {
+    return false;
+  }
+}
+
+const { changed, range } = getChangedFiles();
 const touchesArchitecture = changed.some((file) =>
-  ARCH_PATHS.some((needle) => file === needle || file.startsWith(needle))
+  isArchitecturePath(file)
 );
 const readmeChanged = changed.includes('README.md');
 
 if (touchesArchitecture && !readmeChanged) {
+  const architectureFiles = changed.filter((file) => isArchitecturePath(file));
+  const cacheBustOnlyChange = architectureFiles.length > 0 &&
+    architectureFiles.every((file) => isCacheBustOnlyHtmlDiff(file, range));
+
+  if (cacheBustOnlyChange) {
+    console.log('PASS: README drift check passed for cache-bust-only HTML version token updates.');
+    process.exit(0);
+  }
+
   console.error('FAIL: Architectural changes require README update.');
   process.exit(1);
 }

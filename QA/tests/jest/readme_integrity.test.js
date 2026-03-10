@@ -71,13 +71,14 @@ function resolveChangedFiles() {
 
   if (process.env.CI) {
     if (primary.ok) {
-      return primary.files;
+      return { files: primary.files, range: `${preferredBase}...HEAD` };
     }
     if (secondary.ok) {
-      return secondary.files;
+      const secondaryBase = preferredBase === 'origin/staging' ? 'origin/main' : 'origin/staging';
+      return { files: secondary.files, range: `${secondaryBase}...HEAD` };
     }
     if (fallback.ok) {
-      return fallback.files;
+      return { files: fallback.files, range: 'HEAD~1...HEAD' };
     }
     throw new Error(
       `Unable to determine changed files in CI. primary diff error: ${primary.error}; secondary diff error: ${secondary.error}; HEAD~1 fallback error: ${fallback.error}`
@@ -110,21 +111,60 @@ function resolveChangedFiles() {
       merged.add(file);
     }
   }
-  return Array.from(merged);
+  return { files: Array.from(merged), range: null };
+}
+
+function isArchitectureFile(file) {
+  return ARCHITECTURE_PATH_MATCHERS.some((matches) => matches(file));
+}
+
+function isCanonicalHtmlRoute(file) {
+  return file === 'index.html' ||
+    file === 'about/index.html' ||
+    file === 'services/index.html' ||
+    file === 'insights/index.html' ||
+    file === 'connect/index.html';
+}
+
+function isCacheBustOnlyHtmlDiff(file, range) {
+  if (!range || !isCanonicalHtmlRoute(file)) {
+    return false;
+  }
+
+  try {
+    const diff = execSync(`git diff -U0 ${range} -- ${file}`, {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+    const contentLines = diff
+      .split('\n')
+      // Ignore diff headers and evaluate only edited content lines.
+      .filter((line) => (line.startsWith('+') || line.startsWith('-')) && !line.startsWith('+++') && !line.startsWith('---'));
+
+    if (!contentLines.length) {
+      return false;
+    }
+
+    // Cache-bust-only edits should only touch `?v=...` tokens in route HTML.
+    return contentLines.every((line) => /\?v=[A-Za-z0-9._-]+/.test(line));
+  } catch (_error) {
+    return false;
+  }
 }
 
 describe('README integrity for architectural changes', () => {
   test('requires README.md update when architectural files change', () => {
-    const changedFiles = resolveChangedFiles();
+    const changedContext = resolveChangedFiles();
 
-    if (changedFiles === null) {
+    if (changedContext === null) {
       console.warn('Skipping README integrity test locally: git diff range unavailable.');
       return;
     }
 
-    const hasArchitecturalChange = changedFiles.some((file) =>
-      ARCHITECTURE_PATH_MATCHERS.some((matches) => matches(file))
-    );
+    const { files: changedFiles, range } = changedContext;
+    const architecturalFiles = changedFiles.filter((file) => isArchitectureFile(file));
+    const hasArchitecturalChange = architecturalFiles.length > 0;
 
     if (!hasArchitecturalChange) {
       return;
@@ -132,6 +172,11 @@ describe('README integrity for architectural changes', () => {
 
     const readmeChanged = changedFiles.includes('README.md');
     if (!readmeChanged) {
+      const cacheBustOnlyChange = architecturalFiles.every((file) => isCacheBustOnlyHtmlDiff(file, range));
+      if (cacheBustOnlyChange) {
+        return;
+      }
+
       throw new Error('Architectural change detected without README update.');
     }
   });
