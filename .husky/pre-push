@@ -1,0 +1,14 @@
+# Purpose:
+# - Block git push when CI-parity tests fail locally.
+# Override:
+# - Set SKIP_PREPUSH_QA=1 for emergency bypass (documented in README SOP).
+# Notes:
+# - Husky v9 hook files are plain executable scripts without shebang boilerplate.
+
+if [ "${SKIP_PREPUSH_QA:-0}" = "1" ]; then
+  echo "[husky pre-push] SKIP_PREPUSH_QA=1 set, bypassing local CI-parity gate."
+  exit 0
+fi
+
+echo "[husky pre-push] running CI-parity gate"
+npm run qa:ci-parity

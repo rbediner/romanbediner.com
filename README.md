@@ -259,6 +259,84 @@ npm test
 ```bash
 bash scripts/run-playwright-local.sh
 ```
+- Run CI-parity release checks locally:
+```bash
+npm run qa:ci-parity
+```
+
+## New Machine Bootstrap
+Use this checklist when setting up a new workstation for this repository.
+
+1. Install required runtimes and tools:
+```bash
+# macOS example (Homebrew)
+brew install node@20 python@3.11 git
+```
+2. Clone repository and install Node dependencies:
+```bash
+git clone git@github.com:rbediner/romanbediner.com.git
+cd romanbediner.com
+npm ci
+```
+3. Install Python QA dependencies:
+```bash
+python3 -m pip install --upgrade pip
+pip install playwright==1.58.0 pillow==11.3.0
+python3 -m playwright install chromium
+```
+4. Ensure Husky hooks are installed (pre-push gate):
+```bash
+npm run prepare
+```
+5. Verify local baseline:
+```bash
+npm run qa:ci-parity
+```
+
+## Deployment SOP (Standard Operating Procedure)
+Release policy is deterministic and staging-first. Do not push directly to `prod` without the steps below.
+
+1. Ensure branch and working tree are clean:
+```bash
+git checkout staging
+git pull origin staging
+git status
+```
+2. Run CI-parity locally (same suites required by release gate):
+```bash
+npm run qa:ci-parity
+```
+3. Push `staging`, then monitor CI by SHA:
+```bash
+git push origin staging
+node scripts/monitor-ci-run.js --branch staging --sha "$(git rev-parse HEAD)"
+```
+4. Promote only the exact tested SHA to `prod` (fast-forward only):
+```bash
+git checkout prod
+git pull origin prod
+git merge --ff-only <tested-sha>
+git push origin prod
+node scripts/monitor-ci-run.js --branch prod --sha "<tested-sha>"
+```
+5. Use the one-command release automation when possible:
+```bash
+npm run release:staging-prod
+```
+
+### Local Push Guard
+- `.husky/pre-push` runs `npm run qa:ci-parity` automatically before any push.
+- Emergency bypass (use only when explicitly approved): `SKIP_PREPUSH_QA=1 git push ...`
+- Any bypass must be followed by a full local `npm run qa:ci-parity` and staging CI verification.
+
+## Codex Permissions Model
+Codex command elevation is governed by command-prefix approvals.
+
+- Codex cannot run unrestricted elevated commands permanently.
+- Best practice is approving stable prefixes (for example `git`, `curl -Ls`, `npm run ...`) so Codex can persist approvals beyond a single command.
+- In Codex Desktop, approved command prefixes are stored and reused in future sessions depending local policy and environment controls.
+- If a command falls outside approved prefixes, Codex must request a new permission prompt.
+- Recommendation: pre-approve routine operational prefixes used in this repository to reduce interruptive prompts during CI triage and release operations.
 - Override worker count when needed for debugging or stability:
 ```bash
 bash scripts/run-playwright-local.sh --workers=1
