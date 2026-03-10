@@ -606,6 +606,75 @@
         display: none;
       }
 
+      /* Mobile composition: stack icon and headline for cleaner vertical hierarchy. */
+      .hero-title {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .hero-title img {
+        width: 100%;
+        max-width: 72px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+      }
+
+      /* Mobile hero typography: preserve emphasis while improving legibility. */
+      .contact-hero {
+        padding-top: 28px;
+      }
+
+      .contact-hero h1 {
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .contact-hero p {
+        font-size: 17px;
+        margin-top: 10px;
+      }
+
+      /* Mobile rhythm: tighten section spacing for easier scanning. */
+      .connect-main .section + .section {
+        margin-top: 40px;
+      }
+
+      .connect-themes p {
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .service-list li {
+        margin-bottom: 12px;
+        line-height: 1.65;
+      }
+
+      /* Touch-friendly form controls and full-width primary action. */
+      .form-card {
+        padding: 24px;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 14px 20px;
+      }
+
+      /* Mobile CTA layout: stack content and remove decorative arrow noise. */
+      .executive-action-block {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .action-arrow {
+        display: none;
+      }
+
       .executive-action-block {
         padding: 20px 24px;
       }

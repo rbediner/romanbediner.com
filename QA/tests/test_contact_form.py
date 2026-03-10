@@ -16,7 +16,7 @@ class ContactPageQATest(unittest.TestCase):
         cls.js = CONTACT_JS.read_text(encoding="utf-8")
 
     def test_has_expected_hero_and_icon(self):
-        self.assertIn('src="../assets/icons/contact.png"', self.html)
+        self.assertIn('src="../assets/icons/contact-transparent.png"', self.html)
         self.assertIn("<h1>Let's start a conversation.</h1>", self.html)
         self.assertIn("Share what you're working on or just reach out to connect.", self.html)
 
