@@ -20,7 +20,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const INSIGHTS_PATH = path.join(ROOT, 'insights', 'index.html');
 const README_PATH = path.join(ROOT, 'README.md');
 const START_MARKER = '<!-- AUTO-GENERATED INSIGHT LINKS START -->';

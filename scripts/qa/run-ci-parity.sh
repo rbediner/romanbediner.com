@@ -11,12 +11,12 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 if [[ "${RB_LOCAL_MIRROR_ACTIVE:-0}" != "1" && "$REPO_ROOT" == *"/Library/CloudStorage/"* ]]; then
   echo "[ci-parity] Cloud-synced workspace detected. Re-running from a local /tmp mirror."
   cd "${REPO_ROOT}"
-  bash scripts/run-in-local-mirror.sh bash scripts/run-ci-parity.sh
+  bash scripts/qa/run-in-local-mirror.sh bash scripts/qa/run-ci-parity.sh
   exit 0
 fi
 

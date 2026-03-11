@@ -51,6 +51,6 @@ const xml = [
   ''
 ].join('\n');
 
-const outPath = path.resolve(__dirname, '..', 'sitemap.xml');
+const outPath = path.resolve(__dirname, '..', '..', 'sitemap.xml');
 fs.writeFileSync(outPath, xml, 'utf8');
 console.log(`Sitemap generated at ${outPath}`);

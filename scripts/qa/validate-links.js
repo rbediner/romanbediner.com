@@ -22,11 +22,11 @@ const fs = require('fs');
 const path = require('path');
 
 const pages = [
-  path.resolve(__dirname, '..', 'index.html'),
-  path.resolve(__dirname, '..', 'about', 'index.html'),
-  path.resolve(__dirname, '..', 'services', 'index.html'),
-  path.resolve(__dirname, '..', 'connect', 'index.html'),
-  path.resolve(__dirname, '..', 'insights', 'index.html')
+  path.resolve(__dirname, '..', '..', 'index.html'),
+  path.resolve(__dirname, '..', '..', 'about', 'index.html'),
+  path.resolve(__dirname, '..', '..', 'services', 'index.html'),
+  path.resolve(__dirname, '..', '..', 'connect', 'index.html'),
+  path.resolve(__dirname, '..', '..', 'insights', 'index.html')
 ];
 
 const measurementId = 'G-DVHD0KL633';
@@ -49,7 +49,7 @@ for (const page of pages) {
   }
 
   const gaMetaCount = (html.match(new RegExp(`<meta name="ga4-measurement-id" content="${measurementId}" \/>`, 'g')) || []).length;
-  const gaScriptCount = (html.match(/<script src="\/scripts\/ga4\.js" defer><\/script>/g) || []).length;
+  const gaScriptCount = (html.match(/<script src="\/scripts\/runtime\/ga4-bootstrap\.js" defer><\/script>/g) || []).length;
   const inlineConfigCount = (html.match(/gtag\('config'/g) || []).length;
   if (gaMetaCount !== 1 || gaScriptCount !== 1 || inlineConfigCount !== 0) {
     hasError = true;

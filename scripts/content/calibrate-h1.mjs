@@ -22,7 +22,7 @@ import { chromium } from "playwright";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const rootDir = path.resolve(__dirname, "..");
+const rootDir = path.resolve(__dirname, "..", "..");
 const siteCssPath = path.join(rootDir, "styles", "site.css");
 // Store calibration outputs under QA/results to keep root clean and purpose-driven.
 const artifactsDir = path.join(rootDir, "QA", "results", "h1-calibration");

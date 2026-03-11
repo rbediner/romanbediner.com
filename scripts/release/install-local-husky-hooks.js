@@ -19,31 +19,31 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const gitDir = path.join(ROOT, '.git');
 const huskyBin = path.join(ROOT, 'node_modules', '.bin', process.platform === 'win32' ? 'husky.cmd' : 'husky');
 
 // CI should validate code, not mutate local Git hooks.
 if (process.env.CI === '1' || process.env.CI === 'true') {
-  console.log('[prepare-husky] CI detected. Skipping Husky hook installation.');
+  console.log('[install-local-husky-hooks] CI detected. Skipping Husky hook installation.');
   process.exit(0);
 }
 
 // Package installs outside a Git checkout should remain installable.
 if (!fs.existsSync(gitDir)) {
-  console.log('[prepare-husky] No .git directory detected. Skipping Husky hook installation.');
+  console.log('[install-local-husky-hooks] No .git directory detected. Skipping Husky hook installation.');
   process.exit(0);
 }
 
 if (!fs.existsSync(huskyBin)) {
-  console.log('[prepare-husky] Husky binary is unavailable. Skipping hook installation.');
+  console.log('[install-local-husky-hooks] Husky binary is unavailable. Skipping hook installation.');
   process.exit(0);
 }
 
 const result = spawnSync(huskyBin, { cwd: ROOT, stdio: 'inherit' });
 
 if (result.error) {
-  console.error(`[prepare-husky] Failed to launch Husky: ${result.error.message}`);
+  console.error(`[install-local-husky-hooks] Failed to launch Husky: ${result.error.message}`);
   process.exit(1);
 }
 

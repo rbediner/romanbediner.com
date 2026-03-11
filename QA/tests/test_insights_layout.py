@@ -13,7 +13,7 @@ class InsightsLayoutTest(unittest.TestCase):
         cls.insights_html = (cls.root / "insights/index.html").read_text(encoding="utf-8")
         cls.insights_css = (cls.root / "styles/insights.css").read_text(encoding="utf-8")
         cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
-        cls.insights_script = (cls.root / "scripts/insights-toggle.js").read_text(encoding="utf-8")
+        cls.insights_script = (cls.root / "scripts/runtime/insights-toggle.js").read_text(encoding="utf-8")
 
     def test_cards_have_slug_title_and_toggle(self):
         """Ensure each insight card has a slug id, title, and collapsed toggle."""

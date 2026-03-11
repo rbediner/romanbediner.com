@@ -64,7 +64,7 @@ describe('README structure contract', () => {
     expect(parsed.requires_trailing_slash).toBe(true);
 
     expect(parsed.ga?.meta_tag_required).toBe(true);
-    expect(parsed.ga?.bootstrap_script).toBe('/scripts/ga4.js');
+    expect(parsed.ga?.bootstrap_script).toBe('/scripts/runtime/ga4-bootstrap.js');
     expect(parsed.ga?.inline_allowed).toBe(false);
 
     expect(parsed.csp?.unsafe_inline_allowed).toBe(false);

@@ -1,147 +1,46 @@
 # QA Test Cases
 
-## Route and URL Integrity
+## Scope
+This repository enforces static-site architecture through automated Node, Python, Jest, and Playwright checks. The authoritative entrypoints are `npm run test:node`, `npm run test:python`, `npm run test:jest`, `npm run test:playwright`, `npm run test:visual`, `npm run qa:ci-parity`, and `npm run qa:full-local`.
 
-1. Clean URL navigation
-- File: `QA/tests/test-clean-urls.js`
-- Asserts no `.html` links in nav blocks.
-- Asserts no `/contact/` nav links.
+## Core Contract Suites
 
-2. Canonical route existence policy
-- File: `QA/tests/test-clean-urls.js`
-- Asserts `/insights/index.html` exists.
-- Asserts `/about/insights/index.html` does not exist.
-- Asserts `contact/index.html` does not exist.
-- Asserts `/home/index.html` does not exist.
+1. Route and canonical URL integrity
+- Files: `QA/tests/test-clean-urls.js`, `QA/tests/test-canonical.js`, `QA/tests/test-route-metadata-parity.js`
+- Validates trailing-slash canonical routes, canonical/og:url alignment, and removal of legacy route patterns such as `/contact/` and public `.html` links.
 
-## Metadata and SEO
+2. Shared metadata and search contracts
+- Files: `QA/tests/test-jsonld-schema.js`, `QA/tests/test-og-homepage.js`, `QA/tests/test-og-route-metadata.js`, `QA/tests/test-metadata-consistency.js`, `QA/tests/test-favicon-contract.js`, `QA/tests/test_favicon_assets.py`
+- Validates title/description consistency, JSON-LD coverage, OG/Twitter image wiring, and favicon asset references.
 
-4. Canonical + OG URL alignment
-- File: `QA/tests/test-canonical.js`
-- Asserts canonical URL per canonical page.
-- Asserts `og:url` equals canonical URL.
-- Asserts CSP `script-src` does not include `unsafe-inline`.
+3. Analytics installation and runtime telemetry
+- Files: `QA/tests/test-ga4-installation.js`, `QA/tests/test_ga_runtime_playwright.py`, `QA/tests/jest/insights-analytics.test.js`, `scripts/qa/verify-ga4-installation.js`
+- Validates one GA meta tag per canonical page, one external GA bootstrap include, no inline GA config, and runtime event delivery.
+- Insights interaction telemetry uses event name `insight_toggle` with params `insight_slug`, `insight_title`, `action`, and `page_path`.
 
-5. Title + description + social consistency
-- File: `QA/tests/test-meta.js`
-- Asserts each canonical page has title and meta description.
-- Asserts OG/Twitter descriptions match meta description.
-- Asserts no `/contact/` references in metadata.
+4. Navigation and shared layout contracts
+- Files: `QA/tests/test-header-nav.js`, `QA/tests/test-nav-links-contract.js`, `QA/tests/test-page-top-spacing.js`, `QA/tests/test-transition-blocks.js`, `QA/tests/test-shared-design-system.js`
+- Validates shared nav structure, active-state consistency, top-spacing token usage, and narrative transition block architecture.
 
-6. Structured data coverage
-- File: `QA/tests/test-schema.js`
-- Asserts homepage includes valid Person JSON-LD.
-- Asserts insights page includes 3 valid Article JSON-LD entries.
+5. Page-specific content and interaction contracts
+- Files: `QA/tests/test-home-hero-layout.js`, `QA/tests/test-home-spacing-contract.js`, `QA/tests/test-about-redesign.js`, `QA/tests/test-about-hero-contract.js`, `QA/tests/test-operating-philosophy.js`, `QA/tests/test-connect-page.js`, `QA/tests/test_contact_form.py`, `QA/tests/test-insights-layout.js`, `QA/tests/test_insights_layout.py`, `QA/tests/test-insights-system.js`
+- Validates route-specific DOM, copy structure, visual guardrails, connect form hooks, and insights toggle/card behavior.
 
-7. Favicon asset coverage and page references
-- File: `QA/tests/test-favicon.js`
-- File: `QA/tests/test_favicon_assets.py`
-- Asserts required favicon files exist in `assets/favicon/`.
-- Asserts each route references favicon `32x32`, `16x16`, Apple touch icon, and `.ico` fallback with correct relative paths.
+6. Repository hygiene and automation guardrails
+- Files: `QA/tests/test-no-legacy-references.js`, `QA/tests/test-js-header-comments.js`, `QA/tests/test-repo-hygiene.js`, `QA/tests/test-readme-drift.js`, `QA/tests/test-qa-runner-script.js`, `QA/tests/test-release-sop-automation.js`, `QA/tests/jest/readme_structure.test.js`, `QA/tests/jest/readme_integrity.test.js`, `QA/tests/jest/scripts_comment_headers.test.js`
+- Validates documentation drift, script header coverage, release automation invariants, and repo cleanliness expectations.
 
-## Analytics
+## Browser and Visual Regression Suites
 
-8. GA4 installation across canonical pages
-- File: `QA/tests/test-ga4-installation.js`
-- Asserts one `ga4-measurement-id` meta tag exists per canonical page.
-- Asserts one `/scripts/ga4.js` include exists per canonical page.
-- Asserts no inline `gtag('config'...)` blocks remain.
-- Asserts no unexpected GA measurement IDs exist.
+7. Runtime browser checks
+- Files: `QA/tests/playwright/csp-ga-runtime.spec.js`, `QA/tests/playwright/h1-alignment.spec.js`, `QA/tests/test_nav_runtime_playwright.py`, `QA/tests/test_home_nav_consistency_playwright.py`, `QA/tests/test_home_layout_spacing_playwright.py`, `QA/tests/test_home_spacing_playwright.py`
+- Validates runtime CSP behavior, GA requests, nav interactions, geometry, and mobile overflow constraints.
 
-9. Repository-wide GA4 ID enforcement
-- File: `scripts/verify_ga4_id.js`
-- Scans all HTML files.
-- Fails if any GA ID other than `G-DVHD0KL633` appears.
-- Fails on inline GA config blocks in any HTML file.
-
-10. Browser runtime GA verification
-- File: `QA/tests/test_ga_runtime_playwright.py`
-- Asserts GA loader request and GA collect request on each canonical route.
-- Asserts no CSP console errors are emitted for GA at runtime.
-
-11. Header and navigation consistency
-- File: `QA/tests/test-header-nav.js`
-- Asserts the same header/nav DOM structure across canonical pages.
-- Asserts desktop and mobile nav accessibility labels are present and consistent.
-
-12. Insights card layout + centralized bullets
-- File: `QA/tests/test-insights-layout.js`
-- File: `QA/tests/test_insights_layout.py`
-- Asserts Insight cards use slug ids + expected structure.
-- Asserts expand/collapse CSS behavior and subtle hover lift.
-- Asserts shared orb bullet spec is centralized in `styles/site.css`.
-
-13. Insights production checks
-- File: `QA/tests/insights.test.js`
-- Asserts each `.insight-card` slug is unique and derived from title.
-- Asserts README auto-generated direct links match Insight slugs exactly.
-- Asserts GA `insight_expand` and `insight_collapse` fire with slug payloads.
-- Asserts warning behavior when `gtag` is unavailable.
-
-14. About hybrid redesign + global footer attribution
-- File: `QA/tests/test-about-redesign.js`
-- File: `QA/tests/test_about_redesign.py`
-- Asserts About page contains the approved hybrid structure and timeline sections.
-- Asserts shared `service-list` bullets are used for About key points.
-- Asserts global footer attribution line appears on all canonical pages.
-- Asserts no em dashes are present in canonical page HTML.
-
-## OG Validation
-
-15. OG image URL consistency
-- File: `scripts/check_og_urls.sh`
-- Asserts canonical OG image URL appears once in each canonical page.
-
-## Contact Experience
-
-16. Connect form integration and UX hooks
-- File: `QA/tests/test_contact_form.py`
-- Asserts form fields, editor integration, and script hooks remain intact.
-
-## Visual Regression and Layout Integrity
-
-17. Critical-page baseline snapshots
+8. Visual baselines
 - File: `QA/tests/test_visual_regression_playwright.py`
-- Asserts Home/About/Services/Insights/Connect match committed baseline screenshots.
-- Captures desktop full page (`1440px` width), desktop fold (`1200px` height), and mobile full page (`390px` width).
-- Fails on low-threshold visual drift.
+- Compares committed baselines in `QA/tests/visual-baselines/` against current desktop/mobile renders for Home, About, Services, Insights, and Connect.
 
-18. Navigation visual alignment and active-state stability
-- File: `QA/tests/test_visual_regression_playwright.py`
-- Asserts nav links remain horizontally aligned.
-- Asserts Insights link exists on all pages.
-- Asserts active indicator exists and no layout shift occurs when active state toggles.
-
-19. Insights card integrity and interaction safety
-- File: `QA/tests/test_visual_regression_playwright.py`
-- Asserts card container, blue top divider, orb bullets, bottom-right toggle, and hover hook.
-- Asserts expanded state screenshot remains stable.
-- Asserts expand interaction does not break card width and uses smooth max-height animation.
-
-20. Operating Philosophy visual contract
-- File: `QA/tests/test_visual_regression_playwright.py`
-- Asserts white card background, border radius, hover elevation, right-aligned link, and heading hierarchy.
-- Captures normal and hover state screenshots.
-
-21. Bullet and spacing guardrails
-- File: `QA/tests/test_visual_regression_playwright.py`
-- Asserts all unordered lists use `.service-list` with `/assets/icons/bullet.png` at `8px`.
-- Asserts no default browser bullets render.
-- Asserts vertical spacing stays on the defined scale and below anomaly thresholds.
-
-22. Mobile responsive integrity
-- File: `QA/tests/test_visual_regression_playwright.py`
-- Asserts mobile nav behavior, no horizontal overflow, clean Insights card stacking, and no clipping containers.
-
-23. Home hero spacing + geometry hard guard
-- File: `QA/tests/test_home_layout_spacing_playwright.py`
-- Asserts desktop Home hero-to-Experience gap is bounded (`24px` to `72px`).
-- Asserts mobile Home hero-to-Experience gap is bounded (`16px` to `64px`).
-- Asserts photo top aligns to Home blurb top (`<= 2px` delta).
-- Asserts no mobile horizontal overflow.
-
-24. Home nav consistency + Home nav telemetry
-- File: `QA/tests/test_home_nav_consistency_playwright.py`
-- Asserts desktop and mobile nav contain `Home/About/Services/Insights/Connect` across canonical routes.
-- Asserts active route nav state stays correct per route.
-- Asserts Home header nav clicks emit `nav_click` with `{label, location:"header"}` when `gtag` is available.
+## Operator Commands
+- Fast local validation: `npm run qa:full-local`
+- Release parity validation: `npm run qa:ci-parity`
+- Visual baseline refresh: `npm run test:visual:update`

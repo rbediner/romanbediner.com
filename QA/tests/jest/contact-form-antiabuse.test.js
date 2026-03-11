@@ -9,7 +9,7 @@
 const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..', '..');
-const contactModule = require(path.join(root, 'scripts', 'contact-form-emailjs.js'));
+const contactModule = require(path.join(root, 'scripts', 'runtime', 'contact-form-emailjs.js'));
 
 describe('Contact form anti-abuse guards', () => {
   const baseNow = 1_800_000_000_000;

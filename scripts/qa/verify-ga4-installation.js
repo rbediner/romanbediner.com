@@ -17,14 +17,14 @@
  */
 /**
  * Verifies GA4 measurement ID usage across HTML files.
- * - Canonical pages: exactly one ga4-measurement-id meta and one /scripts/ga4.js include.
+ * - Canonical pages: exactly one ga4-measurement-id meta and one /scripts/runtime/ga4-bootstrap.js include.
  * - All pages: no inline gtag config blocks.
  * - All pages: no GA IDs other than G-DVHD0KL633.
  */
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const MEASUREMENT_ID = 'G-DVHD0KL633';
 const canonicalPages = [
   path.join(ROOT, 'index.html'),
@@ -78,7 +78,7 @@ for (const page of canonicalPages) {
 
   const html = fs.readFileSync(page, 'utf8');
   const metaCount = (html.match(new RegExp(`<meta name="ga4-measurement-id" content="${MEASUREMENT_ID}" \/>`, 'g')) || []).length;
-  const bootstrapCount = (html.match(/<script src="\/scripts\/ga4\.js" defer><\/script>/g) || []).length;
+  const bootstrapCount = (html.match(/<script src="\/scripts\/runtime\/ga4-bootstrap\.js" defer><\/script>/g) || []).length;
 
   if (metaCount !== 1 || bootstrapCount !== 1) {
     failures += 1;

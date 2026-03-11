@@ -118,7 +118,7 @@ async function printFailureDetails(ownerRepo, runId) {
 async function main() {
   const args = parseArgs(process.argv);
   if (args.help === 'true') {
-    console.log('Usage: node scripts/monitor-ci-run.js --branch <branch> --sha <commit-sha> [--repo owner/repo] [--timeout 1800] [--interval 15]');
+    console.log('Usage: node scripts/release/watch-ci-run.js --branch <branch> --sha <commit-sha> [--repo owner/repo] [--timeout 1800] [--interval 15]');
     process.exit(0);
   }
 

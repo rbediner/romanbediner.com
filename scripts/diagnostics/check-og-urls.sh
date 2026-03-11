@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 OG_IMAGE_URL_PRIMARY="https://romanbediner.com/assets/og-logo/og-final.png?v=4"
 OG_IMAGE_PATH="$ROOT_DIR/assets/og-logo/og-final.png"

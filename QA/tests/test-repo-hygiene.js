@@ -98,9 +98,53 @@ function scanForLegacyRootFolders() {
   }
 }
 
+function scanForUnreferencedAssets() {
+  const textExtensions = new Set([
+    '.html',
+    '.css',
+    '.js',
+    '.mjs',
+    '.py',
+    '.md',
+    '.json',
+    '.sh',
+    '.yml',
+    '.yaml',
+    '.svg',
+    '.xml',
+    '.txt'
+  ]);
+
+  const searchableFiles = [...trackedFiles]
+    .filter((rel) => {
+      const ext = path.extname(rel).toLowerCase();
+      return rel === 'CNAME' || textExtensions.has(ext);
+    })
+    .map((rel) => ({
+      rel,
+      text: fs.readFileSync(path.join(ROOT, rel), 'utf8')
+    }));
+
+  for (const rel of trackedFiles) {
+    if (!rel.startsWith('assets/')) {
+      continue;
+    }
+    const isReferenced = searchableFiles.some(({ rel: sourceRel, text }) => {
+      if (sourceRel === rel) {
+        return false;
+      }
+      return text.includes(rel);
+    });
+    if (!isReferenced) {
+      failures.push(`Unreferenced tracked asset detected: ${rel}`);
+    }
+  }
+}
+
 walk(ROOT);
 scanForLegacyHomeRoute();
 scanForLegacyRootFolders();
+scanForUnreferencedAssets();
 
 if (failures.length) {
   failures.forEach((f) => console.error(`FAIL: ${f}`));

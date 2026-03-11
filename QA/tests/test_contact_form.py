@@ -6,7 +6,7 @@ from pathlib import Path
 # QA/tests is nested one level under the repository root.
 ROOT = Path(__file__).resolve().parents[2]
 CONTACT_HTML = ROOT / "connect" / "index.html"
-CONTACT_JS = ROOT / "scripts" / "contact-form-emailjs.js"
+CONTACT_JS = ROOT / "scripts" / "runtime" / "contact-form-emailjs.js"
 
 
 class ContactPageQATest(unittest.TestCase):
@@ -98,8 +98,8 @@ class ContactPageQATest(unittest.TestCase):
         # Allow optional cache-busting query strings while enforcing the canonical connect stylesheet path.
         self.assertRegex(self.html, r'<link rel="stylesheet" href="/styles/connect\.css(?:\?[^"]+)?"\s*/>')
         self.assertIn('<link rel="stylesheet" href="/styles/site.css" />', self.html)
-        self.assertIn('<script src="../scripts/site-navigation.js"></script>', self.html)
-        self.assertIn('<script src="../scripts/contact-form-emailjs.js"></script>', self.html)
+        self.assertIn('<script src="../scripts/runtime/site-navigation.js"></script>', self.html)
+        self.assertIn('<script src="../scripts/runtime/contact-form-emailjs.js"></script>', self.html)
         self.assertIn("contact_draft", self.js)
 
 

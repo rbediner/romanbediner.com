@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Purpose:
-# - Run the full local QA workflow from any current directory.
+# - Run the complete local QA workflow from any current directory.
 # Architectural role:
-# - Provides one deterministic entrypoint for non-engineering operators to run all core checks.
+# - Provides one descriptive operator entrypoint that covers contract, runtime, and visual QA.
 # Dependencies:
 # - bash, node/npm, python3, repository dev dependencies installed via npm ci.
 # Security/CSP considerations:
@@ -13,14 +13,17 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 cd "${REPO_ROOT}"
 
-echo "[run-all-qa] running npm run test:qa-full"
+echo "[run-local-full-qa] running npm run test:qa-full"
 npm run test:qa-full
 
-echo "[run-all-qa] running visual regression suite"
-RUN_VISUAL_TESTS=1 python3 -m unittest discover -s QA/tests -p test_visual_regression_playwright.py -v
+echo "[run-local-full-qa] running Playwright runtime suite"
+npm run test:playwright
 
-echo "[run-all-qa] all checks completed successfully"
+echo "[run-local-full-qa] running visual regression suite"
+npm run test:visual
+
+echo "[run-local-full-qa] all checks completed successfully"

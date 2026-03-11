@@ -9,7 +9,7 @@
  */
 /**
  * Navigation link contract checks for canonical pages.
- * Nav links are rendered at runtime from scripts/site-navigation.js.
+ * Nav links are rendered at runtime from scripts/runtime/site-navigation.js.
  */
 const fs = require('fs');
 const path = require('path');
@@ -36,7 +36,7 @@ function parseNavLinks(navScript) {
 
 let failures = 0;
 
-const navScript = fs.readFileSync(path.join(ROOT, 'scripts', 'site-navigation.js'), 'utf8');
+const navScript = fs.readFileSync(path.join(ROOT, 'scripts', 'runtime', 'site-navigation.js'), 'utf8');
 const navLinks = parseNavLinks(navScript);
 const navHrefs = navLinks.map((link) => link.href);
 
@@ -51,7 +51,7 @@ for (const rel of PAGES) {
   const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
   const hasDesktopPlaceholder = /<nav class="site-nav" aria-label="Primary"><\/nav>/i.test(html);
   const hasMobilePlaceholder = /<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><\/nav>/i.test(html);
-  const hasSharedScript = /<script src="(?:\.\.\/)?scripts\/site-navigation\.js"><\/script>/i.test(html);
+  const hasSharedScript = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js"><\/script>/i.test(html);
 
   if (!hasDesktopPlaceholder) {
     failures += 1;

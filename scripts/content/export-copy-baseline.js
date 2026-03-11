@@ -14,7 +14,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const ROOT = path.resolve(__dirname, "..");
+const ROOT = path.resolve(__dirname, "..", "..");
 const OUTPUT_DIR = path.join(ROOT, "QA", "results");
 const OUTPUT_FILE = path.join(OUTPUT_DIR, "copy-baseline.md");
 

@@ -47,9 +47,9 @@ for (const rel of canonicalPages) {
     failures += 1;
     console.error(`FAIL: missing /styles/site.css in ${rel}`);
   }
-  if (!html.includes('src="/scripts/ga4.js"')) {
+  if (!html.includes('src="/scripts/runtime/ga4-bootstrap.js"')) {
     failures += 1;
-    console.error(`FAIL: missing /scripts/ga4.js include in ${rel}`);
+    console.error(`FAIL: missing /scripts/runtime/ga4-bootstrap.js include in ${rel}`);
   }
   if (/<style>/i.test(html)) {
     failures += 1;
@@ -77,7 +77,7 @@ if (fs.existsSync(path.join(root, 'home', 'index.html'))) {
 
 // /insights/ must exist in shared navigation model.
 const aboutHtml = fs.readFileSync(path.join(root, 'about', 'index.html'), 'utf8');
-const navScript = fs.readFileSync(path.join(root, 'scripts', 'site-navigation.js'), 'utf8');
+const navScript = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'site-navigation.js'), 'utf8');
 if (!aboutHtml.includes('<nav class="site-nav" aria-label="Primary"></nav>') || !/href:\s*["']\/insights\/["']/.test(navScript)) {
   failures += 1;
   console.error('FAIL: /insights/ is missing from shared navigation model.');

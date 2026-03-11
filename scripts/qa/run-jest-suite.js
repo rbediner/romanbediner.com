@@ -17,9 +17,9 @@ const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const JEST_BIN = path.join(ROOT, 'node_modules', 'jest', 'bin', 'jest.js');
-const MIRROR_RUNNER = path.join(ROOT, 'scripts', 'run-in-local-mirror.sh');
+const MIRROR_RUNNER = path.join(ROOT, 'scripts', 'qa', 'run-in-local-mirror.sh');
 const SHOULD_USE_MIRROR =
   !process.env.CI &&
   process.env.RB_LOCAL_MIRROR_ACTIVE !== '1' &&
@@ -31,7 +31,7 @@ function runFromLocalMirror() {
   }
 
   console.warn(`[run-jest-suite] Re-running Jest from local mirror under ${os.tmpdir()}.`);
-  return spawnSync('bash', [MIRROR_RUNNER, process.execPath, 'scripts/run-jest-suite.js'], {
+  return spawnSync('bash', [MIRROR_RUNNER, process.execPath, 'scripts/qa/run-jest-suite.js'], {
     cwd: ROOT,
     stdio: 'inherit',
     env: { ...process.env, RB_LOCAL_MIRROR_ACTIVE: '0' }

@@ -29,7 +29,7 @@ const navModel = [
   { label: 'Connect', href: '/connect/' }
 ];
 
-const navScript = fs.readFileSync(path.resolve(__dirname, '..', '..', 'scripts/site-navigation.js'), 'utf8');
+const navScript = fs.readFileSync(path.resolve(__dirname, '..', '..', 'scripts/runtime/site-navigation.js'), 'utf8');
 
 function normalizeHeader(html) {
   const headerMatch = html.match(/<header class="site-header">([\s\S]*?)<\/header>/i);
@@ -49,7 +49,7 @@ let baseline = null;
 for (const rel of pages) {
   const html = fs.readFileSync(path.resolve(__dirname, '..', '..', rel), 'utf8');
   const normalized = normalizeHeader(html);
-  const scriptIncludeRegex = /<script src="(?:\.\.\/)?scripts\/site-navigation\.js"><\/script>/i;
+  const scriptIncludeRegex = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js"><\/script>/i;
 
   if (!normalized) {
     failures += 1;
@@ -92,7 +92,7 @@ for (const rel of pages) {
 
 if (!/const NAV_LINKS = \[/s.test(navScript)) {
   failures += 1;
-  console.error('FAIL: shared NAV_LINKS model missing in scripts/site-navigation.js.');
+  console.error('FAIL: shared NAV_LINKS model missing in scripts/runtime/site-navigation.js.');
 }
 
 for (const link of navModel) {

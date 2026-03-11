@@ -17,7 +17,7 @@ const root = path.resolve(__dirname, '..', '..');
 const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
 const insightsCss = fs.readFileSync(path.join(root, 'styles/insights.css'), 'utf8');
 const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
-const insightsScript = fs.readFileSync(path.join(root, 'scripts/insights-toggle.js'), 'utf8');
+const insightsScript = fs.readFileSync(path.join(root, 'scripts/runtime/insights-toggle.js'), 'utf8');
 
 let failures = 0;
 
@@ -71,9 +71,9 @@ for (const card of insightCards) {
   }
 }
 
-if (!insightsHtml.includes('src="/scripts/insights-toggle.js" defer')) {
+if (!insightsHtml.includes('src="/scripts/runtime/insights-toggle.js" defer')) {
   failures += 1;
-  console.error('FAIL: Insights page must include deferred /scripts/insights-toggle.js.');
+  console.error('FAIL: Insights page must include deferred /scripts/runtime/insights-toggle.js.');
 }
 
 // Validate CSS behavior for toggle content region and hover lift.

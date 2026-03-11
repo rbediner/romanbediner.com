@@ -7,7 +7,7 @@ set -euo pipefail
 PLAYWRIGHT_VERSION="1.58.2"
 PLAYWRIGHT_DEFAULT_WORKERS="${PLAYWRIGHT_DEFAULT_WORKERS:-50%}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 TMP_ROOT="${TMPDIR:-/tmp}/rb-playwright-runtime"
 PKG_ROOT="$TMP_ROOT/packages"
 RUN_DIR="$TMP_ROOT/run"

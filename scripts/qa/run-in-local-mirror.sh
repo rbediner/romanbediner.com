@@ -5,12 +5,12 @@ set -euo pipefail
 # filesystem timeouts from cloud-synced workspace paths.
 
 if [[ "$#" -eq 0 ]]; then
-  echo "[local-mirror] Usage: bash scripts/run-in-local-mirror.sh <command> [args...]"
+  echo "[local-mirror] Usage: bash scripts/qa/run-in-local-mirror.sh <command> [args...]"
   exit 2
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 TMP_ROOT="${TMPDIR:-/tmp}/rb-local-runtime"
 RUN_DIR="$TMP_ROOT/run"
 

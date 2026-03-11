@@ -44,7 +44,7 @@ Routing requirements:
 
 ## Google Analytics Architecture
 - Each canonical page provides exactly one GA metadata source via a measurement ID meta tag.
-- `/scripts/ga4.js` is the single analytics bootstrap point.
+- `/scripts/runtime/ga4-bootstrap.js` is the single analytics bootstrap point.
 - Inline GA bootstrap is forbidden.
 - External bootstrap keeps analytics compatible with strict CSP and avoids `unsafe-inline` dependency.
 - Guardrails enforce analytics correctness:
@@ -54,7 +54,7 @@ Routing requirements:
   - Runtime request visibility checks
 
 ## Connect Form Delivery Contract
-- `/connect/` form submission is handled client-side via EmailJS in `/scripts/contact-form-emailjs.js`.
+- `/connect/` form submission is handled client-side via EmailJS in `/scripts/runtime/contact-form-emailjs.js`.
 - Email recipient target for website inquiries is `connect@romanbediner.com`.
 - Recipient address must remain obfuscated in JavaScript and must not appear as plaintext in page HTML.
 - EmailJS payload includes `to_email`, `to`, `recipient_email`, and `recipient` mapped to the same recipient to tolerate template-variable naming drift across account migrations.
@@ -67,9 +67,9 @@ Routing requirements:
   - disposable email-domain deny list (extensible in script constants)
 - Anti-abuse rejections use a generic message and do not expose internal rule details.
 - Static-site limitation: these controls reduce abuse but cannot fully prevent hostile automation because enforcement is client-side and can be bypassed by advanced attackers.
-- If EmailJS ownership/account changes, update `SERVICE_ID`, `TEMPLATE_ID`, and `PUBLIC_KEY` in `/scripts/contact-form-emailjs.js` and rerun QA.
+- If EmailJS ownership/account changes, update `SERVICE_ID`, `TEMPLATE_ID`, and `PUBLIC_KEY` in `/scripts/runtime/contact-form-emailjs.js` and rerun QA.
 - To tune spam filters after deployment:
-  - update `SPAM_KEYWORDS` and `BLOCKED_EMAIL_DOMAINS` in `/scripts/contact-form-emailjs.js`
+  - update `SPAM_KEYWORDS` and `BLOCKED_EMAIL_DOMAINS` in `/scripts/runtime/contact-form-emailjs.js`
   - rerun `python3 -m unittest discover -s QA/tests -p test_contact_form.py -v`
   - rerun `npm run test:jest`
 
@@ -86,7 +86,11 @@ Routing requirements:
   - `/services/index.html`
   - `/insights/index.html`
   - `/connect/index.html`
-- JavaScript runtime and automation scripts live in `/scripts`.
+- Browser runtime scripts live in `/scripts/runtime`.
+- QA and local runner scripts live in `/scripts/qa`.
+- Release automation scripts live in `/scripts/release`.
+- Content-generation scripts live in `/scripts/content`.
+- Manual diagnostics live in `/scripts/diagnostics`.
 - Automated tests live in `/QA/tests`.
 - Jest policy/readme tests live in `/QA/tests/jest`.
 - Generated QA and calibration outputs are consolidated under `/QA/results`.
@@ -134,12 +138,12 @@ nvm install
   - `qa-playwright` (`npm run test:playwright -- --workers=3`)
 - A final `deploy-gate` job depends on all QA jobs and is the required branch-protection status for release readiness.
 - Production deployment is separate from validation and runs only on pushes to `prod`.
-- Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
-- `scripts/run-ci-parity.sh` and `scripts/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
-- Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
-- Playwright defaults to parallel workers via `scripts/run-playwright-local.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
+- Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
+- `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
+- Playwright spec tests are executed through `scripts/qa/run-local-playwright-suite.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
+- Playwright defaults to parallel workers via `scripts/qa/run-local-playwright-suite.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.
-- Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/run-jest-suite.js` to keep local/CI behavior deterministic.
+- Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/qa/run-jest-suite.js` to keep local/CI behavior deterministic.
 - CI fails on:
   - CSP violations
   - GA misconfiguration
@@ -155,7 +159,7 @@ nvm install
 
 2. **GA initialization flow**
    - Page defines GA measurement meta tag.
-   - `/scripts/ga4.js` reads the meta value.
+   - `/scripts/runtime/ga4-bootstrap.js` reads the meta value.
    - Script loads GTM-hosted `gtag.js` and initializes analytics without inline JavaScript.
 
 3. **CSP contract**
@@ -179,7 +183,7 @@ nvm install
 8. **Required CI workflow structure**
    - Install dependencies via `npm ci`.
    - Install Playwright Chromium.
-   - Execute node, python, jest, and Playwright checks through `npm test`.
+   - Execute node, python, jest, and Playwright checks through the dedicated CI job commands in `.github/workflows/ci.yml`.
 
 9. **Standardized page transition blocks**
    - Primary narrative pages end with a shared transition component using the same structure and classes.
@@ -194,7 +198,7 @@ nvm install
    - The `hidden` attribute is intentionally not used on `.brief-content` panels because it suppresses content visibility to some crawlers.
    - Visual collapse is implemented with CSS state classes only: `.brief-content.collapsed` and `.brief-content.expanded`.
    - The visible card structure remains unchanged: title, bullet list, expand button, then full brief content.
-   - `scripts/insights-toggle.js` toggles collapse classes and `aria-expanded` state without moving content or changing layout.
+   - `scripts/runtime/insights-toggle.js` toggles collapse classes and `aria-expanded` state without moving content or changing layout.
 
 11. **Contextual internal link styling contract**
    - Contextual inline links may be added inside existing narrative copy to strengthen topical linking to canonical routes such as `/insights/`.
@@ -207,7 +211,7 @@ nvm install
 13. **About professional arc timeline structure**
    - `/about/` professional arc content is wrapped by `.arc-timeline-wrapper` with a neutral grey structural spine rendered via `::before`.
    - Exactly four orbs are rendered (`.orb-1` through `.orb-4`) using `/assets/icons/timeline-orb.png`; spine layering is above orb center to create a bisected structural mark.
-   - Orb alignment is computed dynamically in `/scripts/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb4`) with resize recalculation.
+   - Orb alignment is computed dynamically in `/scripts/runtime/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb4`) with resize recalculation.
    - Timeline dividers are constrained to `.arc-item + .arc-item .arc-narrative` (right column only) so divider lines do not intersect the timeline spine.
    - Era subtitle labels use plain text without decorative bracket pseudo-elements.
    - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
@@ -252,7 +256,7 @@ nvm install
   "requires_trailing_slash": true,
   "ga": {
     "meta_tag_required": true,
-    "bootstrap_script": "/scripts/ga4.js",
+    "bootstrap_script": "/scripts/runtime/ga4-bootstrap.js",
     "inline_allowed": false
   },
   "csp": {
@@ -287,9 +291,13 @@ npx playwright install chromium
 ```bash
 npm test
 ```
-- Run Playwright with the default parallel worker profile (same behavior used by `npm test`):
+- Run the descriptive full local QA entrypoint:
 ```bash
-bash scripts/run-playwright-local.sh
+npm run qa:full-local
+```
+- Run Playwright with the default parallel worker profile:
+```bash
+bash scripts/qa/run-local-playwright-suite.sh
 ```
 - Run CI-parity release checks locally:
 ```bash
@@ -331,7 +339,7 @@ Release policy is deterministic and staging-first. Do not push directly to `prod
 1. Ensure branch and working tree are clean:
 ```bash
 git checkout staging
-git pull origin staging
+git pull --ff-only origin staging
 git status
 ```
 2. Run CI-parity locally (same suites required by release gate):
@@ -341,15 +349,15 @@ npm run qa:ci-parity
 3. Push `staging`, then monitor CI by SHA:
 ```bash
 git push origin staging
-node scripts/monitor-ci-run.js --branch staging --sha "$(git rev-parse HEAD)"
+node scripts/release/watch-ci-run.js --branch staging --sha "$(git rev-parse HEAD)"
 ```
 4. Promote only the exact tested SHA to `prod` (fast-forward only):
 ```bash
 git checkout prod
-git pull origin prod
+git pull --ff-only origin prod
 git merge --ff-only <tested-sha>
 git push origin prod
-node scripts/monitor-ci-run.js --branch prod --sha "<tested-sha>"
+node scripts/release/watch-ci-run.js --branch prod --sha "<tested-sha>"
 ```
 5. Use the one-command release automation when possible:
 ```bash
@@ -358,7 +366,7 @@ npm run release:staging-prod
 
 ### Local Push Guard
 - `.husky/pre-push` runs `npm run qa:ci-parity` automatically before any push.
-- `npm` prepare now runs `node scripts/prepare-husky.js`, which installs Husky hooks only in local Git worktrees and skips cleanly in CI.
+- `npm` prepare runs `node scripts/release/install-local-husky-hooks.js`, which installs Husky hooks only in local Git worktrees and skips cleanly in CI.
 - Emergency bypass (use only when explicitly approved): `SKIP_PREPUSH_QA=1 git push ...`
 - Any bypass must be followed by a full local `npm run qa:ci-parity` and staging CI verification.
 
@@ -372,19 +380,19 @@ Codex command elevation is governed by command-prefix approvals.
 - Recommendation: pre-approve routine operational prefixes used in this repository to reduce interruptive prompts during CI triage and release operations.
 - Local mirrored execution helper:
 ```bash
-bash scripts/run-in-local-mirror.sh npm run test:jest
+bash scripts/qa/run-in-local-mirror.sh npm run test:jest
 ```
 - Override worker count when needed for debugging or stability:
 ```bash
-bash scripts/run-playwright-local.sh --workers=1
+bash scripts/qa/run-local-playwright-suite.sh --workers=1
 ```
-- Run all local QA checks from any directory (recommended operator entrypoint):
+- Run the complete local QA suite:
 ```bash
-cd "/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com" && ./scripts/run-all-qa.sh
+npm run qa:full-local
 ```
 - Export a plain-text copy baseline for regression comparison:
 ```bash
-node scripts/export-copy-baseline.js
+node scripts/content/export-copy-baseline.js
 ```
 - Serve locally (example):
 ```bash

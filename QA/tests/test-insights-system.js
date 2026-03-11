@@ -20,7 +20,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
 const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
-const { onInsightToggleClick } = require(path.join(root, 'scripts/insights-toggle.js'));
+const { onInsightToggleClick } = require(path.join(root, 'scripts/runtime/insights-toggle.js'));
 
 function parseInsightCards(html) {
   const matches = [...html.matchAll(/<article id="([a-z0-9-]+)" class="insight-card">[\s\S]*?<h2>([^<]+)<\/h2>/g)];

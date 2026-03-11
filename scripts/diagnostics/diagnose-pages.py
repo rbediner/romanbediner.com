@@ -101,7 +101,7 @@ def internal_link_check(repo_root: Path):
 
 
 def main():
-    repo_root = Path(__file__).resolve().parents[1]
+    repo_root = Path(__file__).resolve().parents[2]
     token = os.getenv("GITHUB_TOKEN", "").strip()
 
     cname = check_cname(repo_root)
