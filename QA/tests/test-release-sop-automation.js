@@ -24,7 +24,8 @@ function assert(condition, message) {
 const requiredScripts = {
   'qa:ci-parity': 'bash scripts/run-ci-parity.sh',
   'ci:monitor': 'node scripts/monitor-ci-run.js',
-  'release:staging-prod': 'bash scripts/release-staging-to-prod.sh'
+  'release:staging-prod': 'bash scripts/release-staging-to-prod.sh',
+  'prepare': 'node scripts/prepare-husky.js'
 };
 
 for (const [name, value] of Object.entries(requiredScripts)) {
@@ -61,5 +62,11 @@ assert(fs.existsSync(huskyPrePushPath), '.husky/pre-push must exist');
 const huskyText = fs.readFileSync(huskyPrePushPath, 'utf8');
 assert(huskyText.includes('SKIP_PREPUSH_QA'), 'pre-push must include documented bypass variable');
 assert(huskyText.includes('npm run qa:ci-parity'), 'pre-push must run CI-parity script');
+
+const prepareHuskyPath = path.join(ROOT, 'scripts', 'prepare-husky.js');
+assert(fs.existsSync(prepareHuskyPath), 'scripts/prepare-husky.js must exist');
+const prepareHuskyText = fs.readFileSync(prepareHuskyPath, 'utf8');
+assert(prepareHuskyText.includes("process.env.CI === '1'") || prepareHuskyText.includes("process.env.CI === 'true'"), 'prepare-husky script must skip hook installation in CI');
+assert(prepareHuskyText.includes("No .git directory detected"), 'prepare-husky script must skip hook installation outside Git checkouts');
 
 console.log('PASS: deployment SOP automation guardrails are in place.');

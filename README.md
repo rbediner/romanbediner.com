@@ -344,6 +344,7 @@ npm run release:staging-prod
 
 ### Local Push Guard
 - `.husky/pre-push` runs `npm run qa:ci-parity` automatically before any push.
+- `npm` prepare now runs `node scripts/prepare-husky.js`, which installs Husky hooks only in local Git worktrees and skips cleanly in CI.
 - Emergency bypass (use only when explicitly approved): `SKIP_PREPUSH_QA=1 git push ...`
 - Any bypass must be followed by a full local `npm run qa:ci-parity` and staging CI verification.
 
