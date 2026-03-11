@@ -42,6 +42,19 @@ Routing requirements:
   3. GitHub Actions deploys Pages from `prod`
 - Keep `prod` fast-forward only from tested commits to preserve release traceability.
 
+## Cross-Machine Handoff Protocol
+- Canonical handoff file: `/docs/handoff/latest.md`.
+- Every session that changes code, scripts, QA behavior, or release flow must overwrite `/docs/handoff/latest.md` with the latest state before ending work.
+- The handoff file is intentionally single-entry and non-growing:
+  - keep only the latest state
+  - increment `Handoff Sequence` each time it is updated
+  - rely on Git history for older handoffs rather than appending to one file
+- Required startup step for any new machine/session:
+  1. open `/README.md`
+  2. open `/docs/handoff/latest.md`
+  3. align local branch to the handoff commit/branch before edits
+- If `/docs/handoff/latest.md` is missing or stale relative to actual code changes, treat the repo as unsafe to modify until handoff is updated and committed.
+
 ## Google Analytics Architecture
 - Each canonical page provides exactly one GA metadata source via a measurement ID meta tag.
 - `/scripts/runtime/ga4-bootstrap.js` is the single analytics bootstrap point.
