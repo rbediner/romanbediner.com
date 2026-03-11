@@ -1,14 +1,15 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 1
-- Updated At (UTC): 2026-03-11T19:10:00Z
+- Handoff Sequence: 2
+- Updated At (UTC): 2026-03-11T19:23:29Z
 - Source Branch: staging
-- Source Commit: 2c826aa19cebfb34b782afc403970b0c754245d4
+- Source Commit: 631d652f1381a150c1d575e4bd11ddca74ea4152
 - Release Notes Reference: `/docs/release-notes-2026-03-11.md`
 
 ## What Changed Most Recently
-- Restored this repo to the refactor state documented in the March 11 release notes.
-- `staging` was fast-forwarded to commit `2c826aa19cebfb34b782afc403970b0c754245d4`.
+- Added enforced cross-machine handoff protocol in README and Jest guardrail coverage.
+- Added latest release notes record at `/docs/release-notes-2026-03-11.md`.
+- Confirmed both `staging` and `prod` point to `631d652f1381a150c1d575e4bd11ddca74ea4152`.
 - Script layout is intent-based and must remain so:
   - `/scripts/runtime`
   - `/scripts/qa`
@@ -19,6 +20,7 @@
 ## Validation Status
 - `npm run test:visual`: passed (`8/8`, full visual regression)
 - `npm run qa:ci-parity`: node/jest/python phases passed in this environment; Playwright runtime socket bind may fail in restricted sandboxes
+- Hygiene sweep: removed local workspace artifact `/.DS_Store`
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
