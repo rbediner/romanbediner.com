@@ -57,6 +57,12 @@ const ciWorkflowPath = path.join(ROOT, '.github', 'workflows', 'ci.yml');
 const ciWorkflowText = fs.readFileSync(ciWorkflowPath, 'utf8');
 assert(ciWorkflowText.includes('npm run test:playwright -- --workers=3'), 'ci.yml must run Playwright with at least 3 workers');
 
+const nvmrcPath = path.join(ROOT, '.nvmrc');
+assert(fs.existsSync(nvmrcPath), '.nvmrc must exist to align local Node with CI');
+const nvmrcVersion = fs.readFileSync(nvmrcPath, 'utf8').trim();
+assert(nvmrcVersion === '20', '.nvmrc must pin Node 20 to match CI');
+assert(ciWorkflowText.includes("node-version: '20'"), 'ci.yml must pin Node 20');
+
 const huskyPrePushPath = path.join(ROOT, '.husky', 'pre-push');
 assert(fs.existsSync(huskyPrePushPath), '.husky/pre-push must exist');
 const huskyText = fs.readFileSync(huskyPrePushPath, 'utf8');

@@ -116,6 +116,15 @@ Routing requirements:
 
 ## Continuous Integration
 - Node is pinned to version 20.
+- Local development should use the same version via `.nvmrc`.
+- Recommended local setup:
+```bash
+nvm use
+```
+- If Node 20 is not installed yet:
+```bash
+nvm install
+```
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
 - CI is split into parallel jobs:
