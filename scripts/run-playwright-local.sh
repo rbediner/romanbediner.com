@@ -14,6 +14,24 @@ RUN_DIR="$TMP_ROOT/run"
 
 mkdir -p "$PKG_ROOT"
 
+declare -a PLAYWRIGHT_ARGS=("$@")
+HAS_WORKERS_FLAG=0
+for arg in "${PLAYWRIGHT_ARGS[@]-}"; do
+  if [[ "$arg" == "--workers" || "$arg" == --workers=* ]]; then
+    HAS_WORKERS_FLAG=1
+    break
+  fi
+done
+if [[ "$HAS_WORKERS_FLAG" -eq 0 ]]; then
+  PLAYWRIGHT_ARGS+=("--workers=$PLAYWRIGHT_DEFAULT_WORKERS")
+fi
+
+if [[ "${RB_LOCAL_MIRROR_ACTIVE:-0}" == "1" && -f "$ROOT_DIR/node_modules/playwright/cli.js" ]]; then
+  cd "$ROOT_DIR"
+  node node_modules/playwright/cli.js test "${PLAYWRIGHT_ARGS[@]}"
+  exit 0
+fi
+
 download_pkg_tgz() {
   local pkg="$1"
   local tgz="$PKG_ROOT/${pkg}-${PLAYWRIGHT_VERSION}.tgz"
@@ -56,18 +74,6 @@ fi
 mkdir -p "$RUN_DIR/node_modules"
 ln -sfn "$PKG_ROOT/playwright/package" "$RUN_DIR/node_modules/playwright"
 ln -sfn "$PKG_ROOT/playwright-core/package" "$RUN_DIR/node_modules/playwright-core"
-
-declare -a PLAYWRIGHT_ARGS=("$@")
-HAS_WORKERS_FLAG=0
-for arg in "${PLAYWRIGHT_ARGS[@]-}"; do
-  if [[ "$arg" == "--workers" || "$arg" == --workers=* ]]; then
-    HAS_WORKERS_FLAG=1
-    break
-  fi
-done
-if [[ "$HAS_WORKERS_FLAG" -eq 0 ]]; then
-  PLAYWRIGHT_ARGS+=("--workers=$PLAYWRIGHT_DEFAULT_WORKERS")
-fi
 
 cd "$RUN_DIR"
 node --preserve-symlinks --preserve-symlinks-main node_modules/playwright/cli.js test "${PLAYWRIGHT_ARGS[@]}"

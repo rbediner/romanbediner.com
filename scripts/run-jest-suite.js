@@ -13,15 +13,40 @@
  * - If Jest binary path changes, update JEST_BIN resolution in this file only.
  */
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const JEST_BIN = path.join(ROOT, 'node_modules', 'jest', 'bin', 'jest.js');
+const MIRROR_RUNNER = path.join(ROOT, 'scripts', 'run-in-local-mirror.sh');
+const SHOULD_USE_MIRROR =
+  !process.env.CI &&
+  process.env.RB_LOCAL_MIRROR_ACTIVE !== '1' &&
+  ROOT.includes(path.join('Library', 'CloudStorage'));
+
+function runFromLocalMirror() {
+  if (!fs.existsSync(MIRROR_RUNNER)) {
+    return null;
+  }
+
+  console.warn(`[run-jest-suite] Re-running Jest from local mirror under ${os.tmpdir()}.`);
+  return spawnSync('bash', [MIRROR_RUNNER, process.execPath, 'scripts/run-jest-suite.js'], {
+    cwd: ROOT,
+    stdio: 'inherit',
+    env: { ...process.env, RB_LOCAL_MIRROR_ACTIVE: '0' }
+  });
+}
 
 // In CI, missing Jest is a hard failure because lockfile installs must be deterministic.
 if (!fs.existsSync(JEST_BIN)) {
   const message = 'Jest binary not found at node_modules/jest/bin/jest.js. Run `npm ci` to repair local dependencies.';
+  if (SHOULD_USE_MIRROR) {
+    const mirrored = runFromLocalMirror();
+    if (mirrored && typeof mirrored.status === 'number') {
+      process.exit(mirrored.status);
+    }
+  }
   if (process.env.CI) {
     console.error(`FAIL: ${message}`);
     process.exit(1);
@@ -35,6 +60,13 @@ const result = spawnSync(process.execPath, [JEST_BIN, '--passWithNoTests'], {
   cwd: ROOT,
   stdio: 'inherit'
 });
+
+if (result.error && SHOULD_USE_MIRROR && ['ETIMEDOUT', 'EIO'].includes(result.error.code || '')) {
+  const mirrored = runFromLocalMirror();
+  if (mirrored && typeof mirrored.status === 'number') {
+    process.exit(mirrored.status);
+  }
+}
 
 if (typeof result.status === 'number') {
   process.exit(result.status);

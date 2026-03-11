@@ -134,6 +134,7 @@ nvm install
   - `qa-playwright` (`npm run test:playwright -- --workers=3`)
 - A final `deploy-gate` job depends on all QA jobs and is the required branch-protection status for release readiness.
 - Production deployment is separate from validation and runs only on pushes to `prod`.
+- Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
 - Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/run-playwright-local.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.
@@ -368,6 +369,10 @@ Codex command elevation is governed by command-prefix approvals.
 - In Codex Desktop, approved command prefixes are stored and reused in future sessions depending local policy and environment controls.
 - If a command falls outside approved prefixes, Codex must request a new permission prompt.
 - Recommendation: pre-approve routine operational prefixes used in this repository to reduce interruptive prompts during CI triage and release operations.
+- Local mirrored execution helper:
+```bash
+bash scripts/run-in-local-mirror.sh npm run test:jest
+```
 - Override worker count when needed for debugging or stability:
 ```bash
 bash scripts/run-playwright-local.sh --workers=1
