@@ -240,7 +240,7 @@ nvm install
   "transitions": {
     "flow": [
       {"from": "/", "to": "/about/", "label": "THE EXECUTION LAYER", "title": "Transition to Operating Philosophy"},
-      {"from": "/about/", "to": "/services/", "label": "THE EXECUTION LAYER", "title": "Transition to Strategic Services"},
+      {"from": "/about/", "to": "/services/", "label": "THE OPERATING MODEL", "title": "Transition to Strategic Services"},
       {"from": "/services/", "to": "/insights/", "label": "THE STRATEGY LAYER", "title": "Transition to Strategic Insights"},
       {"from": "/insights/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect"}
     ],

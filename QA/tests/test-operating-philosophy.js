@@ -61,7 +61,7 @@ if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*ma
 if (
   !/<section[^>]*class="[^"]*\bnext-page-nav\b[^"]*"/.test(aboutHtml) ||
   !/<a[^>]*href="\/services\/"[^>]*class="nav-anchor"/.test(aboutHtml) ||
-  !/THE EXECUTION LAYER/.test(aboutHtml) ||
+  !/THE OPERATING MODEL/.test(aboutHtml) ||
   !/class="nav-title sr-only">Transition to Strategic Services</.test(aboutHtml)
 ) {
   failures += 1;
