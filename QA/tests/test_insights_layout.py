@@ -48,9 +48,15 @@ class InsightsLayoutTest(unittest.TestCase):
 
     def test_expand_collapse_css_rules(self):
         """Ensure brief content region has dedicated styling."""
-        self.assertRegex(self.insights_css, r"\.brief-content\s*\{[^}]*margin-top:\s*16px;")
+        self.assertRegex(
+            self.insights_css,
+            r"\.brief-content\s*\{[^}]*overflow:\s*hidden;[^}]*transition:\s*max-height 280ms ease, opacity 220ms ease;",
+        )
         self.assertRegex(self.insights_css, r"\.brief-content\.collapsed\s*\{[^}]*max-height:\s*0;[^}]*overflow:\s*hidden;[^}]*opacity:\s*0;")
-        self.assertRegex(self.insights_css, r"\.brief-content\.expanded\s*\{[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;")
+        self.assertRegex(
+            self.insights_css,
+            r"\.brief-content\.expanded\s*\{[^}]*margin-top:\s*16px;[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;",
+        )
 
     def test_hover_lift_and_spacing(self):
         """Ensure card hover lift and card spacing align with required behavior."""

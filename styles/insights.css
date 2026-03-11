@@ -165,9 +165,8 @@ a:hover {
   box-shadow: none;
 }
 
-/* Brief body region uses the same typography and spacing rhythm as existing insight copy. */
+/* Brief body region stays in the DOM for crawlability without changing collapsed card height. */
 .brief-content {
-  margin-top: 16px;
   overflow: hidden;
   transition: max-height 280ms ease, opacity 220ms ease;
 }
@@ -180,6 +179,7 @@ a:hover {
 }
 
 .brief-content.expanded {
+  margin-top: 16px;
   max-height: 2000px;
   opacity: 1;
 }

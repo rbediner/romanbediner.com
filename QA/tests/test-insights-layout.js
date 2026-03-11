@@ -77,7 +77,7 @@ if (!insightsHtml.includes('src="/scripts/insights-toggle.js" defer')) {
 }
 
 // Validate CSS behavior for toggle content region and hover lift.
-if (!/\.brief-content\s*\{[^}]*margin-top:\s*16px;/s.test(insightsCss)) {
+if (!/\.brief-content\s*\{[^}]*overflow:\s*hidden;[^}]*transition:\s*max-height 280ms ease, opacity 220ms ease;/s.test(insightsCss)) {
   failures += 1;
   console.error('FAIL: brief-content region style is missing.');
 }
@@ -85,9 +85,9 @@ if (!/\.brief-content\.collapsed\s*\{[^}]*max-height:\s*0;[^}]*overflow:\s*hidde
   failures += 1;
   console.error('FAIL: collapsed brief-content CSS state is missing.');
 }
-if (!/\.brief-content\.expanded\s*\{[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;/s.test(insightsCss)) {
+if (!/\.brief-content\.expanded\s*\{[^}]*margin-top:\s*16px;[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;/s.test(insightsCss)) {
   failures += 1;
-  console.error('FAIL: expanded brief-content CSS state is missing.');
+  console.error('FAIL: expanded brief-content CSS state must restore visible spacing.');
 }
 if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;/s.test(insightsCss)) {
   failures += 1;
