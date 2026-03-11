@@ -183,6 +183,9 @@ nvm install
    - Primary narrative pages end with a shared transition component using the same structure and classes.
    - Transition flow architecture is: `Home -> About -> Services -> Insights -> Connect`.
    - Transition component styles are centralized in `styles/site.css` and must not be duplicated in page-level CSS.
+   - Transition layer labels render in uppercase to keep taxonomy consistent across the narrative flow.
+   - The semantic transition phrase remains in the DOM inside `.nav-title.sr-only` so search engines and screen readers retain the contextual handoff without showing duplicate visible copy.
+   - The shared `.sr-only` utility in `styles/site.css` is the only approved way to visually hide transition titles while preserving accessibility and crawlability.
 
 10. **Insights crawlability contract**
    - Insights brief content must remain present in the DOM for crawlability and semantic indexing.
@@ -237,8 +240,8 @@ nvm install
   "transitions": {
     "flow": [
       {"from": "/", "to": "/about/", "label": "THE EXECUTION LAYER", "title": "Transition to Operating Philosophy"},
-      {"from": "/about/", "to": "/services/", "label": "The Execution Layer", "title": "Transition to Strategic Services"},
-      {"from": "/services/", "to": "/insights/", "label": "The Strategy Layer", "title": "Transition to Strategic Insights"},
+      {"from": "/about/", "to": "/services/", "label": "THE EXECUTION LAYER", "title": "Transition to Strategic Services"},
+      {"from": "/services/", "to": "/insights/", "label": "THE STRATEGY LAYER", "title": "Transition to Strategic Insights"},
       {"from": "/insights/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect"}
     ],
     "intent": "Guide a linear narrative from operating context to engagement."
