@@ -1,15 +1,15 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 2
-- Updated At (UTC): 2026-03-11T19:23:29Z
+- Handoff Sequence: 3
+- Updated At (UTC): 2026-03-11T19:24:34Z
 - Source Branch: staging
-- Source Commit: 631d652f1381a150c1d575e4bd11ddca74ea4152
+- Source Commit: a689f5a9aae67d9158bba91cbb833339b7fdd2bd
 - Release Notes Reference: `/docs/release-notes-2026-03-11.md`
 
 ## What Changed Most Recently
 - Added enforced cross-machine handoff protocol in README and Jest guardrail coverage.
 - Added latest release notes record at `/docs/release-notes-2026-03-11.md`.
-- Confirmed both `staging` and `prod` point to `631d652f1381a150c1d575e4bd11ddca74ea4152`.
+- Confirmed `staging` and `prod` are aligned to the same commit baseline before this handoff update.
 - Script layout is intent-based and must remain so:
   - `/scripts/runtime`
   - `/scripts/qa`
