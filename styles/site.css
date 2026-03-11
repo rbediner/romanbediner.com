@@ -250,6 +250,15 @@ body > main {
   font-weight: 700;
 }
 
+/* Preserve existing editorial presentation while allowing contextual inline links for crawlability. */
+.semantic-inline-link,
+.semantic-inline-link:hover,
+.semantic-inline-link:focus,
+.semantic-inline-link:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
 .manifesto-callout {
   display: flex;
   width: 100%;
