@@ -135,6 +135,7 @@ nvm install
 - A final `deploy-gate` job depends on all QA jobs and is the required branch-protection status for release readiness.
 - Production deployment is separate from validation and runs only on pushes to `prod`.
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
+- `scripts/run-ci-parity.sh` and `scripts/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
 - Playwright spec tests are executed through `scripts/run-playwright-local.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/run-playwright-local.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.
