@@ -8,6 +8,7 @@
     "calibrate:h1": "node scripts/content/calibrate-h1.mjs",
     "qa:ci-parity": "bash scripts/qa/run-ci-parity.sh",
     "qa:full-local": "bash scripts/qa/run-local-full-qa.sh",
+    "handoff:update": "node scripts/release/update-handoff-latest.js",
     "ci:monitor": "node scripts/release/watch-ci-run.js",
     "release:staging-prod": "bash scripts/release/promote-tested-staging-to-prod.sh",
     "test:jest": "node scripts/qa/run-jest-suite.js",

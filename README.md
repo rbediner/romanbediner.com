@@ -54,6 +54,10 @@ Routing requirements:
   2. open `/docs/handoff/latest.md`
   3. align local branch to the handoff commit/branch before edits
 - If `/docs/handoff/latest.md` is missing or stale relative to actual code changes, treat the repo as unsafe to modify until handoff is updated and committed.
+- Standard command to refresh handoff metadata:
+```bash
+npm run handoff:update
+```
 
 ## Google Analytics Architecture
 - Each canonical page provides exactly one GA metadata source via a measurement ID meta tag.

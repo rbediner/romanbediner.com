@@ -14,6 +14,8 @@ const ROOT = path.resolve(__dirname, '..', '..', '..');
 const README_PATH = path.join(ROOT, 'README.md');
 const HANDOFF_DIR = path.join(ROOT, 'docs', 'handoff');
 const LATEST_HANDOFF_PATH = path.join(HANDOFF_DIR, 'latest.md');
+const PACKAGE_JSON_PATH = path.join(ROOT, 'package.json');
+const HANDOFF_SCRIPT_PATH = path.join(ROOT, 'scripts', 'release', 'update-handoff-latest.js');
 
 describe('Cross-machine handoff contract', () => {
   test('README links the canonical latest handoff file', () => {
@@ -40,5 +42,12 @@ describe('Cross-machine handoff contract', () => {
       .sort();
 
     expect(entries).toEqual(['latest.md']);
+  });
+
+  test('handoff updater command and script exist', () => {
+    const packageJson = JSON.parse(fs.readFileSync(PACKAGE_JSON_PATH, 'utf8'));
+    expect(packageJson.scripts).toBeDefined();
+    expect(packageJson.scripts['handoff:update']).toBe('node scripts/release/update-handoff-latest.js');
+    expect(fs.existsSync(HANDOFF_SCRIPT_PATH)).toBe(true);
   });
 });
