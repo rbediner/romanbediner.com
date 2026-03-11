@@ -168,6 +168,20 @@ a:hover {
 /* Brief body region uses the same typography and spacing rhythm as existing insight copy. */
 .brief-content {
   margin-top: 16px;
+  overflow: hidden;
+  transition: max-height 280ms ease, opacity 220ms ease;
+}
+
+/* Keep expanded insight copy in the DOM for crawlability while preserving the same visual collapse. */
+.brief-content.collapsed {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.brief-content.expanded {
+  max-height: 2000px;
+  opacity: 1;
 }
 
 .brief-content p {
@@ -178,30 +192,6 @@ a:hover {
 }
 
 .brief-content p:last-child {
-  margin-bottom: 0;
-}
-
-.insight-expanded {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  margin-top: 16px;
-  transition: max-height 280ms ease, opacity 220ms ease;
-}
-
-.insight-card.expanded .insight-expanded {
-  max-height: 960px;
-  opacity: 1;
-}
-
-.insight-expanded p {
-  max-width: 720px;
-  margin: 0 0 16px 0;
-  font-size: 18px;
-  color: var(--muted-text);
-}
-
-.insight-expanded p:last-child {
   margin-bottom: 0;
 }
 

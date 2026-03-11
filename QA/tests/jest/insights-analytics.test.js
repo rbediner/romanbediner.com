@@ -21,12 +21,14 @@ function createToggleHarness(options = {}) {
   const pathname = options.pathname || '/insights/';
 
   const content = {
-    attributes: {},
-    toggleAttribute(name, force) {
-      if (force) {
-        this.attributes[name] = '';
-      } else {
-        delete this.attributes[name];
+    classState: new Set(initiallyExpanded ? ['brief-content', 'expanded'] : ['brief-content', 'collapsed']),
+    classList: {
+      toggle(name, force) {
+        if (force) {
+          content.classState.add(name);
+        } else {
+          content.classState.delete(name);
+        }
       }
     }
   };
@@ -128,18 +130,20 @@ describe('Insights analytics runtime', () => {
     );
   });
 
-  test('toggles aria-expanded, button text, and hidden attribute', () => {
+  test('toggles aria-expanded, button text, and collapse classes', () => {
     const { target, button, content } = createToggleHarness({ initiallyExpanded: false });
 
     onInsightToggleClick({ target });
     expect(button.getAttribute('aria-expanded')).toBe('true');
     expect(button.textContent).toBe('- Collapse');
-    expect(content.attributes.hidden).toBeUndefined();
+    expect(content.classState.has('expanded')).toBe(true);
+    expect(content.classState.has('collapsed')).toBe(false);
 
     onInsightToggleClick({ target });
     expect(button.getAttribute('aria-expanded')).toBe('false');
     expect(button.textContent).toBe('+ Expand');
-    expect(content.attributes).toHaveProperty('hidden');
+    expect(content.classState.has('collapsed')).toBe(true);
+    expect(content.classState.has('expanded')).toBe(false);
   });
 
   test('fails silently when gtag is unavailable', () => {

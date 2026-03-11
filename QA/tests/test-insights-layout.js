@@ -55,13 +55,13 @@ for (const card of insightCards) {
     console.error(`FAIL: card ${slug} is missing shared service-list bullets.`);
   }
 
-  if (!/id="[a-z0-9-]+-content"\s+class="brief-content"/i.test(cardHtml)) {
+  if (!/id="[a-z0-9-]+-content"\s+class="brief-content collapsed"/i.test(cardHtml)) {
     failures += 1;
-    console.error(`FAIL: card ${slug} is missing brief-content container with semantic id.`);
+    console.error(`FAIL: card ${slug} is missing collapsed brief-content container with semantic id.`);
   }
 
-  // Guardrail: summary and bullets must remain visible in collapsed state, outside the hidden brief-content block.
-  const contentMarker = `id="${slug}-content" class="brief-content`;
+  // Guardrail: summary and bullets must remain visible in collapsed state, outside the brief-content block.
+  const contentMarker = `id="${slug}-content" class="brief-content collapsed"`;
   const contentStart = cardHtml.indexOf(contentMarker);
   const summaryStart = cardHtml.indexOf('<p class="insight-summary">');
   const listStart = cardHtml.indexOf('<ul class="service-list">');
@@ -80,6 +80,14 @@ if (!insightsHtml.includes('src="/scripts/insights-toggle.js" defer')) {
 if (!/\.brief-content\s*\{[^}]*margin-top:\s*16px;/s.test(insightsCss)) {
   failures += 1;
   console.error('FAIL: brief-content region style is missing.');
+}
+if (!/\.brief-content\.collapsed\s*\{[^}]*max-height:\s*0;[^}]*overflow:\s*hidden;[^}]*opacity:\s*0;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: collapsed brief-content CSS state is missing.');
+}
+if (!/\.brief-content\.expanded\s*\{[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;/s.test(insightsCss)) {
+  failures += 1;
+  console.error('FAIL: expanded brief-content CSS state is missing.');
 }
 if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;/s.test(insightsCss)) {
   failures += 1;

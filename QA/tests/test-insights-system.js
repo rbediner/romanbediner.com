@@ -72,12 +72,15 @@ function testReadmeLinksMatchInsights() {
 
 function createFakeToggleHarness(slug, title) {
   const content = {
-    hidden: false,
-    toggleAttribute(name, force) {
-      if (name !== 'hidden') {
-        return;
+    classState: new Set(['brief-content', 'collapsed']),
+    classList: {
+      toggle(name, force) {
+        if (force) {
+          content.classState.add(name);
+        } else {
+          content.classState.delete(name);
+        }
       }
-      this.hidden = Boolean(force);
     }
   };
 
@@ -145,7 +148,8 @@ function testGaInsightToggleEventBehavior() {
   onInsightToggleClick({ target });
   assert.strictEqual(button.attributes['aria-expanded'], 'true', 'Button aria-expanded should be true on expand.');
   assert.strictEqual(button.textContent, '- Collapse', 'Button text should switch to - Collapse on expand.');
-  assert.strictEqual(content.hidden, false, 'Content should be visible after expand.');
+  assert.strictEqual(content.classState.has('expanded'), true, 'Content should have expanded class after expand.');
+  assert.strictEqual(content.classState.has('collapsed'), false, 'Content should not have collapsed class after expand.');
   assert.strictEqual(calls.length, 1, 'GA event must fire once on expand.');
   assert.deepStrictEqual(calls[0], [
     'event',
@@ -162,7 +166,8 @@ function testGaInsightToggleEventBehavior() {
   onInsightToggleClick({ target });
   assert.strictEqual(button.attributes['aria-expanded'], 'false', 'Button aria-expanded should be false on collapse.');
   assert.strictEqual(button.textContent, '+ Expand', 'Button text should switch back to + Expand on collapse.');
-  assert.strictEqual(content.hidden, true, 'Content should be hidden after collapse.');
+  assert.strictEqual(content.classState.has('collapsed'), true, 'Content should have collapsed class after collapse.');
+  assert.strictEqual(content.classState.has('expanded'), false, 'Content should not have expanded class after collapse.');
   assert.strictEqual(calls.length, 2, 'GA collapse event must fire on second click.');
   assert.deepStrictEqual(calls[1], [
     'event',

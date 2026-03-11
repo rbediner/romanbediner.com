@@ -15,12 +15,12 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 
-const expectedHomepageTitle = 'Roman Bediner | Productizing Operations for AI-Enabled Organizations';
-const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operating models that align product, engineering, finance, and customer teams into scalable execution systems.';
+const expectedHomepageTitle = 'Roman Bediner | AI-Enabled Operations & Execution Systems';
+const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operations, execution systems, and engineering operating models that productize operations for scalable platform execution architecture.';
 // Homepage hero headline is intentionally all caps for executive visual hierarchy.
 const expectedHomepageH1 = 'PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK';
-const expectedInsightsTitle = 'Working Briefs on AI-Enabled Operations | Roman Bediner';
-const expectedInsightsDescription = 'Strategic working briefs on productizing operations, AI as an operating layer, and designing execution systems for modern organizations.';
+const expectedInsightsTitle = 'Insights | AI-Enabled Operations & Execution Systems';
+const expectedInsightsDescription = 'Strategic briefs on AI-enabled operations, execution systems, productizing operations, engineering operating models, and platform execution architecture.';
 
 const htmlPages = [
   'index.html',

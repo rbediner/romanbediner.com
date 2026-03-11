@@ -352,7 +352,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                   }
                   const style = getComputedStyle(panel);
                   const hasMaxHeightTransition = style.transition.includes('max-height');
-                  const isVisible = !panel.hasAttribute('hidden');
+                  const isVisible = panel.classList.contains('expanded');
                   return { found: true, hasMaxHeightTransition, isVisible };
                 }
                 """
@@ -365,7 +365,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 """
                 () => {
                   const panel = document.querySelector('.insight-card .brief-content');
-                  if (!panel || panel.hasAttribute('hidden')) return false;
+                  if (!panel || !panel.classList.contains('expanded')) return false;
                   return panel.scrollHeight > 0 && panel.getBoundingClientRect().height > 0;
                 }
                 """,

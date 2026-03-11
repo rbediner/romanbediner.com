@@ -37,14 +37,17 @@
       return;
     }
 
-    // Keep control state, label, and visibility synchronized for accessibility and analytics accuracy.
+    // Keep control state, label, and CSS-based visibility synchronized for accessibility and analytics accuracy.
     if (article.classList && typeof article.classList.toggle === 'function') {
       article.classList.toggle('expanded', !expanded);
     }
     button.setAttribute('aria-expanded', String(!expanded));
     // Keep explicit prefix tokens so the next action is scannable at a glance.
     button.textContent = expanded ? '+ Expand' : '- Collapse';
-    content.toggleAttribute('hidden', expanded);
+    if (content.classList && typeof content.classList.toggle === 'function') {
+      content.classList.toggle('collapsed', expanded);
+      content.classList.toggle('expanded', !expanded);
+    }
 
     // Derive analytics values from page structure to avoid duplicate hard-coded metadata.
     const insightSlug = article.id;

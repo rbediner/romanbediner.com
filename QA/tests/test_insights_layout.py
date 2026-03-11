@@ -28,15 +28,15 @@ class InsightsLayoutTest(unittest.TestCase):
             self.assertRegex(card_html, r"<h2>[^<]+</h2>")
             self.assertRegex(card_html, r'class="insight-toggle"[^>]*aria-expanded="(true|false)"')
             self.assertIn('<ul class="service-list">', card_html)
-            self.assertRegex(card_html, r'id="[a-z0-9-]+-content"\s+class="brief-content"')
+            self.assertRegex(card_html, r'id="[a-z0-9-]+-content"\s+class="brief-content collapsed"')
 
-    def test_summary_and_bullets_stay_outside_hidden_content(self):
+    def test_summary_and_bullets_stay_outside_collapsed_content(self):
         """Guardrail: summary and bullets must remain visible when a card is collapsed."""
         cards = re.findall(r'<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)</article>', self.insights_html)
         self.assertGreaterEqual(len(cards), 3)
 
         for slug, card_html in cards:
-            content_marker = f'id="{slug}-content" class="brief-content'
+            content_marker = f'id="{slug}-content" class="brief-content collapsed"'
             content_start = card_html.find(content_marker)
             summary_start = card_html.find('<p class="insight-summary">')
             list_start = card_html.find('<ul class="service-list">')
@@ -49,6 +49,8 @@ class InsightsLayoutTest(unittest.TestCase):
     def test_expand_collapse_css_rules(self):
         """Ensure brief content region has dedicated styling."""
         self.assertRegex(self.insights_css, r"\.brief-content\s*\{[^}]*margin-top:\s*16px;")
+        self.assertRegex(self.insights_css, r"\.brief-content\.collapsed\s*\{[^}]*max-height:\s*0;[^}]*overflow:\s*hidden;[^}]*opacity:\s*0;")
+        self.assertRegex(self.insights_css, r"\.brief-content\.expanded\s*\{[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;")
 
     def test_hover_lift_and_spacing(self):
         """Ensure card hover lift and card spacing align with required behavior."""
