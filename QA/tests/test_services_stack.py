@@ -44,7 +44,8 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('class="next-page-nav"', self.services_html)
         self.assertIn('class="nav-anchor"', self.services_html)
         self.assertIn('href="../insights/"', self.services_html)
-        self.assertIn('Transition to Strategic Insights', self.services_html)
+        self.assertIn('class="nav-label">THE STRATEGY LAYER</span>', self.services_html)
+        self.assertIn('class="nav-title sr-only">Transition to Strategic Insights</span>', self.services_html)
         self.assertIn('.next-page-nav', self.site_css)
         self.assertIn('.nav-anchor:hover .nav-title', self.site_css)
 

@@ -31,6 +31,11 @@ function assertSingleTransitionBlock(html, pageLabel) {
       console.error(`FAIL: ${pageLabel} transition block is missing class ${className}.`);
     }
   }
+
+  if (!/class="nav-title sr-only"/.test(html)) {
+    failures += 1;
+    console.error(`FAIL: ${pageLabel} nav-title must remain in the DOM and include sr-only.`);
+  }
 }
 
 assertSingleTransitionBlock(homeHtml, 'index.html');
@@ -65,6 +70,11 @@ if (!/href="\/connect\/"/.test(insightsHtml)) {
 if (!siteCss.includes('.next-page-nav')) {
   failures += 1;
   console.error('FAIL: shared transition component styles must exist in styles/site.css.');
+}
+
+if (!/\.sr-only\s*\{[^}]*position:\s*absolute;[^}]*width:\s*1px;[^}]*height:\s*1px;[^}]*clip:\s*rect\(0,\s*0,\s*0,\s*0\);/s.test(siteCss)) {
+  failures += 1;
+  console.error('FAIL: styles/site.css must provide the shared sr-only utility class.');
 }
 
 if (servicesCss.includes('.next-page-nav') || servicesCss.includes('.nav-anchor') || servicesCss.includes('.nav-title')) {
