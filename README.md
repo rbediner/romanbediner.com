@@ -182,10 +182,15 @@ Routing requirements:
    - The visible card structure remains unchanged: title, bullet list, expand button, then full brief content.
    - `scripts/insights-toggle.js` toggles collapse classes and `aria-expanded` state without moving content or changing layout.
 
-11. **About philosophy heading standard**
+11. **Contextual internal link styling contract**
+   - Contextual inline links may be added inside existing narrative copy to strengthen topical linking to canonical routes such as `/insights/`.
+   - These links must use the shared `.semantic-inline-link` class in `styles/site.css` so crawlable anchors do not introduce visible color, underline, or typography drift.
+   - Internal-link additions must preserve the original layout, spacing, and editorial presentation.
+
+12. **About philosophy heading standard**
    - The philosophy card heading on `/about/` uses the canonical label `Operating Philosophy`.
 
-12. **About professional arc timeline structure**
+13. **About professional arc timeline structure**
    - `/about/` professional arc content is wrapped by `.arc-timeline-wrapper` with a neutral grey structural spine rendered via `::before`.
    - Exactly four orbs are rendered (`.orb-1` through `.orb-4`) using `/assets/icons/timeline-orb.png`; spine layering is above orb center to create a bisected structural mark.
    - Orb alignment is computed dynamically in `/scripts/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb4`) with resize recalculation.
@@ -193,12 +198,12 @@ Routing requirements:
    - Era subtitle labels use plain text without decorative bracket pseudo-elements.
    - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
 
-13. **Connect page conversation section contract**
+14. **Connect page conversation section contract**
    - `/connect/` includes a dedicated `How we might connect` section above the form to frame the page as conversation-first rather than service-offering duplication.
    - Theme bullets in this section must use shared `.service-list` orb bullets from `styles/site.css` with `/assets/icons/bullet.png` (no page-level bullet redefinition).
    - Closing expectation lines are present and visually muted to keep the bullet themes as primary visual focus.
 
-14. **Connect ambient polish contract**
+15. **Connect ambient polish contract**
    - Ambient decorative orbs on `/connect/` are CSS-only pseudo-elements (`.connect-main::before` and `.connect-main::after`) that use layered radial gradients, high blur, and a shared `floatOrb` animation for subtle ambient motion.
    - The ambient background wash is intentionally anchored near the hero (`circle at 78% 14%`) so lighting emphasis stays in the top composition and fades toward lower sections.
    - Hero title polish on `/connect/` uses subtle tightened tracking and line-height (`letter-spacing: -0.02em`, `line-height: 1.15`) without changing page structure.
@@ -206,12 +211,12 @@ Routing requirements:
    - Mobile experience hides ambient orbs at `max-width: 768px` to preserve viewport clarity and form usability.
    - Connect page stylesheet can include a version query string (`/styles/connect.css?v=...`) to force immediate cache refresh after visual hotfixes.
 
-15. **Global page-top spacing contract**
+16. **Global page-top spacing contract**
    - Header-to-content distance is controlled centrally in `styles/site.css` by `--page-top-spacing`.
    - Canonical main containers (`.page-main`, `.about-main`, `.services-main`, `.insights-main`, `.connect-main`, and `body > main`) inherit this token through a shared `padding-top` rule.
    - Page-level styles must not set independent top offsets for the first section on a canonical route.
 
-16. **Connect hero icon transparency and mobile sizing contract**
+17. **Connect hero icon transparency and mobile sizing contract**
    - `/connect/` hero icon uses a transparent-background asset at `/assets/icons/contact-transparent.png` to prevent white-box rendering against ambient backgrounds.
    - The hero image preload and `<img>` source on `/connect/index.html` must reference the same transparent asset path.
    - Mobile styling keeps the icon centered above the headline with `max-width: 72px`, `display: block`, and `margin-left/right: auto` plus `margin-bottom: 16px`.
