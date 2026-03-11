@@ -1,16 +1,15 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 4
-- Updated At (UTC): 2026-03-11T19:27:53Z
+- Handoff Sequence: 5
+- Updated At (UTC): 2026-03-11T19:45:37Z
 - Source Branch: staging
-- Source Commit: 7488a3b80dfc3f1832dfee719264746274fcd54b (pre-handoff baseline)
-- Release Notes Reference: `/docs/release-notes-2026-03-11.md`
+- Source Commit: dde5254173417e2f6b80f7c10ffd40b40fccffa8 (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Added enforced cross-machine handoff protocol in README and Jest guardrail coverage.
-- Added latest release notes record at `/docs/release-notes-2026-03-11.md`.
-- Confirmed `staging` and `prod` are aligned to the same commit baseline before this handoff update.
-- Script layout is intent-based and must remain so:
+- Cleaned the local checkout by aligning local `staging` and `prod` to the current remote tip.
+- Confirmed local `staging`, local `prod`, `origin/staging`, and `origin/prod` all match the same commit.
+- `docs/handoff/latest.md` is the live source of truth for operator context; release notes are archival only.
+- Script layout remains intent-based and must stay as:
   - `/scripts/runtime`
   - `/scripts/qa`
   - `/scripts/release`
@@ -18,6 +17,8 @@
   - `/scripts/diagnostics`
 
 ## Validation Status
+- Local worktree: clean on `staging`
+- Branch alignment: local `staging`, local `prod`, `origin/staging`, and `origin/prod` all at `dde5254173417e2f6b80f7c10ffd40b40fccffa8`
 - `npm run test:visual`: passed (`8/8`, full visual regression)
 - `npm run qa:ci-parity`: node/jest/python phases passed in this environment; Playwright runtime socket bind may fail in restricted sandboxes
 - Hygiene sweep: removed local workspace artifact `/.DS_Store`
@@ -31,4 +32,5 @@
 
 ## Notes
 - This file must contain only the latest handoff state. Do not append historical logs here.
-- Use Git commit history and release notes for older context.
+- This file is not updated automatically by the release script. Run `npm run handoff:update` or update it explicitly before ending a change session.
+- Use Git commit history for older context; do not depend on release notes for current operator state.
