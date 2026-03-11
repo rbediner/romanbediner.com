@@ -326,13 +326,15 @@ Use this checklist when setting up a new workstation for this repository.
 
 1. Install required runtimes and tools:
 ```bash
-# macOS example (Homebrew)
-brew install node@20 python@3.11 git
+# Recommended on macOS: install NVM so local Node stays aligned with CI.
+brew install nvm python@3.11 git
 ```
 2. Clone repository and install Node dependencies:
 ```bash
 git clone git@github.com:rbediner/romanbediner.com.git
 cd romanbediner.com
+nvm install
+nvm use
 npm ci
 ```
 3. Install Python QA dependencies:
@@ -345,10 +347,16 @@ python3 -m playwright install chromium
 ```bash
 npm run prepare
 ```
-5. Verify local baseline:
+5. Run the automated startup preflight before edits:
+```bash
+npm run session:ready
+```
+6. Verify local baseline:
 ```bash
 npm run qa:ci-parity
 ```
+
+`npm run session:ready` is the canonical startup command. It fails fast if Node does not match `.nvmrc`, the working tree is dirty, the current branch does not match the handoff branch, the local commit does not match `origin/staging`, or cloud-sync duplicate artifacts like `scripts 2/` are present.
 
 ## Deployment SOP (Standard Operating Procedure)
 Release policy is deterministic and staging-first. Do not push directly to `prod` without the steps below.

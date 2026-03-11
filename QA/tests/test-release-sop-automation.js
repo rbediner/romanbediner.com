@@ -22,6 +22,7 @@ function assert(condition, message) {
 }
 
 const requiredScripts = {
+  'session:ready': 'node scripts/qa/verify-session-readiness.js',
   'qa:ci-parity': 'bash scripts/qa/run-ci-parity.sh',
   'ci:monitor': 'node scripts/release/watch-ci-run.js',
   'release:staging-prod': 'bash scripts/release/promote-tested-staging-to-prod.sh',

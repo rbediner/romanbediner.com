@@ -31,6 +31,7 @@ describe('Deployment SOP documentation contract', () => {
     expect(README.includes('npx playwright install chromium')).toBe(true);
     expect(README.includes('python3 -m pip install --upgrade pip')).toBe(true);
     expect(README.includes('pip install playwright==1.58.0 pillow==11.3.0')).toBe(true);
+    expect(README.includes('npm run session:ready')).toBe(true);
   });
 
   test('documents pre-push QA gate, release script, and persistent prefix approvals', () => {

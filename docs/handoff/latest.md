@@ -1,14 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 5
-- Updated At (UTC): 2026-03-11T19:45:37Z
+- Handoff Sequence: 7
+- Updated At (UTC): 2026-03-11T20:30:11Z
 - Source Branch: staging
-- Source Commit: dde5254173417e2f6b80f7c10ffd40b40fccffa8 (pre-handoff baseline)
+- Source Commit: 483ded63efa7222dedf75af452bb07bbd9cbedd9 (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Cleaned the local checkout by aligning local `staging` and `prod` to the current remote tip.
-- Confirmed local `staging`, local `prod`, `origin/staging`, and `origin/prod` all match the same commit.
-- `docs/handoff/latest.md` is the live source of truth for operator context; release notes are archival only.
+- Added automated startup preflight command `npm run session:ready`.
+- The preflight now checks Node version vs `.nvmrc`, handoff branch alignment, clean working tree, remote branch parity, and cloud-sync duplicate artifacts such as `scripts 2/`.
+- README bootstrap instructions now recommend NVM and point operators to `npm run session:ready` before running full QA.
+- Installed NVM on this machine, installed Node `20.20.1`, and configured login shells to source the NVM-managed runtime automatically.
+- Removed duplicate Google Drive artifacts that had been created in the workspace (`AGENTS 2.md`, `scripts 2/`, `scripts 3/`, `scripts 4/`).
 - Script layout remains intent-based and must stay as:
   - `/scripts/runtime`
   - `/scripts/qa`
@@ -17,18 +19,19 @@
   - `/scripts/diagnostics`
 
 ## Validation Status
-- Local worktree: clean on `staging`
-- Branch alignment: local `staging`, local `prod`, `origin/staging`, and `origin/prod` all at `dde5254173417e2f6b80f7c10ffd40b40fccffa8`
-- `npm run test:visual`: passed (`8/8`, full visual regression)
-- `npm run qa:ci-parity`: node/jest/python phases passed in this environment; Playwright runtime socket bind may fail in restricted sandboxes
-- Hygiene sweep: removed local workspace artifact `/.DS_Store`
+- `node QA/tests/test-session-readiness-automation.js`: passed
+- `node QA/tests/test-release-sop-automation.js`: passed
+- `./node_modules/.bin/jest QA/tests/jest/session_readiness.test.js QA/tests/jest/deployment_sop.test.js QA/tests/jest/handoff_latest_contract.test.js --runInBand`: passed
+- `zsh -lc 'node -v && npm -v'`: passed (`v20.20.1`, `10.8.2`)
+- `npm run session:ready`: environment blockers resolved; it now fails only because this change session has uncommitted repo modifications in the working tree
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
 2. `git checkout staging && git pull --ff-only origin staging`
-3. `nvm use` (Node 20 per `.nvmrc`)
-4. Read `/README.md` and this file before edits
-5. After changes, overwrite this file with new latest state and increment `Handoff Sequence`
+3. `nvm use` (Node 20 per `.nvmrc`), or install NVM first if it is missing
+4. Run `npm run session:ready` and resolve any reported startup blockers before edits
+5. Read `/README.md` and this file before edits
+6. After changes, overwrite this file with new latest state and increment `Handoff Sequence`
 
 ## Notes
 - This file must contain only the latest handoff state. Do not append historical logs here.
