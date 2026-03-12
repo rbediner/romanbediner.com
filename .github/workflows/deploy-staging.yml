@@ -92,7 +92,7 @@ jobs:
             --source-branch "${{ steps.source.outputs.source_branch }}"
 
       - name: Fail with explicit preview publication summary
-        if: ${{ steps.publish.outcome != 'success' }}
+        if: ${{ steps.publish.conclusion != 'success' }}
         run: |
           {
             echo "## Staging Preview Failed"
@@ -109,7 +109,7 @@ jobs:
           exit 1
 
       - name: Print staging deployment summary
-        if: ${{ steps.publish.outcome == 'success' }}
+        if: ${{ steps.publish.conclusion == 'success' }}
         run: |
           echo "Staging Deployment Summary"
           echo "Branch: ${{ steps.source.outputs.source_branch }}"
@@ -120,7 +120,7 @@ jobs:
           echo "Artifact checksum: ${{ steps.build.outputs.preview_checksum }}"
 
       - name: Write staging deployment summary to job summary
-        if: ${{ steps.publish.outcome == 'success' }}
+        if: ${{ steps.publish.conclusion == 'success' }}
         run: |
           {
             echo "## Staging Preview Ready"
