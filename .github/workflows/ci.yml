@@ -187,9 +187,19 @@ jobs:
         run: |
           python3 -m http.server 4173 > /tmp/rb-lighthouse-server.log 2>&1 &
           echo $! > /tmp/rb-lighthouse-server.pid
-          sleep 2
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:4173/ >/dev/null
 
       - name: Run Lighthouse quality gate
+        env:
+          LIGHTHOUSE_ATTEMPTS: '3'
+          LIGHTHOUSE_RETRY_DELAY_MS: '5000'
+          LIGHTHOUSE_TARGET_WAIT_TIMEOUT_MS: '30000'
         run: node scripts/qa/run-lighthouse-check.js
 
       - name: Stop local static server

@@ -71,7 +71,13 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Wait for Pages propagation window
+        run: sleep 30
+
       - name: Validate live production deployment
+        env:
+          RB_LIVE_MAX_ATTEMPTS: '8'
+          RB_LIVE_RETRY_DELAY_MS: '15000'
         run: node scripts/qa/verify-live-production.js
 
       - name: Print production deployment summary

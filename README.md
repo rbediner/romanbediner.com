@@ -162,6 +162,8 @@ nvm install
   - `build-artifact`
 - Production deployment is separate from validation and runs only on pushes to `prod`.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
+- Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
+- Post-deploy production validation includes propagation-aware retries before failing release flow.
 - Staging deployment uses a validated fallback mode that preserves production safety:
   - CI produces and verifies a staging artifact for review.
   - A true second live Pages environment in this same repository is not enabled under current single-site Pages constraints.
@@ -233,10 +235,11 @@ flowchart LR
    - Repository contract and workflow integrity checks are mandatory.
    - Core QA lanes run in parallel where safe: node, python, jest, browser, lighthouse, and link validation.
    - CI builds one verified static artifact and enforces checksum integrity before deployment.
+   - Lighthouse gate uses repeated attempts with median score evaluation to reduce flaky single-run variance.
 
 9. **Staging and production deployment model**
    - `staging` runs validated artifact generation and publishes artifact outputs for preview review.
-   - `prod` deploys verified artifacts to GitHub Pages and then runs live-site post-deploy validation.
+   - `prod` deploys verified artifacts to GitHub Pages and then runs live-site post-deploy validation with retry/backoff for Pages propagation.
    - True dual-environment staging preview in the same Pages target is intentionally not enabled for safety under single-site constraints.
 
 10. **Manual repository governance (outside code)**

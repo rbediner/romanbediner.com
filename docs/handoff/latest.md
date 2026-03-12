@@ -1,47 +1,26 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 9
-- Updated At (UTC): 2026-03-12T22:36:00Z
+- Handoff Sequence: 10
+- Updated At (UTC): 2026-03-12T21:57:59Z
 - Source Branch: staging
-- Source Commit: 80ecc69abbaefc9354921271484b7e8765d6f65c (pre-handoff baseline)
+- Source Commit: c86b9a8073a259cff9112acc8080db48c861299b (pre-fix baseline)
 
 ## What Changed Most Recently
-- Implemented CI/CD hardening contracts under `docs/architecture/`:
-  - `repo-contract.json`
-  - `workflow-manifest.json`
-  - `environment-model.json`
-- Added architecture enforcement scripts:
-  - `scripts/qa/verify-repo-contract.js`
-  - `scripts/qa/verify-workflow-integrity.js`
-  - `scripts/build/create-artifact.js`
-  - `scripts/qa/verify-artifact-integrity.js`
-  - `scripts/qa/verify-live-production.js`
-  - `scripts/qa/run-lighthouse-check.js`
-  - `scripts/qa/run-link-check.js`
-  - `scripts/docs/generate-environment-diagram.js`
-- Added deployment workflows:
-  - `.github/workflows/deploy-staging.yml` (validated fallback strategy)
-  - `.github/workflows/rollback.yml` (manual rollback)
-- Refactored `.github/workflows/ci.yml` to explicit gate order with parallel lanes and deterministic artifact build.
-- Refactored `.github/workflows/deploy-pages.yml` to verify artifact integrity before deployment and run post-deploy production validation.
-- Updated session readiness to be CI-aware while preserving local branch/tree/remote checks and expanded duplicate artifact detection for conflicted copy naming.
-- Updated README to include:
-  - environment diagram markers and generated diagram
-  - machine-readable JSON generated from `docs/architecture/environment-model.json`
-  - manual GitHub branch-protection follow-ups
-  - explicit startup read order for architecture sessions
-- Added QA guardrail tests for repo contract, workflow integrity, and artifact integrity automation.
+- Stabilized CI Lighthouse quality gate:
+  - `scripts/qa/run-lighthouse-check.js` now waits for target readiness, runs up to 3 attempts, and enforces thresholds using median scores.
+  - `.github/workflows/ci.yml` now performs explicit local server readiness checks before Lighthouse.
+- Hardened production post-deploy validation timing:
+  - `scripts/qa/verify-live-production.js` now retries live checks with configurable backoff to tolerate GitHub Pages propagation delay.
+  - `.github/workflows/deploy-pages.yml` now includes a short propagation wait and retry env settings for post-deploy checks.
+- Added automation guardrail tests:
+  - `QA/tests/test-lighthouse-gate-automation.js`
+  - `QA/tests/test-live-deploy-validation-automation.js`
+- Updated `package.json` Node test chain to include the new automation tests.
+- Updated README CI/deployment documentation to reflect Lighthouse retry/median behavior and post-deploy retry behavior.
 
 ## Validation Status
-- `node scripts/qa/verify-repo-contract.js`: passed
-- `node scripts/qa/verify-workflow-integrity.js`: passed
-- `node scripts/docs/generate-environment-diagram.js --check`: passed
-- `node QA/tests/test-repo-contract-automation.js`: passed
-- `node QA/tests/test-workflow-integrity-automation.js`: passed
-- `node QA/tests/test-artifact-integrity-automation.js`: passed
-- `npm run test:jest -- --maxWorkers=50%`: passed
 - `npm run test:node`: passed
-- `npm run qa:ci-parity`: passed (node, jest, python, playwright, visual)
+- `npm run test:jest -- --maxWorkers=50%`: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
