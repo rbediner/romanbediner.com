@@ -69,6 +69,7 @@ function resolveChangedFiles() {
       : 'git diff --name-only origin/staging...HEAD'
   );
   const fallback = tryDiff('git diff --name-only HEAD~1...HEAD');
+  const singleCommit = tryDiff('git show --pretty="" --name-only HEAD');
   const hasHistory = hasCommitHistory();
 
   if (process.env.CI) {
@@ -82,8 +83,12 @@ function resolveChangedFiles() {
     if (fallback.ok) {
       return { files: fallback.files, range: 'HEAD~1...HEAD' };
     }
+    if (singleCommit.ok) {
+      // Shallow CI clones may only have the current commit available.
+      return { files: singleCommit.files, range: 'HEAD' };
+    }
     throw new Error(
-      `Unable to determine changed files in CI. primary diff error: ${primary.error}; secondary diff error: ${secondary.error}; HEAD~1 fallback error: ${fallback.error}`
+      `Unable to determine changed files in CI. primary diff error: ${primary.error}; secondary diff error: ${secondary.error}; HEAD~1 fallback error: ${fallback.error}; single commit fallback error: ${singleCommit.error}`
     );
   }
 

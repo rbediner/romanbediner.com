@@ -1,28 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 11
-- Updated At (UTC): 2026-03-12T22:19:45Z
+- Handoff Sequence: 12
+- Updated At (UTC): 2026-03-12T22:28:38Z
 - Source Branch: staging
-- Source Commit: 9b8ccf082c03862d6866635c5dff466716fa9eed (pre-fix baseline)
+- Source Commit: ea08e3206059a226d0107457b3410b7d5347092c (pre-fix baseline)
 
 ## What Changed Most Recently
-- Stabilized CI Lighthouse quality gate:
-  - `scripts/qa/run-lighthouse-check.js` now waits for target readiness, runs up to 3 attempts, and enforces thresholds using median scores.
-  - `.github/workflows/ci.yml` now performs explicit local server readiness checks before Lighthouse.
-- Hardened production post-deploy validation timing and route checks:
-  - `scripts/qa/verify-live-production.js` now retries live checks with configurable backoff to tolerate GitHub Pages propagation delay.
-  - Live validation now checks canonical route reachability directly (`/about/`, `/services/`, `/insights/`, `/connect/`) rather than requiring all route links on homepage HTML.
-  - `.github/workflows/deploy-pages.yml` now includes a short propagation wait and retry env settings for post-deploy checks.
-- Added automation guardrail tests:
-  - `QA/tests/test-lighthouse-gate-automation.js`
-  - `QA/tests/test-live-deploy-validation-automation.js`
-- Updated `package.json` Node test chain to include the new automation tests.
-- Updated README CI/deployment documentation to reflect Lighthouse retry/median behavior and post-deploy retry behavior.
+- Fixed prod-only Jest drift-check fragility in shallow CI clones:
+  - `QA/tests/jest/readme_integrity.test.js` now falls back to `git show --pretty="" --name-only HEAD` when branch-range and `HEAD~1` diffs are unavailable in CI.
+- Updated README documentation to reflect CI drift-check fallback behavior.
 
 ## Validation Status
+- `CI=true npm run test:jest -- --maxWorkers=50%`: passed
 - `npm run test:node`: passed
-- `npm run test:jest -- --maxWorkers=50%`: passed
-- `node scripts/qa/verify-live-production.js` (against `https://romanbediner.com`): passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
