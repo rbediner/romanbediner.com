@@ -1,0 +1,35 @@
+{
+  "project": "romanbediner.com",
+  "deployment_model": "github-pages-static",
+  "branches": {
+    "staging": "preview validation and integration branch",
+    "prod": "production deployment branch"
+  },
+  "critical_files": [
+    ".github/workflows/ci.yml",
+    ".github/workflows/deploy-pages.yml",
+    ".github/workflows/deploy-staging.yml",
+    ".github/workflows/rollback.yml",
+    "scripts/qa/verify-session-readiness.js",
+    "scripts/qa/verify-repo-contract.js",
+    "scripts/qa/verify-workflow-integrity.js",
+    "scripts/build/create-artifact.js",
+    "scripts/qa/verify-artifact-integrity.js"
+  ],
+  "protected_paths": [
+    ".github/workflows",
+    "docs/architecture",
+    "scripts/qa",
+    "scripts/build",
+    "scripts/docs"
+  ],
+  "required_scripts": [
+    "session:ready",
+    "docs:generate",
+    "docs:verify",
+    "test:node",
+    "test:python",
+    "test:jest",
+    "test:playwright"
+  ]
+}

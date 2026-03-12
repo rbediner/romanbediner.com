@@ -1,0 +1,62 @@
+name: Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to rollback to (example: v2026.03.12)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: rollback-${{ github.event.inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  rollback-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout requested release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build rollback artifact from selected tag
+        run: node scripts/build/create-artifact.js --out /tmp/rb-rollback-artifact
+
+      - name: Verify rollback artifact integrity
+        run: node scripts/qa/verify-artifact-integrity.js --artifact /tmp/rb-rollback-artifact
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload rollback artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: /tmp/rb-rollback-artifact/site
+
+      - name: Deploy rollback to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Print rollback summary
+        run: |
+          echo "Rollback complete"
+          echo "Tag: ${{ github.event.inputs.tag }}"
+          echo "URL: ${{ steps.deployment.outputs.page_url }}"

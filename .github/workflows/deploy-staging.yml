@@ -1,0 +1,57 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: staging-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-staging-summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build staging validation artifact
+        id: build
+        run: node scripts/build/create-artifact.js --out /tmp/rb-staging-artifact
+
+      - name: Verify staging validation artifact
+        run: node scripts/qa/verify-artifact-integrity.js --artifact /tmp/rb-staging-artifact --expect-commit ${{ github.sha }}
+
+      - name: Publish staging artifact for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: staging-site-artifact-${{ github.sha }}
+          path: /tmp/rb-staging-artifact
+          if-no-files-found: error
+
+      - name: Print staging deployment summary and fallback strategy
+        run: |
+          echo "Staging deployment ready"
+          echo "Preview URL: N/A (safe fallback in use)"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Node: $(node -v)"
+          echo "Artifact ID: ${{ steps.build.outputs.artifact_id }}"
+          echo "Artifact checksum: ${{ steps.build.outputs.artifact_checksum }}"
+          echo "Fallback strategy: GitHub Pages single-site constraints make true in-repo staging preview unsafe for prod continuity."
+          echo "Validation path: use uploaded staging artifact + CI visual/runtime suites before promoting staging -> prod."

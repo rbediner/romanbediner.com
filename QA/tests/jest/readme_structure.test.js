@@ -12,7 +12,9 @@ const path = require('path');
 // Jest specs are nested under QA/tests/jest, so repository root is three levels up.
 const ROOT = path.resolve(__dirname, '..', '..', '..');
 const README_PATH = path.join(ROOT, 'README.md');
+const MODEL_PATH = path.join(ROOT, 'docs', 'architecture', 'environment-model.json');
 const README_TEXT = fs.readFileSync(README_PATH, 'utf8');
+const ENV_MODEL = JSON.parse(fs.readFileSync(MODEL_PATH, 'utf8'));
 
 const REQUIRED_HEADINGS = [
   'Technical Specification',
@@ -82,5 +84,9 @@ describe('README structure contract', () => {
     expect(parsed.ci?.lockfile_required).toBe(true);
     expect(parsed.ci?.playwright_required).toBe(true);
     expect(parsed.ci?.readme_update_required_on_arch_change).toBe(true);
+
+    // Enforce that README machine-readable JSON is generated from (or equivalent to)
+    // docs/architecture/environment-model.json.
+    expect(parsed).toEqual(ENV_MODEL.machine_readable_summary);
   });
 });

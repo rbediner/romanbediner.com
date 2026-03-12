@@ -13,6 +13,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ARCH_PATHS = [
   'scripts/',
+  'docs/architecture/',
   'QA/tests/',
   'styles/',
   '.github/workflows/',
@@ -20,7 +21,10 @@ const ARCH_PATHS = [
   'about/index.html',
   'services/index.html',
   'insights/index.html',
-  'connect/index.html'
+  'connect/index.html',
+  'package.json',
+  'package-lock.json',
+  '.nvmrc'
 ];
 
 if (!process.env.CI) {

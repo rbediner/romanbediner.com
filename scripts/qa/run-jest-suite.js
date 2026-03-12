@@ -56,20 +56,26 @@ if (!fs.existsSync(JEST_BIN)) {
   process.exit(0);
 }
 
-const result = spawnSync(process.execPath, [JEST_BIN, '--passWithNoTests'], {
+const jestArgs = [JEST_BIN, '--passWithNoTests'];
+if (!process.argv.slice(2).some((arg) => arg.startsWith('--maxWorkers'))) {
+  jestArgs.push(`--maxWorkers=${process.env.JEST_JOBS_DEFAULT || '50%'}`);
+}
+jestArgs.push(...process.argv.slice(2));
+
+const rerunResult = spawnSync(process.execPath, jestArgs, {
   cwd: ROOT,
   stdio: 'inherit'
 });
 
-if (result.error && SHOULD_USE_MIRROR && ['ETIMEDOUT', 'EIO'].includes(result.error.code || '')) {
+if (rerunResult.error && SHOULD_USE_MIRROR && ['ETIMEDOUT', 'EIO'].includes(rerunResult.error.code || '')) {
   const mirrored = runFromLocalMirror();
   if (mirrored && typeof mirrored.status === 'number') {
     process.exit(mirrored.status);
   }
 }
 
-if (typeof result.status === 'number') {
-  process.exit(result.status);
+if (typeof rerunResult.status === 'number') {
+  process.exit(rerunResult.status);
 }
 
 console.error('FAIL: Jest process exited without a status code.');

@@ -17,6 +17,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
+const IS_CI = process.env.CI === 'true' || process.env.CI === '1';
 const README_PATH = path.join(ROOT, 'README.md');
 const HANDOFF_PATH = path.join(ROOT, 'docs', 'handoff', 'latest.md');
 const NVMRC_PATH = path.join(ROOT, '.nvmrc');
@@ -44,13 +45,17 @@ function getGitValue(command, fallback = '') {
 function getTopLevelDuplicateArtifacts(entryNames, canonicalNames) {
   return entryNames
     .map((entryName) => {
-      const match = entryName.match(/^(.*) (\d+)(\.[^./]+)?$/);
-      if (!match) {
-        return null;
-      }
+      // Detect the two most common cloud-sync duplicate shapes:
+      // 1) "scripts 2" / "notes 2.md"
+      // 2) "file (conflicted copy ...)".
+      const numberSuffixMatch = entryName.match(/^(.*) (\d+)(\.[^./]+)?$/);
+      const conflictedCopyMatch = entryName.match(/^(.*) \(conflicted copy.*\)(\.[^./]+)?$/i);
+
+      const match = numberSuffixMatch || conflictedCopyMatch;
+      if (!match) return null;
 
       const baseName = match[1];
-      const extension = match[3] || '';
+      const extension = numberSuffixMatch ? (numberSuffixMatch[3] || '') : (conflictedCopyMatch[2] || '');
       const canonicalName = `${baseName}${extension}`;
       if (!canonicalNames.has(canonicalName)) {
         return null;
@@ -108,12 +113,12 @@ function buildFailureMessages() {
   const handoffText = readText(HANDOFF_PATH);
   const requiredBranch = getRequiredBranch(handoffText);
   const currentBranch = getGitValue('git branch --show-current', 'unknown');
-  if (requiredBranch && currentBranch !== requiredBranch) {
+  if (!IS_CI && requiredBranch && currentBranch !== requiredBranch) {
     failures.push(`Current branch is ${currentBranch}, but the latest handoff expects ${requiredBranch}.`);
   }
 
   const workingTreeStatus = getGitValue('git status --porcelain', '');
-  if (workingTreeStatus) {
+  if (!IS_CI && workingTreeStatus) {
     failures.push(
       `Working tree is not clean:\n${formatGitStatus(workingTreeStatus).join('\n')}`
     );
@@ -121,7 +126,7 @@ function buildFailureMessages() {
 
   const localSha = getGitValue('git rev-parse HEAD', '');
   const remoteSha = requiredBranch ? getGitValue(`git rev-parse origin/${requiredBranch}`, '') : '';
-  if (requiredBranch && localSha && remoteSha && localSha !== remoteSha) {
+  if (!IS_CI && requiredBranch && localSha && remoteSha && localSha !== remoteSha) {
     failures.push(
       `Local HEAD ${localSha} does not match origin/${requiredBranch} ${remoteSha}. Pull the latest staging state before editing.`
     );

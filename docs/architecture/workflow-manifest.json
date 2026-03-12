@@ -1,0 +1,33 @@
+{
+  "required_workflows": [
+    "ci.yml",
+    "deploy-pages.yml",
+    "deploy-staging.yml",
+    "rollback.yml"
+  ],
+  "required_jobs": {
+    "ci.yml": [
+      "session-ready",
+      "repo-contract",
+      "workflow-integrity",
+      "unit-tests",
+      "qa-tests",
+      "regression-tests",
+      "browser-tests",
+      "lighthouse-validation",
+      "link-validation",
+      "build-artifact"
+    ],
+    "deploy-pages.yml": [
+      "deploy-pages",
+      "post-deploy-validation",
+      "release-tag"
+    ],
+    "deploy-staging.yml": [
+      "deploy-staging-summary"
+    ],
+    "rollback.yml": [
+      "rollback-deploy"
+    ]
+  }
+}

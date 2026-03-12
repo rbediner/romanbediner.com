@@ -52,7 +52,8 @@ Routing requirements:
 - Required startup step for any new machine/session:
   1. open `/README.md`
   2. open `/docs/handoff/latest.md`
-  3. align local branch to the handoff commit/branch before edits
+  3. open `/docs/architecture/repo-contract.json`
+  4. align local branch to the handoff commit/branch before edits
 - If `/docs/handoff/latest.md` is missing or stale relative to actual code changes, treat the repo as unsafe to modify until handoff is updated and committed.
 - Standard command to refresh handoff metadata:
 ```bash
@@ -148,13 +149,22 @@ nvm install
 ```
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
-- CI is split into parallel jobs:
-  - `qa-node` (`npm run test:node`)
-  - `qa-python` (`npm run test:python`)
-  - `qa-jest` (`npm run test:jest`)
-  - `qa-playwright` (`npm run test:playwright -- --workers=3`)
-- A final `deploy-gate` job depends on all QA jobs and is the required branch-protection status for release readiness.
+- CI is split into explicit guardrails and parallel validation jobs:
+  - `session-ready`
+  - `repo-contract`
+  - `workflow-integrity`
+  - `unit-tests`
+  - `qa-tests`
+  - `regression-tests`
+  - `browser-tests`
+  - `lighthouse-validation`
+  - `link-validation`
+  - `build-artifact`
 - Production deployment is separate from validation and runs only on pushes to `prod`.
+- Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
+- Staging deployment uses a validated fallback mode that preserves production safety:
+  - CI produces and verifies a staging artifact for review.
+  - A true second live Pages environment in this same repository is not enabled under current single-site Pages constraints.
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
 - `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
 - Playwright spec tests are executed through `scripts/qa/run-local-playwright-suite.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
@@ -167,6 +177,26 @@ nvm install
   - route/metadata contract violations
   - repository hygiene violations
   - documentation drift violations
+
+<!-- ENVIRONMENT_DIAGRAM_START -->
+### RomanBediner.com Environment Flow
+```mermaid
+flowchart LR
+  dev["Local Dev"]
+  staging["Staging Branch"]
+  ci["CI Validation"]
+  artifact["Verified Artifact"]
+  prod["Prod Branch"]
+  pages["GitHub Pages"]
+  live["romanbediner.com"]
+  dev -->|"push"| staging
+  staging -->|"run QA"| ci
+  ci -->|"build + checksum"| artifact
+  artifact -->|"promote tested commit"| prod
+  prod -->|"deploy"| pages
+  pages -->|"serve"| live
+```
+<!-- ENVIRONMENT_DIAGRAM_END -->
 
 ## Technical Specification
 1. **Routing architecture contract**
@@ -193,11 +223,24 @@ nvm install
 
 6. **Documentation drift enforcement**
    - Architecture-impacting code changes require `README.md` updates in the same change set.
+   - README machine-readable JSON must remain synchronized with `docs/architecture/environment-model.json`.
 
 7. **Required Node version**
    - Node 20 is required for local and CI parity.
 
 8. **Required CI workflow structure**
+   - `session-ready` gate runs first in CI and must pass before other jobs.
+   - Repository contract and workflow integrity checks are mandatory.
+   - Core QA lanes run in parallel where safe: node, python, jest, browser, lighthouse, and link validation.
+   - CI builds one verified static artifact and enforces checksum integrity before deployment.
+
+9. **Staging and production deployment model**
+   - `staging` runs validated artifact generation and publishes artifact outputs for preview review.
+   - `prod` deploys verified artifacts to GitHub Pages and then runs live-site post-deploy validation.
+   - True dual-environment staging preview in the same Pages target is intentionally not enabled for safety under single-site constraints.
+
+10. **Manual repository governance (outside code)**
+   - Branch protections and required status checks are manual GitHub settings and are not modified by scripts/workflows.
    - Install dependencies via `npm ci`.
    - Install Playwright Chromium.
    - Execute node, python, jest, and Playwright checks through the dedicated CI job commands in `.github/workflows/ci.yml`.
@@ -259,13 +302,39 @@ nvm install
 ## Machine-Readable Architecture Summary
 ```json
 {
-  "routes": ["/", "/about/", "/services/", "/connect/", "/insights/"],
+  "routes": [
+    "/",
+    "/about/",
+    "/services/",
+    "/connect/",
+    "/insights/"
+  ],
   "transitions": {
     "flow": [
-      {"from": "/", "to": "/about/", "label": "THE EXECUTION LAYER", "title": "Transition to Operating Philosophy"},
-      {"from": "/about/", "to": "/services/", "label": "THE OPERATING MODEL", "title": "Transition to Strategic Services"},
-      {"from": "/services/", "to": "/insights/", "label": "THE STRATEGY LAYER", "title": "Transition to Strategic Insights"},
-      {"from": "/insights/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect"}
+      {
+        "from": "/",
+        "to": "/about/",
+        "label": "THE EXECUTION LAYER",
+        "title": "Transition to Operating Philosophy"
+      },
+      {
+        "from": "/about/",
+        "to": "/services/",
+        "label": "THE OPERATING MODEL",
+        "title": "Transition to Strategic Services"
+      },
+      {
+        "from": "/services/",
+        "to": "/insights/",
+        "label": "THE STRATEGY LAYER",
+        "title": "Transition to Strategic Insights"
+      },
+      {
+        "from": "/insights/",
+        "to": "/connect/",
+        "label": "THE RELATIONSHIP LAYER",
+        "title": "Transition to Connect"
+      }
     ],
     "intent": "Guide a linear narrative from operating context to engagement."
   },
@@ -278,7 +347,10 @@ nvm install
   },
   "csp": {
     "unsafe_inline_allowed": false,
-    "required_script_src": ["self", "https://www.googletagmanager.com"],
+    "required_script_src": [
+      "self",
+      "https://www.googletagmanager.com"
+    ],
     "required_connect_src": [
       "https://www.google-analytics.com",
       "https://analytics.google.com",
@@ -290,10 +362,15 @@ nvm install
     "lockfile_required": true,
     "playwright_required": true,
     "readme_update_required_on_arch_change": true
+  },
+  "deployment": {
+    "staging_branch": "staging",
+    "production_branch": "prod",
+    "production_url": "https://romanbediner.com",
+    "staging_preview_mode": "validated-fallback"
   }
 }
 ```
-
 ## Local Development Instructions
 - Node: `20.x`
 - Install dependencies:
@@ -388,6 +465,26 @@ node scripts/release/watch-ci-run.js --branch prod --sha "<tested-sha>"
 ```bash
 npm run release:staging-prod
 ```
+
+## Manual GitHub Configuration Steps
+These settings are intentionally manual and are not modified by scripts in this repository.
+
+1. Branch protection for `staging`:
+   - require CI status checks
+   - restrict direct force pushes
+2. Branch protection for `prod`:
+   - require CI + deployment checks
+   - restrict direct force pushes
+3. Required status checks:
+   - include CI contract and test jobs that gate promotion/deployment
+4. Force-push restrictions:
+   - keep force pushes disabled for `staging` and `prod`
+
+## Architecture Session Start Rule
+Before architecture implementation work, read these files in order:
+1. `/README.md`
+2. `/docs/handoff/latest.md`
+3. `/docs/architecture/repo-contract.json`
 
 ### Local Push Guard
 - `.husky/pre-push` runs `npm run qa:ci-parity` automatically before any push.

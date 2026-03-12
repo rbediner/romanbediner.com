@@ -1,41 +1,59 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 8
-- Updated At (UTC): 2026-03-12T00:51:48Z
+- Handoff Sequence: 9
+- Updated At (UTC): 2026-03-12T22:36:00Z
 - Source Branch: staging
-- Source Commit: ec240e9dcda7d3c225c1f53065c62969d270a641 (pre-handoff baseline)
+- Source Commit: 80ecc69abbaefc9354921271484b7e8765d6f65c (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Added automated startup preflight command `npm run session:ready`.
-- The preflight now checks Node version vs `.nvmrc`, handoff branch alignment, clean working tree, remote branch parity, and cloud-sync duplicate artifacts such as `scripts 2/`.
-- README bootstrap instructions now recommend NVM and point operators to `npm run session:ready` before running full QA.
-- Installed NVM on this machine, installed Node `20.20.1`, and configured login shells to source the NVM-managed runtime automatically.
-- Removed duplicate Google Drive artifacts that had been created in the workspace (`AGENTS 2.md`, `scripts 2/`, `scripts 3/`, `scripts 4/`).
-- Committed the startup automation as `ec240e9` (`Automate session readiness preflight`) and fast-forwarded local `staging`, local `prod`, `origin/staging`, and `origin/prod` to the same tested commit.
-- Script layout remains intent-based and must stay as:
-  - `/scripts/runtime`
-  - `/scripts/qa`
-  - `/scripts/release`
-  - `/scripts/content`
-  - `/scripts/diagnostics`
+- Implemented CI/CD hardening contracts under `docs/architecture/`:
+  - `repo-contract.json`
+  - `workflow-manifest.json`
+  - `environment-model.json`
+- Added architecture enforcement scripts:
+  - `scripts/qa/verify-repo-contract.js`
+  - `scripts/qa/verify-workflow-integrity.js`
+  - `scripts/build/create-artifact.js`
+  - `scripts/qa/verify-artifact-integrity.js`
+  - `scripts/qa/verify-live-production.js`
+  - `scripts/qa/run-lighthouse-check.js`
+  - `scripts/qa/run-link-check.js`
+  - `scripts/docs/generate-environment-diagram.js`
+- Added deployment workflows:
+  - `.github/workflows/deploy-staging.yml` (validated fallback strategy)
+  - `.github/workflows/rollback.yml` (manual rollback)
+- Refactored `.github/workflows/ci.yml` to explicit gate order with parallel lanes and deterministic artifact build.
+- Refactored `.github/workflows/deploy-pages.yml` to verify artifact integrity before deployment and run post-deploy production validation.
+- Updated session readiness to be CI-aware while preserving local branch/tree/remote checks and expanded duplicate artifact detection for conflicted copy naming.
+- Updated README to include:
+  - environment diagram markers and generated diagram
+  - machine-readable JSON generated from `docs/architecture/environment-model.json`
+  - manual GitHub branch-protection follow-ups
+  - explicit startup read order for architecture sessions
+- Added QA guardrail tests for repo contract, workflow integrity, and artifact integrity automation.
 
 ## Validation Status
-- `node QA/tests/test-session-readiness-automation.js`: passed
-- `node QA/tests/test-release-sop-automation.js`: passed
-- `./node_modules/.bin/jest QA/tests/jest/session_readiness.test.js QA/tests/jest/deployment_sop.test.js QA/tests/jest/handoff_latest_contract.test.js --runInBand`: passed
-- `npm run qa:ci-parity`: passed under Node `20.20.1` after rerunning with elevated permissions for local Playwright socket binding
-- `zsh -lc 'node -v && npm -v'`: passed (`v20.20.1`, `10.8.2`)
-- `npm run session:ready`: passed before commit for environment checks, and would now pass on a clean checkout of commit `ec240e9`
+- `node scripts/qa/verify-repo-contract.js`: passed
+- `node scripts/qa/verify-workflow-integrity.js`: passed
+- `node scripts/docs/generate-environment-diagram.js --check`: passed
+- `node QA/tests/test-repo-contract-automation.js`: passed
+- `node QA/tests/test-workflow-integrity-automation.js`: passed
+- `node QA/tests/test-artifact-integrity-automation.js`: passed
+- `npm run test:jest -- --maxWorkers=50%`: passed
+- `npm run test:node`: passed
+- `npm run qa:ci-parity`: passed (node, jest, python, playwright, visual)
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
 2. `git checkout staging && git pull --ff-only origin staging`
-3. `nvm use` (Node 20 per `.nvmrc`), or install NVM first if it is missing
-4. Run `npm run session:ready` and resolve any reported startup blockers before edits
-5. Read `/README.md` and this file before edits
-6. After changes, overwrite this file with new latest state and increment `Handoff Sequence`
+3. `nvm use` (Node 20 per `.nvmrc`)
+4. Run `npm run session:ready`
+5. Read in order before architecture changes:
+   - `/README.md`
+   - `/docs/handoff/latest.md`
+   - `/docs/architecture/repo-contract.json`
 
 ## Notes
-- This file must contain only the latest handoff state. Do not append historical logs here.
-- This file is not updated automatically by the release script. Run `npm run handoff:update` or update it explicitly before ending a change session.
-- Use Git commit history for older context; do not depend on release notes for current operator state.
+- This file must contain only the latest handoff state; do not append logs.
+- This file is intentionally updated by hand at session end after code/test changes.
+- If true staging live preview is required in future, use a separate Pages target (repo/project) instead of reusing production Pages configuration.

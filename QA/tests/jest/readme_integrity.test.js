@@ -14,6 +14,7 @@ const ROOT = path.resolve(__dirname, '..', '..', '..');
 
 const ARCHITECTURE_PATH_MATCHERS = [
   (file) => file.startsWith('scripts/'),
+  (file) => file.startsWith('docs/architecture/'),
   (file) => file.startsWith('QA/tests/'),
   (file) => file.startsWith('styles/'),
   (file) => file.startsWith('.github/workflows/'),
@@ -23,7 +24,8 @@ const ARCHITECTURE_PATH_MATCHERS = [
   (file) => file === 'connect/index.html',
   (file) => file === 'insights/index.html',
   (file) => file === 'package.json',
-  (file) => file === 'package-lock.json'
+  (file) => file === 'package-lock.json',
+  (file) => file === '.nvmrc'
 ];
 
 function tryDiff(command) {

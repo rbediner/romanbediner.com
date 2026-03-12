@@ -4,11 +4,16 @@ on:
   push:
   pull_request:
 
-jobs:
-  # Node-based architecture and contract checks.
-  qa-node:
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  session-ready:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,26 +31,78 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
-      - name: Run Node QA contract suite
-        run: npm run test:node
+      - name: Session readiness gate
+        run: npm run session:ready
 
-  # Python unittest suite covering structure and browser-backed QA contracts.
-  qa-python:
+  repo-contract:
     runs-on: ubuntu-latest
-
+    needs: session-ready
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Verify lockfile exists
-        run: test -f package-lock.json
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Verify repository contract
+        run: npm run verify:repo-contract
+
+  workflow-integrity:
+    runs-on: ubuntu-latest
+    needs: session-ready
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Verify workflow integrity
+        run: npm run verify:workflow-integrity
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs:
+      - repo-contract
+      - workflow-integrity
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Run node architecture tests
+        run: npm run test:node
+
+  qa-tests:
+    runs-on: ubuntu-latest
+    needs:
+      - repo-contract
+      - workflow-integrity
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Install Node dependencies
         run: npm ci
@@ -58,55 +115,47 @@ jobs:
       - name: Install Playwright for Python
         run: |
           python -m pip install --upgrade pip
-          # Keep Python tooling aligned with repository QA expectations.
           pip install playwright==1.58.0 pillow==11.3.0
           python -m playwright install --with-deps chromium
 
-      - name: Run Python QA suite
+      - name: Run python QA tests
+        # Intentionally left without unittest parallel mode because this suite starts
+        # local web servers and browser sessions that become flaky with process fan-out.
         run: npm run test:python
 
-  # Jest policy tests (README integrity, comment headers, architecture schema checks).
-  qa-jest:
+  regression-tests:
     runs-on: ubuntu-latest
-
+    needs:
+      - repo-contract
+      - workflow-integrity
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Verify lockfile exists
-        run: test -f package-lock.json
 
       - name: Install Node dependencies
         run: npm ci
 
-      - name: Run Jest policy suite
-        run: npm run test:jest
+      - name: Run Jest policy suite with safe worker default
+        run: npm run test:jest -- --maxWorkers=50%
 
-  # Node Playwright runtime checks; workers pinned for deterministic CI load.
-  # Policy: run with at least 3 concurrent workers for regression throughput.
-  qa-playwright:
+  browser-tests:
     runs-on: ubuntu-latest
-
+    needs:
+      - repo-contract
+      - workflow-integrity
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Verify lockfile exists
-        run: test -f package-lock.json
 
       - name: Install Node dependencies
         run: npm ci
@@ -114,17 +163,105 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Run Playwright runtime suite (deterministic worker count)
+      - name: Run Playwright runtime suite
         run: npm run test:playwright -- --workers=3
 
-  # Final release gate: all parallel QA jobs must pass before branch protection can allow promotion.
-  deploy-gate:
+  lighthouse-validation:
     runs-on: ubuntu-latest
     needs:
-      - qa-node
-      - qa-python
-      - qa-jest
-      - qa-playwright
+      - repo-contract
+      - workflow-integrity
     steps:
-      - name: Confirm CI release gate
-        run: echo "All QA jobs passed. Deploy gate is green."
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Start local static server
+        run: |
+          python3 -m http.server 4173 > /tmp/rb-lighthouse-server.log 2>&1 &
+          echo $! > /tmp/rb-lighthouse-server.pid
+          sleep 2
+
+      - name: Run Lighthouse quality gate
+        run: node scripts/qa/run-lighthouse-check.js
+
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f /tmp/rb-lighthouse-server.pid ]; then
+            kill "$(cat /tmp/rb-lighthouse-server.pid)" || true
+          fi
+
+  link-validation:
+    runs-on: ubuntu-latest
+    needs:
+      - repo-contract
+      - workflow-integrity
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Start local static server
+        run: |
+          python3 -m http.server 4173 > /tmp/rb-link-server.log 2>&1 &
+          echo $! > /tmp/rb-link-server.pid
+          sleep 2
+
+      - name: Run internal link validation
+        run: node scripts/qa/run-link-check.js
+
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f /tmp/rb-link-server.pid ]; then
+            kill "$(cat /tmp/rb-link-server.pid)" || true
+          fi
+
+  build-artifact:
+    runs-on: ubuntu-latest
+    needs:
+      - unit-tests
+      - qa-tests
+      - regression-tests
+      - browser-tests
+      - lighthouse-validation
+      - link-validation
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build static artifact
+        run: node scripts/build/create-artifact.js --out /tmp/rb-site-artifact
+
+      - name: Verify artifact integrity
+        run: node scripts/qa/verify-artifact-integrity.js --artifact /tmp/rb-site-artifact --expect-commit ${{ github.sha }}
+
+      - name: Upload artifact bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-artifact-${{ github.sha }}
+          path: /tmp/rb-site-artifact
+          if-no-files-found: error

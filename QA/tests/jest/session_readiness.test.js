@@ -54,6 +54,20 @@ describe('Session readiness helpers', () => {
     ]);
   });
 
+  test('detects conflicted-copy duplicate artifacts', () => {
+    const duplicates = getTopLevelDuplicateArtifacts(
+      ['scripts', 'scripts (conflicted copy 2026-03-12 from Roman Mac).js'],
+      new Set(['scripts.js'])
+    );
+
+    expect(duplicates).toEqual([
+      {
+        artifactName: 'scripts (conflicted copy 2026-03-12 from Roman Mac).js',
+        canonicalName: 'scripts.js'
+      }
+    ]);
+  });
+
   test('trims noisy git status lines down to a readable preview', () => {
     expect(formatGitStatus(' D scripts/qa/run-ci-parity.sh\n?? scripts 2/\n')).toEqual([
       ' D scripts/qa/run-ci-parity.sh',

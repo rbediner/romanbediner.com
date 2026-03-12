@@ -1,0 +1,62 @@
+{
+  "diagram": {
+    "title": "RomanBediner.com Environment Flow",
+    "nodes": [
+      { "id": "dev", "label": "Local Dev" },
+      { "id": "staging", "label": "Staging Branch" },
+      { "id": "ci", "label": "CI Validation" },
+      { "id": "artifact", "label": "Verified Artifact" },
+      { "id": "prod", "label": "Prod Branch" },
+      { "id": "pages", "label": "GitHub Pages" },
+      { "id": "live", "label": "romanbediner.com" }
+    ],
+    "edges": [
+      { "from": "dev", "to": "staging", "label": "push" },
+      { "from": "staging", "to": "ci", "label": "run QA" },
+      { "from": "ci", "to": "artifact", "label": "build + checksum" },
+      { "from": "artifact", "to": "prod", "label": "promote tested commit" },
+      { "from": "prod", "to": "pages", "label": "deploy" },
+      { "from": "pages", "to": "live", "label": "serve" }
+    ]
+  },
+  "machine_readable_summary": {
+    "routes": ["/", "/about/", "/services/", "/connect/", "/insights/"],
+    "transitions": {
+      "flow": [
+        { "from": "/", "to": "/about/", "label": "THE EXECUTION LAYER", "title": "Transition to Operating Philosophy" },
+        { "from": "/about/", "to": "/services/", "label": "THE OPERATING MODEL", "title": "Transition to Strategic Services" },
+        { "from": "/services/", "to": "/insights/", "label": "THE STRATEGY LAYER", "title": "Transition to Strategic Insights" },
+        { "from": "/insights/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect" }
+      ],
+      "intent": "Guide a linear narrative from operating context to engagement."
+    },
+    "canonical_domain": "romanbediner.com",
+    "requires_trailing_slash": true,
+    "ga": {
+      "meta_tag_required": true,
+      "bootstrap_script": "/scripts/runtime/ga4-bootstrap.js",
+      "inline_allowed": false
+    },
+    "csp": {
+      "unsafe_inline_allowed": false,
+      "required_script_src": ["self", "https://www.googletagmanager.com"],
+      "required_connect_src": [
+        "https://www.google-analytics.com",
+        "https://analytics.google.com",
+        "https://www.google.com"
+      ]
+    },
+    "ci": {
+      "node_version": "20",
+      "lockfile_required": true,
+      "playwright_required": true,
+      "readme_update_required_on_arch_change": true
+    },
+    "deployment": {
+      "staging_branch": "staging",
+      "production_branch": "prod",
+      "production_url": "https://romanbediner.com",
+      "staging_preview_mode": "validated-fallback"
+    }
+  }
+}
