@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 12
-- Updated At (UTC): 2026-03-12T22:28:38Z
+- Handoff Sequence: 13
+- Updated At (UTC): 2026-03-12T22:37:57Z
 - Source Branch: staging
-- Source Commit: ea08e3206059a226d0107457b3410b7d5347092c (pre-fix baseline)
+- Source Commit: c084acd9bbc9f9d5893b23b7192764425aebd5e4 (pre-handoff baseline)
 
 ## What Changed Most Recently
 - Fixed prod-only Jest drift-check fragility in shallow CI clones:
