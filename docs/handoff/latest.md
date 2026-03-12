@@ -1,18 +1,24 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 13
-- Updated At (UTC): 2026-03-12T22:37:57Z
+- Handoff Sequence: 14
+- Updated At (UTC): 2026-03-12T22:57:29Z
 - Source Branch: staging
-- Source Commit: c084acd9bbc9f9d5893b23b7192764425aebd5e4 (pre-handoff baseline)
+- Source Commit: 836a4e5d89dfd008cc7bd58595b00d227e2f1db6 (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Fixed prod-only Jest drift-check fragility in shallow CI clones:
-  - `QA/tests/jest/readme_integrity.test.js` now falls back to `git show --pretty="" --name-only HEAD` when branch-range and `HEAD~1` diffs are unavailable in CI.
-- Updated README documentation to reflect CI drift-check fallback behavior.
+- Added a responsive footer quote block under existing footer copyright on all canonical pages.
+- Added Google Fonts load for Cormorant Garamond on canonical pages to support footer quote typography.
+- Extended shared stylesheet with footer quote styles and mobile behavior.
+- Added Node QA guardrail `QA/tests/test-footer-quote.js` and wired it into `npm run test:node` via `package.json`.
+- Updated CSP meta policies on canonical pages to allow Google Fonts (`style-src https://fonts.googleapis.com`, `font-src https://fonts.gstatic.com data:`) while keeping script CSP strict.
+- Updated README system overview note for footer quote architecture.
 
 ## Validation Status
-- `CI=true npm run test:jest -- --maxWorkers=50%`: passed
-- `npm run test:node`: passed
+- `npm test`: passed
+  - Node QA: passed
+  - Python QA: passed
+  - Jest: passed
+  - Playwright: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`

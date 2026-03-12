@@ -483,6 +483,57 @@ main li:last-child {
   opacity: 0.65;
 }
 
+/* Footer literary quote block is responsive and wraps naturally as width narrows. */
+.footer-quote-block {
+  max-width: 420px;
+  margin: 16px auto 0 auto;
+  text-align: left;
+}
+
+.footer-quote {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.45;
+  color: rgba(31, 41, 55, 0.72);
+  margin: 0;
+}
+
+.footer-quote-author {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 13px;
+  margin-top: 8px;
+  color: rgba(31, 41, 55, 0.55);
+}
+
+/* Override generic footer paragraph centering only for quote lines. */
+.footer .footer-quote,
+.footer .footer-quote-author {
+  margin: 0;
+  text-align: left;
+  max-width: none;
+}
+
+.footer .footer-quote-author {
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .footer-quote-block {
+    max-width: 300px;
+    margin-top: 14px;
+  }
+
+  .footer-quote {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .footer-quote-author {
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
     padding-top: 32px;

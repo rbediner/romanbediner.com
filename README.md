@@ -6,6 +6,7 @@
 - Folder-based routing where each canonical URL resolves to a folder `index.html` file.
 - Security-first posture with CSP enforcement and runtime policy validation.
 - Analytics architecture is centralized, CSP-compatible, and validated by tests.
+- Footer includes a responsive literary quote rendered with Cormorant Garamond, centered as a block with left-aligned text lines.
 
 ## Canonical Route Architecture
 Canonical public routes:
