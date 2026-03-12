@@ -6,6 +6,7 @@
       { "id": "staging", "label": "Staging Branch" },
       { "id": "ci", "label": "CI Validation" },
       { "id": "artifact", "label": "Verified Artifact" },
+      { "id": "preview", "label": "Preview Repo Pages" },
       { "id": "prod", "label": "Prod Branch" },
       { "id": "pages", "label": "GitHub Pages" },
       { "id": "live", "label": "romanbediner.com" }
@@ -14,6 +15,7 @@
       { "from": "dev", "to": "staging", "label": "push" },
       { "from": "staging", "to": "ci", "label": "run QA" },
       { "from": "ci", "to": "artifact", "label": "build + checksum" },
+      { "from": "artifact", "to": "preview", "label": "publish preview" },
       { "from": "artifact", "to": "prod", "label": "promote tested commit" },
       { "from": "prod", "to": "pages", "label": "deploy" },
       { "from": "pages", "to": "live", "label": "serve" }
@@ -53,10 +55,22 @@
       "readme_update_required_on_arch_change": true
     },
     "deployment": {
-      "staging_branch": "staging",
-      "production_branch": "prod",
-      "production_url": "https://romanbediner.com",
-      "staging_preview_mode": "validated-fallback"
+      "promotion_flow": ["staging", "preview", "prod"],
+      "environments": {
+        "staging_preview": {
+          "repo": "rbediner/romanbediner-preview",
+          "branch": "staging-preview",
+          "url": "https://rbediner.github.io/romanbediner-preview/",
+          "cname": false,
+          "isolated_from_production": true
+        },
+        "production": {
+          "repo": "rbediner/romanbediner.com",
+          "branch": "prod",
+          "url": "https://romanbediner.com",
+          "cname": true
+        }
+      }
     }
   }
 }

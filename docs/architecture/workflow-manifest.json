@@ -24,7 +24,7 @@
       "release-tag"
     ],
     "deploy-staging.yml": [
-      "deploy-staging-summary"
+      "deploy-staging-preview"
     ],
     "rollback.yml": [
       "rollback-deploy"

@@ -167,9 +167,9 @@ nvm install
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
 - Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/insights/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
-- Staging deployment uses a validated fallback mode that preserves production safety:
-  - CI produces and verifies a staging artifact for review.
-  - A true second live Pages environment in this same repository is not enabled under current single-site Pages constraints.
+- Staging deployment publishes an isolated preview to a dedicated repository target (`rbediner/romanbediner-preview`) so production Pages state cannot be overwritten.
+- Staging preview workflow writes a clickable preview URL to both CI logs and GitHub Actions Job Summary.
+- Preview artifacts always remove `CNAME` and enforce `robots.txt` no-index policy.
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
 - `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
 - Playwright spec tests are executed through `scripts/qa/run-local-playwright-suite.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
@@ -191,12 +191,14 @@ flowchart LR
   staging["Staging Branch"]
   ci["CI Validation"]
   artifact["Verified Artifact"]
+  preview["Preview Repo Pages"]
   prod["Prod Branch"]
   pages["GitHub Pages"]
   live["romanbediner.com"]
   dev -->|"push"| staging
   staging -->|"run QA"| ci
   ci -->|"build + checksum"| artifact
+  artifact -->|"publish preview"| preview
   artifact -->|"promote tested commit"| prod
   prod -->|"deploy"| pages
   pages -->|"serve"| live
@@ -241,9 +243,10 @@ flowchart LR
    - Lighthouse gate uses repeated attempts with median score evaluation to reduce flaky single-run variance.
 
 9. **Staging and production deployment model**
-   - `staging` runs validated artifact generation and publishes artifact outputs for preview review.
+   - `staging` deploys verified preview artifacts to isolated preview repo `rbediner/romanbediner-preview` on branch `staging-preview`.
+   - Staging preview URL is `https://rbediner.github.io/romanbediner-preview/`.
    - `prod` deploys verified artifacts to GitHub Pages and then runs live-site post-deploy validation with retry/backoff for Pages propagation.
-   - True dual-environment staging preview in the same Pages target is intentionally not enabled for safety under single-site constraints.
+   - Production requires `CNAME` and remains pinned to `https://romanbediner.com`.
 
 10. **Manual repository governance (outside code)**
    - Branch protections and required status checks are manual GitHub settings and are not modified by scripts/workflows.
@@ -370,10 +373,26 @@ flowchart LR
     "readme_update_required_on_arch_change": true
   },
   "deployment": {
-    "staging_branch": "staging",
-    "production_branch": "prod",
-    "production_url": "https://romanbediner.com",
-    "staging_preview_mode": "validated-fallback"
+    "promotion_flow": [
+      "staging",
+      "preview",
+      "prod"
+    ],
+    "environments": {
+      "staging_preview": {
+        "repo": "rbediner/romanbediner-preview",
+        "branch": "staging-preview",
+        "url": "https://rbediner.github.io/romanbediner-preview/",
+        "cname": false,
+        "isolated_from_production": true
+      },
+      "production": {
+        "repo": "rbediner/romanbediner.com",
+        "branch": "prod",
+        "url": "https://romanbediner.com",
+        "cname": true
+      }
+    }
   }
 }
 ```
@@ -471,6 +490,38 @@ node scripts/release/watch-ci-run.js --branch prod --sha "<tested-sha>"
 ```bash
 npm run release:staging-prod
 ```
+
+## Staging Preview
+Staging preview is isolated from production and is published to a separate repository target.
+
+Flow:
+1. Push to `staging`.
+2. `CI` workflow must complete successfully.
+3. `Deploy Staging` workflow builds a preview artifact, removes `CNAME`, enforces preview `robots.txt` no-index policy, and publishes to preview repo.
+4. Workflow prints the clickable preview URL in logs and Job Summary.
+5. Review preview, then promote tested commit to `prod`.
+
+Current preview target:
+- Repo: `rbediner/romanbediner-preview`
+- Branch: `staging-preview`
+- URL: `https://rbediner.github.io/romanbediner-preview/`
+
+CNAME handling rules:
+- Preview artifacts must not include `CNAME`.
+- Production artifacts must include `CNAME` and deploy to `https://romanbediner.com`.
+
+One-time manual setup (GitHub UI, do not automate in-repo):
+1. Create repository `rbediner/romanbediner-preview`.
+2. Enable Pages for preview repo.
+3. Add secret `PREVIEW_REPO_TOKEN` in primary repo (`rbediner/romanbediner.com`).
+4. Scope token to preview repo only with minimum permissions (`contents: write`).
+5. Optionally protect preview branch (`staging-preview`) if team policy requires it.
+
+Token rotation procedure:
+1. Create a new fine-grained token with preview-repo-only access.
+2. Update `PREVIEW_REPO_TOKEN` repository secret.
+3. Trigger staging deploy and confirm preview URL publishes successfully.
+4. Revoke old token after successful validation.
 
 ## Manual GitHub Configuration Steps
 These settings are intentionally manual and are not modified by scripts in this repository.

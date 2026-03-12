@@ -14,13 +14,17 @@
     "scripts/qa/verify-repo-contract.js",
     "scripts/qa/verify-workflow-integrity.js",
     "scripts/build/create-artifact.js",
-    "scripts/qa/verify-artifact-integrity.js"
+    "scripts/qa/verify-artifact-integrity.js",
+    "scripts/build/create-preview-artifact.js",
+    "scripts/qa/verify-preview-artifact.js",
+    "scripts/release/publish-preview-repo.js"
   ],
   "protected_paths": [
     ".github/workflows",
     "docs/architecture",
     "scripts/qa",
     "scripts/build",
+    "scripts/release",
     "scripts/docs"
   ],
   "required_scripts": [

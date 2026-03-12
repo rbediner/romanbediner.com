@@ -1,24 +1,39 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 14
-- Updated At (UTC): 2026-03-12T22:57:29Z
+- Handoff Sequence: 15
+- Updated At (UTC): 2026-03-12T23:24:05Z
 - Source Branch: staging
-- Source Commit: 836a4e5d89dfd008cc7bd58595b00d227e2f1db6 (pre-handoff baseline)
+- Source Commit: 82e78d6790d05296e0501024f3de222c800a9851 (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Added a responsive footer quote block under existing footer copyright on all canonical pages.
-- Added Google Fonts load for Cormorant Garamond on canonical pages to support footer quote typography.
-- Extended shared stylesheet with footer quote styles and mobile behavior.
-- Added Node QA guardrail `QA/tests/test-footer-quote.js` and wired it into `npm run test:node` via `package.json`.
-- Updated CSP meta policies on canonical pages to allow Google Fonts (`style-src https://fonts.googleapis.com`, `font-src https://fonts.gstatic.com data:`) while keeping script CSP strict.
-- Updated README system overview note for footer quote architecture.
+- Implemented safe isolated staging preview deployment for `staging` using preview repo publication.
+- Added preview artifact builder and verifier:
+  - `scripts/build/create-preview-artifact.js`
+  - `scripts/qa/verify-preview-artifact.js`
+- Added preview repo publisher:
+  - `scripts/release/publish-preview-repo.js`
+- Refactored `.github/workflows/deploy-staging.yml` to:
+  - trigger from successful `CI` completion on `staging`
+  - build + verify preview artifact
+  - publish preview artifact to isolated preview repo branch
+  - emit clickable preview URL in logs and `$GITHUB_STEP_SUMMARY`
+  - fail explicitly with summary when preview publish fails
+- Updated deployment architecture docs:
+  - `docs/architecture/environment-model.json`
+  - `docs/architecture/workflow-manifest.json`
+  - `docs/architecture/repo-contract.json`
+  - `README.md` (new `Staging Preview` section + token rotation procedure)
+- Added staging preview automation guardrail test:
+  - `QA/tests/test-staging-preview-automation.js`
+- Extended artifact automation guardrail test for preview artifact scripts:
+  - `QA/tests/test-artifact-integrity-automation.js`
 
 ## Validation Status
-- `npm test`: passed
-  - Node QA: passed
-  - Python QA: passed
-  - Jest: passed
-  - Playwright: passed
+- `npm run test:node`: passed
+- `npm run test:jest`: passed
+- `npm run test:qa-full`: passed
+  - Python suite skipped local socket-bind/browser server tests in this runtime sandbox (`Operation not permitted`)
+  - visual regression tests remained opt-in and were skipped without `RUN_VISUAL_TESTS=1`
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
@@ -33,4 +48,4 @@
 ## Notes
 - This file must contain only the latest handoff state; do not append logs.
 - This file is intentionally updated by hand at session end after code/test changes.
-- If true staging live preview is required in future, use a separate Pages target (repo/project) instead of reusing production Pages configuration.
+- Staging preview now uses separate preview repository publication and does not share production Pages deployment state.

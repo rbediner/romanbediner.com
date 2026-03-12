@@ -1,26 +1,60 @@
 name: Deploy Staging
 
 on:
-  push:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
     branches:
       - staging
   workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Optional commit SHA to preview (defaults to current branch head)
+        required: false
+      source_branch:
+        description: Branch to preview (defaults to staging)
+        required: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: staging-${{ github.ref }}
+  group: staging-preview-${{ github.event.workflow_run.head_branch || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  deploy-staging-summary:
+  deploy-staging-preview:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'staging') }}
     runs-on: ubuntu-latest
+    env:
+      PREVIEW_REPO: ${{ vars.PREVIEW_REPO || 'rbediner/romanbediner-preview' }}
+      PREVIEW_BRANCH: ${{ vars.PREVIEW_REPO_BRANCH || 'staging-preview' }}
     steps:
+      - name: Resolve source commit + branch
+        id: source
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "source_sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+            echo "source_branch=${{ github.event.workflow_run.head_branch }}" >> "$GITHUB_OUTPUT"
+          else
+            SOURCE_SHA="${{ github.event.inputs.source_sha }}"
+            SOURCE_BRANCH="${{ github.event.inputs.source_branch }}"
+            if [ -z "$SOURCE_SHA" ]; then
+              SOURCE_SHA="${{ github.sha }}"
+            fi
+            if [ -z "$SOURCE_BRANCH" ]; then
+              SOURCE_BRANCH="staging"
+            fi
+            echo "source_sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+            echo "source_branch=$SOURCE_BRANCH" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.source.outputs.source_sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -30,28 +64,74 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
-      - name: Build staging validation artifact
+      - name: Build staging preview artifact
         id: build
-        run: node scripts/build/create-artifact.js --out /tmp/rb-staging-artifact
+        run: node scripts/build/create-preview-artifact.js --out /tmp/rb-staging-preview-artifact
 
-      - name: Verify staging validation artifact
-        run: node scripts/qa/verify-artifact-integrity.js --artifact /tmp/rb-staging-artifact --expect-commit ${{ github.sha }}
+      - name: Verify staging preview artifact
+        run: node scripts/qa/verify-preview-artifact.js --artifact /tmp/rb-staging-preview-artifact --expect-commit ${{ steps.source.outputs.source_sha }}
 
-      - name: Publish staging artifact for review
+      - name: Upload preview artifact backup
         uses: actions/upload-artifact@v4
         with:
-          name: staging-site-artifact-${{ github.sha }}
-          path: /tmp/rb-staging-artifact
+          name: staging-preview-artifact-${{ steps.source.outputs.source_sha }}
+          path: /tmp/rb-staging-preview-artifact
           if-no-files-found: error
 
-      - name: Print staging deployment summary and fallback strategy
+      - name: Publish isolated preview repository
+        id: publish
+        continue-on-error: true
+        env:
+          PREVIEW_REPO_TOKEN: ${{ secrets.PREVIEW_REPO_TOKEN }}
         run: |
-          echo "Staging deployment ready"
-          echo "Preview URL: N/A (safe fallback in use)"
-          echo "Branch: ${{ github.ref_name }}"
-          echo "Commit: ${{ github.sha }}"
+          node scripts/release/publish-preview-repo.js \
+            --artifact /tmp/rb-staging-preview-artifact \
+            --repo "$PREVIEW_REPO" \
+            --branch "$PREVIEW_BRANCH" \
+            --source-sha "${{ steps.source.outputs.source_sha }}" \
+            --source-branch "${{ steps.source.outputs.source_branch }}"
+
+      - name: Fail with explicit preview publication summary
+        if: ${{ steps.publish.outcome != 'success' }}
+        run: |
+          {
+            echo "## Staging Preview Failed"
+            echo
+            echo "Preview publication failed. Check the publish step logs for details."
+            echo
+            echo "Branch: ${{ steps.source.outputs.source_branch }}"
+            echo "Commit: ${{ steps.source.outputs.source_sha }}"
+            echo "Node: $(node -v)"
+            echo "Target preview repo: $PREVIEW_REPO"
+            echo "Target preview branch: $PREVIEW_BRANCH"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "FAIL: Staging preview publication failed." >&2
+          exit 1
+
+      - name: Print staging deployment summary
+        if: ${{ steps.publish.outcome == 'success' }}
+        run: |
+          echo "Staging Deployment Summary"
+          echo "Branch: ${{ steps.source.outputs.source_branch }}"
+          echo "Commit: ${{ steps.source.outputs.source_sha }}"
           echo "Node: $(node -v)"
-          echo "Artifact ID: ${{ steps.build.outputs.artifact_id }}"
-          echo "Artifact checksum: ${{ steps.build.outputs.artifact_checksum }}"
-          echo "Fallback strategy: GitHub Pages single-site constraints make true in-repo staging preview unsafe for prod continuity."
-          echo "Validation path: use uploaded staging artifact + CI visual/runtime suites before promoting staging -> prod."
+          echo "Preview URL: ${{ steps.publish.outputs.preview_url }}"
+          echo "Artifact ID: ${{ steps.build.outputs.preview_artifact_id }}"
+          echo "Artifact checksum: ${{ steps.build.outputs.preview_checksum }}"
+
+      - name: Write staging deployment summary to job summary
+        if: ${{ steps.publish.outcome == 'success' }}
+        run: |
+          {
+            echo "## Staging Preview Ready"
+            echo
+            echo "Preview your changes here:"
+            echo
+            echo "${{ steps.publish.outputs.preview_url }}"
+            echo
+            echo "Branch: ${{ steps.source.outputs.source_branch }}"
+            echo "Commit: ${{ steps.source.outputs.source_sha }}"
+            echo "Node: $(node -v)"
+            echo "Artifact ID: ${{ steps.build.outputs.preview_artifact_id }}"
+            echo "Artifact checksum: ${{ steps.build.outputs.preview_checksum }}"
+          } >> "$GITHUB_STEP_SUMMARY"
