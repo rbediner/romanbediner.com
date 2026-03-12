@@ -164,6 +164,7 @@ nvm install
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
+- Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/insights/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
 - Staging deployment uses a validated fallback mode that preserves production safety:
   - CI produces and verifies a staging artifact for review.
   - A true second live Pages environment in this same repository is not enabled under current single-site Pages constraints.

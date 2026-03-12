@@ -31,9 +31,6 @@ function requireCondition(condition, message) {
 function validateHomepage(homepage) {
   requireCondition(homepage.response.ok, `Homepage failed with status ${homepage.response.status}`);
   requireCondition(homepage.text.includes('/about/'), 'Homepage navigation is missing /about/ link');
-  requireCondition(homepage.text.includes('/services/'), 'Homepage navigation is missing /services/ link');
-  requireCondition(homepage.text.includes('/insights/'), 'Homepage navigation is missing /insights/ link');
-  requireCondition(homepage.text.includes('/connect/'), 'Homepage navigation is missing /connect/ link');
   requireCondition(homepage.text.includes('application/ld+json'), 'Homepage structured data JSON-LD was not found');
   requireCondition(homepage.text.includes('Content-Security-Policy'), 'Homepage CSP meta policy was not found');
   requireCondition(homepage.text.includes('/scripts/runtime/ga4-bootstrap.js'), 'Homepage GA bootstrap script reference was not found');
@@ -47,6 +44,15 @@ function validateSitemap(sitemap) {
 async function validateLiveDeployment() {
   const homepage = await fetchText('/');
   validateHomepage(homepage);
+
+  // Canonical routes are validated directly rather than assuming they are all
+  // present in a single homepage navigation block.
+  const canonicalRoutes = ['/about/', '/services/', '/insights/', '/connect/'];
+  for (const route of canonicalRoutes) {
+    const routeResponse = await fetchText(route);
+    requireCondition(routeResponse.response.ok, `Canonical route failed with status ${routeResponse.response.status}: ${route}`);
+  }
+
   const sitemap = await fetchText('/sitemap.xml');
   validateSitemap(sitemap);
 
