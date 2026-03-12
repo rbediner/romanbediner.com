@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 15
-- Updated At (UTC): 2026-03-12T23:24:05Z
+- Handoff Sequence: 16
+- Updated At (UTC): 2026-03-12T23:31:28Z
 - Source Branch: staging
-- Source Commit: 82e78d6790d05296e0501024f3de222c800a9851 (pre-handoff baseline)
+- Source Commit: 47a2a750b03bb5e3545e2bc267251ae30b330882 (pre-handoff baseline)
 
 ## What Changed Most Recently
 - Implemented safe isolated staging preview deployment for `staging` using preview repo publication.
@@ -27,6 +27,7 @@
   - `QA/tests/test-staging-preview-automation.js`
 - Extended artifact automation guardrail test for preview artifact scripts:
   - `QA/tests/test-artifact-integrity-automation.js`
+- Follow-up fix: corrected `deploy-staging.yml` gating logic to check `steps.publish.conclusion` (not `outcome`) so successful preview publication does not trigger false failure branch.
 
 ## Validation Status
 - `npm run test:node`: passed
