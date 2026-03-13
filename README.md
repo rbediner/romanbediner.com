@@ -235,6 +235,28 @@ nvm install
 - Recommended install paths:
   - Homebrew install (preferred when available): `brew install gh`
   - Fallback local binary install: `~/.local/bin/gh`
+- Fallback local binary install (macOS arm64, no Homebrew required):
+```bash
+mkdir -p "$HOME/.local/bin" "$HOME/.local/share/gh-install"
+latest_tag=$(curl -fsSLI -o /dev/null -w '%{url_effective}' https://github.com/cli/cli/releases/latest | sed -E 's#.*/tag/##')
+version="${latest_tag#v}"
+archive="gh_${version}_macOS_arm64.zip"
+url="https://github.com/cli/cli/releases/download/${latest_tag}/${archive}"
+cd "$HOME/.local/share/gh-install"
+curl -fL -o "$archive" "$url"
+unzip -oq "$archive"
+cp -f "gh_${version}_macOS_arm64/bin/gh" "$HOME/.local/bin/gh"
+chmod +x "$HOME/.local/bin/gh"
+```
+- Ensure `gh` is on PATH (zsh):
+```bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.zshrc"
+source "$HOME/.zshrc"
+```
+- Authenticate with required scopes:
+```bash
+gh auth login --web --scopes repo,workflow
+```
 - Required verification commands:
 ```bash
 gh --version
@@ -242,6 +264,9 @@ gh auth status
 npm ci
 npm test
 ```
+- Expected `gh auth status` contract for release automation:
+  - active account is your repo owner/collaborator account
+  - token scopes include `repo` and `workflow`
 - Release-ops expectation:
   - If a CI/deploy workflow stalls, re-run failed jobs via CLI before asking operators to click through the UI.
 

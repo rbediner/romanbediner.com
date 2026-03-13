@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 39
-- Updated At (UTC): 2026-03-13T19:07:05Z
+- Handoff Sequence: 40
+- Updated At (UTC): 2026-03-13T19:12:01Z
 - Source Branch: staging
-- Source Commit: e0a3d6e7937d4e79d94ae5cb54d318bce2d29419
+- Source Commit: b950595cfa62bd9cdb7b971e1d2b6f628e7b1e0b
 
 ## What Changed Most Recently
 - Implemented permanent icon management architecture:
@@ -23,6 +23,10 @@
     - `evolution-feedback.svg`
 - Created new design-library icon set and left unused candidates in `/Codex/art/icons/`.
 - Root `/assets/icons/` now contains only page folders (no loose files).
+- Documented cross-machine GitHub CLI dependency with exact install/auth commands:
+  - supports no-Homebrew fallback install to `~/.local/bin/gh`
+  - enforces auth scopes `repo,workflow`
+  - adds release-ops verification checks to README
 
 ## Validation Status
 - Local validation completed:
@@ -33,7 +37,7 @@
   - `npm run -s test:node` ✅
 
 ## Branch Alignment
-- `staging`: contains icon-architecture migration commit `e0a3d6e` and is ready to push.
+- `staging`: contains icon-architecture migration commit `e0a3d6e`; README/hand-off docs update is pending local commit.
 - `prod`: unchanged; do not promote until staging CI and preview checks complete.
 
 ## Operator Checklist (Next Machine)
@@ -53,3 +57,4 @@
 - Added new guardrail: `QA/tests/test-icon-management-system.js`.
 - Updated repo hygiene route check to avoid false positives from `/assets/icons/home/`.
 - If jobs stall, re-run with CLI (`gh`) or Actions UI and continue on the same commit.
+- This machine now has `gh` installed and authenticated with required scopes; other machines must follow README bootstrap commands before release operations.
