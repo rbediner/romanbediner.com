@@ -77,7 +77,7 @@ class FrameworkLayoutTest(unittest.TestCase):
         self.assertRegex(self.framework_css, r"\.framework-section h3\s*\{[^}]*margin-top:\s*6px;[^}]*margin-bottom:\s*14px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-arrow svg\s*\{[^}]*stroke:\s*#3b6cff;[^}]*stroke-width:\s*2;[^}]*opacity:\s*0\.75;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section\s*\{[^}]*padding:\s*32px;[^}]*border-radius:\s*12px;", re.S)
-        self.assertRegex(self.framework_css, r"\.card-body\s*\{[^}]*max-width:\s*760px;", re.S)
+        self.assertRegex(self.framework_css, r"\.card-body\s*\{[^}]*max-width:\s*none;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-transition\s*\{[^}]*margin:\s*28px 0;[^}]*display:\s*flex;[^}]*justify-content:\s*center;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-rail\s*\{[^}]*width:\s*2px;[^}]*background:\s*rgba\(80,\s*110,\s*255,\s*0\.15\);", re.S)
 
