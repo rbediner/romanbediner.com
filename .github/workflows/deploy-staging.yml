@@ -66,7 +66,7 @@ jobs:
 
       - name: Build staging preview artifact
         id: build
-        run: node scripts/build/create-preview-artifact.js --out /tmp/rb-staging-preview-artifact
+        run: PREVIEW_BASE_PATH="/${PREVIEW_REPO#*/}" node scripts/build/create-preview-artifact.js --out /tmp/rb-staging-preview-artifact
 
       - name: Verify staging preview artifact
         run: node scripts/qa/verify-preview-artifact.js --artifact /tmp/rb-staging-preview-artifact --expect-commit ${{ steps.source.outputs.source_sha }}

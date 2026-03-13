@@ -40,6 +40,7 @@ assert(stagingWorkflowText.includes('workflow_run:'), 'staging workflow must use
 assert(stagingWorkflowText.includes('workflows:\n      - CI'), 'staging workflow must require CI workflow completion');
 assert(stagingWorkflowText.includes('branches:\n      - staging'), 'staging workflow must be branch-isolated to staging');
 assert(stagingWorkflowText.includes('create-preview-artifact.js'), 'staging workflow must build preview artifact');
+assert(stagingWorkflowText.includes('PREVIEW_BASE_PATH="/${PREVIEW_REPO#*/}"'), 'staging workflow must inject preview base-path for project-pages parity');
 assert(stagingWorkflowText.includes('verify-preview-artifact.js'), 'staging workflow must verify preview artifact');
 assert(stagingWorkflowText.includes('publish-preview-repo.js'), 'staging workflow must publish to preview repository');
 assert(stagingWorkflowText.includes('continue-on-error: true'), 'staging workflow must handle preview publish failures explicitly');
@@ -53,6 +54,7 @@ assert(prodWorkflowText.includes('Ensure production CNAME exists'), 'production 
 assert(prodWorkflowText.includes('test -f /tmp/rb-site-artifact/site/CNAME'), 'production workflow must fail when CNAME is missing');
 
 assert(previewBuildText.includes('fs.rmSync(cnamePath'), 'preview artifact builder must strip CNAME');
+assert(previewBuildText.includes('rewriteRootRelativePathsForPreview'), 'preview artifact builder must rewrite root-relative paths for preview parity');
 assert(previewBuildText.includes("Disallow: /"), 'preview artifact builder must enforce no-index robots policy');
 assert(previewVerifyText.includes('must not contain CNAME'), 'preview verifier must block CNAME in preview artifact');
 assert(previewVerifyText.includes('Disallow: /'), 'preview verifier must require no-index robots policy');

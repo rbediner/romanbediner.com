@@ -15,17 +15,21 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
-const { computeChecksum } = require(path.resolve(__dirname, 'create-artifact.js'));
+const { computeChecksum, listFilesRecursive } = require(path.resolve(__dirname, 'create-artifact.js'));
 
 function parseArgs(argv) {
   const args = {
-    out: ''
+    out: '',
+    basePath: process.env.PREVIEW_BASE_PATH || ''
   };
 
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
     if (token === '--out' && argv[i + 1]) {
       args.out = path.resolve(argv[i + 1]);
+      i += 1;
+    } else if (token === '--base-path' && argv[i + 1]) {
+      args.basePath = argv[i + 1];
       i += 1;
     }
   }
@@ -53,6 +57,63 @@ function ensurePreviewRobots(siteDir) {
   fs.writeFileSync(robotsPath, required.join('\n'));
 }
 
+function normalizeBasePath(input) {
+  if (!input) {
+    return '/romanbediner-preview';
+  }
+
+  let value = input.trim();
+  if (!value) {
+    return '/romanbediner-preview';
+  }
+
+  if (!value.startsWith('/')) {
+    value = `/${value}`;
+  }
+
+  return value.endsWith('/') && value.length > 1
+    ? value.slice(0, -1)
+    : value;
+}
+
+function rewriteRootRelativePathsForPreview(siteDir, basePath) {
+  const files = listFilesRecursive(siteDir);
+  const textExtensions = new Set(['.html', '.css', '.js']);
+
+  for (const relativePath of files) {
+    const ext = path.extname(relativePath).toLowerCase();
+    if (!textExtensions.has(ext)) {
+      continue;
+    }
+
+    const absolutePath = path.join(siteDir, relativePath);
+    const original = fs.readFileSync(absolutePath, 'utf8');
+    let rewritten = original;
+
+    // Rewrite common HTML attributes that currently assume domain-root paths.
+    rewritten = rewritten.replace(
+      /\b(href|src|action|poster|content)=("|')\/(?!\/)/g,
+      `$1=$2${basePath}/`
+    );
+
+    // Rewrite CSS url("/...") references.
+    rewritten = rewritten.replace(
+      /url\((['"]?)\/(?!\/)/g,
+      `url($1${basePath}/`
+    );
+
+    // Rewrite JS string literals that reference root assets/routes.
+    rewritten = rewritten.replace(
+      /(["'`])\/(assets|styles|scripts|about|services|insights|connect)(\/)/g,
+      `$1${basePath}/$2$3`
+    );
+
+    if (rewritten !== original) {
+      fs.writeFileSync(absolutePath, rewritten);
+    }
+  }
+}
+
 function updateManifest(outDir, siteDir) {
   const manifestPath = path.join(outDir, 'artifact-manifest.json');
   if (!fs.existsSync(manifestPath)) {
@@ -73,6 +134,7 @@ function updateManifest(outDir, siteDir) {
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const outDir = args.out || path.resolve('/tmp/rb-preview-artifact');
+  const basePath = normalizeBasePath(args.basePath);
 
   // Reuse the primary artifact builder to keep preview/prod packaging aligned.
   execFileSync(process.execPath, [path.resolve(__dirname, 'create-artifact.js'), '--out', outDir], {
@@ -86,6 +148,9 @@ function main() {
     fs.rmSync(cnamePath, { force: true });
   }
 
+  // Project Pages previews are served from /<repo-name>/, so root-relative
+  // production links need to be rewritten for parity in preview environments.
+  rewriteRootRelativePathsForPreview(siteDir, basePath);
   ensurePreviewRobots(siteDir);
   const manifest = updateManifest(outDir, siteDir);
 
@@ -103,6 +168,7 @@ function main() {
       `- Artifact directory: ${outDir}`,
       `- Site directory: ${siteDir}`,
       `- Manifest: ${manifest.manifestPath}`,
+      `- Preview base path: ${basePath}`,
       `- Preview checksum: ${manifest.checksum}`
     ].join('\n') + '\n'
   );
@@ -114,5 +180,7 @@ if (require.main === module) {
 
 module.exports = {
   ensurePreviewRobots,
+  normalizeBasePath,
+  rewriteRootRelativePathsForPreview,
   parseArgs
 };
