@@ -136,9 +136,9 @@ if (!/\.framework-section\s*\{[^}]*padding:\s*32px;[^}]*border-radius:\s*12px;[^
   console.error('FAIL: framework card padding/radius/shadow refinement is missing.');
 }
 
-if (!/\.card-body\s*\{[^}]*max-width:\s*760px;/s.test(frameworkCss)) {
+if (!/\.card-body\s*\{[^}]*max-width:\s*none;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: framework card body max-width must be 760px.');
+  console.error('FAIL: framework card body max-width must be none.');
 }
 
 if (!/\.framework-transition\s*\{[^}]*margin:\s*28px 0;[^}]*display:\s*flex;[^}]*justify-content:\s*center;/s.test(frameworkCss)) {

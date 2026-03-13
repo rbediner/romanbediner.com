@@ -1,23 +1,27 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 63
-- Updated At (UTC): 2026-03-13T23:45:00Z
+- Handoff Sequence: 64
+- Updated At (UTC): 2026-03-13T23:58:00Z
 - Source Branch: codex/prod-promote
-- Source Commit: c501ae0b98cd78b974a4bffd4b73d8721583d352
+- Source Commit: 263ab4b00bf61bbfa71d567233f2f3bbd4f199af
 
 ## Current State
-- Branches are aligned at the same commit:
-  - `origin/prod`: `c501ae0b98cd78b974a4bffd4b73d8721583d352`
-  - `origin/staging`: `c501ae0b98cd78b974a4bffd4b73d8721583d352`
-  - local `HEAD`: `c501ae0b98cd78b974a4bffd4b73d8721583d352`
-- Staging preview publication remains sourced from `staging` into preview repo branch `staging-preview`.
+- `origin/prod`, `origin/staging`, and local baseline were previously aligned at:
+  - `c501ae0b98cd78b974a4bffd4b73d8721583d352`
+- New pending commit set adds CI guardrail consistency fix for framework text-width contract.
 
-## What Changed In This Cleanup Pass
-- Restored missing handoff file after accidental deletion.
-- Updated `/README.md` for cross-machine reliability:
-  - Added explicit `gh` PATH bootstrap for `~/.local/bin`.
-  - Added required verification commands (`gh --version`, `gh auth status`).
-  - Added framework text-width note for Integration bullet wrapping prevention (`.card-body { max-width: none; }`).
+## What Changed In This Session
+1. Restored missing handoff file and refreshed cross-machine setup guidance in `README.md`.
+2. Synced staging branch to production baseline commit before follow-up fix.
+3. Fixed CI parity failure root cause:
+   - Updated `QA/tests/test-insights-layout.js`
+   - Contract changed from `.card-body max-width: 760px` to `.card-body max-width: none`
+   - This matches current framework production behavior that prevents premature Integration bullet wrapping.
+
+## Validation Performed
+- `npm run docs:verify` PASS
+- `node QA/tests/test-repo-hygiene.js` PASS
+- `node QA/tests/test-insights-layout.js` PASS (after contract update)
 
 ## Tooling + Access Contract (Next Machine)
 1. Use Node 20 (`nvm use`).
