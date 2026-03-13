@@ -128,6 +128,25 @@
   top: -8px;
 }
 
+/* Stage-specific icon refinements for visual optical balance. */
+#design .framework-icon {
+  width: 37px;
+  height: 37px;
+}
+
+#integration .framework-icon {
+  width: 35px;
+  height: 35px;
+}
+
+#execution .framework-icon {
+  top: -10px;
+}
+
+#signals .framework-icon {
+  top: -9px;
+}
+
 .framework-pill {
   margin-bottom: 8px;
   font-weight: 600;
