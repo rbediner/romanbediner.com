@@ -1,26 +1,17 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 26
-- Updated At (UTC): 2026-03-13T03:25:00Z
-- Source Branch: prod
-- Source Commit: 17bfa8aafe4e4c5781d723c50f9b02360cc9b811
+- Handoff Sequence: 27
+- Updated At (UTC): 2026-03-13T02:10:29Z
+- Source Branch: staging
+- Source Commit: 39aae5e1e6e4d7764fbc68bd307317c253426caf
 
 ## What Changed Most Recently
-- Footer quote refinement is live on production (`92781f5`) and anti-stall CI monitor retries are live (`93602a1`).
-- README now explicitly codifies operator release order:
-  1. push to `staging`
-  2. run/await all tests
-  3. only then share staging preview link
-  4. promote the exact approved commit to `prod`
-- README cross-machine section now requires handoff entries for branch alignment, staging preview state, CI lane status, and current blockers/manual steps.
-- Staging deploy workflow now hard-locks preview publication branch to `staging-preview` (removed branch variable override path) to avoid accidental writes to preview `main`.
-- Synced README machine-readable deployment section with source model (`docs/architecture/environment-model.json`) so docs automation/tests stay green.
+- Removed obsolete documentation file `docs/release-notes-2026-03-11.md` (no active references in repo; historical details remain available in Git history).
+- No code, workflow, or release-path behavior changes in this handoff step.
 
 ## Validation Status
-- Documentation integrity checks in this session:
-  - `npm run docs:generate`: passed
-  - `npm run docs:verify`: passed
-  - `npm run test:jest -- readme_structure.test.js readme_integrity.test.js`: passed
+- Deletion safety check:
+  - `rg -n "release-notes-2026-03-11" README.md docs .github scripts QA`: no remaining references
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
