@@ -2,8 +2,8 @@
 
 - Handoff Sequence: 61
 - Updated At (UTC): 2026-03-13T22:25:00Z
-- Source Branch: `codex/prod-promote`
-- Source Commit: `da88d15566e05f045094bb13c569693eec710f8e` (pre-handoff baseline)
+- Source Branch: codex/prod-promote
+- Source Commit: da88d15566e05f045094bb13c569693eec710f8e (pre-handoff baseline)
 
 ## What Changed Most Recently
 - Fixed canonical navigation cache invalidation by appending a version query to the shared runtime include on canonical pages:
