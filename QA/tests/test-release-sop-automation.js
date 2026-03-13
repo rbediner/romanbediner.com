@@ -50,6 +50,7 @@ assert(releaseText.includes('node scripts/release/watch-ci-run.js --branch stagi
 assert(releaseText.includes('git pull --ff-only origin prod'), 'release script must fast-forward pull prod');
 assert(releaseText.includes('git merge --ff-only "${STAGING_SHA}"'), 'release script must fast-forward prod from tested SHA');
 assert(releaseText.includes('node scripts/release/watch-ci-run.js --branch prod'), 'release script must monitor prod CI');
+assert(releaseText.includes('--workflow "Deploy Pages"'), 'release script must monitor Deploy Pages completion for prod SHA');
 
 const monitorPath = path.join(ROOT, 'scripts', 'release', 'watch-ci-run.js');
 const monitorText = fs.readFileSync(monitorPath, 'utf8');
@@ -58,6 +59,7 @@ assert(monitorText.includes('/check-runs/'), 'monitor script must attempt failed
 assert(monitorText.includes('requestJsonWithRetry('), 'monitor script must use retry wrapper for transient API failures');
 assert(monitorText.includes('RETRIABLE_NETWORK_ERRORS'), 'monitor script must define retriable network error codes');
 assert(monitorText.includes('--api-retries'), 'monitor script usage must document api retry tuning');
+assert(monitorText.includes('--workflow "Workflow Name"'), 'monitor script usage must document workflow-name filter');
 
 const ciWorkflowPath = path.join(ROOT, '.github', 'workflows', 'ci.yml');
 const ciWorkflowText = fs.readFileSync(ciWorkflowPath, 'utf8');

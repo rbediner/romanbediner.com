@@ -43,4 +43,7 @@ git push origin prod
 echo "[release] Monitoring prod CI for SHA ${STAGING_SHA}"
 node scripts/release/watch-ci-run.js --branch prod --sha "${STAGING_SHA}" --timeout 1800 --interval 15
 
+echo "[release] Monitoring Deploy Pages for SHA ${STAGING_SHA}"
+node scripts/release/watch-ci-run.js --branch prod --sha "${STAGING_SHA}" --workflow "Deploy Pages" --timeout 1800 --interval 15
+
 echo "[release] Release complete: staging/prod both green at ${STAGING_SHA}"

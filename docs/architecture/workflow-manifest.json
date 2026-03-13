@@ -8,6 +8,7 @@
   "required_jobs": {
     "ci.yml": [
       "session-ready",
+      "gate-profile",
       "repo-contract",
       "workflow-integrity",
       "unit-tests",

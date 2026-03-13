@@ -52,7 +52,15 @@
       "node_version": "20",
       "lockfile_required": true,
       "playwright_required": true,
-      "readme_update_required_on_arch_change": true
+      "readme_update_required_on_arch_change": true,
+      "gate_profiles": {
+        "staging": "fast",
+        "prod": "full"
+      },
+      "full_gate_schedule": {
+        "nightly_enabled": false,
+        "reason": "Operator-selected: full gate runs on prod promotion, not nightly."
+      }
     },
     "deployment": {
       "promotion_flow": ["staging", "preview", "prod"],
@@ -81,7 +89,8 @@
           "repo": "rbediner/romanbediner.com",
           "branch": "prod",
           "url": "https://romanbediner.com",
-          "cname": true
+          "cname": true,
+          "deploy_trigger": "workflow_run:CI(success on prod)"
         }
       }
     }

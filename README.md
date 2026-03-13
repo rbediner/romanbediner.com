@@ -27,7 +27,7 @@ Routing requirements:
 - Runtime model: static-only delivery.
 - No server-side includes or server-rendered composition.
 - CSP is enforced in HTML via `<meta http-equiv="Content-Security-Policy">`.
-- Production publish flow uses GitHub Actions deployment from the `prod` branch (`.github/workflows/deploy-pages.yml`).
+- Production publish flow uses GitHub Actions deployment chained from a successful `CI` run on `prod` (`.github/workflows/deploy-pages.yml`).
 - Hosting portability is mandatory for:
   - S3 + CloudFront
   - Vercel
@@ -40,18 +40,18 @@ Routing requirements:
 - Promotion rule:
   1. validate changes on `staging`
   2. promote the exact tested commit to `prod`
-  3. GitHub Actions deploys Pages from `prod`
+  3. GitHub Actions runs full-gate CI on `prod`, then deploys Pages only if CI passes
 - Keep `prod` fast-forward only from tested commits to preserve release traceability.
 
 ## Operator Release Workflow (Required)
 Use this exact sequence on every machine/session:
 1. Push changes to `staging`.
 2. Run full local regression (`npm test`) or CI-parity equivalent.
-3. Wait for all staging CI jobs to pass.
-4. Publish/share staging preview link only after all tests pass.
+3. Wait for `staging` fast-gate CI jobs to pass.
+4. Publish/share staging preview link only after fast gate passes.
 5. Obtain visual approval from staging preview.
 6. Promote the exact approved commit from `staging` to `prod` (fast-forward only).
-7. Verify production deploy completion and live route health checks.
+7. Wait for `prod` full-gate CI completion, then verify production deploy completion and live route health checks.
 
 Rules:
 - Do not share a staging preview link before tests are green.
@@ -201,18 +201,24 @@ nvm install
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
 - Local pre-push CI-parity uses an isolated temp mirror per run (`mktemp`) to avoid cloud-sync path lock collisions.
+- CI auto-selects gate profile by branch/event:
+  - `staging` push -> `fast` profile
+  - `prod` push -> `full` profile
+  - `workflow_dispatch` -> `full` profile
 - CI is split into explicit guardrails and parallel validation jobs:
   - `session-ready`
+  - `gate-profile`
   - `repo-contract`
   - `workflow-integrity`
   - `unit-tests`
-  - `qa-tests`
   - `regression-tests`
+  - `link-validation`
+- Full profile-only jobs:
+  - `qa-tests`
   - `browser-tests`
   - `lighthouse-validation`
-  - `link-validation`
   - `build-artifact`
-- Production deployment is separate from validation and runs only on pushes to `prod`.
+- Production deployment is separate from validation and runs only after successful `CI` completion on `prod`.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
@@ -510,7 +516,15 @@ flowchart LR
     "node_version": "20",
     "lockfile_required": true,
     "playwright_required": true,
-    "readme_update_required_on_arch_change": true
+    "readme_update_required_on_arch_change": true,
+    "gate_profiles": {
+      "staging": "fast",
+      "prod": "full"
+    },
+    "full_gate_schedule": {
+      "nightly_enabled": false,
+      "reason": "Operator-selected: full gate runs on prod promotion, not nightly."
+    }
   },
   "deployment": {
     "promotion_flow": [
@@ -543,7 +557,8 @@ flowchart LR
         "repo": "rbediner/romanbediner.com",
         "branch": "prod",
         "url": "https://romanbediner.com",
-        "cname": true
+        "cname": true,
+        "deploy_trigger": "workflow_run:CI(success on prod)"
       }
     }
   }
@@ -634,7 +649,7 @@ node scripts/release/watch-ci-run.js --branch staging --sha "$(git rev-parse HEA
    - Monitor resilience: `watch-ci-run.js` retries transient GitHub API failures (DNS, timeout, reset, 5xx) before failing.
 4. Default assistant release behavior:
    - after local required QA passes, push to `staging` automatically
-   - wait for `staging` CI and required tests to complete successfully
+   - wait for `staging` fast-gate CI checks to complete successfully
    - then return an explicit pass confirmation plus the staging preview URL for visual sign-off
    - do not promote to `prod` until preview approval is given
 5. Promote only the exact tested SHA to `prod` (fast-forward only):
@@ -645,6 +660,8 @@ git merge --ff-only <tested-sha>
 git push origin prod
 node scripts/release/watch-ci-run.js --branch prod --sha "<tested-sha>"
 ```
+   - `prod` CI runs full gate automatically.
+   - `Deploy Pages` starts only after successful `prod` CI completion.
 6. Use the one-command release automation when possible:
 ```bash
 npm run release:staging-prod
@@ -783,23 +800,5 @@ python3 -m playwright install chromium
 
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
 ## FRAMEWORK STAGE DIRECT LINKS
-
-Opportunity
-https://romanbediner.com/framework/#opportunity
-
-Design
-https://romanbediner.com/framework/#design
-
-Integration
-https://romanbediner.com/framework/#integration
-
-Execution
-https://romanbediner.com/framework/#execution
-
-Signals
-https://romanbediner.com/framework/#signals
-
-Evolution
-https://romanbediner.com/framework/#evolution
 
 <!-- AUTO-GENERATED INSIGHT LINKS END -->

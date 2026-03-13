@@ -163,7 +163,7 @@ async function main() {
   const args = parseArgs(process.argv);
   if (args.help === 'true') {
     console.log(
-      'Usage: node scripts/release/watch-ci-run.js --branch <branch> --sha <commit-sha> [--repo owner/repo] [--timeout 1800] [--interval 15] [--api-retries 4]'
+      'Usage: node scripts/release/watch-ci-run.js --branch <branch> --sha <commit-sha> [--workflow "Workflow Name"] [--repo owner/repo] [--timeout 1800] [--interval 15] [--api-retries 4]'
     );
     process.exit(0);
   }
@@ -171,6 +171,7 @@ async function main() {
   const repo = args.repo || process.env.GITHUB_REPOSITORY || 'rbediner/romanbediner.com';
   const branch = args.branch;
   const sha = args.sha;
+  const workflowName = args.workflow;
   const timeoutSeconds = Number(args.timeout || 1800);
   const pollIntervalSeconds = Number(args.interval || 15);
   const apiRetries = Number(args['api-retries'] || 4);
@@ -182,6 +183,9 @@ async function main() {
 
   const started = Date.now();
   console.log(`[ci-monitor] Watching ${repo} branch=${branch} sha=${sha}`);
+  if (workflowName) {
+    console.log(`[ci-monitor] Filtering workflow name: ${workflowName}`);
+  }
 
   while (true) {
     if ((Date.now() - started) / 1000 > timeoutSeconds) {
@@ -193,7 +197,17 @@ async function main() {
       `/repos/${repo}/actions/runs?branch=${encodeURIComponent(branch)}&per_page=30`,
       { maxAttempts: apiRetries }
     );
-    const runs = sortByDateDesc((runsPayload.workflow_runs || []).filter((run) => run.head_sha === sha));
+    const runs = sortByDateDesc(
+      (runsPayload.workflow_runs || []).filter((run) => {
+        if (run.head_sha !== sha) {
+          return false;
+        }
+        if (!workflowName) {
+          return true;
+        }
+        return run.name === workflowName;
+      })
+    );
 
     if (!runs.length) {
       console.log('[ci-monitor] No matching run yet; polling...');
