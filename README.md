@@ -220,6 +220,7 @@ nvm install
   - `build-artifact`
 - Production deployment is separate from validation and runs only on `push` to `prod`.
 - `Deploy Pages` explicitly waits for matching prod `CI` success for the same SHA before artifact deploy, preventing branch-ambiguity when the same commit exists on multiple branches.
+- The prod CI-wait step passes `GITHUB_TOKEN` to the monitor script for authenticated GitHub API polling and reliable rate-limit behavior in Actions runners.
 - Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are guarded on successful deploy result.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).

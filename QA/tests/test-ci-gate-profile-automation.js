@@ -54,5 +54,9 @@ assert(
   deployPagesText.includes('watch-ci-run.js --branch prod --sha'),
   'deploy-pages.yml must gate deploy on the exact prod SHA CI run'
 );
+assert(
+  deployPagesText.includes('GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}'),
+  'deploy-pages.yml must pass GITHUB_TOKEN to CI monitor to avoid API rate-limit failures'
+);
 
 console.log('PASS: CI gate profile automation checks passed.');

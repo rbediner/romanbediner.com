@@ -35,6 +35,8 @@ jobs:
 
       - name: Wait for matching prod CI success
         if: ${{ github.event_name == 'push' && github.ref_name == 'prod' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/release/watch-ci-run.js --branch prod --sha ${{ steps.source.outputs.source_sha }} --workflow "CI" --timeout 3600 --interval 15
 
       - name: Checkout
