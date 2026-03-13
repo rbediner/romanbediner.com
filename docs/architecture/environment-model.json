@@ -59,10 +59,19 @@
       "environments": {
         "staging_preview": {
           "repo": "rbediner/romanbediner-preview",
-          "branch": "staging-preview",
+          "branch": "main",
+          "branch_configuration": {
+            "source": "PREVIEW_REPO_BRANCH repository variable",
+            "default_if_unset": "staging-preview",
+            "current_configured_value": "main"
+          },
           "url": "https://rbediner.github.io/romanbediner-preview/",
           "cname": false,
-          "isolated_from_production": true
+          "isolated_from_production": true,
+          "preview_url_emission": [
+            "workflow logs",
+            "github job summary"
+          ]
         },
         "production": {
           "repo": "rbediner/romanbediner.com",

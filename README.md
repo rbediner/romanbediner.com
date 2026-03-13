@@ -381,10 +381,19 @@ flowchart LR
     "environments": {
       "staging_preview": {
         "repo": "rbediner/romanbediner-preview",
-        "branch": "staging-preview",
+        "branch": "main",
+        "branch_configuration": {
+          "source": "PREVIEW_REPO_BRANCH repository variable",
+          "default_if_unset": "staging-preview",
+          "current_configured_value": "main"
+        },
         "url": "https://rbediner.github.io/romanbediner-preview/",
         "cname": false,
-        "isolated_from_production": true
+        "isolated_from_production": true,
+        "preview_url_emission": [
+          "workflow logs",
+          "github job summary"
+        ]
       },
       "production": {
         "repo": "rbediner/romanbediner.com",
@@ -503,7 +512,7 @@ Flow:
 
 Current preview target:
 - Repo: `rbediner/romanbediner-preview`
-- Branch: `staging-preview`
+- Branch: repository variable `PREVIEW_REPO_BRANCH` (default: `staging-preview`; currently configured: `main`)
 - URL: `https://rbediner.github.io/romanbediner-preview/`
 
 CNAME handling rules:
@@ -514,8 +523,11 @@ One-time manual setup (GitHub UI, do not automate in-repo):
 1. Create repository `rbediner/romanbediner-preview`.
 2. Enable Pages for preview repo.
 3. Add secret `PREVIEW_REPO_TOKEN` in primary repo (`rbediner/romanbediner.com`).
-4. Scope token to preview repo only with minimum permissions (`contents: write`).
-5. Optionally protect preview branch (`staging-preview`) if team policy requires it.
+4. Add repository variables:
+   - `PREVIEW_REPO` = `rbediner/romanbediner-preview`
+   - `PREVIEW_REPO_BRANCH` = `main` (or `staging-preview` if you choose a dedicated preview branch)
+5. Scope token to preview repo only with minimum permissions (`contents: write`).
+6. Optionally protect the configured preview branch if team policy requires it.
 
 Token rotation procedure:
 1. Create a new fine-grained token with preview-repo-only access.
@@ -542,6 +554,9 @@ Before architecture implementation work, read these files in order:
 1. `/README.md`
 2. `/docs/handoff/latest.md`
 3. `/docs/architecture/repo-contract.json`
+
+Operator shortcut prompt for new Codex sessions:
+- `session:start — read README + docs/handoff/latest, run session readiness, then run/verify staging deploy and give me the Staging Preview Ready URL.`
 
 ### Local Push Guard
 - `.husky/pre-push` runs `npm run qa:ci-parity` automatically before any push.

@@ -1,21 +1,26 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 17
-- Updated At (UTC): 2026-03-13T00:22:50Z
+- Handoff Sequence: 18
+- Updated At (UTC): 2026-03-13T00:25:34Z
 - Source Branch: staging
-- Source Commit: 68421f901b6a0f22b99b81f3a2055cd7689f740a (pre-handoff baseline)
+- Source Commit: 02752663f35be27e9fdc28177f3e3daba169ccec (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Refined footer quote typography enforcement to ensure Cormorant Garamond reliably renders under existing footer cascade rules.
-- Updated shared footer quote CSS selectors to high-specificity `footer .footer-quote-block ...` pattern with responsive sizing.
-- Updated canonical footer attribution line to em dash form:
-  - `— Walt Disney`
-- Updated footer quote QA contract and metadata/about guardrails to allow the specific footer em-dash attribution while continuing to block other unintended en/em dash usage in canonical HTML.
-- Updated README footer architecture note to document em-dash attribution and footer-aware QA allowance.
+- Fixed staging preview rendering parity for GitHub project Pages path:
+  - Preview artifact now rewrites root-relative asset links (`/styles/...`, `/scripts/...`, `/assets/...`) to preview-base paths (`/romanbediner-preview/...`).
+  - This resolved the issue where preview loaded without styling and script assets.
+- Confirmed successful staging pipeline for the fix commit:
+  - CI run on `68421f9`: success.
+  - Deploy Staging run on `68421f9`: success.
+  - Preview URL served and validated: `https://rbediner.github.io/romanbediner-preview/`.
+- Documentation sync updates completed:
+  - `/README.md` staging preview branch configuration now documents variable-driven branch selection.
+  - `/README.md` now includes a one-line operator shortcut prompt for new Codex sessions.
+  - `/docs/architecture/environment-model.json` now includes preview branch configuration metadata and explicit preview URL emission locations.
 
 ## Validation Status
-- `npm run test:node`: passed
-- `python3 -m unittest QA/tests/test_about_redesign.py -v`: passed
+- `node QA/tests/test-staging-preview-automation.js`: passed
+- `npm run docs:verify`: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
@@ -26,6 +31,10 @@
    - `/README.md`
    - `/docs/handoff/latest.md`
    - `/docs/architecture/repo-contract.json`
+6. Use the session shortcut prompt:
+   - `session:start — read README + docs/handoff/latest, run session readiness, then run/verify staging deploy and give me the Staging Preview Ready URL.`
+7. For visual validation, always open:
+   - `https://rbediner.github.io/romanbediner-preview/`
 
 ## Notes
 - This file must contain only the latest handoff state; do not append logs.
