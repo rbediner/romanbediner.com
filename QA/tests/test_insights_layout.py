@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 class FrameworkLayoutTest(unittest.TestCase):
-    """Validate Framework structure, flow indicators, and readability rules."""
+    """Validate Framework structure, refined content hierarchy, and visual contracts."""
 
     @classmethod
     def setUpClass(cls):
@@ -20,6 +20,32 @@ class FrameworkLayoutTest(unittest.TestCase):
             self.assertIn(f'href="#{section_id}"', self.framework_html)
 
         self.assertEqual(self.framework_html.count('class="framework-section insight-card"'), 6)
+        self.assertIn("<h1>The AI-Enabled Operations Framework</h1>", self.framework_html)
+        self.assertIn(
+            '<h2 class="framework-subtitle">Insights and Briefs on Productizing Operations for Modern AI-Enabled Work</h2>',
+            self.framework_html,
+        )
+
+    def test_framework_section_heading_hierarchy_and_bullet_count(self):
+        expected_h3 = {
+            "opportunity": "Productizing Operations for Modern AI-Enabled Work",
+            "design": "Operations as a Product for Scalable Execution",
+            "integration": "Integrating AI as an Operating Layer",
+            "execution": "Operational Lanes for Scalable Execution",
+            "signals": "Steering Execution with Operational Signals",
+            "evolution": "Designing Adaptive Guardrails for Agentic Work",
+        }
+
+        blocks = re.findall(
+            r'<section id="([a-z-]+)" class="framework-section insight-card">([\s\S]*?)</section>',
+            self.framework_html,
+        )
+        self.assertEqual(len(blocks), 6)
+
+        for stage_id, block in blocks:
+            self.assertIn(f"<h2>{stage_id.capitalize()}</h2>", block)
+            self.assertIn(f"<h3>{expected_h3[stage_id]}</h3>", block)
+            self.assertEqual(block.count("<li>"), 5, f"{stage_id} must contain exactly 5 bullets")
 
     def test_flow_arrows_only_between_sections(self):
         self.assertEqual(self.framework_html.count('class="framework-arrow"'), 3)
@@ -35,12 +61,31 @@ class FrameworkLayoutTest(unittest.TestCase):
 
     def test_framework_css_readability_and_indicator_rules(self):
         self.assertRegex(self.framework_css, r"--framework-max-width:\s*860px;")
-        self.assertRegex(self.framework_css, r"\.framework-progress-line\s*\{[^}]*height:\s*2px;[^}]*opacity:\s*0\.25;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-progress-line\s*\{[^}]*height:\s*3px;[^}]*opacity:\s*0\.35;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress\s*\{[^}]*max-width:\s*700px;", re.S)
-        self.assertRegex(self.framework_css, r"\.framework-progress-markers span\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*opacity:\s*0\.5;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-progress-markers span\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*opacity:\s*0\.5;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section \+ \.framework-section\s*\{[^}]*margin-top:\s*48px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section ul\s*\{[^}]*line-height:\s*1\.6;[^}]*margin-top:\s*14px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*620px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*10px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-main \.executive-callout\s*\{[^}]*background:\s*#f6f8ff;[^}]*border-left:\s*3px solid #3b6cff;[^}]*padding:\s*20px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-section h3\s*\{[^}]*margin-top:\s*6px;[^}]*margin-bottom:\s*14px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-arrow svg\s*\{[^}]*stroke:\s*#3b6cff;[^}]*stroke-width:\s*2;[^}]*opacity:\s*0\.75;", re.S)
+
+    def test_bottom_transition_targets_services(self):
+        self.assertIn('href="/services/"', self.framework_html)
+        self.assertIn("THE EXECUTION LAYER", self.framework_html)
+        self.assertIn("Transition to Services →", self.framework_html)
+
+    def test_icon_contract_black_structure_plus_blue_node(self):
+        icons_dir = self.root / "assets/icons/framework"
+        for icon_name in ["opportunity", "design", "integration", "execution", "signals", "evolution"]:
+            svg = (icons_dir / f"{icon_name}.svg").read_text(encoding="utf-8")
+            self.assertIn('stroke="#111111"', svg, f"{icon_name} icon missing black structural stroke")
+            self.assertIn('stroke-width="2.2"', svg, f"{icon_name} icon stroke width must be 2.2")
+            self.assertIn('fill="#3b6cff"', svg, f"{icon_name} icon must include blue accent node")
 
     def test_redirect_page_points_to_framework(self):
         self.assertIn('http-equiv="refresh"', self.redirect_html)

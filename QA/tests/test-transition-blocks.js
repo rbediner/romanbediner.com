@@ -54,17 +54,17 @@ if (!/href="\/about\/"/.test(homeHtml)) {
   console.error('FAIL: index.html transition must link to /about/.');
 }
 
-if (!insightsHtml.includes('THE RELATIONSHIP LAYER')) {
+if (!insightsHtml.includes('THE EXECUTION LAYER')) {
   failures += 1;
-  console.error('FAIL: framework/index.html is missing transition micro label THE RELATIONSHIP LAYER.');
+  console.error('FAIL: framework/index.html is missing transition micro label THE EXECUTION LAYER.');
 }
-if (!insightsHtml.includes('Transition to Connect')) {
+if (!insightsHtml.includes('Transition to Services →')) {
   failures += 1;
-  console.error('FAIL: framework/index.html is missing transition headline Transition to Connect.');
+  console.error('FAIL: framework/index.html is missing transition headline Transition to Services →.');
 }
-if (!/href="\/connect\/"/.test(insightsHtml)) {
+if (!/href="\/services\/"/.test(insightsHtml)) {
   failures += 1;
-  console.error('FAIL: framework/index.html transition must link to /connect/.');
+  console.error('FAIL: framework/index.html transition must link to /services/.');
 }
 
 if (!siteCss.includes('.next-page-nav')) {

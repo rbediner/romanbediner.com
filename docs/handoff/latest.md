@@ -1,54 +1,53 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 34
-- Updated At (UTC): 2026-03-13T16:55:45Z
+- Handoff Sequence: 35
+- Updated At (UTC): 2026-03-13T18:05:22Z
 - Source Branch: staging
-- Source Commit: c189d1f141e9494b38b098801911a8eda7d63b84
+- Source Commit: 8aa30654ec2f5ccab408711617a9a2c57e1d4389
 
 ## What Changed Most Recently
-- Added explicit cross-machine replication checklist to `/README.md` covering:
-  - required dependencies (Node 20, npm lockfile install, Playwright, Python)
-  - required GitHub CLI scopes (`repo`, `workflow`)
-  - release control checks (staging/prod roles + preview branch target)
-  - handoff integrity steps for new machines
-- Enabled GitHub CLI automation on this machine:
-  - Installed `gh` locally at `~/.local/bin/gh` (v2.88.1).
-  - Authenticated as `rbediner` with `repo` and `workflow` scopes.
-  - CLI workflow control is now available for reruns/dispatch without manual UI dependency.
-- Fixed staging CI `link-validation` false-fail for framework rollout:
-  - `scripts/qa/run-link-check.js` now skips canonical production domain links when target host is local/staging.
-  - Added `QA/tests/test-link-validation-config.js` and wired it into `test:node`.
-- Fixed artifact packaging omission that caused `/framework/` preview 404 despite green deploy jobs:
-  - Added `framework` to `scripts/build/create-artifact.js` include paths.
-  - Added `framework` route rewriting support in `scripts/build/create-preview-artifact.js`.
-  - Added guard test `QA/tests/test-framework-artifact-packaging.js`.
-- Updated README with cross-machine CLI bootstrap section (dependencies, auth, verification commands).
+- Refined `/framework/` content and presentation without changing page architecture:
+  - preserved vertical section flow, anchor navigation, and six-stage section model
+  - upgraded stage hierarchy to `H2` (stage) + `H3` (full framework title)
+  - updated stage copy so every section now contains exactly five bullets
+  - updated bottom transition to Services (`THE EXECUTION LAYER`, `Transition to Services →`, `/services/`)
+- Refined framework visual contracts in `/styles/framework.css`:
+  - stage line: `3px` at `0.35` opacity
+  - marker dots: `10px`
+  - section cards: white + `#e5e7eb` border + subtle hover polish
+  - intro box de-emphasis with lighter tint/border/padding
+  - refined arrow styling and stage pill spacing/weight
+- Replaced all framework icons under `/assets/icons/framework/` with structural black stroke + single blue-node accent style.
+- Updated QA contracts to enforce the new requirements:
+  - `/QA/tests/test-insights-layout.js`
+  - `/QA/tests/test_insights_layout.py`
+  - `/QA/tests/test-transition-blocks.js`
+- README auto-generated framework stage links updated by QA runner to match stage headings.
 
 ## Validation Status
-- Local validation after fixes:
-  - `npm run test:node` passed.
-  - `npm run test:links` passed in local server mode (`http://127.0.0.1:4173`).
-- Prior full suite (`npm test`) already passed for framework migration before this patch set.
-- Remaining action:
-  - wait for CI + Deploy Staging to republish preview artifact with framework folder included.
+- Focused framework checks passed:
+  - `node QA/tests/test-insights-layout.js`
+  - `node QA/tests/test-transition-blocks.js`
+  - `python3 -m unittest QA.tests.test_insights_layout -v`
+- Full Node QA suite passed:
+  - `npm run -s test:node`
 
 ## Branch Alignment
-- `staging`: commit `c189d1f141e9494b38b098801911a8eda7d63b84` pushed and awaiting green CI/deploy confirmation.
-- `prod`: remains behind staging; do not promote until staging preview shows `/framework/` live and verified.
+- `staging`: contains framework refinement changes and passing local QA.
+- `prod`: not yet promoted with this refinement set.
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
 2. `git checkout staging && git pull --ff-only origin staging`
-3. Confirm `gh auth status` is valid (or re-auth with `gh auth login --web --scopes repo,workflow`).
-4. Run:
-   - `npm run test:node`
-   - `npm run test:links` (with local server if needed)
-5. Push staging changes, monitor CI via CLI (`gh run list --workflow ci.yml --branch staging`).
-6. Trigger/verify Deploy Staging via CLI (`gh workflow run deploy-staging.yml --ref staging`).
-7. Confirm preview:
-   - `https://rbediner.github.io/romanbediner-preview/framework/` returns 200 and renders framework page.
-8. Only after visual approval, promote tested staging commit to `prod`.
+3. Run:
+   - `npm run -s test:node`
+   - `python3 -m unittest QA.tests.test_insights_layout -v`
+4. Push to `staging`.
+5. Confirm CI and Deploy Staging are green.
+6. Validate preview:
+   - `https://rbediner.github.io/romanbediner-preview/framework/`
+7. Promote to `prod` only after visual approval on preview.
 
 ## Notes
-- Staging preview publication branch remains `staging-preview` in `rbediner/romanbediner-preview`.
-- If any workflow stalls, use CLI rerun first; avoid prolonged manual wait loops.
+- Keep using `staging` for validation and `prod` for deployment.
+- If workflows stall, re-run from CLI with `gh` first.

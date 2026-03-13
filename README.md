@@ -715,22 +715,22 @@ python3 -m playwright install chromium
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
 ## FRAMEWORK STAGE DIRECT LINKS
 
-Productizing Operations
+Opportunity
 https://romanbediner.com/framework/#opportunity
 
-Operations as a Product
+Design
 https://romanbediner.com/framework/#design
 
-AI as an Operating Layer
+Integration
 https://romanbediner.com/framework/#integration
 
-Operational Lanes
+Execution
 https://romanbediner.com/framework/#execution
 
-Operational Signals
+Signals
 https://romanbediner.com/framework/#signals
 
-Agentic Guardrails
+Evolution
 https://romanbediner.com/framework/#evolution
 
 <!-- AUTO-GENERATED INSIGHT LINKS END -->
