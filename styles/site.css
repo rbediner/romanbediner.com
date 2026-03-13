@@ -485,10 +485,10 @@ main li:last-child {
 
 /* Footer literary quote block is responsive and wraps naturally as width narrows. */
 footer .footer-quote-block {
-  max-width: 680px;
-  margin: 24px auto 0 auto;
-  text-align: left;
-  padding-bottom: 8px;
+  max-width: 560px;
+  margin: 26px auto 0 auto;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 footer .footer-quote {
@@ -498,10 +498,8 @@ footer .footer-quote {
   font-size: 19px;
   line-height: 1.45;
   letter-spacing: 0.01em;
-  color: rgba(31, 41, 55, 0.84);
+  color: rgba(31, 41, 55, 0.82);
   margin: 0;
-  max-width: none;
-  text-align: left;
 }
 
 footer .footer-quote-author {
@@ -510,9 +508,13 @@ footer .footer-quote-author {
   font-size: 14px;
   margin-top: 6px;
   letter-spacing: 0.02em;
-  color: rgba(31, 41, 55, 0.72);
-  max-width: none;
-  text-align: left;
+  color: rgba(31, 41, 55, 0.75);
+}
+
+footer .footer-quote,
+footer .footer-quote-author {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (max-width: 640px) {
