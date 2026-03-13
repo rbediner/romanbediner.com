@@ -1,24 +1,22 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 52
-- Updated At (UTC): 2026-03-13T21:17:31Z
+- Handoff Sequence: 53
+- Updated At (UTC): 2026-03-13T21:23:14Z
 - Source Branch: staging
-- Source Commit: ad23c8f5e08f2f74e0f7dbcbaf9d8e64c393a67a
+- Source Commit: 8fcac53072772e3348d2f5ef4e5f6ec86ae08f88
 
 ## What Changed Most Recently
-- Reconciled README across machine threads as requested:
-  - took `README.md` from latest `origin/prod` as baseline
-  - retained thread-specific architecture addition:
-    - Framework icon optical alignment offset note (`top: -4px`) under `Icon Asset Management`
-  - preserved the auto-generated framework stage direct-link block from prod
-- Updated handoff metadata to reflect this reconciliation and avoid cross-machine drift.
+- Applied a targeted framework icon alignment tweak for staging preview:
+  - `styles/framework.css` `.framework-icon` offset changed from `top: -4px` to `top: -5px`.
+- Updated README architecture contract to match the new icon offset (`top: -5px`).
+- Updated handoff metadata for cross-machine continuity.
 
 ## Validation Status
-- Documentation-only reconciliation performed (README + handoff).
-- No runtime/code-path behavior changes in this pass.
+- Per operator request, this was a fast staging visual-adjustment pass with no local tests executed.
+- Intended next step is visual verification on staging preview.
 
 ## Branch Alignment
-- `staging`: latest integration line remains `ad23c8f`.
+- `staging`: latest integration line remains `8fcac53` before this pass is pushed.
 - `prod`: currently behind staging on this machine context.
 
 ## Preview Links (Staging)
