@@ -534,6 +534,15 @@ footer .footer-quote-author {
 }
 
 @media (max-width: 768px) {
+  /* Mobile-only contrast lift keeps the footer quote readable while still secondary. */
+  footer .footer-quote {
+    color: #6f6f6f;
+  }
+
+  footer .footer-quote-author {
+    color: #7a7a7a;
+  }
+
   .section {
     padding-top: 32px;
   }

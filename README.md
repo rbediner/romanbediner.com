@@ -427,6 +427,11 @@ flowchart LR
    - The hero image preload and `<img>` source on `/connect/index.html` must reference the same transparent asset path.
    - Mobile styling keeps the icon centered above the headline with `max-width: 72px`, `display: block`, and `margin-left/right: auto` plus `margin-bottom: 16px`.
 
+18. **Footer quote mobile readability contract**
+   - Footer quote contrast is increased on mobile-only breakpoints (`max-width: 768px`) to preserve readability while keeping quote hierarchy secondary to body copy.
+   - Mobile quote colors are fixed to `#6f6f6f` for `.footer-quote` and `#7a7a7a` for `.footer-quote-author`.
+   - No layout, spacing, alignment, or typography changes are allowed when adjusting this contract.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
