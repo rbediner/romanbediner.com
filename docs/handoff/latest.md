@@ -1,26 +1,37 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 62
-- Updated At (UTC): 2026-03-13T23:30:00Z
+- Handoff Sequence: 63
+- Updated At (UTC): 2026-03-13T23:45:00Z
 - Source Branch: codex/prod-promote
-- Source Commit: 328573bd95b318dc35a4caebbc028a2b06dfd716 (pre-hotfix baseline)
+- Source Commit: c501ae0b98cd78b974a4bffd4b73d8721583d352
 
-## What Changed Most Recently
-- Emergency framework readability hotfix for production:
-  - `/styles/framework.css`
-  - `.card-body` changed from `max-width: 760px` to `max-width: none`.
-- Purpose: prevent premature wrapping of long framework bullets (notably the first Integration bullet) while preserving bullet indentation and existing layout architecture.
+## Current State
+- Branches are aligned at the same commit:
+  - `origin/prod`: `c501ae0b98cd78b974a4bffd4b73d8721583d352`
+  - `origin/staging`: `c501ae0b98cd78b974a4bffd4b73d8721583d352`
+  - local `HEAD`: `c501ae0b98cd78b974a4bffd4b73d8721583d352`
+- Staging preview publication remains sourced from `staging` into preview repo branch `staging-preview`.
 
-## Validation Status
-- Per operator instruction for speed:
-  - Skipped local test run.
-  - Skipped staging test/deploy.
-  - Direct-to-prod hotfix path.
+## What Changed In This Cleanup Pass
+- Restored missing handoff file after accidental deletion.
+- Updated `/README.md` for cross-machine reliability:
+  - Added explicit `gh` PATH bootstrap for `~/.local/bin`.
+  - Added required verification commands (`gh --version`, `gh auth status`).
+  - Added framework text-width note for Integration bullet wrapping prevention (`.card-body { max-width: none; }`).
 
-## Branch Alignment
-- Working branch: `codex/prod-promote`
-- Pending push: yes (direct `prod` push for hotfix).
+## Tooling + Access Contract (Next Machine)
+1. Use Node 20 (`nvm use`).
+2. Install dependencies with `npm ci`.
+3. Ensure GitHub CLI is installed and on PATH:
+   - Preferred: `brew install gh`
+   - Fallback: local install in `~/.local/bin` (documented in README)
+4. Authenticate GitHub CLI with required scopes:
+   - `gh auth login --web --scopes repo,workflow`
+5. Verify environment before release operations:
+   - `gh --version`
+   - `gh auth status`
+   - `npm test`
 
-## Operator Notes
-- This hotfix intentionally bypasses local/staging verification to satisfy urgent production correction request.
-- Next routine change should resume normal staging-preview workflow with full CI parity before prod promotion.
+## Release Flow Reminder
+- Required path: `staging` -> tests green -> staging preview verification -> promote exact commit to `prod`.
+- If Actions stall/cancel due to queue contention, re-run jobs for the same commit.

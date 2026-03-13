@@ -167,6 +167,8 @@ Required handoff content for cross-machine continuity:
 - Unused icons must remain in the asset library.
 - Framework stage icons are treated as production icons and must remain under `/assets/icons/framework/`.
 - Framework icon display target is approximately `36px` to `40px` height.
+- Framework card text width policy:
+  - `.card-body` in `/styles/framework.css` uses `max-width: none` so long bullets (especially in Integration) do not wrap prematurely on desktop layouts.
 - Framework stage icons use an optical vertical alignment offset (`top: -8px`) in `/styles/framework.css` to keep icon glyphs visually centered against stage pills.
 - Stage-specific framework icon refinements are also codified in `/styles/framework.css`:
   - `#integration .framework-icon { top: -10px; }`
@@ -246,6 +248,16 @@ nvm install
 - Recommended install paths:
   - Homebrew install (preferred when available): `brew install gh`
   - Fallback local binary install: `~/.local/bin/gh`
+- Ensure `gh` is on `PATH` for every shell profile used by Codex or terminal automation:
+```bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+- Verify availability and auth before release operations:
+```bash
+gh --version
+gh auth status
+```
 - Fallback local binary install (macOS arm64, no Homebrew required):
 ```bash
 mkdir -p "$HOME/.local/bin" "$HOME/.local/share/gh-install"
