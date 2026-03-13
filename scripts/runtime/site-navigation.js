@@ -43,7 +43,10 @@ function resolveBasePath() {
 
 // Prefix canonical route hrefs with base path when running on project pages previews.
 function resolveNavHref(href, basePath) {
-  if (!basePath) {
+  if (!basePath || !href) {
+    return href;
+  }
+  if (href.startsWith("http://") || href.startsWith("https://") || href.startsWith(`${basePath}/`)) {
     return href;
   }
   if (href === "/") {

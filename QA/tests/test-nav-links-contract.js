@@ -60,6 +60,11 @@ if (!/return `\$\{basePath\}\/`/.test(navScript) || !/return `\$\{basePath\}\$\{
   console.error('FAIL: resolveNavHref() must prefix both home and non-home routes when preview base path exists.');
 }
 
+if (!/href\.startsWith\(`\$\{basePath\}\/`\)/.test(navScript)) {
+  failures += 1;
+  console.error('FAIL: resolveNavHref() must skip already-prefixed preview paths to avoid double-prefix links.');
+}
+
 for (const href of REQUIRED_HREFS) {
   if (!navHrefs.includes(href)) {
     failures += 1;
