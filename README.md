@@ -492,6 +492,7 @@ npm run qa:ci-parity
 git push origin staging
 node scripts/release/watch-ci-run.js --branch staging --sha "$(git rev-parse HEAD)"
 ```
+   - Monitor resilience: `watch-ci-run.js` retries transient GitHub API failures (DNS, timeout, reset, 5xx) before failing.
 4. Default assistant release behavior:
    - after local required QA passes, push to `staging` automatically
    - wait for `staging` CI and required tests to complete successfully

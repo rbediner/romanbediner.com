@@ -1,20 +1,24 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 22
-- Updated At (UTC): 2026-03-13T01:10:10Z
+- Handoff Sequence: 23
+- Updated At (UTC): 2026-03-13T01:18:13Z
 - Source Branch: staging
-- Source Commit: 3da5d4bb5fbdb72a5a6234ea6612ee4497ae5a77 (pre-handoff baseline)
+- Source Commit: 92781f5c48e63f453ce1c797a19ae0e2ad0874cb (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Refined footer quote typography for centered editorial balance while preserving footer structure:
-  - `footer .footer-quote-block` set to `max-width: 560px`, centered text, `margin-top: 26px`, `padding-bottom: 10px`
-  - quote color tuned to `rgba(31, 41, 55, 0.82)` with medium-weight italic Cormorant styling preserved
-  - author color tuned to `rgba(31, 41, 55, 0.75)` with medium-weight Cormorant styling preserved
-  - added font smoothing polish for quote and author lines
-- Kept mobile behavior intact (`max-width: 320px`, responsive font sizes) and did not modify divider/copyright rules.
+- Promoted tested footer quote refinement to production (`92781f5`) after full local regression pass.
+- Added anti-stall resilience to CI run monitor script:
+  - `scripts/release/watch-ci-run.js` now retries transient GitHub API/network errors (`ENOTFOUND`, `EAI_AGAIN`, `ECONNRESET`, `ETIMEDOUT`, HTTP 5xx)
+  - Added configurable `--api-retries` flag in usage/help
+  - Failure detail lookups (jobs/annotations) now use retry wrapper as well
+- Added release guardrail coverage for monitor resiliency in `QA/tests/test-release-sop-automation.js`.
+- Updated README Deployment SOP note to document monitor retry behavior.
 
 ## Validation Status
-- `npm run test:node`: passed
+- Full local regression before prod promotion:
+  - `npm test`: passed
+- Post-improvement verification:
+  - `npm run test:node`: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`

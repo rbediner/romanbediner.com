@@ -12,6 +12,7 @@
  * - Keep GitHub API endpoint shapes in sync if this repository migrates to GitHub Enterprise or workflow naming changes.
  */
 const https = require('https');
+const RETRIABLE_NETWORK_ERRORS = new Set(['ENOTFOUND', 'EAI_AGAIN', 'ECONNRESET', 'ETIMEDOUT']);
 
 function parseArgs(argv) {
   const args = {};
@@ -33,6 +34,22 @@ function parseArgs(argv) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isRetriableApiError(error) {
+  if (!error) {
+    return false;
+  }
+
+  if (error.code && RETRIABLE_NETWORK_ERRORS.has(error.code)) {
+    return true;
+  }
+
+  if (typeof error.statusCode === 'number' && error.statusCode >= 500) {
+    return true;
+  }
+
+  return false;
 }
 
 function requestJson(path) {
@@ -61,9 +78,11 @@ function requestJson(path) {
         });
         res.on('end', () => {
           if (res.statusCode < 200 || res.statusCode >= 300) {
-            return reject(
-              new Error(`GitHub API request failed (${res.statusCode}) for ${path}: ${body.slice(0, 300)}`)
+            const error = new Error(
+              `GitHub API request failed (${res.statusCode}) for ${path}: ${body.slice(0, 300)}`
             );
+            error.statusCode = res.statusCode;
+            return reject(error);
           }
           try {
             resolve(JSON.parse(body));
@@ -79,12 +98,35 @@ function requestJson(path) {
   });
 }
 
+async function requestJsonWithRetry(path, options = {}) {
+  const maxAttempts = Number(options.maxAttempts || 4);
+  const baseDelayMs = Number(options.baseDelayMs || 1200);
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      return await requestJson(path);
+    } catch (error) {
+      if (!isRetriableApiError(error) || attempt === maxAttempts) {
+        throw error;
+      }
+
+      const delayMs = baseDelayMs * attempt;
+      console.warn(
+        `[ci-monitor] Transient API error (${error.code || error.statusCode || error.message}); retry ${attempt}/${maxAttempts} in ${delayMs}ms`
+      );
+      await sleep(delayMs);
+    }
+  }
+
+  throw new Error(`Unreachable retry state for ${path}`);
+}
+
 function sortByDateDesc(runs) {
   return [...runs].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 }
 
 async function printFailureDetails(ownerRepo, runId) {
-  const jobsPayload = await requestJson(`/repos/${ownerRepo}/actions/runs/${runId}/jobs?per_page=100`);
+  const jobsPayload = await requestJsonWithRetry(`/repos/${ownerRepo}/actions/runs/${runId}/jobs?per_page=100`);
   const failedJobs = (jobsPayload.jobs || []).filter((job) => job.conclusion && job.conclusion !== 'success');
 
   if (!failedJobs.length) {
@@ -96,7 +138,9 @@ async function printFailureDetails(ownerRepo, runId) {
     console.error(`[ci-monitor] Failed job: ${job.name} (${job.html_url || 'no-url'})`);
     try {
       // Job IDs map to check-runs IDs in this repository's existing CI tooling.
-      const annotations = await requestJson(`/repos/${ownerRepo}/check-runs/${job.id}/annotations?per_page=50`);
+      const annotations = await requestJsonWithRetry(
+        `/repos/${ownerRepo}/check-runs/${job.id}/annotations?per_page=50`
+      );
       if (!Array.isArray(annotations) || annotations.length === 0) {
         console.error('[ci-monitor] No annotations returned for failed job.');
         continue;
@@ -118,7 +162,9 @@ async function printFailureDetails(ownerRepo, runId) {
 async function main() {
   const args = parseArgs(process.argv);
   if (args.help === 'true') {
-    console.log('Usage: node scripts/release/watch-ci-run.js --branch <branch> --sha <commit-sha> [--repo owner/repo] [--timeout 1800] [--interval 15]');
+    console.log(
+      'Usage: node scripts/release/watch-ci-run.js --branch <branch> --sha <commit-sha> [--repo owner/repo] [--timeout 1800] [--interval 15] [--api-retries 4]'
+    );
     process.exit(0);
   }
 
@@ -127,6 +173,7 @@ async function main() {
   const sha = args.sha;
   const timeoutSeconds = Number(args.timeout || 1800);
   const pollIntervalSeconds = Number(args.interval || 15);
+  const apiRetries = Number(args['api-retries'] || 4);
 
   if (!branch || !sha) {
     console.error('Missing required args: --branch and --sha');
@@ -142,7 +189,10 @@ async function main() {
       process.exit(1);
     }
 
-    const runsPayload = await requestJson(`/repos/${repo}/actions/runs?branch=${encodeURIComponent(branch)}&per_page=30`);
+    const runsPayload = await requestJsonWithRetry(
+      `/repos/${repo}/actions/runs?branch=${encodeURIComponent(branch)}&per_page=30`,
+      { maxAttempts: apiRetries }
+    );
     const runs = sortByDateDesc((runsPayload.workflow_runs || []).filter((run) => run.head_sha === sha));
 
     if (!runs.length) {

@@ -55,6 +55,9 @@ const monitorPath = path.join(ROOT, 'scripts', 'release', 'watch-ci-run.js');
 const monitorText = fs.readFileSync(monitorPath, 'utf8');
 assert(monitorText.includes('/actions/runs?branch='), 'monitor script must poll Actions runs by branch');
 assert(monitorText.includes('/check-runs/'), 'monitor script must attempt failed-job annotation lookup');
+assert(monitorText.includes('requestJsonWithRetry('), 'monitor script must use retry wrapper for transient API failures');
+assert(monitorText.includes('RETRIABLE_NETWORK_ERRORS'), 'monitor script must define retriable network error codes');
+assert(monitorText.includes('--api-retries'), 'monitor script usage must document api retry tuning');
 
 const ciWorkflowPath = path.join(ROOT, '.github', 'workflows', 'ci.yml');
 const ciWorkflowText = fs.readFileSync(ciWorkflowPath, 'utf8');
