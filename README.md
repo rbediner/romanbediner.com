@@ -194,6 +194,7 @@ nvm install
 ```
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
+- Local pre-push CI-parity uses an isolated temp mirror per run (`mktemp`) to avoid cloud-sync path lock collisions.
 - CI is split into explicit guardrails and parallel validation jobs:
   - `session-ready`
   - `repo-contract`

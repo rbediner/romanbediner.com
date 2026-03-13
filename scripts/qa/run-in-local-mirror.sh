@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# Purpose:
+# - Mirror the repository into a local temp directory and execute a command there.
+# Architectural role:
+# - Protect CI-parity/pre-push runs from cloud-synced filesystem latency and file-lock issues.
+# Dependencies:
+# - bash, git, tar, npm (and rsync when available for overlay sync).
+# Security/CSP considerations:
+# - Executes only local commands against a local mirror; does not modify production assets directly.
+# Migration considerations:
+# - Keep temp workspace creation isolated per run so concurrent/multi-machine sessions cannot collide.
 
-# Mirrors the repository to /tmp and executes a command there to avoid
-# filesystem timeouts from cloud-synced workspace paths.
+set -euo pipefail
 
 if [[ "$#" -eq 0 ]]; then
   echo "[local-mirror] Usage: bash scripts/qa/run-in-local-mirror.sh <command> [args...]"
@@ -11,8 +19,16 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
-TMP_ROOT="${TMPDIR:-/tmp}/rb-local-runtime"
+TMP_BASE="${TMPDIR:-/tmp}"
+TMP_ROOT="$(mktemp -d "${TMP_BASE%/}/rb-local-runtime.XXXXXX")"
 RUN_DIR="$TMP_ROOT/run"
+
+cleanup() {
+  # Best-effort cleanup keeps /tmp stable even when mirrored commands fail.
+  rm -rf "$TMP_ROOT" >/dev/null 2>&1 || true
+}
+
+trap cleanup EXIT
 
 has_git_history() {
   git -C "$ROOT_DIR" rev-parse --verify HEAD >/dev/null 2>&1
@@ -32,7 +48,6 @@ overlay_worktree() {
   fi
 }
 
-rm -rf "$RUN_DIR"
 mkdir -p "$RUN_DIR"
 
 if has_git_history; then
