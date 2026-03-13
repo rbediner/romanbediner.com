@@ -168,6 +168,9 @@ Required handoff content for cross-machine continuity:
 - Framework stage icons are treated as production icons and must remain under `/assets/icons/framework/`.
 - Framework icon display target is approximately `36px` to `40px` height.
 - Framework stage icons use an optical vertical alignment offset (`top: -8px`) in `/styles/framework.css` to keep icon glyphs visually centered against stage pills.
+- Stage-specific framework icon refinements are also codified in `/styles/framework.css`:
+  - `#integration .framework-icon { top: -10px; }`
+  - `#execution .framework-icon { top: -12px; }`
 - Shared orb bullet image is centralized at `/assets/icons/home/bullet.png` and referenced from `styles/site.css`.
 - Non-icon spare assets belong in purpose-driven asset-library folders:
   - `/assets/asset-library/concept-images/` for unused visual concepts/raster references

@@ -111,9 +111,19 @@ if (!/\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40
   console.error('FAIL: framework icons must render between 36px and 40px.');
 }
 
-if (!/\.framework-icon\s*\{[^}]*position:\s*relative;[^}]*top:\s*-4px;/s.test(frameworkCss)) {
+if (!/\.framework-icon\s*\{[^}]*position:\s*relative;[^}]*top:\s*-8px;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: framework icons must include optical vertical offset (top: -4px).');
+  console.error('FAIL: framework icons must include baseline optical vertical offset (top: -8px).');
+}
+
+if (!/#integration\s+\.framework-icon\s*\{[^}]*top:\s*-10px;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: integration icon must include stage-specific vertical offset (top: -10px).');
+}
+
+if (!/#execution\s+\.framework-icon\s*\{[^}]*top:\s*-12px;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: execution icon must include stage-specific vertical offset (top: -12px).');
 }
 
 if (!/\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;/s.test(frameworkCss)) {

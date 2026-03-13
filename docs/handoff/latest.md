@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 57
-- Updated At (UTC): 2026-03-13T21:42:00Z
-- Source Branch: staging
-- Source Commit: a67cf16bbd1040c669c08fcb555878de0fb4df89
+- Handoff Sequence: 59
+- Updated At (UTC): 2026-03-13T21:54:05Z
+- Source Branch: codex/prod-promote
+- Source Commit: 294cbc1cabebb29025a9b6bcd177f5f102e05d6f (pre-handoff baseline)
 
 ## What Changed Most Recently
 - Replaced only two framework production icon assets to fix bottom clipping from prior grid crop:
