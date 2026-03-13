@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Icon assets are split into a production page-scoped icon tree and a design-library tree for unused icons.
+ * - Icon assets are split into a production page-scoped icon tree and an asset-library tree for unused icons.
  * Why this exists:
  * - Prevents icon sprawl in assets/icons and preserves a deterministic workflow for staging/prod icon promotion.
  * What breaks if it fails:
@@ -12,7 +12,7 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const productionIconsRoot = path.join(root, 'assets', 'icons');
-const designLibraryRoot = path.join(root, 'Codex', 'art', 'icons');
+const designLibraryRoot = path.join(root, 'assets', 'asset-library');
 
 const expectedPageFolders = ['home', 'about', 'framework', 'services', 'connect'];
 const expectedFrameworkIcons = [
@@ -70,14 +70,20 @@ if (unexpectedFolders.length > 0) {
 
 if (!fs.existsSync(designLibraryRoot)) {
   failures += 1;
-  console.error('FAIL: design icon library Codex/art/icons is missing.');
+  console.error('FAIL: design asset library assets/asset-library is missing.');
 } else {
   for (const filename of expectedLibraryUnusedIcons) {
     if (!fs.existsSync(path.join(designLibraryRoot, filename))) {
       failures += 1;
-      console.error(`FAIL: missing unused design-library icon ${filename}`);
+      console.error(`FAIL: missing unused asset-library icon ${filename}`);
     }
   }
+}
+
+const legacyDesignLibraryRoot = path.join(root, 'Codex', 'art', 'icons');
+if (fs.existsSync(legacyDesignLibraryRoot)) {
+  failures += 1;
+  console.error('FAIL: legacy design library path Codex/art/icons must not exist.');
 }
 
 for (const filename of expectedFrameworkIcons) {

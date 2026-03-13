@@ -159,9 +159,9 @@ Required handoff content for cross-machine continuity:
   - `/assets/icons/services/`
   - `/assets/icons/connect/`
 - `/assets/icons/` must not contain loose files; page folders are the only allowed entries.
-- Unused candidate icons must live in the design library at `/Codex/art/icons/`.
+- Unused candidate icons must live in the asset library at `/assets/asset-library/`.
 - Promotion workflow for new icons:
-  1. add candidate icon to `/Codex/art/icons/`
+  1. add candidate icon to `/assets/asset-library/`
   2. move it to `/assets/icons/<page-name>/` only when actively used on a live page
 - Framework stage icons are treated as production icons and must remain under `/assets/icons/framework/`.
 - Shared orb bullet image is centralized at `/assets/icons/home/bullet.png` and referenced from `styles/site.css`.

@@ -130,6 +130,10 @@ function scanForUnreferencedAssets() {
     if (!rel.startsWith('assets/')) {
       continue;
     }
+    if (rel.startsWith('assets/asset-library/')) {
+      // Asset-library entries are intentionally unused-by-design until promoted to a live page folder.
+      continue;
+    }
     const isReferenced = searchableFiles.some(({ rel: sourceRel, text }) => {
       if (sourceRel === rel) {
         return false;
