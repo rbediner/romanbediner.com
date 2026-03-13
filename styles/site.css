@@ -485,8 +485,8 @@ main li:last-child {
 
 /* Footer literary quote block is responsive and wraps naturally as width narrows. */
 footer .footer-quote-block {
-  max-width: 520px;
-  margin: 26px auto 0 auto;
+  max-width: 680px;
+  margin: 24px auto 0 auto;
   text-align: left;
   padding-bottom: 8px;
 }
@@ -498,7 +498,7 @@ footer .footer-quote {
   font-size: 19px;
   line-height: 1.45;
   letter-spacing: 0.01em;
-  color: rgba(31, 41, 55, 0.78);
+  color: rgba(31, 41, 55, 0.84);
   margin: 0;
   max-width: none;
   text-align: left;
@@ -510,7 +510,7 @@ footer .footer-quote-author {
   font-size: 14px;
   margin-top: 6px;
   letter-spacing: 0.02em;
-  color: rgba(31, 41, 55, 0.78);
+  color: rgba(31, 41, 55, 0.72);
   max-width: none;
   text-align: left;
 }
