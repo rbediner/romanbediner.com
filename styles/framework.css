@@ -125,7 +125,7 @@
   flex-shrink: 0;
   /* Optical alignment: icon source art sits slightly low vs stage pill center. */
   position: relative;
-  top: -5px;
+  top: -8px;
 }
 
 .framework-pill {
