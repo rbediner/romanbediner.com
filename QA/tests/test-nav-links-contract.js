@@ -76,7 +76,8 @@ for (const rel of PAGES) {
   const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
   const hasDesktopPlaceholder = /<nav class="site-nav" aria-label="Primary"><\/nav>/i.test(html);
   const hasMobilePlaceholder = /<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><\/nav>/i.test(html);
-  const hasSharedScript = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js"><\/script>/i.test(html);
+  // Allow optional cache-busting query params for deterministic nav-cache invalidation.
+  const hasSharedScript = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js(?:\?[^"]+)?"><\/script>/i.test(html);
 
   if (!hasDesktopPlaceholder) {
     failures += 1;

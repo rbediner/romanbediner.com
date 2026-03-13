@@ -49,7 +49,8 @@ let baseline = null;
 for (const rel of pages) {
   const html = fs.readFileSync(path.resolve(__dirname, '..', '..', rel), 'utf8');
   const normalized = normalizeHeader(html);
-  const scriptIncludeRegex = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js"><\/script>/i;
+  // Accept optional cache-busting query params on the shared nav runtime script.
+  const scriptIncludeRegex = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js(?:\?[^"]+)?"><\/script>/i;
 
   if (!normalized) {
     failures += 1;

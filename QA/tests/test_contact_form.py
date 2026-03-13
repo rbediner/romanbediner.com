@@ -98,7 +98,11 @@ class ContactPageQATest(unittest.TestCase):
         # Allow optional cache-busting query strings while enforcing the canonical connect stylesheet path.
         self.assertRegex(self.html, r'<link rel="stylesheet" href="/styles/connect\.css(?:\?[^"]+)?"\s*/>')
         self.assertIn('<link rel="stylesheet" href="/styles/site.css" />', self.html)
-        self.assertIn('<script src="../scripts/runtime/site-navigation.js"></script>', self.html)
+        # Allow cache-busted nav runtime script include.
+        self.assertRegex(
+            self.html,
+            r'<script src="\.\./scripts/runtime/site-navigation\.js(?:\?[^"]+)?"></script>',
+        )
         self.assertIn('<script src="../scripts/runtime/contact-form-emailjs.js"></script>', self.html)
         self.assertIn("contact_draft", self.js)
 

@@ -66,7 +66,7 @@ class FrameworkLayoutTest(unittest.TestCase):
         self.assertRegex(self.framework_css, r"\.framework-progress-markers span\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*opacity:\s*0\.5;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section\s*\{[^}]*margin:\s*0 0 64px 0;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section ul\s*\{[^}]*line-height:\s*1\.6;[^}]*margin-top:\s*14px;", re.S)
-        self.assertRegex(self.framework_css, r"\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*620px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*none;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40)px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*position:\s*relative;[^}]*top:\s*-8px;", re.S)
         self.assertRegex(self.framework_css, r"#integration\s+\.framework-icon\s*\{[^}]*top:\s*-10px;", re.S)

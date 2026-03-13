@@ -201,7 +201,8 @@
 
 .framework-section li {
   margin-bottom: 10px;
-  max-width: 620px;
+  /* Remove artificial width cap so long bullets use full card body width naturally. */
+  max-width: none;
 }
 
 .framework-arrow {
