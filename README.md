@@ -229,6 +229,31 @@ npm test
 - Release-ops expectation:
   - If a CI/deploy workflow stalls, re-run failed jobs via CLI before asking operators to click through the UI.
 
+## Cross-Machine Replication Checklist
+Use this checklist whenever onboarding a new machine so dependencies, permissions, and release controls stay identical.
+
+1. Install runtime dependencies
+   - Node 20 via `nvm` (`nvm install && nvm use`)
+   - npm lockfile install: `npm ci`
+   - Playwright browser/runtime deps: `npx playwright install --with-deps`
+   - Python 3.11 available for QA scripts (`python3 --version`)
+2. Configure access and permissions
+   - `gh auth login --web --scopes repo,workflow`
+   - Verify access: `gh auth status`
+   - Confirm repository remotes include `rbediner/romanbediner.com`
+3. Validate environment parity
+   - `npm test`
+   - `npm run test:node`
+   - `npm run test:links`
+4. Validate release controls
+   - Confirm `staging` is current integration branch and `prod` is deploy branch
+   - Confirm staging preview publisher targets `rbediner/romanbediner-preview` branch `staging-preview`
+   - Confirm GitHub Pages environment protection allows deploy branch being used
+5. Confirm handoff integrity
+   - Read `/docs/handoff/latest.md`
+   - Ensure local branch/commit matches handoff before changes
+   - Update handoff at session end if code/scripts/QA/release behavior changed
+
 <!-- ENVIRONMENT_DIAGRAM_START -->
 ### RomanBediner.com Environment Flow
 ```mermaid

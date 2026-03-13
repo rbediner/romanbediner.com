@@ -1,11 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 33
-- Updated At (UTC): 2026-03-13T16:58:00Z
+- Handoff Sequence: 34
+- Updated At (UTC): 2026-03-13T16:55:45Z
 - Source Branch: staging
 - Source Commit: c189d1f141e9494b38b098801911a8eda7d63b84
 
 ## What Changed Most Recently
+- Added explicit cross-machine replication checklist to `/README.md` covering:
+  - required dependencies (Node 20, npm lockfile install, Playwright, Python)
+  - required GitHub CLI scopes (`repo`, `workflow`)
+  - release control checks (staging/prod roles + preview branch target)
+  - handoff integrity steps for new machines
 - Enabled GitHub CLI automation on this machine:
   - Installed `gh` locally at `~/.local/bin/gh` (v2.88.1).
   - Authenticated as `rbediner` with `repo` and `workflow` scopes.
