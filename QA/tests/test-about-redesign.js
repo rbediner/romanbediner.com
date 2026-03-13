@@ -26,7 +26,7 @@ const canonicalPages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'insights/index.html'
+  'framework/index.html'
 ];
 
 const footerPrimary = '© Roman Bediner, PMP';

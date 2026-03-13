@@ -20,7 +20,7 @@ const ARCH_PATHS = [
   'index.html',
   'about/index.html',
   'services/index.html',
-  'insights/index.html',
+  'framework/index.html',
   'connect/index.html',
   'package.json',
   'package-lock.json',

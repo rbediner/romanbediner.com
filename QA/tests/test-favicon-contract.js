@@ -26,7 +26,7 @@ const pageChecks = [
   { file: 'about/index.html', base: '../assets/favicon/' },
   { file: 'services/index.html', base: '../assets/favicon/' },
   { file: 'connect/index.html', base: '../assets/favicon/' },
-  { file: 'insights/index.html', base: '../assets/favicon/' }
+  { file: 'framework/index.html', base: '../assets/favicon/' }
 ];
 
 let failures = 0;

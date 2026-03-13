@@ -40,12 +40,12 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('.service-icon', self.services_css)
 
     def test_bottom_navigation_anchor_present(self):
-        """Ensure the Services page includes the restored transition anchor to Insights."""
+        """Ensure the Services page includes the restored transition anchor to Framework."""
         self.assertIn('class="next-page-nav"', self.services_html)
         self.assertIn('class="nav-anchor"', self.services_html)
-        self.assertIn('href="../insights/"', self.services_html)
+        self.assertIn('href="../framework/"', self.services_html)
         self.assertIn('class="nav-label">THE STRATEGY LAYER</span>', self.services_html)
-        self.assertIn('class="nav-title sr-only">Transition to Strategic Insights</span>', self.services_html)
+        self.assertIn('class="nav-title sr-only">Transition to Framework</span>', self.services_html)
         self.assertIn('.next-page-nav', self.site_css)
         self.assertIn('.nav-anchor:hover .nav-title', self.site_css)
 

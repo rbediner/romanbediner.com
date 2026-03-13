@@ -1,165 +1,31 @@
 /**
- * Invariant: Insights toggle interactions must always emit GA events with the expected
- * payload and preserve article slug/title mapping.
- * Why this exists: Analytics reporting and downstream dashboards depend on stable
- * event naming and parameters.
- * What breaks if it fails: Expand/collapse telemetry becomes incomplete or incorrect,
- * causing reporting drift and loss of behavior visibility.
+ * Invariant: Framework migration removed legacy insights toggle runtime.
+ * Why this exists: Prevents accidental reintroduction of expand/collapse brief logic.
+ * What breaks if it fails: Framework UX contract and analytics contract drift from migration design.
  */
 const fs = require('fs');
 const path = require('path');
 
-// Tests now live under QA/tests/jest, so repo root is three levels up.
 const root = path.resolve(__dirname, '..', '..', '..');
-const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
-const { onInsightToggleClick } = require(path.join(root, 'scripts/runtime/insights-toggle.js'));
+const frameworkHtml = fs.readFileSync(path.join(root, 'framework/index.html'), 'utf8');
+const redirectHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
+const navScript = fs.readFileSync(path.join(root, 'scripts/runtime/site-navigation.js'), 'utf8');
 
-function createToggleHarness(options = {}) {
-  const slug = options.slug || 'expected-slug';
-  const title = options.title || 'Expected Title';
-  const initiallyExpanded = options.initiallyExpanded || false;
-  const pathname = options.pathname || '/insights/';
-
-  const content = {
-    classState: new Set(initiallyExpanded ? ['brief-content', 'expanded'] : ['brief-content', 'collapsed']),
-    classList: {
-      toggle(name, force) {
-        if (force) {
-          content.classState.add(name);
-        } else {
-          content.classState.delete(name);
-        }
-      }
-    }
-  };
-
-  const article = {
-    id: slug,
-    querySelector(selector) {
-      if (selector === 'h2') {
-        return { textContent: title };
-      }
-      return null;
-    }
-  };
-
-  const button = {
-    textContent: initiallyExpanded ? 'Collapse -' : 'Expand +',
-    attributes: {
-      'aria-controls': `${slug}-content`,
-      'aria-expanded': String(initiallyExpanded)
-    },
-    getAttribute(name) {
-      return this.attributes[name];
-    },
-    setAttribute(name, value) {
-      this.attributes[name] = value;
-    },
-    closest(selector) {
-      if (selector === 'article') {
-        return article;
-      }
-      return null;
-    }
-  };
-
-  const target = {
-    closest(selector) {
-      if (selector === '.insight-toggle') {
-        return button;
-      }
-      return null;
-    }
-  };
-
-  global.document = {
-    getElementById(id) {
-      return id === `${slug}-content` ? content : null;
-    }
-  };
-
-  global.window = {
-    location: { pathname }
-  };
-
-  return { article, button, content, target };
-}
-
-function extractInsightArticles(html) {
-  return [...html.matchAll(/<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)<\/article>/g)]
-    .map((match) => ({ slug: match[1], articleHtml: match[2] }));
-}
-
-describe('Insights analytics runtime', () => {
-  afterEach(() => {
-    delete global.window;
-    delete global.document;
+describe('Framework migration guardrails', () => {
+  test('framework page contains no toggle controls or insight toggle script include', () => {
+    expect(frameworkHtml).not.toMatch(/insight-toggle/);
+    expect(frameworkHtml).not.toMatch(/brief-content/);
+    expect(frameworkHtml).not.toMatch(/insights-toggle\.js/);
   });
 
-  test('fires insight_toggle expand with required payload', () => {
-    const { target } = createToggleHarness({ initiallyExpanded: false });
-    window.gtag = jest.fn();
-
-    onInsightToggleClick({ target });
-
-    expect(window.gtag).toHaveBeenCalledWith(
-      'event',
-      'insight_toggle',
-      expect.objectContaining({
-        insight_slug: 'expected-slug',
-        insight_title: 'Expected Title',
-        action: 'expand',
-        page_path: '/insights/'
-      })
-    );
+  test('shared nav model includes Framework route and excludes legacy Insights label', () => {
+    expect(navScript).toMatch(/\{\s*label:\s*["']Framework["']\s*,\s*href:\s*["']\/framework\/["']\s*\}/);
+    expect(navScript).not.toMatch(/label:\s*["']Insights["']/);
   });
 
-  test('fires insight_toggle collapse with required payload', () => {
-    const { target } = createToggleHarness({ initiallyExpanded: true, title: 'Operations as a Product for Scalable Execution' });
-    window.gtag = jest.fn();
-
-    onInsightToggleClick({ target });
-
-    expect(window.gtag).toHaveBeenCalledWith(
-      'event',
-      'insight_toggle',
-      expect.objectContaining({
-        action: 'collapse',
-        insight_title: 'Operations as a Product for Scalable Execution'
-      })
-    );
-  });
-
-  test('toggles aria-expanded, button text, and collapse classes', () => {
-    const { target, button, content } = createToggleHarness({ initiallyExpanded: false });
-
-    onInsightToggleClick({ target });
-    expect(button.getAttribute('aria-expanded')).toBe('true');
-    expect(button.textContent).toBe('- Collapse');
-    expect(content.classState.has('expanded')).toBe(true);
-    expect(content.classState.has('collapsed')).toBe(false);
-
-    onInsightToggleClick({ target });
-    expect(button.getAttribute('aria-expanded')).toBe('false');
-    expect(button.textContent).toBe('+ Expand');
-    expect(content.classState.has('collapsed')).toBe(true);
-    expect(content.classState.has('expanded')).toBe(false);
-  });
-
-  test('fails silently when gtag is unavailable', () => {
-    const { target } = createToggleHarness({ initiallyExpanded: false });
-    expect(() => onInsightToggleClick({ target })).not.toThrow();
-  });
-});
-
-describe('Insights auto-discovery coverage', () => {
-  test('every insight article has a toggle with aria-controls wiring', () => {
-    const cards = extractInsightArticles(insightsHtml);
-    expect(cards.length).toBeGreaterThan(0);
-
-    for (const card of cards) {
-      expect(card.articleHtml).toMatch(/class="insight-toggle"/);
-      expect(card.articleHtml).toMatch(/aria-controls="[a-z0-9-]+-content"/);
-    }
+  test('/framework/ redirects to /framework/ with canonical continuity', () => {
+    expect(redirectHtml).toMatch(/http-equiv="refresh"/);
+    expect(redirectHtml).toMatch(/url=\/framework\//);
+    expect(redirectHtml).toMatch(/rel="canonical" href="https:\/\/romanbediner\.com\/framework\/"/);
   });
 });

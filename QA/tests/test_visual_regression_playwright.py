@@ -26,7 +26,7 @@ ROUTES = {
     "home": "/",
     "about": "/about/",
     "services": "/services/",
-    "insights": "/insights/",
+    "insights": "/framework/",
     "connect": "/connect/",
 }
 
@@ -237,12 +237,12 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 context.close()
 
     def test_02_navigation_structure_visual_alignment(self):
-        """Part 2: enforce nav alignment, Insights presence, active marker, and no active-state layout shift."""
+        """Part 2: enforce nav alignment, Framework presence, active marker, and no active-state layout shift."""
         expected_by_route = {
             "/": "/",
             "/about/": "/about/",
             "/services/": "/services/",
-            "/insights/": "/insights/",
+            "/framework/": "/framework/",
             "/connect/": "/connect/",
         }
 
@@ -254,7 +254,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 nav_text = [
                     text.strip().lower() for text in page.locator(".site-nav a").all_text_contents()
                 ]
-                self.assertIn("insights", nav_text, f"Insights link missing in desktop nav for {route}")
+                self.assertIn("insights", nav_text, f"Framework link missing in desktop nav for {route}")
 
                 y_positions = page.evaluate(
                     """
@@ -307,11 +307,11 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
         """Part 3: validate insight cards, toggle placement, hover style hook, and expanded-state stability."""
         context, page = self._new_page(1440, 1800)
         try:
-            self._goto(page, "/insights/")
+            self._goto(page, "/framework/")
 
             cards = page.locator(".insight-card")
             card_count = cards.count()
-            self.assertGreaterEqual(card_count, 3, "Insights page must contain at least three insight cards")
+            self.assertGreaterEqual(card_count, 3, "Framework page must contain at least three insight cards")
             self.assertIn(".insight-card:hover", self.insights_css, "Hover elevation class is missing from insights CSS")
 
             for index in range(card_count):
@@ -527,7 +527,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
         """Part 6: validate insight expand/collapse GA events and unavailable-gtag warning behavior."""
         context, page = self._new_page(1440, 1400)
         try:
-            self._goto(page, "/insights/")
+            self._goto(page, "/framework/")
 
             page.evaluate(
                 """
@@ -696,9 +696,9 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                     f"Horizontal overflow detected on mobile route {route}",
                 )
 
-                if route == "/insights/":
+                if route == "/framework/":
                     cards = page.locator(".insight-card")
-                    self.assertGreaterEqual(cards.count(), 3, "Insights cards must exist on mobile")
+                    self.assertGreaterEqual(cards.count(), 3, "Framework cards must exist on mobile")
 
                     # Cards must stack vertically with no overlap.
                     boxes = [cards.nth(i).bounding_box() for i in range(cards.count())]
@@ -706,7 +706,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                         self.assertGreaterEqual(
                             boxes[i]["y"],
                             boxes[i - 1]["y"] + boxes[i - 1]["height"],
-                            "Insights cards overlap on mobile",
+                            "Framework cards overlap on mobile",
                         )
 
                     toggle_box = cards.first.locator(".insight-toggle").bounding_box()

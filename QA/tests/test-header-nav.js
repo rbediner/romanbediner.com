@@ -18,14 +18,14 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'insights/index.html'
+  'framework/index.html'
 ];
 
 const navModel = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about/' },
   { label: 'Services', href: '/services/' },
-  { label: 'Insights', href: '/insights/' },
+  { label: 'Framework', href: '/framework/' },
   { label: 'Connect', href: '/connect/' }
 ];
 

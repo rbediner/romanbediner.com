@@ -18,7 +18,7 @@ const checks = [
   { file: 'about/index.html', canonical: 'https://romanbediner.com/about/' },
   { file: 'services/index.html', canonical: 'https://romanbediner.com/services/' },
   { file: 'connect/index.html', canonical: 'https://romanbediner.com/connect/' },
-  { file: 'insights/index.html', canonical: 'https://romanbediner.com/insights/' }
+  { file: 'framework/index.html', canonical: 'https://romanbediner.com/framework/' }
 ];
 
 let failures = 0;

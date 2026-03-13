@@ -60,7 +60,7 @@ describe('README structure contract', () => {
       throw new Error(`Machine-readable JSON failed to parse: ${error.message}`);
     }
 
-    const expectedRoutes = ['/', '/about/', '/services/', '/connect/', '/insights/'];
+    const expectedRoutes = ['/', '/about/', '/services/', '/connect/', '/framework/'];
     expect(parsed.routes).toEqual(expectedRoutes);
     expect(parsed.canonical_domain).toBe('romanbediner.com');
     expect(parsed.requires_trailing_slash).toBe(true);

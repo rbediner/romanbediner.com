@@ -12,7 +12,7 @@ PAGES=(
   "$ROOT_DIR/services/index.html"
   "$ROOT_DIR/connect/index.html"
   # Route refactor: Insights is a top-level canonical route.
-  "$ROOT_DIR/insights/index.html"
+  "$ROOT_DIR/framework/index.html"
 )
 
 fail=0

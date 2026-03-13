@@ -19,10 +19,10 @@ const PAGES = [
   'index.html',
   'about/index.html',
   'services/index.html',
-  'insights/index.html',
+  'framework/index.html',
   'connect/index.html'
 ];
-const REQUIRED_HREFS = ['/', '/about/', '/services/', '/insights/', '/connect/'];
+const REQUIRED_HREFS = ['/', '/about/', '/services/', '/framework/', '/connect/'];
 
 function parseNavLinks(navScript) {
   const links = [];

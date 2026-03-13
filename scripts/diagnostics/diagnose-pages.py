@@ -22,7 +22,7 @@ OWNER = "rbediner"
 REPO = "romanbediner.com"
 EXPECTED_DOMAIN = "romanbediner.com"
 # Route refactor: clean URL folders are canonical; only homepage remains root-level HTML.
-REQUIRED_ROOT_FILES = ["index.html", "about/index.html", "services/index.html", "connect/index.html", "insights/index.html"]
+REQUIRED_ROOT_FILES = ["index.html", "about/index.html", "services/index.html", "connect/index.html", "framework/index.html"]
 
 
 def api_get(url: str, token: str):
@@ -95,7 +95,7 @@ def internal_link_check(repo_root: Path):
         ):
             if rel in text:
                 non_root_hits.append((page.name, rel))
-        for root_rel in ('href="/"', 'href="/about/"', 'href="/services/"', 'href="/connect/"', 'href="/insights/"'):
+        for root_rel in ('href="/"', 'href="/about/"', 'href="/services/"', 'href="/connect/"', 'href="/framework/"'):
             root_hits += text.count(root_rel)
     return {"root_relative_hits": root_hits, "non_root_hits": non_root_hits}
 
@@ -127,7 +127,7 @@ def main():
     missing = [f for f, ok in files.items() if not ok]
     if missing:
         warnings.append(f"Missing required root files: {', '.join(missing)}")
-        fixes.append("Restore canonical route files: index.html, about/index.html, services/index.html, connect/index.html, insights/index.html")
+        fixes.append("Restore canonical route files: index.html, about/index.html, services/index.html, connect/index.html, framework/index.html")
 
     if cfg["present"] and cfg["conflicts"]:
         warnings.append(f"_config.yml contains potentially conflicting keys: {', '.join(cfg['conflicts'])}")

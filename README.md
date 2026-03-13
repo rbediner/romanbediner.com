@@ -14,7 +14,7 @@ Canonical public routes:
 - `/about/`
 - `/services/`
 - `/connect/`
-- `/insights/`
+- `/framework/`
 
 Routing requirements:
 - Trailing slash is required for canonical URLs.
@@ -125,7 +125,7 @@ Required handoff content for cross-machine continuity:
   - `/index.html`
   - `/about/index.html`
   - `/services/index.html`
-  - `/insights/index.html`
+  - `/framework/index.html`
   - `/connect/index.html`
 - Browser runtime scripts live in `/scripts/runtime`.
 - QA and local runner scripts live in `/scripts/qa`.
@@ -188,7 +188,7 @@ nvm install
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
-- Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/insights/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
+- Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/framework/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
 - Staging deployment publishes an isolated preview to a dedicated repository target (`rbediner/romanbediner-preview`) so production Pages state cannot be overwritten.
 - Preview publication branch is fixed to `staging-preview` (not configurable) to prevent branch drift and accidental publication to preview `main`.
 - Preview publisher now creates `staging-preview` even when preview content is unchanged versus preview `main`, preventing "missing branch" confusion on first hard-locked rollout.
@@ -294,7 +294,7 @@ flowchart LR
    - `scripts/runtime/insights-toggle.js` toggles collapse classes and `aria-expanded` state without moving content or changing layout.
 
 11. **Contextual internal link styling contract**
-   - Contextual inline links may be added inside existing narrative copy to strengthen topical linking to canonical routes such as `/insights/`.
+   - Contextual inline links may be added inside existing narrative copy to strengthen topical linking to canonical routes such as `/framework/`.
    - These links must use the shared `.semantic-inline-link` class in `styles/site.css` so crawlable anchors do not introduce visible color, underline, or typography drift.
    - Internal-link additions must preserve the original layout, spacing, and editorial presentation.
 
@@ -340,7 +340,7 @@ flowchart LR
     "/about/",
     "/services/",
     "/connect/",
-    "/insights/"
+    "/framework/"
   ],
   "transitions": {
     "flow": [
@@ -358,12 +358,12 @@ flowchart LR
       },
       {
         "from": "/services/",
-        "to": "/insights/",
+        "to": "/framework/",
         "label": "THE STRATEGY LAYER",
         "title": "Transition to Strategic Insights"
       },
       {
-        "from": "/insights/",
+        "from": "/framework/",
         "to": "/connect/",
         "label": "THE RELATIONSHIP LAYER",
         "title": "Transition to Connect"
@@ -666,21 +666,24 @@ python3 -m playwright install chromium
 ```
 
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
-## INSIGHT DIRECT LINKS
+## FRAMEWORK STAGE DIRECT LINKS
 
-Productizing Operations for Modern AI-Enabled Work
-https://romanbediner.com/insights/#productizing-operations-ai-enabled-work
+Productizing Operations
+https://romanbediner.com/framework/#opportunity
 
-Operations as a Product for Scalable Execution
-https://romanbediner.com/insights/#operations-as-a-product-scalable-execution
+Operations as a Product
+https://romanbediner.com/framework/#design
 
-Integrating AI as an Operating Layer
-https://romanbediner.com/insights/#ai-as-an-operating-layer
+AI as an Operating Layer
+https://romanbediner.com/framework/#integration
 
-Steering Execution with Operational Signals
-https://romanbediner.com/insights/#steering-execution-with-operational-signals
+Operational Lanes
+https://romanbediner.com/framework/#execution
 
-Designing Adaptive Guardrails for Agentic Work
-https://romanbediner.com/insights/#designing-adaptive-guardrails-for-agentic-work
+Operational Signals
+https://romanbediner.com/framework/#signals
+
+Agentic Guardrails
+https://romanbediner.com/framework/#evolution
 
 <!-- AUTO-GENERATED INSIGHT LINKS END -->

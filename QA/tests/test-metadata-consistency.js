@@ -19,15 +19,15 @@ const expectedHomepageTitle = 'Roman Bediner | AI-Enabled Operations & Execution
 const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operations, execution systems, and engineering operating models that productize operations for scalable platform execution architecture.';
 // Homepage hero headline is intentionally all caps for executive visual hierarchy.
 const expectedHomepageH1 = 'PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK';
-const expectedInsightsTitle = 'Insights | AI-Enabled Operations & Execution Systems';
-const expectedInsightsDescription = 'Strategic briefs on AI-enabled operations, execution systems, productizing operations, engineering operating models, and platform execution architecture.';
+const expectedFrameworkTitle = 'The AI-Enabled Operations Framework';
+const expectedFrameworkDescription = 'The AI-Enabled Operations Framework for productizing operations through Opportunity, Design, Integration, Execution, Signals, and Evolution.';
 
 const htmlPages = [
   'index.html',
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'insights/index.html'
+  'framework/index.html'
 ];
 
 function extractSingle(regex, html, label, file, failures) {
@@ -52,7 +52,7 @@ function decodeBasicEntities(value) {
 const failures = { count: 0 };
 
 const homepageHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const insightsHtml = fs.readFileSync(path.join(root, 'insights', 'index.html'), 'utf8');
+const insightsHtml = fs.readFileSync(path.join(root, 'framework', 'index.html'), 'utf8');
 
 const homepageTitle = extractSingle(/<title>([^<]+)<\/title>/gi, homepageHtml, 'title', 'index.html', failures);
 const homepageDescription = extractSingle(/<meta\s+name="description"\s+content="([^"]*)"\s*\/?\s*>/gi, homepageHtml, 'meta description', 'index.html', failures);
@@ -60,12 +60,12 @@ const homepageH1 = extractSingle(/<h1>([^<]+)<\/h1>/gi, homepageHtml, 'h1', 'ind
 const homepageOgTitle = extractSingle(/<meta\s+property="og:title"\s+content="([^"]*)"\s*\/?\s*>/gi, homepageHtml, 'og:title', 'index.html', failures);
 const homepageOgDescription = extractSingle(/<meta\s+property="og:description"\s+content="([^"]*)"\s*\/?\s*>/gi, homepageHtml, 'og:description', 'index.html', failures);
 
-const insightsTitle = extractSingle(/<title>([^<]+)<\/title>/gi, insightsHtml, 'title', 'insights/index.html', failures);
-const insightsDescription = extractSingle(/<meta\s+name="description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'meta description', 'insights/index.html', failures);
-const insightsOgTitle = extractSingle(/<meta\s+property="og:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:title', 'insights/index.html', failures);
-const insightsOgDescription = extractSingle(/<meta\s+property="og:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:description', 'insights/index.html', failures);
-const insightsTwitterTitle = extractSingle(/<meta\s+name="twitter:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:title', 'insights/index.html', failures);
-const insightsTwitterDescription = extractSingle(/<meta\s+name="twitter:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:description', 'insights/index.html', failures);
+const insightsTitle = extractSingle(/<title>([^<]+)<\/title>/gi, insightsHtml, 'title', 'framework/index.html', failures);
+const insightsDescription = extractSingle(/<meta\s+name="description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'meta description', 'framework/index.html', failures);
+const insightsOgTitle = extractSingle(/<meta\s+property="og:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:title', 'framework/index.html', failures);
+const insightsOgDescription = extractSingle(/<meta\s+property="og:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'og:description', 'framework/index.html', failures);
+const insightsTwitterTitle = extractSingle(/<meta\s+name="twitter:title"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:title', 'framework/index.html', failures);
+const insightsTwitterDescription = extractSingle(/<meta\s+name="twitter:description"\s+content="([^"]*)"\s*\/?\s*>/gi, insightsHtml, 'twitter:description', 'framework/index.html', failures);
 const insightsH1 = [...insightsHtml.matchAll(/<h1>([^<]+)<\/h1>/gi)].map((m) => decodeBasicEntities(m[1].trim()));
 
 if (homepageTitle && homepageTitle !== expectedHomepageTitle) {
@@ -89,17 +89,17 @@ if (homepageOgDescription && !homepageOgDescription.length) {
   console.error('FAIL: homepage og:description cannot be empty.');
 }
 
-if (insightsTitle && insightsTitle !== expectedInsightsTitle) {
+if (insightsTitle && insightsTitle !== expectedFrameworkTitle) {
   failures.count += 1;
-  console.error(`FAIL: insights title mismatch. Expected "${expectedInsightsTitle}"`);
+  console.error(`FAIL: framework title mismatch. Expected "${expectedFrameworkTitle}"`);
 }
-if (insightsDescription && insightsDescription !== expectedInsightsDescription) {
+if (insightsDescription && insightsDescription !== expectedFrameworkDescription) {
   failures.count += 1;
-  console.error('FAIL: insights meta description mismatch.');
+  console.error('FAIL: framework meta description mismatch.');
 }
-if (insightsH1.length !== 1 || insightsH1[0] !== 'Insights & Briefs') {
+if (insightsH1.length !== 1 || insightsH1[0] !== 'The AI-Enabled Operations Framework') {
   failures.count += 1;
-  console.error('FAIL: insights page must contain exactly one h1 with value "Insights & Briefs".');
+  console.error('FAIL: framework page must contain exactly one h1 with value \"The AI-Enabled Operations Framework\".');
 }
 if (insightsOgTitle && !insightsOgTitle.length) {
   failures.count += 1;

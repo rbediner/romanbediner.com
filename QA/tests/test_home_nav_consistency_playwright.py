@@ -43,13 +43,13 @@ class HomeNavConsistencyPlaywrightTest(unittest.TestCase):
             cls.server.server_close()
 
     def test_header_nav_consistent_across_canonical_routes(self):
-        expected_labels = ["Home", "About", "Services", "Insights", "Connect"]
-        expected_hrefs = ["/", "/about/", "/services/", "/insights/", "/connect/"]
+        expected_labels = ["Home", "About", "Framework", "Services", "Connect"]
+        expected_hrefs = ["/", "/about/", "/framework/", "/services/", "/connect/"]
         route_expectations = {
             "/": "/",
             "/about/": "/about/",
             "/services/": "/services/",
-            "/insights/": "/insights/",
+            "/framework/": "/framework/",
             "/connect/": "/connect/",
         }
 
@@ -98,7 +98,7 @@ class HomeNavConsistencyPlaywrightTest(unittest.TestCase):
 
         page.goto(f"http://127.0.0.1:{self.port}/", wait_until="networkidle")
         page.click('.site-nav a[href="/about/"]')
-        page.click('.site-nav a[href="/insights/"]')
+        page.click('.site-nav a[href="/framework/"]')
 
         nav_click_events = page.evaluate(
             """
@@ -116,7 +116,7 @@ class HomeNavConsistencyPlaywrightTest(unittest.TestCase):
         )
         labels = {event.get("label") for event in nav_click_events}
         self.assertIn("About", labels, "Missing nav_click label for About.")
-        self.assertIn("Insights", labels, "Missing nav_click label for Insights.")
+        self.assertIn("Framework", labels, "Missing nav_click label for Framework.")
 
 
 if __name__ == "__main__":

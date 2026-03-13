@@ -3,87 +3,49 @@ import unittest
 from pathlib import Path
 
 
-class InsightsLayoutTest(unittest.TestCase):
-    """Validate Insights structure, behavior, and shared bullet styling."""
+class FrameworkLayoutTest(unittest.TestCase):
+    """Validate Framework structure, flow indicators, and readability rules."""
 
     @classmethod
     def setUpClass(cls):
-        # QA/tests is nested one level under the repository root.
         cls.root = Path(__file__).resolve().parents[2]
-        cls.insights_html = (cls.root / "insights/index.html").read_text(encoding="utf-8")
-        cls.insights_css = (cls.root / "styles/insights.css").read_text(encoding="utf-8")
-        cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
-        cls.insights_script = (cls.root / "scripts/runtime/insights-toggle.js").read_text(encoding="utf-8")
+        cls.framework_html = (cls.root / "framework/index.html").read_text(encoding="utf-8")
+        cls.redirect_html = (cls.root / "insights/index.html").read_text(encoding="utf-8")
+        cls.framework_css = (cls.root / "styles/framework.css").read_text(encoding="utf-8")
 
-    def test_cards_have_slug_title_and_toggle(self):
-        """Ensure each insight card has a slug id, title, and collapsed toggle."""
-        cards = re.findall(r'<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)</article>', self.insights_html)
-        self.assertGreaterEqual(len(cards), 3)
+    def test_framework_has_six_sections_and_anchor_nav(self):
+        section_ids = ["opportunity", "design", "integration", "execution", "signals", "evolution"]
+        for section_id in section_ids:
+            self.assertIn(f'id="{section_id}"', self.framework_html)
+            self.assertIn(f'href="#{section_id}"', self.framework_html)
 
-        seen = set()
-        for slug, card_html in cards:
-            self.assertTrue(slug)
-            self.assertNotIn(slug, seen)
-            seen.add(slug)
-            self.assertRegex(card_html, r"<h2>[^<]+</h2>")
-            self.assertRegex(card_html, r'class="insight-toggle"[^>]*aria-expanded="(true|false)"')
-            self.assertIn('<ul class="service-list">', card_html)
-            self.assertRegex(card_html, r'id="[a-z0-9-]+-content"\s+class="brief-content collapsed"')
+        self.assertEqual(self.framework_html.count('class="framework-section insight-card"'), 6)
 
-    def test_summary_and_bullets_stay_outside_collapsed_content(self):
-        """Guardrail: summary and bullets must remain visible when a card is collapsed."""
-        cards = re.findall(r'<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)</article>', self.insights_html)
-        self.assertGreaterEqual(len(cards), 3)
+    def test_flow_arrows_only_between_sections(self):
+        self.assertEqual(self.framework_html.count('class="framework-arrow"'), 3)
+        section_blocks = re.findall(r'<section id="[a-z-]+" class="framework-section insight-card">([\s\S]*?)</section>', self.framework_html)
+        self.assertTrue(section_blocks)
+        for block in section_blocks:
+            self.assertNotIn('framework-arrow', block)
 
-        for slug, card_html in cards:
-            content_marker = f'id="{slug}-content" class="brief-content collapsed"'
-            content_start = card_html.find(content_marker)
-            summary_start = card_html.find('<p class="insight-summary">')
-            list_start = card_html.find('<ul class="service-list">')
-            self.assertGreaterEqual(content_start, 0, f"{slug} is missing brief-content marker.")
-            self.assertGreaterEqual(summary_start, 0, f"{slug} is missing insight summary.")
-            self.assertGreaterEqual(list_start, 0, f"{slug} is missing service list.")
-            self.assertLess(summary_start, content_start, f"{slug} summary must be outside hidden brief-content.")
-            self.assertLess(list_start, content_start, f"{slug} service-list must be outside hidden brief-content.")
+    def test_legacy_expand_collapse_removed(self):
+        self.assertNotIn('insight-toggle', self.framework_html)
+        self.assertNotIn('brief-content', self.framework_html)
+        self.assertNotIn('insights-toggle.js', self.framework_html)
 
-    def test_expand_collapse_css_rules(self):
-        """Ensure brief content region has dedicated styling."""
-        self.assertRegex(
-            self.insights_css,
-            r"\.brief-content\s*\{[^}]*overflow:\s*hidden;[^}]*transition:\s*max-height 280ms ease, opacity 220ms ease;",
-        )
-        self.assertRegex(self.insights_css, r"\.brief-content\.collapsed\s*\{[^}]*max-height:\s*0;[^}]*overflow:\s*hidden;[^}]*opacity:\s*0;")
-        self.assertRegex(
-            self.insights_css,
-            r"\.brief-content\.expanded\s*\{[^}]*margin-top:\s*16px;[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;",
-        )
+    def test_framework_css_readability_and_indicator_rules(self):
+        self.assertRegex(self.framework_css, r"--framework-max-width:\s*860px;")
+        self.assertRegex(self.framework_css, r"\.framework-progress-line\s*\{[^}]*height:\s*2px;[^}]*opacity:\s*0\.25;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-progress\s*\{[^}]*max-width:\s*700px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-progress-markers span\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*opacity:\s*0\.5;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-section \+ \.framework-section\s*\{[^}]*margin-top:\s*48px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-section ul\s*\{[^}]*line-height:\s*1\.6;[^}]*margin-top:\s*14px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*620px;", re.S)
 
-    def test_hover_lift_and_spacing(self):
-        """Ensure card hover lift and card spacing align with required behavior."""
-        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;")
-        self.assertRegex(self.insights_css, r"\.insight-card\s*\{[^}]*margin-bottom:\s*48px;")
-        self.assertRegex(self.insights_css, r"\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);")
-        self.assertRegex(self.site_css, r"\.service-card,\s*[\s\S]*?\.philosophy-card\s*\{[^}]*padding:\s*40px;")
-        self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*width:\s*56px;")
-        self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*height:\s*3px;")
-        self.assertRegex(self.insights_css, r"\.section-accent\s*\{[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);")
-        self.assertRegex(self.insights_css, r"\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;")
-        self.assertRegex(self.insights_css, r"\.insight-toggle\s*\{[^}]*border-radius:\s*6px;")
-
-    def test_shared_bullets_follow_orb_spec(self):
-        """Ensure global orb bullet spec is centralized in site.css."""
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*width:\s*8px;")
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*height:\s*8px;")
-        self.assertRegex(self.site_css, r"\.service-list li::before\s*\{[^}]*margin-right:\s*14px;")
-        self.assertIn('background-image: url("/assets/icons/bullet.png");', self.site_css)
-
-    def test_ga_event_on_expand_contract(self):
-        """Ensure script sends required insight_toggle GA event payload fields."""
-        self.assertIn("window.gtag('event', 'insight_toggle'", self.insights_script)
-        self.assertIn("insight_slug", self.insights_script)
-        self.assertIn("insight_title", self.insights_script)
-        self.assertIn("action: expanded ? 'collapse' : 'expand'", self.insights_script)
-        self.assertIn("page_path: window.location.pathname", self.insights_script)
+    def test_redirect_page_points_to_framework(self):
+        self.assertIn('http-equiv="refresh"', self.redirect_html)
+        self.assertIn('url=/framework/', self.redirect_html)
+        self.assertIn('rel="canonical" href="https://romanbediner.com/framework/"', self.redirect_html)
 
 
 if __name__ == "__main__":

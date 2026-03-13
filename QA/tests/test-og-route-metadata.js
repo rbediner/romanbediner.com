@@ -38,10 +38,10 @@ const expected = [
     ogDescription: 'Operating model design, execution systems leadership, and platform execution architecture for organizations productizing operations in AI-enabled environments.'
   },
   {
-    file: 'insights/index.html',
-    canonical: 'https://romanbediner.com/insights/',
-    ogTitle: 'Insights | AI-Enabled Operations & Execution Systems',
-    ogDescription: 'Strategic briefs on AI-enabled operations, execution systems, productizing operations, engineering operating models, and platform execution architecture.'
+    file: 'framework/index.html',
+    canonical: 'https://romanbediner.com/framework/',
+    ogTitle: 'Framework | AI-Enabled Operations Framework',
+    ogDescription: 'The AI-Enabled Operations Framework for productizing operations through Opportunity, Design, Integration, Execution, Signals, and Evolution.'
   },
   {
     file: 'connect/index.html',
@@ -211,8 +211,8 @@ for (const page of expected) {
     }
   }
 
-  // Guardrail: old Insights phrase must not appear in Insights metadata.
-  if (page.file === 'insights/index.html') {
+  // Guardrail: old Insights phrase must not appear in Framework metadata.
+  if (page.file === 'framework/index.html') {
     const metadataValues = [
       ogTitle || '',
       ogDescription || '',
@@ -222,7 +222,7 @@ for (const page of expected) {
     ].join(' ');
     if (/Short operational essays/i.test(metadataValues)) {
       failures += 1;
-      console.error('FAIL: legacy phrase "Short operational essays" remains in Insights metadata');
+      console.error('FAIL: legacy phrase "Short operational essays" remains in Framework metadata');
     }
   }
 }

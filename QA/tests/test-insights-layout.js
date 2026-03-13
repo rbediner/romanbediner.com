@@ -1,151 +1,122 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Regression guardrails for test-insights-layout.js.
+ * - Framework page structure and styling must remain stable.
  * Why this exists:
- * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * - Prevents regressions in stage navigation, section flow, and readability.
  * What breaks if it fails:
- * - CI blocks deployment to prevent production regressions.
- */
-/**
- * Test: Insights structure, styling behavior, and shared orb bullet usage.
+ * - CI blocks deployment when framework layout contracts drift.
  */
 const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
-const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
-const insightsCss = fs.readFileSync(path.join(root, 'styles/insights.css'), 'utf8');
+const frameworkHtml = fs.readFileSync(path.join(root, 'framework/index.html'), 'utf8');
+const frameworkCss = fs.readFileSync(path.join(root, 'styles/framework.css'), 'utf8');
 const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
-const insightsScript = fs.readFileSync(path.join(root, 'scripts/runtime/insights-toggle.js'), 'utf8');
 
 let failures = 0;
 
-// Validate card markup and toggle wiring.
-const insightCards = [...insightsHtml.matchAll(/<article id="([a-z0-9-]+)" class="insight-card">([\s\S]*?)<\/article>/g)];
-if (insightCards.length < 3) {
-  failures += 1;
-  console.error('FAIL: Insights page should contain at least 3 insight-card sections.');
-}
-
-const seenSlugs = new Set();
-for (const card of insightCards) {
-  const slug = card[1];
-  const cardHtml = card[2];
-  const titleMatch = cardHtml.match(/<h2>([^<]+)<\/h2>/);
-
-  if (!slug || seenSlugs.has(slug)) {
+const stageIds = ['opportunity', 'design', 'integration', 'execution', 'signals', 'evolution'];
+for (const id of stageIds) {
+  if (!new RegExp(`<section id="${id}" class="framework-section insight-card">`).test(frameworkHtml)) {
     failures += 1;
-    console.error(`FAIL: duplicate or missing card slug: ${slug}`);
+    console.error(`FAIL: missing framework section #${id}.`);
   }
-  seenSlugs.add(slug);
-
-  if (!titleMatch) {
+  if (!new RegExp(`href="#${id}"`).test(frameworkHtml)) {
     failures += 1;
-    console.error(`FAIL: card ${slug} is missing an h2 title.`);
-  }
-
-  if (!/<button[\s\S]*class="insight-toggle"[\s\S]*aria-expanded="(true|false)"/i.test(cardHtml)) {
-    failures += 1;
-    console.error(`FAIL: card ${slug} is missing the insight-toggle button with aria-expanded.`);
-  }
-
-  if (!/<ul class="service-list">/i.test(cardHtml)) {
-    failures += 1;
-    console.error(`FAIL: card ${slug} is missing shared service-list bullets.`);
-  }
-
-  if (!/id="[a-z0-9-]+-content"\s+class="brief-content collapsed"/i.test(cardHtml)) {
-    failures += 1;
-    console.error(`FAIL: card ${slug} is missing collapsed brief-content container with semantic id.`);
-  }
-
-  // Guardrail: summary and bullets must remain visible in collapsed state, outside the brief-content block.
-  const contentMarker = `id="${slug}-content" class="brief-content collapsed"`;
-  const contentStart = cardHtml.indexOf(contentMarker);
-  const summaryStart = cardHtml.indexOf('<p class="insight-summary">');
-  const listStart = cardHtml.indexOf('<ul class="service-list">');
-  if (contentStart === -1 || summaryStart === -1 || listStart === -1 || summaryStart > contentStart || listStart > contentStart) {
-    failures += 1;
-    console.error(`FAIL: card ${slug} must keep summary and service-list outside hidden brief-content.`);
+    console.error(`FAIL: stage nav missing anchor href #${id}.`);
   }
 }
 
-if (!insightsHtml.includes('src="/scripts/runtime/insights-toggle.js" defer')) {
+const sectionCount = (frameworkHtml.match(/class="framework-section insight-card"/g) || []).length;
+if (sectionCount !== 6) {
   failures += 1;
-  console.error('FAIL: Insights page must include deferred /scripts/runtime/insights-toggle.js.');
+  console.error(`FAIL: expected 6 framework sections, found ${sectionCount}.`);
 }
 
-// Validate CSS behavior for toggle content region and hover lift.
-if (!/\.brief-content\s*\{[^}]*overflow:\s*hidden;[^}]*transition:\s*max-height 280ms ease, opacity 220ms ease;/s.test(insightsCss)) {
+if ((frameworkHtml.match(/class="framework-arrow"/g) || []).length !== 3) {
   failures += 1;
-  console.error('FAIL: brief-content region style is missing.');
-}
-if (!/\.brief-content\.collapsed\s*\{[^}]*max-height:\s*0;[^}]*overflow:\s*hidden;[^}]*opacity:\s*0;/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: collapsed brief-content CSS state is missing.');
-}
-if (!/\.brief-content\.expanded\s*\{[^}]*margin-top:\s*16px;[^}]*max-height:\s*2000px;[^}]*opacity:\s*1;/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: expanded brief-content CSS state must restore visible spacing.');
-}
-if (!/\.insight-card\s*\{[^}]*transition:\s*transform 180ms ease, box-shadow 180ms ease;/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: insight-card transition must use transform/box-shadow 180ms ease.');
-}
-if (!/\.insight-card\s*\{[^}]*margin-bottom:\s*48px;/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: insight-card must preserve the refined briefing vertical rhythm (48px spacing).');
-}
-if (!/\.insight-card,\s*[\s\S]*?\.philosophy-card\s*\{[^}]*padding:\s*40px;[^}]*border-radius:\s*8px;/s.test(siteCss)) {
-  failures += 1;
-  console.error('FAIL: site.css must own shared card geometry (40px padding, 8px radius).');
-}
-if (!/\.insight-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\);/s.test(insightsCss)) {
-  failures += 1;
-  console.error('FAIL: insight-card hover lift must be translateY(-2px).');
+  console.error('FAIL: expected exactly 3 framework arrows between stage groups.');
 }
 
-if (!/\.section-accent\s*\{[^}]*width:\s*56px;[^}]*height:\s*3px;[^}]*background:\s*rgba\(59,\s*108,\s*255,\s*0\.62\);/s.test(insightsCss)) {
+if (/insight-toggle|brief-content|\+ Expand|- Collapse/.test(frameworkHtml)) {
   failures += 1;
-  console.error('FAIL: section accent must be short (56px), light blue, and 3px tall.');
+  console.error('FAIL: legacy expand/collapse insights functionality is still present on framework page.');
 }
 
-if (!/\.insight-actions\s*\{[^}]*justify-content:\s*flex-end;/s.test(insightsCss) || !/\.insight-toggle\s*\{[^}]*border-radius:\s*6px;/s.test(insightsCss)) {
+if (!/class="framework-progress"/.test(frameworkHtml) || !/class="framework-progress-line"/.test(frameworkHtml)) {
   failures += 1;
-  console.error('FAIL: bottom-right executive toggle styling is missing.');
+  console.error('FAIL: framework progress indicator line is missing.');
 }
 
-// Validate shared orb bullet implementation in global CSS.
-if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*margin-right:\s*14px;[^}]*background-image:\s*url\("\/assets\/icons\/bullet\.png"\);/s.test(siteCss)) {
+if (!/\.framework-progress-line\s*\{[^}]*height:\s*2px;[^}]*opacity:\s*0\.25;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: shared orb bullet spec is not correctly defined in site.css.');
+  console.error('FAIL: framework progress line styling contract is missing (2px, 0.25 opacity).');
 }
 
-// Validate GA tracking contract in script.
-if (!insightsScript.includes("window.gtag('event', 'insight_toggle'")) {
+if (!/\.framework-progress\s*\{[^}]*max-width:\s*700px;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: insight_toggle GA event call is missing.');
+  console.error('FAIL: framework progress max-width must be 700px.');
 }
-if (!insightsScript.includes('insight_slug')) {
+
+if (!/\.framework-progress-markers span\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*opacity:\s*0\.5;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: insight_slug parameter is missing.');
+  console.error('FAIL: framework progress markers must be 8px circles at 0.5 opacity.');
 }
-if (!insightsScript.includes('insight_title')) {
+
+if (!/\.framework-section\s*\{[^}]*max-width:\s*var\(--framework-max-width\);/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: insight_title parameter is missing.');
+  console.error('FAIL: framework sections must use constrained narrative width.');
 }
-if (!insightsScript.includes('action: expanded ? \'collapse\' : \'expand\'')) {
+
+if (!/--framework-max-width:\s*860px;/.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: action parameter must be expand/collapse based on current state.');
+  console.error('FAIL: framework max width token must remain 860px.');
 }
-if (!insightsScript.includes('page_path: window.location.pathname')) {
+
+if (!/\.framework-section \+ \.framework-section\s*\{[^}]*margin-top:\s*48px;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: page_path parameter must use window.location.pathname.');
+  console.error('FAIL: framework section vertical rhythm must remain 48px.');
+}
+
+if (!/\.framework-section:hover\s*\{[^}]*translateY\(-2px\);[^}]*box-shadow:\s*0 4px 14px rgba\(0, 0, 0, 0\.06\);/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework hover behavior contract is missing.');
+}
+
+if (!/\.framework-section ul\s*\{[^}]*line-height:\s*1\.6;[^}]*margin-top:\s*14px;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework bullet readability rule is missing for list containers.');
+}
+
+if (!/\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*620px;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework bullet readability rule is missing for list items.');
+}
+
+if (!/\.badge-phase\s*\{/.test(siteCss)) {
+  failures += 1;
+  console.error('FAIL: shared badge-phase style must exist in site.css.');
+}
+
+const frameworkIcons = [
+  '/assets/icons/framework/opportunity.svg',
+  '/assets/icons/framework/design.svg',
+  '/assets/icons/framework/integration.svg',
+  '/assets/icons/framework/execution.svg',
+  '/assets/icons/framework/signals.svg',
+  '/assets/icons/framework/evolution.svg'
+];
+for (const iconPath of frameworkIcons) {
+  if (!frameworkHtml.includes(`src="${iconPath}"`)) {
+    failures += 1;
+    console.error(`FAIL: missing framework icon reference ${iconPath}`);
+  }
 }
 
 if (failures > 0) {
   process.exit(1);
 }
 
-console.log('PASS: insights structure, behavior, and orb bullet checks passed.');
+console.log('PASS: framework layout and stage contracts passed.');

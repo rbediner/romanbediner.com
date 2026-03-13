@@ -22,13 +22,13 @@
     ]
   },
   "machine_readable_summary": {
-    "routes": ["/", "/about/", "/services/", "/connect/", "/insights/"],
+    "routes": ["/", "/about/", "/services/", "/connect/", "/framework/"],
     "transitions": {
       "flow": [
         { "from": "/", "to": "/about/", "label": "THE EXECUTION LAYER", "title": "Transition to Operating Philosophy" },
         { "from": "/about/", "to": "/services/", "label": "THE OPERATING MODEL", "title": "Transition to Strategic Services" },
-        { "from": "/services/", "to": "/insights/", "label": "THE STRATEGY LAYER", "title": "Transition to Strategic Insights" },
-        { "from": "/insights/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect" }
+        { "from": "/services/", "to": "/framework/", "label": "THE STRATEGY LAYER", "title": "Transition to Strategic Insights" },
+        { "from": "/framework/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect" }
       ],
       "intent": "Guide a linear narrative from operating context to engagement."
     },

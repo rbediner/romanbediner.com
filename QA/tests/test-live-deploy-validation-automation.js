@@ -36,7 +36,7 @@ const validHomepage = {
   text: [
     '/about/',
     '/services/',
-    '/insights/',
+    '/framework/',
     '/connect/',
     'application/ld+json',
     'Content-Security-Policy',

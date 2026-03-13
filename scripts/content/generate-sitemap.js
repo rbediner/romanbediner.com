@@ -28,8 +28,8 @@ const PAGE_PATHS = [
   { path: '/services/', priority: '0.9' },
   // Refactor: /connect/ is the only canonical route after removing /contact.
   { path: '/connect/', priority: '0.7' },
-  // Canonical top-level Insights route.
-  { path: '/insights/', priority: '0.6' }
+  // Canonical top-level Framework route.
+  { path: '/framework/', priority: '0.6' }
 ];
 
 const lastmod = new Date().toISOString().slice(0, 10);

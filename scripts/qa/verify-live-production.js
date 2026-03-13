@@ -47,7 +47,7 @@ async function validateLiveDeployment() {
 
   // Canonical routes are validated directly rather than assuming they are all
   // present in a single homepage navigation block.
-  const canonicalRoutes = ['/about/', '/services/', '/insights/', '/connect/'];
+  const canonicalRoutes = ['/about/', '/services/', '/framework/', '/connect/'];
   for (const route of canonicalRoutes) {
     const routeResponse = await fetchText(route);
     requireCondition(routeResponse.response.ok, `Canonical route failed with status ${routeResponse.response.status}: ${route}`);

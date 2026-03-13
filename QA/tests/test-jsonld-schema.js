@@ -8,7 +8,7 @@
  * - CI blocks deployment to prevent production regressions.
  */
 /**
- * Test: homepage contains Person and WebSite JSON-LD, and Insights page contains complete Article JSON-LD entries.
+ * Test: homepage contains Person and WebSite JSON-LD, and Framework page contains CreativeWork JSON-LD.
  */
 const fs = require('fs');
 const path = require('path');
@@ -72,12 +72,12 @@ if (!Array.isArray(websiteSchema.about) || websiteSchema.about.length < 4) {
 
 console.log('PASS: homepage Person and WebSite schema are present and complete.');
 
-const insightsPath = path.resolve(__dirname, '..', '..', 'insights', 'index.html');
+const insightsPath = path.resolve(__dirname, '..', '..', 'framework', 'index.html');
 const insightsHtml = fs.readFileSync(insightsPath, 'utf8');
 const insightsSchemaMatch = insightsHtml.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
 
 if (!insightsSchemaMatch) {
-  console.error('FAIL: no JSON-LD block found on insights page.');
+  console.error('FAIL: no JSON-LD block found on framework page.');
   process.exit(1);
 }
 
@@ -85,25 +85,30 @@ let insightsSchema;
 try {
   insightsSchema = JSON.parse(insightsSchemaMatch[1]);
 } catch (error) {
-  console.error('FAIL: insights JSON-LD is not valid JSON.');
+  console.error('FAIL: framework JSON-LD is not valid JSON.');
   process.exit(1);
 }
 
-const graph = insightsSchema['@graph'];
-if (!Array.isArray(graph) || graph.length !== 5) {
-  console.error('FAIL: insights JSON-LD must include exactly 5 Article entries.');
+if (insightsSchema['@type'] !== 'CreativeWork') {
+  console.error('FAIL: framework JSON-LD must be CreativeWork.');
   process.exit(1);
 }
 
-for (const article of graph) {
-  if (article['@type'] !== 'Article') {
-    console.error('FAIL: insights JSON-LD graph includes non-Article entry.');
-    process.exit(1);
-  }
-  if (!article.headline || !article.description || !article.author || !article.datePublished || !article.dateModified || !article.mainEntityOfPage || !article.keywords || !article.about) {
-    console.error('FAIL: insights Article JSON-LD missing required fields.');
+if (!insightsSchema.name || !insightsSchema.description || !insightsSchema.url || !insightsSchema.creator) {
+  console.error('FAIL: framework CreativeWork JSON-LD missing required top-level fields.');
+  process.exit(1);
+}
+
+if (!Array.isArray(insightsSchema.hasPart) || insightsSchema.hasPart.length !== 6) {
+  console.error('FAIL: framework CreativeWork JSON-LD must include six stage entries in hasPart.');
+  process.exit(1);
+}
+
+for (const stage of insightsSchema.hasPart) {
+  if (stage['@type'] !== 'CreativeWork' || !stage.name || !stage.description) {
+    console.error('FAIL: framework stage entry in hasPart is missing required CreativeWork fields.');
     process.exit(1);
   }
 }
 
-console.log('PASS: insights Article schema is present and complete.');
+console.log('PASS: framework CreativeWork schema is present and complete.');

@@ -12,7 +12,7 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const homeHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const insightsHtml = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
+const insightsHtml = fs.readFileSync(path.join(root, 'framework/index.html'), 'utf8');
 const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 const servicesCss = fs.readFileSync(path.join(root, 'styles/services.css'), 'utf8');
 
@@ -39,7 +39,7 @@ function assertSingleTransitionBlock(html, pageLabel) {
 }
 
 assertSingleTransitionBlock(homeHtml, 'index.html');
-assertSingleTransitionBlock(insightsHtml, 'insights/index.html');
+assertSingleTransitionBlock(insightsHtml, 'framework/index.html');
 
 if (!homeHtml.includes('THE EXECUTION LAYER')) {
   failures += 1;
@@ -56,15 +56,15 @@ if (!/href="\/about\/"/.test(homeHtml)) {
 
 if (!insightsHtml.includes('THE RELATIONSHIP LAYER')) {
   failures += 1;
-  console.error('FAIL: insights/index.html is missing transition micro label THE RELATIONSHIP LAYER.');
+  console.error('FAIL: framework/index.html is missing transition micro label THE RELATIONSHIP LAYER.');
 }
 if (!insightsHtml.includes('Transition to Connect')) {
   failures += 1;
-  console.error('FAIL: insights/index.html is missing transition headline Transition to Connect.');
+  console.error('FAIL: framework/index.html is missing transition headline Transition to Connect.');
 }
 if (!/href="\/connect\/"/.test(insightsHtml)) {
   failures += 1;
-  console.error('FAIL: insights/index.html transition must link to /connect/.');
+  console.error('FAIL: framework/index.html transition must link to /connect/.');
 }
 
 if (!siteCss.includes('.next-page-nav')) {

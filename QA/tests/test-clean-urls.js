@@ -20,7 +20,7 @@ const canonicalPages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'insights/index.html'
+  'framework/index.html'
 ];
 
 let failures = 0;
@@ -58,13 +58,17 @@ for (const rel of canonicalPages) {
 }
 
 // Route existence policy.
+if (!fs.existsSync(path.join(root, 'framework', 'index.html'))) {
+  failures += 1;
+  console.error('FAIL: /framework/ page is missing.');
+}
 if (!fs.existsSync(path.join(root, 'insights', 'index.html'))) {
   failures += 1;
-  console.error('FAIL: /insights/ page is missing.');
+  console.error('FAIL: /insights/ redirect page is missing.');
 }
-if (fs.existsSync(path.join(root, 'about', 'insights', 'index.html'))) {
+if (fs.existsSync(path.join(root, 'about', 'framework', 'index.html'))) {
   failures += 1;
-  console.error('FAIL: legacy /about/insights/ page still exists.');
+  console.error('FAIL: legacy /about/framework/ page still exists.');
 }
 if (fs.existsSync(path.join(root, 'contact', 'index.html'))) {
   failures += 1;
@@ -75,12 +79,12 @@ if (fs.existsSync(path.join(root, 'home', 'index.html'))) {
   console.error(`FAIL: legacy ${LEGACY_HOME_ROUTE} route still exists.`);
 }
 
-// /insights/ must exist in shared navigation model.
+// /framework/ must exist in shared navigation model.
 const aboutHtml = fs.readFileSync(path.join(root, 'about', 'index.html'), 'utf8');
 const navScript = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'site-navigation.js'), 'utf8');
-if (!aboutHtml.includes('<nav class="site-nav" aria-label="Primary"></nav>') || !/href:\s*["']\/insights\/["']/.test(navScript)) {
+if (!aboutHtml.includes('<nav class="site-nav" aria-label="Primary"></nav>') || !/href:\s*["']\/framework\/["']/.test(navScript)) {
   failures += 1;
-  console.error('FAIL: /insights/ is missing from shared navigation model.');
+  console.error('FAIL: /framework/ is missing from shared navigation model.');
 }
 
 if (failures > 0) {

@@ -45,7 +45,7 @@ class GARuntimePlaywrightTest(unittest.TestCase):
             cls.server.server_close()
 
     def test_ga_loader_and_collect_requests_fire(self):
-        routes = ["/", "/about/", "/services/", "/connect/", "/insights/"]
+        routes = ["/", "/about/", "/services/", "/connect/", "/framework/"]
 
         for route in routes:
             context = self.browser.new_context()
@@ -88,116 +88,48 @@ class GARuntimePlaywrightTest(unittest.TestCase):
 
             context.close()
 
-    def test_insights_expand_and_collapse_events_emit_collect_requests(self):
+    def test_framework_stage_anchor_navigation_updates_hash(self):
         context = self.browser.new_context()
         page = context.new_page()
 
         requests = []
         page.on("request", lambda request: requests.append(request.url))
 
-        page.goto(f"http://127.0.0.1:{self.port}/insights/", wait_until="networkidle")
-        page.wait_for_function("typeof window.gtag === 'function'")
-        time.sleep(2)
-        page.locator(".insight-toggle").first.click()
-        time.sleep(2)
-        page.locator(".insight-toggle").first.click()
-        time.sleep(2)
-
-        collect_requests = [u for u in requests if "google-analytics.com/g/collect" in u]
-        toggle_hits = [u for u in collect_requests if "insight_toggle" in u]
-        data_layer_events = page.evaluate(
-            """() => (window.dataLayer || [])
-              .map((item) => Array.from(item || []))
-              .filter((item) => item.length >= 3 && item[0] === 'event')
-              .map((item) => ({ name: item[1], payload: item[2] || {} }))"""
-        )
-        toggle_data_layer_hits = [e for e in data_layer_events if e.get("name") == "insight_toggle"]
-        expand_data_layer_hits = [e for e in toggle_data_layer_hits if e.get("payload", {}).get("action") == "expand"]
-        collapse_data_layer_hits = [e for e in toggle_data_layer_hits if e.get("payload", {}).get("action") == "collapse"]
-
-        self.assertTrue(
-            len(toggle_hits) >= 1 or len(toggle_data_layer_hits) >= 1,
-            "No insight_toggle telemetry observed in collect requests or dataLayer.",
-        )
-        self.assertTrue(
-            len(collapse_data_layer_hits) >= 1,
-            "No insight_toggle collapse action observed in dataLayer.",
-        )
-
-        if len(toggle_hits) >= 1:
-            self.assertTrue(
-                any("ep.insight_slug=" in u and "ep.insight_title=" in u and "ep.action=" in u for u in toggle_hits),
-                "insight_toggle collect payload is missing required parameters.",
-            )
-        else:
-            self.assertTrue(
-                any(
-                    "insight_slug" in e.get("payload", {})
-                    and "insight_title" in e.get("payload", {})
-                    and "page_path" in e.get("payload", {})
-                    for e in toggle_data_layer_hits
-                ),
-                "insight_toggle dataLayer payload is missing required parameters.",
-            )
-
-        context.close()
-
-    def test_insights_each_card_emits_matching_slug_and_title(self):
-        context = self.browser.new_context()
-        page = context.new_page()
-
-        page.goto(f"http://127.0.0.1:{self.port}/insights/", wait_until="networkidle")
+        page.goto(f"http://127.0.0.1:{self.port}/framework/", wait_until="networkidle")
         page.wait_for_function("typeof window.gtag === 'function'")
         time.sleep(1)
 
-        # Capture analytics payloads while preserving original gtag behavior.
-        page.evaluate(
-            """
-            () => {
-              window.__qaInsightEvents = [];
-              const originalGtag = window.gtag;
-              window.gtag = (...args) => {
-                window.__qaInsightEvents.push(args);
-                if (typeof originalGtag === 'function') {
-                  try {
-                    originalGtag(...args);
-                  } catch (_err) {
-                    // Keep test harness resilient if network transport fails.
-                  }
-                }
-              };
-            }
-            """
+        expected_order = ["#opportunity", "#design", "#integration", "#execution", "#signals", "#evolution"]
+        for anchor in expected_order:
+            page.locator(f'.framework-stage-nav a[href="{anchor}"]').click()
+            page.wait_for_function("anchor => window.location.hash === anchor", arg=anchor)
+
+        collect_requests = [u for u in requests if "google-analytics.com/g/collect" in u]
+        self.assertGreaterEqual(
+            len(collect_requests),
+            1,
+            "Framework stage navigation should still retain GA collect activity on page.",
         )
 
-        expected_cards = page.evaluate(
-            """() => Array.from(document.querySelectorAll('.insight-card')).map((card) => ({
-              slug: card.id,
-              title: (card.querySelector('h2')?.textContent || '').trim()
-            }))"""
+        context.close()
+
+    def test_framework_sections_match_stage_navigation(self):
+        context = self.browser.new_context()
+        page = context.new_page()
+
+        page.goto(f"http://127.0.0.1:{self.port}/framework/", wait_until="networkidle")
+        page.wait_for_function("typeof window.gtag === 'function'")
+        stage_hrefs = page.eval_on_selector_all(".framework-stage-nav a", "nodes => nodes.map(n => n.getAttribute('href'))")
+        section_ids = page.eval_on_selector_all(".framework-section", "nodes => nodes.map(n => `#${n.id}`)")
+        legacy_toggles = page.locator(".insight-toggle").count()
+
+        self.assertEqual(
+            section_ids,
+            ["#opportunity", "#design", "#integration", "#execution", "#signals", "#evolution"],
+            "Framework sections should render the six canonical stage anchors in order.",
         )
-
-        toggles = page.locator(".insight-card .insight-toggle")
-        toggle_count = toggles.count()
-        self.assertEqual(toggle_count, len(expected_cards), "Each insight card should expose one toggle.")
-
-        for index in range(toggle_count):
-            toggles.nth(index).click()
-            time.sleep(0.2)
-
-        events = page.evaluate(
-            """() => (window.__qaInsightEvents || [])
-              .filter((args) => args.length >= 3 && args[0] === 'event' && args[1] === 'insight_toggle')
-              .map((args) => args[2] || {})"""
-        )
-        self.assertGreaterEqual(len(events), len(expected_cards), "Expected one insight_toggle event per card expand.")
-
-        seen = {(e.get("insight_slug"), e.get("insight_title")) for e in events if e.get("action") == "expand"}
-        expected = {(card["slug"], card["title"]) for card in expected_cards}
-        self.assertTrue(
-            expected.issubset(seen),
-            f"Missing slug/title payload pairs. expected={expected} seen={seen}",
-        )
+        self.assertEqual(stage_hrefs, section_ids, "Stage navigation href order should match section anchors.")
+        self.assertEqual(legacy_toggles, 0, "Framework page must not render legacy insight toggles.")
 
         context.close()
 

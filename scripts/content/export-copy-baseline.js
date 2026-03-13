@@ -22,7 +22,7 @@ const CANONICAL_PAGES = [
   { route: "/", file: "index.html" },
   { route: "/about/", file: "about/index.html" },
   { route: "/services/", file: "services/index.html" },
-  { route: "/insights/", file: "insights/index.html" },
+  { route: "/framework/", file: "framework/index.html" },
   { route: "/connect/", file: "connect/index.html" }
 ];
 

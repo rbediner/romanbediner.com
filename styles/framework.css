@@ -1,0 +1,153 @@
+/* Framework page reuses existing editorial system and insight-card styling. */
+:root {
+  --framework-max-width: 860px;
+}
+
+.framework-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.framework-subtitle {
+  font-size: 20px;
+  color: var(--muted-text);
+  margin: -8px 0 18px;
+}
+
+.framework-stage-nav {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.framework-stage-nav .badge-phase {
+  margin-bottom: 0;
+}
+
+.framework-progress {
+  max-width: 700px;
+  margin: 24px auto 48px;
+}
+
+.framework-progress-line {
+  display: block;
+  height: 2px;
+  background: #3b6cff;
+  opacity: 0.25;
+}
+
+.framework-progress-markers {
+  margin-top: -5px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.framework-progress-markers span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b6cff;
+  opacity: 0.5;
+  justify-self: center;
+}
+
+.framework-section {
+  max-width: var(--framework-max-width);
+  margin: 0 auto;
+  padding: 32px 36px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--surface-color);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.framework-section + .framework-section {
+  margin-top: 48px;
+}
+
+.framework-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.framework-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.framework-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.framework-pill {
+  margin-bottom: 0;
+}
+
+.framework-section h2 {
+  margin: 0 0 12px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.framework-intro {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.framework-section ul {
+  line-height: 1.6;
+  margin-top: 14px;
+}
+
+.framework-section li {
+  margin-bottom: 10px;
+  max-width: 620px;
+}
+
+.framework-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 26px 0;
+}
+
+.framework-arrow svg {
+  stroke: #3b6cff;
+  stroke-width: 2;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .framework-main {
+    padding: 0 24px;
+  }
+
+  .framework-subtitle {
+    font-size: 18px;
+  }
+
+  .framework-stage-nav {
+    justify-content: flex-start;
+    max-width: var(--framework-max-width);
+  }
+
+  .framework-progress {
+    margin: 18px 0 34px;
+  }
+
+  .framework-section {
+    padding: 24px;
+  }
+
+  .framework-section h2 {
+    font-size: 26px;
+  }
+}
