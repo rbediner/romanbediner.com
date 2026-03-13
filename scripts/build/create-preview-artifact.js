@@ -104,7 +104,7 @@ function rewriteRootRelativePathsForPreview(siteDir, basePath) {
 
     // Rewrite JS string literals that reference root assets/routes.
     rewritten = rewritten.replace(
-      /(["'`])\/(assets|styles|scripts|about|services|insights|connect)(\/)/g,
+      /(["'`])\/(assets|styles|scripts|about|services|framework|insights|connect)(\/)/g,
       `$1${basePath}/$2$3`
     );
 

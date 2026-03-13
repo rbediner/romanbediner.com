@@ -210,6 +210,25 @@ nvm install
   - repository hygiene violations
   - documentation drift violations
 
+## CLI Automation Bootstrap (Cross-Machine)
+- Goal: allow Codex sessions to trigger/re-run workflows, monitor CI, and promote releases without manual GitHub UI steps.
+- Required tools and auth on each machine:
+  - GitHub CLI (`gh`) installed and available in `PATH`
+  - `gh auth login` completed for `github.com` with `repo` and `workflow` scopes
+  - Node 20 active (`nvm use`) for local CI parity
+- Recommended install paths:
+  - Homebrew install (preferred when available): `brew install gh`
+  - Fallback local binary install: `~/.local/bin/gh`
+- Required verification commands:
+```bash
+gh --version
+gh auth status
+npm ci
+npm test
+```
+- Release-ops expectation:
+  - If a CI/deploy workflow stalls, re-run failed jobs via CLI before asking operators to click through the UI.
+
 <!-- ENVIRONMENT_DIAGRAM_START -->
 ### RomanBediner.com Environment Flow
 ```mermaid

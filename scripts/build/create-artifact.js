@@ -27,6 +27,7 @@ const INCLUDE_PATHS = [
   'sitemap.xml',
   'about',
   'services',
+  'framework',
   'insights',
   'connect',
   'assets',
