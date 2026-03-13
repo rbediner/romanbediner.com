@@ -1,40 +1,25 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 51
-- Updated At (UTC): 2026-03-13T21:11:30Z
+- Handoff Sequence: 52
+- Updated At (UTC): 2026-03-13T21:17:31Z
 - Source Branch: staging
-- Source Commit: 75aade1f66050ee773de180301dc7c4e02ea3c43
+- Source Commit: ad23c8f5e08f2f74e0f7dbcbaf9d8e64c393a67a
 
 ## What Changed Most Recently
-- Installed GitHub CLI locally (no-Homebrew path):
-  - binary: `~/.local/bin/gh`
-  - version: `2.88.1`
-  - PATH bootstrap added to `~/.zshrc`
-- Applied Framework icon optical alignment refinement:
-  - `styles/framework.css` `.framework-icon` uses:
-    - `position: relative;`
-    - `top: -4px;`
-- Added QA contract coverage for the icon offset:
-  - `QA/tests/test-insights-layout.js`
-  - `QA/tests/test_insights_layout.py`
-- Updated README architecture note:
-  - Framework icon optical alignment offset is now documented under `Icon Asset Management`.
-- Refreshed one stale visual baseline required by pre-push CI parity:
-  - `QA/tests/visual-baselines/insights--mobile-full.png`
+- Reconciled README across machine threads as requested:
+  - took `README.md` from latest `origin/prod` as baseline
+  - retained thread-specific architecture addition:
+    - Framework icon optical alignment offset note (`top: -4px`) under `Icon Asset Management`
+  - preserved the auto-generated framework stage direct-link block from prod
+- Updated handoff metadata to reflect this reconciliation and avoid cross-machine drift.
 
 ## Validation Status
-- Local targeted checks (pass):
-  - `node QA/tests/test-insights-layout.js` ✅
-  - `python3 -m unittest QA/tests/test_insights_layout.py -v` ✅
-  - `RUN_VISUAL_TESTS=1 python3 -m unittest QA.tests.test_visual_regression_playwright.VisualRegressionPlaywrightTest.test_01_visual_snapshots_for_critical_pages -v` ✅
-- Pre-push CI-parity gate (full node + jest + python + visual) passed on push ✅
-- GitHub Actions status on `staging` for commit `75aade1`:
-  - `CI` ✅
-  - `Deploy Staging` ✅
+- Documentation-only reconciliation performed (README + handoff).
+- No runtime/code-path behavior changes in this pass.
 
 ## Branch Alignment
-- `staging`: updated to `75aade1` and green.
-- `prod`: still at `1f353de` (not yet promoted in this pass).
+- `staging`: latest integration line remains `ad23c8f`.
+- `prod`: currently behind staging on this machine context.
 
 ## Preview Links (Staging)
 - Main preview: `https://rbediner.github.io/romanbediner-preview/`

@@ -769,4 +769,22 @@ python3 -m playwright install chromium
 <!-- AUTO-GENERATED INSIGHT LINKS START -->
 ## FRAMEWORK STAGE DIRECT LINKS
 
+Opportunity
+https://romanbediner.com/framework/#opportunity
+
+Design
+https://romanbediner.com/framework/#design
+
+Integration
+https://romanbediner.com/framework/#integration
+
+Execution
+https://romanbediner.com/framework/#execution
+
+Signals
+https://romanbediner.com/framework/#signals
+
+Evolution
+https://romanbediner.com/framework/#evolution
+
 <!-- AUTO-GENERATED INSIGHT LINKS END -->
