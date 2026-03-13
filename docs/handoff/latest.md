@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 32
-- Updated At (UTC): 2026-03-13T16:55:00Z
+- Handoff Sequence: 33
+- Updated At (UTC): 2026-03-13T16:58:00Z
 - Source Branch: staging
-- Source Commit: pending-commit (working tree not yet committed at handoff write time)
+- Source Commit: c189d1f141e9494b38b098801911a8eda7d63b84
 
 ## What Changed Most Recently
 - Enabled GitHub CLI automation on this machine:
@@ -25,10 +25,10 @@
   - `npm run test:links` passed in local server mode (`http://127.0.0.1:4173`).
 - Prior full suite (`npm test`) already passed for framework migration before this patch set.
 - Remaining action:
-  - commit/push current working tree to `staging` and allow CI + Deploy Staging to republish preview artifact with framework folder included.
+  - wait for CI + Deploy Staging to republish preview artifact with framework folder included.
 
 ## Branch Alignment
-- `staging`: ahead of previous remote with uncommitted working changes at handoff write time.
+- `staging`: commit `c189d1f141e9494b38b098801911a8eda7d63b84` pushed and awaiting green CI/deploy confirmation.
 - `prod`: remains behind staging; do not promote until staging preview shows `/framework/` live and verified.
 
 ## Operator Checklist (Next Machine)
