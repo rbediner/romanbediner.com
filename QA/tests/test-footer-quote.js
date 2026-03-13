@@ -20,7 +20,7 @@ const pages = [
 ];
 
 const fontHref =
-  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap';
+  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap';
 const quoteText = "“Laughter is timeless, imagination has no age, dreams are forever.”";
 const authorText = "— Walt Disney";
 

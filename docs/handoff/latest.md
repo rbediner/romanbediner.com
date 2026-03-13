@@ -1,26 +1,31 @@
 # Cross-Machine Handoff (Latest)
 
 - Handoff Sequence: 18
-- Updated At (UTC): 2026-03-13T00:25:34Z
+- Updated At (UTC): 2026-03-13T00:49:29Z
 - Source Branch: staging
-- Source Commit: 02752663f35be27e9fdc28177f3e3daba169ccec (pre-handoff baseline)
+- Source Commit: 2735b8cd80fd93ab656474fbb11b1ad769789e0d (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Fixed staging preview rendering parity for GitHub project Pages path:
-  - Preview artifact now rewrites root-relative asset links (`/styles/...`, `/scripts/...`, `/assets/...`) to preview-base paths (`/romanbediner-preview/...`).
-  - This resolved the issue where preview loaded without styling and script assets.
-- Confirmed successful staging pipeline for the fix commit:
-  - CI run on `68421f9`: success.
-  - Deploy Staging run on `68421f9`: success.
-  - Preview URL served and validated: `https://rbediner.github.io/romanbediner-preview/`.
-- Documentation sync updates completed:
-  - `/README.md` staging preview branch configuration now documents variable-driven branch selection.
-  - `/README.md` now includes a one-line operator shortcut prompt for new Codex sessions.
-  - `/docs/architecture/environment-model.json` now includes preview branch configuration metadata and explicit preview URL emission locations.
+- Refined footer quote presentation to a stronger editorial style:
+  - Upgraded Cormorant Garamond load to medium weight (`wght@0,500;1,500`) on all canonical pages.
+  - Increased footer quote container width and spacing cadence for improved visual rhythm.
+  - Updated quote and author typography weight/size/letter spacing while preserving structure and divider behavior.
+- Preserved footer quote content contract:
+  - quote remains single-line in HTML and wraps naturally by viewport width
+  - author attribution remains em-dash form (`— Walt Disney`)
+- Updated release process documentation to enforce staging-preview-first behavior:
+  - after local required QA passes, assistant pushes to `staging` by default
+  - assistant returns staging preview URL for visual approval
+  - promotion to `prod` occurs only after preview approval
+- Updated footer and metadata/about QA guardrails to keep em-dash allowance scoped to the footer attribution line only.
 
 ## Validation Status
-- `node QA/tests/test-staging-preview-automation.js`: passed
-- `npm run docs:verify`: passed
+- `npm run test:node`: passed
+- `node QA/tests/test-footer-quote.js`: passed
+- `node QA/tests/test-route-metadata-parity.js`: passed
+- `node QA/tests/test-metadata-consistency.js`: passed
+- `node QA/tests/test-about-redesign.js`: passed
+- `python3 -m unittest QA/tests/test_about_redesign.py -v`: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
@@ -31,10 +36,6 @@
    - `/README.md`
    - `/docs/handoff/latest.md`
    - `/docs/architecture/repo-contract.json`
-6. Use the session shortcut prompt:
-   - `session:start — read README + docs/handoff/latest, run session readiness, then run/verify staging deploy and give me the Staging Preview Ready URL.`
-7. For visual validation, always open:
-   - `https://rbediner.github.io/romanbediner-preview/`
 
 ## Notes
 - This file must contain only the latest handoff state; do not append logs.

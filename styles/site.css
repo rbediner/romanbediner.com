@@ -485,43 +485,49 @@ main li:last-child {
 
 /* Footer literary quote block is responsive and wraps naturally as width narrows. */
 footer .footer-quote-block {
-  max-width: 420px;
-  margin: 18px auto 0 auto;
+  max-width: 520px;
+  margin: 26px auto 0 auto;
   text-align: left;
+  padding-bottom: 8px;
 }
 
-footer .footer-quote-block .footer-quote {
+footer .footer-quote {
   font-family: "Cormorant Garamond", serif !important;
   font-style: italic;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 19px;
   line-height: 1.45;
-  color: rgba(31, 41, 55, 0.72);
+  letter-spacing: 0.01em;
+  color: rgba(31, 41, 55, 0.78);
   margin: 0;
   max-width: none;
   text-align: left;
 }
 
-footer .footer-quote-block .footer-quote-author {
+footer .footer-quote-author {
   font-family: "Cormorant Garamond", serif !important;
-  font-size: 13px;
-  margin-top: 8px;
-  color: rgba(31, 41, 55, 0.55);
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+  color: rgba(31, 41, 55, 0.78);
   max-width: none;
   text-align: left;
 }
 
 @media (max-width: 640px) {
   footer .footer-quote-block {
-    max-width: 300px;
+    max-width: 320px;
+    margin-top: 22px;
   }
 
-  footer .footer-quote-block .footer-quote {
-    font-size: 16px;
+  footer .footer-quote {
+    font-size: 17px;
     line-height: 1.5;
   }
 
-  footer .footer-quote-block .footer-quote-author {
-    font-size: 12px;
+  footer .footer-quote-author {
+    font-size: 13px;
   }
 }
 

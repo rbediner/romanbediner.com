@@ -487,7 +487,11 @@ npm run qa:ci-parity
 git push origin staging
 node scripts/release/watch-ci-run.js --branch staging --sha "$(git rev-parse HEAD)"
 ```
-4. Promote only the exact tested SHA to `prod` (fast-forward only):
+4. Default assistant release behavior:
+   - after local required QA passes, push to `staging` automatically
+   - return the staging preview URL for visual sign-off
+   - do not promote to `prod` until preview approval is given
+5. Promote only the exact tested SHA to `prod` (fast-forward only):
 ```bash
 git checkout prod
 git pull --ff-only origin prod
@@ -495,7 +499,7 @@ git merge --ff-only <tested-sha>
 git push origin prod
 node scripts/release/watch-ci-run.js --branch prod --sha "<tested-sha>"
 ```
-5. Use the one-command release automation when possible:
+6. Use the one-command release automation when possible:
 ```bash
 npm run release:staging-prod
 ```
