@@ -71,7 +71,12 @@
           "preview_url_emission": [
             "workflow logs",
             "github job summary"
-          ]
+          ],
+          "release_gate": {
+            "required_tests_must_pass_before_preview_confirmation": true,
+            "must_return_preview_url_with_pass_confirmation": true,
+            "requires_visual_approval_before_prod_promotion": true
+          }
         },
         "production": {
           "repo": "rbediner/romanbediner.com",

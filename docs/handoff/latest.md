@@ -1,21 +1,25 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 20
-- Updated At (UTC): 2026-03-13T01:03:43Z
+- Handoff Sequence: 21
+- Updated At (UTC): 2026-03-13T01:08:53Z
 - Source Branch: staging
-- Source Commit: 1354289da44654d60f95faa131f7bf99ffb04ce8 (pre-handoff baseline)
+- Source Commit: 3aa5e218fa6b3bccf0000f8cba731543e809fa02 (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Corrected staging footer quote presentation after visual review feedback:
-  - widened desktop footer quote block to improve single-line behavior in preview (`max-width: 680px`)
-  - increased quote contrast for stronger readability (`rgba(..., 0.84)`)
-  - tuned author contrast to remain subordinate but readable (`rgba(..., 0.72)`)
-  - preserved responsive mobile behavior and existing footer divider/copyright structure
-- Updated README footer note to reflect wider single-line desktop presentation and stronger contrast intent.
-- Maintained release-process contract: staging-first, wait for staging CI/tests, then provide preview URL before prod promotion.
+- Clarified and hardened release-process documentation contract:
+  - assistant pushes to `staging` automatically only after local required QA passes
+  - assistant waits for `staging` CI/tests to pass
+  - assistant then provides explicit pass confirmation plus staging preview URL for visual inspection
+  - `prod` promotion remains blocked until visual approval
+- Updated machine-readable architecture docs to encode this release gate behavior:
+  - `docs/architecture/environment-model.json` now includes staging preview `release_gate` invariants
+  - `docs/architecture/repo-contract.json` now includes `release_policy` invariants
+- Regenerated README architecture diagram/JSON section from environment model to keep docs synchronized.
 
 ## Validation Status
+- `npm run docs:generate`: passed
 - `npm run test:node`: passed
+- `npm run test:jest -- --maxWorkers=50%`: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`

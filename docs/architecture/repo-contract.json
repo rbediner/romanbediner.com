@@ -35,5 +35,12 @@
     "test:python",
     "test:jest",
     "test:playwright"
-  ]
+  ],
+  "release_policy": {
+    "staging_first": true,
+    "assistant_auto_pushes_staging_after_local_pass": true,
+    "staging_tests_must_pass_before_preview_confirmation": true,
+    "preview_url_must_be_shared_with_pass_confirmation": true,
+    "prod_promotion_requires_visual_signoff": true
+  }
 }

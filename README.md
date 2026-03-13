@@ -393,7 +393,12 @@ flowchart LR
         "preview_url_emission": [
           "workflow logs",
           "github job summary"
-        ]
+        ],
+        "release_gate": {
+          "required_tests_must_pass_before_preview_confirmation": true,
+          "must_return_preview_url_with_pass_confirmation": true,
+          "requires_visual_approval_before_prod_promotion": true
+        }
       },
       "production": {
         "repo": "rbediner/romanbediner.com",
@@ -490,7 +495,7 @@ node scripts/release/watch-ci-run.js --branch staging --sha "$(git rev-parse HEA
 4. Default assistant release behavior:
    - after local required QA passes, push to `staging` automatically
    - wait for `staging` CI and required tests to complete successfully
-   - then return confirmation plus the staging preview URL for visual sign-off
+   - then return an explicit pass confirmation plus the staging preview URL for visual sign-off
    - do not promote to `prod` until preview approval is given
 5. Promote only the exact tested SHA to `prod` (fast-forward only):
 ```bash
@@ -512,8 +517,9 @@ Flow:
 1. Push to `staging`.
 2. `CI` workflow must complete successfully.
 3. `Deploy Staging` workflow builds a preview artifact, removes `CNAME`, enforces preview `robots.txt` no-index policy, and publishes to preview repo.
-4. Workflow prints the clickable preview URL in logs and Job Summary.
-5. Review preview, then promote tested commit to `prod`.
+4. Confirm required staging tests passed for the pushed SHA.
+5. Provide the clickable staging preview URL from logs/Job Summary plus pass confirmation.
+6. Review preview, then promote tested commit to `prod`.
 
 Current preview target:
 - Repo: `rbediner/romanbediner-preview`
