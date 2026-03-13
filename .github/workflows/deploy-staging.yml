@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PREVIEW_REPO: ${{ vars.PREVIEW_REPO || 'rbediner/romanbediner-preview' }}
-      PREVIEW_BRANCH: ${{ vars.PREVIEW_REPO_BRANCH || 'staging-preview' }}
+      PREVIEW_BRANCH: staging-preview
     steps:
       - name: Resolve source commit + branch
         id: source

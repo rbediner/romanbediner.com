@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 24
-- Updated At (UTC): 2026-03-13T02:35:00Z
+- Handoff Sequence: 25
+- Updated At (UTC): 2026-03-13T03:05:00Z
 - Source Branch: prod
-- Source Commit: 93602a184d47477d9fd088d9f56be0d44f903795
+- Source Commit: 011cc2c2c0db9f6dee1cbf391798dc860b79362f
 
 ## What Changed Most Recently
 - Footer quote refinement is live on production (`92781f5`) and anti-stall CI monitor retries are live (`93602a1`).
@@ -13,6 +13,7 @@
   3. only then share staging preview link
   4. promote the exact approved commit to `prod`
 - README cross-machine section now requires handoff entries for branch alignment, staging preview state, CI lane status, and current blockers/manual steps.
+- Staging deploy workflow now hard-locks preview publication branch to `staging-preview` (removed branch variable override path) to avoid accidental writes to preview `main`.
 
 ## Validation Status
 - Last full local regression before prod promotion:
@@ -38,3 +39,4 @@
 - This file must contain only the latest handoff state; do not append logs.
 - This file is intentionally updated by hand at session end after code/test changes.
 - Staging preview uses separate preview repository publication and does not share production Pages deployment state.
+- `romanbediner.com` repo has no `main` branch; only `staging` and `prod` are active release branches.
