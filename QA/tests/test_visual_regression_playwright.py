@@ -478,7 +478,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
         """Part 5: enforce icon bullets (8px) and no default browser bullets."""
         self.assertIn("width: 8px;", self.site_css)
         self.assertIn("height: 8px;", self.site_css)
-        self.assertIn('background-image: url("/assets/icons/bullet.png");', self.site_css)
+        self.assertIn('background-image: url("/assets/icons/home/bullet.png");', self.site_css)
         self.assertIn("transform: translateY(-50%);", self.site_css)
 
         for _, route in ROUTES.items():

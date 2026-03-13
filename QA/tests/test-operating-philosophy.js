@@ -51,10 +51,10 @@ if ((aboutHtml.match(/class="philosophy-item"/g) || []).length !== 2) {
   console.error('FAIL: expected exactly 2 philosophy items in the stack.');
 }
 
-// Test 4: ensure orb bullets use /assets/icons/bullet.png and 8px sizing globally.
-if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*margin-right:\s*14px;[^}]*background-image:\s*url\("\/assets\/icons\/bullet\.png"\);/s.test(siteCss)) {
+// Test 4: ensure orb bullets use /assets/icons/home/bullet.png and 8px sizing globally.
+if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*margin-right:\s*14px;[^}]*background-image:\s*url\("\/assets\/icons\/home\/bullet\.png"\);/s.test(siteCss)) {
   failures += 1;
-  console.error('FAIL: service-list orb bullet spec does not match required /assets/icons/bullet.png and 8px sizing.');
+  console.error('FAIL: service-list orb bullet spec does not match required /assets/icons/home/bullet.png and 8px sizing.');
 }
 
 // Test 5: ensure standardized About transition CTA routes to /services/.

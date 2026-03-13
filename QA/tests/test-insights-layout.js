@@ -141,7 +141,14 @@ if (!/\.framework-arrow svg\s*\{[^}]*stroke:\s*#3b6cff;[^}]*stroke-width:\s*2;[^
   console.error('FAIL: framework arrow style must use refined chevron stroke settings.');
 }
 
-const iconFiles = ['opportunity', 'design', 'integration', 'execution', 'signals', 'evolution'];
+const iconFiles = [
+  'opportunity-network',
+  'design-blueprint',
+  'integration-merger',
+  'execution-workflow',
+  'signals-telemetry',
+  'evolution-feedback'
+];
 for (const iconName of iconFiles) {
   const iconPath = path.join(root, 'assets', 'icons', 'framework', `${iconName}.svg`);
   const svg = fs.readFileSync(iconPath, 'utf8');

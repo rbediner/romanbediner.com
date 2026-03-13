@@ -151,6 +151,21 @@ Required handoff content for cross-machine continuity:
 - Remove stale local result folders such as `test-results` and `test-results (1)` before commit.
 - Remove unused legacy folders when references are fully migrated.
 
+## Icon Management Contract
+- Production icon files must live only in page-scoped folders under `/assets/icons/`:
+  - `/assets/icons/home/`
+  - `/assets/icons/about/`
+  - `/assets/icons/framework/`
+  - `/assets/icons/services/`
+  - `/assets/icons/connect/`
+- `/assets/icons/` must not contain loose files; page folders are the only allowed entries.
+- Unused candidate icons must live in the design library at `/Codex/art/icons/`.
+- Promotion workflow for new icons:
+  1. add candidate icon to `/Codex/art/icons/`
+  2. move it to `/assets/icons/<page-name>/` only when actively used on a live page
+- Framework stage icons are treated as production icons and must remain under `/assets/icons/framework/`.
+- Shared orb bullet image is centralized at `/assets/icons/home/bullet.png` and referenced from `styles/site.css`.
+
 ## Testing Philosophy
 - Policy-as-code: architecture requirements are test-enforced, not convention-enforced.
 - Invariants cover routing, metadata, analytics, CSP, DOM contracts, and repo hygiene.
@@ -351,15 +366,15 @@ flowchart LR
 
 13. **About professional arc timeline structure**
    - `/about/` professional arc content is wrapped by `.arc-timeline-wrapper` with a neutral grey structural spine rendered via `::before`.
-   - Exactly four orbs are rendered (`.orb-1` through `.orb-4`) using `/assets/icons/timeline-orb.png`; spine layering is above orb center to create a bisected structural mark.
-   - Orb alignment is computed dynamically in `/scripts/runtime/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb4`) with resize recalculation.
+   - Exactly three orbs are rendered (`.orb-1` through `.orb-3`) as CSS radial-gradient circles; spine layering is above orb center to create a bisected structural mark.
+   - Orb alignment is computed dynamically in `/scripts/runtime/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb3`) with resize recalculation.
    - Timeline dividers are constrained to `.arc-item + .arc-item .arc-narrative` (right column only) so divider lines do not intersect the timeline spine.
    - Era subtitle labels use plain text without decorative bracket pseudo-elements.
    - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
 
 14. **Connect page conversation section contract**
    - `/connect/` includes a dedicated `How we might connect` section above the form to frame the page as conversation-first rather than service-offering duplication.
-   - Theme bullets in this section must use shared `.service-list` orb bullets from `styles/site.css` with `/assets/icons/bullet.png` (no page-level bullet redefinition).
+   - Theme bullets in this section must use shared `.service-list` orb bullets from `styles/site.css` with `/assets/icons/home/bullet.png` (no page-level bullet redefinition).
    - Closing expectation lines are present and visually muted to keep the bullet themes as primary visual focus.
 
 15. **Connect ambient polish contract**
@@ -376,7 +391,7 @@ flowchart LR
    - Page-level styles must not set independent top offsets for the first section on a canonical route.
 
 17. **Connect hero icon transparency and mobile sizing contract**
-   - `/connect/` hero icon uses a transparent-background asset at `/assets/icons/contact-transparent.png` to prevent white-box rendering against ambient backgrounds.
+   - `/connect/` hero icon uses a transparent-background asset at `/assets/icons/connect/contact-transparent.png` to prevent white-box rendering against ambient backgrounds.
    - The hero image preload and `<img>` source on `/connect/index.html` must reference the same transparent asset path.
    - Mobile styling keeps the icon centered above the headline with `max-width: 72px`, `display: block`, and `margin-left/right: auto` plus `margin-bottom: 16px`.
 

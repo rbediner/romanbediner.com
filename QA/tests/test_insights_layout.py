@@ -81,7 +81,14 @@ class FrameworkLayoutTest(unittest.TestCase):
 
     def test_icon_contract_black_structure_plus_blue_node(self):
         icons_dir = self.root / "assets/icons/framework"
-        for icon_name in ["opportunity", "design", "integration", "execution", "signals", "evolution"]:
+        for icon_name in [
+            "opportunity-network",
+            "design-blueprint",
+            "integration-merger",
+            "execution-workflow",
+            "signals-telemetry",
+            "evolution-feedback",
+        ]:
             svg = (icons_dir / f"{icon_name}.svg").read_text(encoding="utf-8")
             self.assertIn('stroke="#111111"', svg, f"{icon_name} icon missing black structural stroke")
             self.assertIn('stroke-width="2.2"', svg, f"{icon_name} icon stroke width must be 2.2")

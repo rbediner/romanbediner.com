@@ -1,45 +1,55 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 38
-- Updated At (UTC): 2026-03-13T18:52:58Z
+- Handoff Sequence: 39
+- Updated At (UTC): 2026-03-13T19:06:09Z
 - Source Branch: staging
-- Source Commit: 65b0d8ca8fbf7fb57f561d15369635d8398242de
+- Source Commit: pending-local-commit
 
 ## What Changed Most Recently
-- Framework refinement patch is on `staging` (commit `7c5a040`) and staging preview deployment succeeded.
-- Follow-up nav runtime patch is now committed locally for preview correctness:
-  - `scripts/runtime/site-navigation.js`
-  - `QA/tests/test-nav-links-contract.js`
-- Preview routing logic now:
-  - prefixes canonical nav links on `*.github.io` using active repo base path
-  - skips already-prefixed preview hrefs to prevent double-prefix paths like `/romanbediner-preview/romanbediner-preview/...`
-- README updated to document both behaviors under CI/preview architecture notes.
+- Implemented permanent icon management architecture:
+  - production icon tree now strictly page-scoped under `/assets/icons/{home,about,framework,services,connect}/`
+  - design-library icon tree now established at `/Codex/art/icons/` for unused icons
+- Reorganized all active icon references:
+  - Home references `/assets/icons/home/*`
+  - About references `/assets/icons/about/*`
+  - Services references `/assets/icons/services/*`
+  - Connect references `/assets/icons/connect/*`
+  - Framework stage icons now use:
+    - `opportunity-network.svg`
+    - `design-blueprint.svg`
+    - `integration-merger.svg`
+    - `execution-workflow.svg`
+    - `signals-telemetry.svg`
+    - `evolution-feedback.svg`
+- Created new design-library icon set and left unused candidates in `/Codex/art/icons/`.
+- Root `/assets/icons/` now contains only page folders (no loose files).
 
 ## Validation Status
-- Local validation for follow-up fix:
-  - `node QA/tests/test-nav-links-contract.js` ✅
+- Local validation completed:
+  - `node QA/tests/test-icon-management-system.js` ✅
+  - `node QA/tests/test-insights-layout.js` ✅
+  - `python3 -m unittest QA/tests/test_insights_layout.py QA/tests/test_contact_form.py -v` ✅
+  - `python3 -m unittest discover -s QA/tests -p 'test_*.py' -v` ✅
   - `npm run -s test:node` ✅
-- Last remote green status before follow-up push:
-  - CI run `23065652684` ✅ success
-  - Deploy Staging run `23065731349` ✅ success
 
 ## Branch Alignment
-- `staging`: contains framework refinement commit and is receiving preview-nav double-prefix safeguard commit.
-- `prod`: behind staging; do not promote until preview visual verification confirms nav works from all primary links.
+- `staging`: contains icon-architecture migration changes locally and is ready to push.
+- `prod`: unchanged; do not promote until staging CI and preview checks complete.
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
 2. `git checkout staging && git pull --ff-only origin staging`
-3. If local changes exist, run:
-   - `node QA/tests/test-nav-links-contract.js`
+3. Run:
    - `npm run -s test:node`
-4. Push to `staging` and wait for CI + Deploy Staging green.
-5. Validate preview links:
+   - `python3 -m unittest discover -s QA/tests -p 'test_*.py' -v`
+4. Push to `staging`, wait for CI + Deploy Staging green.
+5. Validate preview:
    - `https://rbediner.github.io/romanbediner-preview/`
    - `https://rbediner.github.io/romanbediner-preview/framework/`
-6. Click nav links in preview and verify no `/romanbediner-preview/romanbediner-preview/` URLs.
-7. Promote to `prod` only after explicit visual approval.
+6. Confirm icon paths resolve and no 404s under `/assets/icons/{page}/`.
+7. Promote to `prod` only after visual sign-off.
 
 ## Notes
-- If workflows stall, re-run using `gh` CLI before manual UI intervention.
-- Preview publication target remains hard-locked to `rbediner/romanbediner-preview:staging-preview`.
+- Added new guardrail: `QA/tests/test-icon-management-system.js`.
+- Updated repo hygiene route check to avoid false positives from `/assets/icons/home/`.
+- If jobs stall, re-run with CLI (`gh`) or Actions UI and continue on the same commit.

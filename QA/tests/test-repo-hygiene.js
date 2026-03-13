@@ -81,7 +81,8 @@ function scanForLegacyHomeRoute() {
   }
   for (const file of files) {
     const text = fs.readFileSync(file, 'utf8');
-    if (text.includes(LEGACY_HOME_ROUTE)) {
+    // Detect only route-like /home/ references and ignore asset paths such as /assets/icons/home/.
+    if (/["'(]\/home\//.test(text) || /\bhttps?:\/\/[^"'\s]*\/home\//i.test(text)) {
       failures.push(`Legacy ${LEGACY_HOME_ROUTE} reference found in ${path.relative(ROOT, file)}`);
     }
   }

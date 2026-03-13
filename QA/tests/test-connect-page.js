@@ -85,8 +85,8 @@ if (!/@media\s*\(max-width:\s*768px\)\s*\{[\s\S]*\.connect-main::before[\s\S]*\.
   fail('Connect CSS must hide both ambient orb pseudo-elements on mobile (max-width: 768px).');
 }
 
-if (!/\.service-list li::before\s*\{[^}]*background-image:\s*url\("\/assets\/icons\/bullet\.png"\);/s.test(siteCss)) {
-  fail('Shared orb bullet source must remain /assets/icons/bullet.png in site.css.');
+if (!/\.service-list li::before\s*\{[^}]*background-image:\s*url\("\/assets\/icons\/home\/bullet\.png"\);/s.test(siteCss)) {
+  fail('Shared orb bullet source must remain /assets/icons/home/bullet.png in site.css.');
 }
 
 console.log('PASS: connect conversation section and orb bullet integration checks passed.');

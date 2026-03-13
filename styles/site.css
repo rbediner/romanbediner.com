@@ -447,7 +447,7 @@ main li:last-child {
   vertical-align: middle;
   flex-shrink: 0;
   /* Use canonical bullet icon path under assets/icons to avoid duplicate root icon folders. */
-  background-image: url("/assets/icons/bullet.png");
+  background-image: url("/assets/icons/home/bullet.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
