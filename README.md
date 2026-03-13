@@ -191,6 +191,7 @@ nvm install
 - Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/insights/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
 - Staging deployment publishes an isolated preview to a dedicated repository target (`rbediner/romanbediner-preview`) so production Pages state cannot be overwritten.
 - Preview publication branch is fixed to `staging-preview` (not configurable) to prevent branch drift and accidental publication to preview `main`.
+- Preview publisher now creates `staging-preview` even when preview content is unchanged versus preview `main`, preventing "missing branch" confusion on first hard-locked rollout.
 - Staging preview workflow writes a clickable preview URL to both CI logs and GitHub Actions Job Summary.
 - Preview artifacts always remove `CNAME` and enforce `robots.txt` no-index policy.
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.

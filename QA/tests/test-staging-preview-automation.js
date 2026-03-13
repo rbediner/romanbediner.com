@@ -43,6 +43,7 @@ assert(stagingWorkflowText.includes('create-preview-artifact.js'), 'staging work
 assert(stagingWorkflowText.includes('PREVIEW_BASE_PATH="/${PREVIEW_REPO#*/}"'), 'staging workflow must inject preview base-path for project-pages parity');
 assert(stagingWorkflowText.includes('verify-preview-artifact.js'), 'staging workflow must verify preview artifact');
 assert(stagingWorkflowText.includes('publish-preview-repo.js'), 'staging workflow must publish to preview repository');
+assert(stagingWorkflowText.includes('PREVIEW_BRANCH: staging-preview'), 'staging workflow must hard-lock preview publishing to staging-preview branch');
 assert(stagingWorkflowText.includes('continue-on-error: true'), 'staging workflow must handle preview publish failures explicitly');
 assert(stagingWorkflowText.includes('Staging Preview Failed'), 'staging workflow must emit explicit failure summary');
 assert(stagingWorkflowText.includes('Staging Preview Ready'), 'staging workflow must emit explicit success summary');
@@ -60,5 +61,7 @@ assert(previewVerifyText.includes('must not contain CNAME'), 'preview verifier m
 assert(previewVerifyText.includes('Disallow: /'), 'preview verifier must require no-index robots policy');
 assert(previewPublishText.includes('PREVIEW_REPO_TOKEN'), 'preview publish script must use dedicated preview token');
 assert(previewPublishText.includes('https://${owner}.github.io/${name}/'), 'preview publish script must compute clickable preview URL');
+assert(previewPublishText.includes('remoteBranchExists'), 'preview publish script must detect target branch existence');
+assert(previewPublishText.includes('created missing preview branch'), 'preview publish script must create preview branch when content is unchanged');
 
 console.log('PASS: staging preview automation guardrails are in place.');

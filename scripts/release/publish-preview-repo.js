@@ -87,6 +87,11 @@ function writeGithubOutput(values) {
   fs.appendFileSync(outputPath, `${lines.join('\n')}\n`);
 }
 
+function remoteBranchExists(repoDir, branch) {
+  const output = runGit(['ls-remote', '--heads', 'origin', branch], repoDir).trim();
+  return output.length > 0;
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const token = process.env.PREVIEW_REPO_TOKEN;
@@ -119,9 +124,17 @@ function main() {
 
     runGit(['add', '--all'], repoDir);
 
+    const branchAlreadyExists = remoteBranchExists(repoDir, args.branch);
     const stagedDiff = runGit(['status', '--porcelain'], repoDir).trim();
     if (!stagedDiff) {
-      process.stdout.write('INFO: preview repository already up to date; no commit created.\n');
+      // Critical behavior: still create/push the target preview branch if it does
+      // not exist yet, even when file content matches default branch.
+      if (!branchAlreadyExists) {
+        runGit(['push', 'origin', args.branch], repoDir);
+        process.stdout.write('INFO: preview content unchanged; created missing preview branch.\n');
+      } else {
+        process.stdout.write('INFO: preview repository already up to date; no commit created.\n');
+      }
     } else {
       runGit(
         [
