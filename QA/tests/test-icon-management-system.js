@@ -12,23 +12,28 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const productionIconsRoot = path.join(root, 'assets', 'icons');
-const designLibraryRoot = path.join(root, 'assets', 'asset-library');
+const designLibraryRoot = path.join(root, 'assets', 'asset-library', 'icons');
 
 const expectedPageFolders = ['home', 'about', 'framework', 'services', 'connect'];
 const expectedFrameworkIcons = [
-  'opportunity-network.svg',
-  'design-blueprint.svg',
-  'integration-merger.svg',
-  'execution-workflow.svg',
-  'signals-telemetry.svg',
-  'evolution-feedback.svg'
+  'opportunity-network.png',
+  'design-blueprint.png',
+  'integration-merger.png',
+  'execution-workflow.png',
+  'signals-telemetry.png',
+  'evolution-feedback.png'
 ];
-const expectedLibraryUnusedIcons = [
-  'collaboration-convergence.svg',
-  'strategy-roadmap.svg',
-  'system-scale.svg',
-  'system-resilience.svg',
-  'timeline-orb.png'
+const expectedLibraryGridIcons = [
+  'opportunity-network.png',
+  'design-blueprint.png',
+  'integration-merger.png',
+  'execution-workflow.png',
+  'signals-telemetry.png',
+  'evolution-feedback.png',
+  'collaboration-convergence.png',
+  'strategy-roadmap.png',
+  'system-scale.png',
+  'system-resilience.png'
 ];
 
 const pageFiles = [
@@ -70,13 +75,23 @@ if (unexpectedFolders.length > 0) {
 
 if (!fs.existsSync(designLibraryRoot)) {
   failures += 1;
-  console.error('FAIL: design asset library assets/asset-library is missing.');
+  console.error('FAIL: design asset library assets/asset-library/icons is missing.');
 } else {
-  for (const filename of expectedLibraryUnusedIcons) {
+  for (const filename of expectedLibraryGridIcons) {
     if (!fs.existsSync(path.join(designLibraryRoot, filename))) {
       failures += 1;
-      console.error(`FAIL: missing unused asset-library icon ${filename}`);
+      console.error(`FAIL: missing asset-library icon ${filename}`);
     }
+  }
+  const libraryIcons = fs
+    .readdirSync(designLibraryRoot, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.png'))
+    .map((entry) => entry.name)
+    .sort();
+  const expectedSorted = [...expectedLibraryGridIcons].sort();
+  if (JSON.stringify(libraryIcons) !== JSON.stringify(expectedSorted)) {
+    failures += 1;
+    console.error(`FAIL: assets/asset-library/icons must contain exactly the 10 grid PNGs. Found: ${libraryIcons.join(', ')}`);
   }
 }
 
@@ -92,6 +107,17 @@ for (const filename of expectedFrameworkIcons) {
     failures += 1;
     console.error(`FAIL: missing framework icon assets/icons/framework/${filename}`);
   }
+}
+
+const frameworkIcons = fs
+  .readdirSync(path.join(productionIconsRoot, 'framework'), { withFileTypes: true })
+  .filter((entry) => entry.isFile() && entry.name.endsWith('.png'))
+  .map((entry) => entry.name)
+  .sort();
+const expectedFrameworkSorted = [...expectedFrameworkIcons].sort();
+if (JSON.stringify(frameworkIcons) !== JSON.stringify(expectedFrameworkSorted)) {
+  failures += 1;
+  console.error(`FAIL: assets/icons/framework must contain exactly 6 production PNG icons. Found: ${frameworkIcons.join(', ')}`);
 }
 
 for (const { file, folder } of pageFiles) {

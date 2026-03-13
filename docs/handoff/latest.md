@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 43
-- Updated At (UTC): 2026-03-13T19:27:07Z
+- Handoff Sequence: 46
+- Updated At (UTC): 2026-03-13T19:56:46Z
 - Source Branch: staging
-- Source Commit: 3fd895c3a05db35ce2b7d637d28746391ff79472 (pre-handoff baseline)
+- Source Commit: 3ac584b5c4bbab9e17ed09dd218be24279776950 (pre-handoff baseline)
 
 ## What Changed Most Recently
 - Performed dependency hygiene pass:

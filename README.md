@@ -151,7 +151,7 @@ Required handoff content for cross-machine continuity:
 - Remove stale local result folders such as `test-results` and `test-results (1)` before commit.
 - Remove unused legacy folders when references are fully migrated.
 
-## Icon Management Contract
+## Icon Asset Management
 - Production icon files must live only in page-scoped folders under `/assets/icons/`:
   - `/assets/icons/home/`
   - `/assets/icons/about/`
@@ -159,12 +159,18 @@ Required handoff content for cross-machine continuity:
   - `/assets/icons/services/`
   - `/assets/icons/connect/`
 - `/assets/icons/` must not contain loose files; page folders are the only allowed entries.
-- Unused candidate icons must live in the asset library at `/assets/asset-library/`.
+- Unused or not-yet-promoted icons must live in the asset library at `/assets/asset-library/icons/`.
 - Promotion workflow for new icons:
-  1. add candidate icon to `/assets/asset-library/`
+  1. add candidate icon to `/assets/asset-library/icons/`
   2. move it to `/assets/icons/<page-name>/` only when actively used on a live page
+- Icons from imported grids must first be stored in `/assets/asset-library/icons/`, then promoted to page folders only when used.
+- Unused icons must remain in the asset library.
 - Framework stage icons are treated as production icons and must remain under `/assets/icons/framework/`.
+- Framework icon display target is approximately `36px` to `40px` height.
 - Shared orb bullet image is centralized at `/assets/icons/home/bullet.png` and referenced from `styles/site.css`.
+- Non-icon spare assets belong in purpose-driven asset-library folders:
+  - `/assets/asset-library/concept-images/` for unused visual concepts/raster references
+  - `/assets/asset-library/brand-sources/` for editable brand source files (e.g., PSD)
 
 ## Testing Philosophy
 - Policy-as-code: architecture requirements are test-enforced, not convention-enforced.

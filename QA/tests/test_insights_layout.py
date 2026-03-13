@@ -67,7 +67,7 @@ class FrameworkLayoutTest(unittest.TestCase):
         self.assertRegex(self.framework_css, r"\.framework-section \+ \.framework-section\s*\{[^}]*margin-top:\s*48px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section ul\s*\{[^}]*line-height:\s*1\.6;[^}]*margin-top:\s*14px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*620px;", re.S)
-        self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40)px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*10px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-main \.executive-callout\s*\{[^}]*background:\s*#f6f8ff;[^}]*border-left:\s*3px solid #3b6cff;[^}]*padding:\s*20px;", re.S)
@@ -89,10 +89,8 @@ class FrameworkLayoutTest(unittest.TestCase):
             "signals-telemetry",
             "evolution-feedback",
         ]:
-            svg = (icons_dir / f"{icon_name}.svg").read_text(encoding="utf-8")
-            self.assertIn('stroke="#111111"', svg, f"{icon_name} icon missing black structural stroke")
-            self.assertIn('stroke-width="2.2"', svg, f"{icon_name} icon stroke width must be 2.2")
-            self.assertIn('fill="#3b6cff"', svg, f"{icon_name} icon must include blue accent node")
+            png_path = icons_dir / f"{icon_name}.png"
+            self.assertTrue(png_path.exists(), f"{icon_name}.png must exist in assets/icons/framework")
 
     def test_redirect_page_points_to_framework(self):
         self.assertIn('http-equiv="refresh"', self.redirect_html)

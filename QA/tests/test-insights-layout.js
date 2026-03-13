@@ -106,9 +106,9 @@ if (!/\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*10px;/s.test
   console.error('FAIL: framework header alignment must be centered with 10px gap.');
 }
 
-if (!/\.framework-icon\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;/s.test(frameworkCss)) {
+if (!/\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40)px;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: framework icons must be sized to ~32px.');
+  console.error('FAIL: framework icons must render between 36px and 40px.');
 }
 
 if (!/\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;/s.test(frameworkCss)) {
@@ -150,15 +150,10 @@ const iconFiles = [
   'evolution-feedback'
 ];
 for (const iconName of iconFiles) {
-  const iconPath = path.join(root, 'assets', 'icons', 'framework', `${iconName}.svg`);
-  const svg = fs.readFileSync(iconPath, 'utf8');
-  if (!/stroke="#111111"/.test(svg) || !/stroke-width="2\.2"/.test(svg)) {
+  const iconPath = path.join(root, 'assets', 'icons', 'framework', `${iconName}.png`);
+  if (!fs.existsSync(iconPath)) {
     failures += 1;
-    console.error(`FAIL: ${iconName}.svg must use black structural stroke at width 2.2.`);
-  }
-  if (!/fill="#3b6cff"/.test(svg)) {
-    failures += 1;
-    console.error(`FAIL: ${iconName}.svg must contain a blue accent node.`);
+    console.error(`FAIL: ${iconName}.png is missing from assets/icons/framework.`);
   }
 }
 

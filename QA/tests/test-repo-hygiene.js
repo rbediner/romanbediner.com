@@ -121,6 +121,7 @@ function scanForUnreferencedAssets() {
       const ext = path.extname(rel).toLowerCase();
       return rel === 'CNAME' || textExtensions.has(ext);
     })
+    .filter((rel) => fs.existsSync(path.join(ROOT, rel)))
     .map((rel) => ({
       rel,
       text: fs.readFileSync(path.join(ROOT, rel), 'utf8')
