@@ -1,23 +1,23 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 18
-- Updated At (UTC): 2026-03-13T00:49:29Z
+- Handoff Sequence: 19
+- Updated At (UTC): 2026-03-13T01:00:04Z
 - Source Branch: staging
-- Source Commit: 2735b8cd80fd93ab656474fbb11b1ad769789e0d (pre-handoff baseline)
+- Source Commit: 581217af909062c2c97bb22f9a16a63b70eed9e8 (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Refined footer quote presentation to a stronger editorial style:
-  - Upgraded Cormorant Garamond load to medium weight (`wght@0,500;1,500`) on all canonical pages.
-  - Increased footer quote container width and spacing cadence for improved visual rhythm.
-  - Updated quote and author typography weight/size/letter spacing while preserving structure and divider behavior.
-- Preserved footer quote content contract:
-  - quote remains single-line in HTML and wraps naturally by viewport width
-  - author attribution remains em-dash form (`— Walt Disney`)
-- Updated release process documentation to enforce staging-preview-first behavior:
-  - after local required QA passes, assistant pushes to `staging` by default
-  - assistant returns staging preview URL for visual approval
-  - promotion to `prod` occurs only after preview approval
-- Updated footer and metadata/about QA guardrails to keep em-dash allowance scoped to the footer attribution line only.
+- Refined footer quote typography to an editorial medium-weight profile:
+  - canonical pages now load `Cormorant Garamond` at `wght@0,500;1,500`
+  - shared footer quote CSS updated for wider quote block, stronger quote/author weight, and tuned spacing/letter rhythm
+  - responsive adjustments updated for mobile readability
+- Preserved footer structure contract:
+  - quote remains one line in HTML
+  - attribution remains em-dash (`— Walt Disney`)
+  - existing footer divider/copyright styles unchanged
+- Updated release-process documentation per operator correction:
+  - assistant pushes to staging automatically after local required QA passes
+  - assistant must wait for staging CI/tests to pass
+  - assistant then provides confirmation + staging preview URL for visual inspection before any prod promotion
 
 ## Validation Status
 - `npm run test:node`: passed
