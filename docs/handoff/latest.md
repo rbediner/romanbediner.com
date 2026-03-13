@@ -1,46 +1,26 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 61
-- Updated At (UTC): 2026-03-13T22:25:00Z
+- Handoff Sequence: 62
+- Updated At (UTC): 2026-03-13T23:30:00Z
 - Source Branch: codex/prod-promote
-- Source Commit: da88d15566e05f045094bb13c569693eec710f8e (pre-handoff baseline)
+- Source Commit: 328573bd95b318dc35a4caebbc028a2b06dfd716 (pre-hotfix baseline)
 
 ## What Changed Most Recently
-- Fixed canonical navigation cache invalidation by appending a version query to the shared runtime include on canonical pages:
-  - `/index.html`
-  - `/about/index.html`
-  - `/services/index.html`
-  - `/framework/index.html`
-  - `/connect/index.html`
-- Retained runtime-driven nav model (`Framework` route) while ensuring stale browser caches do not keep showing `Insights`.
-- Fixed framework bullet wrapping in Integration (and all framework sections) by removing the artificial list-item width cap:
-  - `/styles/framework.css`: `.framework-section li` now uses `max-width: none`.
-- Updated focused QA contracts to validate the new behavior:
-  - `/QA/tests/test-header-nav.js`
-  - `/QA/tests/test-nav-links-contract.js`
-  - `/QA/tests/test_contact_form.py`
-  - `/QA/tests/test_insights_layout.py`
+- Emergency framework readability hotfix for production:
+  - `/styles/framework.css`
+  - `.card-body` changed from `max-width: 760px` to `max-width: none`.
+- Purpose: prevent premature wrapping of long framework bullets (notably the first Integration bullet) while preserving bullet indentation and existing layout architecture.
 
-## Validation Status (Targeted, Fast Iteration)
-- `node QA/tests/test-header-nav.js` ✅
-- `node QA/tests/test-nav-links-contract.js` ✅
-- `node QA/tests/test-insights-layout.js` ✅
-- `python3 -m unittest QA.tests.test_insights_layout -v` ✅
-- `python3 -m unittest QA.tests.test_contact_form -v` ✅
+## Validation Status
+- Per operator instruction for speed:
+  - Skipped local test run.
+  - Skipped staging test/deploy.
+  - Direct-to-prod hotfix path.
 
 ## Branch Alignment
 - Working branch: `codex/prod-promote`
-- Pending push: yes (local commit not pushed yet at this handoff snapshot).
-
-## Preview Links (Staging)
-- Preview base (after staging deploy): `https://rbediner.github.io/romanbediner-preview/`
-- Framework preview (after staging deploy): `https://rbediner.github.io/romanbediner-preview/framework/`
+- Pending push: yes (direct `prod` push for hotfix).
 
 ## Operator Notes
-- Workflow contract remains:
-  1. local targeted/focused validation
-  2. push to `staging`
-  3. wait for staging CI + staging deploy green
-  4. share preview link
-  5. promote exact commit to `prod` only after sign-off
-- Query-string cache busting on shared runtime scripts is allowed and covered by QA regex contracts.
+- This hotfix intentionally bypasses local/staging verification to satisfy urgent production correction request.
+- Next routine change should resume normal staging-preview workflow with full CI parity before prod promotion.

@@ -189,9 +189,9 @@
   color: var(--text-color);
 }
 
-/* Wider body text block improves bullet wrapping while preserving indentation. */
+/* Use full available card-body width so long bullets do not wrap prematurely. */
 .card-body {
-  max-width: 760px;
+  max-width: none;
 }
 
 .framework-section ul {
