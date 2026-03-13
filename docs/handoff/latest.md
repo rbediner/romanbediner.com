@@ -1,53 +1,49 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 35
-- Updated At (UTC): 2026-03-13T18:05:22Z
+- Handoff Sequence: 36
+- Updated At (UTC): 2026-03-13T18:44:56Z
 - Source Branch: staging
-- Source Commit: 8aa30654ec2f5ccab408711617a9a2c57e1d4389
+- Source Commit: 7c5a0403e854d660f1ee2464896eb7e80e57f41d
 
 ## What Changed Most Recently
-- Refined `/framework/` content and presentation without changing page architecture:
-  - preserved vertical section flow, anchor navigation, and six-stage section model
-  - upgraded stage hierarchy to `H2` (stage) + `H3` (full framework title)
-  - updated stage copy so every section now contains exactly five bullets
-  - updated bottom transition to Services (`THE EXECUTION LAYER`, `Transition to Services →`, `/services/`)
-- Refined framework visual contracts in `/styles/framework.css`:
-  - stage line: `3px` at `0.35` opacity
-  - marker dots: `10px`
-  - section cards: white + `#e5e7eb` border + subtle hover polish
-  - intro box de-emphasis with lighter tint/border/padding
-  - refined arrow styling and stage pill spacing/weight
-- Replaced all framework icons under `/assets/icons/framework/` with structural black stroke + single blue-node accent style.
-- Updated QA contracts to enforce the new requirements:
-  - `/QA/tests/test-insights-layout.js`
-  - `/QA/tests/test_insights_layout.py`
-  - `/QA/tests/test-transition-blocks.js`
-- README auto-generated framework stage links updated by QA runner to match stage headings.
+- Framework refinement patch landed on `staging` (commit `7c5a040`), including:
+  - updated stage hierarchy (`H2` stage + `H3` full title)
+  - exact stage copy with 5 bullets per section
+  - iconography refresh under `/assets/icons/framework/` (black structural stroke + blue node accent)
+  - transition block updated to Services (`THE EXECUTION LAYER`, `Transition to Services →`, `/services/`)
+  - framework CSS polish for pills/line/markers/cards/arrows/intro box
+- Additional fix for staging preview navigation:
+  - `scripts/runtime/site-navigation.js` now detects `*.github.io` hosts and prefixes nav hrefs with the active preview base path (`/<repo>/...`)
+  - fixes preview `Home` 404 where `/` previously escaped preview scope
+- QA contracts updated:
+  - `/QA/tests/test-nav-links-contract.js` now enforces preview base-path nav runtime helpers
+- README updated with preview-nav base-path behavior to satisfy documentation drift enforcement.
 
 ## Validation Status
-- Focused framework checks passed:
-  - `node QA/tests/test-insights-layout.js`
-  - `node QA/tests/test-transition-blocks.js`
-  - `python3 -m unittest QA.tests.test_insights_layout -v`
-- Full Node QA suite passed:
-  - `npm run -s test:node`
+- Local focused verification:
+  - `node QA/tests/test-nav-links-contract.js` ✅
+  - `npm run -s test:node` ✅
+- Remote staging status:
+  - CI run `23064176394` ✅ success
+  - Deploy Staging run `23064271242` ✅ success
+  - Staging preview `/framework/` and `/services/` returning `HTTP 200`
 
 ## Branch Alignment
-- `staging`: contains framework refinement changes and passing local QA.
-- `prod`: not yet promoted with this refinement set.
+- `staging`: ahead with framework refinement + preview-nav 404 fix (not yet promoted to `prod`).
+- `prod`: still behind staging; promote only after preview visual sign-off.
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
 2. `git checkout staging && git pull --ff-only origin staging`
 3. Run:
+   - `node QA/tests/test-nav-links-contract.js`
    - `npm run -s test:node`
-   - `python3 -m unittest QA.tests.test_insights_layout -v`
-4. Push to `staging`.
-5. Confirm CI and Deploy Staging are green.
-6. Validate preview:
+4. Confirm latest CI + Deploy Staging are green.
+5. Validate preview:
+   - `https://rbediner.github.io/romanbediner-preview/`
    - `https://rbediner.github.io/romanbediner-preview/framework/`
-7. Promote to `prod` only after visual approval on preview.
+6. Promote to `prod` only after explicit visual approval.
 
 ## Notes
-- Keep using `staging` for validation and `prod` for deployment.
-- If workflows stall, re-run from CLI with `gh` first.
+- If any run stalls, re-trigger via `gh` first.
+- Keep preview branch hard-locked to `staging-preview`.

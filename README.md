@@ -194,6 +194,7 @@ nvm install
 - Preview publisher now creates `staging-preview` even when preview content is unchanged versus preview `main`, preventing "missing branch" confusion on first hard-locked rollout.
 - Staging preview workflow writes a clickable preview URL to both CI logs and GitHub Actions Job Summary.
 - Preview artifacts always remove `CNAME` and enforce `robots.txt` no-index policy.
+- Shared header nav runtime detects GitHub Pages preview hosts and prefixes canonical nav routes with the active preview base path so `Home` and primary navigation never escape preview scope.
 - Link validation (`scripts/qa/run-link-check.js`) is environment-aware:
   - when crawling local/staging targets, canonical production domain links are skipped to prevent false failures during staging-first route rollouts
   - when crawling production targets, canonical domain links remain validated

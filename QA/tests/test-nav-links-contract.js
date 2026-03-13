@@ -40,6 +40,26 @@ const navScript = fs.readFileSync(path.join(ROOT, 'scripts', 'runtime', 'site-na
 const navLinks = parseNavLinks(navScript);
 const navHrefs = navLinks.map((link) => link.href);
 
+if (!/function resolveBasePath\(\)/.test(navScript)) {
+  failures += 1;
+  console.error('FAIL: shared nav runtime must expose resolveBasePath() for preview compatibility.');
+}
+
+if (!/hostname\.endsWith\("github\.io"\)/.test(navScript)) {
+  failures += 1;
+  console.error('FAIL: resolveBasePath() must detect GitHub Pages preview hosts.');
+}
+
+if (!/function resolveNavHref\(href, basePath\)/.test(navScript)) {
+  failures += 1;
+  console.error('FAIL: shared nav runtime must expose resolveNavHref(href, basePath).');
+}
+
+if (!/return `\$\{basePath\}\/`/.test(navScript) || !/return `\$\{basePath\}\$\{href\}`/.test(navScript)) {
+  failures += 1;
+  console.error('FAIL: resolveNavHref() must prefix both home and non-home routes when preview base path exists.');
+}
+
 for (const href of REQUIRED_HREFS) {
   if (!navHrefs.includes(href)) {
     failures += 1;

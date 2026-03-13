@@ -32,12 +32,36 @@ function normalizePath(pathname) {
   return pathname.endsWith("/") ? pathname : `${pathname}/`;
 }
 
+// Resolve project-pages base path so preview links stay inside /<repo-name>/.
+function resolveBasePath() {
+  if (!window.location.hostname.endsWith("github.io")) {
+    return "";
+  }
+  const firstSegment = window.location.pathname.split("/").filter(Boolean)[0];
+  return firstSegment ? `/${firstSegment}` : "";
+}
+
+// Prefix canonical route hrefs with base path when running on project pages previews.
+function resolveNavHref(href, basePath) {
+  if (!basePath) {
+    return href;
+  }
+  if (href === "/") {
+    return `${basePath}/`;
+  }
+  return `${basePath}${href}`;
+}
+
 // Render a nav using the shared NAV_LINKS list to prevent per-page drift.
 function renderSharedNav(navElement) {
   if (!navElement) {
     return;
   }
-  navElement.innerHTML = NAV_LINKS.map((link) => `<a href="${link.href}">${link.label}</a>`).join("");
+  const basePath = resolveBasePath();
+  navElement.innerHTML = NAV_LINKS.map((link) => {
+    const resolvedHref = resolveNavHref(link.href, basePath);
+    return `<a href="${resolvedHref}">${link.label}</a>`;
+  }).join("");
 }
 
 // Emit lightweight nav telemetry on Home without breaking pages where GA is unavailable.
