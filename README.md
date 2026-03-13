@@ -43,6 +43,21 @@ Routing requirements:
   3. GitHub Actions deploys Pages from `prod`
 - Keep `prod` fast-forward only from tested commits to preserve release traceability.
 
+## Operator Release Workflow (Required)
+Use this exact sequence on every machine/session:
+1. Push changes to `staging`.
+2. Run full local regression (`npm test`) or CI-parity equivalent.
+3. Wait for all staging CI jobs to pass.
+4. Publish/share staging preview link only after all tests pass.
+5. Obtain visual approval from staging preview.
+6. Promote the exact approved commit from `staging` to `prod` (fast-forward only).
+7. Verify production deploy completion and live route health checks.
+
+Rules:
+- Do not share a staging preview link before tests are green.
+- Do not promote any commit that differs from the tested/approved staging commit.
+- If a deploy run stalls or is canceled by a higher-priority Pages request, re-trigger the same workflow run and continue with the same commit.
+
 ## Cross-Machine Handoff Protocol
 - Canonical handoff file: `/docs/handoff/latest.md`.
 - Every session that changes code, scripts, QA behavior, or release flow must overwrite `/docs/handoff/latest.md` with the latest state before ending work.
@@ -60,6 +75,13 @@ Routing requirements:
 ```bash
 npm run handoff:update
 ```
+
+Required handoff content for cross-machine continuity:
+- active branches (`staging`, `prod`) and head commits
+- whether branches are aligned or divergent
+- current staging preview URL and whether it is approved
+- latest CI result summary (node/python/jest/playwright/deploy-gate)
+- any known blockers, retries, or manual GitHub environment settings currently required
 
 ## Google Analytics Architecture
 - Each canonical page provides exactly one GA metadata source via a measurement ID meta tag.
