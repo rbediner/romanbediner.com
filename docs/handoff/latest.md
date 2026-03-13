@@ -1,23 +1,23 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 56
-- Updated At (UTC): 2026-03-13T21:36:45Z
+- Handoff Sequence: 57
+- Updated At (UTC): 2026-03-13T21:42:00Z
 - Source Branch: staging
-- Source Commit: c065ac4d6f43c9220ebc5cd4a4942e5935ed5fe6
+- Source Commit: a67cf16bbd1040c669c08fcb555878de0fb4df89
 
 ## What Changed Most Recently
-- Applied additional targeted framework icon refinements for staging preview:
-  - Integration: kept ~3% smaller (`35px`) and moved up to `top: -10px`.
-  - Execution: moved up further to `top: -14px`.
-- Existing stage tweaks remain in place for Opportunity/Design/Signals.
-- Updated handoff metadata for cross-machine continuity.
+- Replaced only two framework production icon assets to fix bottom clipping from prior grid crop:
+  - `assets/icons/framework/integration-merger.png`
+  - `assets/icons/framework/execution-workflow.png`
+- Regenerated from source grid with preserved bottom margin so glyph bottoms are no longer cut.
+- Kept all CSS/layout adjustments unchanged.
 
 ## Validation Status
-- Per operator request, this was a fast staging visual-adjustment pass with no local tests executed.
+- Per operator request, this was a fast staging asset-fix pass with no local tests executed.
 - Intended next step is visual verification on staging preview.
 
 ## Branch Alignment
-- `staging`: latest integration line remains `c065ac4` before this pass is pushed.
+- `staging`: latest integration line remains `a67cf16` before this pass is pushed.
 - `prod`: currently behind staging on this machine context.
 
 ## Preview Links (Staging)
