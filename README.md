@@ -219,6 +219,7 @@ nvm install
   - `lighthouse-validation`
   - `build-artifact`
 - Production deployment is separate from validation and runs only after successful `CI` completion on `prod`.
+- `Deploy Pages` can be invoked by non-prod CI events, but deploy execution is hard-gated to `prod` and non-prod invocations are skipped without deployment.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.

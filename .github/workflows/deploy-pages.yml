@@ -31,7 +31,6 @@ jobs:
       source_branch: ${{ steps.source.outputs.source_branch }}
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Resolve source commit + branch
         id: source
