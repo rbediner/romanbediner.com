@@ -484,52 +484,43 @@ main li:last-child {
 }
 
 /* Footer literary quote block is responsive and wraps naturally as width narrows. */
-.footer-quote-block {
+footer .footer-quote-block {
   max-width: 420px;
-  margin: 16px auto 0 auto;
+  margin: 18px auto 0 auto;
   text-align: left;
 }
 
-.footer-quote {
-  font-family: "Cormorant Garamond", serif;
+footer .footer-quote-block .footer-quote {
+  font-family: "Cormorant Garamond", serif !important;
   font-style: italic;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.45;
   color: rgba(31, 41, 55, 0.72);
   margin: 0;
+  max-width: none;
+  text-align: left;
 }
 
-.footer-quote-author {
-  font-family: "Cormorant Garamond", serif;
+footer .footer-quote-block .footer-quote-author {
+  font-family: "Cormorant Garamond", serif !important;
   font-size: 13px;
   margin-top: 8px;
   color: rgba(31, 41, 55, 0.55);
-}
-
-/* Override generic footer paragraph centering only for quote lines. */
-.footer .footer-quote,
-.footer .footer-quote-author {
-  margin: 0;
-  text-align: left;
   max-width: none;
-}
-
-.footer .footer-quote-author {
-  margin-top: 8px;
+  text-align: left;
 }
 
 @media (max-width: 640px) {
-  .footer-quote-block {
+  footer .footer-quote-block {
     max-width: 300px;
-    margin-top: 14px;
   }
 
-  .footer-quote {
+  footer .footer-quote-block .footer-quote {
     font-size: 16px;
     line-height: 1.5;
   }
 
-  .footer-quote-author {
+  footer .footer-quote-block .footer-quote-author {
     font-size: 12px;
   }
 }

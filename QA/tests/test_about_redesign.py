@@ -84,7 +84,11 @@ class AboutRedesignTest(unittest.TestCase):
             )
             self.assertIn(self.footer_primary, html)
             self.assertIn('class="footer-primary"', html)
-            self.assertNotIn("—", html)
+            html_without_allowed_footer_dash = html.replace(
+                '<p class="footer-quote-author">— Walt Disney</p>',
+                "",
+            )
+            self.assertNotIn("—", html_without_allowed_footer_dash)
 
 
 if __name__ == "__main__":

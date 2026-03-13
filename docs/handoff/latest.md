@@ -1,40 +1,21 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 16
-- Updated At (UTC): 2026-03-12T23:31:28Z
+- Handoff Sequence: 17
+- Updated At (UTC): 2026-03-13T00:22:50Z
 - Source Branch: staging
-- Source Commit: 47a2a750b03bb5e3545e2bc267251ae30b330882 (pre-handoff baseline)
+- Source Commit: 68421f901b6a0f22b99b81f3a2055cd7689f740a (pre-handoff baseline)
 
 ## What Changed Most Recently
-- Implemented safe isolated staging preview deployment for `staging` using preview repo publication.
-- Added preview artifact builder and verifier:
-  - `scripts/build/create-preview-artifact.js`
-  - `scripts/qa/verify-preview-artifact.js`
-- Added preview repo publisher:
-  - `scripts/release/publish-preview-repo.js`
-- Refactored `.github/workflows/deploy-staging.yml` to:
-  - trigger from successful `CI` completion on `staging`
-  - build + verify preview artifact
-  - publish preview artifact to isolated preview repo branch
-  - emit clickable preview URL in logs and `$GITHUB_STEP_SUMMARY`
-  - fail explicitly with summary when preview publish fails
-- Updated deployment architecture docs:
-  - `docs/architecture/environment-model.json`
-  - `docs/architecture/workflow-manifest.json`
-  - `docs/architecture/repo-contract.json`
-  - `README.md` (new `Staging Preview` section + token rotation procedure)
-- Added staging preview automation guardrail test:
-  - `QA/tests/test-staging-preview-automation.js`
-- Extended artifact automation guardrail test for preview artifact scripts:
-  - `QA/tests/test-artifact-integrity-automation.js`
-- Follow-up fix: corrected `deploy-staging.yml` gating logic to check `steps.publish.conclusion` (not `outcome`) so successful preview publication does not trigger false failure branch.
+- Refined footer quote typography enforcement to ensure Cormorant Garamond reliably renders under existing footer cascade rules.
+- Updated shared footer quote CSS selectors to high-specificity `footer .footer-quote-block ...` pattern with responsive sizing.
+- Updated canonical footer attribution line to em dash form:
+  - `— Walt Disney`
+- Updated footer quote QA contract and metadata/about guardrails to allow the specific footer em-dash attribution while continuing to block other unintended en/em dash usage in canonical HTML.
+- Updated README footer architecture note to document em-dash attribution and footer-aware QA allowance.
 
 ## Validation Status
 - `npm run test:node`: passed
-- `npm run test:jest`: passed
-- `npm run test:qa-full`: passed
-  - Python suite skipped local socket-bind/browser server tests in this runtime sandbox (`Operation not permitted`)
-  - visual regression tests remained opt-in and were skipped without `RUN_VISUAL_TESTS=1`
+- `python3 -m unittest QA/tests/test_about_redesign.py -v`: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`

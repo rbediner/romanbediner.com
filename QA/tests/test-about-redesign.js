@@ -124,7 +124,11 @@ for (const rel of canonicalPages) {
     failures += 1;
     console.error(`FAIL: primary footer attribution missing in ${rel}`);
   }
-  if (/—/.test(html)) {
+  const htmlWithoutAllowedFooterDash = html.replace(
+    '<p class="footer-quote-author">— Walt Disney</p>',
+    ''
+  );
+  if (/—/.test(htmlWithoutAllowedFooterDash)) {
     failures += 1;
     console.error(`FAIL: em dash found in ${rel}`);
   }
