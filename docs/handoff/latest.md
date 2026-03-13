@@ -1,47 +1,53 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 29
-- Updated At (UTC): 2026-03-13T14:53:35Z
+- Handoff Sequence: 30
+- Updated At (UTC): 2026-03-13T16:18:00Z
 - Source Branch: staging
-- Source Commit: d47e8ec24b7f4e6fa3d9df35e9088e2189204397 (pre-handoff baseline)
+- Source Commit: 2de2c30163df536e89e0212552684a84142cc923
 
 ## What Changed Most Recently
-- Executed a staging fake-deploy validation after preview-repo branch cleanup:
-  - Trigger commit: `d47e8ec24b7f4e6fa3d9df35e9088e2189204397` (`chore: trigger staging preview validation after preview branch cleanup`).
-  - CI run: `23056280984` (success).
-  - Deploy Staging run: `23056381906` (success).
-- Confirmed preview repository branch state after operator cleanup:
-  - Repo `rbediner/romanbediner-preview` now contains only `staging-preview`.
-  - `main` branch has been deleted as intended.
-  - Preview URL remains live: `https://rbediner.github.io/romanbediner-preview/` (HTTP 200).
-- Confirmed primary repo variable alignment:
-  - `PREVIEW_REPO_BRANCH=staging-preview`.
-- Re-ran CI-parity locally:
-  - Node/Jest/Python suites passed.
-  - Visual suite has one baseline-size mismatch (`home--mobile-full.png` height drift), requiring baseline refresh only if this visual change is intended.
+- Migrated Insights into a dedicated Framework route:
+  - Added `/framework/index.html` with six-stage AI-Enabled Operations Framework narrative.
+  - Added `/styles/framework.css`.
+  - Added six framework icons under `/assets/icons/framework/`.
+- Converted legacy `/insights/` to redirect:
+  - `/insights/index.html` now redirects to `/framework/` and preserves canonical continuity.
+- Updated global navigation labels/order and route targets:
+  - `Home`, `About`, `Framework`, `Services`, `Connect`.
+  - Shared nav model updated in `/scripts/runtime/site-navigation.js`.
+- Updated sitemap/content tooling and diagnostics for `/framework/` route:
+  - `generate-insight-links`, sitemap generation, metadata/link diagnostics, and route checks.
+- Refactored QA/test contracts from old Insights toggle model to Framework-stage model:
+  - Node tests, Python tests, Playwright route checks, metadata checks, and nav consistency checks.
 
 ## Validation Status
-- Validation checks in this step:
-  - `npm run session:ready`: passed
-  - `npm run qa:ci-parity`: completed with one visual baseline mismatch (see note above)
-  - Remote CI on trigger commit `d47e8ec...`: CI + Deploy Staging both passed
+- Local full regression completed on staging branch commit lineage:
+  - `npm test` passed (Node + Python + Jest + Playwright runtime suite).
+  - Visual regression suite remains opt-in and was skipped by default contract (`RUN_VISUAL_TESTS=1` not set).
+- Staging preview publication is currently stale and not reflecting commit `2de2c30`:
+  - Preview URL: `https://rbediner.github.io/romanbediner-preview/`
+  - Observed state during polling:
+    - `/framework/` => HTTP 404
+    - root `Last-Modified` stayed at `Fri, 13 Mar 2026 01:13:38 GMT`
+  - Two empty retrigger commits were pushed to `staging` to force workflow reruns:
+    - `27dae0e` and `2de2c30`
+  - Preview still served old artifact after both retriggers.
+
+## Branch Alignment
+- `staging` HEAD: `2de2c30`
+- `prod` HEAD: `718b649` (contains framework migration commit without retrigger commits)
+- Branches are intentionally divergent due staging-only retrigger commits.
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
 2. `git checkout staging && git pull --ff-only origin staging`
-3. `nvm use` (Node 20 per `.nvmrc`)
-4. Run `npm run session:ready`
-5. For release flow: do not provide preview URL before all tests pass.
-6. Read in order before architecture changes:
-   - `/README.md`
-   - `/docs/handoff/latest.md`
-   - `/docs/architecture/repo-contract.json`
-7. Before promoting: ensure `prod` fast-forwards to the exact tested staging commit only.
-8. If visual mismatch is expected, run visual baseline update flow before release promotion.
+3. Validate latest CI runs for commit `2de2c30` in GitHub Actions UI.
+4. Validate staging preview publish:
+   - Confirm `https://rbediner.github.io/romanbediner-preview/framework/` returns HTTP 200.
+   - Confirm `/insights/` preview route redirects to `/framework/`.
+5. Only after staging preview/CI are green, promote to `prod` using fast-forward-only release flow.
+6. Re-run post-promotion production checks and update this handoff file again.
 
 ## Notes
-- This file must contain only the latest handoff state; do not append logs.
-- This file is intentionally updated by hand at session end after code/test changes.
-- Staging preview uses separate preview repository publication and does not share production Pages deployment state.
-- `romanbediner.com` repo has no `main` branch; only `staging` and `prod` are active release branches.
-- `romanbediner-preview` repo now also uses only `staging-preview` as active/default Pages branch.
+- This file intentionally stores only the latest state.
+- If preview remains stale, investigate Deploy Staging workflow permissions/preview-repo write token and environment rules before promoting to prod.
