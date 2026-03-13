@@ -404,11 +404,10 @@ flowchart LR
     "environments": {
       "staging_preview": {
         "repo": "rbediner/romanbediner-preview",
-        "branch": "main",
+        "branch": "staging-preview",
         "branch_configuration": {
-          "source": "PREVIEW_REPO_BRANCH repository variable",
-          "default_if_unset": "staging-preview",
-          "current_configured_value": "main"
+          "source": "hard-locked in deploy-staging workflow",
+          "current_configured_value": "staging-preview"
         },
         "url": "https://rbediner.github.io/romanbediner-preview/",
         "cname": false,
@@ -547,7 +546,7 @@ Flow:
 
 Current preview target:
 - Repo: `rbediner/romanbediner-preview`
-- Branch: repository variable `PREVIEW_REPO_BRANCH` (default: `staging-preview`; currently configured: `main`)
+- Branch: `staging-preview` (hard-locked in workflow)
 - URL: `https://rbediner.github.io/romanbediner-preview/`
 
 CNAME handling rules:
@@ -560,7 +559,7 @@ One-time manual setup (GitHub UI, do not automate in-repo):
 3. Add secret `PREVIEW_REPO_TOKEN` in primary repo (`rbediner/romanbediner.com`).
 4. Add repository variables:
    - `PREVIEW_REPO` = `rbediner/romanbediner-preview`
-   - `PREVIEW_REPO_BRANCH` = `main` (or `staging-preview` if you choose a dedicated preview branch)
+   - `PREVIEW_REPO_BRANCH` variable is no longer used (branch is hard-locked to `staging-preview`)
 5. Scope token to preview repo only with minimum permissions (`contents: write`).
 6. Optionally protect the configured preview branch if team policy requires it.
 

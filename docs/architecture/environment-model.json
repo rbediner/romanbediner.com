@@ -59,11 +59,10 @@
       "environments": {
         "staging_preview": {
           "repo": "rbediner/romanbediner-preview",
-          "branch": "main",
+          "branch": "staging-preview",
           "branch_configuration": {
-            "source": "PREVIEW_REPO_BRANCH repository variable",
-            "default_if_unset": "staging-preview",
-            "current_configured_value": "main"
+            "source": "hard-locked in deploy-staging workflow",
+            "current_configured_value": "staging-preview"
           },
           "url": "https://rbediner.github.io/romanbediner-preview/",
           "cname": false,

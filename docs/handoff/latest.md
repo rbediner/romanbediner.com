@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 25
-- Updated At (UTC): 2026-03-13T03:05:00Z
+- Handoff Sequence: 26
+- Updated At (UTC): 2026-03-13T03:25:00Z
 - Source Branch: prod
-- Source Commit: 011cc2c2c0db9f6dee1cbf391798dc860b79362f
+- Source Commit: 17bfa8aafe4e4c5781d723c50f9b02360cc9b811
 
 ## What Changed Most Recently
 - Footer quote refinement is live on production (`92781f5`) and anti-stall CI monitor retries are live (`93602a1`).
@@ -14,14 +14,13 @@
   4. promote the exact approved commit to `prod`
 - README cross-machine section now requires handoff entries for branch alignment, staging preview state, CI lane status, and current blockers/manual steps.
 - Staging deploy workflow now hard-locks preview publication branch to `staging-preview` (removed branch variable override path) to avoid accidental writes to preview `main`.
+- Synced README machine-readable deployment section with source model (`docs/architecture/environment-model.json`) so docs automation/tests stay green.
 
 ## Validation Status
-- Last full local regression before prod promotion:
-  - `npm test`: passed
-- Post-monitor-hardening verification:
-  - `npm run test:node`: passed
-- Documentation integrity checks after this update:
-  - `npm run test:jest -- readme_structure.test.js readme_integrity.test.js`: pending run in this session (execute before next promotion if code changes continue)
+- Documentation integrity checks in this session:
+  - `npm run docs:generate`: passed
+  - `npm run docs:verify`: passed
+  - `npm run test:jest -- readme_structure.test.js readme_integrity.test.js`: passed
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
