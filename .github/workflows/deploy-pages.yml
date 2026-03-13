@@ -1,11 +1,9 @@
 name: Deploy Pages
 
 on:
-  workflow_run:
-    workflows:
-      - CI
-    types:
-      - completed
+  push:
+    branches:
+      - prod
   workflow_dispatch:
 
 permissions:
@@ -14,12 +12,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-${{ github.event.workflow_run.head_sha || github.sha }}
+  group: pages-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
   deploy-pages:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'prod') }}
     runs-on: ubuntu-latest
     outputs:
       page_url: ${{ steps.deployment.outputs.page_url }}
@@ -33,13 +30,12 @@ jobs:
       - name: Resolve source commit + branch
         id: source
         run: |
-          if [ "${{ github.event_name }}" = "workflow_run" ]; then
-            echo "source_sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
-            echo "source_branch=${{ github.event.workflow_run.head_branch }}" >> "$GITHUB_OUTPUT"
-          else
-            echo "source_sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
-            echo "source_branch=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
-          fi
+          echo "source_sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+          echo "source_branch=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for matching prod CI success
+        if: ${{ github.event_name == 'push' && github.ref_name == 'prod' }}
+        run: node scripts/release/watch-ci-run.js --branch prod --sha ${{ steps.source.outputs.source_sha }} --workflow "CI" --timeout 3600 --interval 15
 
       - name: Checkout
         uses: actions/checkout@v4

@@ -90,7 +90,7 @@
           "branch": "prod",
           "url": "https://romanbediner.com",
           "cname": true,
-          "deploy_trigger": "workflow_run:CI(success on prod)"
+          "deploy_trigger": "push:prod with explicit CI success gate on matching SHA"
         }
       }
     }

@@ -39,20 +39,20 @@ assert(
 );
 
 assert(
-  deployPagesText.includes('workflow_run:'),
-  'deploy-pages.yml must trigger from workflow_run so deploy waits for CI completion'
+  deployPagesText.includes('push:'),
+  'deploy-pages.yml must trigger from push events'
 );
 assert(
-  deployPagesText.includes('workflows:\n      - CI'),
-  'deploy-pages.yml must chain from CI workflow'
+  deployPagesText.includes('branches:\n      - prod'),
+  'deploy-pages.yml push trigger must remain branch-isolated to prod'
 );
 assert(
-  deployPagesText.includes("github.event.workflow_run.conclusion == 'success'"),
-  'deploy-pages.yml must require successful CI conclusion before deploy'
+  deployPagesText.includes('Wait for matching prod CI success'),
+  'deploy-pages.yml must explicitly wait for matching prod CI success'
 );
 assert(
-  deployPagesText.includes("github.event.workflow_run.head_branch == 'prod'"),
-  'deploy-pages.yml must require prod branch when triggered by workflow_run'
+  deployPagesText.includes('watch-ci-run.js --branch prod --sha'),
+  'deploy-pages.yml must gate deploy on the exact prod SHA CI run'
 );
 
 console.log('PASS: CI gate profile automation checks passed.');

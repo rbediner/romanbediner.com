@@ -27,7 +27,7 @@ Routing requirements:
 - Runtime model: static-only delivery.
 - No server-side includes or server-rendered composition.
 - CSP is enforced in HTML via `<meta http-equiv="Content-Security-Policy">`.
-- Production publish flow uses GitHub Actions deployment chained from a successful `CI` run on `prod` (`.github/workflows/deploy-pages.yml`).
+- Production publish flow uses GitHub Actions deployment on `push` to `prod`, with an explicit in-workflow wait for successful `CI` on the exact prod SHA (`.github/workflows/deploy-pages.yml`).
 - Hosting portability is mandatory for:
   - S3 + CloudFront
   - Vercel
@@ -218,10 +218,9 @@ nvm install
   - `browser-tests`
   - `lighthouse-validation`
   - `build-artifact`
-- Production deployment is separate from validation and runs only after successful `CI` completion on `prod`.
-- `Deploy Pages` listens to completed `CI` runs and applies prod-only protection at job level (`workflow_run.head_branch == 'prod'`) for deterministic behavior when default branches differ across repos/environments.
-- `Deploy Pages` can be invoked by non-prod CI events, but deploy execution is hard-gated to `prod` and non-prod invocations are skipped without deployment.
-- Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are additionally guarded on successful prod deploy result to prevent false failures from skipped non-prod invocations.
+- Production deployment is separate from validation and runs only on `push` to `prod`.
+- `Deploy Pages` explicitly waits for matching prod `CI` success for the same SHA before artifact deploy, preventing branch-ambiguity when the same commit exists on multiple branches.
+- Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are guarded on successful deploy result.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
@@ -561,7 +560,7 @@ flowchart LR
         "branch": "prod",
         "url": "https://romanbediner.com",
         "cname": true,
-        "deploy_trigger": "workflow_run:CI(success on prod)"
+        "deploy_trigger": "push:prod with explicit CI success gate on matching SHA"
       }
     }
   }

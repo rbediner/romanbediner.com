@@ -50,10 +50,11 @@ assert(stagingWorkflowText.includes('Staging Preview Ready'), 'staging workflow 
 assert(stagingWorkflowText.includes('Preview URL:'), 'staging workflow must log a preview URL');
 assert(stagingWorkflowText.includes('$GITHUB_STEP_SUMMARY'), 'staging workflow must publish preview URL in job summary');
 
-assert(prodWorkflowText.includes('workflow_run:'), 'production workflow must run after CI workflow completion');
-assert(prodWorkflowText.includes('workflows:\n      - CI'), 'production workflow must be chained from CI');
-assert(prodWorkflowText.includes("head_branch == 'prod'"), 'production workflow must remain prod-isolated via job-level branch gate');
-assert(prodWorkflowText.includes("needs.deploy-pages.result == 'success'"), 'production workflow downstream jobs must require successful prod deploy');
+assert(prodWorkflowText.includes('push:'), 'production workflow must trigger on prod push');
+assert(prodWorkflowText.includes('branches:\n      - prod'), 'production workflow must remain branch-isolated to prod');
+assert(prodWorkflowText.includes('Wait for matching prod CI success'), 'production workflow must gate deploy on matching prod CI completion');
+assert(prodWorkflowText.includes('watch-ci-run.js --branch prod --sha'), 'production workflow must verify CI success for the exact prod SHA');
+assert(prodWorkflowText.includes("needs.deploy-pages.result == 'success'"), 'production workflow downstream jobs must require successful deploy');
 assert(prodWorkflowText.includes('Ensure production CNAME exists'), 'production workflow must enforce CNAME presence');
 assert(prodWorkflowText.includes('test -f /tmp/rb-site-artifact/site/CNAME'), 'production workflow must fail when CNAME is missing');
 
