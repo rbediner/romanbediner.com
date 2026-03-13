@@ -1,11 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 30
-- Updated At (UTC): 2026-03-13T16:18:00Z
+- Handoff Sequence: 31
+- Updated At (UTC): 2026-03-13T16:36:00Z
 - Source Branch: staging
-- Source Commit: 2de2c30163df536e89e0212552684a84142cc923
+- Source Commit: 60208c0fe2e7372fc733df4a1028f96ca328af1c
 
 ## What Changed Most Recently
+- Fixed CI `link-validation` false-failure on staging framework rollout:
+  - Root cause: crawler validated canonical production URL `https://romanbediner.com/framework/` during staging/local runs.
+  - Added environment-aware skip behavior in `/scripts/qa/run-link-check.js`:
+    - local/staging crawls skip canonical production-domain links
+    - production crawls continue validating canonical domain links
+  - Added guard test: `/QA/tests/test-link-validation-config.js`.
+  - Documented behavior in `README.md`.
 - Migrated Insights into a dedicated Framework route:
   - Added `/framework/index.html` with six-stage AI-Enabled Operations Framework narrative.
   - Added `/styles/framework.css`.
@@ -23,6 +30,7 @@
 ## Validation Status
 - Local full regression completed on staging branch commit lineage:
   - `npm test` passed (Node + Python + Jest + Playwright runtime suite).
+  - `npm run test:links` now passes in CI-parity local server mode.
   - Visual regression suite remains opt-in and was skipped by default contract (`RUN_VISUAL_TESTS=1` not set).
 - Staging preview publication is currently stale and not reflecting commit `2de2c30`:
   - Preview URL: `https://rbediner.github.io/romanbediner-preview/`
@@ -34,14 +42,14 @@
   - Preview still served old artifact after both retriggers.
 
 ## Branch Alignment
-- `staging` HEAD: `2de2c30`
+- `staging` HEAD: `60208c0`
 - `prod` HEAD: `718b649` (contains framework migration commit without retrigger commits)
 - Branches are intentionally divergent due staging-only retrigger commits.
 
 ## Operator Checklist (Next Machine)
 1. `git fetch origin --prune`
 2. `git checkout staging && git pull --ff-only origin staging`
-3. Validate latest CI runs for commit `2de2c30` in GitHub Actions UI.
+3. Validate latest CI runs for commit `60208c0` in GitHub Actions UI.
 4. Validate staging preview publish:
    - Confirm `https://rbediner.github.io/romanbediner-preview/framework/` returns HTTP 200.
    - Confirm `/insights/` preview route redirects to `/framework/`.
