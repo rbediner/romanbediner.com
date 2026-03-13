@@ -1,15 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 66
-- Updated At (UTC): 2026-03-13T23:03:08Z
+- Handoff Sequence: 67
+- Updated At (UTC): 2026-03-13T23:29:23Z
 - Source Branch: codex/prod-promote
-- Source Commit: 3ddec5d4eb8642b97e4076408e307de79eba6729 (pre-handoff baseline)
+- Source Commit: 685f7c90f55330cf2864c4f448534cc15503ee33 (pre-handoff baseline)
 
 ## Current State
 - Remote branches are aligned:
-  - `origin/staging` -> `3ddec5d4eb8642b97e4076408e307de79eba6729`
-  - `origin/prod` -> `3ddec5d4eb8642b97e4076408e307de79eba6729`
-- This session has local, unpushed CI/CD workflow updates on `codex/prod-promote`.
+  - `origin/staging` -> `685f7c90f55330cf2864c4f448534cc15503ee33`
+  - `origin/prod` -> `685f7c90f55330cf2864c4f448534cc15503ee33`
+- This session now includes one additional local hotfix commit (not yet pushed at handoff update time):
+  - guard downstream `Deploy Pages` jobs so non-prod `workflow_run` invocations are skipped safely instead of failing.
 
 ## What Changed In This Session
 1. CI gate profiles are now automatic by branch/event in `.github/workflows/ci.yml`:
@@ -34,6 +35,10 @@
    - Updated `docs/architecture/workflow-manifest.json`.
    - Updated `docs/architecture/environment-model.json`.
    - Regenerated README architecture diagram/JSON via `npm run docs:generate`.
+6. Deploy-pages non-prod skip hardening:
+   - Updated `.github/workflows/deploy-pages.yml` so `post-deploy-validation` runs only when `deploy-pages` actually succeeds.
+   - Updated `.github/workflows/deploy-pages.yml` so `release-tag` runs only when `deploy-pages` succeeded on `prod`.
+   - Updated README deployment notes to document this guard explicitly.
 
 ## Validation Performed
 - `npm run docs:generate` PASS
