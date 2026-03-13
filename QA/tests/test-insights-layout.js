@@ -27,7 +27,7 @@ const expectedTitles = {
 };
 
 for (const id of stageIds) {
-  if (!new RegExp(`<section id="${id}" class="framework-section insight-card">`).test(frameworkHtml)) {
+  if (!new RegExp(`<section id="${id}" class="framework-section framework-card insight-card">`).test(frameworkHtml)) {
     failures += 1;
     console.error(`FAIL: missing framework section #${id}.`);
   }
@@ -37,17 +37,17 @@ for (const id of stageIds) {
   }
 }
 
-if ((frameworkHtml.match(/class="framework-section insight-card"/g) || []).length !== 6) {
+if ((frameworkHtml.match(/class="framework-section framework-card insight-card"/g) || []).length !== 6) {
   failures += 1;
   console.error('FAIL: expected exactly 6 framework sections.');
 }
 
-if ((frameworkHtml.match(/class="framework-arrow"/g) || []).length !== 3) {
+if ((frameworkHtml.match(/class="framework-arrow framework-transition"/g) || []).length !== 3) {
   failures += 1;
   console.error('FAIL: expected exactly 3 framework arrows between stage groups.');
 }
 
-const sectionBlocks = [...frameworkHtml.matchAll(/<section id="([a-z-]+)" class="framework-section insight-card">([\s\S]*?)<\/section>/g)];
+const sectionBlocks = [...frameworkHtml.matchAll(/<section id="([a-z-]+)" class="framework-section framework-card insight-card">([\s\S]*?)<\/section>/g)];
 if (sectionBlocks.length !== 6) {
   failures += 1;
   console.error('FAIL: unable to parse all framework section blocks for contract checks.');
@@ -59,12 +59,12 @@ for (const [, id, block] of sectionBlocks) {
     console.error(`FAIL: framework-arrow must not be nested inside section #${id}.`);
   }
 
-  if (!new RegExp(`<h2>${id.charAt(0).toUpperCase()}${id.slice(1)}<\/h2>`).test(block)) {
+  if (!new RegExp(`<h2 class="stage-label">${id.charAt(0).toUpperCase()}${id.slice(1)}<\/h2>`).test(block)) {
     failures += 1;
     console.error(`FAIL: section #${id} must use stage name as <h2>.`);
   }
 
-  if (!block.includes(`<h3>${expectedTitles[id]}</h3>`)) {
+  if (!block.includes(`<h3 class="stage-title">${expectedTitles[id]}</h3>`)) {
     failures += 1;
     console.error(`FAIL: section #${id} is missing required <h3> title copy.`);
   }
@@ -101,9 +101,9 @@ if (!/\.framework-progress-markers span\s*\{[^}]*width:\s*10px;[^}]*height:\s*10
   console.error('FAIL: framework progress markers must be 10px circles.');
 }
 
-if (!/\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*10px;/s.test(frameworkCss)) {
+if (!/\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*12px;/s.test(frameworkCss)) {
   failures += 1;
-  console.error('FAIL: framework header alignment must be centered with 10px gap.');
+  console.error('FAIL: framework header alignment must be centered with 12px gap.');
 }
 
 if (!/\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40)px;/s.test(frameworkCss)) {
@@ -114,6 +114,26 @@ if (!/\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40
 if (!/\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: framework pill refinement (spacing + weight + tracking) is missing.');
+}
+
+if (!/\.framework-section\s*\{[^}]*padding:\s*32px;[^}]*border-radius:\s*12px;[^}]*box-shadow:\s*0 6px 18px rgba\(0, 0, 0, 0\.04\);/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework card padding/radius/shadow refinement is missing.');
+}
+
+if (!/\.card-body\s*\{[^}]*max-width:\s*760px;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework card body max-width must be 760px.');
+}
+
+if (!/\.framework-transition\s*\{[^}]*margin:\s*28px 0;[^}]*display:\s*flex;[^}]*justify-content:\s*center;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework transition spacing contract is missing.');
+}
+
+if (!/\.framework-rail\s*\{[^}]*width:\s*2px;[^}]*background:\s*rgba\(80,\s*110,\s*255,\s*0\.15\);/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework vertical rail contract is missing.');
 }
 
 if (!/\.framework-section h3\s*\{[^}]*margin-top:\s*6px;[^}]*margin-bottom:\s*14px;/s.test(frameworkCss)) {

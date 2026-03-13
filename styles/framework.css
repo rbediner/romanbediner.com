@@ -3,10 +3,15 @@
   --framework-max-width: 860px;
 }
 
+/* Slightly wider framework container improves long-line readability. */
+.framework-container {
+  max-width: 980px;
+}
+
 .framework-main {
-  max-width: 960px;
   margin: 0 auto;
   padding: 0 24px;
+  position: relative;
 }
 
 .framework-subtitle {
@@ -29,6 +34,11 @@
   margin-bottom: 0;
   font-weight: 600;
   letter-spacing: 0.04em;
+}
+
+/* The intro block should breathe before the first framework stage. */
+.framework-intro-block {
+  margin-bottom: 56px;
 }
 
 .framework-progress {
@@ -58,18 +68,43 @@
   justify-self: center;
 }
 
-.framework-section {
+/* Shared flow wrapper allows a centered rail without changing bullet structure. */
+.framework-flow {
+  position: relative;
   max-width: var(--framework-max-width);
   margin: 0 auto;
-  padding: 32px 36px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  background: #ffffff;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.framework-section + .framework-section {
-  margin-top: 48px;
+.framework-rail {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: rgba(80, 110, 255, 0.15);
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.framework-section {
+  max-width: var(--framework-max-width);
+  margin: 0 0 64px 0;
+  padding: 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  position: relative;
+  z-index: 1;
+}
+
+.framework-flow > .framework-section:last-child {
+  margin-bottom: 0;
+}
+
+.framework-section:first-of-type {
+  margin-top: 24px;
 }
 
 .framework-section:hover {
@@ -80,13 +115,13 @@
 .framework-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 0;
 }
 
 .framework-icon {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
 }
 
@@ -94,6 +129,17 @@
   margin-bottom: 8px;
   font-weight: 600;
   letter-spacing: 0.04em;
+  background: rgba(80, 110, 255, 0.10);
+  color: var(--accent-blue);
+}
+
+/* Stage spacing controls keep icon/pill/heading rhythm consistent. */
+.stage-label {
+  margin-top: 4px;
+}
+
+.stage-title {
+  margin-top: 10px;
 }
 
 .framework-section h2 {
@@ -120,6 +166,11 @@
   color: var(--text-color);
 }
 
+/* Wider body text block improves bullet wrapping while preserving indentation. */
+.card-body {
+  max-width: 760px;
+}
+
 .framework-section ul {
   line-height: 1.6;
   margin-top: 14px;
@@ -137,6 +188,12 @@
   margin: 22px auto;
 }
 
+.framework-transition {
+  margin: 28px 0;
+  display: flex;
+  justify-content: center;
+}
+
 .framework-arrow svg {
   stroke: #3b6cff;
   stroke-width: 2;
@@ -146,6 +203,14 @@
 @media (max-width: 768px) {
   .framework-main {
     padding: 0 24px;
+  }
+
+  .framework-flow {
+    max-width: 100%;
+  }
+
+  .framework-rail {
+    display: none;
   }
 
   .framework-subtitle {

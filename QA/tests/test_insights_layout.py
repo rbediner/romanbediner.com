@@ -19,7 +19,7 @@ class FrameworkLayoutTest(unittest.TestCase):
             self.assertIn(f'id="{section_id}"', self.framework_html)
             self.assertIn(f'href="#{section_id}"', self.framework_html)
 
-        self.assertEqual(self.framework_html.count('class="framework-section insight-card"'), 6)
+        self.assertEqual(self.framework_html.count('class="framework-section framework-card insight-card"'), 6)
         self.assertIn("<h1>The AI-Enabled Operations Framework</h1>", self.framework_html)
         self.assertIn(
             '<h2 class="framework-subtitle">Insights and Briefs on Productizing Operations for Modern AI-Enabled Work</h2>',
@@ -37,19 +37,19 @@ class FrameworkLayoutTest(unittest.TestCase):
         }
 
         blocks = re.findall(
-            r'<section id="([a-z-]+)" class="framework-section insight-card">([\s\S]*?)</section>',
+            r'<section id="([a-z-]+)" class="framework-section framework-card insight-card">([\s\S]*?)</section>',
             self.framework_html,
         )
         self.assertEqual(len(blocks), 6)
 
         for stage_id, block in blocks:
-            self.assertIn(f"<h2>{stage_id.capitalize()}</h2>", block)
-            self.assertIn(f"<h3>{expected_h3[stage_id]}</h3>", block)
+            self.assertIn(f'<h2 class="stage-label">{stage_id.capitalize()}</h2>', block)
+            self.assertIn(f'<h3 class="stage-title">{expected_h3[stage_id]}</h3>', block)
             self.assertEqual(block.count("<li>"), 5, f"{stage_id} must contain exactly 5 bullets")
 
     def test_flow_arrows_only_between_sections(self):
-        self.assertEqual(self.framework_html.count('class="framework-arrow"'), 3)
-        section_blocks = re.findall(r'<section id="[a-z-]+" class="framework-section insight-card">([\s\S]*?)</section>', self.framework_html)
+        self.assertEqual(self.framework_html.count('class="framework-arrow framework-transition"'), 3)
+        section_blocks = re.findall(r'<section id="[a-z-]+" class="framework-section framework-card insight-card">([\s\S]*?)</section>', self.framework_html)
         self.assertTrue(section_blocks)
         for block in section_blocks:
             self.assertNotIn('framework-arrow', block)
@@ -64,15 +64,19 @@ class FrameworkLayoutTest(unittest.TestCase):
         self.assertRegex(self.framework_css, r"\.framework-progress-line\s*\{[^}]*height:\s*3px;[^}]*opacity:\s*0\.35;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress\s*\{[^}]*max-width:\s*700px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-markers span\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*opacity:\s*0\.5;", re.S)
-        self.assertRegex(self.framework_css, r"\.framework-section \+ \.framework-section\s*\{[^}]*margin-top:\s*48px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-section\s*\{[^}]*margin:\s*0 0 64px 0;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section ul\s*\{[^}]*line-height:\s*1\.6;[^}]*margin-top:\s*14px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*620px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40)px;", re.S)
-        self.assertRegex(self.framework_css, r"\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*10px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*12px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-main \.executive-callout\s*\{[^}]*background:\s*#f6f8ff;[^}]*border-left:\s*3px solid #3b6cff;[^}]*padding:\s*20px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section h3\s*\{[^}]*margin-top:\s*6px;[^}]*margin-bottom:\s*14px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-arrow svg\s*\{[^}]*stroke:\s*#3b6cff;[^}]*stroke-width:\s*2;[^}]*opacity:\s*0\.75;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-section\s*\{[^}]*padding:\s*32px;[^}]*border-radius:\s*12px;", re.S)
+        self.assertRegex(self.framework_css, r"\.card-body\s*\{[^}]*max-width:\s*760px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-transition\s*\{[^}]*margin:\s*28px 0;[^}]*display:\s*flex;[^}]*justify-content:\s*center;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-rail\s*\{[^}]*width:\s*2px;[^}]*background:\s*rgba\(80,\s*110,\s*255,\s*0\.15\);", re.S)
 
     def test_bottom_transition_targets_services(self):
         self.assertIn('href="/services/"', self.framework_html)
