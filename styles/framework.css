@@ -137,10 +137,11 @@
 #integration .framework-icon {
   width: 35px;
   height: 35px;
+  top: -10px;
 }
 
 #execution .framework-icon {
-  top: -10px;
+  top: -14px;
 }
 
 #signals .framework-icon {
