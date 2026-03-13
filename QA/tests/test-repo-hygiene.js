@@ -146,10 +146,33 @@ function scanForUnreferencedAssets() {
   }
 }
 
+function scanTrackedGeneratedArtifacts() {
+  // Prevent local test/runtime outputs from being committed. These files are
+  // machine-specific and create noisy diffs with no production value.
+  const disallowedTrackedPrefixes = [
+    'QA/tests/__pycache__/',
+    'QA/tests/visual-current/',
+    'QA/tests/visual-diff/'
+  ];
+  const disallowedTrackedFiles = [
+    'QA/results/playwright/.last-run.json'
+  ];
+
+  for (const rel of trackedFiles) {
+    if (disallowedTrackedPrefixes.some((prefix) => rel.startsWith(prefix))) {
+      failures.push(`Generated artifact must not be tracked: ${rel}`);
+    }
+    if (disallowedTrackedFiles.includes(rel)) {
+      failures.push(`Runtime state file must not be tracked: ${rel}`);
+    }
+  }
+}
+
 walk(ROOT);
 scanForLegacyHomeRoute();
 scanForLegacyRootFolders();
 scanForUnreferencedAssets();
+scanTrackedGeneratedArtifacts();
 
 if (failures.length) {
   failures.forEach((f) => console.error(`FAIL: ${f}`));

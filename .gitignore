@@ -9,6 +9,9 @@ dist/
 .pytest_cache/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+QA/tests/__pycache__/
 
 # Visual regression artifacts generated during local test runs.
 QA/tests/visual-current/
@@ -18,6 +21,7 @@ QA/tests/visual-diff/
 QA/results/*
 !QA/results/.gitkeep
 !QA/results/README.md
+QA/results/playwright/.last-run.json
 
 # Playwright runtime artifacts and duplicated local output folders.
 test-results*/
