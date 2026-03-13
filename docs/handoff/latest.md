@@ -1,11 +1,32 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 49
-- Updated At (UTC): 2026-03-13T20:35:49Z
+- Handoff Sequence: 50
+- Updated At (UTC): 2026-03-13T20:58:30Z
 - Source Branch: staging
 - Source Commit: 3c178b952e1116079b5baa4752eb84eab59048bc (pre-refinement baseline)
 
 ## What Changed Most Recently
+- Installed GitHub CLI locally on this machine using the no-Homebrew fallback path:
+  - binary path: `~/.local/bin/gh`
+  - version: `2.88.1`
+  - shell path bootstrap added to `~/.zshrc`
+- Applied Framework icon optical alignment refinement:
+  - `styles/framework.css` `.framework-icon` now includes:
+    - `position: relative;`
+    - `top: -4px;`
+  - Reason: icon art baseline sat slightly low relative to stage-pill center.
+- Updated Framework QA contracts to enforce the new alignment:
+  - `QA/tests/test-insights-layout.js`
+  - `QA/tests/test_insights_layout.py`
+- Verified targeted Framework contracts pass:
+  - `node QA/tests/test-insights-layout.js` ✅
+  - `python3 -m unittest QA/tests/test_insights_layout.py -v` ✅
+
+## Concurrent Work Note
+- There are active local edits in other files from another Codex thread (`README.md`, `styles/site.css`) that were intentionally not modified in this pass.
+- This pass is limited to Framework icon vertical alignment + QA contract enforcement + local CLI dependency install.
+
+## Prior Refinement Snapshot
 - Applied the Framework page visual refinement patch without changing page architecture.
 - Updated `/framework/index.html` to support new visual contracts:
   - Added `framework-container` and `framework-intro-block`.

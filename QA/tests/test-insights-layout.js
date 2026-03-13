@@ -111,6 +111,11 @@ if (!/\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40
   console.error('FAIL: framework icons must render between 36px and 40px.');
 }
 
+if (!/\.framework-icon\s*\{[^}]*position:\s*relative;[^}]*top:\s*-4px;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework icons must include optical vertical offset (top: -4px).');
+}
+
 if (!/\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: framework pill refinement (spacing + weight + tracking) is missing.');

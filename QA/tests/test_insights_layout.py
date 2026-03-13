@@ -68,6 +68,7 @@ class FrameworkLayoutTest(unittest.TestCase):
         self.assertRegex(self.framework_css, r"\.framework-section ul\s*\{[^}]*line-height:\s*1\.6;[^}]*margin-top:\s*14px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-section li\s*\{[^}]*margin-bottom:\s*10px;[^}]*max-width:\s*620px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*width:\s*(3[6-9]|40)px;[^}]*height:\s*(3[6-9]|40)px;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-icon\s*\{[^}]*position:\s*relative;[^}]*top:\s*-4px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-header\s*\{[^}]*align-items:\s*center;[^}]*gap:\s*12px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-pill\s*\{[^}]*margin-bottom:\s*8px;[^}]*font-weight:\s*600;[^}]*letter-spacing:\s*0\.04em;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-main \.executive-callout\s*\{[^}]*background:\s*#f6f8ff;[^}]*border-left:\s*3px solid #3b6cff;[^}]*padding:\s*20px;", re.S)
