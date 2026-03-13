@@ -219,6 +219,7 @@ nvm install
   - `lighthouse-validation`
   - `build-artifact`
 - Production deployment is separate from validation and runs only after successful `CI` completion on `prod`.
+- `Deploy Pages` listens to completed `CI` runs and applies prod-only protection at job level (`workflow_run.head_branch == 'prod'`) for deterministic behavior when default branches differ across repos/environments.
 - `Deploy Pages` can be invoked by non-prod CI events, but deploy execution is hard-gated to `prod` and non-prod invocations are skipped without deployment.
 - Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are additionally guarded on successful prod deploy result to prevent false failures from skipped non-prod invocations.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.

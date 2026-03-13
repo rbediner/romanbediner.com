@@ -52,7 +52,8 @@ assert(stagingWorkflowText.includes('$GITHUB_STEP_SUMMARY'), 'staging workflow m
 
 assert(prodWorkflowText.includes('workflow_run:'), 'production workflow must run after CI workflow completion');
 assert(prodWorkflowText.includes('workflows:\n      - CI'), 'production workflow must be chained from CI');
-assert(prodWorkflowText.includes('branches:\n      - prod'), 'production workflow must remain branch-isolated to prod');
+assert(prodWorkflowText.includes("head_branch == 'prod'"), 'production workflow must remain prod-isolated via job-level branch gate');
+assert(prodWorkflowText.includes("needs.deploy-pages.result == 'success'"), 'production workflow downstream jobs must require successful prod deploy');
 assert(prodWorkflowText.includes('Ensure production CNAME exists'), 'production workflow must enforce CNAME presence');
 assert(prodWorkflowText.includes('test -f /tmp/rb-site-artifact/site/CNAME'), 'production workflow must fail when CNAME is missing');
 
