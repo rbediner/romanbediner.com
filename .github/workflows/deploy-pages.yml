@@ -33,16 +33,16 @@ jobs:
           echo "source_sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
           echo "source_branch=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
 
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.source.outputs.source_sha }}
+
       - name: Wait for matching prod CI success
         if: ${{ github.event_name == 'push' && github.ref_name == 'prod' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/release/watch-ci-run.js --branch prod --sha ${{ steps.source.outputs.source_sha }} --workflow "CI" --timeout 3600 --interval 15
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ steps.source.outputs.source_sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
