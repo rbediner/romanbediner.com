@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 73
-- Updated At (UTC): 2026-03-14T21:59:50Z
+- Handoff Sequence: 74
+- Updated At (UTC): 2026-03-14T22:15:38Z
 - Source Branch: codex/prod-promote
-- Source Commit: 5dc42d6e21f3a4f9e334830fa7d6eb02bcfbf84a
+- Source Commit: 8cd97983299209cedb547eb2c62127efed78f680 (pre-handoff baseline)
 
 ## Current State
 - Remote branches are aligned:

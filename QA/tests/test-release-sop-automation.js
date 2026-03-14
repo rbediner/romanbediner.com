@@ -23,6 +23,7 @@ function assert(condition, message) {
 
 const requiredScripts = {
   'session:ready': 'node scripts/qa/verify-session-readiness.js',
+  'qa:prepush-gate': 'node scripts/qa/run-prepush-gate.js',
   'qa:ci-parity': 'bash scripts/qa/run-ci-parity.sh',
   'ci:monitor': 'node scripts/release/watch-ci-run.js',
   'release:staging-prod': 'bash scripts/release/promote-tested-staging-to-prod.sh',
@@ -75,7 +76,16 @@ const huskyPrePushPath = path.join(ROOT, '.husky', 'pre-push');
 assert(fs.existsSync(huskyPrePushPath), '.husky/pre-push must exist');
 const huskyText = fs.readFileSync(huskyPrePushPath, 'utf8');
 assert(huskyText.includes('SKIP_PREPUSH_QA'), 'pre-push must include documented bypass variable');
-assert(huskyText.includes('npm run qa:ci-parity'), 'pre-push must run CI-parity script');
+assert(huskyText.includes('npm run qa:prepush-gate'), 'pre-push must run smart pre-push gate script');
+
+const prepushGatePath = path.join(ROOT, 'scripts', 'qa', 'run-prepush-gate.js');
+assert(fs.existsSync(prepushGatePath), 'scripts/qa/run-prepush-gate.js must exist');
+const prepushGateText = fs.readFileSync(prepushGatePath, 'utf8');
+assert(prepushGateText.includes('DOCS_ONLY_PATTERNS'), 'pre-push gate must define docs-only path policy');
+assert(prepushGateText.includes('npm run qa:ci-parity'), 'pre-push gate must preserve full CI parity for non-doc changes');
+assert(prepushGateText.includes('npm run docs:verify'), 'pre-push gate must run docs verify for docs-only changes');
+assert(prepushGateText.includes('npm run test:node'), 'pre-push gate must run node policy tests for docs-only changes');
+assert(prepushGateText.includes('npm run test:jest'), 'pre-push gate must run jest policy tests for docs-only changes');
 
 const prepareHuskyPath = path.join(ROOT, 'scripts', 'release', 'install-local-husky-hooks.js');
 assert(fs.existsSync(prepareHuskyPath), 'scripts/release/install-local-husky-hooks.js must exist');

@@ -242,6 +242,9 @@ nvm install
   - when crawling production targets, canonical domain links remain validated
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
 - `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
+- Local pre-push hook runs `npm run qa:prepush-gate`:
+  - docs-only changes (`README.md`, `docs/**`, `AGENTS.md`) run a lightweight gate (`docs:verify`, `test:node`, `test:jest`)
+  - non-doc changes continue to run full CI-parity via `npm run qa:ci-parity`
 - Playwright spec tests are executed through `scripts/qa/run-local-playwright-suite.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/qa/run-local-playwright-suite.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.

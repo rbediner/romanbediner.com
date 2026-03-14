@@ -10,5 +10,5 @@ if [ "${SKIP_PREPUSH_QA:-0}" = "1" ]; then
   exit 0
 fi
 
-echo "[husky pre-push] running CI-parity gate"
-npm run qa:ci-parity
+echo "[husky pre-push] running pre-push QA gate"
+npm run qa:prepush-gate
