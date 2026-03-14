@@ -190,6 +190,10 @@ Required handoff content for cross-machine continuity:
 ## Continuous Integration
 - Node is pinned to version 20.
 - Local development should use the same version via `.nvmrc`.
+- Recommended operator tooling:
+  - GitHub CLI (`gh`) for reliable workflow monitoring and reruns:
+    - Install via Homebrew when available: `brew install gh`
+    - If Homebrew is unavailable, install official release binary to `~/.local/bin/gh` and add `export PATH="$HOME/.local/bin:$PATH"` to `~/.zshrc`
 - Recommended local setup:
 ```bash
 nvm use

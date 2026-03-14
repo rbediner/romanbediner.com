@@ -1,16 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 71
-- Updated At (UTC): 2026-03-14T00:04:21Z
+- Handoff Sequence: 72
+- Updated At (UTC): 2026-03-14T12:42:41Z
 - Source Branch: codex/prod-promote
-- Source Commit: ed2c6a50f42d6924fdb5120d3a0327efeecac695 (pre-handoff baseline)
+- Source Commit: 992807dc75a3290c14ade4f859ed3a944659b1f9 (pre-handoff baseline)
 
 ## Current State
 - Remote branches are aligned:
-  - `origin/staging` -> `ed2c6a50f42d6924fdb5120d3a0327efeecac695`
-  - `origin/prod` -> `ed2c6a50f42d6924fdb5120d3a0327efeecac695`
-- This session includes one additional local, unpushed workflow hotfix at handoff time:
-  - move checkout before the prod CI-gate monitor step in `deploy-pages.yml` so `scripts/release/watch-ci-run.js` exists in the runner workspace.
+  - `origin/staging` -> `992807dc75a3290c14ade4f859ed3a944659b1f9`
+  - `origin/prod` -> `992807dc75a3290c14ade4f859ed3a944659b1f9`
+- This session includes one additional local, unpushed docs/tooling update at handoff time:
+  - add GitHub CLI (`gh`) operator setup guidance in README for better cross-machine workflow monitoring.
 
 ## What Changed In This Session
 1. Production deploy model was stabilized:
@@ -27,9 +27,9 @@
 - `npm run docs:generate` PASS
 - `npm run test:node` PASS
 - `npm run test:jest` PASS
-- Latest confirmed staging green (for `ed2c6a50f42d6924fdb5120d3a0327efeecac695`):
-  - CI success: https://github.com/rbediner/romanbediner.com/actions/runs/23075388158
-  - Deploy Staging success: https://github.com/rbediner/romanbediner.com/actions/runs/23075411340
+- Latest confirmed prod green (for `992807dc75a3290c14ade4f859ed3a944659b1f9`):
+  - CI success: https://github.com/rbediner/romanbediner.com/actions/runs/23075564619
+  - Deploy Pages success: https://github.com/rbediner/romanbediner.com/actions/runs/23075564612
 
 ## Required Startup Order (Next Machine / Next Codex Session)
 1. Read `/README.md`
@@ -45,3 +45,6 @@
   - promote exact approved SHA to `prod`
   - `prod` full gate + deploy + post-deploy validation
 - No CI caching added (per operator preference).
+- Local operator tooling now includes GitHub CLI:
+  - installed binary: `~/.local/bin/gh`
+  - shell path update: `~/.zshrc` includes `export PATH="$HOME/.local/bin:$PATH"`
