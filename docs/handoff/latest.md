@@ -1,41 +1,46 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 75
-- Updated At (UTC): 2026-03-14T22:49:16Z
-- Source Branch: staging
-- Source Commit: 7f1b3c1b04a775662c6b3d31ea43374bce343683
+- Handoff Sequence: 76
+- Updated At (UTC): 2026-03-14T23:02:24Z
+- Source Branch: prod
+- Source Commit: 26dff0971f79dab8cd691cf6c1fde5bec69f452e
 
 ## Current State
-- Remote branches:
-  - `origin/staging` -> `7f1b3c1b04a775662c6b3d31ea43374bce343683`
-  - `origin/prod` -> `a5afda698341d332d246ed64a49f2578eb5df798`
-- Branch alignment:
-  - Diverged by design (`staging` ahead; `prod` not yet promoted from this icon update).
+- Remote branches are aligned:
+  - `origin/staging` -> `26dff0971f79dab8cd691cf6c1fde5bec69f452e`
+  - `origin/prod` -> `26dff0971f79dab8cd691cf6c1fde5bec69f452e`
+- This commit is both staging-approved and production-deployed.
 
 ## What Changed In This Session
-1. Rebuilt framework Signals icon from the 10-icon source grid (`assets/asset-library/icon-grid.jpg`) with a clean transparent mask and increased safety padding.
-2. Replaced production icon at:
-   - `/assets/icons/framework/signals-telemetry.png`
-3. Validated and pushed commit:
-   - `7f1b3c1` — "Rebuild Signals icon from icon-grid with clean padded crop"
+1. Completed end-to-end release promotion for approved staging SHA `26dff0971f79dab8cd691cf6c1fde5bec69f452e`:
+   - full local CI-parity
+   - staging CI verification
+   - fast-forward promotion to `prod`
+   - prod CI + Deploy Pages monitoring
+2. Confirmed production route health with live validator after deploy.
 
 ## Validation Performed
-- Local CI-parity gate (full): `npm run qa:ci-parity`
+- Local CI-parity (multiple enforced runs via release script + hooks): pass
   - Node contracts: pass
   - Jest policy suite: pass
   - Python QA suite: pass
   - Playwright runtime: pass
   - Visual regression suite: pass
-- Pre-push hook CI-parity rerun: pass
-- Remote `staging` CI run for exact SHA: pass
-  - Run: `https://github.com/rbediner/romanbediner.com/actions/runs/23098038985`
+- Staging CI for promoted SHA: pass
+  - `https://github.com/rbediner/romanbediner.com/actions/runs/23098071837`
+- Prod CI for same SHA: pass
+  - `https://github.com/rbediner/romanbediner.com/actions/runs/23098200239`
+- Deploy Pages for same SHA: pass
+  - `https://github.com/rbediner/romanbediner.com/actions/runs/23098200228`
+- Post-deploy live production validation: pass
+  - command: `npm run test:deploy:live`
 
-## Staging Preview
-- URL: `https://rbediner.github.io/romanbediner-preview/`
-- Status: published from successful `staging` pipeline for SHA `7f1b3c1b04a775662c6b3d31ea43374bce343683`
-- Visual approval: pending operator review
+## Environment URLs
+- Staging preview:
+  - `https://rbediner.github.io/romanbediner-preview/`
+- Production:
+  - `https://romanbediner.com/`
 
 ## Operator Notes
-- User reported prior Signals icon crop/noise; fix now uses clean extraction from icon grid source with additional breathing room around artwork.
-- No CSS/layout changes were required for this fix.
-- Next step after visual signoff: promote exact tested staging SHA `7f1b3c1b04a775662c6b3d31ea43374bce343683` to `prod`.
+- Signals icon recrop/padding fix is now live in production.
+- Playwright execution remains enforced with at least 3 workers in CI-parity/release gates.
