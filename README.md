@@ -310,6 +310,36 @@ npm test
 ## Cross-Machine Replication Checklist
 Use this checklist whenever onboarding a new machine so dependencies, permissions, and release controls stay identical.
 
+### Fresh Machine Dependency Baseline (Required)
+Install these first on any new machine before attempting CI-parity checks, staging preview publication, or prod promotion:
+
+1. `git`
+2. `Node.js 20.x` and `npm` (via `.nvmrc`)
+3. `python3` and `pip` (Python 3.11 recommended for parity with CI)
+4. Playwright browser runtime (`chromium`)
+5. GitHub CLI (`gh`) authenticated with `repo` and `workflow` scopes
+
+Exact bootstrap sequence:
+```bash
+nvm install
+nvm use
+npm ci
+python3 -m pip install --upgrade pip
+python3 -m pip install playwright==1.58.0 pillow==11.3.0
+python3 -m playwright install chromium
+gh auth login --web --scopes repo,workflow
+npm run session:ready
+```
+
+Required repo-level release/preview wiring (GitHub settings):
+- Primary repo (`rbediner/romanbediner.com`) secret: `PREVIEW_REPO_TOKEN`
+- Primary repo (`rbediner/romanbediner.com`) variables:
+  - `PREVIEW_REPO=rbediner/romanbediner-preview`
+  - `PREVIEW_REPO_BRANCH=staging-preview`
+- Preview repo (`rbediner/romanbediner-preview`):
+  - branch `staging-preview` exists
+  - GitHub Pages source is `staging-preview` + `/(root)`
+
 1. Install runtime dependencies
    - Node 20 via `nvm` (`nvm install && nvm use`)
    - npm lockfile install: `npm ci`

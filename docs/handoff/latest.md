@@ -1,35 +1,43 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 72
-- Updated At (UTC): 2026-03-14T12:42:41Z
+- Handoff Sequence: 73
+- Updated At (UTC): 2026-03-14T21:59:50Z
 - Source Branch: codex/prod-promote
-- Source Commit: 992807dc75a3290c14ade4f859ed3a944659b1f9 (pre-handoff baseline)
+- Source Commit: 5dc42d6e21f3a4f9e334830fa7d6eb02bcfbf84a
 
 ## Current State
 - Remote branches are aligned:
-  - `origin/staging` -> `992807dc75a3290c14ade4f859ed3a944659b1f9`
-  - `origin/prod` -> `992807dc75a3290c14ade4f859ed3a944659b1f9`
-- This session includes one additional local, unpushed docs/tooling update at handoff time:
-  - add GitHub CLI (`gh`) operator setup guidance in README for better cross-machine workflow monitoring.
+  - `origin/staging` -> `5dc42d6e21f3a4f9e334830fa7d6eb02bcfbf84a`
+  - `origin/prod` -> `5dc42d6e21f3a4f9e334830fa7d6eb02bcfbf84a`
+- Session change:
+  - README now includes an explicit "Fresh Machine Dependency Baseline (Required)" section with exact bootstrap commands and required GitHub repo-level preview settings.
 
 ## What Changed In This Session
-1. Production deploy model was stabilized:
-   - `/.github/workflows/deploy-pages.yml` uses `push` on `prod` and explicit CI success gating for the exact SHA.
-2. API reliability guard was added:
-   - prod CI monitor step passes `GITHUB_TOKEN` to avoid unauthenticated rate-limit failures.
-3. Step-order bug was fixed:
-   - checkout now runs before CI monitor invocation in deploy workflow.
-4. Architecture and guardrail contracts updated:
-   - `/README.md` deployment bullets updated.
-   - `/QA/tests/test-ci-gate-profile-automation.js` updated to enforce tokenized SHA-gated prod deploy behavior.
+1. Cross-machine operator docs were tightened for onboarding clarity:
+   - `/README.md` now enumerates machine prerequisites and exact setup commands.
+2. Preview/deploy prerequisites are now explicit in docs:
+   - required secret/variables in `rbediner/romanbediner.com`
+   - required branch/pages settings in `rbediner/romanbediner-preview`
 
 ## Validation Performed
-- `npm run docs:generate` PASS
-- `npm run test:node` PASS
-- `npm run test:jest` PASS
-- Latest confirmed prod green (for `992807dc75a3290c14ade4f859ed3a944659b1f9`):
-  - CI success: https://github.com/rbediner/romanbediner.com/actions/runs/23075564619
-  - Deploy Pages success: https://github.com/rbediner/romanbediner.com/actions/runs/23075564612
+- Documentation-only update. No code/runtime behavior changed.
+- Regression not rerun in this handoff update session.
+
+## Fresh Machine Prerequisites (Operator Quick List)
+1. Install `git`.
+2. Install `nvm`, then activate Node 20:
+   - `nvm install`
+   - `nvm use`
+3. Install repo dependencies:
+   - `npm ci`
+4. Install Python QA dependencies:
+   - `python3 -m pip install --upgrade pip`
+   - `python3 -m pip install playwright==1.58.0 pillow==11.3.0`
+   - `python3 -m playwright install chromium`
+5. Install/auth GitHub CLI:
+   - `gh auth login --web --scopes repo,workflow`
+6. Validate environment:
+   - `npm run session:ready`
 
 ## Required Startup Order (Next Machine / Next Codex Session)
 1. Read `/README.md`
@@ -45,6 +53,7 @@
   - promote exact approved SHA to `prod`
   - `prod` full gate + deploy + post-deploy validation
 - No CI caching added (per operator preference).
-- Local operator tooling now includes GitHub CLI:
-  - installed binary: `~/.local/bin/gh`
-  - shell path update: `~/.zshrc` includes `export PATH="$HOME/.local/bin:$PATH"`
+- Ensure preview wiring exists before expecting staging preview publication:
+  - secret `PREVIEW_REPO_TOKEN`
+  - variables `PREVIEW_REPO` and `PREVIEW_REPO_BRANCH=staging-preview`
+  - preview repo Pages source set to `staging-preview` root
