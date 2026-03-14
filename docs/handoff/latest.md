@@ -1,59 +1,41 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 74
-- Updated At (UTC): 2026-03-14T22:15:38Z
-- Source Branch: codex/prod-promote
-- Source Commit: 8cd97983299209cedb547eb2c62127efed78f680 (pre-handoff baseline)
+- Handoff Sequence: 75
+- Updated At (UTC): 2026-03-14T22:49:16Z
+- Source Branch: staging
+- Source Commit: 7f1b3c1b04a775662c6b3d31ea43374bce343683
 
 ## Current State
-- Remote branches are aligned:
-  - `origin/staging` -> `5dc42d6e21f3a4f9e334830fa7d6eb02bcfbf84a`
-  - `origin/prod` -> `5dc42d6e21f3a4f9e334830fa7d6eb02bcfbf84a`
-- Session change:
-  - README now includes an explicit "Fresh Machine Dependency Baseline (Required)" section with exact bootstrap commands and required GitHub repo-level preview settings.
+- Remote branches:
+  - `origin/staging` -> `7f1b3c1b04a775662c6b3d31ea43374bce343683`
+  - `origin/prod` -> `a5afda698341d332d246ed64a49f2578eb5df798`
+- Branch alignment:
+  - Diverged by design (`staging` ahead; `prod` not yet promoted from this icon update).
 
 ## What Changed In This Session
-1. Cross-machine operator docs were tightened for onboarding clarity:
-   - `/README.md` now enumerates machine prerequisites and exact setup commands.
-2. Preview/deploy prerequisites are now explicit in docs:
-   - required secret/variables in `rbediner/romanbediner.com`
-   - required branch/pages settings in `rbediner/romanbediner-preview`
+1. Rebuilt framework Signals icon from the 10-icon source grid (`assets/asset-library/icon-grid.jpg`) with a clean transparent mask and increased safety padding.
+2. Replaced production icon at:
+   - `/assets/icons/framework/signals-telemetry.png`
+3. Validated and pushed commit:
+   - `7f1b3c1` — "Rebuild Signals icon from icon-grid with clean padded crop"
 
 ## Validation Performed
-- Documentation-only update. No code/runtime behavior changed.
-- Regression not rerun in this handoff update session.
+- Local CI-parity gate (full): `npm run qa:ci-parity`
+  - Node contracts: pass
+  - Jest policy suite: pass
+  - Python QA suite: pass
+  - Playwright runtime: pass
+  - Visual regression suite: pass
+- Pre-push hook CI-parity rerun: pass
+- Remote `staging` CI run for exact SHA: pass
+  - Run: `https://github.com/rbediner/romanbediner.com/actions/runs/23098038985`
 
-## Fresh Machine Prerequisites (Operator Quick List)
-1. Install `git`.
-2. Install `nvm`, then activate Node 20:
-   - `nvm install`
-   - `nvm use`
-3. Install repo dependencies:
-   - `npm ci`
-4. Install Python QA dependencies:
-   - `python3 -m pip install --upgrade pip`
-   - `python3 -m pip install playwright==1.58.0 pillow==11.3.0`
-   - `python3 -m playwright install chromium`
-5. Install/auth GitHub CLI:
-   - `gh auth login --web --scopes repo,workflow`
-6. Validate environment:
-   - `npm run session:ready`
-
-## Required Startup Order (Next Machine / Next Codex Session)
-1. Read `/README.md`
-2. Read `/docs/handoff/latest.md`
-3. Read `/docs/architecture/repo-contract.json`
-4. Run `npm run session:ready`
+## Staging Preview
+- URL: `https://rbediner.github.io/romanbediner-preview/`
+- Status: published from successful `staging` pipeline for SHA `7f1b3c1b04a775662c6b3d31ea43374bce343683`
+- Visual approval: pending operator review
 
 ## Operator Notes
-- Staging preview URL:
-  - `https://rbediner.github.io/romanbediner-preview/`
-- Promotion discipline remains strict:
-  - `staging` fast gate + preview review
-  - promote exact approved SHA to `prod`
-  - `prod` full gate + deploy + post-deploy validation
-- No CI caching added (per operator preference).
-- Ensure preview wiring exists before expecting staging preview publication:
-  - secret `PREVIEW_REPO_TOKEN`
-  - variables `PREVIEW_REPO` and `PREVIEW_REPO_BRANCH=staging-preview`
-  - preview repo Pages source set to `staging-preview` root
+- User reported prior Signals icon crop/noise; fix now uses clean extraction from icon grid source with additional breathing room around artwork.
+- No CSS/layout changes were required for this fix.
+- Next step after visual signoff: promote exact tested staging SHA `7f1b3c1b04a775662c6b3d31ea43374bce343683` to `prod`.
