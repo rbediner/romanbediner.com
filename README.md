@@ -149,15 +149,17 @@ Required handoff content for cross-machine continuity:
 ## Framework Brief Pages
 - Hub route: `/framework/`
 - Brief routes:
-  - `/framework/opportunity/productizing-operations/`
-  - `/framework/design/operations-as-product/`
-  - `/framework/integration/ai-operating-layer/`
-  - `/framework/execution/operational-lanes/`
-  - `/framework/signals/operational-signals/`
-  - `/framework/evolution/agentic-guardrails/`
+  - `/framework/opportunity/productizing-operations/` (`https://romanbediner.com/framework/opportunity/productizing-operations/`)
+  - `/framework/design/operations-as-product/` (`https://romanbediner.com/framework/design/operations-as-product/`)
+  - `/framework/integration/ai-operating-layer/` (`https://romanbediner.com/framework/integration/ai-operating-layer/`)
+  - `/framework/execution/operational-lanes/` (`https://romanbediner.com/framework/execution/operational-lanes/`)
+  - `/framework/signals/operational-signals/` (`https://romanbediner.com/framework/signals/operational-signals/`)
+  - `/framework/evolution/agentic-guardrails/` (`https://romanbediner.com/framework/evolution/agentic-guardrails/`)
 - Framework architecture contract:
   - cards remain vertically stacked
   - card titles and `Explore the Brief` footer bands link to stage brief pages
+  - colored framework diagram is sticky and is the only stage diagram on hub
+  - diagram pills link to matching card anchors (`#opportunity` through `#evolution`) with active-stage tracking while scrolling
   - centered neutral down-arrow indicators render between cards only
 - Stage color system:
   - applies only to stage pills (cards, diagram, brief pages) and diagram node dots

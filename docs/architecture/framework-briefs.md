@@ -11,6 +11,10 @@
   - `/framework/evolution/agentic-guardrails/`
 - Framework cards stay in a vertical stack and include centered, neutral flow arrows between cards.
 - Each card title and footer band (`Explore the Brief`) links to the matching brief route.
+- The colored framework diagram is the only stage diagram on the hub and is sticky while scrolling cards.
+- Hub diagram pills are in-page anchors (`#opportunity` to `#evolution`) and map to matching `id` + `data-stage` card contracts.
+- Active stage highlight is observer-driven (`.framework-progress-marker.is-active`) as cards enter view.
+- Brief pages reuse the same colored diagram as cross-page stage navigation; current stage is highlighted and not clickable.
 
 ## Stage Color Rules
 - Stage colors apply only to:

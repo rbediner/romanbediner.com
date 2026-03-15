@@ -91,49 +91,40 @@
       </ul>
     </section>
 
-    <nav class="framework-stage-nav" aria-label="Framework stages">
-      <a class="badge-phase" href="#opportunity">Opportunity</a>
-      <a class="badge-phase" href="#design">Design</a>
-      <a class="badge-phase" href="#integration">Integration</a>
-      <a class="badge-phase" href="#execution">Execution</a>
-      <a class="badge-phase" href="#signals">Signals</a>
-      <a class="badge-phase" href="#evolution">Evolution</a>
-    </nav>
-
-    <div class="framework-progress" aria-hidden="true" role="presentation">
+    <nav class="framework-progress framework-diagram" aria-label="Framework stage navigation">
       <span class="framework-progress-line"></span>
       <div class="framework-progress-markers">
-        <span class="framework-progress-marker">
-          <span class="badge-phase framework-diagram-pill stage-opportunity">Opportunity</span>
-          <span class="framework-progress-dot stage-opportunity"></span>
+        <span class="framework-progress-marker" data-stage="opportunity">
+          <a class="badge-phase framework-diagram-pill framework-progress-link stage-opportunity" data-stage-link="opportunity" href="#opportunity">Opportunity</a>
+          <span class="framework-progress-dot stage-opportunity" data-stage-dot="opportunity"></span>
         </span>
-        <span class="framework-progress-marker">
-          <span class="badge-phase framework-diagram-pill stage-design">Design</span>
-          <span class="framework-progress-dot stage-design"></span>
+        <span class="framework-progress-marker" data-stage="design">
+          <a class="badge-phase framework-diagram-pill framework-progress-link stage-design" data-stage-link="design" href="#design">Design</a>
+          <span class="framework-progress-dot stage-design" data-stage-dot="design"></span>
         </span>
-        <span class="framework-progress-marker">
-          <span class="badge-phase framework-diagram-pill stage-integration">Integration</span>
-          <span class="framework-progress-dot stage-integration"></span>
+        <span class="framework-progress-marker" data-stage="integration">
+          <a class="badge-phase framework-diagram-pill framework-progress-link stage-integration" data-stage-link="integration" href="#integration">Integration</a>
+          <span class="framework-progress-dot stage-integration" data-stage-dot="integration"></span>
         </span>
-        <span class="framework-progress-marker">
-          <span class="badge-phase framework-diagram-pill stage-execution">Execution</span>
-          <span class="framework-progress-dot stage-execution"></span>
+        <span class="framework-progress-marker" data-stage="execution">
+          <a class="badge-phase framework-diagram-pill framework-progress-link stage-execution" data-stage-link="execution" href="#execution">Execution</a>
+          <span class="framework-progress-dot stage-execution" data-stage-dot="execution"></span>
         </span>
-        <span class="framework-progress-marker">
-          <span class="badge-phase framework-diagram-pill stage-signals">Signals</span>
-          <span class="framework-progress-dot stage-signals"></span>
+        <span class="framework-progress-marker" data-stage="signals">
+          <a class="badge-phase framework-diagram-pill framework-progress-link stage-signals" data-stage-link="signals" href="#signals">Signals</a>
+          <span class="framework-progress-dot stage-signals" data-stage-dot="signals"></span>
         </span>
-        <span class="framework-progress-marker">
-          <span class="badge-phase framework-diagram-pill stage-evolution">Evolution</span>
-          <span class="framework-progress-dot stage-evolution"></span>
+        <span class="framework-progress-marker" data-stage="evolution">
+          <a class="badge-phase framework-diagram-pill framework-progress-link stage-evolution" data-stage-link="evolution" href="#evolution">Evolution</a>
+          <span class="framework-progress-dot stage-evolution" data-stage-dot="evolution"></span>
         </span>
       </div>
-    </div>
+    </nav>
 
     <div class="framework-flow">
       <div class="framework-rail" aria-hidden="true"></div>
 
-    <section id="opportunity" class="framework-section framework-card insight-card">
+    <section id="opportunity" data-stage="opportunity" class="framework-section framework-card insight-card">
       <header class="framework-header stage-header">
         <img src="/assets/icons/framework/opportunity-network.png" alt="" class="framework-icon" aria-hidden="true" />
         <span class="framework-pill stage-pill badge-phase stage-opportunity">Opportunity</span>
@@ -157,10 +148,10 @@
     </section>
 
     <div class="framework-arrow framework-transition" aria-hidden="true">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v13"/><path d="m5 11 5 6 5-6" /></svg>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v14"/><path d="m6 12 6 9 6-9" /></svg>
     </div>
 
-    <section id="design" class="framework-section framework-card insight-card">
+    <section id="design" data-stage="design" class="framework-section framework-card insight-card">
       <header class="framework-header stage-header">
         <img src="/assets/icons/framework/design-blueprint.png" alt="" class="framework-icon" aria-hidden="true" />
         <span class="framework-pill stage-pill badge-phase stage-design">Design</span>
@@ -184,10 +175,10 @@
     </section>
 
     <div class="framework-arrow framework-transition" aria-hidden="true">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v13"/><path d="m5 11 5 6 5-6" /></svg>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v14"/><path d="m6 12 6 9 6-9" /></svg>
     </div>
 
-    <section id="integration" class="framework-section framework-card insight-card">
+    <section id="integration" data-stage="integration" class="framework-section framework-card insight-card">
       <header class="framework-header stage-header">
         <img src="/assets/icons/framework/integration-merger.png" alt="" class="framework-icon" aria-hidden="true" />
         <span class="framework-pill stage-pill badge-phase stage-integration">Integration</span>
@@ -211,10 +202,10 @@
     </section>
 
     <div class="framework-arrow framework-transition" aria-hidden="true">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v13"/><path d="m5 11 5 6 5-6" /></svg>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v14"/><path d="m6 12 6 9 6-9" /></svg>
     </div>
 
-    <section id="execution" class="framework-section framework-card insight-card">
+    <section id="execution" data-stage="execution" class="framework-section framework-card insight-card">
       <header class="framework-header stage-header">
         <img src="/assets/icons/framework/execution-workflow.png" alt="" class="framework-icon" aria-hidden="true" />
         <span class="framework-pill stage-pill badge-phase stage-execution">Execution</span>
@@ -238,10 +229,10 @@
     </section>
 
     <div class="framework-arrow framework-transition" aria-hidden="true">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v13"/><path d="m5 11 5 6 5-6" /></svg>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v14"/><path d="m6 12 6 9 6-9" /></svg>
     </div>
 
-    <section id="signals" class="framework-section framework-card insight-card">
+    <section id="signals" data-stage="signals" class="framework-section framework-card insight-card">
       <header class="framework-header stage-header">
         <img src="/assets/icons/framework/signals-telemetry.png" alt="" class="framework-icon" aria-hidden="true" />
         <span class="framework-pill stage-pill badge-phase stage-signals">Signals</span>
@@ -265,10 +256,10 @@
     </section>
 
     <div class="framework-arrow framework-transition" aria-hidden="true">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v13"/><path d="m5 11 5 6 5-6" /></svg>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v14"/><path d="m6 12 6 9 6-9" /></svg>
     </div>
 
-    <section id="evolution" class="framework-section framework-card insight-card">
+    <section id="evolution" data-stage="evolution" class="framework-section framework-card insight-card">
       <header class="framework-header stage-header">
         <img src="/assets/icons/framework/evolution-feedback.png" alt="" class="framework-icon" aria-hidden="true" />
         <span class="framework-pill stage-pill badge-phase stage-evolution">Evolution</span>
@@ -315,6 +306,7 @@
     </div>
   </footer>
 
+  <script src="/scripts/runtime/framework-stage-nav.js"></script>
   <script src="../scripts/runtime/site-navigation.js?v=20260313a"></script>
 </body>
 </html>

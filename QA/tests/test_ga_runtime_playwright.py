@@ -101,7 +101,7 @@ class GARuntimePlaywrightTest(unittest.TestCase):
 
         expected_order = ["#opportunity", "#design", "#integration", "#execution", "#signals", "#evolution"]
         for anchor in expected_order:
-            page.locator(f'.framework-stage-nav a[href="{anchor}"]').click()
+            page.locator(f'.framework-diagram .framework-progress-link[href="{anchor}"]').click()
             page.wait_for_function("anchor => window.location.hash === anchor", arg=anchor)
 
         collect_requests = [u for u in requests if "google-analytics.com/g/collect" in u]
@@ -119,7 +119,7 @@ class GARuntimePlaywrightTest(unittest.TestCase):
 
         page.goto(f"http://127.0.0.1:{self.port}/framework/", wait_until="networkidle")
         page.wait_for_function("typeof window.gtag === 'function'")
-        stage_hrefs = page.eval_on_selector_all(".framework-stage-nav a", "nodes => nodes.map(n => n.getAttribute('href'))")
+        stage_hrefs = page.eval_on_selector_all(".framework-diagram .framework-progress-link", "nodes => nodes.map(n => n.getAttribute('href'))")
         section_ids = page.eval_on_selector_all(".framework-section", "nodes => nodes.map(n => `#${n.id}`)")
         legacy_toggles = page.locator(".insight-toggle").count()
 

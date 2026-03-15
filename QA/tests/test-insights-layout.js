@@ -91,7 +91,7 @@ if (!/<ul class="service-list">\s*<li>Design operations as a system<\/li>\s*<li>
   console.error('FAIL: framework thesis must use orb service-list bullets with exact three statements.');
 }
 
-const sectionBlocks = [...frameworkHtml.matchAll(/<section id="([a-z-]+)" class="framework-section framework-card insight-card">([\s\S]*?)<\/section>/g)];
+const sectionBlocks = [...frameworkHtml.matchAll(/<section id="([a-z-]+)" data-stage="([a-z-]+)" class="framework-section framework-card insight-card">([\s\S]*?)<\/section>/g)];
 if (sectionBlocks.length !== 6) {
   failures += 1;
   console.error('FAIL: expected exactly 6 framework sections.');
@@ -107,12 +107,36 @@ if (/class="stage-label"/.test(frameworkHtml)) {
   console.error('FAIL: duplicate stage-label headings must be removed from cards.');
 }
 
-for (const [idx, [, id, block]] of sectionBlocks.entries()) {
+if (/class="framework-stage-nav"/.test(frameworkHtml)) {
+  failures += 1;
+  console.error('FAIL: duplicate stage row above framework diagram must be removed from hub.');
+}
+
+if (!/class="framework-progress framework-diagram"/.test(frameworkHtml)) {
+  failures += 1;
+  console.error('FAIL: framework hub must use diagram navigation wrapper.');
+}
+
+if (!/href="#opportunity"/.test(frameworkHtml) || !/href="#evolution"/.test(frameworkHtml)) {
+  failures += 1;
+  console.error('FAIL: framework diagram pills must link to matching in-page anchors.');
+}
+
+if (!frameworkHtml.includes('<script src="/scripts/runtime/framework-stage-nav.js"></script>')) {
+  failures += 1;
+  console.error('FAIL: framework hub must include runtime script for sticky diagram stage tracking.');
+}
+
+for (const [idx, [, id, dataStage, block]] of sectionBlocks.entries()) {
   const expected = stages[idx];
   if (id !== expected.id) {
     failures += 1;
     console.error(`FAIL: framework section order mismatch at index ${idx}.`);
     continue;
+  }
+  if (dataStage !== expected.id) {
+    failures += 1;
+    console.error(`FAIL: framework section #${id} must expose matching data-stage.`);
   }
 
   if (!new RegExp(`<span class="framework-pill stage-pill badge-phase stage-${expected.id}">${expected.label}<\/span>`).test(block)) {
@@ -181,14 +205,24 @@ for (const stage of stages) {
     console.error(`FAIL: ${stage.brief} placeholder text contract is missing.`);
   }
 
-  if (!briefHtml.includes('class="framework-stage-nav"')) {
+  if (!briefHtml.includes('class="framework-progress framework-diagram"')) {
     failures += 1;
-    console.error(`FAIL: ${stage.brief} missing framework stage navigator.`);
+    console.error(`FAIL: ${stage.brief} missing framework diagram navigator.`);
   }
 
-  if (!briefHtml.includes('class="badge-phase current-stage"')) {
+  if (!new RegExp(`<span class="badge-phase framework-diagram-pill current-stage stage-${stage.id}">${stage.label}<\/span>`).test(briefHtml)) {
     failures += 1;
-    console.error(`FAIL: ${stage.brief} must highlight the current stage in navigator.`);
+    console.error(`FAIL: ${stage.brief} must highlight the current stage with a non-clickable pill.`);
+  }
+
+  if (/class="[^"]*current-stage[^"]*" href=/.test(briefHtml)) {
+    failures += 1;
+    console.error(`FAIL: ${stage.brief} current stage must not be clickable.`);
+  }
+
+  if ((briefHtml.match(/class="framework-progress-marker"/g) || []).length !== 6) {
+    failures += 1;
+    console.error(`FAIL: ${stage.brief} framework diagram must render exactly 6 stage markers.`);
   }
 
   if (!briefHtml.includes(`href="${stage.next}"`)) {
@@ -200,6 +234,33 @@ for (const stage of stages) {
     failures += 1;
     console.error(`FAIL: ${stage.brief} missing required GA4 meta/bootstrap tags.`);
   }
+
+  const metadataChecks = [
+    /<title>[^<]+<\/title>/,
+    /<meta name="description" content="[^"]+" \/>/,
+    /<link rel="canonical" href="https:\/\/romanbediner\.com\/framework\/[^"]+" \/>/,
+    /<meta property="og:title" content="[^"]+" \/>/,
+    /<meta property="og:description" content="[^"]+" \/>/,
+    /<meta property="og:type" content="article" \/>/,
+    /<meta property="og:url" content="https:\/\/romanbediner\.com\/framework\/[^"]+" \/>/,
+    /<meta property="og:image" content="https:\/\/romanbediner\.com\/assets\/og\/framework-preview\.png" \/>/,
+    /<meta name="twitter:card" content="summary_large_image" \/>/,
+    /<meta name="twitter:title" content="[^"]+" \/>/,
+    /<meta name="twitter:description" content="[^"]+" \/>/,
+    /<meta name="twitter:image" content="https:\/\/romanbediner\.com\/assets\/og\/framework-preview\.png" \/>/
+  ];
+  for (const check of metadataChecks) {
+    if (!check.test(briefHtml)) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} metadata contract missing required tag (${check}).`);
+      break;
+    }
+  }
+}
+
+if (!/\.framework-diagram\s*\{[^}]*position:\s*sticky;[^}]*top:\s*90px;[^}]*z-index:\s*50;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework diagram must remain sticky below header.');
 }
 
 if (!/\.framework-progress-line\s*\{[^}]*background:\s*#d1d5db;/s.test(frameworkCss)) {
@@ -222,19 +283,34 @@ if (!/\.framework-arrow svg\s*\{[^}]*stroke:\s*var\(--flow-neutral\);/s.test(fra
   console.error('FAIL: inter-card flow arrows must use neutral styling.');
 }
 
+if (!/\.framework-progress-marker\.is-active\s+\.framework-progress-dot\s*\{[^}]*scale\(1\.25\);/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: active stage tracking style hook is missing.');
+}
+
+if (!/\.framework-progress-link:hover\s*\{[^}]*filter:\s*brightness\(0\.96\);/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework diagram hover tint contract is missing.');
+}
+
 if (!/\.framework-brief-band\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: framework brief footer band style contract is missing.');
 }
 
+if (!/\.framework-brief-band:hover\s*\{[^}]*color:\s*#2563eb;[^}]*background:\s*#eef4ff;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework brief footer hover tint contract is missing.');
+}
+
+if (!/\.framework-brief-band:hover\s+\.framework-brief-arrow\s*\{[^}]*translateX\(4px\);/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework brief footer hover arrow shift is missing.');
+}
+
 if (!/\.framework-section:hover\s*\{[^}]*translateY\(-2px\);/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: framework card hover lift contract is missing.');
-}
-
-if (!/\.framework-section:hover\s+\.framework-brief-arrow\s*\{[^}]*translateX\(4px\);/s.test(frameworkCss)) {
-  failures += 1;
-  console.error('FAIL: brief-band arrow hover shift is missing.');
 }
 
 if (failures > 0) {

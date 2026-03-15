@@ -43,21 +43,6 @@
   font-weight: 500;
 }
 
-.framework-stage-nav {
-  max-width: 860px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.framework-stage-nav .badge-phase {
-  margin-bottom: 0;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
 /* The intro block should breathe before the first framework stage. */
 .framework-intro-block {
   margin-bottom: 56px;
@@ -79,6 +64,14 @@
   max-width: 860px;
   margin: 24px auto 48px;
   position: relative;
+  background: #ffffff;
+}
+
+.framework-diagram {
+  position: sticky;
+  top: 90px;
+  z-index: 50;
+  padding: 12px 0 10px;
 }
 
 .framework-progress-line {
@@ -111,11 +104,32 @@
   margin-bottom: 0;
 }
 
+.framework-progress-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.framework-progress-link:hover {
+  text-decoration: none;
+  filter: brightness(0.96);
+}
+
 .framework-progress-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  margin-top: 2px;
+  margin-top: -1px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.framework-progress-marker.is-active .framework-progress-dot {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.12);
+}
+
+.framework-progress-marker.is-active .framework-progress-link {
+  box-shadow: 0 0 0 1px currentColor inset;
 }
 
 .stage-opportunity {
@@ -330,18 +344,20 @@
   color: #334155;
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .framework-brief-band:hover {
   text-decoration: none;
-  color: #334155;
+  color: #2563eb;
+  background: #eef4ff;
 }
 
 .framework-brief-arrow {
   transition: transform 0.15s ease;
 }
 
-.framework-section:hover .framework-brief-arrow {
+.framework-brief-band:hover .framework-brief-arrow {
   transform: translateX(4px);
 }
 
@@ -353,23 +369,30 @@
 }
 
 .framework-transition {
-  margin: 28px 0;
+  margin: 36px 0;
   display: flex;
   justify-content: center;
 }
 
 .framework-arrow svg {
   stroke: var(--flow-neutral);
-  opacity: 0.6;
+  opacity: 0.9;
 }
 
-.framework-brief-main .framework-stage-nav {
-  justify-content: flex-start;
+.framework-brief-main .framework-diagram {
+  position: relative;
+  top: auto;
+  z-index: 1;
   margin: 0 0 26px;
+  padding-top: 0;
 }
 
-.framework-stage-nav .badge-phase.current-stage {
+.framework-progress-link.current-stage,
+.framework-diagram-pill.current-stage {
   border: 1px solid currentColor;
+  box-shadow: 0 0 0 1px currentColor inset;
+  cursor: default;
+  pointer-events: none;
 }
 
 .brief-placeholder-panel {
@@ -407,13 +430,15 @@
     font-size: 18px;
   }
 
-  .framework-stage-nav {
-    justify-content: flex-start;
-    max-width: var(--framework-max-width);
-  }
-
   .framework-progress {
     margin: 18px 0 34px;
+  }
+
+  .framework-diagram {
+    position: relative;
+    top: auto;
+    z-index: 1;
+    padding-top: 0;
   }
 
   .framework-progress-line {

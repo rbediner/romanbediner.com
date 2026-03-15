@@ -512,7 +512,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
             self.assertEqual(page.locator(".insight-toggle").count(), 0, "Legacy insight toggles must not exist on framework")
 
             # Interact with stage anchors and verify navigation hash updates safely.
-            anchor = page.locator(".framework-stage-nav a[href='#integration']").first
+            anchor = page.locator(".framework-diagram .framework-progress-link[href='#integration']").first
             anchor.scroll_into_view_if_needed()
             page.wait_for_timeout(80)
             anchor.click(timeout=3000)
@@ -527,7 +527,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
             page.evaluate(
                 """
                 () => {
-                  const link = document.querySelector(".framework-stage-nav a[href='#signals']");
+                  const link = document.querySelector(".framework-diagram .framework-progress-link[href='#signals']");
                   if (link) link.click();
                 }
                 """
