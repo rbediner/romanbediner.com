@@ -1,46 +1,42 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 79
-- Updated At (UTC): 2026-03-15T19:40:18Z
+- Handoff Sequence: 80
+- Updated At (UTC): 2026-03-15T19:44:35Z
 - Source Branch: staging
-- Source Commit: ce76877ba60ce181c900a7f4beb05e72dfaf15df
+- Source Commit: 6dee286bdd1ed91d44a671f98642e97a4b8bb096 (working tree has uncommitted framework brief SEO metadata updates)
 
 ## Current State
 - Remote branches are divergent:
-  - `origin/staging` -> `ce76877ba60ce181c900a7f4beb05e72dfaf15df`
+  - `origin/staging` -> `6dee286bdd1ed91d44a671f98642e97a4b8bb096`
   - `origin/prod` -> `26dff0971f79dab8cd691cf6c1fde5bec69f452e`
-- `staging` now contains framework hub/brief rollout + preview/prod full-route health checks.
-- Latest staging preview deployment is successful for commit `ce76877`.
+- Local branch: `staging`
+- Staging preview is live and healthy from latest pushed commit.
 
 ## What Changed In This Session
-1. Implemented finalized framework hub and brief-route rollout:
-   - hub updates in `/framework/index.html` and `/styles/framework.css`
-   - six brief pages added under `/framework/{stage}/{brief}/`
-   - README + framework architecture documentation updated
-2. Added deployment route-health enforcement:
-   - shared route checker `/scripts/qa/route-health.js`
-   - production sitemap-driven 200 checks in `/scripts/qa/verify-live-production.js`
-   - preview sitemap-driven 200 checks in `/scripts/qa/verify-live-preview.js`
-   - staging workflow now runs live preview route checks post-publish
-3. Resolved preview validation edge case:
-   - fixed preview validator to respect project-pages base path
-   - added preview retry/backoff for Pages propagation
-4. Updated QA contracts and visual baselines for framework redesign:
-   - node/python framework contract tests
-   - preview/prod deployment automation tests
-   - updated visual baselines for framework page (`insights--*` screenshots)
+1. Added full SEO + Open Graph metadata to all six framework brief pages:
+   - `/framework/opportunity/productizing-operations/index.html`
+   - `/framework/design/operations-as-product/index.html`
+   - `/framework/integration/ai-operating-layer/index.html`
+   - `/framework/execution/operational-lanes/index.html`
+   - `/framework/signals/operational-signals/index.html`
+   - `/framework/evolution/agentic-guardrails/index.html`
+2. Updated each page `<head>` with requested metadata contract:
+   - `<title>`
+   - `<meta name="description">`
+   - `<link rel="canonical">`
+   - Open Graph tags (`og:title`, `og:description`, `og:type=article`, `og:url`, `og:image`)
+   - Twitter tags (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`)
+3. Added shared OG image asset (new):
+   - `/assets/og/framework-preview.png` (1200x630)
 
 ## Validation Performed
-- Local (multiple runs via Husky CI-parity pre-push gates): pass
-  - node architecture tests
-  - python QA tests
-  - jest suites
-  - playwright/browser suites
-  - visual regression (updated baselines)
-- Staging CI (latest): pass
-  - `https://github.com/rbediner/romanbediner.com/actions/runs/23117783253`
-- Deploy Staging (latest): pass
-  - `https://github.com/rbediner/romanbediner.com/actions/runs/23117798778`
+- Metadata presence and canonical parity verification script: pass
+  - validated all required metadata tags inside `<head>` on all six pages
+  - validated canonical URL on each page matches requested URL
+- OG image validation: pass
+  - file exists at `/assets/og/framework-preview.png`
+  - dimensions verified as `1200x630`
+- Source rendering check via grep across all six pages: pass
 
 ## Environment URLs
 - Staging preview:
@@ -49,5 +45,4 @@
   - `https://romanbediner.com/`
 
 ## Operator Notes
-- Earlier staging deploy (`23117735867`) failed during first rollout of preview live validator due root-path check on project-pages base-path; fixed by base-path mapping + retry/backoff in `verify-live-preview.js` and re-deployed successfully.
-- Release notes file requested by operator was removed; release summary is provided in thread response instead.
+- This session intentionally modified only metadata and OG asset scope; no layout/card/icon/bullet/framework structure changes were made.
