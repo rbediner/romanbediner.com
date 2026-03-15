@@ -61,7 +61,8 @@
 }
 
 .framework-progress {
-  max-width: 860px;
+  width: 100%;
+  max-width: var(--framework-max-width);
   margin: 24px auto 48px;
   position: relative;
   background: #ffffff;
@@ -77,7 +78,7 @@
 .framework-progress-line {
   display: block;
   height: 2px;
-  background: #d1d5db;
+  background: #c6cdd8;
   position: absolute;
   left: 0;
   right: 0;
@@ -189,6 +190,7 @@
 /* Shared flow wrapper allows a centered rail without changing bullet structure. */
 .framework-flow {
   position: relative;
+  width: 100%;
   max-width: var(--framework-max-width);
   margin: 0 auto;
 }
@@ -291,6 +293,40 @@
   line-height: 1.2;
 }
 
+.framework-stage-label {
+  margin: 0 0 4px;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent !important;
+}
+
+.framework-stage-label.stage-opportunity {
+  color: var(--stage-opportunity);
+}
+
+.framework-stage-label.stage-design {
+  color: var(--stage-design);
+}
+
+.framework-stage-label.stage-integration {
+  color: var(--stage-integration);
+}
+
+.framework-stage-label.stage-execution {
+  color: var(--stage-execution);
+}
+
+.framework-stage-label.stage-signals {
+  color: var(--stage-signals);
+}
+
+.framework-stage-label.stage-evolution {
+  color: var(--stage-evolution);
+}
+
 .framework-title-link {
   color: var(--text-primary);
   text-decoration: none;
@@ -310,6 +346,11 @@
 .framework-intro {
   margin: 0 0 12px;
   color: var(--text-color);
+}
+
+.framework-brief-main .framework-intro {
+  max-width: var(--framework-max-width);
+  margin: 0 auto 12px;
 }
 
 /* Use full available card-body width so long bullets do not wrap prematurely. */
@@ -365,26 +406,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 22px auto;
+  margin: 24px auto;
 }
 
 .framework-transition {
-  margin: 36px 0;
+  margin: 42px 0;
   display: flex;
   justify-content: center;
 }
 
 .framework-arrow svg {
-  stroke: var(--flow-neutral);
-  opacity: 0.9;
+  width: 26px;
+  height: 26px;
+  stroke: #8792a1;
+  stroke-width: 2.2;
+  opacity: 0.95;
 }
 
 .framework-brief-main .framework-diagram {
   position: relative;
   top: auto;
   z-index: 1;
-  margin: 0 0 26px;
+  margin: 0 auto 26px;
   padding-top: 0;
+}
+
+.framework-brief-main .framework-label {
+  margin: 0 0 12px;
+}
+
+.framework-brief-main > .framework-pill {
+  margin-bottom: 16px;
+}
+
+.framework-brief-main h1 {
+  margin: 0 0 20px;
+}
+
+.framework-brief-main .section-accent {
+  display: none;
 }
 
 .framework-progress-link.current-stage,
@@ -396,7 +456,9 @@
 }
 
 .brief-placeholder-panel {
-  margin: 34px 0;
+  width: 100%;
+  max-width: var(--framework-max-width);
+  margin: 34px auto;
   text-align: center;
   background: #f8fafc;
   border: 1px solid #e5e7eb;

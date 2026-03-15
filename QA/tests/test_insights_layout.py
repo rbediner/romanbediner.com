@@ -139,11 +139,11 @@ class FrameworkLayoutTest(unittest.TestCase):
 
     def test_framework_css_contracts(self):
         self.assertRegex(self.framework_css, r"\.framework-diagram\s*\{[^}]*position:\s*sticky;[^}]*top:\s*90px;[^}]*z-index:\s*50;", re.S)
-        self.assertRegex(self.framework_css, r"\.framework-progress-line\s*\{[^}]*background:\s*#d1d5db;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-progress-line\s*\{[^}]*background:\s*#c6cdd8;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-dot\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-marker\.is-active\s+\.framework-progress-dot\s*\{[^}]*scale\(1\.25\);", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-link:hover\s*\{[^}]*filter:\s*brightness\(0\.96\);", re.S)
-        self.assertRegex(self.framework_css, r"\.framework-arrow svg\s*\{[^}]*stroke:\s*var\(--flow-neutral\);", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-arrow svg\s*\{[^}]*stroke:\s*#8792a1;[^}]*stroke-width:\s*2\.2;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-brief-band\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-brief-band:hover\s*\{[^}]*color:\s*#2563eb;[^}]*background:\s*#eef4ff;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-brief-band:hover\s+\.framework-brief-arrow\s*\{[^}]*translateX\(4px\);", re.S)

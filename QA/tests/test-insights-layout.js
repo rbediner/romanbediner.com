@@ -263,7 +263,7 @@ if (!/\.framework-diagram\s*\{[^}]*position:\s*sticky;[^}]*top:\s*90px;[^}]*z-in
   console.error('FAIL: framework diagram must remain sticky below header.');
 }
 
-if (!/\.framework-progress-line\s*\{[^}]*background:\s*#d1d5db;/s.test(frameworkCss)) {
+if (!/\.framework-progress-line\s*\{[^}]*background:\s*#c6cdd8;/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: framework diagram connector line must remain neutral gray.');
 }
@@ -278,7 +278,7 @@ if (!/\.framework-pill\s*\{[^}]*text-transform:\s*uppercase;/s.test(frameworkCss
   console.error('FAIL: stage pill style contract is missing.');
 }
 
-if (!/\.framework-arrow svg\s*\{[^}]*stroke:\s*var\(--flow-neutral\);/s.test(frameworkCss)) {
+if (!/\.framework-arrow svg\s*\{[^}]*stroke:\s*#8792a1;[^}]*stroke-width:\s*2\.2;/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: inter-card flow arrows must use neutral styling.');
 }
