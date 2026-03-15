@@ -1,28 +1,41 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 91
-- Updated At (UTC): 2026-03-15T21:35:36Z
+- Handoff Sequence: 92
+- Updated At (UTC): 2026-03-15T21:52:19Z
 - Source Branch: staging
-- Source Commit: 70e64519167bd67f7e1e6d7727dcbdf1034a28d1
+- Source Commit: 615db828ad67f710ca26a5a079d6e6204b959e45
 
 ## Current State
 - Remote branch heads:
-  - `origin/staging` -> `70e64519167bd67f7e1e6d7727dcbdf1034a28d1`
-  - `origin/prod` -> `7bad14da7312081156f5d4513c5b918b76dd6a31`
+  - `origin/staging` -> `615db828ad67f710ca26a5a079d6e6204b959e45`
+  - `origin/prod` -> `615db828ad67f710ca26a5a079d6e6204b959e45`
 - Local branch: `staging`
-- Local/remote staging alignment: clean (`staging` == `origin/staging`).
+- Local/remote staging alignment: clean (`staging` == `origin/staging`) before this handoff update commit.
 
 ## What Changed
 1. Framework icon optical alignment refinement in `styles/framework.css`:
-   - `#execution .framework-icon` top offset changed from `-12px` to `-10px`
-   - `#signals .framework-icon` top offset changed from `-9px` to `-7px`
-2. Handoff was refreshed after pushing this change to `staging`.
+   - `#execution .framework-icon` top offset changed from `-10px` to `-9px`
+   - `#signals .framework-icon` top offset changed from `-7px` to `-6px`
+2. README icon contract updated in `README.md`:
+   - `#execution .framework-icon { top: -9px; }`
+   - `#signals .framework-icon { top: -6px; }`
+3. Released tested SHA `615db828ad67f710ca26a5a079d6e6204b959e45` from `staging` to `prod` via fast-forward.
 
 ## Validation Performed
-- `node QA/tests/test-insights-layout.js` (pass)
-- `python3 -m unittest QA.tests.test_insights_layout -v` (pass)
-- User explicitly approved skipping the full local pre-push CI-parity gate for this push:
-  - `SKIP_PREPUSH_QA=1 git push origin staging`
+- Local full regression:
+  - `npm test` (pass)
+- Pre-push CI parity (auto via Husky) on staging push:
+  - `npm run qa:ci-parity` (pass)
+- Staging remote checks:
+  - GitHub Actions `CI` (success)
+  - GitHub Actions `Deploy Staging` (success)
+  - `RB_PREVIEW_URL=https://rbediner.github.io/romanbediner-preview/ node scripts/qa/verify-live-preview.js` (pass)
+- Pre-push CI parity (auto via Husky) on prod push:
+  - `npm run qa:ci-parity` (pass)
+- Production remote checks:
+  - GitHub Actions `CI` (success)
+  - GitHub Actions `Deploy Pages` (success)
+  - `node scripts/qa/verify-live-production.js` (pass)
 
 ## URLs
 - Staging preview base:
@@ -31,4 +44,7 @@
   - `https://romanbediner.com/`
 
 ## Operator Notes
-- Change is intentionally scoped to icon vertical offsets only (2px down for Execution and Signals).
+- Live production CSS now serves:
+  - `#execution .framework-icon { top: -9px; }`
+  - `#signals .framework-icon { top: -6px; }`
+- Repo hygiene checks for `.DS_Store` and common cloud-sync duplicate directories were clean during this session.
