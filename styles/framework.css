@@ -277,7 +277,7 @@ html {
 }
 
 .framework-pill {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -285,7 +285,7 @@ html {
 
 /* Stage spacing controls keep icon/pill/heading rhythm consistent. */
 .stage-title {
-  margin-top: 10px;
+  margin-top: 2px;
 }
 
 .framework-section h2 {
@@ -295,44 +295,10 @@ html {
 }
 
 .framework-section h3 {
-  margin-top: 6px;
+  margin-top: 0;
   margin-bottom: 14px;
   font-size: 30px;
   line-height: 1.2;
-}
-
-.framework-stage-label {
-  margin: 0 0 4px;
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: transparent !important;
-}
-
-.framework-stage-label.stage-opportunity {
-  color: var(--stage-opportunity);
-}
-
-.framework-stage-label.stage-design {
-  color: var(--stage-design);
-}
-
-.framework-stage-label.stage-integration {
-  color: var(--stage-integration);
-}
-
-.framework-stage-label.stage-execution {
-  color: var(--stage-execution);
-}
-
-.framework-stage-label.stage-signals {
-  color: var(--stage-signals);
-}
-
-.framework-stage-label.stage-evolution {
-  color: var(--stage-evolution);
 }
 
 .framework-title-link {
