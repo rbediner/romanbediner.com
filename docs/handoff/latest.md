@@ -1,48 +1,45 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 80
-- Updated At (UTC): 2026-03-15T19:44:35Z
+- Handoff Sequence: 81
+- Updated At (UTC): 2026-03-15T19:53:49Z
 - Source Branch: staging
-- Source Commit: 6dee286bdd1ed91d44a671f98642e97a4b8bb096 (working tree has uncommitted framework brief SEO metadata updates)
+- Source Commit: bebd28e4d771a181926b216e891d04f09b855096
 
 ## Current State
-- Remote branches are divergent:
-  - `origin/staging` -> `6dee286bdd1ed91d44a671f98642e97a4b8bb096`
+- Remote branches are intentionally divergent:
+  - `origin/staging` -> `bebd28e4d771a181926b216e891d04f09b855096`
   - `origin/prod` -> `26dff0971f79dab8cd691cf6c1fde5bec69f452e`
 - Local branch: `staging`
-- Staging preview is live and healthy from latest pushed commit.
+- Local/remote staging alignment: clean (`staging` == `origin/staging`)
+- Production remains unchanged in this session.
 
-## What Changed In This Session
-1. Added full SEO + Open Graph metadata to all six framework brief pages:
-   - `/framework/opportunity/productizing-operations/index.html`
-   - `/framework/design/operations-as-product/index.html`
-   - `/framework/integration/ai-operating-layer/index.html`
-   - `/framework/execution/operational-lanes/index.html`
-   - `/framework/signals/operational-signals/index.html`
-   - `/framework/evolution/agentic-guardrails/index.html`
-2. Updated each page `<head>` with requested metadata contract:
-   - `<title>`
-   - `<meta name="description">`
-   - `<link rel="canonical">`
-   - Open Graph tags (`og:title`, `og:description`, `og:type=article`, `og:url`, `og:image`)
-   - Twitter tags (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`)
-3. Added shared OG image asset (new):
+## What Changed
+1. Added full SEO + Open Graph + Twitter metadata to all six framework brief pages (head-only changes).
+2. Added shared OG image asset:
    - `/assets/og/framework-preview.png` (1200x630)
+3. Preserved framework layout/cards/bullets/icon offsets/structure (no visual architecture changes requested outside metadata scope).
+4. Pushed metadata commit to staging only:
+   - Commit: `bebd28e` (`Add SEO and OG metadata for framework brief pages`)
 
 ## Validation Performed
-- Metadata presence and canonical parity verification script: pass
-  - validated all required metadata tags inside `<head>` on all six pages
-  - validated canonical URL on each page matches requested URL
-- OG image validation: pass
-  - file exists at `/assets/og/framework-preview.png`
-  - dimensions verified as `1200x630`
-- Source rendering check via grep across all six pages: pass
+- Metadata contract checks: pass on all six brief pages
+  - required tags present in `<head>`
+  - canonical URLs match page URLs
+  - OG/Twitter metadata present
+- OG image checks: pass
+  - file exists
+  - dimensions verified `1200x630`
+- Pre-push QA gate (`qa:ci-parity` with local mirror + visual/runtime suites): pass
+- Push outcome:
+  - initial later retry reported ref-lock race because remote already moved to `bebd28e`
+  - post-fetch confirmation shows staging remote already at `bebd28e`
 
-## Environment URLs
-- Staging preview:
+## URLs
+- Staging preview base:
   - `https://rbediner.github.io/romanbediner-preview/`
 - Production:
   - `https://romanbediner.com/`
 
 ## Operator Notes
-- This session intentionally modified only metadata and OG asset scope; no layout/card/icon/bullet/framework structure changes were made.
+- User requested to hold these metadata changes in staging/preview and not promote to prod yet.
+- Next step is preview verification/approval before any prod promotion.
