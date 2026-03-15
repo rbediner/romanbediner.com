@@ -160,6 +160,7 @@ Required handoff content for cross-machine continuity:
   - card titles and `Explore the Brief` footer bands link to stage brief pages
   - colored framework diagram is sticky and is the only stage diagram on hub
   - diagram pills link to matching card anchors (`#opportunity` through `#evolution`) with active-stage tracking while scrolling
+  - anchor jumps use smooth scrolling and card-level `scroll-margin-top` offset so sticky diagram does not obscure card headers
   - centered neutral down-arrow indicators render between cards only
 - Stage color system:
   - applies only to stage pills (cards, diagram, brief pages) and diagram node dots

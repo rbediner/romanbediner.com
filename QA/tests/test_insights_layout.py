@@ -139,6 +139,8 @@ class FrameworkLayoutTest(unittest.TestCase):
 
     def test_framework_css_contracts(self):
         self.assertRegex(self.framework_css, r"\.framework-diagram\s*\{[^}]*position:\s*sticky;[^}]*top:\s*90px;[^}]*z-index:\s*50;", re.S)
+        self.assertRegex(self.framework_css, r"html\s*\{[^}]*scroll-behavior:\s*smooth;", re.S)
+        self.assertRegex(self.framework_css, r"\.framework-card\s*\{[^}]*scroll-margin-top:\s*160px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-line\s*\{[^}]*background:\s*#c6cdd8;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-dot\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-marker\.is-active\s+\.framework-progress-dot\s*\{[^}]*scale\(1\.25\);", re.S)

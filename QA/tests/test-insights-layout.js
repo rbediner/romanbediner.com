@@ -263,6 +263,16 @@ if (!/\.framework-diagram\s*\{[^}]*position:\s*sticky;[^}]*top:\s*90px;[^}]*z-in
   console.error('FAIL: framework diagram must remain sticky below header.');
 }
 
+if (!/html\s*\{[^}]*scroll-behavior:\s*smooth;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework route must enforce smooth anchor scrolling.');
+}
+
+if (!/\.framework-card\s*\{[^}]*scroll-margin-top:\s*160px;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework cards must reserve sticky-diagram anchor offset.');
+}
+
 if (!/\.framework-progress-line\s*\{[^}]*background:\s*#c6cdd8;/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: framework diagram connector line must remain neutral gray.');
