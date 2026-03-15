@@ -3,7 +3,7 @@
 - Handoff Sequence: 93
 - Updated At (UTC): 2026-03-15T21:55:59Z
 - Source Branch: staging
-- Source Commit: dbe9a4c76f8b1f1f95bfd8fdf5c8af5bc3d30e4c
+- Source Commit: dbe9a4c9a3b250481f01c86c5da903a0d83b7a57
 
 ## Current State
 - Remote branch heads:
