@@ -1,6 +1,19 @@
 /* Framework page reuses existing editorial system and insight-card styling. */
 :root {
   --framework-max-width: 860px;
+  --stage-opportunity: #1d4ed8;
+  --stage-design: #7c3aed;
+  --stage-integration: #0f766e;
+  --stage-execution: #b45309;
+  --stage-signals: #be185d;
+  --stage-evolution: #0e7490;
+  --stage-opportunity-tint: rgba(29, 78, 216, 0.12);
+  --stage-design-tint: rgba(124, 58, 237, 0.12);
+  --stage-integration-tint: rgba(15, 118, 110, 0.12);
+  --stage-execution-tint: rgba(180, 83, 9, 0.12);
+  --stage-signals-tint: rgba(190, 24, 93, 0.12);
+  --stage-evolution-tint: rgba(14, 116, 144, 0.12);
+  --flow-neutral: #9ca3af;
 }
 
 /* Slightly wider framework container improves long-line readability. */
@@ -12,6 +25,15 @@
   margin: 0 auto;
   padding: 0 24px;
   position: relative;
+}
+
+.framework-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--muted-text);
 }
 
 .framework-subtitle {
@@ -41,31 +63,113 @@
   margin-bottom: 56px;
 }
 
+.framework-thesis-block p {
+  margin: 0 0 8px;
+}
+
+.framework-thesis-block p:last-of-type {
+  margin-bottom: 0;
+}
+
+.framework-thesis-block .service-list {
+  margin-top: 14px;
+}
+
 .framework-progress {
-  max-width: 700px;
+  max-width: 860px;
   margin: 24px auto 48px;
+  position: relative;
 }
 
 .framework-progress-line {
   display: block;
-  height: 3px;
-  background: #3b6cff;
-  opacity: 0.35;
+  height: 2px;
+  background: #d1d5db;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - 9px);
 }
 
 .framework-progress-markers {
-  margin-top: -6px;
+  margin-top: 0;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
 }
 
-.framework-progress-markers span {
+.framework-progress-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  position: relative;
+  z-index: 1;
+}
+
+.framework-diagram-pill {
+  margin-bottom: 0;
+}
+
+.framework-progress-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #3b6cff;
-  opacity: 0.5;
-  justify-self: center;
+  margin-top: 2px;
+}
+
+.stage-opportunity {
+  color: var(--stage-opportunity);
+  background: var(--stage-opportunity-tint);
+}
+
+.stage-design {
+  color: var(--stage-design);
+  background: var(--stage-design-tint);
+}
+
+.stage-integration {
+  color: var(--stage-integration);
+  background: var(--stage-integration-tint);
+}
+
+.stage-execution {
+  color: var(--stage-execution);
+  background: var(--stage-execution-tint);
+}
+
+.stage-signals {
+  color: var(--stage-signals);
+  background: var(--stage-signals-tint);
+}
+
+.stage-evolution {
+  color: var(--stage-evolution);
+  background: var(--stage-evolution-tint);
+}
+
+.framework-progress-dot.stage-opportunity {
+  background: var(--stage-opportunity);
+}
+
+.framework-progress-dot.stage-design {
+  background: var(--stage-design);
+}
+
+.framework-progress-dot.stage-integration {
+  background: var(--stage-integration);
+}
+
+.framework-progress-dot.stage-execution {
+  background: var(--stage-execution);
+}
+
+.framework-progress-dot.stage-signals {
+  background: var(--stage-signals);
+}
+
+.framework-progress-dot.stage-evolution {
+  background: var(--stage-evolution);
 }
 
 /* Shared flow wrapper allows a centered rail without changing bullet structure. */
@@ -80,7 +184,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  background: rgba(80, 110, 255, 0.15);
+  background: rgba(156, 163, 175, 0.2);
   top: 0;
   bottom: 0;
   pointer-events: none;
@@ -109,7 +213,7 @@
 
 .framework-section:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
 }
 
 .framework-header {
@@ -152,15 +256,10 @@
   margin-bottom: 8px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  background: rgba(80, 110, 255, 0.10);
-  color: var(--accent-blue);
+  text-transform: uppercase;
 }
 
 /* Stage spacing controls keep icon/pill/heading rhythm consistent. */
-.stage-label {
-  margin-top: 4px;
-}
-
 .stage-title {
   margin-top: 10px;
 }
@@ -176,6 +275,16 @@
   margin-bottom: 14px;
   font-size: 30px;
   line-height: 1.2;
+}
+
+.framework-title-link {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.framework-title-link:hover {
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
 .framework-main .executive-callout {
@@ -205,6 +314,37 @@
   max-width: none;
 }
 
+.framework-card-divider {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 22px;
+}
+
+.framework-brief-band {
+  margin: 0 -32px -32px;
+  padding: 16px 32px;
+  background: #f8fafc;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #334155;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.framework-brief-band:hover {
+  text-decoration: none;
+  color: #334155;
+}
+
+.framework-brief-arrow {
+  transition: transform 0.15s ease;
+}
+
+.framework-section:hover .framework-brief-arrow {
+  transform: translateX(4px);
+}
+
 .framework-arrow {
   display: flex;
   justify-content: center;
@@ -219,9 +359,35 @@
 }
 
 .framework-arrow svg {
-  stroke: #3b6cff;
-  stroke-width: 2;
-  opacity: 0.75;
+  stroke: var(--flow-neutral);
+  opacity: 0.6;
+}
+
+.framework-brief-main .framework-stage-nav {
+  justify-content: flex-start;
+  margin: 0 0 26px;
+}
+
+.framework-stage-nav .badge-phase.current-stage {
+  border: 1px solid currentColor;
+}
+
+.brief-placeholder-panel {
+  margin: 34px 0;
+  text-align: center;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 48px 26px;
+}
+
+.brief-placeholder-title {
+  margin: 0 0 16px;
+}
+
+.brief-placeholder-copy {
+  margin: 0 auto;
+  max-width: 620px;
 }
 
 @media (max-width: 768px) {
@@ -250,6 +416,16 @@
     margin: 18px 0 34px;
   }
 
+  .framework-progress-line {
+    display: none;
+  }
+
+  .framework-progress-markers {
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
   .framework-section {
     padding: 24px;
   }
@@ -260,5 +436,10 @@
 
   .framework-section h3 {
     font-size: 26px;
+  }
+
+  .framework-brief-band {
+    margin: 0 -24px -24px;
+    padding: 15px 24px;
   }
 }

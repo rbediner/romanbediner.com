@@ -12,21 +12,16 @@
  * - Update required route/content assertions if canonical pages or scripts change.
  */
 
+const {
+  extractRoutePathnames,
+  fetchText,
+  requireCondition,
+  validateRouteStatuses
+} = require('./route-health');
+
 const BASE_URL = process.env.RB_LIVE_URL || 'https://romanbediner.com';
 const MAX_ATTEMPTS = Number(process.env.RB_LIVE_MAX_ATTEMPTS || 8);
 const RETRY_DELAY_MS = Number(process.env.RB_LIVE_RETRY_DELAY_MS || 15000);
-
-async function fetchText(pathname) {
-  const response = await fetch(`${BASE_URL}${pathname}`, { redirect: 'follow' });
-  const text = await response.text();
-  return { response, text };
-}
-
-function requireCondition(condition, message) {
-  if (!condition) {
-    throw new Error(message);
-  }
-}
 
 function validateHomepage(homepage) {
   requireCondition(homepage.response.ok, `Homepage failed with status ${homepage.response.status}`);
@@ -42,21 +37,16 @@ function validateSitemap(sitemap) {
 }
 
 async function validateLiveDeployment() {
-  const homepage = await fetchText('/');
+  const homepage = await fetchText(BASE_URL, '/');
   validateHomepage(homepage);
 
-  // Canonical routes are validated directly rather than assuming they are all
-  // present in a single homepage navigation block.
-  const canonicalRoutes = ['/about/', '/services/', '/framework/', '/connect/'];
-  for (const route of canonicalRoutes) {
-    const routeResponse = await fetchText(route);
-    requireCondition(routeResponse.response.ok, `Canonical route failed with status ${routeResponse.response.status}: ${route}`);
-  }
-
-  const sitemap = await fetchText('/sitemap.xml');
+  const sitemap = await fetchText(BASE_URL, '/sitemap.xml');
   validateSitemap(sitemap);
 
-  return { homepage, sitemap };
+  const canonicalRoutes = extractRoutePathnames(sitemap.text);
+  const routeResults = await validateRouteStatuses(BASE_URL, canonicalRoutes);
+
+  return { homepage, sitemap, routeResults, canonicalRoutes };
 }
 
 function sleep(ms) {
@@ -95,6 +85,7 @@ async function main() {
       `- Base URL: ${BASE_URL}`,
       `- Homepage status: ${result.homepage.response.status}`,
       `- Sitemap status: ${result.sitemap.response.status}`,
+      `- Route checks: ${result.routeResults.length}`,
       `- Attempts used: ${attempt}/${MAX_ATTEMPTS}`
     ].join('\n') + '\n'
   );
@@ -108,6 +99,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  extractRoutePathnames,
   validateHomepage,
+  validateLiveDeployment,
   validateSitemap
 };

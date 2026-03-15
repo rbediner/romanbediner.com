@@ -15,6 +15,7 @@ const STAGING_WORKFLOW = path.join(ROOT, '.github', 'workflows', 'deploy-staging
 const PROD_WORKFLOW = path.join(ROOT, '.github', 'workflows', 'deploy-pages.yml');
 const PREVIEW_BUILD_SCRIPT = path.join(ROOT, 'scripts', 'build', 'create-preview-artifact.js');
 const PREVIEW_VERIFY_SCRIPT = path.join(ROOT, 'scripts', 'qa', 'verify-preview-artifact.js');
+const PREVIEW_LIVE_VERIFY_SCRIPT = path.join(ROOT, 'scripts', 'qa', 'verify-live-preview.js');
 const PREVIEW_PUBLISH_SCRIPT = path.join(ROOT, 'scripts', 'release', 'publish-preview-repo.js');
 
 function assert(condition, message) {
@@ -28,12 +29,14 @@ assert(fs.existsSync(STAGING_WORKFLOW), 'deploy-staging workflow must exist');
 assert(fs.existsSync(PROD_WORKFLOW), 'deploy-pages workflow must exist');
 assert(fs.existsSync(PREVIEW_BUILD_SCRIPT), 'create-preview-artifact script must exist');
 assert(fs.existsSync(PREVIEW_VERIFY_SCRIPT), 'verify-preview-artifact script must exist');
+assert(fs.existsSync(PREVIEW_LIVE_VERIFY_SCRIPT), 'verify-live-preview script must exist');
 assert(fs.existsSync(PREVIEW_PUBLISH_SCRIPT), 'publish-preview-repo script must exist');
 
 const stagingWorkflowText = fs.readFileSync(STAGING_WORKFLOW, 'utf8');
 const prodWorkflowText = fs.readFileSync(PROD_WORKFLOW, 'utf8');
 const previewBuildText = fs.readFileSync(PREVIEW_BUILD_SCRIPT, 'utf8');
 const previewVerifyText = fs.readFileSync(PREVIEW_VERIFY_SCRIPT, 'utf8');
+const previewLiveVerifyText = fs.readFileSync(PREVIEW_LIVE_VERIFY_SCRIPT, 'utf8');
 const previewPublishText = fs.readFileSync(PREVIEW_PUBLISH_SCRIPT, 'utf8');
 
 assert(stagingWorkflowText.includes('workflow_run:'), 'staging workflow must use workflow_run trigger');
@@ -43,6 +46,8 @@ assert(stagingWorkflowText.includes('create-preview-artifact.js'), 'staging work
 assert(stagingWorkflowText.includes('PREVIEW_BASE_PATH="/${PREVIEW_REPO#*/}"'), 'staging workflow must inject preview base-path for project-pages parity');
 assert(stagingWorkflowText.includes('verify-preview-artifact.js'), 'staging workflow must verify preview artifact');
 assert(stagingWorkflowText.includes('publish-preview-repo.js'), 'staging workflow must publish to preview repository');
+assert(stagingWorkflowText.includes('verify-live-preview.js'), 'staging workflow must validate live preview routes after publish');
+assert(stagingWorkflowText.includes('RB_PREVIEW_URL'), 'staging workflow must pass preview URL to live preview validator');
 assert(stagingWorkflowText.includes('PREVIEW_BRANCH: staging-preview'), 'staging workflow must hard-lock preview publishing to staging-preview branch');
 assert(stagingWorkflowText.includes('continue-on-error: true'), 'staging workflow must handle preview publish failures explicitly');
 assert(stagingWorkflowText.includes('Staging Preview Failed'), 'staging workflow must emit explicit failure summary');
@@ -63,6 +68,8 @@ assert(previewBuildText.includes('rewriteRootRelativePathsForPreview'), 'preview
 assert(previewBuildText.includes("Disallow: /"), 'preview artifact builder must enforce no-index robots policy');
 assert(previewVerifyText.includes('must not contain CNAME'), 'preview verifier must block CNAME in preview artifact');
 assert(previewVerifyText.includes('Disallow: /'), 'preview verifier must require no-index robots policy');
+assert(previewLiveVerifyText.includes('extractRoutePathnames'), 'preview live verifier must derive route list from sitemap');
+assert(previewLiveVerifyText.includes('validateRouteStatuses'), 'preview live verifier must validate route statuses');
 assert(previewPublishText.includes('PREVIEW_REPO_TOKEN'), 'preview publish script must use dedicated preview token');
 assert(previewPublishText.includes('https://${owner}.github.io/${name}/'), 'preview publish script must compute clickable preview URL');
 assert(previewPublishText.includes('remoteBranchExists'), 'preview publish script must detect target branch existence');

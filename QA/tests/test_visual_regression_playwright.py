@@ -331,7 +331,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 card = cards.nth(index)
                 self.assertEqual(card.locator(".framework-pill").count(), 1, f"Section {index} is missing stage pill")
                 self.assertEqual(card.locator("img.framework-icon").count(), 1, f"Section {index} is missing icon")
-                self.assertEqual(card.locator("h2").count(), 1, f"Section {index} must include stage heading h2")
+                self.assertEqual(card.locator("h2").count(), 0, f"Section {index} must not render duplicate stage heading h2")
                 self.assertEqual(card.locator("h3").count(), 1, f"Section {index} must include title heading h3")
                 self.assertEqual(card.locator("ul.service-list li").count(), 5, f"Section {index} must include five bullets")
         finally:

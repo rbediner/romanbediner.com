@@ -127,6 +127,13 @@ Required handoff content for cross-machine continuity:
   - `/services/index.html`
   - `/framework/index.html`
   - `/connect/index.html`
+- Framework brief page entrypoints:
+  - `/framework/opportunity/productizing-operations/index.html`
+  - `/framework/design/operations-as-product/index.html`
+  - `/framework/integration/ai-operating-layer/index.html`
+  - `/framework/execution/operational-lanes/index.html`
+  - `/framework/signals/operational-signals/index.html`
+  - `/framework/evolution/agentic-guardrails/index.html`
 - Browser runtime scripts live in `/scripts/runtime`.
 - QA and local runner scripts live in `/scripts/qa`.
 - Release automation scripts live in `/scripts/release`.
@@ -138,6 +145,30 @@ Required handoff content for cross-machine continuity:
 - Legacy paths are disallowed.
 - `.DS_Store` files are disallowed.
 - Nested `.git` directories are disallowed.
+
+## Framework Brief Pages
+- Hub route: `/framework/`
+- Brief routes:
+  - `/framework/opportunity/productizing-operations/`
+  - `/framework/design/operations-as-product/`
+  - `/framework/integration/ai-operating-layer/`
+  - `/framework/execution/operational-lanes/`
+  - `/framework/signals/operational-signals/`
+  - `/framework/evolution/agentic-guardrails/`
+- Framework architecture contract:
+  - cards remain vertically stacked
+  - card titles and `Explore the Brief` footer bands link to stage brief pages
+  - centered neutral down-arrow indicators render between cards only
+- Stage color system:
+  - applies only to stage pills (cards, diagram, brief pages) and diagram node dots
+  - does not apply to card backgrounds, card borders, connector line, or orb bullets
+- Orb bullet system:
+  - thesis and framework card lists use `.service-list` orb bullets from `/styles/site.css`
+  - orb source remains `/assets/icons/home/bullet.png`
+- Icon rules:
+  - framework icon optical offsets in `/styles/framework.css` are intentional and must remain unchanged unless layout integrity breaks
+  - production framework icons remain in `/assets/icons/framework/`; unused icons remain in `/assets/asset-library/icons/`
+- Supplemental architecture notes: `/docs/architecture/framework-briefs.md`
 
 ## Directory Hygiene Rules
 - Keep production assets under `/assets/*` and avoid duplicate root-level asset folders.
@@ -231,10 +262,12 @@ nvm install
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
 - Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/framework/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
+- Post-deploy production validation now enforces `200 OK` checks for every route listed in live `sitemap.xml` (including framework brief routes).
 - Staging deployment publishes an isolated preview to a dedicated repository target (`rbediner/romanbediner-preview`) so production Pages state cannot be overwritten.
 - Preview publication branch is fixed to `staging-preview` (not configurable) to prevent branch drift and accidental publication to preview `main`.
 - Preview publisher now creates `staging-preview` even when preview content is unchanged versus preview `main`, preventing "missing branch" confusion on first hard-locked rollout.
 - Staging preview workflow writes a clickable preview URL to both CI logs and GitHub Actions Job Summary.
+- Staging preview workflow performs live preview `200 OK` checks for every route listed in preview `sitemap.xml` before reporting success.
 - Preview artifacts always remove `CNAME` and enforce `robots.txt` no-index policy.
 - Shared header nav runtime detects GitHub Pages preview hosts and prefixes canonical nav routes with the active preview base path so `Home` and primary navigation never escape preview scope; already-prefixed preview routes are intentionally left unchanged to prevent double-prefix URLs.
 - Link validation (`scripts/qa/run-link-check.js`) is environment-aware:

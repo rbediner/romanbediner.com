@@ -119,6 +119,12 @@ jobs:
           echo "Artifact ID: ${{ steps.build.outputs.preview_artifact_id }}"
           echo "Artifact checksum: ${{ steps.build.outputs.preview_checksum }}"
 
+      - name: Validate live staging preview deployment
+        if: ${{ steps.publish.conclusion == 'success' }}
+        env:
+          RB_PREVIEW_URL: ${{ steps.publish.outputs.preview_url }}
+        run: node scripts/qa/verify-live-preview.js
+
       - name: Write staging deployment summary to job summary
         if: ${{ steps.publish.conclusion == 'success' }}
         run: |

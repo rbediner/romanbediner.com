@@ -20,7 +20,13 @@ const PAGES = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'framework/index.html'
+  'framework/index.html',
+  'framework/opportunity/productizing-operations/index.html',
+  'framework/design/operations-as-product/index.html',
+  'framework/integration/ai-operating-layer/index.html',
+  'framework/execution/operational-lanes/index.html',
+  'framework/signals/operational-signals/index.html',
+  'framework/evolution/agentic-guardrails/index.html'
 ];
 
 let failures = 0;

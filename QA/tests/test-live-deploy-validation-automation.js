@@ -30,6 +30,7 @@ function expectThrow(fn, message) {
 
 assert(typeof script.validateHomepage === 'function', 'verify-live-production.js must export validateHomepage');
 assert(typeof script.validateSitemap === 'function', 'verify-live-production.js must export validateSitemap');
+assert(typeof script.extractRoutePathnames === 'function', 'verify-live-production.js must export extractRoutePathnames');
 
 const validHomepage = {
   response: { ok: true, status: 200 },
@@ -55,5 +56,18 @@ expectThrow(
   () => script.validateSitemap({ response: { ok: true, status: 200 }, text: '<xml></xml>' }),
   'validateSitemap should fail when <urlset> is missing'
 );
+
+const routes = script.extractRoutePathnames(
+  [
+    '<urlset>',
+    '<url><loc>https://romanbediner.com/</loc></url>',
+    '<url><loc>https://romanbediner.com/framework/</loc></url>',
+    '<url><loc>https://romanbediner.com/framework/opportunity/productizing-operations/</loc></url>',
+    '</urlset>'
+  ].join('')
+);
+assert(routes.includes('/'), 'extractRoutePathnames should include homepage route');
+assert(routes.includes('/framework/'), 'extractRoutePathnames should include framework route');
+assert(routes.includes('/framework/opportunity/productizing-operations/'), 'extractRoutePathnames should include nested brief routes');
 
 console.log('PASS: live deploy validation automation checks passed.');

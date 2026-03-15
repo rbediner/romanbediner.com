@@ -29,7 +29,14 @@ const PAGE_PATHS = [
   // Refactor: /connect/ is the only canonical route after removing /contact.
   { path: '/connect/', priority: '0.7' },
   // Canonical top-level Framework route.
-  { path: '/framework/', priority: '0.6' }
+  { path: '/framework/', priority: '0.6' },
+  // Framework stage briefs.
+  { path: '/framework/opportunity/productizing-operations/', priority: '0.5' },
+  { path: '/framework/design/operations-as-product/', priority: '0.5' },
+  { path: '/framework/integration/ai-operating-layer/', priority: '0.5' },
+  { path: '/framework/execution/operational-lanes/', priority: '0.5' },
+  { path: '/framework/signals/operational-signals/', priority: '0.5' },
+  { path: '/framework/evolution/agentic-guardrails/', priority: '0.5' }
 ];
 
 const lastmod = new Date().toISOString().slice(0, 10);
