@@ -1,68 +1,53 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 78
-- Updated At (UTC): 2026-03-15T19:29:52Z
+- Handoff Sequence: 79
+- Updated At (UTC): 2026-03-15T19:40:18Z
 - Source Branch: staging
-- Source Commit: a058dd9f6de37a313b941c73d916bc44750e1527 (working tree has uncommitted framework + brief-page + deploy-health updates)
+- Source Commit: ce76877ba60ce181c900a7f4beb05e72dfaf15df
 
 ## Current State
 - Remote branches are divergent:
-  - `origin/staging` -> `a058dd9f6de37a313b941c73d916bc44750e1527`
+  - `origin/staging` -> `ce76877ba60ce181c900a7f4beb05e72dfaf15df`
   - `origin/prod` -> `26dff0971f79dab8cd691cf6c1fde5bec69f452e`
-- Local branch: `staging`
-- Session changes are local-only and not yet pushed.
+- `staging` now contains framework hub/brief rollout + preview/prod full-route health checks.
+- Latest staging preview deployment is successful for commit `ce76877`.
 
 ## What Changed In This Session
-1. Implemented finalized framework hub updates in `/framework/index.html` and `/styles/framework.css`:
-   - added `FRAMEWORK` label and thesis block with orb bullets
-   - introduced stage-color diagram pills + matching node dots with neutral connector
-   - removed duplicate stage labels from card bodies
-   - added clickable card-title links and full-width `Explore the Brief` footer bands
-   - preserved vertical card flow and icon optical offsets; added centered neutral down-flow connectors between every card
-2. Created six stage brief placeholder routes:
-   - `/framework/opportunity/productizing-operations/`
-   - `/framework/design/operations-as-product/`
-   - `/framework/integration/ai-operating-layer/`
-   - `/framework/execution/operational-lanes/`
-   - `/framework/signals/operational-signals/`
-   - `/framework/evolution/agentic-guardrails/`
-3. Added full-route deployment health checks for both environments:
-   - new shared route-health utility: `/scripts/qa/route-health.js`
-   - production validator now checks `200 OK` for every route in live `sitemap.xml`: `/scripts/qa/verify-live-production.js`
-   - new preview validator checks `200 OK` for every route in preview `sitemap.xml`: `/scripts/qa/verify-live-preview.js`
-   - staging deploy workflow now runs live preview route validation after publish (`.github/workflows/deploy-staging.yml`)
-4. Updated docs + SEO support:
-   - added `/docs/architecture/framework-briefs.md`
-   - added release notes `/docs/releases/2026-03-15-framework-briefs-release-notes.md`
-   - updated `README.md` with Framework Brief Pages architecture section and preview/prod sitemap-route health enforcement notes
-   - expanded sitemap generation to include all six brief routes (`scripts/content/generate-sitemap.js`, `sitemap.xml`)
-5. Updated QA coverage for framework and deploy-health contracts:
-   - `QA/tests/test-insights-layout.js`
-   - `QA/tests/test_insights_layout.py`
-   - `QA/tests/test-ga4-installation.js`
-   - `QA/tests/test-clean-urls.js`
-   - `QA/tests/test_visual_regression_playwright.py` (header expectation cleanup)
-   - `QA/tests/test-live-deploy-validation-automation.js`
-   - `QA/tests/test-staging-preview-automation.js`
+1. Implemented finalized framework hub and brief-route rollout:
+   - hub updates in `/framework/index.html` and `/styles/framework.css`
+   - six brief pages added under `/framework/{stage}/{brief}/`
+   - README + framework architecture documentation updated
+2. Added deployment route-health enforcement:
+   - shared route checker `/scripts/qa/route-health.js`
+   - production sitemap-driven 200 checks in `/scripts/qa/verify-live-production.js`
+   - preview sitemap-driven 200 checks in `/scripts/qa/verify-live-preview.js`
+   - staging workflow now runs live preview route checks post-publish
+3. Resolved preview validation edge case:
+   - fixed preview validator to respect project-pages base path
+   - added preview retry/backoff for Pages propagation
+4. Updated QA contracts and visual baselines for framework redesign:
+   - node/python framework contract tests
+   - preview/prod deployment automation tests
+   - updated visual baselines for framework page (`insights--*` screenshots)
 
 ## Validation Performed
-- `node QA/tests/test-insights-layout.js`: pass
-- `python3 -m unittest QA.tests.test_insights_layout -v`: pass
-- `node QA/tests/test-ga4-installation.js`: pass
-- `node QA/tests/test-clean-urls.js`: pass
-- `node QA/tests/test-live-deploy-validation-automation.js`: pass
-- `node QA/tests/test-staging-preview-automation.js`: pass
-- `node QA/tests/test-insights-system.js`: pass
-- `npm run test:node`: pass
-- `npm run test:jest`: pass
-- `python3 -m unittest QA.tests.test_visual_regression_playwright.VisualRegressionPlaywrightTest.test_03_framework_page_section_integrity -v`: skipped (visual suite opt-in; `RUN_VISUAL_TESTS=1` required)
+- Local (multiple runs via Husky CI-parity pre-push gates): pass
+  - node architecture tests
+  - python QA tests
+  - jest suites
+  - playwright/browser suites
+  - visual regression (updated baselines)
+- Staging CI (latest): pass
+  - `https://github.com/rbediner/romanbediner.com/actions/runs/23117783253`
+- Deploy Staging (latest): pass
+  - `https://github.com/rbediner/romanbediner.com/actions/runs/23117798778`
 
 ## Environment URLs
-- Staging preview (target URL once staging publish runs):
+- Staging preview:
   - `https://rbediner.github.io/romanbediner-preview/`
 - Production:
   - `https://romanbediner.com/`
 
 ## Operator Notes
-- Preview deployment was not triggered in this session because changes remain local and unpushed.
-- Next operator step: commit + push to `staging`, wait for fast gate green, then run/confirm staging preview publish for side-by-side review against release notes.
+- Earlier staging deploy (`23117735867`) failed during first rollout of preview live validator due root-path check on project-pages base-path; fixed by base-path mapping + retry/backoff in `verify-live-preview.js` and re-deployed successfully.
+- Release notes file requested by operator was removed; release summary is provided in thread response instead.
