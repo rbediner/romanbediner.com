@@ -69,7 +69,9 @@ assert(previewBuildText.includes("Disallow: /"), 'preview artifact builder must 
 assert(previewVerifyText.includes('must not contain CNAME'), 'preview verifier must block CNAME in preview artifact');
 assert(previewVerifyText.includes('Disallow: /'), 'preview verifier must require no-index robots policy');
 assert(previewLiveVerifyText.includes('extractRoutePathnames'), 'preview live verifier must derive route list from sitemap');
+assert(previewLiveVerifyText.includes('resolvePathForBase'), 'preview live verifier must map checks to preview base path');
 assert(previewLiveVerifyText.includes('validateRouteStatuses'), 'preview live verifier must validate route statuses');
+assert(previewLiveVerifyText.includes('RB_PREVIEW_MAX_ATTEMPTS'), 'preview live verifier must support retry attempts for Pages propagation');
 assert(previewPublishText.includes('PREVIEW_REPO_TOKEN'), 'preview publish script must use dedicated preview token');
 assert(previewPublishText.includes('https://${owner}.github.io/${name}/'), 'preview publish script must compute clickable preview URL');
 assert(previewPublishText.includes('remoteBranchExists'), 'preview publish script must detect target branch existence');
