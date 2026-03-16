@@ -26,3 +26,4 @@ QA/results/playwright/.last-run.json
 # Playwright runtime artifacts and duplicated local output folders.
 test-results*/
 .npm-cache/
+.claude/
