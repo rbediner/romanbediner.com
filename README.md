@@ -475,9 +475,10 @@ flowchart LR
 
 9. **Standardized page transition blocks**
    - Primary narrative pages end with a shared transition component using the same structure and classes.
-   - Transition flow architecture is: `Home -> About -> Services -> Insights -> Connect`.
+   - Transition flow architecture is: `Home -> About -> Framework -> Services -> Connect`.
+   - Nav-label text: Home = "Explore the Operating Model", About = "Explore the Framework", Framework = "Explore Service Models", Services = "Start the Conversation".
    - Transition component styles are centralized in `styles/site.css` and must not be duplicated in page-level CSS.
-   - Transition layer labels render in uppercase to keep taxonomy consistent across the narrative flow.
+   - Transition nav-labels render in uppercase via CSS `text-transform: uppercase` to keep taxonomy consistent across the narrative flow.
    - The semantic transition phrase remains in the DOM inside `.nav-title.sr-only` so search engines and screen readers retain the contextual handoff without showing duplicate visible copy.
    - The shared `.sr-only` utility in `styles/site.css` is the only approved way to visually hide transition titles while preserving accessibility and crawlability.
 

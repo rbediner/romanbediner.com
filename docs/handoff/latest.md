@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 94
-- Updated At (UTC): 2026-03-15T22:06:38Z
+- Handoff Sequence: 95
+- Updated At (UTC): 2026-03-16T22:50:11Z
 - Source Branch: staging
-- Source Commit: c087822449f53f240c70b65fd05d4568067a97df
+- Source Commit: c231d1ac1bf6db9aa6ee764c36b9124ede0f529c (pre-handoff baseline)
 
 ## Current State
 - Remote branch heads:

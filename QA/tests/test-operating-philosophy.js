@@ -60,9 +60,9 @@ if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*ma
 // Test 5: ensure standardized About transition CTA routes to /services/.
 if (
   !/<section[^>]*class="[^"]*\bnext-page-nav\b[^"]*"/.test(aboutHtml) ||
-  !/<a[^>]*href="\/services\/"[^>]*class="nav-anchor"/.test(aboutHtml) ||
-  !/THE OPERATING MODEL/.test(aboutHtml) ||
-  !/class="nav-title sr-only">Transition to Strategic Services</.test(aboutHtml)
+  !/<a[^>]*href="\/framework\/"[^>]*class="nav-anchor"/.test(aboutHtml) ||
+  !/Explore the Framework/.test(aboutHtml) ||
+  !/class="nav-title sr-only">Transition to Framework</.test(aboutHtml)
 ) {
   failures += 1;
   console.error('FAIL: About transition CTA is missing or incorrectly routed.');

@@ -41,26 +41,26 @@ function assertSingleTransitionBlock(html, pageLabel) {
 assertSingleTransitionBlock(homeHtml, 'index.html');
 assertSingleTransitionBlock(insightsHtml, 'framework/index.html');
 
-if (!homeHtml.includes('THE EXECUTION LAYER')) {
+if (!homeHtml.includes('Explore the Operating Model')) {
   failures += 1;
-  console.error('FAIL: index.html is missing transition micro label THE EXECUTION LAYER.');
+  console.error('FAIL: index.html is missing transition micro label Explore the Operating Model.');
 }
-if (!homeHtml.includes('Transition to Operating Philosophy')) {
+if (!homeHtml.includes('Transition to About')) {
   failures += 1;
-  console.error('FAIL: index.html is missing transition headline Transition to Operating Philosophy.');
+  console.error('FAIL: index.html is missing transition headline Transition to About.');
 }
 if (!/href="\/about\/"/.test(homeHtml)) {
   failures += 1;
   console.error('FAIL: index.html transition must link to /about/.');
 }
 
-if (!insightsHtml.includes('THE EXECUTION LAYER')) {
+if (!insightsHtml.includes('Explore Service Models')) {
   failures += 1;
-  console.error('FAIL: framework/index.html is missing transition micro label THE EXECUTION LAYER.');
+  console.error('FAIL: framework/index.html is missing transition micro label Explore Service Models.');
 }
-if (!insightsHtml.includes('Transition to Services →')) {
+if (!insightsHtml.includes('Transition to Services')) {
   failures += 1;
-  console.error('FAIL: framework/index.html is missing transition headline Transition to Services →.');
+  console.error('FAIL: framework/index.html is missing transition headline Transition to Services.');
 }
 if (!/href="\/services\/"/.test(insightsHtml)) {
   failures += 1;
