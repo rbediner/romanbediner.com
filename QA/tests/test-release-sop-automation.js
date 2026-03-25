@@ -26,6 +26,7 @@ const requiredScripts = {
   'qa:prepush-gate': 'node scripts/qa/run-prepush-gate.js',
   'qa:ci-parity': 'bash scripts/qa/run-ci-parity.sh',
   'ci:monitor': 'node scripts/release/watch-ci-run.js',
+  'release:verify-prod': 'node scripts/release/verify-prod-release.js',
   'release:staging-prod': 'bash scripts/release/promote-tested-staging-to-prod.sh',
   'prepare': 'node scripts/release/install-local-husky-hooks.js'
 };
@@ -50,8 +51,7 @@ assert(releaseText.includes('git pull --ff-only origin staging'), 'release scrip
 assert(releaseText.includes('node scripts/release/watch-ci-run.js --branch staging'), 'release script must monitor staging CI');
 assert(releaseText.includes('git pull --ff-only origin prod'), 'release script must fast-forward pull prod');
 assert(releaseText.includes('git merge --ff-only "${STAGING_SHA}"'), 'release script must fast-forward prod from tested SHA');
-assert(releaseText.includes('node scripts/release/watch-ci-run.js --branch prod'), 'release script must monitor prod CI');
-assert(releaseText.includes('--workflow "Deploy Pages"'), 'release script must monitor Deploy Pages completion for prod SHA');
+assert(releaseText.includes('node scripts/release/verify-prod-release.js --branch prod --sha "${STAGING_SHA}"'), 'release script must run unified prod verification gate for tested SHA');
 
 const monitorPath = path.join(ROOT, 'scripts', 'release', 'watch-ci-run.js');
 const monitorText = fs.readFileSync(monitorPath, 'utf8');

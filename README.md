@@ -51,12 +51,21 @@ Use this exact sequence on every machine/session:
 4. Publish/share staging preview link only after fast gate passes.
 5. Obtain visual approval from staging preview.
 6. Promote the exact approved commit from `staging` to `prod` (fast-forward only).
-7. Wait for `prod` full-gate CI completion, then verify production deploy completion and live route health checks.
+7. Verify release completion for that exact prod SHA using:
+```bash
+npm run release:verify-prod -- --sha <prod-sha>
+```
+This gate must confirm:
+- `CI` workflow success for the same SHA
+- `Deploy Pages` workflow success for the same SHA
+- live production smoke checks pass (`scripts/qa/verify-live-production.js`)
 
 Rules:
 - Do not share a staging preview link before tests are green.
 - Do not promote any commit that differs from the tested/approved staging commit.
 - If a deploy run stalls or is canceled by a higher-priority Pages request, re-trigger the same workflow run and continue with the same commit.
+- Never announce production complete until `release:verify-prod` passes for the promoted SHA.
+- Release completion evidence must include: promoted SHA + CI run URL + Deploy Pages run URL + live smoke pass.
 - Cache-bust contract for shared framework styling:
   - if framework styling changes, framework hub + brief pages must reference `/styles/framework.css?v=<token>`
   - all framework hub/brief pages must use the same token value
