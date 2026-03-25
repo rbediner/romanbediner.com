@@ -22,6 +22,11 @@
   - lead/deck (`.framework-intro.framework-lede`)
   - accent
   - stage diagram
+- Brief top stage pills and left-rail spine pills share the outlined marker system:
+  - transparent fill
+  - 2px border using stage color (`currentColor`)
+  - no hover affordance and no pointer interaction on top framework pills
+  - stage color logic remains token-driven by `.stage-*` classes
 
 ## Stage Color Rules
 - Stage colors apply only to:

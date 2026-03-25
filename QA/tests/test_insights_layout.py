@@ -161,6 +161,16 @@ class FrameworkLayoutTest(unittest.TestCase):
         self.assertRegex(self.framework_css, r"\.framework-progress-dot\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-marker\.is-active\s+\.framework-progress-dot\s*\{[^}]*scale\(1\.25\);", re.S)
         self.assertRegex(self.framework_css, r"\.framework-progress-link:hover\s*\{[^}]*filter:\s*brightness\(0\.96\);", re.S)
+        self.assertRegex(
+            self.framework_css,
+            r"\.framework-brief-main\s*>\s*\.framework-pill\s*\{[^}]*border:\s*2px\s+solid\s+currentColor;[^}]*background:\s*transparent;[^}]*cursor:\s*default;[^}]*pointer-events:\s*none;",
+            re.S,
+        )
+        self.assertRegex(
+            self.framework_css,
+            r"\.brief-sticky-stage\s*\{[^}]*border:\s*2px\s+solid\s+currentColor;[^}]*background:\s*transparent;",
+            re.S,
+        )
         self.assertRegex(self.framework_css, r"\.framework-arrow svg\s*\{[^}]*stroke:\s*#8792a1;[^}]*stroke-width:\s*2\.2;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-brief-band\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;", re.S)
         self.assertRegex(self.framework_css, r"\.framework-brief-band:hover\s*\{[^}]*color:\s*#2563eb;[^}]*background:\s*#eef4ff;", re.S)

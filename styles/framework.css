@@ -411,12 +411,20 @@ html {
 
 .framework-brief-main > .framework-pill {
   margin-bottom: 16px;
-}
-
-.framework-brief-main > .framework-pill.stage-opportunity {
-  opacity: 0.62;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  background: transparent;
+  opacity: 0.72;
   filter: saturate(0.72);
-  font-weight: 590;
+  cursor: default;
+  pointer-events: none;
 }
 
 .framework-brief-main h1 {
@@ -522,10 +530,17 @@ html {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  background: transparent;
   margin-top: 2px;
   opacity: 0.72;
   filter: saturate(0.72);
-  box-shadow: 0 0 0 1px currentColor inset;
   white-space: nowrap;
 }
 

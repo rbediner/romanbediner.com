@@ -318,6 +318,16 @@ if (!/\.framework-pill\s*\{[^}]*text-transform:\s*uppercase;/s.test(frameworkCss
   console.error('FAIL: stage pill style contract is missing.');
 }
 
+if (!/\.framework-brief-main\s*>\s*\.framework-pill\s*\{[^}]*border:\s*2px\s+solid\s+currentColor;[^}]*background:\s*transparent;[^}]*cursor:\s*default;[^}]*pointer-events:\s*none;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: framework header stage pills must be outlined, non-interactive markers.');
+}
+
+if (!/\.brief-sticky-stage\s*\{[^}]*border:\s*2px\s+solid\s+currentColor;[^}]*background:\s*transparent;/s.test(frameworkCss)) {
+  failures += 1;
+  console.error('FAIL: spine stage pills must remain outlined markers.');
+}
+
 if (!/\.framework-arrow svg\s*\{[^}]*stroke:\s*#8792a1;[^}]*stroke-width:\s*2\.2;/s.test(frameworkCss)) {
   failures += 1;
   console.error('FAIL: inter-card flow arrows must use neutral styling.');

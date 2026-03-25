@@ -184,6 +184,7 @@ Required handoff content for cross-machine continuity:
 - Stage color system:
   - applies only to stage pills (cards, diagram, brief pages) and diagram node dots
   - does not apply to card backgrounds, card borders, connector line, or orb bullets
+  - brief-page top framework pills are outlined, non-interactive markers that mirror spine-pill styling while preserving per-stage color tokens
 - Orb bullet system:
   - thesis and framework card lists use `.service-list` orb bullets from `/styles/site.css`
   - orb source remains `/assets/icons/home/bullet.png`
