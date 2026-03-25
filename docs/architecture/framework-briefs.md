@@ -16,6 +16,12 @@
 - Hub anchor navigation is smooth-scrolling and cards provide `scroll-margin-top` offset so sticky diagram does not clip landed headers.
 - Active stage highlight is observer-driven (`.framework-progress-marker.is-active`) as cards enter view.
 - Brief pages reuse the same colored diagram as cross-page stage navigation; current stage is highlighted and not clickable.
+- Long-form brief header order is standardized as:
+  - stage pill
+  - H1
+  - lead/deck (`.framework-intro.framework-lede`)
+  - accent
+  - stage diagram
 
 ## Stage Color Rules
 - Stage colors apply only to:

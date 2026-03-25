@@ -180,6 +180,7 @@ Required handoff content for cross-machine continuity:
   - centered neutral down-arrow indicators render between cards only
   - Opportunity, Design, and Integration brief routes are implemented as long-form editorial pages using the shared brief architecture
   - long-form brief layout uses an editorial left-rail system on desktop (sticky stage marker + subtle vertical spine) and collapses to a single-column flow on mobile
+  - long-form brief header order is standardized as: stage pill, H1, lead/deck (`.framework-intro.framework-lede`), accent, then stage diagram
 - Stage color system:
   - applies only to stage pills (cards, diagram, brief pages) and diagram node dots
   - does not apply to card backgrounds, card borders, connector line, or orb bullets
