@@ -34,6 +34,11 @@ const INCLUDE_PATHS = [
   'styles',
   path.join('scripts', 'runtime')
 ];
+const RELEASE_CACHE_BUST_PATHS = [
+  '/styles/site.css',
+  '/styles/framework.css',
+  '/scripts/runtime/site-navigation.js'
+];
 
 function parseArgs(argv) {
   const args = { out: DEFAULT_OUT };
@@ -115,6 +120,38 @@ function resolveCommitSha() {
   }
 }
 
+function applyReleaseCacheBust(siteDir, commit) {
+  const token = (commit && commit !== 'unknown' ? commit.slice(0, 12) : String(Date.now())).toLowerCase();
+  const files = listFilesRecursive(siteDir).filter((relativePath) => path.extname(relativePath).toLowerCase() === '.html');
+
+  for (const relativePath of files) {
+    const absolutePath = path.join(siteDir, relativePath);
+    const original = fs.readFileSync(absolutePath, 'utf8');
+    let rewritten = original;
+
+    for (const assetPath of RELEASE_CACHE_BUST_PATHS) {
+      const escapedAssetPath = assetPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const exactWithoutQuery = new RegExp(`${escapedAssetPath}(?!\\?)`, 'g');
+      const existingQuery = new RegExp(`${escapedAssetPath}\\?v=[A-Za-z0-9._-]+`, 'g');
+      const relativeAssetPath = assetPath.startsWith('/') ? assetPath.slice(1) : assetPath;
+      const escapedRelativeAssetPath = relativeAssetPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const relativeWithoutQuery = new RegExp(`(?<![A-Za-z0-9_./-])${escapedRelativeAssetPath}(?!\\?)`, 'g');
+      const relativeWithQuery = new RegExp(`(?<![A-Za-z0-9_./-])${escapedRelativeAssetPath}\\?v=[A-Za-z0-9._-]+`, 'g');
+
+      rewritten = rewritten.replace(existingQuery, `${assetPath}?v=${token}`);
+      rewritten = rewritten.replace(exactWithoutQuery, `${assetPath}?v=${token}`);
+      rewritten = rewritten.replace(relativeWithQuery, `${relativeAssetPath}?v=${token}`);
+      rewritten = rewritten.replace(relativeWithoutQuery, `${relativeAssetPath}?v=${token}`);
+    }
+
+    if (rewritten !== original) {
+      fs.writeFileSync(absolutePath, rewritten);
+    }
+  }
+
+  return token;
+}
+
 function writeGithubOutput(values) {
   const outputPath = process.env.GITHUB_OUTPUT;
   if (!outputPath) {
@@ -135,6 +172,7 @@ function main() {
   copyIncludedPaths(siteDir);
 
   const commit = resolveCommitSha();
+  const releaseCacheBustToken = applyReleaseCacheBust(siteDir, commit);
   const { checksum, fileCount } = computeChecksum(siteDir);
   const manifest = {
     artifact_id: `${commit.slice(0, 12)}-${Date.now()}`,
@@ -142,7 +180,8 @@ function main() {
     node: process.versions.node,
     checksum,
     file_count: fileCount,
-    build_time: new Date().toISOString()
+    build_time: new Date().toISOString(),
+    release_cache_bust_token: releaseCacheBustToken
   };
 
   const manifestPath = path.join(outDir, 'artifact-manifest.json');
@@ -172,6 +211,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  applyReleaseCacheBust,
   computeChecksum,
   listFilesRecursive,
   main,

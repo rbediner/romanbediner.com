@@ -70,6 +70,9 @@ Rules:
   - if framework styling changes, framework hub + brief pages must reference `/styles/framework.css?v=<token>`
   - all framework hub/brief pages must use the same token value
   - CI enforcement: `QA/tests/test-framework-cache-bust.js`
+- Deploy-time cache-busting is automatic for staging/prod artifacts:
+  - `scripts/build/create-artifact.js` rewrites cache tokens per release commit for shared assets (`/styles/site.css`, `/styles/framework.css`, `/scripts/runtime/site-navigation.js`)
+  - this prevents stale CSS/JS from prior deploys without manual token bumping in source files
 
 ## Cross-Machine Handoff Protocol
 - Canonical handoff file: `/docs/handoff/latest.md`.

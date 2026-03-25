@@ -53,6 +53,13 @@ assert(releaseText.includes('git pull --ff-only origin prod'), 'release script m
 assert(releaseText.includes('git merge --ff-only "${STAGING_SHA}"'), 'release script must fast-forward prod from tested SHA');
 assert(releaseText.includes('node scripts/release/verify-prod-release.js --branch prod --sha "${STAGING_SHA}"'), 'release script must run unified prod verification gate for tested SHA');
 
+const artifactBuilderPath = path.join(ROOT, 'scripts', 'build', 'create-artifact.js');
+const artifactBuilderText = fs.readFileSync(artifactBuilderPath, 'utf8');
+assert(artifactBuilderText.includes('RELEASE_CACHE_BUST_PATHS'), 'create-artifact.js must define release cache-bust asset targets');
+assert(artifactBuilderText.includes('applyReleaseCacheBust(siteDir, commit)'), 'create-artifact.js must apply release cache-busting during artifact build');
+assert(artifactBuilderText.includes('/styles/framework.css'), 'release cache-bust must include framework.css');
+assert(artifactBuilderText.includes('/scripts/runtime/site-navigation.js'), 'release cache-bust must include shared nav runtime script');
+
 const monitorPath = path.join(ROOT, 'scripts', 'release', 'watch-ci-run.js');
 const monitorText = fs.readFileSync(monitorPath, 'utf8');
 assert(monitorText.includes('/actions/runs?branch='), 'monitor script must poll Actions runs by branch');
