@@ -195,7 +195,7 @@ for (const stage of stages) {
     console.error(`FAIL: ${stage.brief} missing expected brief title.`);
   }
 
-  if (stage.id === 'opportunity' || stage.id === 'design' || stage.id === 'integration') {
+  if (stage.id === 'opportunity' || stage.id === 'design' || stage.id === 'integration' || stage.id === 'execution') {
     if (!briefHtml.includes('class="framework-brief-article"')) {
       failures += 1;
       console.error(`FAIL: ${stage.brief} must render the long-form brief article.`);
@@ -204,7 +204,9 @@ for (const stage of stages) {
       ? '<h2>What starts to break first</h2>'
       : stage.id === 'design'
         ? '<h2>What operational design makes explicit</h2>'
-        : '<h2>Integration Maturity</h2>';
+        : stage.id === 'integration'
+          ? '<h2>Integration Maturity</h2>'
+          : '<h2>Lane Anatomy (Structured View)</h2>';
     if (!briefHtml.includes(expectedInsetHeading)) {
       failures += 1;
       console.error(`FAIL: ${stage.brief} missing required inset list heading.`);
