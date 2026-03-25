@@ -1,45 +1,49 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 125
-- Updated At (UTC): 2026-03-25T23:02:39Z
-- Source Branch: prod
-- Source Commit: 027804a11e8fbbe06d38f8504741692c74b59f0a (pre-handoff baseline)
+- Handoff Sequence: 126
+- Updated At (UTC): 2026-03-25T23:36:00Z
+- Source Branch: codex/execution-brief
+- Source Commit: d42b7257624c15da611c8f926b4444ad9169f555 (pre-handoff baseline)
 
 ## Current State
 - Remote branch heads:
-  - `origin/staging` -> `64c5fea7ffffef25a29ad209d3e0347348e7e372`
-  - `origin/prod` -> `64c5fea7ffffef25a29ad209d3e0347348e7e372`
-- Local branch: `prod`
+  - `origin/staging` -> `d42b7257624c15da611c8f926b4444ad9169f555`
+  - `origin/prod` -> `0c8cba0f9e7ff061da9e6fb37c75604120728908`
+- Local branch: `codex/execution-brief`
 - Branch alignment:
-  - `staging` and `prod` are aligned at `64c5fea`
-  - current workspace contains local uncommitted changes
+  - `staging` is ahead of `prod` by the Execution brief implementation commit
+  - workspace is clean after commit
 
 ## What Changed In This Session
-1. Replaced the Design brief placeholder page with full long-form editorial content at `/framework/design/operations-as-product/`, reusing the Opportunity brief shell and class architecture.
-2. Preserved framework stage navigation behavior and activated Design state in-page:
-   - top stage pill: `Design`
-   - framework diagram: Design marker set to current/non-clickable state
-   - left rail sticky stage marker: `Design`
-   - next-stage transition remains `/framework/integration/ai-operating-layer/`
-3. Updated framework layout tests to recognize both Opportunity and Design as long-form brief pages (while keeping remaining four brief pages on placeholder expectations).
-4. Updated documentation to reflect current brief-content architecture:
-   - `README.md` now states Opportunity + Design are long-form briefs
-   - `docs/architecture/framework-briefs.md` now distinguishes long-form vs placeholder brief routes
+1. Replaced the Execution brief placeholder with full long-form editorial content at `/framework/execution/operational-lanes/`, reusing the established Opportunity/Design/Integration brief architecture.
+2. Preserved the brief shell and stage-navigation system:
+   - top stage pill marker: `Execution` (outlined, non-interactive)
+   - diagram current stage: Execution highlighted and non-clickable
+   - left rail sticky stage marker: `Execution`
+   - next-stage transition remains `/framework/signals/operational-signals/`
+3. Added the required Execution content model with restrained editorial rhythm:
+   - lede in gray intro treatment directly under H1
+   - structured long-form sections aligned to Execution-stage scope
+   - subtle inset block: `Lane Anatomy (Structured View)` using orb bullets (`.service-list`)
+4. Updated framework layout tests so Execution is treated as a long-form brief route rather than a placeholder route.
+5. Updated architecture documentation to reflect current long-form brief coverage:
+   - README now states Opportunity + Design + Integration + Execution are long-form briefs
+   - framework brief architecture doc now lists Execution as long-form and marks Signals/Evolution as remaining placeholders
 
 ## Validation Performed
-- `node QA/tests/test-insights-layout.js` (pass)
-- `python3 -m unittest QA.tests.test_insights_layout -v` (pass)
-- `npm run test:jest` (pass)
-- `npm test` (pass; includes Node, Python, Jest, and Playwright suites)
+- Focused local checks before push:
+  - `node QA/tests/test-insights-layout.js` (pass)
+  - `python3 -m unittest QA.tests.test_insights_layout -v` (pass)
+- Pre-push enforced full CI-parity gate (pass):
+  - Node contract suite
+  - Jest policy suite
+  - Python suite (including Playwright-backed runtime checks)
+  - push to `origin/staging` completed
 
 ## Operator Notes
-- Files currently modified locally (not yet committed/pushed):
-  - `framework/design/operations-as-product/index.html`
-  - `QA/tests/test-insights-layout.js`
-  - `QA/tests/test_insights_layout.py`
-  - `README.md`
-  - `docs/architecture/framework-briefs.md`
-  - `docs/handoff/latest.md`
+- Staging preview target for approval:
+  - `https://rbediner.github.io/romanbediner-preview/framework/execution/operational-lanes/`
+- Not yet promoted to production.
 
 ## URLs
 - Staging preview base:
