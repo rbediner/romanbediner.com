@@ -1,0 +1,114 @@
+.integration-brief-main .integration-subhead {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 21px;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.integration-brief-main .brief-divider {
+  width: 100%;
+  max-width: 720px;
+  margin: 18px auto 28px;
+  border: 0;
+  border-top: 1px solid #d7dde6;
+}
+
+.integration-brief-main .integration-hook {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 44px;
+  padding: 18px 0 18px 20px;
+  border-left: 3px solid rgba(15, 118, 110, 0.6);
+  color: #4b5563;
+  font-size: 25px;
+  line-height: 1.52;
+  font-weight: 520;
+  letter-spacing: -0.01em;
+}
+
+.integration-brief-main .framework-brief-content-frame {
+  max-width: 720px;
+}
+
+.integration-brief-main .framework-brief-article {
+  max-width: 720px;
+}
+
+.integration-brief-main .brief-section {
+  margin: 0 0 72px;
+}
+
+.integration-brief-main .brief-section h2 {
+  margin: 0 0 22px;
+}
+
+.integration-brief-main .brief-section p {
+  margin: 0 0 20px;
+}
+
+.integration-brief-main .integration-maturity {
+  margin-left: 12px;
+  padding: 24px 24px 22px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.16) 0%, rgba(148, 163, 184, 0.06) 100%);
+}
+
+.integration-brief-main .maturity-level {
+  margin-bottom: 30px;
+  padding-left: 8px;
+}
+
+.integration-brief-main .maturity-level:last-child {
+  margin-bottom: 0;
+}
+
+.integration-brief-main .maturity-level p {
+  margin: 0 0 10px;
+}
+
+.integration-brief-main .maturity-level .service-list {
+  margin-top: 0;
+}
+
+.integration-brief-main .maturity-level .service-list li {
+  margin-bottom: 10px;
+}
+
+.integration-brief-main .maturity-level .service-list li:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .integration-brief-main .integration-subhead {
+    font-size: 19px;
+    line-height: 1.55;
+  }
+
+  .integration-brief-main .brief-divider {
+    margin-top: 14px;
+    margin-bottom: 22px;
+  }
+
+  .integration-brief-main .integration-hook {
+    margin-bottom: 30px;
+    padding-left: 16px;
+    font-size: 21px;
+    line-height: 1.48;
+  }
+
+  .integration-brief-main .brief-section {
+    margin-bottom: 46px;
+  }
+
+  .integration-brief-main .integration-maturity {
+    margin-left: 0;
+    padding: 18px 16px 16px;
+  }
+
+  .integration-brief-main .maturity-level {
+    margin-bottom: 24px;
+    padding-left: 0;
+  }
+}

@@ -178,7 +178,7 @@ Required handoff content for cross-machine continuity:
   - diagram pills link to matching card anchors (`#opportunity` through `#evolution`) with active-stage tracking while scrolling
   - anchor jumps use smooth scrolling and card-level `scroll-margin-top` offset so sticky diagram does not obscure card headers
   - centered neutral down-arrow indicators render between cards only
-  - Opportunity and Design brief routes are implemented as long-form editorial pages using the shared brief architecture
+  - Opportunity, Design, and Integration brief routes are implemented as long-form editorial pages using the shared brief architecture
   - long-form brief layout uses an editorial left-rail system on desktop (sticky stage marker + subtle vertical spine) and collapses to a single-column flow on mobile
 - Stage color system:
   - applies only to stage pills (cards, diagram, brief pages) and diagram node dots

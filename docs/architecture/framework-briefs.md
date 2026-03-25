@@ -45,6 +45,7 @@
 - Long-form briefs currently live at:
   - `/framework/opportunity/productizing-operations/`
   - `/framework/design/operations-as-product/`
+  - `/framework/integration/ai-operating-layer/`
 - Remaining brief routes currently use the centered placeholder panel (`Brief in Development`).
 - All brief pages (long-form and placeholder) include GA4 meta + shared bootstrap for pageview tracking parity.
 

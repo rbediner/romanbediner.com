@@ -28,6 +28,7 @@
   <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
   <link rel="stylesheet" href="/styles/site.css" />
   <link rel="stylesheet" href="/styles/framework.css?v=20260325a" />
+  <link rel="stylesheet" href="/scripts/integration-ai-operating-layer.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
   <meta name="ga4-measurement-id" content="G-DVHD0KL633" />
   <script src="/scripts/runtime/ga4-bootstrap.js" defer></script>
@@ -48,7 +49,7 @@
     </div>
   </header>
 
-  <main class="insights-main framework-main framework-container framework-brief-main">
+  <main class="insights-main framework-main framework-container framework-brief-main integration-brief-main">
     <p class="framework-label">FRAMEWORK</p>
     <span class="framework-pill stage-pill badge-phase stage-integration">Integration</span>
     <h1>Integrating AI as an Operating Layer</h1>
@@ -65,7 +66,7 @@
           <a class="badge-phase framework-diagram-pill framework-progress-link stage-design" href="/framework/design/operations-as-product/">Design</a>
           <span class="framework-progress-dot stage-design"></span>
         </span>
-        <span class="framework-progress-marker" data-stage="integration">
+        <span class="framework-progress-marker" data-stage="integration" data-current="true">
           <span class="badge-phase framework-diagram-pill current-stage stage-integration">Integration</span>
           <span class="framework-progress-dot stage-integration"></span>
         </span>
@@ -84,13 +85,111 @@
       </div>
     </nav>
 
-    <p class="framework-intro">AI strengthens execution when it participates directly inside operational workflows.</p>
+    <p class="framework-intro integration-subhead">AI strengthens execution when it participates directly inside operational workflows.</p>
+    <hr class="brief-divider" />
 
-    <section class="brief-placeholder-panel" aria-live="polite">
-      <h2 class="brief-placeholder-title">Brief in Development</h2>
-      <p class="brief-placeholder-copy">This page will expand the Integration stage of<br />The AI-Enabled Operations Framework.</p>
-      <p class="brief-placeholder-copy">Content coming soon.</p>
-    </section>
+    <blockquote class="integration-hook">
+      Integrating AI into operations places intelligence at the point where work moves, decisions are made, and coordination either holds together or starts to drift.
+    </blockquote>
+
+    <div class="framework-brief-content-frame">
+      <aside class="brief-stage-rail" aria-hidden="true">
+        <span class="badge-phase stage-pill stage-integration brief-sticky-stage">Integration</span>
+      </aside>
+
+      <article class="framework-brief-article" aria-label="Integration brief content">
+        <section class="brief-section brief-opening">
+          <p>Organizations are bringing AI into everyday work to improve speed, coordination, and decision quality. As complexity increases, work crosses more systems, decisions depend on more inputs, and timing becomes harder to manage. Teams want outcomes that are consistent and predictable while operating across product, engineering, support, finance, and infrastructure.</p>
+          <p>The problem to solve is operational. Intelligence often sits outside the moments where work advances, which forces teams to gather context manually and reconcile differences across systems. This slows decisions and introduces variability in how similar situations are handled. Integration addresses this by placing intelligence directly inside the flow of work, where the system can interpret context, support decisions, and improve coordination while execution is in motion.</p>
+          <p>It shifts context assembly from people to the system so decision-ready information is available inside the workflow rather than being built manually. This is how AI becomes part of how work progresses rather than a separate activity around it.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>AI Participates Where Work Advances</h2>
+          <p>Integration begins by identifying where decisions shape outcomes inside workflows. These moments include ticket triage, release readiness, incident response, backlog prioritization, customer escalation, capacity allocation, and dependency management. They are execution events that determine whether work moves forward with clarity.</p>
+          <p>In many environments, these decisions rely on fragmented context, with different teams holding pieces of the picture and signals arriving at different times. Integration brings those signals together within the workflow so context is available when decisions are made, allowing AI to evaluate conditions as work progresses and support the next action directly inside the workflow.</p>
+          <p>The system helps the workflow interpret itself, which reduces delay and improves consistency across teams. It also lowers the coordination load between functions because context arrives in the same decision surface.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Integration Connects the System</h2>
+          <p>Embedding AI into operations requires connected systems and clear data flow. Product, engineering, support, finance, and infrastructure contribute signals that shape execution, and integration aligns these inputs into a shared execution layer.</p>
+          <p>This alignment creates clarity by making data contracts explicit, ownership visible, and dependencies defined earlier. AI operates on complete context, which improves decision quality and outcome consistency. In practice, integration connects planning, ticketing, observability, support, incident management, and forecasting systems into a unified layer.</p>
+          <p>The operating layer pulls signals from these systems, aligns them into a shared context, and presents that context at the decision point so actions reflect real conditions. Teams spend less time translating updates across tools and more time moving execution forward with confidence.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Timing Aligns Intelligence with Action</h2>
+          <p>AI creates value when it operates within the cadence of execution. Decisions matter most at the moment work is advancing, and integration ensures intelligence is available at that point. The operating layer evaluates signals as they emerge and supports decisions while options are still open, which improves prioritization, strengthens coordination, and helps teams maintain momentum across fast-moving environments.</p>
+          <p>For example, release readiness improves when performance signals, device behavior, partner status, and issue trends are available together before a go or no-go decision. Incident coordination improves when severity, customer impact, historical patterns, and ownership are visible at the same time, allowing decisions to reflect complete context rather than partial views.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Human and AI Interaction Is Structured</h2>
+          <p>Integration defines how humans and AI operate together within workflows. AI aggregates signals, identifies patterns, and supports baseline decisioning, while humans apply judgment, context, and trade-offs where needed.</p>
+          <p>This interaction works best when it is clear and consistent. The system defines when AI informs, when it recommends, and when it acts, and teams understand where human input is required. This structure improves trust and accountability because responsibilities are visible and predictable, allowing teams to focus more on action than on gathering information.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Integration Patterns That Scale</h2>
+          <p>Strong integration follows consistent patterns that support scale. AI is embedded into workflows rather than accessed through separate tools, context flows across systems without manual reconciliation, and decision points are explicit with signals arriving in time to support action.</p>
+          <p>These patterns improve coordination as environments grow. Teams align more easily because context is shared and visible, and execution becomes more consistent because decisions follow structured logic supported by live data. In practice, issue response improves when severity, customer impact, known patterns, and ownership paths are presented together during active incidents, allowing the system to support coordination directly.</p>
+        </section>
+
+        <section class="brief-section integration-maturity" aria-label="Integration maturity">
+          <h2>Integration Maturity</h2>
+
+          <div class="maturity-level">
+            <p><strong>Level 1: Isolated Intelligence</strong></p>
+            <ul class="service-list">
+              <li>Insight exists in tools or reports outside workflows</li>
+              <li>Teams access information separately from execution</li>
+              <li>Decisions depend on manual context assembly</li>
+            </ul>
+          </div>
+
+          <div class="maturity-level">
+            <p><strong>Level 2: Assisted Workflows</strong></p>
+            <ul class="service-list">
+              <li>Recommendations appear within workflows</li>
+              <li>Teams use signals to guide decisions</li>
+              <li>Consistency improves but remains operator-dependent</li>
+            </ul>
+          </div>
+
+          <div class="maturity-level">
+            <p><strong>Level 3: Embedded Decisioning</strong></p>
+            <ul class="service-list">
+              <li>AI participates directly inside workflows</li>
+              <li>Routing, prioritization, and resolution are influenced in real time</li>
+              <li>Decisions reflect shared, cross-system context</li>
+            </ul>
+          </div>
+
+          <div class="maturity-level">
+            <p><strong>Level 4: Adaptive Operations Layer</strong></p>
+            <ul class="service-list">
+              <li>Decisions adjust continuously based on live signals and system state</li>
+              <li>The operating model adapts while maintaining stability</li>
+              <li>Execution remains consistent across scale and conditions</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="brief-section">
+          <h2>What Strong Integration Looks Like</h2>
+          <p>In a well-integrated environment, AI operates as part of the system’s control layer rather than as a separate capability. Workflows carry their own context, decisions reflect signals from across product, engineering, support, and operations, and the system presents that context at the moment action is required. Teams move with clearer intent because the workflow already contains the information needed to decide.</p>
+          <p>Execution becomes more stable as a result. The operating layer reduces variation in how similar situations are handled by aligning inputs, timing, and decision logic. Prioritization reflects current conditions, escalations carry the right context, and readiness is assessed against consistent criteria. Speed improves alongside quality because decisions are made earlier, with better information, and with less rework across teams.</p>
+          <p>This is where integration shows its value. The system improves how work flows, how decisions are formed, and how coordination holds together as scale increases. Gains compound because each workflow operates with the same underlying structure for context and decisioning.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Next Stage: Execution</h2>
+          <p>Integration connects systems, places intelligence inside workflows, and aligns context with the moments where decisions are made. The operating layer becomes a practical execution surface instead of a conceptual architecture discussion.</p>
+          <p>Execution is where that structure is applied under real conditions. It determines whether the operating layer produces consistent, repeatable outcomes across teams, environments, and scale, and whether the system maintains clarity as complexity increases.</p>
+        </section>
+      </article>
+    </div>
 
     <section class="next-page-nav">
       <div class="section-accent"></div>
