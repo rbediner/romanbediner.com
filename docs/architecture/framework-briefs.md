@@ -27,6 +27,11 @@
   - 2px border using stage color (`currentColor`)
   - no hover affordance and no pointer interaction on top framework pills
   - stage color logic remains token-driven by `.stage-*` classes
+  - implementation contract for future brief pages:
+    - keep top brief marker as `<span class="framework-pill stage-pill badge-phase stage-<stage>">...`
+    - keep spine marker as `<span class="badge-phase stage-pill stage-<stage> brief-sticky-stage">...`
+    - do not convert top marker to links or add hover/pointer affordances
+    - all stage color changes must come from `.stage-*` tokens in `/styles/framework.css`
 
 ## Stage Color Rules
 - Stage colors apply only to:
