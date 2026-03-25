@@ -481,6 +481,7 @@ html {
 }
 
 .framework-lede {
+  box-sizing: border-box;
   max-width: var(--framework-max-width);
   margin: 8px auto 46px;
   padding: 24px 26px;
