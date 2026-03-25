@@ -1,18 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 100
-- Updated At (UTC): 2026-03-25T14:13:00Z
+- Handoff Sequence: 101
+- Updated At (UTC): 2026-03-25T14:16:30Z
 - Source Branch: staging
-- Source Commit: c3e3d15237acff1aedce23607ee54c5d2079a1c2
+- Source Commit: dd6b05ff434d4195d651a81652269a6e97573d2f
 
 ## Current State
 - Remote branch heads:
-  - `origin/staging` -> `c3e3d15237acff1aedce23607ee54c5d2079a1c2`
+  - `origin/staging` -> `dd6b05ff434d4195d651a81652269a6e97573d2f`
   - `origin/prod` -> `c5a3baefd34350c216c4df3c5b6ee0bfbc91d351`
 - Local branch: `staging`
 - Branch alignment:
   - `staging` is ahead of `prod`
-  - local working tree has uncommitted targeted refinement edits for Opportunity brief styling
+  - local branch aligned with `origin/staging` after push
 
 ## What Changed In This Session
 1. Applied targeted visual/layout refinement pass for `/framework/opportunity/productizing-operations/` without changing route, metadata, title, or body wording.
@@ -31,11 +31,9 @@
 - Full `npm test` was run earlier in-session; initial failure was `README integrity` only, then resolved by README update.
 
 ## Operator Notes
-- Files modified locally (not yet committed/pushed at this handoff snapshot):
-  - `styles/framework.css`
-  - `README.md`
-  - `docs/handoff/latest.md`
-- Staging preview currently reflects `c3e3d15`; this new refinement pass is local and requires commit + push to publish.
+- Patch commit: `dd6b05f` (pushed to `staging`).
+- Pre-push CI parity gate completed successfully during push.
+- Staging deploy should publish from `dd6b05f` via Actions `Deploy Staging` workflow.
 
 ## URLs
 - Staging preview base:
