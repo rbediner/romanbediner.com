@@ -578,6 +578,10 @@ html {
   margin-bottom: 0;
 }
 
+.framework-brief-article .service-list + p {
+  margin-top: 24px;
+}
+
 .brief-opening {
   padding: 16px 18px 12px;
   border-radius: 10px;
@@ -684,6 +688,10 @@ html {
   .brief-section p {
     font-size: 19px;
     line-height: 1.64;
+  }
+
+  .framework-brief-article .service-list + p {
+    margin-top: 18px;
   }
 
   .brief-inset-list-section {
