@@ -57,6 +57,10 @@ Rules:
 - Do not share a staging preview link before tests are green.
 - Do not promote any commit that differs from the tested/approved staging commit.
 - If a deploy run stalls or is canceled by a higher-priority Pages request, re-trigger the same workflow run and continue with the same commit.
+- Cache-bust contract for shared framework styling:
+  - if framework styling changes, framework hub + brief pages must reference `/styles/framework.css?v=<token>`
+  - all framework hub/brief pages must use the same token value
+  - CI enforcement: `QA/tests/test-framework-cache-bust.js`
 
 ## Cross-Machine Handoff Protocol
 - Canonical handoff file: `/docs/handoff/latest.md`.
