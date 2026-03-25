@@ -449,6 +449,59 @@ html {
   max-width: 620px;
 }
 
+.framework-brief-article {
+  max-width: var(--framework-max-width);
+  margin: 28px auto 0;
+}
+
+.brief-section {
+  margin: 0 0 42px;
+}
+
+.brief-section:last-child {
+  margin-bottom: 0;
+}
+
+.brief-section h2 {
+  margin: 0 0 14px;
+  font-size: 30px;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+}
+
+.brief-section p {
+  margin: 0 0 18px;
+  font-size: 20px;
+  line-height: 1.68;
+  color: var(--text-color);
+}
+
+.brief-section p:last-child {
+  margin-bottom: 0;
+}
+
+.brief-inset-list-section {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 22px 18px;
+  background: rgba(148, 163, 184, 0.08);
+  border-radius: 10px;
+}
+
+.brief-inset-list-section .service-list {
+  margin: 4px 0 0;
+}
+
+.brief-inset-list-section .service-list li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.brief-inset-list-section .service-list li:last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .framework-main {
     padding: 0 24px;
@@ -502,5 +555,27 @@ html {
   .framework-brief-band {
     margin: 0 -24px -24px;
     padding: 15px 24px;
+  }
+
+  .framework-brief-article {
+    margin-top: 20px;
+  }
+
+  .brief-section {
+    margin-bottom: 34px;
+  }
+
+  .brief-section h2 {
+    font-size: 25px;
+  }
+
+  .brief-section p {
+    font-size: 19px;
+    line-height: 1.64;
+  }
+
+  .brief-inset-list-section {
+    max-width: 100%;
+    padding: 18px 18px 16px;
   }
 }

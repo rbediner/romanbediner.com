@@ -104,7 +104,7 @@ class FrameworkLayoutTest(unittest.TestCase):
             self.assertEqual(block.count('<li>'), 5)
             self.assertNotIn('framework-arrow', block)
 
-    def test_brief_pages_placeholder_and_next_stage_contract(self):
+    def test_brief_pages_content_and_next_stage_contract(self):
         for stage in self.stages:
             file_path = self.root / stage["brief"].strip("/") / "index.html"
             self.assertTrue(file_path.exists(), f"Missing brief page: {stage['brief']}")
@@ -120,8 +120,16 @@ class FrameworkLayoutTest(unittest.TestCase):
             self.assertIn(f'<span class="badge-phase framework-diagram-pill current-stage stage-{stage["id"]}">{stage["label"]}</span>', html)
             self.assertNotRegex(html, r'class="[^"]*current-stage[^"]*" href=')
             self.assertEqual(html.count('class="framework-progress-marker"'), 6)
-            self.assertIn('Brief in Development', html)
-            self.assertIn('Content coming soon.', html)
+            if stage["id"] == "opportunity":
+                self.assertIn('class="framework-brief-article"', html)
+                self.assertIn('<h2>What starts to break first</h2>', html)
+                self.assertIn('class="brief-section brief-inset-list-section"', html)
+                self.assertIn('class="service-list"', html)
+                self.assertNotIn('Brief in Development', html)
+                self.assertNotIn('Content coming soon.', html)
+            else:
+                self.assertIn('Brief in Development', html)
+                self.assertIn('Content coming soon.', html)
             self.assertIn(f'href="{stage["next"]}"', html)
             self.assertIn('<meta name="ga4-measurement-id" content="G-DVHD0KL633" />', html)
             self.assertIn('<script src="/scripts/runtime/ga4-bootstrap.js" defer></script>', html)

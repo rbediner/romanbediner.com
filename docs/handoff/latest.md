@@ -1,41 +1,57 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 96
-- Updated At (UTC): 2026-03-16T23:20:00Z
+- Handoff Sequence: 97
+- Updated At (UTC): 2026-03-25T00:24:13Z
 - Source Branch: staging
-- Source Commit: ba485bd96e97d7f6ebd5e0b1386ecac7bcd7b57f
+- Source Commit: c5a3baefd34350c216c4df3c5b6ee0bfbc91d351
 
 ## Current State
 - Remote branch heads:
-  - `origin/staging` -> `ba485bd96e97d7f6ebd5e0b1386ecac7bcd7b57f`
-  - `origin/prod` -> `ba485bd96e97d7f6ebd5e0b1386ecac7bcd7b57f`
+  - `origin/staging` -> `c5a3baefd34350c216c4df3c5b6ee0bfbc91d351`
+  - `origin/prod` -> `c5a3baefd34350c216c4df3c5b6ee0bfbc91d351`
 - Local branch: `staging`
-- Local/remote staging alignment: clean (`staging` == `origin/staging`)
+- Local/remote staging alignment: base aligned (`staging` == `origin/staging`) with uncommitted local edits
 
 ## What Changed
-1. Standardized footer nav labels and routing across all pages (`3e6fc37`):
-   - Home: label → `Explore the Operating Model`, href → `/about/` (label only, link was correct)
-   - About: label → `Explore the Framework`, href → `/framework/` (was incorrectly pointing to `/services/`)
-   - Framework: label → `Explore Service Models`, href → `/services/` (label only, link was correct)
-   - Services: label → `Start the Conversation`, href → `/connect/` (was incorrectly pointing back to `../framework/`)
-   - All `sr-only` accessibility text updated to match new labels
-   - Word "layer" removed from all nav-label and sr-only text
-2. Added `.claude/` to `.gitignore` (`ba485bd`):
-   - Local Claude Code tooling directory excluded from tracking
+1. Replaced Opportunity brief placeholder panel with real long-form editorial content in:
+   - `/framework/opportunity/productizing-operations/index.html`
+   - Added sectioned brief flow and inset list:
+     - opening section (3 paragraphs)
+     - `The shift teams are already feeling`
+     - `What productizing operations actually means`
+     - inset `What starts to break first` list
+     - `Where AI changes the equation`
+     - `Why Opportunity comes first`
+2. Preserved existing page shell and navigation behaviors:
+   - top FRAMEWORK label
+   - Opportunity stage pill
+   - framework diagram and cross-page links
+   - intro line beneath diagram
+   - next-stage navigation to `/framework/design/operations-as-product/`
+3. Added minimal readability styles in `/styles/framework.css` for:
+   - editorial section spacing rhythm
+   - paragraph typography
+   - subtle inset list treatment integrated in page flow
+   - orb bullet compatibility for inset list via `.service-list`
+4. Preserved existing metadata/analytics in Opportunity brief head (no metadata rewrite).
 
 ## Validation Performed
-- Staging remote checks:
-  - GitHub Actions `CI` (success) — run 23169991655
-  - GitHub Actions `Deploy Staging` (success) — run 23170025648
-  - `RB_PREVIEW_URL=https://rbediner.github.io/romanbediner-preview/ node scripts/qa/verify-live-preview.js` (pass)
-- Production remote checks:
-  - GitHub Actions `CI` (success) — run 23170216486
-  - GitHub Actions `Deploy Pages` (success) — run 23170216485
-  - `node scripts/qa/verify-live-production.js` (pass)
+- `npm run session:ready` (pass) on `staging` before edits.
+- Static verification checks performed:
+  - placeholder copy removed
+  - next-stage link remains `/framework/design/operations-as-product/`
+  - Opportunity remains current stage (non-clickable)
+  - other stage pills remain clickable
+  - title, description, canonical, OG, and Twitter tags still present
+  - brief body word count measured at ~1303 words
+- Full automated test suite not run in this session.
 
 ## Operator Notes
-- Two routing bugs corrected: About page was pointing to `/services/` instead of `/framework/`; Services page was pointing back to `../framework/` instead of `/connect/`.
-- Pre-push CI-parity gate passed cleanly on this release (no SKIP needed).
+- Working tree currently includes modified files not yet committed:
+  - `framework/opportunity/productizing-operations/index.html`
+  - `styles/framework.css`
+  - `docs/handoff/latest.md`
+- This change set is content and typography/layout only for the Opportunity brief page; no route, metadata schema, or framework diagram behavior changes were introduced.
 
 ## URLs
 - Staging preview base:

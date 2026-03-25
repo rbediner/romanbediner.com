@@ -195,14 +195,36 @@ for (const stage of stages) {
     console.error(`FAIL: ${stage.brief} missing expected brief title.`);
   }
 
-  if (!briefHtml.includes('class="brief-placeholder-panel"')) {
-    failures += 1;
-    console.error(`FAIL: ${stage.brief} missing placeholder panel.`);
-  }
-
-  if (!briefHtml.includes('Brief in Development') || !briefHtml.includes('Content coming soon.')) {
-    failures += 1;
-    console.error(`FAIL: ${stage.brief} placeholder text contract is missing.`);
+  if (stage.id === 'opportunity') {
+    if (!briefHtml.includes('class="framework-brief-article"')) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} must render the long-form brief article.`);
+    }
+    if (!briefHtml.includes('<h2>What starts to break first</h2>')) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} missing required inset list heading.`);
+    }
+    if (!briefHtml.includes('class="brief-section brief-inset-list-section"')) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} missing inset list section treatment.`);
+    }
+    if (!briefHtml.includes('class="service-list"')) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} inset list must use orb bullet styling.`);
+    }
+    if (briefHtml.includes('Brief in Development') || briefHtml.includes('Content coming soon.')) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} should not include legacy placeholder copy.`);
+    }
+  } else {
+    if (!briefHtml.includes('class="brief-placeholder-panel"')) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} missing placeholder panel.`);
+    }
+    if (!briefHtml.includes('Brief in Development') || !briefHtml.includes('Content coming soon.')) {
+      failures += 1;
+      console.error(`FAIL: ${stage.brief} placeholder text contract is missing.`);
+    }
   }
 
   if (!briefHtml.includes('class="framework-progress framework-diagram"')) {
