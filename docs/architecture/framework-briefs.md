@@ -34,16 +34,19 @@
 - Orb image path is `/assets/icons/home/bullet.png`.
 - Do not use browser default bullets for framework thesis or stage lists.
 
-## Placeholder Brief Strategy
-- Each brief page includes:
+## Brief Content Strategy
+- All brief pages include:
   - `FRAMEWORK` label
   - stage pill
   - brief title
   - full six-stage navigator with current stage highlight
   - intro line copied from the framework card
-  - centered placeholder panel (`Brief in Development`)
   - next-stage navigation link
-- Placeholder pages include GA4 meta + shared bootstrap for pageview tracking parity.
+- Long-form briefs currently live at:
+  - `/framework/opportunity/productizing-operations/`
+  - `/framework/design/operations-as-product/`
+- Remaining brief routes currently use the centered placeholder panel (`Brief in Development`).
+- All brief pages (long-form and placeholder) include GA4 meta + shared bootstrap for pageview tracking parity.
 
 ## Icon Asset System
 - Active framework icons remain in `/assets/icons/framework/`.

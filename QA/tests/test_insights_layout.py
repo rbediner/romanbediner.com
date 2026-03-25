@@ -120,9 +120,12 @@ class FrameworkLayoutTest(unittest.TestCase):
             self.assertIn(f'<span class="badge-phase framework-diagram-pill current-stage stage-{stage["id"]}">{stage["label"]}</span>', html)
             self.assertNotRegex(html, r'class="[^"]*current-stage[^"]*" href=')
             self.assertEqual(html.count('class="framework-progress-marker"'), 6)
-            if stage["id"] == "opportunity":
+            if stage["id"] in {"opportunity", "design"}:
                 self.assertIn('class="framework-brief-article"', html)
-                self.assertIn('<h2>What starts to break first</h2>', html)
+                if stage["id"] == "opportunity":
+                    self.assertIn('<h2>What starts to break first</h2>', html)
+                else:
+                    self.assertIn('<h2>What operational design makes explicit</h2>', html)
                 self.assertIn('class="brief-section brief-inset-list-section"', html)
                 self.assertIn('class="service-list"', html)
                 self.assertNotIn('Brief in Development', html)

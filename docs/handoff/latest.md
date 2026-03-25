@@ -1,40 +1,45 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 111
-- Updated At (UTC): 2026-03-25T15:39:04Z
+- Handoff Sequence: 112
+- Updated At (UTC): 2026-03-25T17:51:34Z
 - Source Branch: prod
-- Source Commit: 5dbe42dc4c33af58d29b1982b9184749dd504b58 (pre-handoff baseline)
+- Source Commit: 64c5fea7ffffef25a29ad209d3e0347348e7e372 (pre-handoff baseline)
 
 ## Current State
 - Remote branch heads:
-  - `origin/staging` -> `91c13f6b9beccc179ec572af2941e87ec576510a`
-  - `origin/prod` -> `c5a3baefd34350c216c4df3c5b6ee0bfbc91d351`
-- Local branch: `staging`
+  - `origin/staging` -> `64c5fea7ffffef25a29ad209d3e0347348e7e372`
+  - `origin/prod` -> `64c5fea7ffffef25a29ad209d3e0347348e7e372`
+- Local branch: `prod`
 - Branch alignment:
-  - `staging` is ahead of `prod`
-  - local branch aligned with `origin/staging` after push
+  - `staging` and `prod` are aligned at `64c5fea`
+  - current workspace contains local uncommitted changes
 
 ## What Changed In This Session
-1. Refined Opportunity brief layout so body reading width matches lead/deck width while preserving route, metadata, copy, navigation, and framework behavior.
-2. Updated `/styles/framework.css` with utility-column separation:
-   - moved sticky stage pill and spine into a left utility rail outside the reading column width
-   - kept right article column at full `var(--framework-max-width)` so deck and body align
-   - ensured sticky marker remains pill-sized (`inline-flex`, `align-self:flex-start`, `white-space:nowrap`) while scrolling
-   - kept spine subtle as a utility-rail structural cue without compressing text column
-3. Prior corrective commits in this session also stabilized sticky behavior and spine separation for the Opportunity brief.
+1. Replaced the Design brief placeholder page with full long-form editorial content at `/framework/design/operations-as-product/`, reusing the Opportunity brief shell and class architecture.
+2. Preserved framework stage navigation behavior and activated Design state in-page:
+   - top stage pill: `Design`
+   - framework diagram: Design marker set to current/non-clickable state
+   - left rail sticky stage marker: `Design`
+   - next-stage transition remains `/framework/integration/ai-operating-layer/`
+3. Updated framework layout tests to recognize both Opportunity and Design as long-form brief pages (while keeping remaining four brief pages on placeholder expectations).
+4. Updated documentation to reflect current brief-content architecture:
+   - `README.md` now states Opportunity + Design are long-form briefs
+   - `docs/architecture/framework-briefs.md` now distinguishes long-form vs placeholder brief routes
 
 ## Validation Performed
-- `npm run test:jest` (pass, all suites green).
-- Full `npm test` was run earlier in-session; initial failure was `README integrity` only, then resolved by README update.
+- `node QA/tests/test-insights-layout.js` (pass)
+- `python3 -m unittest QA.tests.test_insights_layout -v` (pass)
+- `npm run test:jest` (pass)
+- `npm test` (pass; includes Node, Python, Jest, and Playwright suites)
 
 ## Operator Notes
-- Commits pushed to `staging` in this session (in order):
-  - `dd6b05f` (deck/spine/rail refinement)
-  - `7decfa8` (sticky rail behavior and spine separation correction)
-  - `9afebf6` (sticky marker remains pill-shaped while scrolling)
-  - `91c13f6` (utility column externalized; reading column aligned with deck width)
-- Pre-push CI parity gates passed on each code push.
-- Staging preview should now reflect `91c13f6` after Deploy Staging publishes.
+- Files currently modified locally (not yet committed/pushed):
+  - `framework/design/operations-as-product/index.html`
+  - `QA/tests/test-insights-layout.js`
+  - `QA/tests/test_insights_layout.py`
+  - `README.md`
+  - `docs/architecture/framework-briefs.md`
+  - `docs/handoff/latest.md`
 
 ## URLs
 - Staging preview base:

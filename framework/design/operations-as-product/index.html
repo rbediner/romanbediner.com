@@ -61,7 +61,7 @@
           <a class="badge-phase framework-diagram-pill framework-progress-link stage-opportunity" href="/framework/opportunity/productizing-operations/">Opportunity</a>
           <span class="framework-progress-dot stage-opportunity"></span>
         </span>
-        <span class="framework-progress-marker" data-stage="design">
+        <span class="framework-progress-marker" data-stage="design" data-current="true">
           <span class="badge-phase framework-diagram-pill current-stage stage-design">Design</span>
           <span class="framework-progress-dot stage-design"></span>
         </span>
@@ -84,13 +84,110 @@
       </div>
     </nav>
 
-    <p class="framework-intro">Operational workflows must be designed with the same discipline applied to products.</p>
+    <p class="framework-intro framework-lede">Execution becomes harder to sustain when the path of work is unclear. It becomes scalable when that path is defined, owned, and consistent end to end.</p>
 
-    <section class="brief-placeholder-panel" aria-live="polite">
-      <h2 class="brief-placeholder-title">Brief in Development</h2>
-      <p class="brief-placeholder-copy">This page will expand the Design stage of<br />The AI-Enabled Operations Framework.</p>
-      <p class="brief-placeholder-copy">Content coming soon.</p>
-    </section>
+    <div class="framework-brief-content-frame">
+      <aside class="brief-stage-rail" aria-hidden="true">
+        <span class="badge-phase stage-pill stage-design brief-sticky-stage">Design</span>
+      </aside>
+
+      <article class="framework-brief-article" aria-label="Design brief content">
+        <section class="brief-section brief-opening">
+          <p>Execution rarely changes all at once. It evolves in specific places, with work entering without clear structure. It is interpreted differently at each handoff. Decisions rely on context that is not always shared. Outputs meet local expectations but do not always align downstream.</p>
+          <p>As organizations scale, these patterns become more visible. More teams, more systems, and more decisions increase the need for consistency. What once worked through coordination and experience benefits from clearer structure, which is why execution becomes a design opportunity and why operational workflows deserve the same discipline applied to products.</p>
+          <p>At scale, execution is shaped by how work moves. When that movement is not clearly defined, teams rely more heavily on interpretation and coordination. As complexity increases, similar work can begin to produce uneven outcomes. Design addresses this by making the system explicit.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Stage discipline</h2>
+          <p><strong>What belongs in Design:</strong></p>
+          <ul class="service-list">
+            <li>Architect the operating model as a system</li>
+            <li>Define end to end workflows with clear inputs, outputs, and handoffs</li>
+            <li>Assign explicit ownership for each core workflow</li>
+            <li>Set decision boundaries across human, AI-assisted, and automated work</li>
+            <li>Establish outcome standards for how work moves</li>
+          </ul>
+          <p><strong>What does NOT belong in Design:</strong></p>
+          <ul class="service-list">
+            <li>Detailed AI tooling and embedding patterns</li>
+            <li>Day to day cadence, backlog management, and optimization loops</li>
+            <li>KPI systems and signal interpretation</li>
+            <li>Autonomy models and guardrails</li>
+            <li>Capacity planning and performance tuning</li>
+          </ul>
+        </section>
+
+        <section class="brief-section">
+          <h2>Where execution becomes harder to sustain</h2>
+          <p>Execution evolves through patterns as workflows expand across functions and handoffs increase. Each team improves its own step, but the full path of work becomes harder to see. Decisions depend on context that may not travel with the work. Outputs move forward but require clarification to be used downstream.</p>
+          <p><strong>Common patterns:</strong></p>
+          <ul class="service-list">
+            <li>Intake varies, so work enters with different levels of completeness</li>
+            <li>Teams adapt locally, creating variation in interpretation</li>
+            <li>Decisions follow availability rather than defined ownership</li>
+            <li>Outputs require alignment later in the process</li>
+          </ul>
+          <p>AI makes these patterns easier to see by increasing speed, volume, and traceability. Work moves faster, so variation appears sooner in the workflow. More output is generated in parallel, which makes differences across similar tasks easier to compare. Steps executed through tools and prompts leave a clearer record, so gaps in inputs, decisions, and handoffs become easier to identify. This makes clarity in how work moves even more important.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Operations as a product</h2>
+          <p>Treating operations as a product introduces discipline to execution, and each core workflow becomes a managed system with a defined outcome, a single accountable owner, and a lifecycle. Changes are introduced deliberately. Performance is observed and improved over time.</p>
+          <p>This shifts focus from individual steps to end to end system performance. When variation appears, the response is to refine the workflow, which mirrors product development. Roadmaps are prioritized. Releases are structured. Outcomes are measured and improved. Applying this discipline to operations ensures execution evolves intentionally. This becomes even more valuable in AI-enabled environments, where automation participates in workflows and the operating model must support speed while maintaining consistency.</p>
+        </section>
+
+        <section class="brief-section brief-inset-list-section" aria-label="What operational design makes explicit">
+          <h2>What operational design makes explicit</h2>
+          <p><strong>Signature lens: the operational contract</strong></p>
+          <p>A well-designed workflow functions as a contract between teams, systems, and AI participation.</p>
+          <ul class="service-list">
+            <li>Entry conditions: what must be true before work starts</li>
+            <li>Output standard: what qualifies as complete</li>
+            <li>Decision authority: who decides and within what boundaries</li>
+            <li>Information contract: what data is required and in what form</li>
+            <li>Transition rule: how work moves forward</li>
+            <li>Continuation condition: when work proceeds or requires review</li>
+          </ul>
+          <p>When these are defined, execution becomes more consistent. Without them, teams rely more heavily on experience.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Workflows, ownership, and decision rights</h2>
+          <p>Design starts by making the full path of work visible. Each workflow is defined end to end, from intake to outcome. Inputs are specified. Outputs are standardized. Handoffs are explicit.</p>
+          <p>Ownership is assigned at the workflow level, with one owner accountable for system performance over time. Decision rights are defined at key points. The system specifies who decides, what information is required, and how decisions move forward.</p>
+          <p>Example: A customer onboarding workflow spans sales, operations, and finance. Without design, each function validates inputs independently. With design, intake criteria are defined once, validation is consistent, and ownership ensures alignment across the workflow. The difference is clarity in how work moves.</p>
+        </section>
+
+        <section class="brief-section brief-soft-wash">
+          <h2>Designing for AI participation</h2>
+          <p>AI is designed into workflows as a defined participant, and each step specifies how work is executed across three modes:</p>
+          <ul class="service-list">
+            <li>Human decision: judgment and context</li>
+            <li>AI-assisted decision: drafting, analysis, and synthesis</li>
+            <li>Automated execution: repeatable steps within defined thresholds</li>
+          </ul>
+          <p>These modes are assigned based on the nature of the work. That supports consistency, reduces cycle time, and surfaces patterns earlier while keeping accountability tied to the workflow.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>What changes when execution is designed</h2>
+          <p>When execution is designed, several shifts become visible, starting with work entering with consistent structure. Decisions are made within defined boundaries. Outputs are usable downstream. Teams spend less time interpreting and more time progressing work.</p>
+          <p>Coordination becomes lighter because the system carries more context. Visibility improves because workflows are defined end to end. AI participation becomes more reliable because it operates within a clear structure. The result is consistency that allows the organization to move faster with confidence.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Keeping the system simple and durable</h2>
+          <p>Design introduces structure, and discipline comes from keeping it usable. A strong operating model defines what is necessary to remove ambiguity. It focuses on intake, decision, and handoff. Simplicity is a constraint, so workflows should be easy to understand, decision boundaries should be practical, and ownership should be clear. A durable model scales because people understand it and apply it consistently.</p>
+        </section>
+
+        <section class="brief-section">
+          <h2>Transition to Integration</h2>
+          <p>With the operating model designed, execution has a stable structure. The next stage focuses on how AI is embedded within that structure so it becomes part of how workflows actually run.</p>
+          <p>This is where design becomes operational. The question shifts from how work should be structured to where AI should assist, where automation can execute, and where human judgment should remain explicit. Integration builds on the foundation established here by placing intelligence inside the workflow while preserving clarity, ownership, and accountability.</p>
+        </section>
+      </article>
+    </div>
 
     <section class="next-page-nav">
       <div class="section-accent"></div>
