@@ -1,13 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 102
-- Updated At (UTC): 2026-03-25T14:23:10Z
+- Handoff Sequence: 104
+- Updated At (UTC): 2026-03-25T14:40:35Z
 - Source Branch: staging
-- Source Commit: 7decfa873f2d9f0e00eb93f44bc31abdf14ca5b3
+- Source Commit: 77dfedefb33040acd11a5ec33f9af18ee71b27c3 (pre-handoff baseline)
 
 ## Current State
 - Remote branch heads:
-  - `origin/staging` -> `7decfa873f2d9f0e00eb93f44bc31abdf14ca5b3`
+  - `origin/staging` -> `91c13f6b9beccc179ec572af2941e87ec576510a`
   - `origin/prod` -> `c5a3baefd34350c216c4df3c5b6ee0bfbc91d351`
 - Local branch: `staging`
 - Branch alignment:
@@ -15,26 +15,26 @@
   - local branch aligned with `origin/staging` after push
 
 ## What Changed In This Session
-1. Applied targeted Opportunity brief refinement pass for `/framework/opportunity/productizing-operations/` without changing route, metadata, title, top nav, or body wording.
-2. Updated `/styles/framework.css` in two patches:
-   - strengthened deck hierarchy and section rhythm
-   - implemented desktop left-rail + spine structure
-   - fixed sticky marker behavior by stretching rail item to article height (`align-self: stretch`) so `position: sticky` can engage through scroll
-   - increased explicit separation between sticky pill and spine (wider rail column + spine offset + rail padding)
-   - preserved normalized active Opportunity node dot size/position in top diagram
-   - retained mobile simplification (single-column, no left rail/spine)
-3. Updated README architecture contract to include the Opportunity brief editorial left-rail behavior.
+1. Refined Opportunity brief layout so body reading width matches lead/deck width while preserving route, metadata, copy, navigation, and framework behavior.
+2. Updated `/styles/framework.css` with utility-column separation:
+   - moved sticky stage pill and spine into a left utility rail outside the reading column width
+   - kept right article column at full `var(--framework-max-width)` so deck and body align
+   - ensured sticky marker remains pill-sized (`inline-flex`, `align-self:flex-start`, `white-space:nowrap`) while scrolling
+   - kept spine subtle as a utility-rail structural cue without compressing text column
+3. Prior corrective commits in this session also stabilized sticky behavior and spine separation for the Opportunity brief.
 
 ## Validation Performed
 - `npm run test:jest` (pass, all suites green).
 - Full `npm test` was run earlier in-session; initial failure was `README integrity` only, then resolved by README update.
 
 ## Operator Notes
-- Commits pushed to `staging` in this session:
+- Commits pushed to `staging` in this session (in order):
   - `dd6b05f` (deck/spine/rail refinement)
   - `7decfa8` (sticky rail behavior and spine separation correction)
-- Pre-push CI parity gate completed successfully on both code pushes.
-- Staging deploy should publish latest from `7decfa8` via Actions `Deploy Staging`.
+  - `9afebf6` (sticky marker remains pill-shaped while scrolling)
+  - `91c13f6` (utility column externalized; reading column aligned with deck width)
+- Pre-push CI parity gates passed on each code push.
+- Staging preview should now reflect `91c13f6` after Deploy Staging publishes.
 
 ## URLs
 - Staging preview base:
