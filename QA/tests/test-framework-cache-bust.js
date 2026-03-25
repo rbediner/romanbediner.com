@@ -1,4 +1,12 @@
 #!/usr/bin/env node
+/**
+ * Invariant:
+ * - Framework hub and all framework brief pages must reference `/styles/framework.css` with a shared `?v=` token.
+ * Why this exists:
+ * - Production CDN/browser caches can retain stale shared CSS and break page behavior after HTML updates.
+ * What breaks if it fails:
+ * - Deploys can publish new framework page markup while old CSS remains cached, causing visual/regression mismatches.
+ */
 
 const fs = require('fs');
 const path = require('path');
