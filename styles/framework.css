@@ -498,15 +498,15 @@ html {
   max-width: var(--framework-max-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr);
-  column-gap: 26px;
-  align-items: start;
+  grid-template-columns: 144px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: stretch;
 }
 
 .framework-brief-content-frame::before {
   content: "";
   position: absolute;
-  left: 130px;
+  left: 156px;
   top: 8px;
   bottom: 12px;
   width: 1px;
@@ -515,11 +515,12 @@ html {
 
 .brief-stage-rail {
   position: relative;
-  width: 118px;
+  width: 144px;
   top: 0;
-  min-height: 100%;
+  align-self: stretch;
   display: flex;
   justify-content: flex-end;
+  padding-right: 24px;
   pointer-events: none;
 }
 
@@ -530,6 +531,7 @@ html {
   opacity: 0.72;
   filter: saturate(0.72);
   box-shadow: 0 0 0 1px currentColor inset;
+  width: max-content;
 }
 
 .framework-brief-article {
