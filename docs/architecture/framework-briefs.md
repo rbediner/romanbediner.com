@@ -48,4 +48,5 @@
 ## Icon Asset System
 - Active framework icons remain in `/assets/icons/framework/`.
 - Unused framework icon candidates remain in `/assets/asset-library/icons/`.
+- Imported grid/source references (including the icon grid) are stored in `/assets/asset-library/concept-images/` (`/assets/asset-library/concept-images/icon-grid.jpg`).
 - Icon optical offsets in `/styles/framework.css` are intentional and must not be normalized.

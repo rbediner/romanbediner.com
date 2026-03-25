@@ -172,6 +172,7 @@ Required handoff content for cross-machine continuity:
 - Icon rules:
   - framework icon optical offsets in `/styles/framework.css` are intentional and must remain unchanged unless layout integrity breaks
   - production framework icons remain in `/assets/icons/framework/`; unused icons remain in `/assets/asset-library/icons/`
+  - icon grid references now live in `/assets/asset-library/concept-images/icon-grid.jpg` (not in `/assets/asset-library/icons/`)
 - Supplemental architecture notes: `/docs/architecture/framework-briefs.md`
 
 ## Directory Hygiene Rules
@@ -198,7 +199,7 @@ Required handoff content for cross-machine continuity:
 - Promotion workflow for new icons:
   1. add candidate icon to `/assets/asset-library/icons/`
   2. move it to `/assets/icons/<page-name>/` only when actively used on a live page
-- Icons from imported grids must first be stored in `/assets/asset-library/icons/`, then promoted to page folders only when used.
+- Icons from imported grids should be tracked as concept references in `/assets/asset-library/concept-images/` (current reference: `/assets/asset-library/concept-images/icon-grid.jpg`), then promoted as individual icon files to `/assets/asset-library/icons/` and finally `/assets/icons/<page-name>/` when used.
 - Unused icons must remain in the asset library.
 - Framework stage icons are treated as production icons and must remain under `/assets/icons/framework/`.
 - Framework icon display target is approximately `36px` to `40px` height.
