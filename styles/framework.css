@@ -520,6 +520,7 @@ html {
   align-self: stretch;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
   padding-right: 24px;
   pointer-events: none;
 }
@@ -527,11 +528,14 @@ html {
 .brief-sticky-stage {
   position: sticky;
   top: 136px;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
   margin-top: 2px;
   opacity: 0.72;
   filter: saturate(0.72);
   box-shadow: 0 0 0 1px currentColor inset;
-  width: max-content;
+  white-space: nowrap;
 }
 
 .framework-brief-article {
