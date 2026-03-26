@@ -59,12 +59,14 @@ This gate must confirm:
 - `CI` workflow success for the same SHA
 - `Deploy Pages` workflow success for the same SHA
 - live production smoke checks pass (`scripts/qa/verify-live-production.js`)
+- matching CI/Deploy runs are discovered within the configured fail-fast window (default `900s`)
 
 Rules:
 - Do not share a staging preview link before tests are green.
 - Do not promote any commit that differs from the tested/approved staging commit.
 - If a deploy run stalls or is canceled by a higher-priority Pages request, re-trigger the same workflow run and continue with the same commit.
 - Never announce production complete until `release:verify-prod` passes for the promoted SHA.
+- Never run concurrent `release:verify-prod` commands for the same branch/SHA. The script now enforces a per-branch/SHA lock and exits if another verifier is already active.
 - Release completion evidence must include: promoted SHA + CI run URL + Deploy Pages run URL + live smoke pass.
 - Cache-bust contract for shared framework styling:
   - if framework styling changes, framework hub + brief pages must reference `/styles/framework.css?v=<token>`
@@ -750,6 +752,7 @@ git push origin staging
 node scripts/release/watch-ci-run.js --branch staging --sha "$(git rev-parse HEAD)"
 ```
    - Monitor resilience: `watch-ci-run.js` retries transient GitHub API failures (DNS, timeout, reset, 5xx) before failing.
+   - Monitor fail-fast: use `--require-run-within <seconds>` to stop when no matching run appears, instead of polling until the global timeout.
 4. Default assistant release behavior:
    - after local required QA passes, push to `staging` automatically
    - wait for `staging` fast-gate CI checks to complete successfully

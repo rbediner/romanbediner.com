@@ -163,7 +163,7 @@ async function main() {
   const args = parseArgs(process.argv);
   if (args.help === 'true') {
     console.log(
-      'Usage: node scripts/release/watch-ci-run.js --branch <branch> --sha <commit-sha> [--workflow "Workflow Name"] [--repo owner/repo] [--timeout 1800] [--interval 15] [--api-retries 4]'
+      'Usage: node scripts/release/watch-ci-run.js --branch <branch> --sha <commit-sha> [--workflow "Workflow Name"] [--repo owner/repo] [--timeout 1800] [--interval 15] [--api-retries 4] [--require-run-within 900]'
     );
     process.exit(0);
   }
@@ -175,6 +175,7 @@ async function main() {
   const timeoutSeconds = Number(args.timeout || 1800);
   const pollIntervalSeconds = Number(args.interval || 15);
   const apiRetries = Number(args['api-retries'] || 4);
+  const requireRunWithinSeconds = Number(args['require-run-within'] || 0);
 
   if (!branch || !sha) {
     console.error('Missing required args: --branch and --sha');
@@ -186,9 +187,17 @@ async function main() {
   if (workflowName) {
     console.log(`[ci-monitor] Filtering workflow name: ${workflowName}`);
   }
+  if (requireRunWithinSeconds > 0) {
+    console.log(
+      `[ci-monitor] Require matching run discovery within ${requireRunWithinSeconds}s or fail fast.`
+    );
+  }
+
+  let noRunPollCount = 0;
 
   while (true) {
-    if ((Date.now() - started) / 1000 > timeoutSeconds) {
+    const elapsedSeconds = (Date.now() - started) / 1000;
+    if (elapsedSeconds > timeoutSeconds) {
       console.error(`[ci-monitor] Timeout after ${timeoutSeconds}s while waiting for CI completion.`);
       process.exit(1);
     }
@@ -210,7 +219,20 @@ async function main() {
     );
 
     if (!runs.length) {
-      console.log('[ci-monitor] No matching run yet; polling...');
+      noRunPollCount += 1;
+      if (requireRunWithinSeconds > 0 && elapsedSeconds > requireRunWithinSeconds) {
+        console.error(
+          `[ci-monitor] No matching run discovered within ${requireRunWithinSeconds}s for workflow="${workflowName || 'any'}" sha=${sha}.`
+        );
+        console.error('[ci-monitor] Fail-fast triggered. Re-check workflow trigger and branch/SHA alignment.');
+        process.exit(1);
+      }
+
+      console.log(
+        `[ci-monitor] No matching run yet; polling... (attempt ${noRunPollCount}, elapsed ${Math.floor(
+          elapsedSeconds
+        )}s)`
+      );
       await sleep(pollIntervalSeconds * 1000);
       continue;
     }

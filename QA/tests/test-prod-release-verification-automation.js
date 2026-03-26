@@ -34,6 +34,10 @@ assert(
   'verify-prod-release.js must invoke watch-ci-run.js for CI/Deploy workflow monitoring.'
 );
 assert(
+  verifyScript.includes('--require-run-within'),
+  'verify-prod-release.js must enforce fail-fast run discovery for CI/Deploy monitoring.'
+);
+assert(
   verifyScript.includes("'CI'"),
   'verify-prod-release.js must enforce CI workflow success.'
 );
@@ -48,6 +52,10 @@ assert(
 assert(
   verifyScript.includes('PASS: Production release verification complete.'),
   'verify-prod-release.js must emit explicit completion summary output.'
+);
+assert(
+  verifyScript.includes('acquireLock(') && verifyScript.includes('releaseLock('),
+  'verify-prod-release.js must enforce single-run lock lifecycle to prevent duplicate monitors.'
 );
 
 const promoteScript = fs.readFileSync(

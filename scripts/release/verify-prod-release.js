@@ -13,6 +13,9 @@
  */
 
 const https = require('https');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const { spawnSync } = require('child_process');
 
 function parseArgs(argv) {
@@ -41,6 +44,73 @@ function runNode(scriptArgs, env = process.env) {
   });
   if (result.status !== 0) {
     process.exit(result.status || 1);
+  }
+}
+
+function lockPathFor(branch, sha) {
+  const safeBranch = String(branch || 'prod').replace(/[^a-zA-Z0-9._-]/g, '_');
+  const safeSha = String(sha || 'unknown').replace(/[^a-zA-Z0-9._-]/g, '_');
+  return path.join(os.tmpdir(), `romanbediner-release-verify-${safeBranch}-${safeSha}.lock`);
+}
+
+function tryReadJson(filePath) {
+  try {
+    const raw = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function isPidAlive(pid) {
+  if (!Number.isInteger(pid) || pid <= 0) {
+    return false;
+  }
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function acquireLock(lockPath, context) {
+  const existing = tryReadJson(lockPath);
+  if (existing && isPidAlive(Number(existing.pid))) {
+    throw new Error(
+      `release:verify-prod already running for this SHA (pid=${existing.pid}, started=${existing.startedAt}).`
+    );
+  }
+
+  if (existing) {
+    fs.unlinkSync(lockPath);
+  }
+
+  fs.writeFileSync(
+    lockPath,
+    `${JSON.stringify(
+      {
+        pid: process.pid,
+        startedAt: new Date().toISOString(),
+        ...context
+      },
+      null,
+      2
+    )}\n`,
+    'utf8'
+  );
+}
+
+function releaseLock(lockPath) {
+  try {
+    if (fs.existsSync(lockPath)) {
+      const payload = tryReadJson(lockPath);
+      if (!payload || payload.pid === process.pid) {
+        fs.unlinkSync(lockPath);
+      }
+    }
+  } catch {
+    // Best-effort cleanup only.
   }
 }
 
@@ -102,13 +172,29 @@ async function main() {
   const sha = args.sha;
   const timeout = args.timeout || '3600';
   const interval = args.interval || '15';
+  const runDiscoveryTimeout = args['run-discovery-timeout'] || '900';
 
   if (!sha) {
     process.stderr.write('FAIL: Missing required --sha for release verification.\n');
     process.exit(2);
   }
 
-  process.stdout.write(`[release-verify] Verifying prod release for sha=${sha} on branch=${branch}\n`);
+  const lockPath = lockPathFor(branch, sha);
+  acquireLock(lockPath, { branch, sha, repo });
+
+  process.on('exit', () => releaseLock(lockPath));
+  process.on('SIGINT', () => {
+    releaseLock(lockPath);
+    process.exit(130);
+  });
+  process.on('SIGTERM', () => {
+    releaseLock(lockPath);
+    process.exit(143);
+  });
+
+  process.stdout.write(
+    `[release-verify] Verifying prod release for sha=${sha} on branch=${branch} (run-discovery-timeout=${runDiscoveryTimeout}s)\n`
+  );
 
   runNode([
     'scripts/release/watch-ci-run.js',
@@ -123,7 +209,9 @@ async function main() {
     '--timeout',
     timeout,
     '--interval',
-    interval
+    interval,
+    '--require-run-within',
+    runDiscoveryTimeout
   ]);
 
   runNode([
@@ -139,7 +227,9 @@ async function main() {
     '--timeout',
     timeout,
     '--interval',
-    interval
+    interval,
+    '--require-run-within',
+    runDiscoveryTimeout
   ]);
 
   runNode(['scripts/qa/verify-live-production.js']);

@@ -68,6 +68,8 @@ assert(monitorText.includes('requestJsonWithRetry('), 'monitor script must use r
 assert(monitorText.includes('RETRIABLE_NETWORK_ERRORS'), 'monitor script must define retriable network error codes');
 assert(monitorText.includes('--api-retries'), 'monitor script usage must document api retry tuning');
 assert(monitorText.includes('--workflow "Workflow Name"'), 'monitor script usage must document workflow-name filter');
+assert(monitorText.includes('--require-run-within 900'), 'monitor script usage must document fail-fast run discovery timeout');
+assert(monitorText.includes('No matching run discovered within'), 'monitor script must fail fast when run discovery timeout is exceeded');
 
 const ciWorkflowPath = path.join(ROOT, '.github', 'workflows', 'ci.yml');
 const ciWorkflowText = fs.readFileSync(ciWorkflowPath, 'utf8');
