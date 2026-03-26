@@ -1,48 +1,55 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 128
-- Updated At (UTC): 2026-03-26T13:42:30Z
+- Handoff Sequence: 129
+- Updated At (UTC): 2026-03-26T17:11:57Z
 - Source Branch: prod
-- Source Commit: 7906e9ec35b683c1a6d9a43fe62368d7ec045209 (latest prod release)
+- Source Commit: a83286f065a829bef9e9a7e02cba8034913931ae (latest prod release)
 
 ## Current State
 - Remote branch heads:
-  - `origin/prod` -> `7906e9ec35b683c1a6d9a43fe62368d7ec045209`
-  - `origin/staging` -> `7906e9ec35b683c1a6d9a43fe62368d7ec045209`
+  - `origin/prod` -> `a83286f065a829bef9e9a7e02cba8034913931ae`
+  - `origin/staging` -> `a83286f065a829bef9e9a7e02cba8034913931ae`
 - Local branch: `prod`
 - Branch alignment:
-  - `staging` and `prod` are aligned at `7906e9e`
+  - `staging` and `prod` are aligned at `a83286f`
   - workspace clean
 
 ## What Changed In This Session
-1. Updated Design brief content only at `/framework/design/operations-as-product/`:
-   - replaced hook/deck line under the H1 (gray intro treatment preserved)
-   - replaced long-form article copy in existing section wrappers
-   - no layout, component, spacing, styling, navigation, metadata, or JS behavior changes
-2. Promoted the exact staged commit to production:
-   - commit: `7906e9ec35b683c1a6d9a43fe62368d7ec045209`
-3. Handoff updated to reflect aligned branch/release state.
+1. Converted Signals brief from placeholder to long-form at `/framework/signals/operational-signals/` using the established framework brief system:
+   - preserved locked brief shell, diagram behavior, stage pill/spine contracts, and shared styling architecture
+   - inserted approved long-form Signals content with required hook in gray lead treatment
+   - retained subtle inset list structure and next-stage transition
+2. Updated test contracts so Signals is treated as long-form:
+   - `QA/tests/test-insights-layout.js`
+   - `QA/tests/test_insights_layout.py`
+3. Updated architecture docs for live long-form status:
+   - `README.md`
+   - `docs/architecture/framework-briefs.md`
+4. Promoted exact tested commit to staging and prod:
+   - commit: `a83286f065a829bef9e9a7e02cba8034913931ae`
+5. Updated this handoff to reflect final release state and verification evidence.
 
 ## Validation Performed
-- Full local regression passed (`npm test`).
-- Staging pre-push gate passed (CI parity + visual suite) during `HEAD -> staging`.
-- Production pre-push gate passed (CI parity + visual suite) during `prod -> prod`.
-- Production release verification passed for SHA `7906e9ec35b683c1a6d9a43fe62368d7ec045209`:
-  - CI run: `https://github.com/rbediner/romanbediner.com/actions/runs/23597502154`
-  - Deploy Pages run: `https://github.com/rbediner/romanbediner.com/actions/runs/23597502099`
-  - Live smoke: `scripts/qa/verify-live-production.js` pass (11/11 critical routes 200)
-- Note: prior Execution cleanup release remains valid in history:
-  - commit: `738841eb12ed34741ea9fa59782277a579577e82`
-  - CI run: `https://github.com/rbediner/romanbediner.com/actions/runs/23596726347`
-  - Deploy Pages run: `https://github.com/rbediner/romanbediner.com/actions/runs/23596726375`
-  - Node contract suite
-  - Jest policy suite
-  - Python + Playwright suite
-  - Visual regression suite
+- Local full CI-parity gate passed before release (`npm run qa:ci-parity`).
+- Staging push gate passed (pre-push CI-parity) and staging deploy succeeded:
+  - Deploy Staging run: `https://github.com/rbediner/romanbediner.com/actions/runs/23607019667`
+- Prod push gate passed (pre-push CI-parity).
+- Initial prod CI/Deploy attempt on this SHA failed due Lighthouse variance; rerun was executed and passed.
+- Final prod verification evidence for SHA `a83286f065a829bef9e9a7e02cba8034913931ae`:
+  - CI run (rerun, success): `https://github.com/rbediner/romanbediner.com/actions/runs/23607250359`
+  - Deploy Pages run (rerun, success): `https://github.com/rbediner/romanbediner.com/actions/runs/23607250246`
+  - Live smoke pass: `npm run test:deploy:live` (`scripts/qa/verify-live-production.js`)
 
 ## Operator Notes
-- Production includes Opportunity, Design, Integration, and Execution as long-form framework briefs.
-- Signals and Evolution remain placeholder brief pages.
+- Production now includes long-form framework briefs for:
+  - Opportunity
+  - Design
+  - Integration
+  - Execution
+  - Signals
+- Remaining placeholder brief page: Evolution (`/framework/evolution/agentic-guardrails/`).
+- Known non-blocking CI annotation:
+  - GitHub Actions emits Node 20 deprecation warnings for core actions; workflows still pass.
 
 ## URLs
 - Staging preview base:
