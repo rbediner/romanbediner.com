@@ -153,6 +153,7 @@ Required handoff content for cross-machine continuity:
   - `/framework/signals/operational-signals/index.html`
   - `/framework/evolution/agentic-guardrails/index.html`
 - Browser runtime scripts live in `/scripts/runtime`.
+- Framework brief analytics interactions are tracked by `/scripts/runtime/framework-brief-analytics.js`.
 - QA and local runner scripts live in `/scripts/qa`.
 - Release automation scripts live in `/scripts/release`.
 - Content-generation scripts live in `/scripts/content`.
@@ -160,6 +161,7 @@ Required handoff content for cross-machine continuity:
 - Automated tests live in `/QA/tests`.
 - Jest policy/readme tests live in `/QA/tests/jest`.
 - Generated QA and calibration outputs are consolidated under `/QA/results`.
+- Integration brief page-specific stylesheet lives at `/styles/integration-ai-operating-layer.css`.
 - Legacy paths are disallowed.
 - `.DS_Store` files are disallowed.
 - Nested `.git` directories are disallowed.

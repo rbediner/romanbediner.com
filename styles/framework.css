@@ -578,6 +578,15 @@ html {
   font-weight: 700;
 }
 
+.brief-section .brief-section-heading {
+  margin: 0 0 20px;
+  font-size: 31px;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
 .brief-section + .brief-section h2 {
   margin-top: 8px;
 }
@@ -697,6 +706,10 @@ html {
   }
 
   .brief-section h2 {
+    font-size: 27px;
+  }
+
+  .brief-section .brief-section-heading {
     font-size: 27px;
   }
 
