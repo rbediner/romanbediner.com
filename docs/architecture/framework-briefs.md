@@ -63,7 +63,8 @@
   - `/framework/design/operations-as-product/`
   - `/framework/integration/ai-operating-layer/`
   - `/framework/execution/operational-lanes/`
-- Remaining brief routes currently use the centered placeholder panel (`Brief in Development`): Signals and Evolution.
+  - `/framework/signals/operational-signals/`
+- Remaining brief routes currently use the centered placeholder panel (`Brief in Development`): Evolution.
 - All brief pages (long-form and placeholder) include GA4 meta + shared bootstrap for pageview tracking parity.
 
 ## Icon Asset System
