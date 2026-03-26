@@ -57,7 +57,7 @@ const stages = [
     label: 'Evolution',
     title: 'Designing Adaptive Guardrails for Agentic Work',
     brief: '/framework/evolution/agentic-guardrails/',
-    next: '/framework/opportunity/productizing-operations/'
+    next: '/framework/signals/operational-signals/'
   }
 ];
 
@@ -195,7 +195,7 @@ for (const stage of stages) {
     console.error(`FAIL: ${stage.brief} missing expected brief title.`);
   }
 
-  if (stage.id === 'opportunity' || stage.id === 'design' || stage.id === 'integration' || stage.id === 'execution' || stage.id === 'signals') {
+  if (stage.id === 'opportunity' || stage.id === 'design' || stage.id === 'integration' || stage.id === 'execution' || stage.id === 'signals' || stage.id === 'evolution') {
     if (!briefHtml.includes('class="framework-brief-article"')) {
       failures += 1;
       console.error(`FAIL: ${stage.brief} must render the long-form brief article.`);
@@ -207,7 +207,9 @@ for (const stage of stages) {
         : stage.id === 'integration'
           ? '<h2>Integration Maturity</h2>'
           : stage.id === 'signals'
-            ? '<h2>Operational signals worth watching</h2>'
+          ? '<h2>Operational signals worth watching</h2>'
+          : stage.id === 'evolution'
+            ? '<h2>What adaptive guardrails should define</h2>'
             : '<h2>Lane Anatomy (Structured View)</h2>';
     if (!briefHtml.includes(expectedInsetHeading)) {
       failures += 1;
@@ -227,15 +229,6 @@ for (const stage of stages) {
     if (briefHtml.includes('Brief in Development') || briefHtml.includes('Content coming soon.')) {
       failures += 1;
       console.error(`FAIL: ${stage.brief} should not include legacy placeholder copy.`);
-    }
-  } else {
-    if (!briefHtml.includes('class="brief-placeholder-panel"')) {
-      failures += 1;
-      console.error(`FAIL: ${stage.brief} missing placeholder panel.`);
-    }
-    if (!briefHtml.includes('Brief in Development') || !briefHtml.includes('Content coming soon.')) {
-      failures += 1;
-      console.error(`FAIL: ${stage.brief} placeholder text contract is missing.`);
     }
   }
 

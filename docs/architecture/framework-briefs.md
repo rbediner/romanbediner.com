@@ -64,8 +64,8 @@
   - `/framework/integration/ai-operating-layer/`
   - `/framework/execution/operational-lanes/`
   - `/framework/signals/operational-signals/`
-- Remaining brief routes currently use the centered placeholder panel (`Brief in Development`): Evolution.
-- All brief pages (long-form and placeholder) include GA4 meta + shared bootstrap for pageview tracking parity.
+  - `/framework/evolution/agentic-guardrails/`
+- All brief pages include GA4 meta + shared bootstrap for pageview tracking parity.
 
 ## Icon Asset System
 - Active framework icons remain in `/assets/icons/framework/`.

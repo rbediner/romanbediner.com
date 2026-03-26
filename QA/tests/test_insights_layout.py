@@ -53,7 +53,7 @@ class FrameworkLayoutTest(unittest.TestCase):
                 "label": "Evolution",
                 "title": "Designing Adaptive Guardrails for Agentic Work",
                 "brief": "/framework/evolution/agentic-guardrails/",
-                "next": "/framework/opportunity/productizing-operations/",
+                "next": "/framework/signals/operational-signals/",
             },
         ]
 
@@ -120,7 +120,7 @@ class FrameworkLayoutTest(unittest.TestCase):
             self.assertIn(f'<span class="badge-phase framework-diagram-pill current-stage stage-{stage["id"]}">{stage["label"]}</span>', html)
             self.assertNotRegex(html, r'class="[^"]*current-stage[^"]*" href=')
             self.assertEqual(html.count('class="framework-progress-marker"'), 6)
-            if stage["id"] in {"opportunity", "design", "integration", "execution", "signals"}:
+            if stage["id"] in {"opportunity", "design", "integration", "execution", "signals", "evolution"}:
                 self.assertIn('class="framework-brief-article"', html)
                 if stage["id"] == "opportunity":
                     self.assertIn('<h2>What starts to break first</h2>', html)
@@ -130,6 +130,8 @@ class FrameworkLayoutTest(unittest.TestCase):
                     self.assertIn('<h2>Lane Anatomy (Structured View)</h2>', html)
                 elif stage["id"] == "signals":
                     self.assertIn('<h2>Operational signals worth watching</h2>', html)
+                elif stage["id"] == "evolution":
+                    self.assertIn('<h2>What adaptive guardrails should define</h2>', html)
                 else:
                     self.assertIn('<h2>What operational design makes explicit</h2>', html)
                 if stage["id"] == "integration":
@@ -139,9 +141,6 @@ class FrameworkLayoutTest(unittest.TestCase):
                 self.assertIn('class="service-list"', html)
                 self.assertNotIn('Brief in Development', html)
                 self.assertNotIn('Content coming soon.', html)
-            else:
-                self.assertIn('Brief in Development', html)
-                self.assertIn('Content coming soon.', html)
             self.assertIn(f'href="{stage["next"]}"', html)
             self.assertIn('<meta name="ga4-measurement-id" content="G-DVHD0KL633" />', html)
             self.assertIn('<script src="/scripts/runtime/ga4-bootstrap.js" defer></script>', html)
