@@ -1,59 +1,54 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 134
-- Updated At (UTC): 2026-03-26T21:43:00Z
-- Source Branch: prod
-- Source Commit: c27663681430ab34c82d85e347eb6a7d183692e1 (latest prod release)
+- Handoff Sequence: 138
+- Updated At (UTC): 2026-03-27T13:42:06Z
+- Source Branch: staging
+- Source Commit: a8603270954369f3c2d2c6abe695b207a8fc2c76 (pre-handoff baseline)
 
 ## Current State
 - Remote branch heads:
-  - `origin/prod` -> `c27663681430ab34c82d85e347eb6a7d183692e1`
-  - `origin/staging` -> `c27663681430ab34c82d85e347eb6a7d183692e1`
+  - `origin/prod` -> `a8603270954369f3c2d2c6abe695b207a8fc2c76`
+  - `origin/staging` -> `a8603270954369f3c2d2c6abe695b207a8fc2c76`
 - Local branch: `prod`
 - Branch alignment:
-  - `staging` and `prod` are aligned at `c276636`
-  - workspace clean before handoff commit
+  - `staging` and `prod` remain aligned at `a860327`
+  - local workspace includes uncommitted changes from prior sessions plus this analytics hardening patch
 
 ## What Changed In This Session
-1. Applied targeted framework brief consistency and metadata hardening across all six brief pages:
-   - canonical + `og:url` normalized with trailing slash parity
-   - one JSON-LD `WebPage` block added per brief page from existing H1 + meta description
-   - logo alt text normalized to `Roman Bediner logo`
-2. Fixed Integration brief stylesheet placement and reference:
-   - moved `scripts/integration-ai-operating-layer.css` -> `styles/integration-ai-operating-layer.css`
-   - updated page reference in `framework/integration/ai-operating-layer/index.html`
-3. Fixed Signals duplicate heading semantics with no visual style drift:
-   - replaced duplicate opening `<h2>` with `<p class="brief-section-heading">...`
-   - added matching `.brief-section-heading` typography rules in `styles/framework.css`
-4. Added lightweight GA4 interaction telemetry for framework briefs:
-   - new runtime script `scripts/runtime/framework-brief-analytics.js`
-   - tracks `framework_stage_click` (`from_stage`, `to_stage`)
-   - tracks `framework_nav_click` (`target_stage`)
-   - loaded on all six framework brief pages
-5. Updated architecture documentation note in `README.md` for:
-   - new framework brief analytics runtime script
-   - integration brief page-specific stylesheet path under `/styles/`
+1. Framework brief analytics hardening (`scripts/runtime/framework-brief-analytics.js`):
+   - added `scroll_depth` event tracking at 25/50/75/90 thresholds
+   - each threshold fires once per page load
+   - payload includes: `source_page`, `target_page`, `link_type`, `page_path`, `page_type=framework_brief`, `scroll_percent`, `environment`
+2. Connect intent instrumentation (`scripts/runtime/site-navigation.js`):
+   - added `connect_intent` on `/connect/` navigation arrival
+   - added `connect_intent` on LinkedIn external-link clicks (`linkedin.com/in/romanbediner`)
+   - payload includes: `source_page`, `target_page`, `link_type`, `trigger_type`, `destination`, `environment`
+3. Event taxonomy and environment consistency:
+   - maintained existing events (`nav_click`, `internal_link_click`, `framework_stage_click`, `framework_nav_click`)
+   - added `scroll_depth` and `connect_intent`
+   - ensured environment mapping stays explicit and lightweight (`production|preview|staging|local|unknown`)
+4. Analytics QA contract update (`QA/tests/test-ga4-installation.js`):
+   - checks required event names are present in runtime scripts
+   - checks scroll threshold contract and connect intent hooks
+5. PRD simplification mirrored in README (`README.md`):
+   - clarified measurement scope to observable actions only
+   - clarified conversion definition (`/connect/` visit OR LinkedIn click)
+   - removed requirement posture for inferred recruiter classification / attribution modeling
+   - clarified SEO alignment is manual/editorial for this phase (no automated SEO enforcement requirement)
+   - documented design-brief source gap as acknowledged, synthesized, and non-blocking
 
 ## Validation Performed
-- Local CI parity:
-  - `npm run qa:ci-parity` (PASS)
-- Additional instrumentation validation:
-  - synthetic click validation with Playwright + local server confirms exactly one
-    `framework_stage_click` and one `framework_nav_click` per interaction (PASS)
-- Staging promotion and checks for `c276636`:
-  - CI success: `https://github.com/rbediner/romanbediner.com/actions/runs/23619306255`
-  - Deploy Staging success: `https://github.com/rbediner/romanbediner.com/actions/runs/23619346150`
-- Prod promotion and checks for `c276636`:
-  - CI success: `https://github.com/rbediner/romanbediner.com/actions/runs/23619439486`
-  - Deploy Pages success: `https://github.com/rbediner/romanbediner.com/actions/runs/23619439503`
-- Final production release verification:
-  - `npm run release:verify-prod -- --sha c27663681430ab34c82d85e347eb6a7d183692e1` (PASS)
-  - includes live production smoke pass (`https://romanbediner.com` and critical routes)
+- `node QA/tests/test-ga4-installation.js` (PASS)
+- `npm run test:jest` (PASS)
+- `npm run test:playwright -- --workers=3` (PASS)
+- SEO alignment spot-check completed for all six framework brief pages:
+  - title/meta/H1/canonical/og:url alignment verified (no rewrite applied)
 
 ## Operator Notes
-- No rollback required; release completed cleanly.
-- GitHub Actions emits Node 20 deprecation warnings for marketplace actions; non-blocking for this release.
-- Framework brief metadata and analytics contracts are now consistent across all six brief pages.
+- No page copy changes made.
+- No new UI blocks or layout restructuring introduced for this patch.
+- No automation-based SEO enforcement added; validation remains manual/editorial as requested.
+- No staging/prod promotion executed in this session.
 
 ## URLs
 - Staging preview base:

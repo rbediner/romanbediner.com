@@ -28,6 +28,12 @@ Routing requirements:
 - No server-side includes or server-rendered composition.
 - CSP is enforced in HTML via `<meta http-equiv="Content-Security-Policy">`.
 - Production publish flow uses GitHub Actions deployment on `push` to `prod`, with an explicit in-workflow wait for successful `CI` on the exact prod SHA (`.github/workflows/deploy-pages.yml`).
+- Staging preview flow uses isolated preview publication (`.github/workflows/deploy-staging.yml`) with:
+  - trigger on `push` to `staging` (plus CI `workflow_run` + manual dispatch)
+  - explicit wait for matching successful `CI` on staging push SHAs before preview publication
+  - artifact publication to `rbediner/romanbediner-preview` (never to the production repo)
+  - mandatory CNAME removal and strict preview no-index policy in preview artifacts
+  - preview URL emitted in logs and in job summary as clickable markdown link
 - Hosting portability is mandatory for:
   - S3 + CloudFront
   - Vercel
@@ -78,7 +84,21 @@ Rules:
 
 ## Cross-Machine Handoff Protocol
 - Canonical handoff file: `/docs/handoff/latest.md`.
+- Live PRD: `SEO Authority PRD` (`https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`).
+- PRD simplification baseline for this phase:
+  - Measurement scope is limited to observable actions:
+    - page views
+    - framework interaction tracking
+    - framework brief scroll depth tracking
+    - connect intent tracking
+  - Conversion definition is limited to:
+    - visit to `/connect/`
+    - or click to LinkedIn (`linkedin.com/in/romanbediner`)
+  - Do not require user classification, inferred recruiter qualification, or attribution modeling beyond direct observable events.
+  - SEO alignment is editorial + structural and is reviewed manually; no automated SEO enforcement pipeline is required for this phase.
+  - Design brief source note: current design brief is synthesized; missing source narrative is acknowledged and non-blocking for the current phase.
 - Every session that changes code, scripts, QA behavior, or release flow must overwrite `/docs/handoff/latest.md` with the latest state before ending work.
+- Every session that makes a meaningful product change must also update the live PRD in the same session or release cycle. This includes new features, meaningful deploys, UX or navigation rule changes, analytics or metadata contract changes, information architecture changes, and content-system decisions that affect what the site does or promises.
 - The handoff file is intentionally single-entry and non-growing:
   - keep only the latest state
   - increment `Handoff Sequence` each time it is updated
@@ -100,12 +120,38 @@ Required handoff content for cross-machine continuity:
 - current staging preview URL and whether it is approved
 - latest CI result summary (node/python/jest/playwright/deploy-gate)
 - any known blockers, retries, or manual GitHub environment settings currently required
+- whether the live PRD was updated for the current session, or why no PRD update was required
 
 ## Google Analytics Architecture
 - Each canonical page provides exactly one GA metadata source via a measurement ID meta tag.
 - `/scripts/runtime/ga4-bootstrap.js` is the single analytics bootstrap point.
 - Inline GA bootstrap is forbidden.
 - External bootstrap keeps analytics compatible with strict CSP and avoids `unsafe-inline` dependency.
+- Runtime analytics context now standardizes environment tagging:
+  - `production` for `romanbediner.com`
+  - `preview` for `*.github.io`
+  - `staging` for explicit staging host/metadata overrides
+  - `local` for `localhost` / `127.0.0.1`
+  - `unknown` as fallback
+- Shared navigation telemetry in `/scripts/runtime/site-navigation.js` emits:
+  - `nav_click` for header/footer links
+  - `internal_link_click` for in-content internal links
+  - `connect_intent` for:
+    - navigation arrival on `/connect/`
+    - LinkedIn external-link intent
+  - required params: `source_page`, `target_page`, `link_type`, `environment`
+- Framework brief telemetry in `/scripts/runtime/framework-brief-analytics.js` emits:
+  - `framework_stage_click`
+  - `framework_nav_click`
+  - `scroll_depth` (25/50/75/90 thresholds, once per threshold per load, brief pages only)
+  - required params: `source_page`, `target_page`, `link_type`, `environment`
+- Allowed event taxonomy for this phase:
+  - `nav_click`
+  - `internal_link_click`
+  - `framework_stage_click`
+  - `framework_nav_click`
+  - `scroll_depth`
+  - `connect_intent`
 - Guardrails enforce analytics correctness:
   - GA meta tag presence and uniqueness
   - Allowed GA IDs only
@@ -153,6 +199,12 @@ Required handoff content for cross-machine continuity:
   - `/framework/signals/operational-signals/index.html`
   - `/framework/evolution/agentic-guardrails/index.html`
 - Browser runtime scripts live in `/scripts/runtime`.
+- Shared footer now includes a minimal native link row (Home, Framework, Services, Connect) and keeps footer order:
+  - divider
+  - footer nav row
+  - copyright
+  - quote
+  - attribution
 - Framework brief analytics interactions are tracked by `/scripts/runtime/framework-brief-analytics.js`.
 - QA and local runner scripts live in `/scripts/qa`.
 - Release automation scripts live in `/scripts/release`.
@@ -212,6 +264,10 @@ Required handoff content for cross-machine continuity:
   - Calibration output: `/QA/results/h1-calibration`
 - Remove stale local result folders such as `test-results` and `test-results (1)` before commit.
 - Remove unused legacy folders when references are fully migrated.
+- Header navigation currently depends on JavaScript rendering (`/scripts/runtime/site-navigation.js`) and placeholder nav nodes in HTML.
+  - Current decision: do not add static no-JS fallback markup until nav placeholder contracts/tests are explicitly revised.
+  - Risk: no-JS clients may have reduced header navigation discoverability.
+  - Future option: progressive enhancement fallback that ships static anchor markup and hydrates safely without duplicating links.
 
 ## Icon Asset Management
 - Production icon files must live only in page-scoped folders under `/assets/icons/`:

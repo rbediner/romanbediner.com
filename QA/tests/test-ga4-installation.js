@@ -15,6 +15,12 @@ const fs = require('fs');
 const path = require('path');
 
 const MEASUREMENT_ID = 'G-DVHD0KL633';
+const navRuntime = fs.readFileSync(path.resolve(__dirname, '..', '..', 'scripts/runtime/site-navigation.js'), 'utf8');
+const frameworkAnalyticsRuntime = fs.readFileSync(
+  path.resolve(__dirname, '..', '..', 'scripts/runtime/framework-brief-analytics.js'),
+  'utf8'
+);
+const gaBootstrapRuntime = fs.readFileSync(path.resolve(__dirname, '..', '..', 'scripts/runtime/ga4-bootstrap.js'), 'utf8');
 const PAGES = [
   'index.html',
   'about/index.html',
@@ -58,6 +64,68 @@ for (const rel of PAGES) {
     failures += 1;
     console.error(`FAIL: unexpected GA IDs in ${rel}: ${unexpectedIds.join(', ')}`);
   }
+}
+
+const requiredNavigationParams = ['source_page', 'target_page', 'link_type', 'environment'];
+for (const key of requiredNavigationParams) {
+  if (!navRuntime.includes(key)) {
+    failures += 1;
+    console.error(`FAIL: missing required navigation analytics parameter '${key}' in scripts/runtime/site-navigation.js`);
+  }
+}
+
+const requiredFrameworkParams = ['source_page', 'target_page', 'link_type'];
+for (const key of requiredFrameworkParams) {
+  if (!frameworkAnalyticsRuntime.includes(key)) {
+    failures += 1;
+    console.error(`FAIL: missing required framework analytics parameter '${key}' in scripts/runtime/framework-brief-analytics.js`);
+  }
+}
+
+if (!frameworkAnalyticsRuntime.includes('environment')) {
+  failures += 1;
+  console.error('FAIL: missing required framework analytics parameter \'environment\' in scripts/runtime/framework-brief-analytics.js');
+}
+
+const requiredEvents = [
+  'nav_click',
+  'internal_link_click',
+  'framework_stage_click',
+  'framework_nav_click',
+  'scroll_depth',
+  'connect_intent'
+];
+
+for (const eventName of requiredEvents) {
+  if (!navRuntime.includes(eventName) && !frameworkAnalyticsRuntime.includes(eventName)) {
+    failures += 1;
+    console.error(`FAIL: required analytics event '${eventName}' is not implemented in runtime scripts.`);
+  }
+}
+
+if (!frameworkAnalyticsRuntime.includes("page_type: 'framework_brief'")) {
+  failures += 1;
+  console.error("FAIL: scroll_depth payload must include page_type='framework_brief'.");
+}
+
+if (!frameworkAnalyticsRuntime.includes('var thresholds = [25, 50, 75, 90]')) {
+  failures += 1;
+  console.error('FAIL: scroll_depth thresholds must be 25/50/75/90.');
+}
+
+if (!navRuntime.includes('trackConnectIntentNavigation')) {
+  failures += 1;
+  console.error('FAIL: connect intent navigation tracking hook is missing.');
+}
+
+if (!navRuntime.includes('linkedin.com/in/romanbediner')) {
+  failures += 1;
+  console.error('FAIL: connect intent external-link tracking for LinkedIn is missing.');
+}
+
+if (!gaBootstrapRuntime.includes('debug_mode')) {
+  failures += 1;
+  console.error('FAIL: GA bootstrap must configure debug_mode for non-production environments.');
 }
 
 if (failures > 0) {

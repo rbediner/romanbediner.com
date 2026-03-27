@@ -67,29 +67,150 @@ function renderSharedNav(navElement) {
   }).join("");
 }
 
-// Emit lightweight nav telemetry on Home without breaking pages where GA is unavailable.
-function trackHeaderNavClick(label) {
-  if (normalizePath(window.location.pathname) !== "/") {
+function resolveEnvironment() {
+  if (window.__rbAnalytics && typeof window.__rbAnalytics.environment === "string") {
+    return window.__rbAnalytics.environment;
+  }
+
+  var hostname = window.location.hostname || "";
+  var pathname = window.location.pathname || "";
+  if (hostname === "romanbediner.com") {
+    return "production";
+  }
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
+    return "local";
+  }
+  if (hostname === "rbediner.github.io" && pathname.startsWith("/romanbediner-preview")) {
+    return "preview";
+  }
+  return "unknown";
+}
+
+function trackEvent(eventName, params) {
+  if (window.__rbAnalytics && typeof window.__rbAnalytics.trackEvent === "function") {
+    window.__rbAnalytics.trackEvent(eventName, params || {});
     return;
   }
+
   if (typeof window.gtag === "function") {
-    window.gtag("event", "nav_click", {
-      label,
-      location: "header"
-    });
+    window.gtag("event", eventName, Object.assign({}, params || {}, {
+      environment: resolveEnvironment()
+    }));
   }
 }
 
-// Attach nav click tracking to a rendered nav element.
-function bindHeaderNavTracking(navElement) {
-  if (!navElement) {
+function resolveEventTargetPath(link) {
+  try {
+    var parsed = new URL(link.href, window.location.origin);
+    var path = parsed.pathname || "/";
+    return parsed.hash ? path + parsed.hash : path;
+  } catch (error) {
+    return null;
+  }
+}
+
+function isInternalLink(link) {
+  if (!link || !link.href) {
+    return false;
+  }
+
+  try {
+    var parsed = new URL(link.href, window.location.origin);
+    return parsed.origin === window.location.origin;
+  } catch (error) {
+    return false;
+  }
+}
+
+function resolveSourceFromReferrer() {
+  try {
+    if (!document.referrer) {
+      return "(direct)";
+    }
+    var ref = new URL(document.referrer);
+    if (ref.origin !== window.location.origin) {
+      return "(direct)";
+    }
+    return ref.pathname || "/";
+  } catch (error) {
+    return "(direct)";
+  }
+}
+
+function trackConnectIntentNavigation() {
+  var currentPath = normalizePath(window.location.pathname || "/");
+  if (currentPath !== "/connect/") {
     return;
   }
-  navElement.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      const label = (link.textContent || "").trim();
-      trackHeaderNavClick(label);
-    });
+
+  var sourcePage = resolveSourceFromReferrer();
+  trackEvent("connect_intent", {
+    source_page: sourcePage,
+    target_page: "/connect/",
+    link_type: "internal_navigation",
+    trigger_type: "internal_navigation",
+    destination: "/connect/"
+  });
+}
+
+function bindGlobalLinkTracking() {
+  document.addEventListener("click", (event) => {
+    var link = event.target.closest("a[href]");
+    if (!link) {
+      return;
+    }
+
+    if (!isInternalLink(link)) {
+      var href = (link.getAttribute("href") || "").toLowerCase();
+      var absolute = (link.href || "").toLowerCase();
+      if (href.includes("linkedin.com/in/romanbediner") || absolute.includes("linkedin.com/in/romanbediner")) {
+        var sourcePage = window.location.pathname || "/";
+        trackEvent("connect_intent", {
+          source_page: sourcePage,
+          target_page: "linkedin",
+          link_type: "external_link",
+          trigger_type: "external_link",
+          destination: "linkedin"
+        });
+      }
+      return;
+    }
+
+    var targetPath = resolveEventTargetPath(link);
+    if (!targetPath) {
+      return;
+    }
+
+    var sourcePage = window.location.pathname || "/";
+    var label = (link.textContent || "").trim();
+    var baseParams = {
+      source_page: sourcePage,
+      target_page: targetPath,
+      environment: resolveEnvironment()
+    };
+
+    if (link.closest(".site-nav") || link.closest("#mobile-nav")) {
+      trackEvent("nav_click", Object.assign({}, baseParams, {
+        label: label,
+        link_type: "header",
+        location: "header"
+      }));
+      return;
+    }
+
+    if (link.closest("footer") || link.closest(".footer")) {
+      trackEvent("nav_click", Object.assign({}, baseParams, {
+        label: label,
+        link_type: "footer",
+        location: "footer"
+      }));
+      return;
+    }
+
+    var frameworkContext = link.closest(".framework-diagram, .framework-progress, .framework-stage-list");
+    trackEvent("internal_link_click", Object.assign({}, baseParams, {
+      link_type: frameworkContext ? "framework" : "in-content"
+    }));
   });
 }
 
@@ -119,8 +240,8 @@ function applyActiveNavState(navElement, activePath) {
 
   renderSharedNav(desktopNav);
   renderSharedNav(mobileNav);
-  bindHeaderNavTracking(desktopNav);
-  bindHeaderNavTracking(mobileNav);
+  bindGlobalLinkTracking();
+  trackConnectIntentNavigation();
 
   if (!menuToggle || !mobileNav) {
     return;

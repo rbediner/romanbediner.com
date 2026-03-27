@@ -3,7 +3,8 @@
  * - Emit lightweight GA4 interaction telemetry for framework brief pages.
  *
  * Architectural role:
- * - Tracks brief-page stage CTA transitions and framework diagram navigation clicks.
+ * - Tracks brief-page stage CTA transitions, framework diagram navigation clicks,
+ *   and scroll depth milestones.
  *
  * Dependencies:
  * - Browser DOM APIs and GA bootstrap (`window.gtag`) when available.
@@ -14,7 +15,7 @@
  *
  * Migration considerations:
  * - Keep stage route prefixes synchronized with framework brief URL contracts.
- * - Preserve event names/parameters (`framework_stage_click`, `framework_nav_click`) for GA continuity.
+ * - Preserve event names/parameters (`framework_stage_click`, `framework_nav_click`, `scroll_depth`) for GA continuity.
  */
 (function initFrameworkBriefAnalytics() {
   var stageMap = {
@@ -38,18 +39,30 @@
   }
 
   function safeTrack(eventName, params) {
+    var environment = (window.__rbAnalytics && window.__rbAnalytics.environment) || 'unknown';
+    var payload = Object.assign({}, params || {}, {
+      environment: environment
+    });
+
+    if (window.__rbAnalytics && typeof window.__rbAnalytics.trackEvent === 'function') {
+      window.__rbAnalytics.trackEvent(eventName, payload);
+      return;
+    }
+
     if (typeof window.gtag !== 'function') {
       return;
     }
-    window.gtag('event', eventName, params);
+    window.gtag('event', eventName, payload);
   }
 
   function trackStageCtaClick(link) {
     var fromStage = getStageFromPath(window.location.pathname);
     var toStage = null;
+    var targetPath = null;
 
     try {
-      toStage = getStageFromPath(new URL(link.href, window.location.origin).pathname);
+      targetPath = new URL(link.href, window.location.origin).pathname;
+      toStage = getStageFromPath(targetPath);
     } catch (error) {
       return;
     }
@@ -59,6 +72,9 @@
     }
 
     safeTrack('framework_stage_click', {
+      source_page: window.location.pathname || '/',
+      target_page: targetPath,
+      link_type: 'framework',
       from_stage: fromStage,
       to_stage: toStage
     });
@@ -66,9 +82,11 @@
 
   function trackFrameworkNavClick(link) {
     var targetStage = null;
+    var targetPath = null;
 
     try {
-      targetStage = getStageFromPath(new URL(link.href, window.location.origin).pathname);
+      targetPath = new URL(link.href, window.location.origin).pathname;
+      targetStage = getStageFromPath(targetPath);
     } catch (error) {
       return;
     }
@@ -78,8 +96,75 @@
     }
 
     safeTrack('framework_nav_click', {
+      source_page: window.location.pathname || '/',
+      target_page: targetPath,
+      link_type: 'framework',
       target_stage: targetStage
     });
+  }
+
+  function initScrollDepthTracking() {
+    var thresholds = [25, 50, 75, 90];
+    var fired = new Set();
+    var ticking = false;
+
+    function maxScrollableDistance() {
+      var doc = document.documentElement;
+      var body = document.body;
+      var scrollHeight = Math.max(
+        doc ? doc.scrollHeight : 0,
+        body ? body.scrollHeight : 0
+      );
+      return Math.max(scrollHeight - window.innerHeight, 0);
+    }
+
+    function currentScrollPercent() {
+      var maxScrollable = maxScrollableDistance();
+      if (maxScrollable <= 0) {
+        return 100;
+      }
+      return Math.min(
+        100,
+        Math.round((window.scrollY / maxScrollable) * 100)
+      );
+    }
+
+    function emitThreshold(percent) {
+      var path = window.location.pathname || '/';
+      safeTrack('scroll_depth', {
+        source_page: path,
+        target_page: path,
+        link_type: 'framework',
+        page_path: path,
+        page_type: 'framework_brief',
+        scroll_percent: percent
+      });
+    }
+
+    function evaluateThresholds() {
+      var percent = currentScrollPercent();
+      thresholds.forEach(function (threshold) {
+        if (percent >= threshold && !fired.has(threshold)) {
+          fired.add(threshold);
+          emitThreshold(threshold);
+        }
+      });
+    }
+
+    function scheduleEvaluation() {
+      if (ticking) {
+        return;
+      }
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        evaluateThresholds();
+      });
+    }
+
+    evaluateThresholds();
+    window.addEventListener('scroll', scheduleEvaluation, { passive: true });
+    window.addEventListener('resize', scheduleEvaluation, { passive: true });
   }
 
   document.addEventListener('click', function (event) {
@@ -94,4 +179,6 @@
       trackFrameworkNavClick(frameworkNavLink);
     }
   });
+
+  initScrollDepthTracking();
 })();

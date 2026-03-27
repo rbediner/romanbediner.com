@@ -1,6 +1,9 @@
 name: Deploy Staging
 
 on:
+  push:
+    branches:
+      - staging
   workflow_run:
     workflows:
       - CI
@@ -26,7 +29,7 @@ concurrency:
 
 jobs:
   deploy-staging-preview:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'staging') }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'staging') }}
     runs-on: ubuntu-latest
     env:
       PREVIEW_REPO: ${{ vars.PREVIEW_REPO || 'rbediner/romanbediner-preview' }}
@@ -68,6 +71,12 @@ jobs:
         id: build
         run: PREVIEW_BASE_PATH="/${PREVIEW_REPO#*/}" node scripts/build/create-preview-artifact.js --out /tmp/rb-staging-preview-artifact
 
+      - name: Wait for matching staging CI success
+        if: ${{ github.event_name == 'push' && github.ref_name == 'staging' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/release/watch-ci-run.js --branch staging --sha ${{ steps.source.outputs.source_sha }} --workflow "CI" --timeout 3600 --interval 15 --require-run-within 900
+
       - name: Verify staging preview artifact
         run: node scripts/qa/verify-preview-artifact.js --artifact /tmp/rb-staging-preview-artifact --expect-commit ${{ steps.source.outputs.source_sha }}
 
@@ -84,6 +93,10 @@ jobs:
         env:
           PREVIEW_REPO_TOKEN: ${{ secrets.PREVIEW_REPO_TOKEN }}
         run: |
+          if [ "$PREVIEW_REPO" = "${{ github.repository }}" ]; then
+            echo "FAIL: PREVIEW_REPO must not match production repository." >&2
+            exit 1
+          fi
           node scripts/release/publish-preview-repo.js \
             --artifact /tmp/rb-staging-preview-artifact \
             --repo "$PREVIEW_REPO" \
@@ -133,7 +146,7 @@ jobs:
             echo
             echo "Preview your changes here:"
             echo
-            echo "${{ steps.publish.outputs.preview_url }}"
+            echo "[Open Staging Preview](${{ steps.publish.outputs.preview_url }})"
             echo
             echo "Branch: ${{ steps.source.outputs.source_branch }}"
             echo "Commit: ${{ steps.source.outputs.source_sha }}"
