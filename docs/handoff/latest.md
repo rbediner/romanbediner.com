@@ -1,51 +1,69 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 145
-- Updated At (UTC): 2026-03-30T23:10:00Z
-- Source Branch: staging
-- Source Commit: d3d3972323e3f1b6d0abef07c46ef5ec41cbef49
+- Handoff Sequence: 146
+- Updated At (UTC): 2026-03-30T18:08:48Z
+- Source Branch: prod
+- Source Commit: 91353b4c0e5a8264c0dffa10b99bd0f4d0aaa2fe
 
 ## Current State
-- `staging` and `prod` are aligned on the same shipped commit:
-  - `d3d3972323e3f1b6d0abef07c46ef5ec41cbef49`
-- The current work in progress is release-flow optimization only:
-  - reduce duplicate full local CI-parity runs when promoting the exact already-tested staging SHA to `prod`
+- `staging` and `prod` are functionally aligned on the release-flow optimization commit:
+  - `91353b4c0e5a8264c0dffa10b99bd0f4d0aaa2fe`
+- This session shipped a release-flow improvement only:
+  - exact `staging -> prod` promotions no longer replay the full local `qa:ci-parity` gate
+  - `prod` now reuses the already-tested `staging` SHA after validating remote staging `CI`
 - The isolated staging preview remains available for future visual review at:
   - `https://rbediner.github.io/romanbediner-preview/`
 
 ## What Changed In This Session
 1. Added a dedicated prod-promotion verifier:
-   - `scripts/qa/verify-prod-promotion-candidate.js`
-   - confirms `prod` HEAD matches `origin/staging`
-   - confirms the push is still a fast-forward from `origin/prod`
-   - confirms staging `CI` is already green for that SHA before allowing the fast prod path
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-prod-promotion-candidate.js`
+   - verifies `prod` HEAD matches `origin/staging`
+   - verifies the push remains a fast-forward from `origin/prod`
+   - verifies staging `CI` is already green for that SHA before allowing the fast prod path
 2. Expanded the smart pre-push gate:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-prepush-gate.js`
    - docs-only changes still use the lightweight docs gate
    - exact `staging -> prod` promotions now use the new prod-promotion verifier
    - all other code/runtime pushes still use full `qa:ci-parity`
-3. Added release-guardrail coverage:
-   - Jest tests for prod promotion candidate logic
-   - automation contract tests for the new gate script and package script wiring
-4. Updated operator documentation:
-   - `README.md`
+3. Added release guardrail coverage:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/prod_promotion_gate.test.js`
+   - expanded `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/prepush_gate.test.js`
+   - expanded `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/test-release-sop-automation.js`
+4. Hardened GitHub Actions monitoring auth:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/release/watch-ci-run.js`
+   - monitoring now checks `GITHUB_TOKEN`, then `GH_TOKEN`, then falls back to the existing `git credential` helper token for `github.com`
+   - this prevents fresh-shell GitHub API rate-limit failures during local release verification
+5. Updated operator documentation:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/README.md`
    - this handoff file
-5. Hardened GitHub Actions monitoring auth:
-   - `scripts/release/watch-ci-run.js` now reuses the existing `git` credential helper token for `github.com` when shell env tokens are missing
-   - this prevents unauthenticated GitHub API rate-limit failures during local release verification on fresh shells
 
 ## Validation Performed
-- Pending in this session after code edits:
+- Local:
   - `npm run test:jest`
   - `npm run test:node`
-  - release-flow sanity check from `staging`
+  - full local `qa:ci-parity` passed before the final `staging` push of `91353b4`
+- Remote on `staging` for `91353b4`:
+  - `CI` completed successfully
+  - `Deploy Staging` completed successfully
+- Promotion behavior check:
+  - pushing `prod` for the same SHA used the new fast gate instead of rerunning the full local parity suite
+  - the fast gate successfully verified remote staging `CI` and allowed the promotion
+- Remote on `prod` for `91353b4`:
+  - GitHub Actions runs were started from the promotion push
+  - if a future session starts before they are manually rechecked, inspect `CI` and `Deploy Pages` for this SHA first
 
 ## Operator Notes
-- Expected outcome after this change:
-  - heavy local CI-parity runs still happen on `staging`
-  - the matching `prod` promotion of that same SHA becomes much faster
 - This is a release-flow / developer-experience improvement, not a product feature change.
+- Expected release behavior now:
+  1. push code/runtime changes to `staging`
+  2. let full local parity + remote staging `CI` run there
+  3. promote the exact tested SHA to `prod`
+  4. local pre-push on `prod` uses the fast promotion gate instead of replaying full local parity
+- Best practice:
+  - keep `staging` as the place where the heavy gate runs
+  - keep `prod` promotion limited to the exact already-green staging SHA
 - PRD note:
-  - no PRD update is needed unless this session expands into user-facing behavior changes
+  - no PRD update is needed unless a future session changes user-facing behavior
 
 ## Fresh Machine Prerequisites (Operator Quick List)
 1. Install `git`
@@ -58,6 +76,8 @@ npm ci
 python3 -m playwright install chromium
 npm run session:ready
 ```
+5. Optional but recommended:
+   - install `gh` for easier GitHub Actions inspection on fresh machines
 
 ## URLs
 - Staging preview base:
