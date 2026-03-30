@@ -33,11 +33,15 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
   <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
+  <!-- Reduce font handshake latency so shared typography blocks the first paint less often. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="/styles/site.css" />
   <link rel="stylesheet" href="/styles/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/icons/home/mainlogo.svg">
   <link rel="preload" as="image" href="assets/icons/home/contact.png">
+  <link rel="preload" as="image" href="assets/images/website-photo.jpg" fetchpriority="high">
   <!-- Analytics: GA4 measurement ID source of truth for /scripts/runtime/ga4-bootstrap.js -->
   <meta name="ga4-measurement-id" content="G-DVHD0KL633" />
   <script src="/scripts/runtime/ga4-bootstrap.js" defer></script>
@@ -124,12 +128,12 @@
       </div>
 
       <div class="master-photo">
-        <!-- Keep explicit dimensions so the hero reserves space before the image finishes decoding. -->
+        <!-- Keep explicit dimensions matched to the optimized source so the hero reserves space without implying a larger asset than we ship. -->
         <img
           src="assets/images/website-photo.jpg"
           alt="Roman Bediner"
-          width="1022"
-          height="1360"
+          width="541"
+          height="720"
           decoding="async"
           fetchpriority="high"
         />

@@ -619,8 +619,10 @@ flowchart LR
 
 19. **Homepage hero media performance contract**
    - The homepage portrait in `index.html` must use `/assets/images/website-photo.jpg` instead of the legacy PNG to keep the above-the-fold payload lean.
-   - The hero image must retain explicit intrinsic dimensions (`width="1022"`, `height="1360"`) so the master layout reserves media space before decode completes.
+   - The hero image must retain explicit intrinsic dimensions (`width="541"`, `height="720"`) that match the optimized source so the master layout reserves space before decode completes without implying a larger media payload than we ship.
+   - The optimized homepage portrait must remain at or below `120 KB`; `QA/tests/test-home-hero-image-optimization.js` enforces the byte ceiling.
    - The homepage hero image must keep `decoding="async"` and `fetchpriority="high"` because it is visible immediately on page load.
+   - The homepage must keep the font preconnect hints for `fonts.googleapis.com` and `fonts.gstatic.com`, plus the hero-image preload for `/assets/images/website-photo.jpg`, because those hints are part of the Lighthouse headroom strategy.
    - Reintroducing `assets/images/website-photo.png` as a tracked homepage asset is prohibited; `QA/tests/test-home-hero-image-optimization.js` enforces the contract.
 
 ## Machine-Readable Architecture Summary

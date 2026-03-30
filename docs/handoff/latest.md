@@ -1,47 +1,50 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 142
-- Updated At (UTC): 2026-03-30T17:01:48Z
+- Handoff Sequence: 143
+- Updated At (UTC): 2026-03-30T17:27:00Z
 - Source Branch: staging
-- Source Commit: 9a85e3a5bdc34cd4794f418d57aa257eac015a6e
+- Source Commit: 2d754b90dd26b22b879c7a1cef3809dae8a5ee3f
 
 ## Current State
-- This session optimized the homepage portrait payload before the next staging preview review.
+- This follow-up session is preparing a second-pass homepage portrait optimization for staging preview after a `prod` CI Lighthouse failure on the prior image-only optimization commit.
 - Intended promotion flow remains: `staging` preview first, then `prod` only after visual sign-off.
 - Preview URL to verify after staging deploy:
   - `https://rbediner.github.io/romanbediner-preview/`
 
 ## What Changed In This Session
-1. Replaced the homepage hero portrait asset:
-   - removed legacy `assets/images/website-photo.png`
-   - added optimized `assets/images/website-photo.jpg`
+1. Tightened the homepage hero portrait payload again:
+   - replaced the first optimized JPEG with a smaller follow-up JPEG at `90,431 bytes`
+   - source dimensions are now `541 x 720`
 2. Updated homepage markup in `index.html`:
-   - switched the portrait source to the new JPEG
-   - kept explicit intrinsic dimensions (`1022 x 1360`)
-   - added `decoding="async"` and `fetchpriority="high"` for above-the-fold loading stability
-3. Added a dedicated regression guardrail:
-   - `QA/tests/test-home-hero-image-optimization.js`
-   - enforces JPEG usage, prevents the PNG from reappearing, and keeps the image performance attributes intact
+   - kept the same hero composition and image path
+   - aligned explicit intrinsic dimensions to the actual optimized source (`541 x 720`)
+   - retained `decoding="async"` and `fetchpriority="high"`
+   - retained the homepage hero preload plus font preconnect hints used to preserve Lighthouse margin
+3. Expanded the regression guardrail in `QA/tests/test-home-hero-image-optimization.js`:
+   - enforces the JPEG path
+   - blocks the legacy PNG from reappearing
+   - enforces the `120 KB` byte ceiling
+   - enforces the preload + preconnect hints
 4. Updated `README.md` Technical Specification:
-   - documented the homepage hero media performance contract so future sessions know the portrait optimization is intentional
+   - documented the refined hero media performance contract and the preload/preconnect requirements
 
 ## Validation Performed
-- Live production measurement before change:
+- Live production measurement before this second pass:
   - homepage HTML payload about `11.9 KB`
-  - typical homepage response about `80-116 ms`
-  - major weight contributor identified as `assets/images/website-photo.png` at `2,090,301 bytes`
-- Optimized asset result:
-  - new `assets/images/website-photo.jpg` is `401,406 bytes`
-  - payload reduction is about `80.8%` for the homepage portrait asset
+  - prior optimized JPEG was `401,406 bytes`
+  - `prod` CI for commit `2d754b90dd26b22b879c7a1cef3809dae8a5ee3f` failed on `lighthouse-validation`, so more headroom was required
+- Second-pass optimized asset result:
+  - current `assets/images/website-photo.jpg` is `90,431 bytes`
+  - reduction from the original PNG (`2,090,301 bytes`) is about `95.7%`
+  - reduction from the first JPEG pass (`401,406 bytes`) is about `77.5%`
 - Local regression validation:
-  - `node QA/tests/test-home-hero-layout.js` -> PASS
   - `node QA/tests/test-home-hero-image-optimization.js` -> PASS
-  - `npm run test:node` -> PASS
+  - local Lighthouse rerun -> PASS with performance median `92` and accessibility median `95`
 
 ## Operator Notes
 - The expected user-visible result is the same portrait composition with a materially smaller transfer size.
-- Because this is a lossy conversion, visual sign-off on staging is still required before promotion to `prod`.
-- If the preview shows noticeable quality loss, revert by comparing against commit history before promotion.
+- Because this is still a lossy JPEG optimization, visual sign-off on staging is required before promotion to `prod`.
+- If the preview shows noticeable quality loss, compare against commit history before promotion.
 
 ## Fresh Machine Prerequisites (Operator Quick List)
 1. Install `git`

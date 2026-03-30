@@ -24,6 +24,11 @@ const failures = [];
 
 if (!fs.existsSync(optimizedImagePath)) {
   failures.push('Optimized homepage photo is missing at assets/images/website-photo.jpg.');
+} else {
+  const optimizedSize = fs.statSync(optimizedImagePath).size;
+  if (optimizedSize > 120 * 1024) {
+    failures.push('Homepage hero image must stay at or below 120 KB to preserve Lighthouse headroom.');
+  }
 }
 
 if (fs.existsSync(legacyImagePath)) {
@@ -44,8 +49,8 @@ if (!heroImageMatch) {
     failures.push('Homepage hero image must not reference the legacy PNG asset.');
   }
 
-  if (!/width="1022"/i.test(imageMarkup) || !/height="1360"/i.test(imageMarkup)) {
-    failures.push('Homepage hero image must keep explicit width and height attributes.');
+  if (!/width="541"/i.test(imageMarkup) || !/height="720"/i.test(imageMarkup)) {
+    failures.push('Homepage hero image must keep explicit width and height attributes that match the optimized source asset.');
   }
 
   if (!/decoding="async"/i.test(imageMarkup)) {
@@ -55,6 +60,18 @@ if (!heroImageMatch) {
   if (!/fetchpriority="high"/i.test(imageMarkup)) {
     failures.push('Homepage hero image must keep fetchpriority="high" for above-the-fold loading.');
   }
+}
+
+if (!/<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/i.test(html)) {
+  failures.push('Homepage must preconnect to fonts.googleapis.com to reduce font startup latency.');
+}
+
+if (!/<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/i.test(html)) {
+  failures.push('Homepage must preconnect to fonts.gstatic.com with crossorigin.');
+}
+
+if (!/<link rel="preload" as="image" href="assets\/images\/website-photo\.jpg" fetchpriority="high">/i.test(html)) {
+  failures.push('Homepage must preload the hero image for more stable LCP behavior.');
 }
 
 if (failures.length > 0) {
