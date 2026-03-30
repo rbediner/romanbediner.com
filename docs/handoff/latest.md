@@ -3,7 +3,7 @@
 - Handoff Sequence: 142
 - Updated At (UTC): 2026-03-30T17:01:48Z
 - Source Branch: staging
-- Feature Commit: 9a85e3a5bdc34cd4794f418d57aa257eac015a6e
+- Source Commit: 9a85e3a5bdc34cd4794f418d57aa257eac015a6e
 
 ## Current State
 - This session optimized the homepage portrait payload before the next staging preview review.
