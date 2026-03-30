@@ -124,7 +124,15 @@
       </div>
 
       <div class="master-photo">
-        <img src="assets/images/website-photo.png" alt="Roman Bediner" />
+        <!-- Keep explicit dimensions so the hero reserves space before the image finishes decoding. -->
+        <img
+          src="assets/images/website-photo.jpg"
+          alt="Roman Bediner"
+          width="1022"
+          height="1360"
+          decoding="async"
+          fetchpriority="high"
+        />
       </div>
 
       <div class="master-blurb">

@@ -617,6 +617,12 @@ flowchart LR
    - Mobile quote colors are fixed to `#6f6f6f` for `.footer-quote` and `#7a7a7a` for `.footer-quote-author`.
    - No layout, spacing, alignment, or typography changes are allowed when adjusting this contract.
 
+19. **Homepage hero media performance contract**
+   - The homepage portrait in `index.html` must use `/assets/images/website-photo.jpg` instead of the legacy PNG to keep the above-the-fold payload lean.
+   - The hero image must retain explicit intrinsic dimensions (`width="1022"`, `height="1360"`) so the master layout reserves media space before decode completes.
+   - The homepage hero image must keep `decoding="async"` and `fetchpriority="high"` because it is visible immediately on page load.
+   - Reintroducing `assets/images/website-photo.png` as a tracked homepage asset is prohibited; `QA/tests/test-home-hero-image-optimization.js` enforces the contract.
+
 ## Machine-Readable Architecture Summary
 ```json
 {
