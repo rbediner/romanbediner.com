@@ -11,7 +11,8 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..', '..');
 const {
   isDocsOnlyChangeSet,
-  DOCS_ONLY_PATTERNS
+  DOCS_ONLY_PATTERNS,
+  isProdPromotionCandidate
 } = require(path.join(ROOT, 'scripts', 'qa', 'run-prepush-gate.js'));
 
 describe('pre-push gate docs-only policy', () => {
@@ -33,5 +34,25 @@ describe('pre-push gate docs-only policy', () => {
     const serialized = DOCS_ONLY_PATTERNS.map((pattern) => pattern.toString()).join('\n');
     expect(serialized).toContain('README');
     expect(serialized).toContain('docs');
+  });
+
+  test('detects exact staging sha promotions on prod', () => {
+    expect(
+      isProdPromotionCandidate({
+        currentBranch: 'prod',
+        headSha: 'abc123',
+        stagingSha: 'abc123'
+      })
+    ).toBe(true);
+  });
+
+  test('rejects prod promotions when staging sha differs', () => {
+    expect(
+      isProdPromotionCandidate({
+        currentBranch: 'prod',
+        headSha: 'abc123',
+        stagingSha: 'def456'
+      })
+    ).toBe(false);
   });
 });

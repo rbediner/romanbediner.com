@@ -12,6 +12,7 @@
  * - Keep GitHub API endpoint shapes in sync if this repository migrates to GitHub Enterprise or workflow naming changes.
  */
 const https = require('https');
+const { execFileSync } = require('child_process');
 const RETRIABLE_NETWORK_ERRORS = new Set(['ENOTFOUND', 'EAI_AGAIN', 'ECONNRESET', 'ETIMEDOUT']);
 
 function parseArgs(argv) {
@@ -53,7 +54,7 @@ function isRetriableApiError(error) {
 }
 
 function requestJson(path) {
-  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  const token = getGitHubToken();
   const headers = {
     'User-Agent': 'romanbediner-ci-monitor',
     Accept: 'application/vnd.github+json'
@@ -96,6 +97,37 @@ function requestJson(path) {
     req.on('error', reject);
     req.end();
   });
+}
+
+function getGitHubToken() {
+  const explicitToken = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  if (explicitToken) {
+    return explicitToken;
+  }
+
+  try {
+    const credentialBlob = execFileSync(
+      'git',
+      ['credential', 'fill'],
+      {
+        encoding: 'utf8',
+        input: 'protocol=https\nhost=github.com\n\n',
+        stdio: ['pipe', 'pipe', 'ignore']
+      }
+    );
+
+    const passwordLine = credentialBlob
+      .split('\n')
+      .find((line) => line.startsWith('password='));
+
+    if (!passwordLine) {
+      return '';
+    }
+
+    return passwordLine.slice('password='.length).trim();
+  } catch (_error) {
+    return '';
+  }
 }
 
 async function requestJsonWithRetry(path, options = {}) {

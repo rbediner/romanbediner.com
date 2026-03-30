@@ -868,6 +868,7 @@ One-time manual setup (GitHub UI, do not automate in-repo):
    - `PREVIEW_REPO_BRANCH` variable is no longer used (branch is hard-locked to `staging-preview`)
 5. Scope token to preview repo only with minimum permissions (`contents: write`).
 6. Optionally protect the configured preview branch if team policy requires it.
+7. Main-repo release monitors now reuse your existing `git push` GitHub credential automatically when `GH_TOKEN` / `GITHUB_TOKEN` is not exported, which avoids unauthenticated API rate-limit failures during release checks on a fresh shell.
 
 Token rotation procedure:
 1. Create a new fine-grained token with preview-repo-only access.
@@ -899,7 +900,15 @@ Operator shortcut prompt for new Codex sessions:
 - `session:start — read README + docs/handoff/latest, run session readiness, then run/verify staging deploy and give me the Staging Preview Ready URL.`
 
 ### Local Push Guard
-- `.husky/pre-push` runs `npm run qa:ci-parity` automatically before any push.
+- `.husky/pre-push` runs `npm run qa:prepush-gate` automatically before any push.
+- Smart gate profiles:
+  - docs-only pushes run `npm run docs:verify`, `npm run test:node`, and `npm run test:jest`
+  - exact `staging -> prod` promotions run `npm run qa:prod-promotion-gate`, which verifies `prod` HEAD matches `origin/staging` and confirms staging CI is already green for that SHA
+  - all other code/runtime pushes still run `npm run qa:ci-parity`
+- Release/CI monitors authenticate in this order:
+  - `GITHUB_TOKEN`
+  - `GH_TOKEN`
+  - existing `git` credential helper entry for `github.com`
 - `npm` prepare runs `node scripts/release/install-local-husky-hooks.js`, which installs Husky hooks only in local Git worktrees and skips cleanly in CI.
 - Emergency bypass (use only when explicitly approved): `SKIP_PREPUSH_QA=1 git push ...`
 - Any bypass must be followed by a full local `npm run qa:ci-parity` and staging CI verification.

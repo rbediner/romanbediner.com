@@ -1,62 +1,51 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 144
-- Updated At (UTC): 2026-03-30T22:20:00Z
-- Source Branch: prod
-- Source Commit: 35236e9140c8e35e87112fc8906232f296ad7e58
+- Handoff Sequence: 145
+- Updated At (UTC): 2026-03-30T23:10:00Z
+- Source Branch: staging
+- Source Commit: d3d3972323e3f1b6d0abef07c46ef5ec41cbef49
 
 ## Current State
-- The refined homepage hero optimization has been released successfully.
 - `staging` and `prod` are aligned on the same shipped commit:
-  - `35236e9140c8e35e87112fc8906232f296ad7e58`
+  - `d3d3972323e3f1b6d0abef07c46ef5ec41cbef49`
+- The current work in progress is release-flow optimization only:
+  - reduce duplicate full local CI-parity runs when promoting the exact already-tested staging SHA to `prod`
 - The isolated staging preview remains available for future visual review at:
   - `https://rbediner.github.io/romanbediner-preview/`
-- Production is live and serving the optimized homepage asset from:
-  - `https://romanbediner.com/`
 
 ## What Changed In This Session
-1. Promoted the approved staging optimization commit to `prod`:
-   - commit `35236e9140c8e35e87112fc8906232f296ad7e58`
-   - commit message: `Refine homepage hero payload for Lighthouse headroom`
-2. Shipped the second-pass homepage hero optimization:
-   - homepage portrait remains at `assets/images/website-photo.jpg`
-   - image dimensions are `541 x 720`
-   - asset transfer size is `90,431 bytes`
-3. Preserved the supporting performance markup in `index.html`:
-   - font preconnect hints remain enabled
-   - hero image preload remains enabled
-4. Cleaned local machine artifacts after release verification:
-   - removed stray `.DS_Store` files from the repo working tree
+1. Added a dedicated prod-promotion verifier:
+   - `scripts/qa/verify-prod-promotion-candidate.js`
+   - confirms `prod` HEAD matches `origin/staging`
+   - confirms the push is still a fast-forward from `origin/prod`
+   - confirms staging `CI` is already green for that SHA before allowing the fast prod path
+2. Expanded the smart pre-push gate:
+   - docs-only changes still use the lightweight docs gate
+   - exact `staging -> prod` promotions now use the new prod-promotion verifier
+   - all other code/runtime pushes still use full `qa:ci-parity`
+3. Added release-guardrail coverage:
+   - Jest tests for prod promotion candidate logic
+   - automation contract tests for the new gate script and package script wiring
+4. Updated operator documentation:
+   - `README.md`
+   - this handoff file
+5. Hardened GitHub Actions monitoring auth:
+   - `scripts/release/watch-ci-run.js` now reuses the existing `git` credential helper token for `github.com` when shell env tokens are missing
+   - this prevents unauthenticated GitHub API rate-limit failures during local release verification on fresh shells
 
 ## Validation Performed
-- Local branch state after release:
-  - `git status -sb` -> clean
-  - local `HEAD`, `origin/staging`, and `origin/prod` all resolve to `35236e9140c8e35e87112fc8906232f296ad7e58`
-- Live production HTML verification:
-  - `https://romanbediner.com/` now references `assets/images/website-photo.jpg`
-  - live markup confirms `width="541"` and `height="720"`
-  - live markup confirms font preconnect + hero preload hints are present
-- GitHub Actions verification:
-  - `CI` run for the release commit completed successfully
-  - `Deploy Pages` run for the release commit completed successfully
-- Asset performance outcome:
-  - original PNG: `2,090,301 bytes`
-  - first JPEG pass: `401,406 bytes`
-  - shipped second-pass JPEG: `90,431 bytes`
-  - total reduction versus original PNG: about `95.7%`
+- Pending in this session after code edits:
+  - `npm run test:jest`
+  - `npm run test:node`
+  - release-flow sanity check from `staging`
 
 ## Operator Notes
-- The shipped homepage should look visually unchanged in normal use while loading materially faster.
-- The isolated preview repo remains part of the current deployment workflow and should not be removed casually; it is now an active dependency of staging preview publication.
-- The preview repo must keep:
-  - default branch: `staging-preview`
-  - Pages source: `staging-preview` + `/ (root)`
-- Main repo Actions settings must keep:
-  - repository secret: `PREVIEW_REPO_TOKEN`
-  - repository variable: `PREVIEW_REPO=rbediner/romanbediner-preview`
-  - repository variable: `PREVIEW_REPO_BRANCH=staging-preview`
+- Expected outcome after this change:
+  - heavy local CI-parity runs still happen on `staging`
+  - the matching `prod` promotion of that same SHA becomes much faster
+- This is a release-flow / developer-experience improvement, not a product feature change.
 - PRD note:
-  - the live PRD was not updated in this session because this was a performance-only media optimization and deployment completion pass, not a feature or behavior change
+  - no PRD update is needed unless this session expands into user-facing behavior changes
 
 ## Fresh Machine Prerequisites (Operator Quick List)
 1. Install `git`

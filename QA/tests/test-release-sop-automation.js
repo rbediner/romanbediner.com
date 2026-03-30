@@ -24,6 +24,7 @@ function assert(condition, message) {
 const requiredScripts = {
   'session:ready': 'node scripts/qa/verify-session-readiness.js',
   'qa:prepush-gate': 'node scripts/qa/run-prepush-gate.js',
+  'qa:prod-promotion-gate': 'node scripts/qa/verify-prod-promotion-candidate.js',
   'qa:ci-parity': 'bash scripts/qa/run-ci-parity.sh',
   'ci:monitor': 'node scripts/release/watch-ci-run.js',
   'release:verify-prod': 'node scripts/release/verify-prod-release.js',
@@ -66,6 +67,8 @@ assert(monitorText.includes('/actions/runs?branch='), 'monitor script must poll 
 assert(monitorText.includes('/check-runs/'), 'monitor script must attempt failed-job annotation lookup');
 assert(monitorText.includes('requestJsonWithRetry('), 'monitor script must use retry wrapper for transient API failures');
 assert(monitorText.includes('RETRIABLE_NETWORK_ERRORS'), 'monitor script must define retriable network error codes');
+assert(monitorText.includes("['credential', 'fill']"), 'monitor script must reuse git credential auth when GH_TOKEN is absent');
+assert(monitorText.includes('password='), 'monitor script must parse git credential tokens for authenticated API access');
 assert(monitorText.includes('--api-retries'), 'monitor script usage must document api retry tuning');
 assert(monitorText.includes('--workflow "Workflow Name"'), 'monitor script usage must document workflow-name filter');
 assert(monitorText.includes('--require-run-within 900'), 'monitor script usage must document fail-fast run discovery timeout');
@@ -92,9 +95,18 @@ assert(fs.existsSync(prepushGatePath), 'scripts/qa/run-prepush-gate.js must exis
 const prepushGateText = fs.readFileSync(prepushGatePath, 'utf8');
 assert(prepushGateText.includes('DOCS_ONLY_PATTERNS'), 'pre-push gate must define docs-only path policy');
 assert(prepushGateText.includes('npm run qa:ci-parity'), 'pre-push gate must preserve full CI parity for non-doc changes');
+assert(prepushGateText.includes('verify-prod-promotion-candidate.js'), 'pre-push gate must use the prod promotion verifier for already-tested staging SHAs');
 assert(prepushGateText.includes('npm run docs:verify'), 'pre-push gate must run docs verify for docs-only changes');
 assert(prepushGateText.includes('npm run test:node'), 'pre-push gate must run node policy tests for docs-only changes');
 assert(prepushGateText.includes('npm run test:jest'), 'pre-push gate must run jest policy tests for docs-only changes');
+
+const prodPromotionGatePath = path.join(ROOT, 'scripts', 'qa', 'verify-prod-promotion-candidate.js');
+assert(fs.existsSync(prodPromotionGatePath), 'scripts/qa/verify-prod-promotion-candidate.js must exist');
+const prodPromotionGateText = fs.readFileSync(prodPromotionGatePath, 'utf8');
+assert(prodPromotionGateText.includes("const STAGING_BRANCH = 'staging'"), 'prod promotion gate must pin staging branch');
+assert(prodPromotionGateText.includes("const PROD_BRANCH = 'prod'"), 'prod promotion gate must pin prod branch');
+assert(prodPromotionGateText.includes("const STAGING_CI_WORKFLOW_NAME = 'CI'"), 'prod promotion gate must validate the staging CI workflow');
+assert(prodPromotionGateText.includes('watch-ci-run.js'), 'prod promotion gate must monitor existing staging CI status before prod push');
 
 const prepareHuskyPath = path.join(ROOT, 'scripts', 'release', 'install-local-husky-hooks.js');
 assert(fs.existsSync(prepareHuskyPath), 'scripts/release/install-local-husky-hooks.js must exist');

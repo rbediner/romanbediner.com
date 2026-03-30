@@ -10,6 +10,7 @@
     "docs:verify": "node scripts/docs/generate-environment-diagram.js --check",
     "session:ready": "node scripts/qa/verify-session-readiness.js",
     "qa:prepush-gate": "node scripts/qa/run-prepush-gate.js",
+    "qa:prod-promotion-gate": "node scripts/qa/verify-prod-promotion-candidate.js",
     "verify:repo-contract": "node scripts/qa/verify-repo-contract.js",
     "verify:workflow-integrity": "node scripts/qa/verify-workflow-integrity.js",
     "qa:ci-parity": "bash scripts/qa/run-ci-parity.sh",

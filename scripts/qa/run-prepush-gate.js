@@ -23,6 +23,8 @@ const DOCS_ONLY_PATTERNS = [
   /^docs\//,
   /^AGENTS\.md$/
 ];
+const PROD_BRANCH = 'prod';
+const STAGING_BRANCH = 'staging';
 
 function run(command) {
   execSync(command, {
@@ -76,6 +78,28 @@ function getChangedFiles() {
   }
 }
 
+function getCurrentBranch() {
+  try {
+    return execSync('git branch --show-current', {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    }).trim();
+  } catch (_error) {
+    return '';
+  }
+}
+
+function getRefSha(refName) {
+  try {
+    return execSync(`git rev-parse ${refName}`, {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    }).trim();
+  } catch (_error) {
+    return '';
+  }
+}
+
 function isDocsOnlyChangeSet(changedFiles) {
   if (!Array.isArray(changedFiles) || changedFiles.length === 0) {
     return false;
@@ -98,12 +122,33 @@ function runFullGate() {
   run('npm run qa:ci-parity');
 }
 
+function isProdPromotionCandidate({ currentBranch, headSha, stagingSha }) {
+  return currentBranch === PROD_BRANCH && Boolean(headSha) && headSha === stagingSha;
+}
+
+function runProdPromotionGate() {
+  process.stdout.write(
+    '[husky pre-push] Prod promotion candidate detected. Reusing the already-tested staging SHA and validating remote staging CI.\n'
+  );
+  run('node scripts/qa/verify-prod-promotion-candidate.js');
+}
+
 function main() {
   const changedFiles = getChangedFiles();
+  const currentBranch = getCurrentBranch();
+  const headSha = getRefSha('HEAD');
+  const stagingSha = getRefSha(`origin/${STAGING_BRANCH}`);
+
   if (isDocsOnlyChangeSet(changedFiles)) {
     runDocsOnlyGate();
     return;
   }
+
+  if (isProdPromotionCandidate({ currentBranch, headSha, stagingSha })) {
+    runProdPromotionGate();
+    return;
+  }
+
   runFullGate();
 }
 
@@ -113,7 +158,12 @@ if (require.main === module) {
 
 module.exports = {
   DOCS_ONLY_PATTERNS,
+  PROD_BRANCH,
+  STAGING_BRANCH,
   getChangedFiles,
+  getCurrentBranch,
   getUpstreamRef,
-  isDocsOnlyChangeSet
+  getRefSha,
+  isDocsOnlyChangeSet,
+  isProdPromotionCandidate
 };
