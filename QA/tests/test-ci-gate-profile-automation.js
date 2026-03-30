@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - CI must auto-select fast vs full gate profile by branch/event.
+ * - CI must auto-select one of the documented selective QA gate profiles.
  * Why this exists:
- * - Prevents accidental return to always-full validation that slows staging previews.
+ * - Prevents accidental return to blunt fast/full logic that wastes release time.
  * What breaks if it fails:
- * - CI blocks until gate-profile automation and prod full-gate wiring are restored.
+ * - CI blocks until selective gate automation and job wiring are restored.
  */
 const fs = require('fs');
 const path = require('path');
@@ -25,17 +25,33 @@ const ciText = fs.readFileSync(CI_WORKFLOW, 'utf8');
 const deployPagesText = fs.readFileSync(DEPLOY_PAGES_WORKFLOW, 'utf8');
 
 assert(ciText.includes('gate-profile:'), 'ci.yml must define gate-profile job');
+assert(ciText.includes('resolve-gate-profile.js'), 'ci.yml must resolve profile through the shared gate classifier');
+assert(ciText.includes('--format github-output'), 'ci.yml gate-profile job must emit structured outputs');
+assert(ciText.includes('run_unit_tests'), 'ci.yml gate-profile job must expose unit-test gating output');
+assert(ciText.includes('run_regression_tests'), 'ci.yml gate-profile job must expose regression-test gating output');
+assert(ciText.includes('run_link_validation'), 'ci.yml gate-profile job must expose link-validation gating output');
+assert(ciText.includes('run_browser_tests'), 'ci.yml gate-profile job must expose browser-test gating output');
+assert(ciText.includes('run_qa_tests'), 'ci.yml gate-profile job must expose python QA gating output');
+assert(ciText.includes('run_lighthouse_validation'), 'ci.yml gate-profile job must expose Lighthouse gating output');
+assert(ciText.includes('run_build_artifact'), 'ci.yml gate-profile job must expose artifact gating output');
+assert(ciText.includes('## CI Gate Profile'), 'ci.yml gate-profile job must publish a readable job summary');
+
+const selectiveJobGuards = [
+  "if: needs.gate-profile.outputs.run_unit_tests == 'true'",
+  "if: needs.gate-profile.outputs.run_regression_tests == 'true'",
+  "if: needs.gate-profile.outputs.run_link_validation == 'true'",
+  "if: needs.gate-profile.outputs.run_browser_tests == 'true'",
+  "if: needs.gate-profile.outputs.run_qa_tests == 'true'",
+  "if: needs.gate-profile.outputs.run_lighthouse_validation == 'true'"
+];
+
+for (const guard of selectiveJobGuards) {
+  assert(ciText.includes(guard), `ci.yml must include selective guard ${guard}`);
+}
+
 assert(
-  ciText.includes('CI gate profile: ${PROFILE}'),
-  'ci.yml gate-profile job must print selected profile'
-);
-assert(
-  ciText.includes('if [ "${GITHUB_REF}" = "refs/heads/prod" ]'),
-  'ci.yml must force full gate on prod branch'
-);
-assert(
-  ciText.includes('if: needs.gate-profile.outputs.full_gate == \'true\''),
-  'ci.yml must guard full-gate jobs with gate-profile output'
+  ciText.includes("needs.gate-profile.outputs.run_build_artifact == 'true'"),
+  'ci.yml must guard artifact build with selective gate output'
 );
 
 assert(

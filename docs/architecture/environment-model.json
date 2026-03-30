@@ -54,12 +54,20 @@
       "playwright_required": true,
       "readme_update_required_on_arch_change": true,
       "gate_profiles": {
-        "staging": "fast",
-        "prod": "full"
+        "available": [
+          "docs-only",
+          "localized-page",
+          "shared-ui",
+          "release-infra",
+          "full-regression"
+        ],
+        "selection_model": "changed-file classifier with full-regression fallback",
+        "prod_promotion": "exact tested staging sha uses qa:prod-promotion-gate",
+        "production_smoke": "qa:smoke:prod"
       },
       "full_gate_schedule": {
         "nightly_enabled": false,
-        "reason": "Operator-selected: full gate runs on prod promotion, not nightly."
+        "reason": "Operator-selected: full gate runs only when the classifier deems a change broad or risky enough."
       }
     },
     "deployment": {

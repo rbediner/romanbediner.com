@@ -40,21 +40,64 @@ jobs:
     needs: session-ready
     outputs:
       profile: ${{ steps.profile.outputs.profile }}
-      full_gate: ${{ steps.profile.outputs.full_gate }}
+      reason: ${{ steps.profile.outputs.reason }}
+      route_scopes: ${{ steps.profile.outputs.route_scopes }}
+      run_unit_tests: ${{ steps.profile.outputs.run_unit_tests }}
+      run_regression_tests: ${{ steps.profile.outputs.run_regression_tests }}
+      run_link_validation: ${{ steps.profile.outputs.run_link_validation }}
+      run_browser_tests: ${{ steps.profile.outputs.run_browser_tests }}
+      run_qa_tests: ${{ steps.profile.outputs.run_qa_tests }}
+      run_lighthouse_validation: ${{ steps.profile.outputs.run_lighthouse_validation }}
+      run_build_artifact: ${{ steps.profile.outputs.run_build_artifact }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
       - name: Resolve CI gate profile
         id: profile
         run: |
-          # Staging is optimized for fast feedback. Prod enforces full gate.
-          PROFILE="fast"
-          FULL_GATE="false"
-          if [ "${GITHUB_REF}" = "refs/heads/prod" ] || [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
-            PROFILE="full"
-            FULL_GATE="true"
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            node scripts/qa/resolve-gate-profile.js --format github-output >> "$GITHUB_OUTPUT"
+          elif [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            node scripts/qa/resolve-gate-profile.js \
+              --base-sha "${{ github.event.pull_request.base.sha }}" \
+              --head-sha "${{ github.event.pull_request.head.sha }}" \
+              --format github-output >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            node scripts/qa/resolve-gate-profile.js \
+              --base-sha "${{ github.event.before }}" \
+              --head-sha "${{ github.sha }}" \
+              --format github-output >> "$GITHUB_OUTPUT"
+          else
+            node scripts/qa/resolve-gate-profile.js --format github-output >> "$GITHUB_OUTPUT"
           fi
-          echo "profile=${PROFILE}" >> "$GITHUB_OUTPUT"
-          echo "full_gate=${FULL_GATE}" >> "$GITHUB_OUTPUT"
-          echo "CI gate profile: ${PROFILE}"
+
+      - name: Publish gate profile summary
+        run: |
+          {
+            echo "## CI Gate Profile"
+            echo ""
+            echo "- Profile: ${{ steps.profile.outputs.profile }}"
+            echo "- Reason: ${{ steps.profile.outputs.reason }}"
+            echo "- Route scopes: ${{ steps.profile.outputs.route_scopes || 'none' }}"
+            echo "- Unit tests: ${{ steps.profile.outputs.run_unit_tests }}"
+            echo "- Regression tests: ${{ steps.profile.outputs.run_regression_tests }}"
+            echo "- Link validation: ${{ steps.profile.outputs.run_link_validation }}"
+            echo "- Browser tests: ${{ steps.profile.outputs.run_browser_tests }}"
+            echo "- QA tests: ${{ steps.profile.outputs.run_qa_tests }}"
+            echo "- Lighthouse: ${{ steps.profile.outputs.run_lighthouse_validation }}"
+            echo "- Build artifact: ${{ steps.profile.outputs.run_build_artifact }}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
   repo-contract:
     runs-on: ubuntu-latest
@@ -97,6 +140,7 @@ jobs:
         run: npm run verify:workflow-integrity
 
   unit-tests:
+    if: needs.gate-profile.outputs.run_unit_tests == 'true'
     runs-on: ubuntu-latest
     needs:
       - gate-profile
@@ -118,7 +162,7 @@ jobs:
         run: npm run test:node
 
   qa-tests:
-    if: needs.gate-profile.outputs.full_gate == 'true'
+    if: needs.gate-profile.outputs.run_qa_tests == 'true'
     runs-on: ubuntu-latest
     needs:
       - gate-profile
@@ -153,6 +197,7 @@ jobs:
         run: npm run test:python
 
   regression-tests:
+    if: needs.gate-profile.outputs.run_regression_tests == 'true'
     runs-on: ubuntu-latest
     needs:
       - gate-profile
@@ -174,7 +219,7 @@ jobs:
         run: npm run test:jest -- --maxWorkers=50%
 
   browser-tests:
-    if: needs.gate-profile.outputs.full_gate == 'true'
+    if: needs.gate-profile.outputs.run_browser_tests == 'true'
     runs-on: ubuntu-latest
     needs:
       - gate-profile
@@ -199,7 +244,7 @@ jobs:
         run: npm run test:playwright -- --workers=3
 
   lighthouse-validation:
-    if: needs.gate-profile.outputs.full_gate == 'true'
+    if: needs.gate-profile.outputs.run_lighthouse_validation == 'true'
     runs-on: ubuntu-latest
     needs:
       - gate-profile
@@ -244,6 +289,7 @@ jobs:
           fi
 
   link-validation:
+    if: needs.gate-profile.outputs.run_link_validation == 'true'
     runs-on: ubuntu-latest
     needs:
       - gate-profile
@@ -278,10 +324,22 @@ jobs:
           fi
 
   build-artifact:
-    if: needs.gate-profile.outputs.full_gate == 'true'
+    if: |
+      always() &&
+      needs.gate-profile.outputs.run_build_artifact == 'true' &&
+      needs.repo-contract.result == 'success' &&
+      needs.workflow-integrity.result == 'success' &&
+      (needs.unit-tests.result == 'success' || needs.unit-tests.result == 'skipped') &&
+      (needs.qa-tests.result == 'success' || needs.qa-tests.result == 'skipped') &&
+      (needs.regression-tests.result == 'success' || needs.regression-tests.result == 'skipped') &&
+      (needs.browser-tests.result == 'success' || needs.browser-tests.result == 'skipped') &&
+      (needs.lighthouse-validation.result == 'success' || needs.lighthouse-validation.result == 'skipped') &&
+      (needs.link-validation.result == 'success' || needs.link-validation.result == 'skipped')
     runs-on: ubuntu-latest
     needs:
       - gate-profile
+      - repo-contract
+      - workflow-integrity
       - unit-tests
       - qa-tests
       - regression-tests

@@ -46,15 +46,16 @@ Routing requirements:
 - Promotion rule:
   1. validate changes on `staging`
   2. promote the exact tested commit to `prod`
-  3. GitHub Actions runs full-gate CI on `prod`, then deploys Pages only if CI passes
+  3. GitHub Actions reruns the selective CI profile for that commit on `prod`, then deploys Pages only if CI passes
+  4. post-deploy production smoke confirms the live site is healthy
 - Keep `prod` fast-forward only from tested commits to preserve release traceability.
 
 ## Operator Release Workflow (Required)
 Use this exact sequence on every machine/session:
 1. Push changes to `staging`.
-2. Run full local regression (`npm test`) or CI-parity equivalent.
-3. Wait for `staging` fast-gate CI jobs to pass.
-4. Publish/share staging preview link only after fast gate passes.
+2. Let the selective pre-push gate choose the smallest responsible local validation profile.
+3. Wait for `staging` selective CI jobs to pass.
+4. Publish/share staging preview link only after the selected staging gate passes.
 5. Obtain visual approval from staging preview.
 6. Promote the exact approved commit from `staging` to `prod` (fast-forward only).
 7. Verify release completion for that exact prod SHA using:
@@ -324,10 +325,18 @@ nvm install
 - Dependency install in CI uses `npm ci`.
 - Playwright browser installation is required in CI.
 - Local pre-push CI-parity uses an isolated temp mirror per run (`mktemp`) to avoid cloud-sync path lock collisions.
-- CI auto-selects gate profile by branch/event:
-  - `staging` push -> `fast` profile
-  - `prod` push -> `full` profile
-  - `workflow_dispatch` -> `full` profile
+- CI now resolves the smallest responsible selective gate profile from the changed files:
+  - `docs-only`
+  - `localized-page`
+  - `shared-ui`
+  - `release-infra`
+  - `full-regression`
+- Gate intent:
+  - `docs-only`: documentation and handoff integrity only
+  - `localized-page`: one route scope changed, so validate that page without paying for whole-site browser coverage
+  - `shared-ui`: shared CSS/nav/runtime changes, so validate all critical pages plus browser/Lighthouse coverage
+  - `release-infra`: workflow/release/build automation changed, so validate contracts, release logic, and artifact integrity
+  - `full-regression`: broad or ambiguous changes, so run the whole stack
 - CI is split into explicit guardrails and parallel validation jobs:
   - `session-ready`
   - `gate-profile`
@@ -336,11 +345,20 @@ nvm install
   - `unit-tests`
   - `regression-tests`
   - `link-validation`
-- Full profile-only jobs:
+- Selective profile-only jobs:
   - `qa-tests`
   - `browser-tests`
   - `lighthouse-validation`
   - `build-artifact`
+- Production smoke is intentionally separate from selective staging validation:
+  - post-deploy production smoke runs through `npm run qa:smoke:prod`
+  - smoke covers homepage, sitemap, canonical routes, CSP, structured data, and GA bootstrap presence on the live site
+- Google Analytics coverage is explicit in the gate design:
+  - `localized-page`: static GA contract remains covered by `npm run test:node`
+  - `shared-ui`: GA contract + browser/runtime validation run together
+  - `release-infra`: GA contract is validated alongside release automation because build/deploy changes can accidentally strip analytics
+  - `full-regression`: all GA checks remain in scope
+  - `qa:smoke:prod`: verifies GA bootstrap is present on the live domain after deploy
 - Production deployment is separate from validation and runs only on `push` to `prod`.
 - `Deploy Pages` explicitly waits for matching prod `CI` success for the same SHA before artifact deploy, preventing branch-ambiguity when the same commit exists on multiple branches.
 - The prod CI-wait step passes `GITHUB_TOKEN` to the monitor script for authenticated GitHub API polling and reliable rate-limit behavior in Actions runners.
@@ -363,9 +381,19 @@ nvm install
   - when crawling production targets, canonical domain links remain validated
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
 - `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
-- Local pre-push hook runs `npm run qa:prepush-gate`:
-  - docs-only changes (`README.md`, `docs/**`, `AGENTS.md`) run a lightweight gate (`docs:verify`, `test:node`, `test:jest`)
-  - non-doc changes continue to run full CI-parity via `npm run qa:ci-parity`
+- Local pre-push hook runs `npm run qa:prepush-gate` and now chooses a selective gate automatically:
+  - docs-only changes (`README.md`, `docs/**`, `AGENTS.md`) run `npm run qa:gate:docs-only`
+  - one-route page/content/asset changes run `npm run qa:gate:localized-page`
+  - shared-shell/nav/runtime changes run `npm run qa:gate:shared-ui`
+  - workflow/release/build changes run `npm run qa:gate:release-infra`
+  - exact `staging -> prod` promotions run `npm run qa:prod-promotion-gate`
+  - broad or unmapped changes fall back to `npm run qa:gate:full-regression`
+- Selective local gate runs now emit measurable output to:
+  - `/QA/results/gate-metrics/latest-local-gate.json`
+- The measurable goal is simple:
+  - use `full-regression` only when the change truly spans multiple systems
+  - keep `staging` as the heavy proving ground
+  - keep `prod` promotion fast, then rely on `qa:smoke:prod` after deploy
 - Playwright spec tests are executed through `scripts/qa/run-local-playwright-suite.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/qa/run-local-playwright-suite.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.
@@ -689,12 +717,20 @@ flowchart LR
     "playwright_required": true,
     "readme_update_required_on_arch_change": true,
     "gate_profiles": {
-      "staging": "fast",
-      "prod": "full"
+      "available": [
+        "docs-only",
+        "localized-page",
+        "shared-ui",
+        "release-infra",
+        "full-regression"
+      ],
+      "selection_model": "changed-file classifier with full-regression fallback",
+      "prod_promotion": "exact tested staging sha uses qa:prod-promotion-gate",
+      "production_smoke": "qa:smoke:prod"
     },
     "full_gate_schedule": {
       "nightly_enabled": false,
-      "reason": "Operator-selected: full gate runs on prod promotion, not nightly."
+      "reason": "Operator-selected: full gate runs only when the classifier deems a change broad or risky enough."
     }
   },
   "deployment": {
@@ -820,10 +856,10 @@ node scripts/release/watch-ci-run.js --branch staging --sha "$(git rev-parse HEA
    - Monitor resilience: `watch-ci-run.js` retries transient GitHub API failures (DNS, timeout, reset, 5xx) before failing.
    - Monitor fail-fast: use `--require-run-within <seconds>` to stop when no matching run appears, instead of polling until the global timeout.
 4. Default assistant release behavior:
-   - after local required QA passes, push to `staging` automatically
-   - wait for `staging` fast-gate CI checks to complete successfully
-   - then return an explicit pass confirmation plus the staging preview URL for visual sign-off
-   - do not promote to `prod` until preview approval is given
+  - after local required QA passes, push to `staging` automatically
+  - wait for the selected `staging` gate checks to complete successfully
+  - then return an explicit pass confirmation plus the staging preview URL for visual sign-off
+  - do not promote to `prod` until preview approval is given
 5. Promote only the exact tested SHA to `prod` (fast-forward only):
 ```bash
 git checkout prod
@@ -833,7 +869,9 @@ git push origin prod
 node scripts/release/watch-ci-run.js --branch prod --sha "<tested-sha>"
 ```
    - `prod` CI runs full gate automatically.
+   - `prod` local push uses `qa:prod-promotion-gate` when the SHA already matches the tested staging commit.
    - `Deploy Pages` starts only after successful `prod` CI completion.
+   - production smoke then runs through `npm run qa:smoke:prod`.
 6. Use the one-command release automation when possible:
 ```bash
 npm run release:staging-prod
@@ -902,9 +940,21 @@ Operator shortcut prompt for new Codex sessions:
 ### Local Push Guard
 - `.husky/pre-push` runs `npm run qa:prepush-gate` automatically before any push.
 - Smart gate profiles:
-  - docs-only pushes run `npm run docs:verify`, `npm run test:node`, and `npm run test:jest`
+  - docs-only pushes run `npm run qa:gate:docs-only`
+  - single-route page/content/asset changes run `npm run qa:gate:localized-page`
+  - shared UI/runtime changes run `npm run qa:gate:shared-ui`
+  - workflow/build/release changes run `npm run qa:gate:release-infra`
   - exact `staging -> prod` promotions run `npm run qa:prod-promotion-gate`, which verifies `prod` HEAD matches `origin/staging` and confirms staging CI is already green for that SHA
-  - all other code/runtime pushes still run `npm run qa:ci-parity`
+  - broad or ambiguous changes fall back to `npm run qa:gate:full-regression`
+- Manual gate commands:
+  - `npm run qa:gate:resolve`
+  - `npm run qa:gate:docs-only`
+  - `npm run qa:gate:localized-page`
+  - `npm run qa:gate:shared-ui`
+  - `npm run qa:gate:release-infra`
+  - `npm run qa:gate:full-regression`
+  - `npm run qa:smoke:prod`
+  - `npm run qa:smoke:preview`
 - Release/CI monitors authenticate in this order:
   - `GITHUB_TOKEN`
   - `GH_TOKEN`

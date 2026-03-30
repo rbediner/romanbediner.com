@@ -17,12 +17,11 @@
  * - Keep docs-only allowlist aligned with README drift policy.
  */
 const { execSync } = require('child_process');
-
-const DOCS_ONLY_PATTERNS = [
-  /^README\.md$/,
-  /^docs\//,
-  /^AGENTS\.md$/
-];
+const {
+  DOCS_ONLY_PATTERNS,
+  classifyChangedFiles,
+  isDocsOnlyChangeSet
+} = require('./resolve-gate-profile');
 const PROD_BRANCH = 'prod';
 const STAGING_BRANCH = 'staging';
 
@@ -100,28 +99,6 @@ function getRefSha(refName) {
   }
 }
 
-function isDocsOnlyChangeSet(changedFiles) {
-  if (!Array.isArray(changedFiles) || changedFiles.length === 0) {
-    return false;
-  }
-
-  return changedFiles.every((filePath) =>
-    DOCS_ONLY_PATTERNS.some((pattern) => pattern.test(filePath))
-  );
-}
-
-function runDocsOnlyGate() {
-  process.stdout.write('[husky pre-push] Docs-only change detected. Running lightweight integrity gate.\n');
-  run('npm run docs:verify');
-  run('npm run test:node');
-  run('npm run test:jest');
-}
-
-function runFullGate() {
-  process.stdout.write('[husky pre-push] Code/runtime change detected. Running full CI-parity gate.\n');
-  run('npm run qa:ci-parity');
-}
-
 function isProdPromotionCandidate({ currentBranch, headSha, stagingSha }) {
   return currentBranch === PROD_BRANCH && Boolean(headSha) && headSha === stagingSha;
 }
@@ -139,17 +116,22 @@ function main() {
   const headSha = getRefSha('HEAD');
   const stagingSha = getRefSha(`origin/${STAGING_BRANCH}`);
 
-  if (isDocsOnlyChangeSet(changedFiles)) {
-    runDocsOnlyGate();
-    return;
-  }
-
   if (isProdPromotionCandidate({ currentBranch, headSha, stagingSha })) {
     runProdPromotionGate();
     return;
   }
 
-  runFullGate();
+  const profileResult = classifyChangedFiles(changedFiles);
+  if (isDocsOnlyChangeSet(changedFiles)) {
+    process.stdout.write(
+      '[husky pre-push] Docs-only change detected. Running lightweight integrity gate.\n'
+    );
+  } else {
+    process.stdout.write(
+      `[husky pre-push] ${profileResult.profile} change detected. ${profileResult.reason}\n`
+    );
+  }
+  run(`node scripts/qa/run-selective-gate.js --profile ${profileResult.profile} --changed-files "${changedFiles.join(',')}" --reason "${profileResult.reason.replace(/"/g, '\\"')}"`);
 }
 
 if (require.main === module) {

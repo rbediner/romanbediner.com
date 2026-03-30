@@ -23,8 +23,17 @@ function assert(condition, message) {
 
 const requiredScripts = {
   'session:ready': 'node scripts/qa/verify-session-readiness.js',
+  'qa:gate:resolve': 'node scripts/qa/resolve-gate-profile.js',
+  'qa:gate:run': 'node scripts/qa/run-selective-gate.js',
+  'qa:gate:docs-only': 'node scripts/qa/run-selective-gate.js --profile docs-only',
+  'qa:gate:localized-page': 'node scripts/qa/run-selective-gate.js --profile localized-page',
+  'qa:gate:shared-ui': 'node scripts/qa/run-selective-gate.js --profile shared-ui',
+  'qa:gate:release-infra': 'node scripts/qa/run-selective-gate.js --profile release-infra',
+  'qa:gate:full-regression': 'node scripts/qa/run-selective-gate.js --profile full-regression',
   'qa:prepush-gate': 'node scripts/qa/run-prepush-gate.js',
   'qa:prod-promotion-gate': 'node scripts/qa/verify-prod-promotion-candidate.js',
+  'qa:smoke:prod': 'node scripts/qa/verify-live-production.js',
+  'qa:smoke:preview': 'node scripts/qa/verify-live-preview.js',
   'qa:ci-parity': 'bash scripts/qa/run-ci-parity.sh',
   'ci:monitor': 'node scripts/release/watch-ci-run.js',
   'release:verify-prod': 'node scripts/release/verify-prod-release.js',
@@ -94,11 +103,28 @@ const prepushGatePath = path.join(ROOT, 'scripts', 'qa', 'run-prepush-gate.js');
 assert(fs.existsSync(prepushGatePath), 'scripts/qa/run-prepush-gate.js must exist');
 const prepushGateText = fs.readFileSync(prepushGatePath, 'utf8');
 assert(prepushGateText.includes('DOCS_ONLY_PATTERNS'), 'pre-push gate must define docs-only path policy');
-assert(prepushGateText.includes('npm run qa:ci-parity'), 'pre-push gate must preserve full CI parity for non-doc changes');
+assert(prepushGateText.includes('classifyChangedFiles(changedFiles)'), 'pre-push gate must classify changed files through the shared resolver');
+assert(prepushGateText.includes('run-selective-gate.js --profile'), 'pre-push gate must call the selective gate runner');
 assert(prepushGateText.includes('verify-prod-promotion-candidate.js'), 'pre-push gate must use the prod promotion verifier for already-tested staging SHAs');
-assert(prepushGateText.includes('npm run docs:verify'), 'pre-push gate must run docs verify for docs-only changes');
-assert(prepushGateText.includes('npm run test:node'), 'pre-push gate must run node policy tests for docs-only changes');
-assert(prepushGateText.includes('npm run test:jest'), 'pre-push gate must run jest policy tests for docs-only changes');
+
+const gateResolverPath = path.join(ROOT, 'scripts', 'qa', 'resolve-gate-profile.js');
+assert(fs.existsSync(gateResolverPath), 'scripts/qa/resolve-gate-profile.js must exist');
+const gateResolverText = fs.readFileSync(gateResolverPath, 'utf8');
+assert(gateResolverText.includes("'docs-only'"), 'gate resolver must define docs-only profile');
+assert(gateResolverText.includes("'localized-page'"), 'gate resolver must define localized-page profile');
+assert(gateResolverText.includes("'shared-ui'"), 'gate resolver must define shared-ui profile');
+assert(gateResolverText.includes("'release-infra'"), 'gate resolver must define release-infra profile');
+assert(gateResolverText.includes("'full-regression'"), 'gate resolver must define full-regression profile');
+assert(gateResolverText.includes('run_link_validation'), 'gate resolver must define selective link-validation behavior');
+assert(gateResolverText.includes('run_lighthouse_validation'), 'gate resolver must define selective Lighthouse behavior');
+assert(gateResolverText.includes('run_build_artifact'), 'gate resolver must define selective artifact behavior');
+
+const selectiveGateRunnerPath = path.join(ROOT, 'scripts', 'qa', 'run-selective-gate.js');
+assert(fs.existsSync(selectiveGateRunnerPath), 'scripts/qa/run-selective-gate.js must exist');
+const selectiveGateRunnerText = fs.readFileSync(selectiveGateRunnerPath, 'utf8');
+assert(selectiveGateRunnerText.includes('latest-local-gate.json'), 'selective gate runner must emit metrics output');
+assert(selectiveGateRunnerText.includes('http.server'), 'selective gate runner must start a local server for links/Lighthouse when needed');
+assert(selectiveGateRunnerText.includes('PASS: selective local QA gate passed.'), 'selective gate runner must report successful gate execution');
 
 const prodPromotionGatePath = path.join(ROOT, 'scripts', 'qa', 'verify-prod-promotion-candidate.js');
 assert(fs.existsSync(prodPromotionGatePath), 'scripts/qa/verify-prod-promotion-candidate.js must exist');

@@ -10,10 +10,14 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..', '..');
 const {
-  isDocsOnlyChangeSet,
   DOCS_ONLY_PATTERNS,
   isProdPromotionCandidate
 } = require(path.join(ROOT, 'scripts', 'qa', 'run-prepush-gate.js'));
+const {
+  PROFILE_SETTINGS,
+  classifyChangedFiles,
+  isDocsOnlyChangeSet
+} = require(path.join(ROOT, 'scripts', 'qa', 'resolve-gate-profile.js'));
 
 describe('pre-push gate docs-only policy', () => {
   test('treats docs files as docs-only change set', () => {
@@ -54,5 +58,39 @@ describe('pre-push gate docs-only policy', () => {
         stagingSha: 'def456'
       })
     ).toBe(false);
+  });
+
+  test('classifies a single route asset swap as localized-page', () => {
+    const result = classifyChangedFiles(['assets/images/website-photo.jpg']);
+    expect(result.profile).toBe('localized-page');
+    expect(result.routeScopes).toEqual(['home']);
+  });
+
+  test('classifies shared shell changes as shared-ui', () => {
+    const result = classifyChangedFiles(['styles/site.css']);
+    expect(result.profile).toBe('shared-ui');
+    expect(result.settings.runBrowserTests).toBe(true);
+    expect(result.settings.runLighthouseValidation).toBe(true);
+  });
+
+  test('classifies workflow-only edits as release-infra', () => {
+    const result = classifyChangedFiles(['.github/workflows/ci.yml']);
+    expect(result.profile).toBe('release-infra');
+    expect(result.settings.runBuildArtifact).toBe(true);
+  });
+
+  test('falls back to full-regression for unknown files', () => {
+    const result = classifyChangedFiles(['unknown/new-area.txt']);
+    expect(result.profile).toBe('full-regression');
+  });
+
+  test('documents all five selective profile settings', () => {
+    expect(Object.keys(PROFILE_SETTINGS)).toEqual([
+      'docs-only',
+      'localized-page',
+      'shared-ui',
+      'release-infra',
+      'full-regression'
+    ]);
   });
 });
