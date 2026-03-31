@@ -12,6 +12,8 @@ const fs = require('fs');
 
 const script = require(path.resolve(__dirname, '..', '..', 'scripts', 'qa', 'verify-live-production.js'));
 const browserSmokePath = path.resolve(__dirname, '..', '..', 'scripts', 'qa', 'verify-live-browser-smoke.js');
+const deployWorkflowPath = path.resolve(__dirname, '..', '..', '.github', 'workflows', 'deploy-pages.yml');
+const deployWorkflow = fs.readFileSync(deployWorkflowPath, 'utf8');
 const packageJson = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '..', '..', 'package.json'), 'utf8')
 );
@@ -40,6 +42,11 @@ assert(fs.existsSync(browserSmokePath), 'verify-live-browser-smoke.js must exist
 assert(
   packageJson.scripts['qa:smoke:prod'] === 'node scripts/qa/verify-live-production.js && node scripts/qa/verify-live-browser-smoke.js',
   'qa:smoke:prod must combine fetch and browser smoke checks'
+);
+assert(
+  deployWorkflow.includes('- name: Install Node dependencies for live smoke') &&
+    deployWorkflow.includes('run: npm ci'),
+  'deploy-pages.yml post-deploy validation must install Node dependencies before browser smoke runs'
 );
 
 const validHomepage = {

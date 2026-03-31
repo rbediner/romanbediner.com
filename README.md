@@ -377,6 +377,7 @@ nvm install
 - `Deploy Pages` checks out the exact source SHA before running monitor/build steps so release scripts are always available in runner workspace.
 - Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are guarded on successful deploy result.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
+- Post-deploy production validation must run `npm ci` before browser smoke so the Node `playwright` package exists in the runner workspace; browser-binary installation alone is not enough.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
 - Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/framework/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
@@ -597,6 +598,7 @@ flowchart LR
 10. **Manual repository governance (outside code)**
    - Branch protections and required status checks are manual GitHub settings and are not modified by scripts/workflows.
    - Install dependencies via `npm ci`.
+   - In post-deploy validation jobs, install Node dependencies before running browser smoke commands.
    - Install Playwright Chromium.
    - Execute node, python, jest, and Playwright checks through the dedicated CI job commands in `.github/workflows/ci.yml`.
 

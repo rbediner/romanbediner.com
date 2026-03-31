@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 148
-- Updated At (UTC): 2026-03-31T15:21:53Z
+- Handoff Sequence: 149
+- Updated At (UTC): 2026-03-31T17:31:49Z
 - Source Branch: staging
-- Source Commit: fe7248d8d0039fd4ff57a68b4c7f9fd1032316a4 (pre-handoff baseline)
+- Source Commit: e9a73b38e371db0c5a7af3b3605b9fd5972ba120 (pre-handoff baseline)
 
 ## Current State
 - This session upgrades the selective QA system from the first gate draft to a more protective `v1.1` model on `staging`.
@@ -17,6 +17,9 @@
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-production.js`
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
   - npm alias: `npm run qa:smoke:prod`
+- Release-pipeline correction in progress:
+  - the first prod rollout after browser smoke integration exposed a workflow bug: `post-deploy-validation` installed Chromium but did not run `npm ci`, so live smoke failed with `Cannot find module 'playwright'` after the site had already deployed
+  - this session fixes that gap in `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/deploy-pages.yml`, adds an automation guardrail test, and re-drives the fix through `staging` and `prod`
 - Review document created for next-day operator review:
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
 

@@ -87,6 +87,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install Node dependencies for live smoke
+        run: npm ci
+
       - name: Wait for Pages propagation window
         run: sleep 30
 
