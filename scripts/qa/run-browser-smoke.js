@@ -175,6 +175,18 @@ function recordFailures(page, runtimeIssues) {
   });
 }
 
+function shouldIgnoreRuntimeIssue(issue) {
+  const normalized = String(issue || '');
+
+  // Live prod smoke occasionally sees a third-party Cloudflare beacon attempt
+  // that is correctly blocked by our CSP. Treating that as an app runtime
+  // regression makes the release gate noisy without improving safety.
+  return (
+    normalized.includes('static.cloudflareinsights.com') &&
+    normalized.includes('violates the following Content Security Policy directive')
+  );
+}
+
 async function assertNavContract(page, routeLabel) {
   const desktopLabels = await page.locator('.site-nav a').allTextContents();
   const desktopHrefs = await page.locator('.site-nav a').evaluateAll((nodes) =>
@@ -406,8 +418,10 @@ async function runScope(browser, baseUrl, scopeName) {
       await assertMobileContract(page, scopeName);
     }
 
-    if (runtimeIssues.length > 0) {
-      throw new Error(`${scopeName}: runtime errors detected (${runtimeIssues.join(' | ')})`);
+    const actionableRuntimeIssues = runtimeIssues.filter((issue) => !shouldIgnoreRuntimeIssue(issue));
+
+    if (actionableRuntimeIssues.length > 0) {
+      throw new Error(`${scopeName}: runtime errors detected (${actionableRuntimeIssues.join(' | ')})`);
     }
 
     return {
@@ -459,5 +473,6 @@ if (require.main === module) {
 
 module.exports = {
   SCOPE_CONFIG,
-  parseScopes
+  parseScopes,
+  shouldIgnoreRuntimeIssue
 };

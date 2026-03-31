@@ -147,6 +147,8 @@ assert(browserSmokeText.includes('assertNavContract'), 'browser smoke must prote
 assert(browserSmokeText.includes('assertGaBootstrap'), 'browser smoke must protect GA bootstrap runtime');
 assert(browserSmokeText.includes('assertFrameworkContract'), 'browser smoke must protect framework JS hotspot behavior');
 assert(browserSmokeText.includes('assertServiceBulletContract'), 'browser smoke must protect visual bullet spacing contract');
+assert(browserSmokeText.includes('shouldIgnoreRuntimeIssue'), 'browser smoke must classify known benign CSP console noise explicitly');
+assert(browserSmokeText.includes('static.cloudflareinsights.com'), 'browser smoke must narrowly scope benign runtime-noise handling');
 
 const prodPromotionGatePath = path.join(ROOT, 'scripts', 'qa', 'verify-prod-promotion-candidate.js');
 assert(fs.existsSync(prodPromotionGatePath), 'scripts/qa/verify-prod-promotion-candidate.js must exist');
