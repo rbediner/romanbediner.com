@@ -26,6 +26,11 @@ describe('selective gate runner contract', () => {
     expect(runnerText).toContain("spawn('python3', ['-m', 'http.server'");
   });
 
+  test('resolves route-scope placeholders before executing commands', () => {
+    expect(runnerText).toContain('applyCommandPlaceholders');
+    expect(runnerText).toContain('profileResult.routeScopes');
+  });
+
   test('prints a human-readable success summary', () => {
     expect(runnerText).toContain('PASS: selective local QA gate passed.');
     expect(runnerText).toContain('Metrics file:');

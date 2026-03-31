@@ -80,17 +80,24 @@ const PROFILE_SETTINGS = {
     runQaTests: false,
     runLighthouseValidation: false,
     runBuildArtifact: false,
+    browserCommandTemplate: '',
     localCommands: ['npm run docs:verify', 'npm run test:node', 'npm run test:jest']
   },
   'localized-page': {
     runUnitTests: true,
     runRegressionTests: true,
     runLinkValidation: true,
-    runBrowserTests: false,
+    runBrowserTests: true,
     runQaTests: false,
     runLighthouseValidation: false,
     runBuildArtifact: false,
-    localCommands: ['npm run test:node', 'npm run test:jest', 'npm run test:links']
+    browserCommandTemplate: 'node scripts/qa/run-browser-smoke.js --scopes {routeScopesCsv}',
+    localCommands: [
+      'npm run test:node',
+      'npm run test:jest',
+      'npm run test:links',
+      'node scripts/qa/run-browser-smoke.js --scopes {routeScopesCsv}'
+    ]
   },
   'shared-ui': {
     runUnitTests: true,
@@ -100,11 +107,12 @@ const PROFILE_SETTINGS = {
     runQaTests: false,
     runLighthouseValidation: true,
     runBuildArtifact: false,
+    browserCommandTemplate: 'node scripts/qa/run-browser-smoke.js --scopes all',
     localCommands: [
       'npm run test:node',
       'npm run test:jest',
       'npm run test:links',
-      'npm run test:playwright -- --workers=3',
+      'node scripts/qa/run-browser-smoke.js --scopes all',
       'npm run test:lighthouse'
     ]
   },
@@ -116,6 +124,7 @@ const PROFILE_SETTINGS = {
     runQaTests: false,
     runLighthouseValidation: false,
     runBuildArtifact: true,
+    browserCommandTemplate: '',
     localCommands: [
       'npm run verify:repo-contract',
       'npm run verify:workflow-integrity',
@@ -132,9 +141,21 @@ const PROFILE_SETTINGS = {
     runQaTests: true,
     runLighthouseValidation: true,
     runBuildArtifact: true,
+    browserCommandTemplate: 'npm run test:playwright -- --workers=3',
     localCommands: ['npm run qa:ci-parity']
   }
 };
+
+function routeScopesToCsv(routeScopes) {
+  if (!Array.isArray(routeScopes) || routeScopes.length === 0) {
+    return 'all';
+  }
+  return routeScopes.join(',');
+}
+
+function applyCommandPlaceholders(command, routeScopes) {
+  return command.replace(/\{routeScopesCsv\}/g, routeScopesToCsv(routeScopes));
+}
 
 function matchesAny(filePath, patterns) {
   return patterns.some((pattern) => pattern.test(filePath));
@@ -159,12 +180,17 @@ function detectRouteScopes(changedFiles) {
 }
 
 function buildProfile(profile, reason, changedFiles, routeScopes) {
+  const scopes = Array.from(routeScopes);
+  const settings = PROFILE_SETTINGS[profile];
   return {
     profile,
     reason,
     changedFiles,
-    routeScopes: Array.from(routeScopes),
-    settings: PROFILE_SETTINGS[profile]
+    routeScopes: scopes,
+    settings,
+    browserCommand: settings.browserCommandTemplate
+      ? applyCommandPlaceholders(settings.browserCommandTemplate, scopes)
+      : ''
   };
 }
 
@@ -340,7 +366,8 @@ function formatAsGitHubOutput(profileResult) {
     `run_browser_tests=${String(profileResult.settings.runBrowserTests)}`,
     `run_qa_tests=${String(profileResult.settings.runQaTests)}`,
     `run_lighthouse_validation=${String(profileResult.settings.runLighthouseValidation)}`,
-    `run_build_artifact=${String(profileResult.settings.runBuildArtifact)}`
+    `run_build_artifact=${String(profileResult.settings.runBuildArtifact)}`,
+    `browser_command=${profileResult.browserCommand}`
   ];
   return `${lines.join('\n')}\n`;
 }
@@ -384,6 +411,7 @@ module.exports = {
   RELEASE_INFRA_PATTERNS,
   ROUTE_SCOPES,
   SHARED_UI_PATTERNS,
+  applyCommandPlaceholders,
   classifyChangedFiles,
   detectRouteScopes,
   getChangedFilesFromRefs,

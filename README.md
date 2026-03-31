@@ -333,8 +333,8 @@ nvm install
   - `full-regression`
 - Gate intent:
   - `docs-only`: documentation and handoff integrity only
-  - `localized-page`: one route scope changed, so validate that page without paying for whole-site browser coverage
-  - `shared-ui`: shared CSS/nav/runtime changes, so validate all critical pages plus browser/Lighthouse coverage
+  - `localized-page`: one route scope changed, so validate that page with targeted desktop/mobile browser smoke, nav/link checks, GA bootstrap, and route-specific JS hotspots without paying for whole-site regression
+  - `shared-ui`: shared CSS/nav/runtime changes, so validate all critical pages, nav contracts, mobile behavior, layout-sensitive UI contracts, and browser/Lighthouse coverage
   - `release-infra`: workflow/release/build automation changed, so validate contracts, release logic, and artifact integrity
   - `full-regression`: broad or ambiguous changes, so run the whole stack
 - CI is split into explicit guardrails and parallel validation jobs:
@@ -353,12 +353,24 @@ nvm install
 - Production smoke is intentionally separate from selective staging validation:
   - post-deploy production smoke runs through `npm run qa:smoke:prod`
   - smoke covers homepage, sitemap, canonical routes, CSP, structured data, and GA bootstrap presence on the live site
+  - smoke also runs a lightweight live browser pass over `home`, `framework`, and `connect` to catch mobile-nav regressions, JS hotspot failures, and obvious live-runtime issues
 - Google Analytics coverage is explicit in the gate design:
-  - `localized-page`: static GA contract remains covered by `npm run test:node`
+  - `localized-page`: GA meta contract plus targeted browser bootstrap/runtime validation run together
   - `shared-ui`: GA contract + browser/runtime validation run together
   - `release-infra`: GA contract is validated alongside release automation because build/deploy changes can accidentally strip analytics
   - `full-regression`: all GA checks remain in scope
-  - `qa:smoke:prod`: verifies GA bootstrap is present on the live domain after deploy
+  - `qa:smoke:prod`: verifies GA bootstrap is present and initializes on the live domain after deploy
+- Design-contract protection is intentionally broader than plain “page loads”:
+  - `npm run test:node` remains the static contract layer for header/body alignment, icon sizing, orb bullet spacing, typography/spacing rules, and route-specific markup/schema conventions
+  - `npm run qa:browser:smoke` adds fast browser enforcement for navigation, mobile overflow, service-list bullet styling, and selected JS hotspots
+- Current selective browser smoke checks cover:
+  - shared desktop + mobile nav structure
+  - mobile menu open/close behavior
+  - horizontal overflow guard on mobile
+  - bullet/icon spacing contract for `.service-list`
+  - homepage hero alignment and image presence
+  - framework stage-diagram pill interaction and active-state behavior
+  - connect form presence and primary CTA integrity
 - Production deployment is separate from validation and runs only on `push` to `prod`.
 - `Deploy Pages` explicitly waits for matching prod `CI` success for the same SHA before artifact deploy, preventing branch-ambiguity when the same commit exists on multiple branches.
 - The prod CI-wait step passes `GITHUB_TOKEN` to the monitor script for authenticated GitHub API polling and reliable rate-limit behavior in Actions runners.
@@ -397,6 +409,9 @@ nvm install
 - Playwright spec tests are executed through `scripts/qa/run-local-playwright-suite.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Playwright defaults to parallel workers via `scripts/qa/run-local-playwright-suite.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.
+- Additional targeted browser entrypoints:
+  - `npm run qa:browser:smoke`
+  - `npm run qa:smoke:prod:browser`
 - Jest (30.x) is required as a direct dev dependency and is invoked through `/scripts/qa/run-jest-suite.js` to keep local/CI behavior deterministic.
 - CI fails on:
   - CSP violations
@@ -726,7 +741,20 @@ flowchart LR
       ],
       "selection_model": "changed-file classifier with full-regression fallback",
       "prod_promotion": "exact tested staging sha uses qa:prod-promotion-gate",
-      "production_smoke": "qa:smoke:prod"
+      "production_smoke": "qa:smoke:prod",
+      "browser_smoke": {
+        "localized_page": "targeted desktop + mobile smoke over changed route scopes",
+        "shared_ui": "desktop + mobile smoke across canonical routes",
+        "full_regression": "full Playwright suite with explicit worker count"
+      },
+      "protected_contracts": [
+        "navigation labels and hrefs",
+        "mobile menu behavior and overflow safety",
+        "GA bootstrap/runtime availability",
+        "framework stage pill interaction",
+        "hero alignment and single-line heading contract",
+        "service bullet icon size and spacing contract"
+      ]
     },
     "full_gate_schedule": {
       "nightly_enabled": false,

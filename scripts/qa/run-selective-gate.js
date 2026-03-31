@@ -23,6 +23,7 @@ const path = require('path');
 const { execSync, spawn } = require('child_process');
 const {
   PROFILE_SETTINGS,
+  applyCommandPlaceholders,
   classifyChangedFiles,
   parseChangedFilesArg
 } = require('./resolve-gate-profile');
@@ -109,7 +110,8 @@ function stopStaticServer(child) {
 
 function profileNeedsStaticServer(profileSettings) {
   return profileSettings.localCommands.some((command) =>
-    command.includes('npm run test:links') || command.includes('npm run test:lighthouse')
+    command.includes('npm run test:links') ||
+    command.includes('npm run test:lighthouse')
   );
 }
 
@@ -154,7 +156,8 @@ async function main() {
     );
 
     for (const command of profileResult.settings.localCommands) {
-      commandResults.push(runCommand(command));
+      const resolvedCommand = applyCommandPlaceholders(command, profileResult.routeScopes);
+      commandResults.push(runCommand(resolvedCommand));
     }
   } finally {
     stopStaticServer(serverProcess);

@@ -31,6 +31,7 @@ assert(ciText.includes('run_unit_tests'), 'ci.yml gate-profile job must expose u
 assert(ciText.includes('run_regression_tests'), 'ci.yml gate-profile job must expose regression-test gating output');
 assert(ciText.includes('run_link_validation'), 'ci.yml gate-profile job must expose link-validation gating output');
 assert(ciText.includes('run_browser_tests'), 'ci.yml gate-profile job must expose browser-test gating output');
+assert(ciText.includes('browser_command'), 'ci.yml gate-profile job must expose browser command output');
 assert(ciText.includes('run_qa_tests'), 'ci.yml gate-profile job must expose python QA gating output');
 assert(ciText.includes('run_lighthouse_validation'), 'ci.yml gate-profile job must expose Lighthouse gating output');
 assert(ciText.includes('run_build_artifact'), 'ci.yml gate-profile job must expose artifact gating output');
@@ -52,6 +53,10 @@ for (const guard of selectiveJobGuards) {
 assert(
   ciText.includes("needs.gate-profile.outputs.run_build_artifact == 'true'"),
   'ci.yml must guard artifact build with selective gate output'
+);
+assert(
+  ciText.includes('needs.gate-profile.outputs.browser_command'),
+  'ci.yml must route browser job execution through the resolved browser command'
 );
 
 assert(

@@ -20,15 +20,32 @@ Best-practice principle:
 - Always run a short production smoke test after deploy.
 - Fall back to `full-regression` when risk is broad or ambiguous.
 
-## The Five Gates
+## The Five Gates (v1.1)
 
 | Gate | When it should run | What it runs | What it intentionally skips | GA coverage |
 | --- | --- | --- | --- | --- |
 | `docs-only` | `README.md`, `docs/**`, `AGENTS.md` only | `docs:verify`, `test:node`, `test:jest` | Browser, links, Lighthouse, artifact build, Python QA | Covered indirectly through static contract tests only |
-| `localized-page` | One route scope only (`home`, `about`, `services`, `framework`, `connect`) | `test:node`, `test:jest`, `test:links` | Full browser suite, Python QA, Lighthouse, artifact build | Static GA contract remains covered by `test:node` |
-| `shared-ui` | Shared CSS, shared nav, shared runtime JS, multi-route shell/layout changes | `test:node`, `test:jest`, `test:links`, `test:playwright -- --workers=3`, `test:lighthouse` | Python QA, artifact build | GA static + runtime coverage |
+| `localized-page` | One route scope only (`home`, `about`, `services`, `framework`, `connect`) | `test:node`, `test:jest`, `test:links`, targeted browser smoke for the affected route | Python QA, Lighthouse, artifact build, full visual regression | Static GA contract + targeted browser/runtime GA bootstrap validation |
+| `shared-ui` | Shared CSS, shared nav, shared runtime JS, multi-route shell/layout changes | `test:node`, `test:jest`, `test:links`, browser smoke across all canonical routes, `test:lighthouse` | Python QA, artifact build | GA static + runtime coverage |
 | `release-infra` | Workflows, release scripts, build scripts, repo contract, architecture control files | `verify:repo-contract`, `verify:workflow-integrity`, `test:node`, `test:jest`, artifact build + integrity verify | Page/browser regressions unless the change also touches product UI | GA contract stays in scope because deploy/build changes can strip analytics |
 | `full-regression` | Broad, mixed, unknown, or cross-cutting changes | `qa:ci-parity` | Nothing | Full GA coverage |
+
+### Why this changed from v1
+
+The first draft was still too weak in the places we actually worry about:
+
+- navigation drift
+- broken links
+- mobile layout damage
+- JS interaction regressions
+- GA event/bootstrap regressions
+- subtle visual contract breakage such as:
+  - headers drifting off the body column
+  - icons losing alignment against text
+  - orb bullets changing size or spacing
+  - framework stage pills or moving elements breaking behavior
+
+So `localized-page` is no longer “static checks only.” It now gets a cheap but real browser pass.
 
 ## Production Smoke Test
 
@@ -49,6 +66,18 @@ It checks:
    - JSON-LD structured data
    - CSP
    - GA bootstrap reference
+5. lightweight live browser smoke on:
+   - `home`
+   - `framework`
+   - `connect`
+6. live browser smoke currently verifies:
+   - shared nav is rendered correctly
+   - mobile nav opens and closes
+   - mobile overflow is not obvious
+   - homepage hero alignment contract still holds
+   - framework stage pills still interact correctly
+   - connect form shell still renders
+   - GA bootstrap initializes in runtime
 
 Best practice:
 
@@ -81,6 +110,43 @@ Classifier rules in plain English:
 4. workflow/release/build-only -> `release-infra`
 5. unknown or mixed risk -> `full-regression`
 
+## What We Are Explicitly Protecting
+
+The gate design now assumes these risks matter every release:
+
+### Navigation and links
+
+- header nav labels/hrefs
+- mobile nav labels/hrefs
+- active-link state
+- route reachability
+
+### Mobile integrity
+
+- menu toggle visibility
+- desktop nav hidden on mobile
+- mobile nav open/close
+- no obvious horizontal overflow
+
+### Visual contracts
+
+- homepage hero alignment
+- body-column/header alignment contracts enforced by static tests
+- orb bullet size and spacing
+- icon/text alignment contracts enforced through CSS + browser smoke
+
+### JavaScript hotspots
+
+- framework stage-diagram pill navigation
+- shared site-navigation runtime
+- connect form shell rendering
+
+### Google Analytics
+
+- measurement meta remains present
+- bootstrap script remains present
+- runtime object initializes in browser smoke
+
 ## How We Measure Savings
 
 Selective local gate runs now write metrics to:
@@ -105,8 +171,8 @@ These are current planning estimates, not final performance guarantees:
 | Gate | Expected local cost vs full regression | Why |
 | --- | --- | --- |
 | `docs-only` | 85% to 95% cheaper | No browser, no Lighthouse, no Python, no artifact build |
-| `localized-page` | 70% to 85% cheaper | Keeps static checks and links, skips browser/QA/lighthouse |
-| `shared-ui` | 40% to 65% cheaper | Adds browser + Lighthouse, still skips Python QA and artifact build |
+| `localized-page` | 55% to 75% cheaper | Adds targeted browser + mobile coverage, still avoids Python QA, Lighthouse, and full regression |
+| `shared-ui` | 35% to 60% cheaper | Adds browser smoke across all canonical routes plus Lighthouse, still skips Python QA and artifact build |
 | `release-infra` | 60% to 80% cheaper | Tests release logic directly instead of replaying site-wide browser QA |
 | `full-regression` | No intended savings | This is the safety fallback |
 
@@ -132,7 +198,11 @@ Expected gate:
 
 Why:
 
-- one route scope (`home`) changed
+- one route scope (`home`) changed, but it still deserves:
+  - nav/link validation
+  - one desktop browser pass
+  - one mobile browser pass
+  - homepage alignment verification
 
 ### Scenario C — shared nav/runtime change
 
@@ -142,7 +212,11 @@ Expected gate:
 
 Why:
 
-- change affects multiple pages through shared runtime
+- change affects multiple pages through shared runtime and could break:
+  - navigation everywhere
+  - mobile menu behavior
+  - GA event wiring
+  - shared visual contracts
 
 ### Scenario D — deploy workflow change
 
@@ -168,11 +242,11 @@ Why:
 
 Please review these questions:
 
-1. Do the five gates feel intuitive enough to trust without constant manual overrides?
-2. Is the production smoke scope the right size, or do you want one or two more checks added?
-3. Do you want `localized-page` to include a one-page Playwright check by default, or keep it cheaper as currently designed?
-4. Should `release-infra` include preview live validation by default, or only when staging preview logic itself changes?
-5. Does the savings model feel aligned with your goal of “way more efficient without getting sloppy”?
+1. Do the five gates still feel intuitive now that `localized-page` has a real browser pass?
+2. Does the current production smoke browser scope (`home`, `framework`, `connect`) feel like the right lightweight set?
+3. Do you want one more explicit browser contract for `services` or `about`, or is static coverage enough there?
+4. Do the named “visual contract” protections reflect the breakage you worry about most?
+5. Does this still feel meaningfully more efficient than replaying full regression for every medium-sized change?
 
 ## Recommended Next Step After Review
 

@@ -46,6 +46,7 @@ jobs:
       run_regression_tests: ${{ steps.profile.outputs.run_regression_tests }}
       run_link_validation: ${{ steps.profile.outputs.run_link_validation }}
       run_browser_tests: ${{ steps.profile.outputs.run_browser_tests }}
+      browser_command: ${{ steps.profile.outputs.browser_command }}
       run_qa_tests: ${{ steps.profile.outputs.run_qa_tests }}
       run_lighthouse_validation: ${{ steps.profile.outputs.run_lighthouse_validation }}
       run_build_artifact: ${{ steps.profile.outputs.run_build_artifact }}
@@ -94,6 +95,7 @@ jobs:
             echo "- Regression tests: ${{ steps.profile.outputs.run_regression_tests }}"
             echo "- Link validation: ${{ steps.profile.outputs.run_link_validation }}"
             echo "- Browser tests: ${{ steps.profile.outputs.run_browser_tests }}"
+            echo "- Browser command: ${{ steps.profile.outputs.browser_command || 'none' }}"
             echo "- QA tests: ${{ steps.profile.outputs.run_qa_tests }}"
             echo "- Lighthouse: ${{ steps.profile.outputs.run_lighthouse_validation }}"
             echo "- Build artifact: ${{ steps.profile.outputs.run_build_artifact }}"
@@ -241,7 +243,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright runtime suite
-        run: npm run test:playwright -- --workers=3
+        run: ${{ needs.gate-profile.outputs.browser_command }}
 
   lighthouse-validation:
     if: needs.gate-profile.outputs.run_lighthouse_validation == 'true'

@@ -1,35 +1,49 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 147
-- Updated At (UTC): 2026-03-30T22:46:30Z
+- Handoff Sequence: 148
+- Updated At (UTC): 2026-03-31T15:21:53Z
 - Source Branch: staging
-- Source Commit: eb7055665ff816321f6183cc1cc4b4ab4187155f
+- Source Commit: fe7248d8d0039fd4ff57a68b4c7f9fd1032316a4 (pre-handoff baseline)
 
 ## Current State
-- This session implements the first full selective QA gate model for review on `staging`.
+- This session upgrades the selective QA system from the first gate draft to a more protective `v1.1` model on `staging`.
 - The old blunt `fast/full` CI language has been replaced in code/docs with five explicit gate profiles:
   - `docs-only`
   - `localized-page`
   - `shared-ui`
   - `release-infra`
   - `full-regression`
-- Production smoke remains a separate post-deploy verification step through:
+- Production smoke remains a separate post-deploy verification step and now includes a lightweight live browser pass through:
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-production.js`
+  - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
   - npm alias: `npm run qa:smoke:prod`
 - Review document created for next-day operator review:
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
 
 ## What Changed In This Session
-1. Added a shared selective-gate classifier:
+1. Strengthened the shared selective-gate classifier:
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/resolve-gate-profile.js`
-   - classifies changed files into the five gate profiles
-   - includes route-scope mapping for `home`, `about`, `services`, `framework`, and `connect`
-2. Added a measurable selective local gate runner:
+   - still classifies changed files into the five gate profiles
+   - now emits route-scoped browser commands so `localized-page` and `shared-ui` can run the smallest responsible browser coverage
+   - route scopes remain `home`, `about`, `services`, `framework`, and `connect`
+2. Updated the measurable selective local gate runner:
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-selective-gate.js`
    - runs the exact local commands for the selected gate
+   - now resolves route placeholders into concrete browser smoke commands before execution
    - writes timing metrics to:
      - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
-3. Expanded local npm entrypoints:
+3. Added targeted browser smoke tooling:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-browser-smoke.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
+   - browser smoke now explicitly protects:
+     - shared nav labels/hrefs on desktop and mobile
+     - mobile menu open/close and overflow safety
+     - GA bootstrap/runtime availability
+     - homepage hero alignment and single-line heading contract
+     - framework stage-pill interaction behavior
+     - connect form shell rendering
+     - orb bullet icon size and spacing contract (`8px` bullet with required margin)
+4. Expanded local npm entrypoints:
    - `qa:gate:resolve`
    - `qa:gate:run`
    - `qa:gate:docs-only`
@@ -37,44 +51,70 @@
    - `qa:gate:shared-ui`
    - `qa:gate:release-infra`
    - `qa:gate:full-regression`
+   - `qa:browser:smoke`
    - `qa:smoke:prod`
+   - `qa:smoke:prod:fetch`
+   - `qa:smoke:prod:browser`
    - `qa:smoke:preview`
-4. Upgraded CI gate selection:
+5. Upgraded CI gate selection:
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/ci.yml`
    - CI now resolves the selective gate profile through the shared classifier
    - CI job summary now prints the selected profile and which validations are enabled
    - expensive jobs (`qa-tests`, `browser-tests`, `lighthouse-validation`, `build-artifact`) are now driven by explicit profile outputs instead of old `full_gate` logic
-5. Updated tests for the new model:
+   - browser job now runs the resolved browser command, which means:
+     - `localized-page` gets targeted browser smoke
+     - `shared-ui` gets browser smoke across canonical routes
+     - `full-regression` still uses the full 3-worker Playwright suite
+6. Upgraded production post-deploy smoke:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/deploy-pages.yml`
+   - prod validation now installs Chromium and runs:
+     - `npm run qa:smoke:prod`
+   - this now combines fetch-based live checks with lightweight live browser smoke
+7. Updated tests for the v1.1 model:
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/prepush_gate.test.js`
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/selective_gate_runner.test.js`
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/deployment_sop.test.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/browser_smoke_contract.test.js`
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/test-ci-gate-profile-automation.js`
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/test-release-sop-automation.js`
-6. Updated docs and machine-readable architecture:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/test-live-deploy-validation-automation.js`
+8. Updated docs and machine-readable architecture:
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/README.md`
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/architecture/environment-model.json`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
    - this handoff file
 
 ## Validation Performed
 - Local:
+  - `npm run docs:generate`
   - `npm run test:jest`
   - `npm run test:node`
-  - `npm run qa:gate:release-infra`
-  - `npm run qa:smoke:prod`
-- Selective gate measurement sample captured:
+  - `node scripts/qa/run-browser-smoke.js --scopes home,framework,connect`
+- Selective browser smoke sample captured:
+  - scopes: `home,framework,connect`
+  - result: pass
+- Selective gate measurement sample captured from prior rollout remains available:
   - profile: `release-infra`
   - total duration: `5383ms`
   - metrics file:
     - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
 
 ## Operator Notes
-- This is not yet a product/UX change; it is QA/release architecture work.
+- This is still QA/release architecture work, not a product copy or layout redesign.
 - The intended operating model after review is:
   1. `staging` remains the proving ground
   2. the classifier chooses the smallest responsible gate
-  3. `prod` promotion still uses the already-tested staging SHA when eligible
-  4. `qa:smoke:prod` remains mandatory after deploy
+  3. `localized-page` includes a cheap but real desktop/mobile browser pass by default
+  4. `shared-ui` covers cross-route nav/mobile/layout-sensitive browser smoke
+  5. `prod` promotion still uses the already-tested staging SHA when eligible
+  6. `qa:smoke:prod` remains mandatory after deploy
 - Google Analytics is explicitly accounted for in the gate design and in the production smoke gate.
+- Layout-sensitive UI contracts are now first-class concerns in the docs and browser smoke model. The current system explicitly guards against drift in:
+  - hero/header alignment
+  - bullet icon size and spacing
+  - nav rendering
+  - mobile overflow
+  - framework stage-pill interaction
 - The review document for tomorrow is the best place to start if the goal is to discuss what each gate should include/exclude.
 
 ## Fresh Machine Prerequisites (Operator Quick List)

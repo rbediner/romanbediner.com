@@ -63,7 +63,20 @@
         ],
         "selection_model": "changed-file classifier with full-regression fallback",
         "prod_promotion": "exact tested staging sha uses qa:prod-promotion-gate",
-        "production_smoke": "qa:smoke:prod"
+        "production_smoke": "qa:smoke:prod",
+        "browser_smoke": {
+          "localized_page": "targeted desktop + mobile smoke over changed route scopes",
+          "shared_ui": "desktop + mobile smoke across canonical routes",
+          "full_regression": "full Playwright suite with explicit worker count"
+        },
+        "protected_contracts": [
+          "navigation labels and hrefs",
+          "mobile menu behavior and overflow safety",
+          "GA bootstrap/runtime availability",
+          "framework stage pill interaction",
+          "hero alignment and single-line heading contract",
+          "service bullet icon size and spacing contract"
+        ]
       },
       "full_gate_schedule": {
         "nightly_enabled": false,

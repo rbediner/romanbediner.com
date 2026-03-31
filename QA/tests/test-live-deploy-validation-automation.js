@@ -8,8 +8,13 @@
  * - Production deploy validation can become brittle or silently ineffective.
  */
 const path = require('path');
+const fs = require('fs');
 
 const script = require(path.resolve(__dirname, '..', '..', 'scripts', 'qa', 'verify-live-production.js'));
+const browserSmokePath = path.resolve(__dirname, '..', '..', 'scripts', 'qa', 'verify-live-browser-smoke.js');
+const packageJson = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '..', '..', 'package.json'), 'utf8')
+);
 
 function assert(condition, message) {
   if (!condition) {
@@ -31,6 +36,11 @@ function expectThrow(fn, message) {
 assert(typeof script.validateHomepage === 'function', 'verify-live-production.js must export validateHomepage');
 assert(typeof script.validateSitemap === 'function', 'verify-live-production.js must export validateSitemap');
 assert(typeof script.extractRoutePathnames === 'function', 'verify-live-production.js must export extractRoutePathnames');
+assert(fs.existsSync(browserSmokePath), 'verify-live-browser-smoke.js must exist');
+assert(
+  packageJson.scripts['qa:smoke:prod'] === 'node scripts/qa/verify-live-production.js && node scripts/qa/verify-live-browser-smoke.js',
+  'qa:smoke:prod must combine fetch and browser smoke checks'
+);
 
 const validHomepage = {
   response: { ok: true, status: 200 },

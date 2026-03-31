@@ -64,6 +64,8 @@ describe('pre-push gate docs-only policy', () => {
     const result = classifyChangedFiles(['assets/images/website-photo.jpg']);
     expect(result.profile).toBe('localized-page');
     expect(result.routeScopes).toEqual(['home']);
+    expect(result.settings.runBrowserTests).toBe(true);
+    expect(result.browserCommand).toContain('--scopes home');
   });
 
   test('classifies shared shell changes as shared-ui', () => {
@@ -71,6 +73,7 @@ describe('pre-push gate docs-only policy', () => {
     expect(result.profile).toBe('shared-ui');
     expect(result.settings.runBrowserTests).toBe(true);
     expect(result.settings.runLighthouseValidation).toBe(true);
+    expect(result.browserCommand).toContain('--scopes all');
   });
 
   test('classifies workflow-only edits as release-infra', () => {

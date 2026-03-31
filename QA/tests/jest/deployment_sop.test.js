@@ -41,6 +41,7 @@ describe('Deployment SOP documentation contract', () => {
     expect(README.includes('npm run qa:gate:shared-ui')).toBe(true);
     expect(README.includes('npm run qa:gate:release-infra')).toBe(true);
     expect(README.includes('npm run qa:gate:full-regression')).toBe(true);
+    expect(README.includes('npm run qa:browser:smoke')).toBe(true);
     expect(README.includes('npm run qa:smoke:prod')).toBe(true);
     expect(README.includes('npm run release:staging-prod')).toBe(true);
     expect(README.includes('--workers>=3')).toBe(true);
