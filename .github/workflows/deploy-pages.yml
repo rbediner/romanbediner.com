@@ -18,6 +18,8 @@ concurrency:
 jobs:
   deploy-pages:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
     outputs:
       page_url: ${{ steps.deployment.outputs.page_url }}
       artifact_checksum: ${{ steps.build.outputs.artifact_checksum }}

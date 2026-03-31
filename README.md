@@ -387,6 +387,7 @@ nvm install
   - `actions/configure-pages@v6`
   - `actions/upload-pages-artifact@v4`
   - `actions/deploy-pages@v5`
+- `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'` is set at the job level on `deploy-pages` and `rollback-deploy` jobs to pre-empt the GitHub Node 20 deprecation cutoff (June 2, 2026). `actions/upload-pages-artifact@v4` internally pins `actions/upload-artifact@v4.6.2` (Node 20); there is no upstream `v5` yet. This env var instructs the runner to execute those internally-called Node 20 steps on Node 24 instead. Remove it when `upload-pages-artifact` ships a Node 24-native release.
 - `Deploy Pages` checks out the exact source SHA before running monitor/build steps so release scripts are always available in runner workspace.
 - Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are guarded on successful deploy result.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
