@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 150
-- Updated At (UTC): 2026-03-31T17:45:17Z
+- Handoff Sequence: 151
+- Updated At (UTC): 2026-03-31T22:34:00Z
 - Source Branch: prod
-- Source Commit: 233b4372daa825eda6c696d9ad74227df99c4b0e (pre-handoff baseline)
+- Source Commit: 0553b3c15dcf79c5f7dbe624c72103523d94a8f7 (release cleanup fully promoted)
 
 ## Current State
 - This session upgrades the selective QA system from the first gate draft to a more protective `v1.1` model on `staging`.
@@ -17,13 +17,16 @@
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-production.js`
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
   - npm alias: `npm run qa:smoke:prod`
-- Release-pipeline correction in progress:
+- Release-pipeline correction completed:
   - the first prod rollout after browser smoke integration exposed a workflow bug: `post-deploy-validation` installed Chromium but did not run `npm ci`, so live smoke failed with `Cannot find module 'playwright'` after the site had already deployed
   - the immediate rerun fixed that dependency gap, but then surfaced a second issue: live browser smoke treated a CSP-blocked `static.cloudflareinsights.com` beacon attempt as an app runtime failure
-  - this session fixes both gaps:
+  - the follow-up prod release fixed both gaps and completed successfully end-to-end:
     - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/deploy-pages.yml` now installs Node dependencies before browser smoke
     - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-browser-smoke.js` now ignores only that known non-app CSP-blocked beacon noise while keeping real runtime errors release-blocking
     - new automation guardrail coverage was added before re-driving the fix through `staging` and `prod`
+- Operator release rule is now explicit in docs:
+  - stay with the release until the final remote workflow for that environment has concluded
+  - do not report completion for `staging`, preview publication, or `prod` while any deploy or validation job is still running
 - Review document created for next-day operator review:
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
 

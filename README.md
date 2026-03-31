@@ -70,6 +70,8 @@ This gate must confirm:
 
 Rules:
 - Do not share a staging preview link before tests are green.
+- Treat `staging`, preview publication, and `prod` as active releases until their final remote workflow and validation steps have fully concluded.
+- Do not report any environment as complete while a deploy, preview verification, post-deploy smoke, or release verification job is still running.
 - Do not promote any commit that differs from the tested/approved staging commit.
 - If a deploy run stalls or is canceled by a higher-priority Pages request, re-trigger the same workflow run and continue with the same commit.
 - Never announce production complete until `release:verify-prod` passes for the promoted SHA.
