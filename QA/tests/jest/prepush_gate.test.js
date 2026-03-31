@@ -65,6 +65,10 @@ describe('pre-push gate docs-only policy', () => {
     expect(result.profile).toBe('localized-page');
     expect(result.routeScopes).toEqual(['home']);
     expect(result.settings.runBrowserTests).toBe(true);
+    expect(result.unitCommand).toContain('run-static-contract-suite.js --profile localized-page --mode node');
+    expect(result.regressionCommand).toContain(
+      'run-static-contract-suite.js --profile localized-page --mode jest'
+    );
     expect(result.browserCommand).toContain('--scopes home');
   });
 
@@ -73,6 +77,10 @@ describe('pre-push gate docs-only policy', () => {
     expect(result.profile).toBe('shared-ui');
     expect(result.settings.runBrowserTests).toBe(true);
     expect(result.settings.runLighthouseValidation).toBe(true);
+    expect(result.unitCommand).toContain('run-static-contract-suite.js --profile shared-ui --mode node');
+    expect(result.regressionCommand).toContain(
+      'run-static-contract-suite.js --profile shared-ui --mode jest'
+    );
     expect(result.browserCommand).toContain('--scopes all');
   });
 
@@ -80,6 +88,10 @@ describe('pre-push gate docs-only policy', () => {
     const result = classifyChangedFiles(['.github/workflows/ci.yml']);
     expect(result.profile).toBe('release-infra');
     expect(result.settings.runBuildArtifact).toBe(true);
+    expect(result.unitCommand).toContain('run-static-contract-suite.js --profile release-infra --mode node');
+    expect(result.regressionCommand).toContain(
+      'run-static-contract-suite.js --profile release-infra --mode jest'
+    );
   });
 
   test('falls back to full-regression for unknown files', () => {
@@ -99,5 +111,6 @@ describe('pre-push gate docs-only policy', () => {
 
   test('keeps docs-only local gate bound to the dedicated docs suite', () => {
     expect(PROFILE_SETTINGS['docs-only'].localCommands).toEqual(['npm run test:docs-gate']);
+    expect(PROFILE_SETTINGS['docs-only'].runRegressionTests).toBe(false);
   });
 });

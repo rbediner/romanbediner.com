@@ -17,6 +17,7 @@
     "qa:gate:release-infra": "node scripts/qa/run-selective-gate.js --profile release-infra",
     "qa:gate:full-regression": "node scripts/qa/run-selective-gate.js --profile full-regression",
     "qa:browser:smoke": "node scripts/qa/run-browser-smoke.js",
+    "qa:static-contracts": "node scripts/qa/run-static-contract-suite.js",
     "qa:prepush-gate": "node scripts/qa/run-prepush-gate.js",
     "qa:prod-promotion-gate": "node scripts/qa/verify-prod-promotion-candidate.js",
     "qa:smoke:prod": "node scripts/qa/verify-live-production.js && node scripts/qa/verify-live-browser-smoke.js",

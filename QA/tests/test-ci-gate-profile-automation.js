@@ -29,6 +29,8 @@ assert(ciText.includes('resolve-gate-profile.js'), 'ci.yml must resolve profile 
 assert(ciText.includes('--format github-output'), 'ci.yml gate-profile job must emit structured outputs');
 assert(ciText.includes('run_unit_tests'), 'ci.yml gate-profile job must expose unit-test gating output');
 assert(ciText.includes('run_regression_tests'), 'ci.yml gate-profile job must expose regression-test gating output');
+assert(ciText.includes('unit_command'), 'ci.yml gate-profile job must expose unit command output');
+assert(ciText.includes('regression_command'), 'ci.yml gate-profile job must expose regression command output');
 assert(ciText.includes('run_link_validation'), 'ci.yml gate-profile job must expose link-validation gating output');
 assert(ciText.includes('run_browser_tests'), 'ci.yml gate-profile job must expose browser-test gating output');
 assert(ciText.includes('browser_command'), 'ci.yml gate-profile job must expose browser command output');
@@ -58,6 +60,14 @@ assert(
   ciText.includes('needs.gate-profile.outputs.browser_command'),
   'ci.yml must route browser job execution through the resolved browser command'
 );
+assert(
+  ciText.includes('needs.gate-profile.outputs.unit_command'),
+  'ci.yml must route unit-test execution through the resolved unit command'
+);
+assert(
+  ciText.includes('needs.gate-profile.outputs.regression_command'),
+  'ci.yml must route regression-test execution through the resolved regression command'
+);
 
 assert(
   deployPagesText.includes('push:'),
@@ -78,6 +88,20 @@ assert(
 assert(
   deployPagesText.includes('GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}'),
   'deploy-pages.yml must pass GITHUB_TOKEN to CI monitor to avoid API rate-limit failures'
+);
+assert(
+  ciText.includes('actions/checkout@v6') &&
+    ciText.includes('actions/setup-node@v6') &&
+    ciText.includes('actions/upload-artifact@v7'),
+  'ci.yml must use modern GitHub-hosted action runtimes for checkout, node setup, and artifact upload'
+);
+assert(
+  deployPagesText.includes('actions/checkout@v6') &&
+    deployPagesText.includes('actions/setup-node@v6') &&
+    deployPagesText.includes('actions/configure-pages@v6') &&
+    deployPagesText.includes('actions/upload-pages-artifact@v4') &&
+    deployPagesText.includes('actions/deploy-pages@v5'),
+  'deploy-pages.yml must use modern Pages action runtimes'
 );
 
 console.log('PASS: CI gate profile automation checks passed.');

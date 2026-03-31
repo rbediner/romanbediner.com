@@ -31,6 +31,7 @@ const requiredScripts = {
   'qa:gate:release-infra': 'node scripts/qa/run-selective-gate.js --profile release-infra',
   'qa:gate:full-regression': 'node scripts/qa/run-selective-gate.js --profile full-regression',
   'qa:browser:smoke': 'node scripts/qa/run-browser-smoke.js',
+  'qa:static-contracts': 'node scripts/qa/run-static-contract-suite.js',
   'qa:prepush-gate': 'node scripts/qa/run-prepush-gate.js',
   'qa:prod-promotion-gate': 'node scripts/qa/verify-prod-promotion-candidate.js',
   'qa:smoke:prod': 'node scripts/qa/verify-live-production.js && node scripts/qa/verify-live-browser-smoke.js',
@@ -125,8 +126,13 @@ assert(gateResolverText.includes("'full-regression'"), 'gate resolver must defin
 assert(gateResolverText.includes('run_link_validation'), 'gate resolver must define selective link-validation behavior');
 assert(gateResolverText.includes('run_lighthouse_validation'), 'gate resolver must define selective Lighthouse behavior');
 assert(gateResolverText.includes('run_build_artifact'), 'gate resolver must define selective artifact behavior');
+assert(gateResolverText.includes('unitCommandTemplate'), 'gate resolver must define selective unit command templates');
+assert(gateResolverText.includes('regressionCommandTemplate'), 'gate resolver must define selective regression command templates');
 assert(gateResolverText.includes('browserCommandTemplate'), 'gate resolver must define browser command templates');
 assert(gateResolverText.includes("localCommands: ['npm run test:docs-gate']"), 'docs-only gate must use the dedicated docs validation suite');
+assert(gateResolverText.includes('run-static-contract-suite.js --profile localized-page --mode node'), 'localized-page gate must use targeted node contract suite');
+assert(gateResolverText.includes('run-static-contract-suite.js --profile shared-ui --mode node'), 'shared-ui gate must use targeted node contract suite');
+assert(gateResolverText.includes('run-static-contract-suite.js --profile release-infra --mode node'), 'release-infra gate must use targeted node contract suite');
 assert(gateResolverText.includes('run-browser-smoke.js --scopes {routeScopesCsv}'), 'localized-page gate must use targeted browser smoke');
 assert(
   gateResolverText.includes("browserCommandTemplate: 'npm run test:playwright -- --workers=3'"),
@@ -140,6 +146,14 @@ assert(selectiveGateRunnerText.includes('latest-local-gate.json'), 'selective ga
 assert(selectiveGateRunnerText.includes('http.server'), 'selective gate runner must start a local server for links/Lighthouse when needed');
 assert(selectiveGateRunnerText.includes('PASS: selective local QA gate passed.'), 'selective gate runner must report successful gate execution');
 assert(selectiveGateRunnerText.includes('applyCommandPlaceholders'), 'selective gate runner must resolve route-scoped browser smoke commands');
+
+const staticSuiteRunnerPath = path.join(ROOT, 'scripts', 'qa', 'run-static-contract-suite.js');
+assert(fs.existsSync(staticSuiteRunnerPath), 'scripts/qa/run-static-contract-suite.js must exist');
+const staticSuiteRunnerText = fs.readFileSync(staticSuiteRunnerPath, 'utf8');
+assert(staticSuiteRunnerText.includes('LOCALIZED_NODE_BY_SCOPE'), 'static suite runner must map localized route scopes');
+assert(staticSuiteRunnerText.includes('SHARED_UI_NODE_TESTS'), 'static suite runner must define shared-ui node suite');
+assert(staticSuiteRunnerText.includes('RELEASE_INFRA_JEST_TESTS'), 'static suite runner must define release-infra jest suite');
+assert(staticSuiteRunnerText.includes('PASS: selective static contract suite passed.'), 'static suite runner must report successful execution');
 
 const browserSmokePath = path.join(ROOT, 'scripts', 'qa', 'run-browser-smoke.js');
 assert(fs.existsSync(browserSmokePath), 'scripts/qa/run-browser-smoke.js must exist');

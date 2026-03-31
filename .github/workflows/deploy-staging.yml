@@ -55,12 +55,12 @@ jobs:
           fi
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ steps.source.outputs.source_sha }}
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
 
@@ -81,7 +81,7 @@ jobs:
         run: node scripts/qa/verify-preview-artifact.js --artifact /tmp/rb-staging-preview-artifact --expect-commit ${{ steps.source.outputs.source_sha }}
 
       - name: Upload preview artifact backup
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: staging-preview-artifact-${{ steps.source.outputs.source_sha }}
           path: /tmp/rb-staging-preview-artifact

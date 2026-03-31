@@ -24,10 +24,10 @@ Best-practice principle:
 
 | Gate | When it should run | What it runs | What it intentionally skips | GA coverage |
 | --- | --- | --- | --- | --- |
-| `docs-only` | `README.md`, `docs/**`, `AGENTS.md` only | `docs:verify`, `test:node`, `test:jest` | Browser, links, Lighthouse, artifact build, Python QA | Covered indirectly through static contract tests only |
-| `localized-page` | One route scope only (`home`, `about`, `services`, `framework`, `connect`) | `test:node`, `test:jest`, `test:links`, targeted browser smoke for the affected route | Python QA, Lighthouse, artifact build, full visual regression | Static GA contract + targeted browser/runtime GA bootstrap validation |
-| `shared-ui` | Shared CSS, shared nav, shared runtime JS, multi-route shell/layout changes | `test:node`, `test:jest`, `test:links`, browser smoke across all canonical routes, `test:lighthouse` | Python QA, artifact build | GA static + runtime coverage |
-| `release-infra` | Workflows, release scripts, build scripts, repo contract, architecture control files | `verify:repo-contract`, `verify:workflow-integrity`, `test:node`, `test:jest`, artifact build + integrity verify | Page/browser regressions unless the change also touches product UI | GA contract stays in scope because deploy/build changes can strip analytics |
+| `docs-only` | `README.md`, `docs/**`, `AGENTS.md` only | `docs:verify` + dedicated README/handoff/SOP Jest suite (`test:docs-gate`) | Browser, links, Lighthouse, artifact build, Python QA | Covered indirectly through documentation contract tests only |
+| `localized-page` | One route scope only (`home`, `about`, `services`, `framework`, `connect`) | route-owned static contract suite (`run-static-contract-suite.js` for Node + Jest), `test:links`, targeted browser smoke for the affected route | Python QA, Lighthouse, artifact build, full visual regression | Static GA contract + targeted browser/runtime GA bootstrap validation |
+| `shared-ui` | Shared CSS, shared nav, shared runtime JS, multi-route shell/layout changes | shared UI static contract suite (`run-static-contract-suite.js` for Node + Jest), `test:links`, browser smoke across all canonical routes, `test:lighthouse` | Python QA, artifact build | GA static + runtime coverage |
+| `release-infra` | Workflows, release scripts, build scripts, repo contract, architecture control files | `verify:repo-contract`, `verify:workflow-integrity`, release/documentation static contract suite (`run-static-contract-suite.js` for Node + Jest), artifact build + integrity verify | Page/browser regressions unless the change also touches product UI | GA contract stays in scope because deploy/build changes can strip analytics |
 | `full-regression` | Broad, mixed, unknown, or cross-cutting changes | `qa:ci-parity` | Nothing | Full GA coverage |
 
 ### Why this changed from v1

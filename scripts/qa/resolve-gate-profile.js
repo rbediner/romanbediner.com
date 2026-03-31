@@ -74,12 +74,14 @@ const ROUTE_SCOPES = {
 const PROFILE_SETTINGS = {
   'docs-only': {
     runUnitTests: true,
-    runRegressionTests: true,
+    runRegressionTests: false,
     runLinkValidation: false,
     runBrowserTests: false,
     runQaTests: false,
     runLighthouseValidation: false,
     runBuildArtifact: false,
+    unitCommandTemplate: 'npm run test:docs-gate',
+    regressionCommandTemplate: '',
     browserCommandTemplate: '',
     // Keep docs-only changes on a purpose-built suite so README/handoff edits
     // do not pay for whole-site contract checks they cannot affect directly.
@@ -93,10 +95,14 @@ const PROFILE_SETTINGS = {
     runQaTests: false,
     runLighthouseValidation: false,
     runBuildArtifact: false,
+    unitCommandTemplate:
+      'node scripts/qa/run-static-contract-suite.js --profile localized-page --mode node --scopes {routeScopesCsv}',
+    regressionCommandTemplate:
+      'node scripts/qa/run-static-contract-suite.js --profile localized-page --mode jest --scopes {routeScopesCsv}',
     browserCommandTemplate: 'node scripts/qa/run-browser-smoke.js --scopes {routeScopesCsv}',
     localCommands: [
-      'npm run test:node',
-      'npm run test:jest',
+      'node scripts/qa/run-static-contract-suite.js --profile localized-page --mode node --scopes {routeScopesCsv}',
+      'node scripts/qa/run-static-contract-suite.js --profile localized-page --mode jest --scopes {routeScopesCsv}',
       'npm run test:links',
       'node scripts/qa/run-browser-smoke.js --scopes {routeScopesCsv}'
     ]
@@ -109,10 +115,14 @@ const PROFILE_SETTINGS = {
     runQaTests: false,
     runLighthouseValidation: true,
     runBuildArtifact: false,
+    unitCommandTemplate:
+      'node scripts/qa/run-static-contract-suite.js --profile shared-ui --mode node --scopes {routeScopesCsv}',
+    regressionCommandTemplate:
+      'node scripts/qa/run-static-contract-suite.js --profile shared-ui --mode jest --scopes {routeScopesCsv}',
     browserCommandTemplate: 'node scripts/qa/run-browser-smoke.js --scopes all',
     localCommands: [
-      'npm run test:node',
-      'npm run test:jest',
+      'node scripts/qa/run-static-contract-suite.js --profile shared-ui --mode node --scopes {routeScopesCsv}',
+      'node scripts/qa/run-static-contract-suite.js --profile shared-ui --mode jest --scopes {routeScopesCsv}',
       'npm run test:links',
       'node scripts/qa/run-browser-smoke.js --scopes all',
       'npm run test:lighthouse'
@@ -126,12 +136,16 @@ const PROFILE_SETTINGS = {
     runQaTests: false,
     runLighthouseValidation: false,
     runBuildArtifact: true,
+    unitCommandTemplate:
+      'node scripts/qa/run-static-contract-suite.js --profile release-infra --mode node --scopes all',
+    regressionCommandTemplate:
+      'node scripts/qa/run-static-contract-suite.js --profile release-infra --mode jest --scopes all',
     browserCommandTemplate: '',
     localCommands: [
       'npm run verify:repo-contract',
       'npm run verify:workflow-integrity',
-      'npm run test:node',
-      'npm run test:jest',
+      'node scripts/qa/run-static-contract-suite.js --profile release-infra --mode node --scopes all',
+      'node scripts/qa/run-static-contract-suite.js --profile release-infra --mode jest --scopes all',
       'node scripts/build/create-artifact.js --out /tmp/rb-selective-artifact && node scripts/qa/verify-artifact-integrity.js --artifact /tmp/rb-selective-artifact --expect-commit $(git rev-parse HEAD)'
     ]
   },
@@ -143,6 +157,8 @@ const PROFILE_SETTINGS = {
     runQaTests: true,
     runLighthouseValidation: true,
     runBuildArtifact: true,
+    unitCommandTemplate: 'npm run test:node',
+    regressionCommandTemplate: 'npm run test:jest -- --maxWorkers=50%',
     browserCommandTemplate: 'npm run test:playwright -- --workers=3',
     localCommands: ['npm run qa:ci-parity']
   }
@@ -190,6 +206,12 @@ function buildProfile(profile, reason, changedFiles, routeScopes) {
     changedFiles,
     routeScopes: scopes,
     settings,
+    unitCommand: settings.unitCommandTemplate
+      ? applyCommandPlaceholders(settings.unitCommandTemplate, scopes)
+      : '',
+    regressionCommand: settings.regressionCommandTemplate
+      ? applyCommandPlaceholders(settings.regressionCommandTemplate, scopes)
+      : '',
     browserCommand: settings.browserCommandTemplate
       ? applyCommandPlaceholders(settings.browserCommandTemplate, scopes)
       : ''
@@ -364,6 +386,8 @@ function formatAsGitHubOutput(profileResult) {
     `route_scopes=${profileResult.routeScopes.join(',')}`,
     `run_unit_tests=${String(profileResult.settings.runUnitTests)}`,
     `run_regression_tests=${String(profileResult.settings.runRegressionTests)}`,
+    `unit_command=${profileResult.unitCommand}`,
+    `regression_command=${profileResult.regressionCommand}`,
     `run_link_validation=${String(profileResult.settings.runLinkValidation)}`,
     `run_browser_tests=${String(profileResult.settings.runBrowserTests)}`,
     `run_qa_tests=${String(profileResult.settings.runQaTests)}`,

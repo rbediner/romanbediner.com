@@ -335,9 +335,9 @@ nvm install
   - `full-regression`
 - Gate intent:
   - `docs-only`: documentation and handoff integrity only, using a dedicated docs suite instead of the whole static contract stack
-  - `localized-page`: one route scope changed, so validate that page with targeted desktop/mobile browser smoke, nav/link checks, GA bootstrap, and route-specific JS hotspots without paying for whole-site regression
-  - `shared-ui`: shared CSS/nav/runtime changes, so validate all critical pages, nav contracts, mobile behavior, layout-sensitive UI contracts, and browser/Lighthouse coverage
-  - `release-infra`: workflow/release/build automation changed, so validate contracts, release logic, and artifact integrity
+  - `localized-page`: one route scope changed, so validate only that route’s static contracts, targeted desktop/mobile browser smoke, nav/link checks, GA bootstrap, and route-specific JS hotspots without paying for whole-site regression
+  - `shared-ui`: shared CSS/nav/runtime changes, so run the purpose-built shared shell suite across critical pages, nav contracts, mobile behavior, layout-sensitive UI contracts, and browser/Lighthouse coverage
+  - `release-infra`: workflow/release/build automation changed, so validate release/documentation contracts, release logic, and artifact integrity without replaying page-level product checks
   - `full-regression`: broad or ambiguous changes, so run the whole stack
 - CI is split into explicit guardrails and parallel validation jobs:
   - `session-ready`
@@ -364,6 +364,9 @@ nvm install
   - `qa:smoke:prod`: verifies GA bootstrap is present and initializes on the live domain after deploy
 - Design-contract protection is intentionally broader than plain “page loads”:
   - `npm run test:node` remains the static contract layer for header/body alignment, icon sizing, orb bullet spacing, typography/spacing rules, and route-specific markup/schema conventions
+  - `npm run qa:static-contracts -- --profile localized-page --mode node --scopes <route>` now runs the small route-owned static suite used by both local gates and CI
+  - `npm run qa:static-contracts -- --profile shared-ui --mode node --scopes all` now runs the shared-shell contract suite used by both local gates and CI
+  - `npm run qa:static-contracts -- --profile release-infra --mode node --scopes all` now runs the release/documentation contract suite used by both local gates and CI
   - `npm run qa:browser:smoke` adds fast browser enforcement for navigation, mobile overflow, service-list bullet styling, and selected JS hotspots
 - Current selective browser smoke checks cover:
   - shared desktop + mobile nav structure
@@ -376,6 +379,14 @@ nvm install
 - Production deployment is separate from validation and runs only on `push` to `prod`.
 - `Deploy Pages` explicitly waits for matching prod `CI` success for the same SHA before artifact deploy, preventing branch-ambiguity when the same commit exists on multiple branches.
 - The prod CI-wait step passes `GITHUB_TOKEN` to the monitor script for authenticated GitHub API polling and reliable rate-limit behavior in Actions runners.
+- GitHub Actions runtime modernization is now pinned to the current Node 24-based majors on official GitHub-hosted actions:
+  - `actions/checkout@v6`
+  - `actions/setup-node@v6`
+  - `actions/setup-python@v6`
+  - `actions/upload-artifact@v7`
+  - `actions/configure-pages@v6`
+  - `actions/upload-pages-artifact@v4`
+  - `actions/deploy-pages@v5`
 - `Deploy Pages` checks out the exact source SHA before running monitor/build steps so release scripts are always available in runner workspace.
 - Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are guarded on successful deploy result.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
@@ -399,9 +410,9 @@ nvm install
 - `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
 - Local pre-push hook runs `npm run qa:prepush-gate` and now chooses a selective gate automatically:
   - docs-only changes (`README.md`, `docs/**`, `AGENTS.md`) run `npm run qa:gate:docs-only`, which now collapses to `npm run test:docs-gate`
-  - one-route page/content/asset changes run `npm run qa:gate:localized-page`
-  - shared-shell/nav/runtime changes run `npm run qa:gate:shared-ui`
-  - workflow/release/build changes run `npm run qa:gate:release-infra`
+  - one-route page/content/asset changes run `npm run qa:gate:localized-page`, which now calls `run-static-contract-suite.js` for route-owned Node/Jest checks before links + browser smoke
+  - shared-shell/nav/runtime changes run `npm run qa:gate:shared-ui`, which now calls `run-static-contract-suite.js` for shared UI Node/Jest checks before links + browser smoke + Lighthouse
+  - workflow/release/build changes run `npm run qa:gate:release-infra`, which now calls `run-static-contract-suite.js` for release/documentation Node/Jest checks before artifact verification
   - exact `staging -> prod` promotions run `npm run qa:prod-promotion-gate`
   - broad or unmapped changes fall back to `npm run qa:gate:full-regression`
 - Selective local gate runs now emit measurable output to:
@@ -983,6 +994,8 @@ Operator shortcut prompt for new Codex sessions:
   - `npm run qa:gate:resolve`
   - `npm run qa:gate:docs-only`
   - `npm run test:docs-gate`
+  - `npm run qa:static-contracts -- --profile localized-page --mode node --scopes home`
+  - `npm run qa:static-contracts -- --profile shared-ui --mode jest --scopes all`
   - `npm run qa:gate:localized-page`
   - `npm run qa:gate:shared-ui`
   - `npm run qa:gate:release-infra`
