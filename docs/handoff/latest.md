@@ -1,12 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 154
-- Updated At (UTC): 2026-03-31T19:27:50Z
+- Handoff Sequence: 155
+- Updated At (UTC): 2026-03-31T20:20:00Z
 - Source Branch: prod
-- Source Commit: e516d06d79f2acbc492ca3ec62609aa00a473094 (selective gate v1.2 runtime + suite optimization ready for staged release)
+- Source Commit: 3de411b1bb448d8e2637f1c02824fe9f077fe3d9 (opt into Node 24 for upload-pages-artifact internal dependency)
 
 ## Current State
-- This session upgrades the selective QA system from the first gate draft to a more efficient `v1.2` model while keeping the protective `v1.1` browser/mobile/nav/GA coverage intact.
+- Node 24 migration is now complete for all directly-controlled workflow actions. The remaining warning (`actions/upload-pages-artifact@v4` internally calling `upload-artifact@v4.6.2`, Node 20) is handled by `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'` set at the job level on `deploy-pages` and `rollback-deploy`. GitHub's annotation will continue to say "being forced to run on Node.js 24" until `upload-pages-artifact@v5` ships. Remove the env var then and bump the action version.
+- Deadline for forced cutover: June 2, 2026.
+- The previous session upgraded the selective QA system from the first gate draft to a more efficient `v1.2` model while keeping the protective `v1.1` browser/mobile/nav/GA coverage intact.
 - The old blunt `fast/full` CI language has been replaced in code/docs with five explicit gate profiles:
   - `docs-only`
   - `localized-page`
