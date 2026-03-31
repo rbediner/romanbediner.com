@@ -96,4 +96,8 @@ describe('pre-push gate docs-only policy', () => {
       'full-regression'
     ]);
   });
+
+  test('keeps docs-only local gate bound to the dedicated docs suite', () => {
+    expect(PROFILE_SETTINGS['docs-only'].localCommands).toEqual(['npm run test:docs-gate']);
+  });
 });

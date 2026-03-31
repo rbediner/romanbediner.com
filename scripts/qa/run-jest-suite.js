@@ -57,10 +57,15 @@ if (!fs.existsSync(JEST_BIN)) {
 }
 
 const jestArgs = [JEST_BIN, '--passWithNoTests'];
-if (!process.argv.slice(2).some((arg) => arg.startsWith('--maxWorkers'))) {
+const requestedArgs = process.argv.slice(2);
+const forcesSingleProcess = requestedArgs.includes('--runInBand') || requestedArgs.includes('-i');
+
+// Respect explicit serial runs so targeted suites can avoid the worker pool
+// entirely without conflicting with the default max-worker policy.
+if (!forcesSingleProcess && !requestedArgs.some((arg) => arg.startsWith('--maxWorkers'))) {
   jestArgs.push(`--maxWorkers=${process.env.JEST_JOBS_DEFAULT || '50%'}`);
 }
-jestArgs.push(...process.argv.slice(2));
+jestArgs.push(...requestedArgs);
 
 const rerunResult = spawnSync(process.execPath, jestArgs, {
   cwd: ROOT,

@@ -334,7 +334,7 @@ nvm install
   - `release-infra`
   - `full-regression`
 - Gate intent:
-  - `docs-only`: documentation and handoff integrity only
+  - `docs-only`: documentation and handoff integrity only, using a dedicated docs suite instead of the whole static contract stack
   - `localized-page`: one route scope changed, so validate that page with targeted desktop/mobile browser smoke, nav/link checks, GA bootstrap, and route-specific JS hotspots without paying for whole-site regression
   - `shared-ui`: shared CSS/nav/runtime changes, so validate all critical pages, nav contracts, mobile behavior, layout-sensitive UI contracts, and browser/Lighthouse coverage
   - `release-infra`: workflow/release/build automation changed, so validate contracts, release logic, and artifact integrity
@@ -398,7 +398,7 @@ nvm install
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
 - `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
 - Local pre-push hook runs `npm run qa:prepush-gate` and now chooses a selective gate automatically:
-  - docs-only changes (`README.md`, `docs/**`, `AGENTS.md`) run `npm run qa:gate:docs-only`
+  - docs-only changes (`README.md`, `docs/**`, `AGENTS.md`) run `npm run qa:gate:docs-only`, which now collapses to `npm run test:docs-gate`
   - one-route page/content/asset changes run `npm run qa:gate:localized-page`
   - shared-shell/nav/runtime changes run `npm run qa:gate:shared-ui`
   - workflow/release/build changes run `npm run qa:gate:release-infra`
@@ -982,6 +982,7 @@ Operator shortcut prompt for new Codex sessions:
 - Manual gate commands:
   - `npm run qa:gate:resolve`
   - `npm run qa:gate:docs-only`
+  - `npm run test:docs-gate`
   - `npm run qa:gate:localized-page`
   - `npm run qa:gate:shared-ui`
   - `npm run qa:gate:release-infra`

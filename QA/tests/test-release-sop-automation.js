@@ -41,6 +41,7 @@ const requiredScripts = {
   'ci:monitor': 'node scripts/release/watch-ci-run.js',
   'release:verify-prod': 'node scripts/release/verify-prod-release.js',
   'release:staging-prod': 'bash scripts/release/promote-tested-staging-to-prod.sh',
+  'test:docs-gate': 'npm run docs:verify && node scripts/qa/run-jest-suite.js QA/tests/jest/readme_integrity.test.js QA/tests/jest/readme_structure.test.js QA/tests/jest/handoff_latest_contract.test.js QA/tests/jest/deployment_sop.test.js --runInBand',
   'prepare': 'node scripts/release/install-local-husky-hooks.js'
 };
 
@@ -125,6 +126,7 @@ assert(gateResolverText.includes('run_link_validation'), 'gate resolver must def
 assert(gateResolverText.includes('run_lighthouse_validation'), 'gate resolver must define selective Lighthouse behavior');
 assert(gateResolverText.includes('run_build_artifact'), 'gate resolver must define selective artifact behavior');
 assert(gateResolverText.includes('browserCommandTemplate'), 'gate resolver must define browser command templates');
+assert(gateResolverText.includes("localCommands: ['npm run test:docs-gate']"), 'docs-only gate must use the dedicated docs validation suite');
 assert(gateResolverText.includes('run-browser-smoke.js --scopes {routeScopesCsv}'), 'localized-page gate must use targeted browser smoke');
 assert(
   gateResolverText.includes("browserCommandTemplate: 'npm run test:playwright -- --workers=3'"),

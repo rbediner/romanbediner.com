@@ -81,7 +81,9 @@ const PROFILE_SETTINGS = {
     runLighthouseValidation: false,
     runBuildArtifact: false,
     browserCommandTemplate: '',
-    localCommands: ['npm run docs:verify', 'npm run test:node', 'npm run test:jest']
+    // Keep docs-only changes on a purpose-built suite so README/handoff edits
+    // do not pay for whole-site contract checks they cannot affect directly.
+    localCommands: ['npm run test:docs-gate']
   },
   'localized-page': {
     runUnitTests: true,

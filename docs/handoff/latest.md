@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 151
-- Updated At (UTC): 2026-03-31T22:34:00Z
+- Handoff Sequence: 153
+- Updated At (UTC): 2026-03-31T23:32:00Z
 - Source Branch: prod
-- Source Commit: 0553b3c15dcf79c5f7dbe624c72103523d94a8f7 (release cleanup fully promoted)
+- Source Commit: a9822c3ec5b9f1e65dff82c91c18ae35b2227d7b (docs-only gate optimization ready for promotion)
 
 ## Current State
 - This session upgrades the selective QA system from the first gate draft to a more protective `v1.1` model on `staging`.
@@ -27,6 +27,19 @@
 - Operator release rule is now explicit in docs:
   - stay with the release until the final remote workflow for that environment has concluded
   - do not report completion for `staging`, preview publication, or `prod` while any deploy or validation job is still running
+- Docs-only local QA was further optimized this session:
+  - `scripts/qa/resolve-gate-profile.js` now maps `docs-only` to a single dedicated command:
+    - `npm run test:docs-gate`
+  - `test:docs-gate` intentionally runs only:
+    - `npm run docs:verify`
+    - `QA/tests/jest/readme_integrity.test.js`
+    - `QA/tests/jest/readme_structure.test.js`
+    - `QA/tests/jest/handoff_latest_contract.test.js`
+    - `QA/tests/jest/deployment_sop.test.js`
+  - this removes the old docs-only dependency on the full `test:node` + full Jest bundle while preserving README, handoff, and SOP safety
+  - measured local improvement on this machine:
+    - previous docs-only pre-push gate: about `8666ms`
+    - optimized docs-only selective gate: about `1954ms`
 - Review document created for next-day operator review:
   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
 
