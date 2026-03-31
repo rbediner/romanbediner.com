@@ -40,6 +40,8 @@ const requiredScripts = {
   'qa:smoke:preview': 'node scripts/qa/verify-live-preview.js',
   'qa:ci-parity': 'bash scripts/qa/run-ci-parity.sh',
   'ci:monitor': 'node scripts/release/watch-ci-run.js',
+  'release:watchers:status': 'node scripts/release/manage-release-watchers.js status',
+  'release:watchers:cleanup': 'node scripts/release/manage-release-watchers.js cleanup',
   'release:verify-prod': 'node scripts/release/verify-prod-release.js',
   'release:staging-prod': 'bash scripts/release/promote-tested-staging-to-prod.sh',
   'test:docs-gate': 'npm run docs:verify && node scripts/qa/run-jest-suite.js QA/tests/jest/readme_integrity.test.js QA/tests/jest/readme_structure.test.js QA/tests/jest/handoff_latest_contract.test.js QA/tests/jest/deployment_sop.test.js --runInBand',
@@ -60,6 +62,9 @@ assert(ciParityText.includes('npm run test:visual'), 'run-ci-parity.sh missing v
 
 const releasePath = path.join(ROOT, 'scripts', 'release', 'promote-tested-staging-to-prod.sh');
 const releaseText = fs.readFileSync(releasePath, 'utf8');
+assert(releaseText.includes('cleanup_release_watchers()'), 'release script must define watcher cleanup helper');
+assert(releaseText.includes('node scripts/release/manage-release-watchers.js cleanup'), 'release script must clean watcher processes');
+assert(releaseText.includes('trap cleanup_release_watchers EXIT INT TERM'), 'release script must clean watcher processes on exit');
 assert(releaseText.includes('bash scripts/qa/run-ci-parity.sh'), 'release script must run CI parity before push');
 assert(releaseText.includes('git push origin staging'), 'release script must push staging');
 assert(releaseText.includes('git pull --ff-only origin staging'), 'release script must fast-forward pull staging');
@@ -87,6 +92,14 @@ assert(monitorText.includes('--api-retries'), 'monitor script usage must documen
 assert(monitorText.includes('--workflow "Workflow Name"'), 'monitor script usage must document workflow-name filter');
 assert(monitorText.includes('--require-run-within 900'), 'monitor script usage must document fail-fast run discovery timeout');
 assert(monitorText.includes('No matching run discovered within'), 'monitor script must fail fast when run discovery timeout is exceeded');
+
+const watcherManagerPath = path.join(ROOT, 'scripts', 'release', 'manage-release-watchers.js');
+assert(fs.existsSync(watcherManagerPath), 'scripts/release/manage-release-watchers.js must exist');
+const watcherManagerText = fs.readFileSync(watcherManagerPath, 'utf8');
+assert(watcherManagerText.includes('gh-run-list-loop'), 'watcher manager must classify gh run list loops');
+assert(watcherManagerText.includes('gh-run-watch'), 'watcher manager must classify gh run watch processes');
+assert(watcherManagerText.includes('Only repo-owned watcher loops are targeted.'), 'watcher manager usage must document repo-owned scope');
+assert(watcherManagerText.includes('lsof'), 'watcher manager must verify cwd ownership before cleanup');
 
 const ciWorkflowPath = path.join(ROOT, '.github', 'workflows', 'ci.yml');
 const ciWorkflowText = fs.readFileSync(ciWorkflowPath, 'utf8');
@@ -174,10 +187,24 @@ assert(prodPromotionGateText.includes("const PROD_BRANCH = 'prod'"), 'prod promo
 assert(prodPromotionGateText.includes("const STAGING_CI_WORKFLOW_NAME = 'CI'"), 'prod promotion gate must validate the staging CI workflow');
 assert(prodPromotionGateText.includes('watch-ci-run.js'), 'prod promotion gate must monitor existing staging CI status before prod push');
 
+const verifyProdReleasePath = path.join(ROOT, 'scripts', 'release', 'verify-prod-release.js');
+const verifyProdReleaseText = fs.readFileSync(verifyProdReleasePath, 'utf8');
+assert(verifyProdReleaseText.includes('manage-release-watchers.js'), 'verify-prod-release must clean watcher processes before and after release verification');
+
 const prepareHuskyPath = path.join(ROOT, 'scripts', 'release', 'install-local-husky-hooks.js');
 assert(fs.existsSync(prepareHuskyPath), 'scripts/release/install-local-husky-hooks.js must exist');
 const prepareHuskyText = fs.readFileSync(prepareHuskyPath, 'utf8');
 assert(prepareHuskyText.includes("process.env.CI === '1'") || prepareHuskyText.includes("process.env.CI === 'true'"), 'prepare-husky script must skip hook installation in CI');
 assert(prepareHuskyText.includes("No .git directory detected"), 'prepare-husky script must skip hook installation outside Git checkouts');
+
+const readmePath = path.join(ROOT, 'README.md');
+const readmeText = fs.readFileSync(readmePath, 'utf8');
+assert(readmeText.includes('npm run release:watchers:status'), 'README must document watcher status command');
+assert(readmeText.includes('npm run release:watchers:cleanup'), 'README must document watcher cleanup command');
+assert(readmeText.includes('Do not use ad-hoc shell polling loops'), 'README must forbid ad-hoc watcher loops');
+
+const handoffPath = path.join(ROOT, 'docs', 'handoff', 'latest.md');
+const handoffText = fs.readFileSync(handoffPath, 'utf8');
+assert(handoffText.includes('release watcher hygiene'), 'handoff must document release watcher hygiene');
 
 console.log('PASS: deployment SOP automation guardrails are in place.');

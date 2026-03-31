@@ -47,6 +47,17 @@ function runNode(scriptArgs, env = process.env) {
   }
 }
 
+function runWatcherCleanup(options = {}) {
+  const result = spawnSync(
+    process.execPath,
+    ['scripts/release/manage-release-watchers.js', 'cleanup'],
+    { stdio: 'inherit', env: process.env }
+  );
+  if (result.status !== 0 && options.hardFail !== false) {
+    process.exit(result.status || 1);
+  }
+}
+
 function lockPathFor(branch, sha) {
   const safeBranch = String(branch || 'prod').replace(/[^a-zA-Z0-9._-]/g, '_');
   const safeSha = String(sha || 'unknown').replace(/[^a-zA-Z0-9._-]/g, '_');
@@ -180,15 +191,21 @@ async function main() {
   }
 
   const lockPath = lockPathFor(branch, sha);
+  runWatcherCleanup();
   acquireLock(lockPath, { branch, sha, repo });
 
-  process.on('exit', () => releaseLock(lockPath));
+  process.on('exit', () => {
+    releaseLock(lockPath);
+    runWatcherCleanup({ hardFail: false });
+  });
   process.on('SIGINT', () => {
     releaseLock(lockPath);
+    runWatcherCleanup({ hardFail: false });
     process.exit(130);
   });
   process.on('SIGTERM', () => {
     releaseLock(lockPath);
+    runWatcherCleanup({ hardFail: false });
     process.exit(143);
   });
 

@@ -30,6 +30,8 @@
     "qa:full-local": "bash scripts/qa/run-local-full-qa.sh",
     "handoff:update": "node scripts/release/update-handoff-latest.js",
     "ci:monitor": "node scripts/release/watch-ci-run.js",
+    "release:watchers:status": "node scripts/release/manage-release-watchers.js status",
+    "release:watchers:cleanup": "node scripts/release/manage-release-watchers.js cleanup",
     "release:verify-prod": "node scripts/release/verify-prod-release.js",
     "release:staging-prod": "bash scripts/release/promote-tested-staging-to-prod.sh",
     "test:docs-gate": "npm run docs:verify && node scripts/qa/run-jest-suite.js QA/tests/jest/readme_integrity.test.js QA/tests/jest/readme_structure.test.js QA/tests/jest/handoff_latest_contract.test.js QA/tests/jest/deployment_sop.test.js --runInBand",

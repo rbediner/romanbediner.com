@@ -15,6 +15,15 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 cd "${REPO_ROOT}"
 
+cleanup_release_watchers() {
+  node scripts/release/manage-release-watchers.js cleanup
+}
+
+trap cleanup_release_watchers EXIT INT TERM
+
+echo "[release] Cleaning repo-owned release watcher processes before starting"
+cleanup_release_watchers
+
 if [[ -n "$(git status --porcelain)" ]]; then
   echo "[release] Working tree is not clean. Commit or stash changes first."
   exit 1

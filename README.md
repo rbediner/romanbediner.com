@@ -889,6 +889,14 @@ git checkout staging
 git pull --ff-only origin staging
 git status
 ```
+   - Release watcher hygiene: before starting a release, confirm there are no stranded repo-owned watcher loops:
+```bash
+npm run release:watchers:status
+```
+   - If a previous session left repo-owned watcher loops behind, clean them before continuing:
+```bash
+npm run release:watchers:cleanup
+```
 2. Run CI-parity locally (same suites required by release gate):
 ```bash
 npm run qa:ci-parity
@@ -921,6 +929,10 @@ node scripts/release/watch-ci-run.js --branch prod --sha "<tested-sha>"
 ```bash
 npm run release:staging-prod
 ```
+7. Watcher SOP:
+   - Do not use ad-hoc shell polling loops such as `while true; do gh run list ...; done`.
+   - Use `node scripts/release/watch-ci-run.js` or the managed release scripts only.
+   - A release is not complete until the final remote workflow is green and `npm run release:watchers:status` reports no active repo-owned watcher loops.
 
 ## Staging Preview
 Staging preview is isolated from production and is published to a separate repository target.

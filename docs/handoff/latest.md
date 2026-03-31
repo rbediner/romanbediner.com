@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 155
-- Updated At (UTC): 2026-03-31T20:20:00Z
+- Handoff Sequence: 156
+- Updated At (UTC): 2026-03-31T20:46:37Z
 - Source Branch: prod
-- Source Commit: 3de411b1bb448d8e2637f1c02824fe9f077fe3d9 (opt into Node 24 for upload-pages-artifact internal dependency)
+- Source Commit: ed50efb7b3d2ff1b951b7892c59aa0b65a910b44 (release watcher hygiene automation and managed cleanup commands)
 
 ## Current State
 - Node 24 migration is now complete for all directly-controlled workflow actions. The remaining warning (`actions/upload-pages-artifact@v4` internally calling `upload-artifact@v4.6.2`, Node 20) is handled by `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'` set at the job level on `deploy-pages` and `rollback-deploy`. GitHub's annotation will continue to say "being forced to run on Node.js 24" until `upload-pages-artifact@v5` ships. Remove the env var then and bump the action version.
@@ -29,6 +29,14 @@
 - Operator release rule is now explicit in docs:
   - stay with the release until the final remote workflow for that environment has concluded
   - do not report completion for `staging`, preview publication, or `prod` while any deploy or validation job is still running
+- Release watcher hygiene is now part of the operational SOP:
+  - release watcher hygiene is mandatory for staging/prod verification sessions
+  - do not use ad-hoc shell polling loops like `while true; do gh run list ...; done`
+  - use `node scripts/release/watch-ci-run.js` or the managed release automation only
+  - before or after release work, use:
+    - `npm run release:watchers:status`
+    - `npm run release:watchers:cleanup`
+  - canonical release helpers now auto-clean repo-owned watcher loops on entry and exit so stale terminal monitors do not accumulate across sessions
 - Docs-only local QA was optimized in the previous session and remains intact:
   - `scripts/qa/resolve-gate-profile.js` now maps `docs-only` to a single dedicated command:
     - `npm run test:docs-gate`
@@ -137,10 +145,21 @@
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/architecture/environment-model.json`
    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
    - this handoff file
+11. Added release watcher hygiene automation:
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/release/manage-release-watchers.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/release/promote-tested-staging-to-prod.sh`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/release/verify-prod-release.js`
+   - release helpers now clean repo-owned `gh`/shell watcher loops on entry and exit
+   - new operator commands:
+     - `npm run release:watchers:status`
+     - `npm run release:watchers:cleanup`
+   - new Jest/automation coverage protects watcher detection, cleanup wiring, and SOP wording
 
 ## Validation Performed
 - Local:
   - `npm run test:jest`
+  - `npm run release:watchers:status`
+  - `npm run release:watchers:cleanup`
   - `node scripts/qa/run-static-contract-suite.js --profile localized-page --mode node --scopes home`
   - `node scripts/qa/run-static-contract-suite.js --profile localized-page --mode jest --scopes connect`
   - `node scripts/qa/run-static-contract-suite.js --profile shared-ui --mode jest --scopes all`
@@ -178,6 +197,7 @@
   - mobile overflow
   - framework stage-pill interaction
 - The review document for tomorrow is the best place to start if the goal is to discuss what each gate should include/exclude.
+- Release watcher hygiene is now the expected cleanup path whenever a release session starts or ends. This replaced the old informal habit of leaving manual `gh run list` polling loops running in terminal tabs.
 
 ## Fresh Machine Prerequisites (Operator Quick List)
 1. Install `git`
