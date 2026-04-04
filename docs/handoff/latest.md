@@ -1,7 +1,7 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 157
-- Updated At (UTC): 2026-03-31T21:04:48Z
+- Handoff Sequence: 159
+- Updated At (UTC): 2026-04-04T14:02:33Z
 - Source Branch: prod
 - Source Commit: e03a0737d7e03d28a093712a034773560e9325df (release watcher hygiene automation and managed cleanup commands)
 
@@ -16,15 +16,15 @@
   - `release-infra`
   - `full-regression`
 - Production smoke remains a separate post-deploy verification step and now includes a lightweight live browser pass through:
-  - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-production.js`
-  - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
+  - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/verify-live-production.js`
+  - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
   - npm alias: `npm run qa:smoke:prod`
 - Release-pipeline correction completed:
   - the first prod rollout after browser smoke integration exposed a workflow bug: `post-deploy-validation` installed Chromium but did not run `npm ci`, so live smoke failed with `Cannot find module 'playwright'` after the site had already deployed
   - the immediate rerun fixed that dependency gap, but then surfaced a second issue: live browser smoke treated a CSP-blocked `static.cloudflareinsights.com` beacon attempt as an app runtime failure
   - the follow-up prod release fixed both gaps and completed successfully end-to-end:
-    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/deploy-pages.yml` now installs Node dependencies before browser smoke
-    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-browser-smoke.js` now ignores only that known non-app CSP-blocked beacon noise while keeping real runtime errors release-blocking
+    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/.github/workflows/deploy-pages.yml` now installs Node dependencies before browser smoke
+    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/run-browser-smoke.js` now ignores only that known non-app CSP-blocked beacon noise while keeping real runtime errors release-blocking
     - new automation guardrail coverage was added before re-driving the fix through `staging` and `prod`
 - Operator release rule is now explicit in docs:
   - stay with the release until the final remote workflow for that environment has concluded
@@ -51,10 +51,10 @@
     - previous docs-only pre-push gate: about `8666ms`
     - optimized docs-only selective gate: about `1954ms`
 - Review document created for next-day operator review:
-  - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
+  - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
 - Current selective-gate improvement in this session:
   - `localized-page`, `shared-ui`, and `release-infra` now use a new purpose-built static suite runner:
-    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-static-contract-suite.js`
+    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/run-static-contract-suite.js`
   - this removes the old mismatch where selective gates still replayed the broad `test:node` + `test:jest` bundles underneath
   - CI now consumes resolved `unit_command` and `regression_command` outputs from the shared gate resolver instead of hard-coding broad test commands
   - GitHub-hosted workflow actions were modernized to current upstream majors to clear Node 20 runtime deprecation warnings:
@@ -68,26 +68,26 @@
 
 ## What Changed In This Session
 1. Strengthened the shared selective-gate classifier:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/resolve-gate-profile.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/resolve-gate-profile.js`
    - still classifies changed files into the five gate profiles
    - now emits route-scoped `unit_command`, `regression_command`, and browser commands so CI and local gates run the smallest responsible suite for each profile
    - route scopes remain `home`, `about`, `services`, `framework`, and `connect`
 2. Added the purpose-built static suite runner:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-static-contract-suite.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/run-static-contract-suite.js`
    - owns the route-to-test mapping for:
      - `localized-page`
      - `shared-ui`
      - `release-infra`
    - keeps localized route checks, shared shell checks, and release/doc automation checks separate instead of replaying broad whole-site Node/Jest bundles
 3. Updated the measurable selective local gate runner:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-selective-gate.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/run-selective-gate.js`
    - runs the exact local commands for the selected gate
    - now resolves route placeholders into concrete browser smoke commands before execution
    - writes timing metrics to:
-     - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
+     - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
 4. Added targeted browser smoke tooling:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-browser-smoke.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/run-browser-smoke.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/verify-live-browser-smoke.js`
    - browser smoke now explicitly protects:
      - shared nav labels/hrefs on desktop and mobile
      - mobile menu open/close and overflow safety
@@ -111,7 +111,7 @@
    - `qa:smoke:prod:browser`
    - `qa:smoke:preview`
 6. Upgraded CI gate selection:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/ci.yml`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/.github/workflows/ci.yml`
    - CI now resolves the selective gate profile through the shared classifier
    - CI job summary now prints the selected profile and which validations are enabled
    - expensive jobs (`qa-tests`, `browser-tests`, `lighthouse-validation`, `build-artifact`) are now driven by explicit profile outputs instead of old `full_gate` logic
@@ -121,34 +121,34 @@
      - `shared-ui` gets browser smoke across canonical routes
      - `full-regression` still uses the full 3-worker Playwright suite
 7. Modernized workflow action runtimes:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/ci.yml`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/deploy-pages.yml`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/deploy-staging.yml`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/rollback.yml`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/.github/workflows/ci.yml`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/.github/workflows/deploy-pages.yml`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/.github/workflows/deploy-staging.yml`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/.github/workflows/rollback.yml`
    - now pinned to current upstream majors that run on the modern Node 24-based action runtime
 8. Upgraded production post-deploy smoke:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/.github/workflows/deploy-pages.yml`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/.github/workflows/deploy-pages.yml`
    - prod validation now installs Chromium and runs:
      - `npm run qa:smoke:prod`
    - this now combines fetch-based live checks with lightweight live browser smoke
 9. Updated tests for the v1.2 model:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/prepush_gate.test.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/static_contract_suite.test.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/selective_gate_runner.test.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/deployment_sop.test.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/jest/browser_smoke_contract.test.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/test-ci-gate-profile-automation.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/test-release-sop-automation.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/tests/test-live-deploy-validation-automation.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/jest/prepush_gate.test.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/jest/static_contract_suite.test.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/jest/selective_gate_runner.test.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/jest/deployment_sop.test.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/jest/browser_smoke_contract.test.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/test-ci-gate-profile-automation.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/test-release-sop-automation.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/tests/test-live-deploy-validation-automation.js`
 10. Updated docs and machine-readable architecture:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/README.md`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/architecture/environment-model.json`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/README.md`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/docs/architecture/environment-model.json`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/docs/qa/selective-gate-review-2026-03-30.md`
    - this handoff file
 11. Added release watcher hygiene automation:
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/release/manage-release-watchers.js`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/release/promote-tested-staging-to-prod.sh`
-   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/release/verify-prod-release.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/release/manage-release-watchers.js`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/release/promote-tested-staging-to-prod.sh`
+   - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/release/verify-prod-release.js`
    - release helpers now clean repo-owned `gh`/shell watcher loops on entry and exit
    - new operator commands:
      - `npm run release:watchers:status`
@@ -157,6 +157,8 @@
 
 ## Validation Performed
 - Local:
+  - `npm run test:docs-gate`
+  - `npm run test:qa-full`
   - `npm run test:jest`
   - `npm run release:watchers:status`
   - `npm run release:watchers:cleanup`
@@ -172,9 +174,12 @@
   - profile: `release-infra`
   - total duration: `5383ms`
   - metrics file:
-    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
+    - `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
 
 ## Operator Notes
+- Repository was moved locally from the old `.../My Drive/AI/Codex/...` parent into `.../My Drive/AI/Projects/RB Website/...`; handoff and QA review docs were refreshed so future sessions do not inherit stale local paths.
+- No live PRD update was required in this session because there was no product or behavior change, only local path/documentation maintenance plus validation.
+- Post-move local validation on the website repo now includes a clean `npm run test:qa-full` pass from the new workspace path.
 - This is still QA/release architecture work, not a product copy or layout redesign.
 - There was no pending prod release left from the previous docs-only optimization; branches were aligned before this v1.2 work started.
 - The intended operating model after review is:

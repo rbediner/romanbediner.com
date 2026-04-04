@@ -88,11 +88,11 @@ Best practice:
 
 Implemented in:
 
-- `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/resolve-gate-profile.js`
+- `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/resolve-gate-profile.js`
 
 Local runner:
 
-- `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/scripts/qa/run-selective-gate.js`
+- `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/scripts/qa/run-selective-gate.js`
 
 Current route scopes:
 
@@ -151,7 +151,7 @@ The gate design now assumes these risks matter every release:
 
 Selective local gate runs now write metrics to:
 
-- `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Codex/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
+- `/Users/roman.bediner/Library/CloudStorage/GoogleDrive-rbediner@gmail.com/My Drive/AI/Projects/RB Website/romanbediner.com/QA/results/gate-metrics/latest-local-gate.json`
 
 That file records:
 
