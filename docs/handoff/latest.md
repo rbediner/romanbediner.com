@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 159
-- Updated At (UTC): 2026-04-04T14:02:33Z
-- Source Branch: prod
-- Source Commit: e03a0737d7e03d28a093712a034773560e9325df (release watcher hygiene automation and managed cleanup commands)
+- Handoff Sequence: 160
+- Updated At (UTC): 2026-04-06T22:15:00Z
+- Source Branch: staging
+- Source Commit: c27aad26e2f197568b37cbec713586ff7d3d570e (docs: refresh handoff after workspace move)
 
 ## Current State
 - Node 24 migration is now complete for all directly-controlled workflow actions. The remaining warning (`actions/upload-pages-artifact@v4` internally calling `upload-artifact@v4.6.2`, Node 20) is handled by `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'` set at the job level on `deploy-pages` and `rollback-deploy`. GitHub's annotation will continue to say "being forced to run on Node.js 24" until `upload-pages-artifact@v5` ships. Remove the env var then and bump the action version.
