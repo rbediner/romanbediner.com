@@ -151,10 +151,12 @@ Required handoff content for cross-machine continuity:
   - `framework_nav_click`
   - `scroll_depth` (25/50/75/90 thresholds, once per threshold per load, brief pages only)
   - required params: `source_page`, `target_page`, `link_type`, `environment`
-- Resources telemetry in `/scripts/runtime/resources-analytics.js` emits:
-  - `resource_pdf_download` — fires on click of any `[data-track-pdf-download]` download link; params: `source_page`, `resource_name`
-  - `resource_card_click` — fires on hub card primary CTA click; requires `data-resource-card="<name>"` on the article; params: `source_page`, `target_page`, `resource_name`
-  - `resource_preview_expand` — fired from `resources-carousel.js` on Expand Preview open; params: `source_page`, `slide_index`, `slide_total`
+- Resources telemetry in `/scripts/runtime/resources-analytics.js` and `/scripts/runtime/resources-carousel.js` emits the locked PRD P3-AD-01 contract:
+  - `resource_card_click` — fires on a resource card's primary CTA click; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`
+  - `resource_pdf_download` — fires on click of any `[data-track-pdf-download]` download link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `file_path`
+  - `resource_preview_expand` — fires from `resources-carousel.js` on Expand Preview modal open; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `slide_index`
+  - `environment` is added automatically by the shared `window.__rbAnalytics.trackEvent()` wrapper in `/scripts/runtime/ga4-bootstrap.js`
+  - DOM contract: resource cards and the summary-page `<main>` must declare `data-resource-slug`, `data-resource-title`, `data-resource-type`, and `data-resource-location`; PDF links must declare `data-track-pdf-download` and `data-file-path`
 - Allowed event taxonomy for this phase:
   - `nav_click`
   - `internal_link_click`

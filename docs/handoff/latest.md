@@ -1,9 +1,100 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 164
-- Updated At (UTC): 2026-04-19T19:00:00Z
+- Handoff Sequence: 165
+- Updated At (UTC): 2026-04-19T20:44:50Z
 - Source Branch: staging
-- Source Commit: 6233100a60a4210c30f7c86f06fae4aa303c8457
+- Source Commit: pending (changes not yet committed — see continuation pass below)
+
+## Continuation Pass: V2 Phase 1 Polish — PRD Tickets P1-RH-01..04, P1-FS-01..04, P1-FW-01, P3-UX-01, P3-AD-01, P3-DOC-01 (2026-04-19)
+
+### What Changed In This Pass
+
+#### A. Resources Hub (`resources/index.html`) — P1-RH-01..04
+- H1 and label unchanged; subhead replaced with PRD-locked two-sentence intro (P1-RH-01)
+- Removed `resources-intro-support` and `resources-entry-note` helper paragraphs (were prior-pass placeholders)
+- Framework summary card given `is-featured` class for visual elevation; CTA label updated to "Open the Framework Summary" (P1-RH-02)
+- Dashboard placeholder body replaced with full PRD-locked paragraph (P1-RH-03); no CTA added
+- Four PRD P3-AD-01 analytics data attributes added to both resource articles: `data-resource-slug`, `data-resource-title`, `data-resource-type`, `data-resource-location`
+- Bottom `next-page-nav` section replaced with `resources-inset-cta` aside containing locked CTA "Explore the Full Framework" → `/framework/` (P1-RH-04)
+
+#### B. Framework Summary Page (`resources/ai-enabled-operations-framework-summary/index.html`) — P1-FS-01..04
+- `<main>` now carries the four analytics data attributes for the summary-page resource context (P3-AD-01)
+- Top section restructured: `shelf-callout` lede replaced with `resource-top-section` grid containing locked conversational paragraph (P1-FS-01) + `Who This Is For` blue box as companion card
+- `Who This Is For` simplified: removed intro sentence, kept three-item bullet list
+- CTA label changed from "Download PDF" → "Download Framework Summary PDF" (P1-FS-03)
+- CTA container changed from `resource-link-row` to `resource-cta-cluster`; primary CTA gets `resource-primary-cta-featured` class
+- PDF download link now carries `data-file-path` attribute for P3-AD-01 `file_path` param
+- Bottom `resource-conversational-close` section removed (locked para moved to top per P1-FS-01)
+- Locked helper line "Six slides. Fast review. Easy to share." retained (P1-FS-03)
+- Dual nav retained: Back to Resources ← | Reach Out for a Chat →
+
+#### C. Framework Page (`framework/index.html`) — P1-FW-01
+- Bottom CTA placeholder comment removed; copy updated to locked PRD string:
+  - Intro line: "Prefer a faster read? The downloadable summary captures the six stages at a glance."
+  - Link label: "Explore the Framework Summary at a Glance" (was "Explore the Full Framework Summary")
+- `<div>` → `<aside>` with `framework-summary-cta-inset` class for inset-card visual treatment
+
+#### D. CSS (`styles/resources.css`)
+- **Modal (P1-FS-02 / P3-UX-01)**: complete overhaul — materially larger (max-width 1200px vs 900px), prev/next arrow buttons inside stage, close button repositioned to top-right corner of inner panel with larger hit target (40px), `display:none`→`display:flex` toggle so `opacity: 0` doesn't ghost-block content, mobile breakpoints added
+- **Featured card (P1-RH-02)**: `.resource-card.is-featured` — subtle gradient, blue border tint, elevated shadow
+- **Resources inset CTA (P1-RH-04)**: `.resources-inset-cta` + `.resources-inset-cta-copy` — restrained boxed aside
+- **Framework inset CTA (P1-FW-01)**: `.framework-summary-cta-inset` — matching restrained box style
+- **Top section (P1-FS-01)**: `.resource-top-section`, `.resource-conversational-lede` — grid layout, relaxed prose size
+- **CTA cluster (P1-FS-03)**: `.resource-cta-cluster`, `.resource-primary-cta-featured` — taller, stronger download CTA
+
+#### E. JS — Carousel (`scripts/runtime/resources-carousel.js`) — P1-FS-02 / P3-UX-01 / P3-AD-01
+- Full modal rewrite: prev/next nav buttons, focus trap (Tab/Shift+Tab), ArrowLeft/ArrowRight slide nav, Escape close, outside-click close, focus-moves-in on open, focus-returns-to-trigger on close, visible labeled close icon
+- `resource_preview_expand` event now fires with full P3-AD-01 params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `slide_index` (reads from DOM `data-resource-*` attrs)
+
+#### F. JS — Analytics (`scripts/runtime/resources-analytics.js`) — P3-AD-01
+- Completely reworked parameter contract from `source_page`/`target_page`/`resource_name` to PRD-locked:
+  - `resource_card_click`: `resource_slug`, `resource_title`, `resource_type`, `resource_location`
+  - `resource_pdf_download`: + `file_path` (from `data-file-path` attr)
+  - `environment` added automatically by `ga4-bootstrap.js` `trackEvent()` wrapper
+- Context read via `readResourceContext()` helper which walks up to nearest `[data-resource-slug]` ancestor
+
+### Tests Updated
+- `QA/tests/test-resources-phase1.js`: comprehensive rewrite covering:
+  - All PRD-locked copy strings (P1-RH-01..04, P1-FS-01..03, P1-FW-01)
+  - All P3-AD-01 DOM attribute contracts (four attrs on hub card + summary page `<main>`, `data-file-path` on PDF link)
+  - All P3-AD-01 analytics event + param names in JS source
+  - All P1-FS-02 / P3-UX-01 modal behavioral contracts in carousel JS source
+
+### Analytics Event Contract (PRD P3-AD-01 — locked)
+| Event | Required Params | Source |
+|-------|----------------|--------|
+| `resource_card_click` | `resource_slug`, `resource_title`, `resource_type`, `resource_location` | `resources-analytics.js` |
+| `resource_pdf_download` | + `file_path` | `resources-analytics.js` |
+| `resource_preview_expand` | + `slide_index` | `resources-carousel.js` |
+All events receive `environment` automatically from the `trackEvent()` wrapper.
+
+### Test Results
+- `npm run test:node` — all pass
+- `npm run test:jest` — all 17 suites / 67 tests pass
+- `node QA/tests/test-resources-phase1.js` — PASS
+
+### PRD Ticket Status (apply in Google Doc — operator action required)
+| Ticket | Status |
+|--------|--------|
+| P1-RH-01 | DEV Complete |
+| P1-RH-02 | DEV Complete |
+| P1-RH-03 | DEV Complete |
+| P1-RH-04 | DEV Complete |
+| P1-FS-01 | DEV Complete |
+| P1-FS-02 | DEV Complete |
+| P1-FS-03 | DEV Complete |
+| P1-FS-04 | DEV Complete |
+| P1-FW-01 | DEV Complete |
+| P3-UX-01 | DEV Complete |
+| P3-AD-01 | DEV Complete |
+| P3-DOC-01 | DEV Complete |
+
+### Open Items After This Pass
+- Staging preview visual approval required before prod promotion
+- PRD ticket statuses must be applied manually in the Google Doc (no write access via tool)
+- Browser smoke blocked by Google Drive sandbox mount issue (pre-existing; unrelated to these changes); all behavioral contracts are covered by node/jest tests instead
+- `/resources/ai-enabled-operations-dashboard/` route: still deferred
+- Dashboard migration into main repo: deferred
 
 ## Current State
 - Website V2 Phase 1 is now the active product state in the working tree:

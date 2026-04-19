@@ -286,78 +286,148 @@
   outline: none;
 }
 
-/* Lightbox modal */
+/* Expand Preview modal (P1-FS-02 / P3-UX-01) */
 .resource-preview-modal {
   position: fixed;
   inset: 0;
   z-index: 900;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  background: rgba(10, 15, 30, 0.72);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  padding: 32px 24px;
+  background: rgba(10, 15, 30, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 
 .resource-preview-modal.is-open {
+  display: flex;
   opacity: 1;
 }
 
 .resource-preview-modal-inner {
   position: relative;
-  max-width: 900px;
-  width: 100%;
-  background: #fff;
+  max-width: 1200px;
+  width: min(100%, 1200px);
+  max-height: calc(100vh - 64px);
+  background: #ffffff;
   border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 40px 80px rgba(10, 15, 30, 0.3);
+  padding: 28px 32px 24px;
+  box-shadow: 0 40px 80px rgba(10, 15, 30, 0.35);
   transform: translateY(8px);
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  outline: none;
 }
 
 .resource-preview-modal.is-open .resource-preview-modal-inner {
   transform: translateY(0);
 }
 
+.resource-preview-modal-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 0;
+}
+
 .resource-preview-modal-img {
-  width: 100%;
+  max-width: 100%;
+  max-height: calc(100vh - 180px);
   height: auto;
+  width: auto;
   display: block;
   border-radius: 8px;
+  box-shadow: 0 18px 36px rgba(10, 15, 30, 0.18);
+  background: #ffffff;
 }
 
 .resource-preview-modal-close {
   position: absolute;
-  top: -14px;
-  right: -14px;
-  width: 36px;
-  height: 36px;
+  top: 12px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
   border-radius: 999px;
-  border: 1px solid rgba(17, 17, 17, 0.12);
-  background: #fff;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  background: #ffffff;
   color: var(--text-primary);
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(10, 15, 30, 0.12);
-  transition: box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
+  z-index: 2;
 }
 
-.resource-preview-modal-close:hover {
-  box-shadow: 0 6px 16px rgba(10, 15, 30, 0.18);
+.resource-preview-modal-close:hover,
+.resource-preview-modal-close:focus-visible {
+  box-shadow: 0 8px 18px rgba(10, 15, 30, 0.2);
+  outline: none;
+  transform: scale(1.04);
+}
+
+.resource-preview-modal-nav {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  background: #ffffff;
+  color: var(--text-primary);
+  font-size: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(10, 15, 30, 0.1);
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.resource-preview-modal-nav:hover:not([disabled]),
+.resource-preview-modal-nav:focus-visible {
+  border-color: rgba(59, 108, 255, 0.4);
+  color: var(--accent-blue);
+  outline: none;
+  box-shadow: 0 6px 14px rgba(10, 15, 30, 0.14);
+}
+
+.resource-preview-modal-nav[disabled] {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .resource-preview-modal-caption {
-  margin: 10px 0 0;
+  margin: 4px 0 0;
   font-size: 13px;
   color: var(--text-secondary);
   text-align: center;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 767px) {
+  .resource-preview-modal {
+    padding: 16px;
+  }
+  .resource-preview-modal-inner {
+    padding: 20px 16px 16px;
+  }
+  .resource-preview-modal-nav {
+    width: 38px;
+    height: 38px;
+  }
+  .resource-preview-modal-img {
+    max-height: calc(100vh - 200px);
+  }
 }
 
 /* Utility line near download */
@@ -430,17 +500,91 @@
   transform: translateX(4px);
 }
 
-/* Framework summary CTA (bottom of /framework/) */
+/* Framework summary inset CTA (P1-FW-01) — restrained, premium, subordinate
+   to the Explore Service Models transition below it. */
 .framework-summary-cta {
-  margin: 36px 0 0;
+  margin: 44px 0 0;
   padding: 24px 0;
   border-top: 1px solid var(--border-color);
 }
 
+.framework-summary-cta-inset {
+  margin: 44px auto 0;
+  max-width: 720px;
+  padding: 22px 26px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: #f8fafc;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
 .framework-summary-cta-copy {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-size: 15px;
   color: var(--text-secondary);
+}
+
+/* Featured resource card (P1-RH-02) */
+.resource-card.is-featured {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border-color: rgba(59, 108, 255, 0.22);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
+}
+
+.resource-card.is-featured h2 {
+  margin-top: 8px;
+}
+
+.resource-primary-cta-featured {
+  min-height: 52px;
+  padding: 0 26px;
+  font-size: 15px;
+}
+
+/* Resources hub inset CTA (P1-RH-04) */
+.resources-inset-cta {
+  margin: 44px auto 0;
+  max-width: 720px;
+  padding: 22px 26px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
+.resources-inset-cta-copy {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+/* Summary page top section (P1-FS-01) — unified, restrained composition */
+.resource-top-section {
+  margin-top: 20px;
+  display: grid;
+  gap: 24px;
+}
+
+.resource-conversational-lede {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  max-width: 720px;
+}
+
+.resource-audience-card {
+  margin-top: 0;
+}
+
+/* CTA cluster (P1-FS-03) — stronger hierarchy for download primary action */
+.resource-cta-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+  margin-top: 28px;
 }
 
 @media (max-width: 767px) {
