@@ -178,11 +178,23 @@ All Website V2 Phase 1 locked decisions, copy, and design direction from the pri
 - README: No structural or behavioral documentation change. No README update required.
 - Handoff: Updated (this section)
 
+### Staging Deploy Confirmed
+- CI run 24636070994 — success
+- Deploy Staging run 24636119876 — success
+- Staging preview URLs validated (all 200):
+  - https://rbediner.github.io/romanbediner-preview/
+  - https://rbediner.github.io/romanbediner-preview/resources/
+  - https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-framework-summary/
+  - https://rbediner.github.io/romanbediner-preview/framework/
+
+### Additional Baseline Commit
+- `test: refresh visual baselines for framework page (shelf-callout removed)` — SHA: 8248695a...
+- Three `insights--` visual baselines regenerated after removing the mid-page framework shelf-callout
+
 ### Open Items After This Pass
 - Exact final `/framework/` → summary CTA copy: using placeholder, needs approval
 - Final copy for `/resources/ai-enabled-operations-dashboard/`: deferred
 - Dashboard migration into main repo: deferred
-- Staging deploy: PENDING — see next handoff update after push
 
 ## What Changed In This Session
 1. Added Website V2 Phase 1 resources architecture and assets:
