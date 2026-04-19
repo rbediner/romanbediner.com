@@ -27,8 +27,18 @@ assert(
 );
 
 assert(
-  previewBuilder.includes('(assets|styles|scripts|about|services|framework|insights|connect)'),
+  /['"]resources['"]/.test(artifactBuilder),
+  'create-artifact.js must include "resources" in INCLUDE_PATHS.'
+);
+
+assert(
+  previewBuilder.includes('framework'),
   'create-preview-artifact.js must rewrite absolute /framework/ links for preview base-path mode.'
+);
+
+assert(
+  previewBuilder.includes('resources'),
+  'create-preview-artifact.js must rewrite absolute /resources/ links for preview base-path mode.'
 );
 
 console.log('PASS: framework artifact packaging and preview rewrite contracts passed.');

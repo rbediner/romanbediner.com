@@ -28,6 +28,7 @@ const INCLUDE_PATHS = [
   'about',
   'services',
   'framework',
+  'resources',
   'insights',
   'connect',
   'assets',

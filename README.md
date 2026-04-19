@@ -86,6 +86,7 @@ Rules:
 - Deploy-time cache-busting is automatic for staging/prod artifacts:
   - `scripts/build/create-artifact.js` rewrites cache tokens per release commit for shared assets (`/styles/site.css`, `/styles/framework.css`, `/scripts/runtime/site-navigation.js`)
   - this prevents stale CSS/JS from prior deploys without manual token bumping in source files
+- Artifact route packaging: `INCLUDE_PATHS` in `scripts/build/create-artifact.js` controls which top-level directories are bundled into the deploy artifact. When a new top-level route directory is added, it must be added to `INCLUDE_PATHS` or that route will 404 in staging and production. Current packaged routes: `about`, `services`, `framework`, `resources`, `insights`, `connect`.
 
 ## Cross-Machine Handoff Protocol
 - Canonical handoff file: `/docs/handoff/latest.md`.

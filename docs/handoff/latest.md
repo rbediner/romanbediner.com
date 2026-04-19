@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 161
-- Updated At (UTC): 2026-04-19T16:56:46Z
+- Handoff Sequence: 162
+- Updated At (UTC): 2026-04-19T18:30:00Z
 - Source Branch: staging
-- Source Commit: 60f8014fd6c591fc919172ddfa0b4e1fbb323396 (pre-handoff baseline)
+- Source Commit: 04651669e04b8bc0c9b308d996fd136568a1b79d (pre-fix baseline; will update after push)
 
 ## Current State
 - Website V2 Phase 1 is now the active product state in the working tree:
@@ -73,6 +73,33 @@
     - `actions/configure-pages@v6`
     - `actions/upload-pages-artifact@v4`
     - `actions/deploy-pages@v5`
+
+## Continuation Pass: V2 Phase 1 Staging 404 Fix (2026-04-19)
+
+### Root Cause
+`resources` was missing from `INCLUDE_PATHS` in `scripts/build/create-artifact.js`. The artifact builder only copies explicitly listed top-level directories into the deploy bundle, so `/resources/` and all sub-routes were never included in staging or production artifacts despite existing in the working tree. Codex's Phase 1 work added the route files but did not register `resources` in the build include list.
+
+A secondary gap: the JS string-literal rewrite regex in `scripts/build/create-preview-artifact.js` also did not include `resources`, meaning preview base-path rewriting would have silently skipped any JS-embedded `/resources/` strings.
+
+### Fix Applied
+- `scripts/build/create-artifact.js`: added `'resources'` to `INCLUDE_PATHS` (after `'framework'`)
+- `scripts/build/create-preview-artifact.js`: added `resources` to the JS string-literal rewrite regex
+- `QA/tests/test-framework-artifact-packaging.js`: updated assertions to guard against future recurrence (checks both `framework` and `resources` are present in INCLUDE_PATHS and in the preview rewrite regex)
+- `README.md`: added explicit note about the `INCLUDE_PATHS` packaging contract so future route additions are not silently omitted
+
+### Tests After Fix
+- `npm run test:node` — all pass
+- `npm run test:jest` — all 17 suites / 67 tests pass
+
+### Locked Decisions (unchanged)
+All Website V2 Phase 1 locked decisions, copy, and design direction from the prior Codex pass are preserved. No route content, nav, or copy was changed.
+
+### Open Items (unchanged from prior pass)
+- `/resources/` intro thesis statement: still a placeholder decision
+- exact `/framework/` → summary CTA copy: open
+- final `/resources/ai-enabled-operations-dashboard/` copy: open (route deferred)
+- exact GA4 event naming for resource interactions: open
+- dashboard migration into main repo: deferred beyond Phase 1
 
 ## What Changed In This Session
 1. Added Website V2 Phase 1 resources architecture and assets:
