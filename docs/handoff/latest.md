@@ -108,6 +108,13 @@
 - Production remains:
   - `https://romanbediner.com/`
 
+### Release watcher hygiene
+- Keep release watcher hygiene in place for this repo.
+- Before or after release work, use:
+  - `npm run release:watchers:status`
+  - `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
 ### Notes For The Next Session
 - Start by verifying the staging preview for:
   - `/resources/`
