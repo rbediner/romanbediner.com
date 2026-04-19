@@ -77,19 +77,6 @@
       </div>
     </div>
 
-    <div class="resource-card-actions" aria-label="Primary summary actions">
-      <a class="resource-primary-cta" href="/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf" download>Download PDF</a>
-      <a class="resource-text-cta" href="/framework/">
-        <span>Explore the Full Framework</span>
-        <span class="resource-text-cta-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-
-    <section class="resource-section" aria-labelledby="summary-overview">
-      <h2 id="summary-overview">In This Summary</h2>
-      <p>This summary introduces the full logic of the AI-Enabled Operations Framework and shows how the six stages connect, from defining the operating opportunity and designing workflows as managed systems to embedding AI into execution, structuring operational lanes, steering with measurable signals, and evolving guardrails as autonomy expands. It is designed to give leaders a practical view of how modern execution can become more structured, scalable, and accountable as AI participation increases.</p>
-    </section>
-
     <section class="resource-blue-box" aria-labelledby="summary-audience">
       <h2 id="summary-audience">Who This Is For</h2>
       <p>If you are integrating AI into real workflows, trying to productize operations, or looking for a clearer way to scale execution without adding unnecessary process, this summary gives you a practical starting point.</p>
@@ -98,6 +85,11 @@
         <li>Startup and growth leaders trying to scale execution without adding process overhead</li>
         <li>Product and engineering leaders integrating AI into real day-to-day workflows</li>
       </ul>
+    </section>
+
+    <section class="resource-section" aria-labelledby="summary-overview">
+      <h2 id="summary-overview">In This Summary</h2>
+      <p>This summary introduces the full logic of the AI-Enabled Operations Framework and shows how the six stages connect, from defining the operating opportunity and designing workflows as managed systems to embedding AI into execution, structuring operational lanes, steering with measurable signals, and evolving guardrails as autonomy expands. It is designed to give leaders a practical view of how modern execution can become more structured, scalable, and accountable as AI participation increases.</p>
     </section>
 
     <section class="resource-section" aria-labelledby="summary-preview">
@@ -111,6 +103,7 @@
             <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous slide">&larr;</button>
             <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next slide">&rarr;</button>
           </div>
+          <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand slide preview">Expand Preview</button>
         </div>
         <div class="resource-carousel-viewport">
           <div class="resource-carousel-track" data-carousel-track>
@@ -151,28 +144,33 @@
       </div>
 
       <div class="resource-link-row">
-        <a class="resource-primary-cta" href="/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf" download>Download PDF</a>
+        <a class="resource-primary-cta" href="/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf" download="AI-Enabled-Operations-Framework-Summary.pdf" data-track-pdf-download>Download PDF</a>
         <a class="resource-text-cta" href="/framework/">
           <span>Explore the Full Framework</span>
           <span class="resource-text-cta-arrow" aria-hidden="true">&rarr;</span>
         </a>
       </div>
+      <p class="resource-utility-line">Six slides. Fast review. Easy to share.</p>
     </section>
 
-    <section class="next-page-nav">
-      <div class="section-accent"></div>
-      <!-- Temporary placeholder copy until final bottom CTA wording is approved. -->
-      <a href="/connect/" class="nav-anchor">
-        <div class="nav-header-row">
-          <span class="nav-label">Continue the Conversation</span>
-          <svg class="nav-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </div>
-        <span class="nav-title sr-only">Transition to Connect</span>
-      </a>
+    <section class="resource-section resource-conversational-close" aria-label="Framework context and next steps">
+      <p class="resource-framework-linkback">For the full framework, including the six stages and expanded long-form briefs, explore the main <a href="/framework/">Framework page</a>.</p>
+      <p>If this sounds relevant to what you are building, scaling, or trying to untangle, feel free to reach out. I am always glad to connect with thoughtful operators, leaders, and teams to exchange ideas, talk through challenges, and explore how this kind of framework can be applied in a real operating environment.</p>
+      <div class="resource-card-actions">
+        <a class="resource-primary-cta" href="/connect/">Reach Out for a Chat</a>
+      </div>
     </section>
+
+    <div class="resource-dual-nav" aria-label="Page navigation">
+      <a class="resource-dual-nav-item" href="/resources/">
+        <span class="resource-dual-nav-arrow" aria-hidden="true">&larr;</span>
+        <span>Back to Resources</span>
+      </a>
+      <a class="resource-dual-nav-item resource-dual-nav-right" href="/connect/">
+        <span>Reach Out for a Chat</span>
+        <span class="resource-dual-nav-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
   </main>
 
   <footer class="footer">
@@ -193,5 +191,6 @@
   </footer>
 
   <script src="../../scripts/runtime/site-navigation.js?v=20260313a"></script>
+  <script src="../../scripts/runtime/resources-analytics.js" defer></script>
 </body>
 </html>

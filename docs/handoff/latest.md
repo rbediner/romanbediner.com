@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 163
-- Updated At (UTC): 2026-04-19T17:30:00Z
+- Handoff Sequence: 164
+- Updated At (UTC): 2026-04-19T19:00:00Z
 - Source Branch: staging
-- Source Commit: dff826714aacf669b3b12eba2a2ecb966ad81195
+- Source Commit: ff6fb25766f9115aa657d434ab26239124bdc181
 
 ## Current State
 - Website V2 Phase 1 is now the active product state in the working tree:
@@ -109,6 +109,80 @@ All Website V2 Phase 1 locked decisions, copy, and design direction from the pri
 - final `/resources/ai-enabled-operations-dashboard/` copy: open (route deferred)
 - exact GA4 event naming for resource interactions: open
 - dashboard migration into main repo: deferred beyond Phase 1
+
+## Continuation Pass: V2 Phase 1 UX/Content Refinement (2026-04-19)
+
+### What Changed In This Pass
+
+#### A. Resources hub (`resources/index.html`)
+- H1 changed from "Curated Resources" to "Resources"
+- Subhead replaced with locked intro paragraph: "A curated set of downloadable and interactive resources focused on practical, tactical ways to implement the operating framework for modern AI-enabled teams."
+- Added supporting sentence: "Each resource is designed to make the framework easier to review, apply, and discuss in real operating environments."
+- Replaced internal-facing shelf-callout (Phase 1 editorial placeholder) with public-facing entry note: "Start here with a concise summary of the framework, then explore deeper materials and interactive tools as the resource library expands."
+- Framework summary card description strengthened to locked two-sentence version
+- Removed extra "Return to the Full Framework" secondary CTA from hub card
+- Dashboard placeholder card: changed status badge from "Planned Next" to "Coming Soon"; replaced internal-facing description with locked public copy; removed any CTA link
+- Added `data-resource-card` attribute to framework summary card for analytics tracking
+- Added `resources-analytics.js` script load
+
+#### B. Framework summary page (`resources/ai-enabled-operations-framework-summary/index.html`)
+- Section order restructured to locked flow: header → subhead → shelf-callout (hero para) → Who This Is For (blue box) → In This Summary → slide preview → CTA cluster → conversational close → dual nav
+- Removed top CTA cluster (previously sat between shelf-callout and In This Summary)
+- Added "Expand Preview" button to carousel header (`data-carousel-expand`)
+- Fixed download filename: both Download PDF links now use `download="AI-Enabled-Operations-Framework-Summary.pdf"`
+- Added utility line "Six slides. Fast review. Easy to share." below download CTA
+- Added conversational close section with framework link-back and locked conversational paragraph + "Reach Out for a Chat" CTA
+- Replaced single "Continue the Conversation" bottom nav with dual nav: Back to Resources (←) | Reach Out for a Chat (→)
+- Added `data-track-pdf-download` attribute to Download PDF links
+- Added `resources-analytics.js` script load
+
+#### C. Framework page (`framework/index.html`)
+- Removed mid-page shelf-callout ("Framework Summary" blue box) that sat between intro and stage pills — was an interruption to the page rhythm
+- Added subtle bottom CTA after Evolution card and before "Explore Service Models" nav: quiet text + arrow link to `/resources/ai-enabled-operations-framework-summary/`
+- **NOTE: Bottom CTA copy is still open. Current placeholder:** "For a faster overview of the six stages, the downloadable summary is a good starting point." + "Explore the Full Framework Summary →"
+
+#### D. CSS (`styles/resources.css`)
+- Added: `.resource-meta.is-coming-soon` — muted gray badge
+- Added: `.resource-expand-preview` — text-link button style
+- Added: `.resource-preview-modal` and inner elements — lightbox overlay styles
+- Added: `.resource-utility-line` — small muted text
+- Added: `.resource-conversational-close` — section separator
+- Added: `.resource-framework-linkback` — secondary link paragraph
+- Added: `.resource-dual-nav`, `.resource-dual-nav-item`, `.resource-dual-nav-arrow` — bottom dual nav
+- Added: `.resources-intro-support`, `.resources-entry-note` — hub intro text layers
+- Added: `.framework-summary-cta`, `.framework-summary-cta-copy` — framework page bottom CTA (minimal, unboxed)
+
+#### E. JS — Carousel (`scripts/runtime/resources-carousel.js`)
+- Added Expand Preview lightbox: builds modal on first open, shows current slide enlarged, closes on Escape or click-outside
+- Fires `resource_preview_expand` GA event via `window.__rbAnalytics.trackEvent()` on open
+
+#### F. JS — Analytics (`scripts/runtime/resources-analytics.js`) — NEW FILE
+- Tracks `resource_pdf_download` on all `[data-track-pdf-download]` link clicks
+- Tracks `resource_card_click` on hub card primary CTA clicks (via `[data-resource-card]` attribute)
+- Follows same convention as `framework-brief-analytics.js`; uses `window.__rbAnalytics.trackEvent()`
+- Loaded on both `/resources/` and `/resources/ai-enabled-operations-framework-summary/`
+
+### Analytics Events Added
+| Event | Trigger | Parameters |
+|-------|---------|-----------|
+| `resource_pdf_download` | Click Download PDF | `source_page`, `resource_name` |
+| `resource_card_click` | Click hub card → summary page | `source_page`, `target_page`, `resource_name` |
+| `resource_preview_expand` | Click Expand Preview | `source_page`, `slide_index`, `slide_total` |
+
+### Validation
+- `node QA/tests/test-resources-phase1.js` — PASS (all phase 1 contracts intact)
+- `scripts/runtime` directory is in `INCLUDE_PATHS` — `resources-analytics.js` auto-included in build artifact
+
+### PRD / README / Docs
+- PRD: No material change to product/UX contract; copy and design decisions already locked in prior pass. No PRD update required.
+- README: No structural or behavioral documentation change. No README update required.
+- Handoff: Updated (this section)
+
+### Open Items After This Pass
+- Exact final `/framework/` → summary CTA copy: using placeholder, needs approval
+- Final copy for `/resources/ai-enabled-operations-dashboard/`: deferred
+- Dashboard migration into main repo: deferred
+- Staging deploy: PENDING — see next handoff update after push
 
 ## What Changed In This Session
 1. Added Website V2 Phase 1 resources architecture and assets:

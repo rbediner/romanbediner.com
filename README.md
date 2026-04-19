@@ -151,6 +151,10 @@ Required handoff content for cross-machine continuity:
   - `framework_nav_click`
   - `scroll_depth` (25/50/75/90 thresholds, once per threshold per load, brief pages only)
   - required params: `source_page`, `target_page`, `link_type`, `environment`
+- Resources telemetry in `/scripts/runtime/resources-analytics.js` emits:
+  - `resource_pdf_download` — fires on click of any `[data-track-pdf-download]` download link; params: `source_page`, `resource_name`
+  - `resource_card_click` — fires on hub card primary CTA click; requires `data-resource-card="<name>"` on the article; params: `source_page`, `target_page`, `resource_name`
+  - `resource_preview_expand` — fired from `resources-carousel.js` on Expand Preview open; params: `source_page`, `slide_index`, `slide_total`
 - Allowed event taxonomy for this phase:
   - `nav_click`
   - `internal_link_click`
