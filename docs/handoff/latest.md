@@ -3,7 +3,7 @@
 - Handoff Sequence: 162
 - Updated At (UTC): 2026-04-19T18:30:00Z
 - Source Branch: staging
-- Source Commit: 04651669e04b8bc0c9b308d996fd136568a1b79d (pre-fix baseline; will update after push)
+- Source Commit: b0ec8c3d0dbb6812f81c445a3fe45330ff000150
 
 ## Current State
 - Website V2 Phase 1 is now the active product state in the working tree:
