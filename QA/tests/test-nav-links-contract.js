@@ -20,9 +20,11 @@ const PAGES = [
   'about/index.html',
   'services/index.html',
   'framework/index.html',
-  'connect/index.html'
+  'connect/index.html',
+  'resources/index.html',
+  'resources/ai-enabled-operations-framework-summary/index.html'
 ];
-const REQUIRED_HREFS = ['/', '/about/', '/services/', '/framework/', '/connect/'];
+const REQUIRED_HREFS = ['/', '/about/', '/framework/', '/resources/', '/services/', '/connect/'];
 
 function parseNavLinks(navScript) {
   const links = [];
@@ -77,7 +79,7 @@ for (const rel of PAGES) {
   const hasDesktopPlaceholder = /<nav class="site-nav" aria-label="Primary"><\/nav>/i.test(html);
   const hasMobilePlaceholder = /<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><\/nav>/i.test(html);
   // Allow optional cache-busting query params for deterministic nav-cache invalidation.
-  const hasSharedScript = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js(?:\?[^"]+)?"><\/script>/i.test(html);
+  const hasSharedScript = /<script src="(?:\.\.\/){0,2}scripts\/runtime\/site-navigation\.js(?:\?[^"]+)?"><\/script>/i.test(html);
 
   if (!hasDesktopPlaceholder) {
     failures += 1;

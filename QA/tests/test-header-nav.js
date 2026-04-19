@@ -18,14 +18,17 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'framework/index.html'
+  'framework/index.html',
+  'resources/index.html',
+  'resources/ai-enabled-operations-framework-summary/index.html'
 ];
 
 const navModel = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about/' },
-  { label: 'Services', href: '/services/' },
   { label: 'Framework', href: '/framework/' },
+  { label: 'Resources', href: '/resources/' },
+  { label: 'Services', href: '/services/' },
   { label: 'Connect', href: '/connect/' }
 ];
 
@@ -50,7 +53,7 @@ for (const rel of pages) {
   const html = fs.readFileSync(path.resolve(__dirname, '..', '..', rel), 'utf8');
   const normalized = normalizeHeader(html);
   // Accept optional cache-busting query params on the shared nav runtime script.
-  const scriptIncludeRegex = /<script src="(?:\.\.\/)?scripts\/runtime\/site-navigation\.js(?:\?[^"]+)?"><\/script>/i;
+  const scriptIncludeRegex = /<script src="(?:\.\.\/){0,2}scripts\/runtime\/site-navigation\.js(?:\?[^"]+)?"><\/script>/i;
 
   if (!normalized) {
     failures += 1;

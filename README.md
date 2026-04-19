@@ -12,6 +12,8 @@
 Canonical public routes:
 - `/`
 - `/about/`
+- `/resources/`
+- `/resources/ai-enabled-operations-framework-summary/`
 - `/services/`
 - `/connect/`
 - `/framework/`
@@ -191,9 +193,14 @@ Required handoff content for cross-machine continuity:
 - Canonical page entrypoints:
   - `/index.html`
   - `/about/index.html`
+  - `/resources/index.html`
+  - `/resources/ai-enabled-operations-framework-summary/index.html`
   - `/services/index.html`
   - `/framework/index.html`
   - `/connect/index.html`
+- Resource assets:
+  - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
+  - `/assets/resources/framework-summary/slides/`
 - Framework brief page entrypoints:
   - `/framework/opportunity/productizing-operations/index.html`
   - `/framework/design/operations-as-product/index.html`
@@ -202,7 +209,7 @@ Required handoff content for cross-machine continuity:
   - `/framework/signals/operational-signals/index.html`
   - `/framework/evolution/agentic-guardrails/index.html`
 - Browser runtime scripts live in `/scripts/runtime`.
-- Shared footer now includes a minimal native link row (Home, Framework, Services, Connect) and keeps footer order:
+- Shared footer now includes a minimal native link row (Home, About, Framework, Resources, Services, Connect) and keeps footer order:
   - divider
   - footer nav row
   - copyright
@@ -692,8 +699,10 @@ flowchart LR
     "/",
     "/about/",
     "/services/",
-    "/connect/",
-    "/framework/"
+    "/framework/",
+    "/resources/",
+    "/resources/ai-enabled-operations-framework-summary/",
+    "/connect/"
   ],
   "transitions": {
     "flow": [
@@ -717,6 +726,12 @@ flowchart LR
       },
       {
         "from": "/framework/",
+        "to": "/resources/ai-enabled-operations-framework-summary/",
+        "label": "THE ARTIFACT LAYER",
+        "title": "Transition to Framework Summary"
+      },
+      {
+        "from": "/resources/ai-enabled-operations-framework-summary/",
         "to": "/connect/",
         "label": "THE RELATIONSHIP LAYER",
         "title": "Transition to Connect"

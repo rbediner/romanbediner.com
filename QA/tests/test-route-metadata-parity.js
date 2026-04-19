@@ -18,7 +18,9 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
-  'framework/index.html'
+  'framework/index.html',
+  'resources/index.html',
+  'resources/ai-enabled-operations-framework-summary/index.html'
 ];
 
 const seenTitles = new Set();

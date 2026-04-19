@@ -27,6 +27,8 @@ const PAGES = [
   'services/index.html',
   'connect/index.html',
   'framework/index.html',
+  'resources/index.html',
+  'resources/ai-enabled-operations-framework-summary/index.html',
   'framework/opportunity/productizing-operations/index.html',
   'framework/design/operations-as-product/index.html',
   'framework/integration/ai-operating-layer/index.html',

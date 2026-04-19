@@ -19,6 +19,8 @@ const ARCH_PATHS = [
   '.github/workflows/',
   'index.html',
   'about/index.html',
+  'resources/index.html',
+  'resources/ai-enabled-operations-framework-summary/index.html',
   'services/index.html',
   'framework/index.html',
   'connect/index.html',

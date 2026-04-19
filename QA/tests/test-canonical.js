@@ -18,7 +18,9 @@ const checks = [
   { file: 'about/index.html', canonical: 'https://romanbediner.com/about/' },
   { file: 'services/index.html', canonical: 'https://romanbediner.com/services/' },
   { file: 'connect/index.html', canonical: 'https://romanbediner.com/connect/' },
-  { file: 'framework/index.html', canonical: 'https://romanbediner.com/framework/' }
+  { file: 'framework/index.html', canonical: 'https://romanbediner.com/framework/' },
+  { file: 'resources/index.html', canonical: 'https://romanbediner.com/resources/' },
+  { file: 'resources/ai-enabled-operations-framework-summary/index.html', canonical: 'https://romanbediner.com/resources/ai-enabled-operations-framework-summary/' }
 ];
 
 let failures = 0;

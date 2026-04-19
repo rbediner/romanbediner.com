@@ -25,6 +25,8 @@ const SITE_URL = 'https://romanbediner.com';
 const PAGE_PATHS = [
   { path: '/', priority: '1.0' },
   { path: '/about/', priority: '0.8' },
+  { path: '/resources/', priority: '0.85' },
+  { path: '/resources/ai-enabled-operations-framework-summary/', priority: '0.75' },
   { path: '/services/', priority: '0.9' },
   // Refactor: /connect/ is the only canonical route after removing /contact.
   { path: '/connect/', priority: '0.7' },

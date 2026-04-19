@@ -43,9 +43,9 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
             cls.server.server_close()
 
     def test_nav_links_and_snapshot_stability(self):
-        expected_labels = ["Home", "About", "Framework", "Services", "Connect"]
-        expected_hrefs = ["/", "/about/", "/framework/", "/services/", "/connect/"]
-        routes = ["/", "/about/", "/services/", "/framework/", "/connect/"]
+        expected_labels = ["Home", "About", "Framework", "Resources", "Services", "Connect"]
+        expected_hrefs = ["/", "/about/", "/framework/", "/resources/", "/services/", "/connect/"]
+        routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/connect/"]
 
         baseline_header = None
 
@@ -83,7 +83,7 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
             context.close()
 
     def test_insights_link_persists_across_route_clicks(self):
-        routes = ["/", "/about/", "/services/", "/framework/", "/connect/"]
+        routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/connect/"]
 
         for route in routes:
             context = self.browser.new_context()

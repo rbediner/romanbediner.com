@@ -44,6 +44,18 @@ const expected = [
     ogDescription: 'The AI-Enabled Operations Framework for productizing operations through Opportunity, Design, Integration, Execution, Signals, and Evolution.'
   },
   {
+    file: 'resources/index.html',
+    canonical: 'https://romanbediner.com/resources/',
+    ogTitle: 'Resources | AI-Enabled Operations Artifacts',
+    ogDescription: 'Curated resources for the AI-Enabled Operations Framework, beginning with the downloadable framework summary and expanding to additional public artifacts over time.'
+  },
+  {
+    file: 'resources/ai-enabled-operations-framework-summary/index.html',
+    canonical: 'https://romanbediner.com/resources/ai-enabled-operations-framework-summary/',
+    ogTitle: 'AI-Enabled Operations Framework Summary',
+    ogDescription: 'A concise, downloadable overview of the six-stage framework for productizing operations in modern AI-enabled environments.'
+  },
+  {
     file: 'connect/index.html',
     canonical: 'https://romanbediner.com/connect/',
     ogTitle: 'Connect | AI-Enabled Operations Advisory',

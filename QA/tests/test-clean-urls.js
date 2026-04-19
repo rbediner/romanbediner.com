@@ -21,6 +21,8 @@ const canonicalPages = [
   'services/index.html',
   'connect/index.html',
   'framework/index.html',
+  'resources/index.html',
+  'resources/ai-enabled-operations-framework-summary/index.html',
   'framework/opportunity/productizing-operations/index.html',
   'framework/design/operations-as-product/index.html',
   'framework/integration/ai-operating-layer/index.html',
@@ -68,6 +70,14 @@ if (!fs.existsSync(path.join(root, 'framework', 'index.html'))) {
   failures += 1;
   console.error('FAIL: /framework/ page is missing.');
 }
+if (!fs.existsSync(path.join(root, 'resources', 'index.html'))) {
+  failures += 1;
+  console.error('FAIL: /resources/ page is missing.');
+}
+if (!fs.existsSync(path.join(root, 'resources', 'ai-enabled-operations-framework-summary', 'index.html'))) {
+  failures += 1;
+  console.error('FAIL: /resources/ai-enabled-operations-framework-summary/ page is missing.');
+}
 if (!fs.existsSync(path.join(root, 'insights', 'index.html'))) {
   failures += 1;
   console.error('FAIL: /insights/ redirect page is missing.');
@@ -88,9 +98,9 @@ if (fs.existsSync(path.join(root, 'home', 'index.html'))) {
 // /framework/ must exist in shared navigation model.
 const aboutHtml = fs.readFileSync(path.join(root, 'about', 'index.html'), 'utf8');
 const navScript = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'site-navigation.js'), 'utf8');
-if (!aboutHtml.includes('<nav class="site-nav" aria-label="Primary"></nav>') || !/href:\s*["']\/framework\/["']/.test(navScript)) {
+if (!aboutHtml.includes('<nav class="site-nav" aria-label="Primary"></nav>') || !/href:\s*["']\/framework\/["']/.test(navScript) || !/href:\s*["']\/resources\/["']/.test(navScript)) {
   failures += 1;
-  console.error('FAIL: /framework/ is missing from shared navigation model.');
+  console.error('FAIL: /framework/ or /resources/ is missing from shared navigation model.');
 }
 
 if (failures > 0) {

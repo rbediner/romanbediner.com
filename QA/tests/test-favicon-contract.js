@@ -26,7 +26,9 @@ const pageChecks = [
   { file: 'about/index.html', base: '../assets/favicon/' },
   { file: 'services/index.html', base: '../assets/favicon/' },
   { file: 'connect/index.html', base: '../assets/favicon/' },
-  { file: 'framework/index.html', base: '../assets/favicon/' }
+  { file: 'framework/index.html', base: '../assets/favicon/' },
+  { file: 'resources/index.html', base: '../assets/favicon/' },
+  { file: 'resources/ai-enabled-operations-framework-summary/index.html', base: '../../assets/favicon/' }
 ];
 
 let failures = 0;

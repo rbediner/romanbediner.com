@@ -43,11 +43,12 @@ class HomeNavConsistencyPlaywrightTest(unittest.TestCase):
             cls.server.server_close()
 
     def test_header_nav_consistent_across_canonical_routes(self):
-        expected_labels = ["Home", "About", "Framework", "Services", "Connect"]
-        expected_hrefs = ["/", "/about/", "/framework/", "/services/", "/connect/"]
+        expected_labels = ["Home", "About", "Framework", "Resources", "Services", "Connect"]
+        expected_hrefs = ["/", "/about/", "/framework/", "/resources/", "/services/", "/connect/"]
         route_expectations = {
             "/": "/",
             "/about/": "/about/",
+            "/resources/": "/resources/",
             "/services/": "/services/",
             "/framework/": "/framework/",
             "/connect/": "/connect/",

@@ -41,14 +41,15 @@ const CONTENT_TYPES = {
   '.webmanifest': 'application/manifest+json'
 };
 
-const NAV_LABELS = ['Home', 'About', 'Framework', 'Services', 'Connect'];
-const NAV_HREFS = ['/', '/about/', '/framework/', '/services/', '/connect/'];
+const NAV_LABELS = ['Home', 'About', 'Framework', 'Resources', 'Services', 'Connect'];
+const NAV_HREFS = ['/', '/about/', '/framework/', '/resources/', '/services/', '/connect/'];
 
 const SCOPE_CONFIG = {
   home: { route: '/', checks: ['home', 'nav', 'mobile', 'ga'] },
   about: { route: '/about/', checks: ['service-list', 'nav', 'mobile', 'ga'] },
   services: { route: '/services/', checks: ['service-list', 'nav', 'mobile', 'ga'] },
   framework: { route: '/framework/', checks: ['framework', 'service-list', 'nav', 'mobile', 'ga'] },
+  resources: { route: '/resources/', checks: ['service-list', 'nav', 'mobile', 'ga'] },
   connect: { route: '/connect/', checks: ['connect', 'service-list', 'nav', 'mobile', 'ga'] }
 };
 

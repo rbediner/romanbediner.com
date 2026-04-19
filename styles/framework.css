@@ -52,6 +52,48 @@ html {
   margin-bottom: 56px;
 }
 
+.framework-resource-callout {
+  max-width: var(--framework-max-width);
+  margin: 0 auto 40px;
+}
+
+.framework-resource-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+}
+
+.framework-resource-copy {
+  margin: 0 0 16px;
+}
+
+.framework-resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.framework-resource-link:hover,
+.framework-resource-link:focus-visible {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.framework-resource-link .resource-text-cta-arrow {
+  transition: transform 0.18s ease;
+}
+
+.framework-resource-link:hover .resource-text-cta-arrow,
+.framework-resource-link:focus-visible .resource-text-cta-arrow {
+  transform: translateX(6px);
+}
+
 .framework-thesis-block p {
   margin: 0 0 8px;
 }
