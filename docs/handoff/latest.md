@@ -3,7 +3,7 @@
 - Handoff Sequence: 165
 - Updated At (UTC): 2026-04-19T20:44:50Z
 - Source Branch: staging
-- Source Commit: pending (changes not yet committed — see continuation pass below)
+- Source Commit: 95742712d625fa808d687df7714485625c7b3a8c
 
 ## Continuation Pass: V2 Phase 1 Polish — PRD Tickets P1-RH-01..04, P1-FS-01..04, P1-FW-01, P3-UX-01, P3-AD-01, P3-DOC-01 (2026-04-19)
 
