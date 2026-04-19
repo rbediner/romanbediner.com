@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 166
-- Updated At (UTC): 2026-04-19T22:30:00Z
+- Handoff Sequence: 167
+- Updated At (UTC): 2026-04-19T22:08:00Z
 - Source Branch: staging
-- Source Commit: 8f651e2720ffc69a4ab8fb6f5e820a48a59afa33
+- Source Commit: 584b3c886e5b9fb5c7ba616f58f930c034a53996
 
 ## Continuation Pass: Staging-Only Correction and Validation — Resources / Summary / Framework CTA (2026-04-19)
 
@@ -84,8 +84,8 @@
   - mobile overflow check on summary page
   - mobile CTA width sanity check on summary page
 
-### Current Ticket Read on Local State
-- Ready to mark `DEV Complete` again after staging preview publish/verification if preview reflects the same corrected state:
+### Final Ticket Outcome
+- After staging CI, staging deploy, live preview verification, focused self-QA, and direct PRD reconciliation, these tickets were moved back from `In Progress` to `DEV Complete`:
   - `P1-RH-01`
   - `P1-RH-02`
   - `P1-RH-03`
@@ -94,7 +94,7 @@
   - `P1-FS-03`
   - `P1-FW-01`
   - `P3-DOC-01`
-- Still expected to remain `DEV Complete` if no preview regression is found:
+- These remained `DEV Complete` throughout and were revalidated in this pass:
   - `P1-FS-02`
   - `P1-FS-04`
   - `P3-AD-01`
@@ -103,7 +103,12 @@
 ### Staging / Production State
 - This pass is **staging only**.
 - Do **not** promote anything to `prod` from this pass.
-- Staging preview target remains:
+- Staging preview published successfully for commit `584b3c886e5b9fb5c7ba616f58f930c034a53996`.
+- Staging CI run:
+  - `https://github.com/rbediner/romanbediner.com/actions/runs/24640194211`
+- Staging deploy run:
+  - `https://github.com/rbediner/romanbediner.com/actions/runs/24640246225`
+- Staging preview URL:
   - `https://rbediner.github.io/romanbediner-preview/`
 - Production remains:
   - `https://romanbediner.com/`
@@ -116,9 +121,9 @@
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
 ### Notes For The Next Session
-- Start by verifying the staging preview for:
+- Human review should start from the updated staging preview on:
   - `/resources/`
   - `/resources/ai-enabled-operations-framework-summary/`
   - `/framework/`
-- If preview matches local validation, update the PRD ticket statuses back from `In Progress` to `DEV Complete` for the corrected tickets.
+- If new visual feedback appears, compare against the locked PRD ticket language before making any net-new design changes.
 - Keep `prod` untouched unless there is a later explicit promotion instruction after human review.
