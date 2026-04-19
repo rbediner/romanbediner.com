@@ -72,19 +72,30 @@ mustInclude('P1-RH-03 locked body', resourcesHtml,
 
 // PRD-locked copy: P1-RH-04 (hub bottom CTA)
 mustInclude('P1-RH-04 locked CTA', resourcesHtml, 'Explore the Full Framework');
+mustInclude('P1-RH-04 companion panel wrapper', resourcesHtml, 'class="resources-inset-cta resource-companion-panel"');
+mustInclude('P1-RH-04 panel accent', resourcesHtml, 'class="resource-panel-accent"');
+mustInclude('P1-RH-04 button-like CTA treatment', resourcesHtml, 'class="resource-companion-cta" href="/framework/"');
 
 // PRD-locked copy: P1-FS-01 (conversational paragraph)
 mustInclude('P1-FS-01 locked conversational paragraph', summaryHtml,
   'If this sounds relevant to what you are building, scaling, or trying to untangle, feel free to reach out. I am always glad to connect with thoughtful operators, leaders, and teams to exchange ideas, talk through challenges, and explore how this kind of framework can be applied in a real operating environment.'
 );
+mustInclude('P1-FS-01 unified top shell', summaryHtml, 'class="resource-top-shell resource-companion-panel"');
+mustInclude('P1-FS-01 top grid wrapper', summaryHtml, 'class="resource-top-grid"');
+mustInclude('P1-FS-01 restrained audience card', summaryHtml, 'class="resource-blue-box resource-audience-card"');
 
 // PRD-locked copy: P1-FS-03 (download CTA + helper line + secondary text CTA)
 mustInclude('P1-FS-03 download CTA label', summaryHtml, 'Download Framework Summary PDF');
 mustInclude('P1-FS-03 utility line', summaryHtml, 'Six slides. Fast review. Easy to share.');
 mustInclude('P1-FS-03 secondary text CTA', summaryHtml, 'Explore the Full Framework');
+mustInclude('P1-FS-03 stronger companion CTA class', summaryHtml, 'class="resource-companion-cta" href="/framework/"');
+mustInclude('P1-FS-03 stronger dual nav primary class', summaryHtml, 'class="resource-dual-nav-item resource-dual-nav-item-primary resource-dual-nav-right"');
+mustInclude('P1-FS-03 stronger dual nav secondary class', summaryHtml, 'class="resource-dual-nav-item resource-dual-nav-item-secondary"');
 
 // PRD-locked copy: P1-FW-01 (framework bottom CTA)
 mustInclude('P1-FW-01 locked framework CTA', frameworkHtml, 'Explore the Framework Summary at a Glance');
+mustInclude('P1-FW-01 inset companion panel', frameworkHtml, 'class="framework-summary-cta framework-summary-cta-inset resource-companion-panel"');
+mustInclude('P1-FW-01 button-like CTA treatment', frameworkHtml, 'class="resource-companion-cta resource-companion-cta-framework"');
 
 // Carousel contract
 mustInclude('carousel shell', summaryHtml, 'data-resource-carousel');

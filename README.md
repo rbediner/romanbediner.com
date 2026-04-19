@@ -208,6 +208,14 @@ Required handoff content for cross-machine continuity:
 - Resource assets:
   - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
   - `/assets/resources/framework-summary/slides/`
+- Resources presentation contract:
+  - `/resources/` keeps the locked two-sentence intro directly under the header and closes with a blue-accent companion inset CTA to `/framework/`.
+  - `/resources/ai-enabled-operations-framework-summary/` uses one unified top companion panel for the locked conversational paragraph plus the `Who This Is For` card.
+  - Summary-page action hierarchy is intentionally stronger than plain text links:
+    - `Download Framework Summary PDF` remains the dominant primary CTA
+    - `Explore the Full Framework` uses the shared companion CTA treatment
+    - bottom dual navigation uses stronger blue CTA styling while preserving locked copy
+  - `/framework/` keeps the summary companion CTA visually secondary to `Explore Service Models`, but it must render as an intentional inset card with a button-like companion action rather than easy-to-miss body text.
 - Framework brief page entrypoints:
   - `/framework/opportunity/productizing-operations/index.html`
   - `/framework/design/operations-as-product/index.html`

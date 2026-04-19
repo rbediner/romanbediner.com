@@ -63,7 +63,7 @@
     </div>
   </header>
 
-  <main class="page-main resources-main">
+  <main class="page-main resources-main resources-hub-main">
     <p class="resources-label">RESOURCES</p>
     <h1>Resources</h1>
     <div class="section-accent" aria-hidden="true"></div>
@@ -88,7 +88,7 @@
         </div>
       </article>
 
-      <article class="resource-card is-future"
+      <article class="resource-card is-future is-upcoming"
                data-resource-slug="ai-enabled-operations-dashboard"
                data-resource-title="AI-Enabled Operations Dashboard"
                data-resource-type="dashboard_prototype"
@@ -99,11 +99,13 @@
       </article>
     </section>
 
-    <aside class="resources-inset-cta" aria-label="Return to the full framework">
+    <!-- Companion CTA stays secondary to the resource cards, but should still close the page with intent. -->
+    <aside class="resources-inset-cta resource-companion-panel" aria-label="Return to the full framework">
+      <div class="resource-panel-accent" aria-hidden="true"></div>
       <p class="resources-inset-cta-copy">Prefer the complete six-stage model in long form?</p>
-      <a class="resource-text-cta" href="/framework/">
+      <a class="resource-companion-cta" href="/framework/">
         <span>Explore the Full Framework</span>
-        <span class="resource-text-cta-arrow" aria-hidden="true">&rarr;</span>
+        <span class="resource-companion-cta-arrow" aria-hidden="true">&rarr;</span>
       </a>
     </aside>
   </main>
