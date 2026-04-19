@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 162
-- Updated At (UTC): 2026-04-19T18:30:00Z
+- Handoff Sequence: 163
+- Updated At (UTC): 2026-04-19T17:30:00Z
 - Source Branch: staging
-- Source Commit: b0ec8c3d0dbb6812f81c445a3fe45330ff000150
+- Source Commit: dff826714aacf669b3b12eba2a2ecb966ad81195
 
 ## Current State
 - Website V2 Phase 1 is now the active product state in the working tree:
@@ -90,6 +90,15 @@ A secondary gap: the JS string-literal rewrite regex in `scripts/build/create-pr
 ### Tests After Fix
 - `npm run test:node` — all pass
 - `npm run test:jest` — all 17 suites / 67 tests pass
+
+### Staging Deploy Confirmed
+- CI run 24634789707 — success
+- Deploy Staging run 24634844246 — success
+- Staging preview URLs validated (all 200):
+  - https://rbediner.github.io/romanbediner-preview/
+  - https://rbediner.github.io/romanbediner-preview/resources/
+  - https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-framework-summary/
+  - https://rbediner.github.io/romanbediner-preview/framework/
 
 ### Locked Decisions (unchanged)
 All Website V2 Phase 1 locked decisions, copy, and design direction from the prior Codex pass are preserved. No route content, nav, or copy was changed.
