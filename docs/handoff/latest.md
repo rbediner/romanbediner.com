@@ -1,115 +1,101 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 175
-- Updated At (UTC): 2026-04-20T22:30:00Z
+- Handoff Sequence: 176
+- Updated At (UTC): 2026-04-20T23:00:00Z
 - Source Branch: staging
-- Source Commit: 53cae3e442f2655f9bd3b5670972b09b4f863392 (pre-commit baseline — new commit pending)
+- Source Commit: pending (commit in progress)
 
 ## Session Summary (2026-04-20)
 
-Phase 2 of the AI-Enabled Operations Dashboard migration spec. Full dashboard resource page shell built and shipped to staging. Resources hub card flipped from Coming Soon to launched state. All node tests pass.
+Phase 2 + Phase 3 of the AI-Enabled Operations Dashboard migration spec. Full page shell shipped in Phase 2. Phase 3 complete: public repo renamed and de-clientized, romanbediner.com source links updated to the live repo URL.
 
-### What changed
+## Phase 2 — What was done (previous commit on staging)
 
-- **New route**: `resources/ai-enabled-operations-dashboard/index.html` — full page shell at `/resources/ai-enabled-operations-dashboard/` with all locked copy per spec section 10
-- **Resources hub card** (`resources/index.html`): removed Coming Soon state, added launched card with `Open the Dashboard` pill button linking to the new route, updated body copy to spec-locked text
-- **CSS** (`styles/resources.css`): added dashboard-specific styles — artifact frame shell, mobile fallback, top CTA row, views grid, source callout, bottom CTA row, responsive layout
-- **Sitemap** (`sitemap.xml`): added new route with `lastmod: 2026-04-20`, `priority: 0.75`
-- **Tests updated**:
-  - `QA/tests/test-resources-phase1.js`: updated locked body copy check to match new card copy; added 30+ assertions covering all locked dashboard page copy, CTA labels, analytics attributes, mobile fallback shell, artifact frame shell
-  - `QA/tests/test-canonical.js`: added dashboard route
-  - `QA/tests/test-og-route-metadata.js`: added dashboard route with correct OG title/description
-  - `QA/tests/test-route-metadata-parity.js`: added dashboard route
-- **README.md**: added `/resources/ai-enabled-operations-dashboard/` to canonical routes list, repository structure, and machine-readable JSON routes array
-- **Architecture diagram**: regenerated via `npm run docs:generate`
+- New route `/resources/ai-enabled-operations-dashboard/` with full spec-locked page shell
+- Resources hub card flipped from Coming Soon to launched state with `Open the Dashboard` button
+- CSS, sitemap, test files, README all updated
+- All node tests passing, CI green, staging preview live
 
-### Files changed
+## Phase 3 — What was done (this commit)
 
-- `resources/ai-enabled-operations-dashboard/index.html` (new)
-- `resources/index.html`
-- `styles/resources.css`
-- `sitemap.xml`
-- `QA/tests/test-resources-phase1.js`
-- `QA/tests/test-canonical.js`
-- `QA/tests/test-og-route-metadata.js`
-- `QA/tests/test-route-metadata-parity.js`
-- `README.md`
+### Public dashboard repo (`rbediner/ai-enabled-operations-dashboard`)
+- **Repo renamed** from `canopy-exec-dashboard` → `ai-enabled-operations-dashboard` via GitHub API
+- **Repo description** updated: "AI-Enabled Operations Dashboard — interactive single-screen prototype for AI-enabled operating visibility, structured execution, and leadership review."
+- **README.md** rewritten as clean public artifact doc: no internal agent instructions, no client-specific framing, no Cloudflare tunnel workflow details. Introduces the dashboard as a standalone public resource with usage, customization, and build/deploy instructions. Links to the resource page on romanbediner.com.
+- **`package.json` name** updated: `exec-operating-screen` → `ai-enabled-operations-dashboard`
+- **`docs/HANDOFF-SOP.md`** scrubbed: all `canopy-exec-dashboard` URL references replaced with `ai-enabled-operations-dashboard`
+- **`docs/PRD.md`** scrubbed: same
+- **`docs/handoff/latest.md`** rewritten: reflects rename, migration context, Phase 4 next steps
+- Committed to `staging` (`5f2e440`) and fast-forwarded to `prod`
+
+### romanbediner.com
+- `resources/ai-enabled-operations-dashboard/index.html`: `View Source Code` links updated from `canopy-exec-dashboard` to `ai-enabled-operations-dashboard` (now pointing to the live renamed repo)
+- `docs/handoff/latest.md` updated
+
+## Files changed (Phase 3 — this commit)
+
+- `resources/ai-enabled-operations-dashboard/index.html`
 - `docs/handoff/latest.md`
 
-## Validation run
+## Validation
 
 - `node QA/tests/test-resources-phase1.js` — PASS
 - `node QA/tests/test-canonical.js` — PASS
-- `node QA/tests/test-og-route-metadata.js` — PASS
-- `node QA/tests/test-route-metadata-parity.js` — PASS
-- `node QA/tests/test-transition-blocks.js` — PASS
-- `node QA/tests/test-ga4-installation.js` — PASS
-- `node QA/tests/test-nav-links-contract.js` — PASS
-- `node QA/tests/test-no-legacy-references.js` — PASS
-- `node QA/tests/test-repo-hygiene.js` — PASS
-- `npm run test:node` — PASS (all suites including docs:verify after regeneration)
 
 ## Branch / release state
 
-- `staging`: active branch for this pass — commit pending push
-- `prod`: unchanged in this session
-- Promotion: not performed
+- `staging`: active — this commit pending push
+- `prod`: unchanged in this session (romanbediner.com)
+- Public dashboard repo: `staging` and `prod` both at `5f2e440`
+- Promotion: not performed for romanbediner.com
 
-## What is done (Phase 2)
+## Staging preview URL
 
-- `/resources/ai-enabled-operations-dashboard/` route exists with full spec-locked content
-- All locked page sections implemented: header, supporting subhead, blue callout, What This Dashboard Helps Answer, In This Dashboard, live artifact container (placeholder shell), Core Dashboard Views, Operating Principles, source-availability callout, closing conversational callout, bottom CTA row, page nav
-- Mobile fallback shell in place (CSS hides frame on mobile, shows fallback with message and View Source Code CTA)
-- Desktop/tablet artifact frame shell ready for iframe wiring in Phase 5
-- Resources hub card flipped to launched state with `Open the Dashboard` button
-- Analytics data attributes in place on `<main>` element
-- All locked copy implemented verbatim per spec
+`https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
 
 ## What remains (for Codex or next session)
 
-### Phase 3 — Rename and clean the standalone dashboard repo
-- Rename `rbediner/canopy-exec-dashboard` → `rbediner/ai-enabled-operations-dashboard` via GitHub
-- Remove all public Canopy references from the repo README, package.json description, and any visible source labels
-- Rewrite public README as a clean standalone artifact brief
-- Once renamed, the `View Source Code` links on the dashboard page (currently pointing to `https://github.com/rbediner/ai-enabled-operations-dashboard`) will resolve correctly
-
 ### Phase 4 — Import dashboard source into romanbediner.com
-- Clone `canopy-exec-dashboard` source
-- Copy dashboard source into a new top-level folder `ai-enabled-operations-dashboard/` inside this repo
+- Copy dashboard source from `rbediner/ai-enabled-operations-dashboard` into a new top-level folder `ai-enabled-operations-dashboard/` inside `romanbediner.com`
 - Do NOT create a nested `.git` directory
-- Ensure no Canopy references leak into any public-facing content
-- Verify the dashboard builds and runs locally at that path
-- Add `ai-enabled-operations-dashboard` to `INCLUDE_PATHS` in `scripts/build/create-artifact.js` if the route requires its own top-level directory
+- Dashboard source is a React/Vite app with these key paths:
+  - `src/App.jsx` — overall 16:9 screen composition
+  - `src/data/dashboardData.js` — all metric values
+  - `src/components/` — dashboard tiles
+  - `src/styles.css` — design system
+  - `vite.config.js` — build config
+  - `package.json` — `npm install && npm run build` outputs to `dist/`
+- The built output (`dist/`) is what will be served as the iframe source on the resource page
+- Add the build step to the website's artifact packaging so `dist/` is included in staging/prod artifacts
+- `INCLUDE_PATHS` in `scripts/build/create-artifact.js` already includes `resources` — confirm whether the dashboard source folder also needs to be listed (it's a separate top-level folder, not under `resources/`)
 
 ### Phase 5 — Wire the live dashboard into the resource page
-- Embed the dashboard as an iframe inside `.resource-dashboard-frame-shell` on the dashboard resource page
-- Preserve the dashboard's internal 16:9 and scaling behavior
-- Preserve its built-in fullscreen control; do not add a second external one
-- Ensure the iframe loads same-origin (CSP allows `frame-src 'self'`)
-- Replace the `.resource-dashboard-mobile-tile-inner` placeholder with a real polished screenshot/preview tile
-- Verify desktop and tablet render immediately on page load (no second click required)
+- Embed the built dashboard as an iframe inside `.resource-dashboard-frame-shell`
+- iframe src points to `https://romanbediner.com/ai-enabled-operations-dashboard/` (or relative `/ai-enabled-operations-dashboard/`)
+- Preserve 16:9 behavior, scaling, fullscreen toggle
+- Replace mobile tile placeholder with a real screenshot from the dashboard
+- Verify desktop/tablet renders immediately on page load
 
-### Phase 6 — Align CI/CD, packaging, analytics
-- Verify the route is included in `scripts/build/create-artifact.js` INCLUDE_PATHS (currently `resources` is included, so sub-routes are covered — but confirm the dashboard source folder is handled correctly)
-- Verify the route appears in the staging preview artifact and passes the sitemap 200-OK check
-- Add any route-specific QA smoke checks if needed
+### Phase 6 — CI/CD, packaging, analytics alignment
+- Verify build pipeline includes the dashboard source and dist output
+- Verify route appears in staging preview sitemap check
+- Add QA smoke for the dashboard route if needed
 
-### Phase 7 — Public source-repo automation
-- Set up a GitHub Action or export script so future dashboard changes in `romanbediner.com` sync to the public `ai-enabled-operations-dashboard` repo automatically
+### Phase 7 — Public source-repo sync automation
+- GitHub Action in `romanbediner.com` that syncs dashboard source changes back to `rbediner/ai-enabled-operations-dashboard`
 - Keep the public repo dashboard-only
 
 ### Phase 8 — Docs and final report
-- Update README with Phase 3–7 changes
-- Update this handoff file
-- Write the final implementation report per spec section 15
+- Update README with all phases
+- Write final implementation report per spec section 15
 
-## Important notes for the next agent
+## Important notes for the next agent (Codex)
 
-- The `View Source Code` links currently point to `https://github.com/rbediner/ai-enabled-operations-dashboard` — this URL will 404 until Phase 3 (repo rename) is complete. Do not ship to production until Phase 3 is done.
-- The artifact frame container is a styled placeholder (16:9 gradient block). It must be replaced with the actual iframe in Phase 5.
-- The mobile preview tile is also a CSS placeholder. A real screenshot of the dashboard should replace it in Phase 4/5.
-- All locked copy from spec section 10 is already in the page — do NOT change any text in the dashboard page without explicit instruction.
-- The resources hub card body copy was updated from the old PRD-locked text to the new spec-locked text. The test `test-resources-phase1.js` has been updated accordingly.
+- The public repo is now `https://github.com/rbediner/ai-enabled-operations-dashboard` — all Canopy references scrubbed
+- The `View Source Code` links in the dashboard resource page now point to the correct live URL
+- The dashboard is a React/Vite app — it needs to be built (`npm run build`) to produce the static `dist/` output that can be served as an iframe
+- The dashboard's built output (`dist/index.html`) is the iframe entry point — not the raw React source
+- No Canopy references remain anywhere public
 
 ## Release Watcher Hygiene
 
@@ -121,4 +107,4 @@ Phase 2 of the AI-Enabled Operations Dashboard migration spec. Full dashboard re
 
 ## PRD status
 
-- PRD not yet updated for this pass; use this handoff summary to update the live PRD if the dashboard page launch and card flip are accepted.
+- PRD not yet updated for this pass; use this handoff summary to update the live PRD.
