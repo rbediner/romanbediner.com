@@ -3,7 +3,7 @@
 - Handoff Sequence: 169
 - Updated At (UTC): 2026-04-20T18:00:00Z
 - Source Branch: staging
-- Source Commit: 2bf144f (fix: resources/summary/framework/services UX correction pass)
+- Source Commit: 875e44ac9c1de06cc13c9e293940dacadc5ea042
 
 ## Staging-Only UX/Design Correction Pass — Resources Family + Site Polish (2026-04-20)
 
