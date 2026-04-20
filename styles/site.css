@@ -346,11 +346,13 @@ body > main {
   margin: 24px 0 32px 0;
 }
 
-/* Horizontal separator that signals content end before bottom-nav block. */
+/* About-family divider treatment reused before bottom-nav rows on scoped pages. */
 .page-nav-divider {
-  border-top: 1px solid var(--border-color);
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(59, 108, 255, 0.62);
   width: 100%;
-  margin-bottom: 0;
+  margin: 12px 0 32px;
 }
 
 /* Shared bottom-page transition component used across primary pages. */

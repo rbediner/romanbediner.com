@@ -77,6 +77,7 @@ mustInclude('P1-RH-04 locked CTA', resourcesHtml, 'Explore the Full Framework');
 mustInclude('P1-RH-04 forward nav wrapper', resourcesHtml, 'class="next-page-nav resources-forward-nav"');
 mustInclude('P1-RH-04 nav anchor to framework', resourcesHtml, 'href="/framework/" class="nav-anchor"');
 mustInclude('P1-RH-04 divider above nav', resourcesHtml, 'class="page-nav-divider"');
+mustInclude('P1-RH-04 no duplicate nav divider marker', resourcesHtml, '<section class="next-page-nav resources-forward-nav">\n      <div class="page-nav-divider" aria-hidden="true"></div>');
 
 // PRD-locked copy: P1-FS-01 (conversational paragraph)
 mustInclude('P1-FS-01 locked conversational paragraph', summaryHtml,
@@ -109,11 +110,13 @@ mustInclude('P1-FS-03 site-family nav wrapper', summaryHtml, 'class="resource-pa
 mustInclude('P1-FS-03 nav back to resources hub', summaryHtml, 'Back to Resources Hub');
 mustInclude('P1-FS-03 nav forward to connect', summaryHtml, 'href="/connect/" class="nav-anchor"');
 mustInclude('P1-FS-03 divider above bottom nav', summaryHtml, 'class="page-nav-divider"');
+mustInclude('P1-FS-03 compact mobile toolbar hook', summaryHtml, 'class="resource-carousel-toolbar"');
 
 // PRD-locked copy: P1-FW-01 (framework bottom CTA)
 mustInclude('P1-FW-01 locked framework CTA', frameworkHtml, 'Explore the Framework Summary at a Glance');
 mustInclude('P1-FW-01 inset companion panel', frameworkHtml, 'class="framework-summary-cta framework-summary-cta-inset resource-companion-panel"');
 mustInclude('P1-FW-01 button-like CTA treatment', frameworkHtml, 'class="resource-companion-cta resource-companion-cta-framework"');
+mustInclude('P1-FW-01 no duplicate nav divider marker', frameworkHtml, '<section class="next-page-nav">\n      <div class="page-nav-divider" aria-hidden="true"></div>');
 
 // Carousel contract
 mustInclude('carousel shell', summaryHtml, 'data-resource-carousel');

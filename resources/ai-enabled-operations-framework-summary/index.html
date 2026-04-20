@@ -103,16 +103,19 @@
       <div class="resource-carousel-shell" data-resource-carousel>
         <div class="resource-carousel-header">
           <p class="resource-carousel-count" data-carousel-count>Slide 1 of 8</p>
-          <div class="resource-carousel-controls" aria-label="Slide navigation">
-            <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous slide">&larr;</button>
-            <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next slide">&rarr;</button>
+          <!-- Keep all slide controls in one toolbar so mobile layout stays compact and intentional. -->
+          <div class="resource-carousel-toolbar">
+            <div class="resource-carousel-controls" aria-label="Slide navigation">
+              <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous slide">&larr;</button>
+              <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next slide">&rarr;</button>
+            </div>
+            <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand slide preview">
+              <svg class="resource-expand-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+              <span class="sr-only">Expand slide preview</span>
+            </button>
           </div>
-          <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand slide preview">
-            <svg class="resource-expand-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-            </svg>
-            <span class="sr-only">Expand slide preview</span>
-          </button>
         </div>
         <div class="resource-carousel-viewport">
           <div class="resource-carousel-track" data-carousel-track>
