@@ -37,7 +37,7 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
 
 ## Validation Run Results
 
-- Push to staging was initially blocked by pre-push QA (`test-no-legacy-references`) due imported markdown mentioning `styles.css`; fixed in commit `2443158`.
+- Push to staging was initially blocked by pre-push QA (`test-no-legacy-references`) due imported markdown mentioning legacy stylesheet reference; fixed in commit `2443158`.
 - `cd ai-enabled-operations-dashboard && npm run build` ✅
 - `cd ai-enabled-operations-dashboard && npm run test:unit` ✅
 - `cd ai-enabled-operations-dashboard && npm run test:qa` ✅ (run with local dev server)
