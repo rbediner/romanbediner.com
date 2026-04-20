@@ -209,8 +209,8 @@ Required handoff content for cross-machine continuity:
   - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
   - `/assets/resources/framework-summary/slides/`
 - Resources presentation contract:
-  - `/resources/` keeps the locked two-sentence intro directly under the header and closes with a blue-accent companion inset CTA to `/framework/`.
-  - `/resources/ai-enabled-operations-framework-summary/` uses one unified top companion panel for the locked conversational paragraph plus the `Who This Is For` card.
+  - `/resources/` opens with the shared shelf-callout family treatment, including the vertical blue rule used on accepted About/Framework surfaces, and closes with a blue-accent companion inset CTA to `/framework/`.
+  - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family treatment, keeps `Who This Is For` as a restrained standalone companion card, and moves the locked conversational paragraph into the lower closing invitation area below the preview/CTA cluster.
   - Summary-page action hierarchy is intentionally stronger than plain text links:
     - `Download Framework Summary PDF` remains the dominant primary CTA
     - `Explore the Full Framework` uses the shared companion CTA treatment

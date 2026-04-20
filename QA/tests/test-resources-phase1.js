@@ -63,6 +63,8 @@ mustInclude('summary page', summaryHtml, 'href="/connect/"');
 mustInclude('P1-RH-01 locked intro', resourcesHtml,
   'Selected resources that make the operating model tangible. These materials provide a faster way to review the framework, its practical application, and the tools being developed around it.'
 );
+mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
+mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
 
 // PRD-locked copy: P1-RH-03 (Dashboard placeholder — title + full body)
 mustInclude('P1-RH-03 locked title', resourcesHtml, 'AI-Enabled Operations Dashboard');
@@ -80,9 +82,23 @@ mustInclude('P1-RH-04 button-like CTA treatment', resourcesHtml, 'class="resourc
 mustInclude('P1-FS-01 locked conversational paragraph', summaryHtml,
   'If this sounds relevant to what you are building, scaling, or trying to untangle, feel free to reach out. I am always glad to connect with thoughtful operators, leaders, and teams to exchange ideas, talk through challenges, and explore how this kind of framework can be applied in a real operating environment.'
 );
-mustInclude('P1-FS-01 unified top shell', summaryHtml, 'class="resource-top-shell resource-companion-panel"');
-mustInclude('P1-FS-01 top grid wrapper', summaryHtml, 'class="resource-top-grid"');
-mustInclude('P1-FS-01 restrained audience card', summaryHtml, 'class="resource-blue-box resource-audience-card"');
+mustInclude('P1-FS-01 family shelf callout', summaryHtml, 'class="shelf-callout resource-family-callout resource-summary-callout"');
+mustInclude('P1-FS-01 vertical blue rule', summaryHtml, 'class="shelf-border"');
+mustInclude('P1-FS-01 restrained audience card', summaryHtml, 'class="resource-blue-box resource-audience-card resource-audience-card-standalone"');
+mustInclude('P1-FS-01 closing conversation callout', summaryHtml, 'class="shelf-callout resource-family-callout resource-conversation-callout"');
+
+const audienceIdx = summaryHtml.indexOf('id="summary-audience"');
+const overviewIdx = summaryHtml.indexOf('id="summary-overview"');
+const carouselIdx = summaryHtml.indexOf('data-resource-carousel');
+const conversationIdx = summaryHtml.indexOf('resource-conversation-copy');
+
+if (!(audienceIdx !== -1 && overviewIdx !== -1 && audienceIdx < overviewIdx)) {
+  fail('P1-FS-01 audience card must appear before the In This Summary section.');
+}
+
+if (!(carouselIdx !== -1 && conversationIdx !== -1 && carouselIdx < conversationIdx)) {
+  fail('P1-FS-01 conversational paragraph must appear below the slide preview area.');
+}
 
 // PRD-locked copy: P1-FS-03 (download CTA + helper line + secondary text CTA)
 mustInclude('P1-FS-03 download CTA label', summaryHtml, 'Download Framework Summary PDF');

@@ -20,18 +20,35 @@
   color: var(--text-secondary);
 }
 
-.resources-subhead {
-  margin: -8px 0 20px;
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--text-secondary);
+.resources-family-intro,
+.resource-top-section {
+  margin-top: 0;
+}
+
+.resource-family-callout {
+  margin-bottom: 30px;
+}
+
+.resource-family-callout .shelf-content {
+  padding: 26px 32px;
+}
+
+.resource-family-copy {
+  margin: 0;
   max-width: 760px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.resource-summary-callout .resource-family-copy {
+  max-width: 720px;
 }
 
 .resources-grid {
   display: grid;
   gap: 24px;
-  margin-top: 30px;
+  margin-top: 8px;
 }
 
 .resource-card {
@@ -155,10 +172,6 @@
   text-transform: uppercase;
 }
 
-.resource-summary-main .shelf-callout {
-  margin-bottom: 28px;
-}
-
 .resource-section {
   margin-top: 44px;
 }
@@ -171,13 +184,15 @@
   margin-top: 24px;
   padding: 24px 26px 26px;
   border-radius: 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 250, 255, 0.96) 100%);
-  border: 1px solid rgba(59, 108, 255, 0.18);
-  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.05);
 }
 
 .resource-blue-box h2 {
   margin: 0 0 12px;
+  font-size: 22px;
+  color: var(--accent-blue);
 }
 
 .resource-blue-box .service-list {
@@ -473,9 +488,16 @@
 
 /* Conversational close section */
 .resource-conversational-close {
-  border-top: 1px solid var(--border-color);
-  padding-top: 32px;
-  margin-top: 48px;
+  margin-top: 34px;
+}
+
+.resource-conversation-callout {
+  margin-bottom: 0;
+}
+
+.resource-conversation-copy {
+  max-width: 820px;
+  color: var(--text-secondary);
 }
 
 .resource-framework-linkback {
@@ -629,11 +651,6 @@
   max-width: 520px;
 }
 
-/* Summary page top section (P1-FS-01) — unified, restrained composition */
-.resource-top-section {
-  margin-top: 18px;
-}
-
 .resource-companion-panel {
   border-radius: 14px;
 }
@@ -646,31 +663,12 @@
   background: linear-gradient(90deg, rgba(59, 108, 255, 0.88) 0%, rgba(59, 108, 255, 0.42) 100%);
 }
 
-.resource-top-shell {
-  padding: 26px 28px 28px;
-  border: 1px solid rgba(59, 108, 255, 0.18);
-  background: linear-gradient(180deg, rgba(244, 248, 255, 0.98) 0%, rgba(250, 252, 255, 0.98) 100%);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.07);
-}
-
-.resource-top-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.9fr);
-  gap: 24px;
-  align-items: start;
-}
-
-.resource-conversational-lede {
-  margin: 0;
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--text-primary);
-  max-width: none;
-}
-
 .resource-audience-card {
-  margin-top: 0;
-  align-self: stretch;
+  max-width: 760px;
+}
+
+.resource-audience-card-standalone {
+  margin: 0 0 8px;
 }
 
 /* CTA cluster (P1-FS-03) — stronger hierarchy for download primary action */
@@ -737,7 +735,7 @@
     padding: 22px;
   }
 
-  .resource-top-shell,
+  .resource-family-callout .shelf-content,
   .resources-inset-cta,
   .framework-summary-cta-inset {
     padding: 22px;
@@ -753,7 +751,6 @@
     width: 100%;
   }
 
-  .resource-top-grid,
   .resource-dual-nav {
     grid-template-columns: 1fr;
   }
