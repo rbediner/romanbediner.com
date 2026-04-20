@@ -98,7 +98,7 @@
 
     <section class="resource-section" aria-labelledby="summary-preview">
       <h2 id="summary-preview">Slide Preview</h2>
-      <p>Review the summary page by page below, then download the full PDF for offline use or sharing.</p>
+      <p>Review the summary page by page below, or download the full PDF for offline use or sharing.</p>
 
       <div class="resource-carousel-shell" data-resource-carousel>
         <div class="resource-carousel-header">
@@ -107,7 +107,12 @@
             <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous slide">&larr;</button>
             <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next slide">&rarr;</button>
           </div>
-          <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand slide preview">Expand Preview</button>
+          <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand slide preview">
+            <svg class="resource-expand-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+            <span class="sr-only">Expand slide preview</span>
+          </button>
         </div>
         <div class="resource-carousel-viewport">
           <div class="resource-carousel-track" data-carousel-track>
@@ -162,23 +167,34 @@
     </section>
 
     <section class="resource-conversational-close" aria-label="Closing invitation">
-      <div class="shelf-callout resource-family-callout resource-conversation-callout">
-        <div class="shelf-border" aria-hidden="true"></div>
-        <div class="shelf-content">
-          <p class="resource-family-copy resource-conversation-copy">If this sounds relevant to what you are building, scaling, or trying to untangle, feel free to reach out. I am always glad to connect with thoughtful operators, leaders, and teams to exchange ideas, talk through challenges, and explore how this kind of framework can be applied in a real operating environment.</p>
-        </div>
+      <div class="resource-conversation-card">
+        <p class="resource-family-copy resource-conversation-copy">If this sounds relevant to what you are building, scaling, or trying to untangle, feel free to reach out. I am always glad to connect with thoughtful operators, leaders, and teams to exchange ideas, talk through challenges, and explore how this kind of framework can be applied in a real operating environment.</p>
       </div>
     </section>
 
-    <div class="resource-dual-nav" aria-label="Page navigation">
-      <a class="resource-dual-nav-item resource-dual-nav-item-secondary" href="/resources/">
-        <span class="resource-dual-nav-arrow" aria-hidden="true">&larr;</span>
-        <span>Back to Resources</span>
-      </a>
-      <a class="resource-dual-nav-item resource-dual-nav-item-primary resource-dual-nav-right" href="/connect/">
-        <span>Reach Out for a Chat</span>
-        <span class="resource-dual-nav-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+    <div class="resource-page-nav" aria-label="Page navigation">
+      <div class="page-nav-divider" aria-hidden="true"></div>
+      <div class="resource-page-nav-links">
+        <a href="/resources/" class="nav-anchor resource-nav-back">
+          <div class="nav-header-row">
+            <svg class="nav-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            <span class="nav-label">Back to Resources Hub</span>
+          </div>
+        </a>
+        <a href="/connect/" class="nav-anchor">
+          <div class="nav-header-row">
+            <span class="nav-label">Reach Out for a Chat</span>
+            <svg class="nav-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+          <span class="nav-title sr-only">Transition to Connect</span>
+        </a>
+      </div>
     </div>
   </main>
 

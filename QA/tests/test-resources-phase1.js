@@ -72,11 +72,11 @@ mustInclude('P1-RH-03 locked body', resourcesHtml,
   'An interactive dashboard concept for AI-enabled operating visibility, structured execution, and leadership review. Designed as a free, shareable prototype, it offers a practical starting point for teams that want a clearer at-a-glance view of the business and a flexible artifact they can adapt to their own context.'
 );
 
-// PRD-locked copy: P1-RH-04 (hub bottom CTA)
+// PRD-locked copy: P1-RH-04 (hub forward nav)
 mustInclude('P1-RH-04 locked CTA', resourcesHtml, 'Explore the Full Framework');
-mustInclude('P1-RH-04 companion panel wrapper', resourcesHtml, 'class="resources-inset-cta resource-companion-panel"');
-mustInclude('P1-RH-04 panel accent', resourcesHtml, 'class="resource-panel-accent"');
-mustInclude('P1-RH-04 button-like CTA treatment', resourcesHtml, 'class="resource-companion-cta" href="/framework/"');
+mustInclude('P1-RH-04 forward nav wrapper', resourcesHtml, 'class="next-page-nav resources-forward-nav"');
+mustInclude('P1-RH-04 nav anchor to framework', resourcesHtml, 'href="/framework/" class="nav-anchor"');
+mustInclude('P1-RH-04 divider above nav', resourcesHtml, 'class="page-nav-divider"');
 
 // PRD-locked copy: P1-FS-01 (conversational paragraph)
 mustInclude('P1-FS-01 locked conversational paragraph', summaryHtml,
@@ -85,7 +85,7 @@ mustInclude('P1-FS-01 locked conversational paragraph', summaryHtml,
 mustInclude('P1-FS-01 family shelf callout', summaryHtml, 'class="shelf-callout resource-family-callout resource-summary-callout"');
 mustInclude('P1-FS-01 vertical blue rule', summaryHtml, 'class="shelf-border"');
 mustInclude('P1-FS-01 restrained audience card', summaryHtml, 'class="resource-blue-box resource-audience-card resource-audience-card-standalone"');
-mustInclude('P1-FS-01 closing conversation callout', summaryHtml, 'class="shelf-callout resource-family-callout resource-conversation-callout"');
+mustInclude('P1-FS-01 closing conversation card', summaryHtml, 'class="resource-conversation-card"');
 
 const audienceIdx = summaryHtml.indexOf('id="summary-audience"');
 const overviewIdx = summaryHtml.indexOf('id="summary-overview"');
@@ -105,8 +105,10 @@ mustInclude('P1-FS-03 download CTA label', summaryHtml, 'Download Framework Summ
 mustInclude('P1-FS-03 utility line', summaryHtml, 'Six slides. Fast review. Easy to share.');
 mustInclude('P1-FS-03 secondary text CTA', summaryHtml, 'Explore the Full Framework');
 mustInclude('P1-FS-03 stronger companion CTA class', summaryHtml, 'class="resource-companion-cta" href="/framework/"');
-mustInclude('P1-FS-03 stronger dual nav primary class', summaryHtml, 'class="resource-dual-nav-item resource-dual-nav-item-primary resource-dual-nav-right"');
-mustInclude('P1-FS-03 stronger dual nav secondary class', summaryHtml, 'class="resource-dual-nav-item resource-dual-nav-item-secondary"');
+mustInclude('P1-FS-03 site-family nav wrapper', summaryHtml, 'class="resource-page-nav"');
+mustInclude('P1-FS-03 nav back to resources hub', summaryHtml, 'Back to Resources Hub');
+mustInclude('P1-FS-03 nav forward to connect', summaryHtml, 'href="/connect/" class="nav-anchor"');
+mustInclude('P1-FS-03 divider above bottom nav', summaryHtml, 'class="page-nav-divider"');
 
 // PRD-locked copy: P1-FW-01 (framework bottom CTA)
 mustInclude('P1-FW-01 locked framework CTA', frameworkHtml, 'Explore the Framework Summary at a Glance');

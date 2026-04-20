@@ -346,6 +346,13 @@ body > main {
   margin: 24px 0 32px 0;
 }
 
+/* Horizontal separator that signals content end before bottom-nav block. */
+.page-nav-divider {
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+  margin-bottom: 0;
+}
+
 /* Shared bottom-page transition component used across primary pages. */
 .next-page-nav {
   margin-top: 100px;

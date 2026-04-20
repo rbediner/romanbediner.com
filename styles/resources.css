@@ -186,7 +186,7 @@
   border-radius: 12px;
   background: #ffffff;
   border: 1px solid var(--border-color);
-  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
 }
 
 .resource-blue-box h2 {
@@ -313,25 +313,36 @@
   color: var(--text-secondary);
 }
 
-/* Expand Preview button */
+/* Expand Preview — icon button, not text link */
 .resource-expand-preview {
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--accent-blue);
-  font-size: 13px;
-  font-weight: 600;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  background: #ffffff;
+  color: var(--text-primary);
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(59, 108, 255, 0.4);
-  transition: text-decoration-color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  text-decoration: none;
+}
+
+.resource-expand-icon {
+  display: block;
+  flex-shrink: 0;
 }
 
 .resource-expand-preview:hover,
 .resource-expand-preview:focus-visible {
-  text-decoration-color: var(--accent-blue);
+  border-color: rgba(59, 108, 255, 0.4);
+  color: var(--accent-blue);
+  box-shadow: 0 4px 10px rgba(59, 108, 255, 0.1);
   outline: none;
+  text-decoration: none;
 }
 
 /* Expand Preview modal (P1-FS-02 / P3-UX-01) */
@@ -486,18 +497,22 @@
   letter-spacing: 0.02em;
 }
 
-/* Conversational close section */
+/* Conversational close section — card treatment, no vertical rule */
 .resource-conversational-close {
   margin-top: 34px;
 }
 
-.resource-conversation-callout {
-  margin-bottom: 0;
+.resource-conversation-card {
+  padding: 24px 28px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
 }
 
 .resource-conversation-copy {
   max-width: 820px;
   color: var(--text-secondary);
+  margin: 0;
 }
 
 .resource-framework-linkback {
@@ -589,18 +604,20 @@
 .framework-summary-cta-inset {
   margin: 44px auto 0;
   max-width: 760px;
-  padding: 24px 28px 28px;
-  border: 1px solid rgba(59, 108, 255, 0.18);
+  padding: 28px 32px 32px;
+  border: 1px solid rgba(59, 108, 255, 0.26);
   border-radius: 12px;
   background: linear-gradient(180deg, rgba(244, 248, 255, 0.98) 0%, rgba(250, 252, 255, 0.98) 100%);
-  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.07);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.09);
 }
 
 .framework-summary-cta-copy {
-  margin: 0 0 14px;
-  font-size: 15px;
-  color: var(--text-secondary);
+  margin: 0 0 18px;
+  font-size: 17px;
+  color: var(--text-primary);
   max-width: 540px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 /* Featured resource card (P1-RH-02) */
@@ -716,7 +733,19 @@
 }
 
 .resource-companion-cta-framework {
-  min-height: 50px;
+  min-height: 54px;
+  padding: 0 28px;
+  font-size: 15px;
+  border: 1.5px solid rgba(59, 108, 255, 0.36);
+  background: linear-gradient(135deg, #f4f8ff 0%, rgba(244, 248, 255, 0.9) 100%);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+}
+
+.resource-companion-cta-framework:hover,
+.resource-companion-cta-framework:focus-visible {
+  border-color: rgba(59, 108, 255, 0.5);
+  background: linear-gradient(135deg, #edf3ff 0%, rgba(237, 243, 255, 0.96) 100%);
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.09);
 }
 
 @media (max-width: 767px) {
@@ -765,4 +794,46 @@
   .resource-dual-nav-item-primary {
     justify-self: stretch;
   }
+
+  .resource-page-nav-links {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+/* Featured resource card — hover lift matches framework card family */
+.resource-card.is-featured {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.resource-card.is-featured:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+}
+
+/* Summary page site-family nav (replaces pill dual nav) */
+.resource-page-nav {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.resource-page-nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.resource-nav-back .nav-arrow {
+  transform: scaleX(-1);
+}
+
+.resource-nav-back:hover .nav-arrow {
+  transform: scaleX(-1) translateX(12px);
+}
+
+/* Resources hub forward nav — uses next-page-nav but scoped margin */
+.resources-forward-nav {
+  margin-top: 60px;
 }
