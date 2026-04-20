@@ -96,6 +96,14 @@ Tickets touched and recommended final status:
 - Production remains unchanged: `https://romanbediner.com/`
 - Do **not** promote to `prod` from this pass without human visual review on staging.
 
+### Release Watcher Hygiene
+
+- Keep release watcher hygiene in place for this repo.
+- Use:
+  - `npm run release:watchers:status`
+  - `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
 ### Notes For The Next Session
 
 - Start human review on staging at:
