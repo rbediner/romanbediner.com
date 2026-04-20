@@ -38,6 +38,7 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
 ## Validation Run Results
 
 - Push to staging was initially blocked by pre-push QA (`test-no-legacy-references`) due imported markdown mentioning legacy stylesheet reference; fixed in commit `2443158`.
+- Staging CI link-validation failure repro/fix: `ai-enabled-operations-dashboard/index.html` entry script changed from `/src/main.jsx` to `./src/main.jsx` so monorepo root crawl no longer 404s.
 - `cd ai-enabled-operations-dashboard && npm run build` ✅
 - `cd ai-enabled-operations-dashboard && npm run test:unit` ✅
 - `cd ai-enabled-operations-dashboard && npm run test:qa` ✅ (run with local dev server)
