@@ -64,5 +64,9 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
 - Dashboard iframe now depends on packaged artifact route `/ai-enabled-operations-dashboard/`
 - Release artifact build must retain dashboard dist promotion logic in `create-artifact.js`
 - If dashboard source changes, regenerate dist before release
+- Keep release watcher hygiene in place for this repo:
+  - `npm run release:watchers:status`
+  - `npm run release:watchers:cleanup`
+  - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 - PRD update still pending for this phase set:
   - `SEO Authority PRD` — `https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`
