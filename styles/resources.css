@@ -465,11 +465,11 @@
 }
 
 .resource-preview-modal-prev {
-  left: 10px;
+  left: max(10px, env(safe-area-inset-left));
 }
 
 .resource-preview-modal-next {
-  right: 10px;
+  right: max(10px, env(safe-area-inset-right));
 }
 
 .resource-preview-modal-nav:hover:not([disabled]),
@@ -510,10 +510,10 @@
     font-size: 16px;
   }
   .resource-preview-modal-prev {
-    left: 4px;
+    left: max(6px, env(safe-area-inset-left));
   }
   .resource-preview-modal-next {
-    right: 4px;
+    right: max(6px, env(safe-area-inset-right));
   }
   .resource-preview-modal-img {
     max-height: calc(100vh - 220px);

@@ -494,6 +494,14 @@ main li:last-child {
   border-top: 1px solid var(--neutral-border, var(--border-color, #e6e6e6));
 }
 
+/* Home-specific accent variant when a page needs a blue pre-footer divider. */
+.footer-divider.footer-divider-accent {
+  border-top: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(59, 108, 255, 0.62);
+}
+
 .footer-nav {
   display: flex;
   justify-content: center;

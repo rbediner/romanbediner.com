@@ -746,6 +746,11 @@ html {
   transform: translateX(6px);
 }
 
+/* Keep this as a companion pill CTA, not a page-nav treatment. */
+.framework-summary-cta .resource-companion-cta-arrow {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .framework-main {
     padding: 0 24px;
