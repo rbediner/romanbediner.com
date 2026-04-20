@@ -1,129 +1,105 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 167
-- Updated At (UTC): 2026-04-19T22:08:00Z
+- Handoff Sequence: 168
+- Updated At (UTC): 2026-04-20T12:23:00Z
 - Source Branch: staging
-- Source Commit: 584b3c886e5b9fb5c7ba616f58f930c034a53996
+- Source Commit: 8e66a595cb63f7a2966f1ab6dc1a82d9b70c5be1
 
-## Continuation Pass: Staging-Only Correction and Validation — Resources / Summary / Framework CTA (2026-04-19)
+## Staging-Only Correction Pass — Resources Family Alignment (2026-04-20)
 
-### What I Found From Claude's Prior Pass
-- The prior implementation materially solved route structure, analytics plumbing, and modal behavior in code.
-- The prior implementation did **not** fully satisfy the locked visual finish on several in-scope tickets even though those tickets had already been marked `DEV Complete` in the PRD and in handoff notes.
-- The biggest misses were the same ones the operator flagged:
-  - summary page top section still felt like separate soft blocks instead of one stronger blue-accent family composition
-  - `Who This Is For` was present but not landing as an intentional restrained companion card
-  - summary-page bottom nav still read like weak text links instead of stronger blue CTA treatment
-  - framework bottom summary CTA was still too subtle and text-like
-  - resources hub closing treatment and card finishing still felt underpowered
+### What This Pass Corrected
+- This was a correction run against a failed design-alignment result, not a net-new design pass.
+- The prior staging result still looked off-family on the Resources surfaces because it used a custom rounded accent treatment instead of the real site-family blue-box pattern used on accepted pages like About.
+- The summary page also placed the conversational paragraph too high, making it read like hero framing instead of a closing invitation.
 
-### PRD Status Correction Performed
-- Updated the live PRD directly before code changes.
-- Moved these tickets from inaccurate `DEV Complete` back to `In Progress` during audit:
+### PRD Status Handling
+- Updated the live PRD before implementation.
+- Moved these touched tickets from inaccurate `DEV Complete` back to `In Progress` for this correction run:
   - `P1-RH-01`
-  - `P1-RH-02`
-  - `P1-RH-03`
   - `P1-RH-04`
   - `P1-FS-01`
   - `P1-FS-03`
-  - `P1-FW-01`
-  - `P3-DOC-01`
-
-### Code Changes In This Pass
-
-#### Resources hub (`resources/index.html`, `styles/resources.css`)
-- Kept the locked two-sentence intro directly under the header.
-- Strengthened the featured framework-summary card with a more intentional blue-accent finish and stronger featured-action feel.
-- Strengthened the dashboard placeholder card so it reads as an intentional premium upcoming artifact rather than a soft placeholder.
-- Rebuilt the closing Resources CTA into a proper blue-accent companion inset panel with a stronger, button-like companion action to `/framework/`.
-- Tightened page rhythm around the opening section, card stack, and closing move.
-
-#### Framework summary page (`resources/ai-enabled-operations-framework-summary/index.html`, `styles/resources.css`)
-- Rebuilt the top section into one unified companion panel with:
-  - shared blue-accent line treatment
-  - locked conversational paragraph unchanged
-  - `Who This Is For` retained as a contained companion card inside the same top composition
-- Strengthened CTA hierarchy:
-  - download CTA remains primary and more premium/button-like
-  - `Explore the Full Framework` now uses the shared companion CTA treatment instead of a plain text link
-  - bottom dual nav now uses stronger blue CTA styling while preserving locked copy
-- Fixed mobile overflow on the summary page by clipping the carousel width at the summary-page container level.
-
-#### Framework page (`framework/index.html`, `styles/resources.css`)
-- Rebuilt the bottom summary companion CTA as a true inset companion panel with a stronger button-like action.
-- Kept the summary CTA visually secondary to `Explore Service Models`.
-
-#### Tests / docs
-- Updated `QA/tests/test-resources-phase1.js` so the stronger companion-panel and CTA treatments are now protected by source-level invariants.
-- Updated `README.md` with the current Resources presentation contract.
-
-### Analytics / Accessibility Findings
-- Resource analytics contract in code already matched the locked PRD contract:
-  - `resource_card_click`
-  - `resource_preview_expand`
-  - `resource_pdf_download`
-  - required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, plus `slide_index` / `file_path` where required
-- Modal runtime code already satisfied the locked accessibility behavior in source:
-  - visible close icon
-  - previous / next controls
-  - keyboard arrow navigation
-  - Escape close
-  - outside click close
-  - focus moves into modal on open
-  - focus returns to trigger on close
-
-### Local Validation Completed
-- `node QA/tests/test-resources-phase1.js` — PASS
-- `npm run test:jest` — PASS
-- `npm run test:node` — PASS
-- Focused browser self-QA with Playwright against a local static server — PASS
-  - `/resources/`
-  - `/resources/ai-enabled-operations-framework-summary/`
-  - `/framework/`
-  - summary modal open / keyboard nav / Escape close / focus return
-  - mobile overflow check on summary page
-  - mobile CTA width sanity check on summary page
-
-### Final Ticket Outcome
-- After staging CI, staging deploy, live preview verification, focused self-QA, and direct PRD reconciliation, these tickets were moved back from `In Progress` to `DEV Complete`:
-  - `P1-RH-01`
-  - `P1-RH-02`
-  - `P1-RH-03`
-  - `P1-RH-04`
-  - `P1-FS-01`
-  - `P1-FS-03`
-  - `P1-FW-01`
-  - `P3-DOC-01`
-- These remained `DEV Complete` throughout and were revalidated in this pass:
-  - `P1-FS-02`
   - `P1-FS-04`
-  - `P3-AD-01`
-  - `P3-UX-01`
+  - `P3-DOC-01`
+- Updated PRD wording so the source of truth now matches the corrected direction:
+  - Resources intro uses the shared shelf-callout blue-box family treatment.
+  - Summary page top uses the same shelf-callout family treatment.
+  - `Who This Is For` remains a restrained companion card near the top, not inside an awkward split hero.
+  - The locked conversational paragraph belongs in the lower closing invitation area below the preview section.
+
+### Implementation Summary
+- `resources/index.html`
+  - Replaced the plain intro paragraph with the shared shelf-callout structure and vertical blue rule.
+- `resources/ai-enabled-operations-framework-summary/index.html`
+  - Replaced the oversized split top composition with the shared shelf-callout family treatment.
+  - Repositioned `Who This Is For` into a restrained standalone companion card below the top callout.
+  - Moved the locked conversational paragraph into the lower closing invitation area beneath the preview/CTA cluster.
+- `styles/resources.css`
+  - Removed the off-family top-shell split-layout treatment.
+  - Added resource-specific support for the shared shelf-callout pattern and tightened audience/conversation spacing.
+  - Kept existing CTA and modal behavior intact.
+- `QA/tests/test-resources-phase1.js`
+  - Updated invariants to enforce the shelf-callout family markup, audience-card placement, and lower placement of the conversational note.
+- `README.md`
+  - Updated the Resources presentation contract to match the corrected family treatment and copy placement.
+
+### Validation Completed
+- Automated:
+  - `node QA/tests/test-resources-phase1.js` — PASS
+  - `npm run test:node` — PASS
+  - `npm run test:jest` — PASS
+  - local pre-push full-regression parity gate — PASS
+  - staging CI — PASS
+    - `https://github.com/rbediner/romanbediner.com/actions/runs/24665998220`
+  - staging deploy — PASS
+    - `https://github.com/rbediner/romanbediner.com/actions/runs/24666127384`
+- Focused self-QA:
+  - Compared corrected Resources and Summary pages against accepted About and Framework family language.
+  - Verified the shared shelf-callout treatment and vertical blue rule now exist on:
+    - `/resources/`
+    - `/resources/ai-enabled-operations-framework-summary/`
+  - Verified `Who This Is For` no longer sits inside an awkward split-hero composition.
+  - Verified the locked conversational paragraph now sits below the preview area near the closing invitation.
+  - Verified locked copy remained exact.
+  - Verified modal behavior still works end to end:
+    - larger expanded preview
+    - previous/next navigation
+    - keyboard navigation
+    - Escape close
+    - outside click close
+    - focus enters modal
+    - focus returns on close
+  - Verified mobile presentation is acceptable on both changed pages.
+  - Verified live preview markup for the corrected structures after deploy.
+
+### Ticket Outcome For This Run
+- Returned to `DEV Complete` after implementation, testing, self-QA, and live staging verification:
+  - `P1-RH-01`
+  - `P1-RH-04`
+  - `P1-FS-01`
+  - `P1-FS-03`
+  - `P1-FS-04`
+  - `P3-DOC-01`
+- No touched ticket remains open from this correction pass.
 
 ### Staging / Production State
 - This pass is **staging only**.
-- Do **not** promote anything to `prod` from this pass.
-- Staging preview published successfully for commit `584b3c886e5b9fb5c7ba616f58f930c034a53996`.
-- Staging CI run:
-  - `https://github.com/rbediner/romanbediner.com/actions/runs/24640194211`
-- Staging deploy run:
-  - `https://github.com/rbediner/romanbediner.com/actions/runs/24640246225`
-- Staging preview URL:
+- Updated staging preview:
   - `https://rbediner.github.io/romanbediner-preview/`
-- Production remains:
+- Production remains unchanged:
   - `https://romanbediner.com/`
+- Do **not** promote to `prod` from this pass.
 
 ### Release watcher hygiene
 - Keep release watcher hygiene in place for this repo.
-- Before or after release work, use:
+- Use:
   - `npm run release:watchers:status`
   - `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
 ### Notes For The Next Session
-- Human review should start from the updated staging preview on:
+- Start human review on staging at:
   - `/resources/`
   - `/resources/ai-enabled-operations-framework-summary/`
-  - `/framework/`
-- If new visual feedback appears, compare against the locked PRD ticket language before making any net-new design changes.
+- If new visual feedback appears, compare directly against accepted About/Framework family language before adding any new motif.
 - Keep `prod` untouched unless there is a later explicit promotion instruction after human review.
