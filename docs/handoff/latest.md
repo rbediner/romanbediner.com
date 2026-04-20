@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 169
-- Updated At (UTC): 2026-04-20T18:00:00Z
+- Handoff Sequence: 170
+- Updated At (UTC): 2026-04-20T14:05:00Z
 - Source Branch: staging
-- Source Commit: 875e44ac9c1de06cc13c9e293940dacadc5ea042
+- Source Commit: 38a6b81832160e64cccd42abca852e8ea40abf47
 
 ## Staging-Only UX/Design Correction Pass — Resources Family + Site Polish (2026-04-20)
 
