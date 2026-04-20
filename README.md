@@ -57,10 +57,11 @@ Use this exact sequence on every machine/session:
 1. Push changes to `staging`.
 2. Let the selective pre-push gate choose the smallest responsible local validation profile.
 3. Wait for `staging` selective CI jobs to pass.
-4. Publish/share staging preview link only after the selected staging gate passes.
-5. Obtain visual approval from staging preview.
-6. Promote the exact approved commit from `staging` to `prod` (fast-forward only).
-7. Verify release completion for that exact prod SHA using:
+4. Wait for `Deploy Staging` to complete for the same `staging` SHA.
+5. Publish/share staging preview link only after both `CI` and `Deploy Staging` are complete and green for that exact SHA.
+6. Obtain visual approval from staging preview.
+7. Promote the exact approved commit from `staging` to `prod` (fast-forward only).
+8. Verify release completion for that exact prod SHA using:
 ```bash
 npm run release:verify-prod -- --sha <prod-sha>
 ```
@@ -72,6 +73,9 @@ This gate must confirm:
 
 Rules:
 - Do not share a staging preview link before tests are green.
+- Do not share a staging preview link while `CI` or `Deploy Staging` is still running for the target SHA.
+- If `CI` or `Deploy Staging` fails, resolve the failure, push the fix, and re-run until both workflows are green before sharing the preview link.
+- If a `Deploy Staging` run is canceled by concurrency, watch for the replacement run and require that replacement to succeed before sharing.
 - Treat `staging`, preview publication, and `prod` as active releases until their final remote workflow and validation steps have fully concluded.
 - Do not report any environment as complete while a deploy, preview verification, post-deploy smoke, or release verification job is still running.
 - Do not promote any commit that differs from the tested/approved staging commit.
