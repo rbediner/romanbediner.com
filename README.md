@@ -209,13 +209,16 @@ Required handoff content for cross-machine continuity:
   - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
   - `/assets/resources/framework-summary/slides/`
 - Resources presentation contract:
-  - `/resources/` opens with the shared shelf-callout family treatment, including the vertical blue rule used on accepted About/Framework surfaces, and closes with a blue-accent companion inset CTA to `/framework/`.
-  - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family treatment, keeps `Who This Is For` as a restrained standalone companion card, and moves the locked conversational paragraph into the lower closing invitation area below the preview/CTA cluster.
-  - Summary-page action hierarchy is intentionally stronger than plain text links:
-    - `Download Framework Summary PDF` remains the dominant primary CTA
-    - `Explore the Full Framework` uses the shared companion CTA treatment
-    - bottom dual navigation uses stronger blue CTA styling while preserving locked copy
-  - `/framework/` keeps the summary companion CTA visually secondary to `Explore Service Models`, but it must render as an intentional inset card with a button-like companion action rather than easy-to-miss body text.
+  - `/resources/` opens with the shared shelf-callout family treatment (vertical blue rule, blue-tinted bg) and closes with a forward-only site-family nav block (`.next-page-nav resources-forward-nav`) to `/framework/`. The inset companion panel (`resources-inset-cta`) no longer exists on this page.
+  - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family, keeps `Who This Is For` as a restrained non-interactive companion card (`.resource-blue-box`), and moves the locked conversational paragraph into a `.resource-conversation-card` (card surface, no vertical blue rule) below the preview/CTA cluster.
+  - Summary-page action hierarchy is intentionally ordered: download primary CTA → companion CTA → conversational card → site-family page nav.
+    - `Download Framework Summary PDF` remains the dominant primary CTA.
+    - `Explore the Full Framework` uses the shared companion CTA treatment.
+    - Bottom nav uses the site-family `.nav-anchor` pattern (two links: back to Resources Hub, forward to Connect), not pill-style dual-nav CTAs.
+    - The expand-preview affordance is an icon button (36×36px, corners/fullscreen icon), not a text link.
+    - A `.page-nav-divider` (1px border-top from `site.css`) appears immediately above the bottom nav on this page.
+  - `/framework/` keeps the summary companion CTA visually secondary to `Explore Service Models`, but it must render as a more pronounced inset card: larger padding, bolder border, primary-color copy at 17px, gradient-tinted button. A `.page-nav-divider` appears immediately above the bottom nav.
+  - Services header does not include a `section-accent` div between the `<header>` and the shelf-callout.
 - Framework brief page entrypoints:
   - `/framework/opportunity/productizing-operations/index.html`
   - `/framework/design/operations-as-product/index.html`

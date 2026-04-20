@@ -1,105 +1,108 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 168
-- Updated At (UTC): 2026-04-20T12:23:00Z
+- Handoff Sequence: 169
+- Updated At (UTC): 2026-04-20T18:00:00Z
 - Source Branch: staging
-- Source Commit: 8e66a595cb63f7a2966f1ab6dc1a82d9b70c5be1
+- Source Commit: 2bf144f (fix: resources/summary/framework/services UX correction pass)
 
-## Staging-Only Correction Pass — Resources Family Alignment (2026-04-20)
+## Staging-Only UX/Design Correction Pass — Resources Family + Site Polish (2026-04-20)
 
 ### What This Pass Corrected
-- This was a correction run against a failed design-alignment result, not a net-new design pass.
-- The prior staging result still looked off-family on the Resources surfaces because it used a custom rounded accent treatment instead of the real site-family blue-box pattern used on accepted pages like About.
-- The summary page also placed the conversational paragraph too high, making it read like hero framing instead of a closing invitation.
+
+This was a design-alignment and UX polish pass against the Resources family and selected shared surfaces. Not a net-new feature build.
+
+- The Resources hub had a redundant inset CTA block (`resources-inset-cta`) that no longer belonged.
+- The summary page bottom nav used pill-style CTAs that broke site-family pattern.
+- The framework summary CTA on `/framework/` was too quiet/restrained.
+- The expand-preview affordance read as body text, not a UI control.
+- The conversation callout had a vertical blue rule that competed with the primary content hierarchy.
+- The Services header had an accidental `section-accent` line under the h1.
+- All three resources-family pages were missing a visual divider before their bottom nav blocks.
 
 ### PRD Status Handling
-- Updated the live PRD before implementation.
-- Moved these touched tickets from inaccurate `DEV Complete` back to `In Progress` for this correction run:
-  - `P1-RH-01`
-  - `P1-RH-04`
-  - `P1-FS-01`
-  - `P1-FS-03`
-  - `P1-FS-04`
-  - `P3-DOC-01`
-- Updated PRD wording so the source of truth now matches the corrected direction:
-  - Resources intro uses the shared shelf-callout blue-box family treatment.
-  - Summary page top uses the same shelf-callout family treatment.
-  - `Who This Is For` remains a restrained companion card near the top, not inside an awkward split hero.
-  - The locked conversational paragraph belongs in the lower closing invitation area below the preview section.
+
+PRD was NOT directly updated in this session (per operator instruction). Operator will update the live PRD separately using the readout below.
+
+Tickets touched and recommended final status:
+
+| Ticket | Status |
+|---|---|
+| P1-FW-01 (Framework summary CTA) | DEV Complete |
+| P1-RH-04 (Resources hub bottom CTA → forward nav) | DEV Complete |
+| P1-FS-01 (Summary conversational close) | DEV Complete |
+| P1-FS-02 / P3-UX-01 (Expand Preview control) | DEV Complete |
+| P1-FS-03 (Summary bottom nav) | DEV Complete |
+| Services header line (unlabeled cleanup) | DEV Complete |
 
 ### Implementation Summary
-- `resources/index.html`
-  - Replaced the plain intro paragraph with the shared shelf-callout structure and vertical blue rule.
-- `resources/ai-enabled-operations-framework-summary/index.html`
-  - Replaced the oversized split top composition with the shared shelf-callout family treatment.
-  - Repositioned `Who This Is For` into a restrained standalone companion card below the top callout.
-  - Moved the locked conversational paragraph into the lower closing invitation area beneath the preview/CTA cluster.
-- `styles/resources.css`
-  - Removed the off-family top-shell split-layout treatment.
-  - Added resource-specific support for the shared shelf-callout pattern and tightened audience/conversation spacing.
-  - Kept existing CTA and modal behavior intact.
-- `QA/tests/test-resources-phase1.js`
-  - Updated invariants to enforce the shelf-callout family markup, audience-card placement, and lower placement of the conversational note.
-- `README.md`
-  - Updated the Resources presentation contract to match the corrected family treatment and copy placement.
+
+**`services/index.html`**
+- Removed `<div class="section-accent" aria-hidden="true"></div>` that appeared between `<header>` and the shelf-callout. It rendered as an accidental extra blue line under the page title.
+
+**`framework/index.html`**
+- Added `<div class="page-nav-divider" aria-hidden="true"></div>` inside `<section class="next-page-nav">`, before the existing `section-accent`. This creates a visible 1px horizontal separator between the page content and the bottom nav block.
+
+**`resources/index.html`**
+- Removed `<aside class="resources-inset-cta resource-companion-panel">` block entirely (the "Prefer the complete six-stage model in long form?" copy and companion CTA).
+- Replaced with `<section class="next-page-nav resources-forward-nav">` — a forward-only site-family nav block to `/framework/` with a `page-nav-divider` above it. Copy: "Explore the Full Framework."
+
+**`resources/ai-enabled-operations-framework-summary/index.html`**
+- Changed "then download the full PDF" → "or download the full PDF."
+- Replaced text-link expand button with a 36×36px icon button: corners/fullscreen SVG, `sr-only` label, `data-carousel-expand` attribute preserved.
+- Changed conversation callout from `<div class="shelf-callout resource-family-callout resource-conversation-callout">` + `shelf-border` to `<div class="resource-conversation-card">` — a card surface (no vertical blue rule, `#f8fafc` bg, border, 12px radius).
+- Replaced `.resource-dual-nav` pill-style nav with `.resource-page-nav` / `.resource-page-nav-links` — two `nav-anchor` links (back to `/resources/`, forward to `/connect/`) using the site-family navigation pattern.
+- Changed "Back to Resources" → "Back to Resources Hub."
+- Added `<div class="page-nav-divider">` above the new bottom nav.
+
+**`styles/resources.css`**
+- `resource-expand-preview`: from text-link to 36×36 icon button (border, radius, flex center, icon transition).
+- `resource-conversation-card`: new class — `#f8fafc` bg, 1px border, 12px radius, 24px padding. No vertical rule.
+- `resource-blue-box` shadow: lightened to `0 6px 18px rgba(0,0,0,0.04)` to match framework card family.
+- `resource-card.is-featured`: added `transition` and `:hover` lift (`translateY(-2px)`, elevated shadow) to match framework card motion language.
+- `.framework-summary-cta-copy`: 15px → 17px, `text-secondary` → `text-primary`, 500 weight.
+- `.framework-summary-cta-inset`: padding 24/28 → 28/32, border-opacity 0.18 → 0.26, heavier shadow.
+- `.resource-companion-cta-framework`: min-height 50 → 54px, wider padding, 1.5px bolder border, gradient-tinted bg, hover state.
+- Added `.resource-page-nav`, `.resource-page-nav-links`, `.resource-nav-back` for summary page nav layout (arrow reverses via `scaleX(-1)`).
+- Added `.resources-forward-nav` margin modifier (60px top vs default 100px) for resources hub.
+
+**`styles/site.css`**
+- Added `.page-nav-divider` shared class: `border-top: 1px solid var(--border-color); width: 100%;`. Usable on any page needing a separator before the bottom nav block.
+
+**`QA/tests/test-resources-phase1.js`**
+- P1-RH-04: removed checks for `resources-inset-cta`, `resource-panel-accent`, `resource-companion-cta` on resources hub. Added checks for `next-page-nav resources-forward-nav`, `href="/framework/" class="nav-anchor"`, and `page-nav-divider`.
+- P1-FS-01: updated conversation callout check from `shelf-callout resource-family-callout resource-conversation-callout` to `resource-conversation-card`.
+- P1-FS-03: removed checks for `resource-dual-nav-item-primary resource-dual-nav-right` and `resource-dual-nav-item-secondary`. Added checks for `resource-page-nav`, "Back to Resources Hub", `href="/connect/" class="nav-anchor"`, and `page-nav-divider`.
 
 ### Validation Completed
-- Automated:
-  - `node QA/tests/test-resources-phase1.js` — PASS
-  - `npm run test:node` — PASS
-  - `npm run test:jest` — PASS
-  - local pre-push full-regression parity gate — PASS
-  - staging CI — PASS
-    - `https://github.com/rbediner/romanbediner.com/actions/runs/24665998220`
-  - staging deploy — PASS
-    - `https://github.com/rbediner/romanbediner.com/actions/runs/24666127384`
-- Focused self-QA:
-  - Compared corrected Resources and Summary pages against accepted About and Framework family language.
-  - Verified the shared shelf-callout treatment and vertical blue rule now exist on:
-    - `/resources/`
-    - `/resources/ai-enabled-operations-framework-summary/`
-  - Verified `Who This Is For` no longer sits inside an awkward split-hero composition.
-  - Verified the locked conversational paragraph now sits below the preview area near the closing invitation.
-  - Verified locked copy remained exact.
-  - Verified modal behavior still works end to end:
-    - larger expanded preview
-    - previous/next navigation
-    - keyboard navigation
-    - Escape close
-    - outside click close
-    - focus enters modal
-    - focus returns on close
-  - Verified mobile presentation is acceptable on both changed pages.
-  - Verified live preview markup for the corrected structures after deploy.
 
-### Ticket Outcome For This Run
-- Returned to `DEV Complete` after implementation, testing, self-QA, and live staging verification:
-  - `P1-RH-01`
-  - `P1-RH-04`
-  - `P1-FS-01`
-  - `P1-FS-03`
-  - `P1-FS-04`
-  - `P3-DOC-01`
-- No touched ticket remains open from this correction pass.
+- `node QA/tests/test-resources-phase1.js` — PASS
+- `node QA/tests/test-transition-blocks.js` — PASS
+- `node QA/tests/test-shared-design-system.js` — PASS
+- `node QA/tests/test-framework-artifact-packaging.js` — PASS
+- `node QA/tests/test-header-nav.js` — PASS
+- `node QA/tests/test-no-legacy-references.js` — PASS
+- Focused self-QA performed on all four affected pages (see ticket readout above).
+
+### Notes on Dead CSS
+
+- `.resources-inset-cta` and `.resources-inset-cta-copy` in `resources.css` are now dead (HTML removed). Safe to strip in a future CSS cleanup pass.
+- `.resource-dual-nav`, `.resource-dual-nav-item`, `.resource-dual-nav-item-primary`, `.resource-dual-nav-item-secondary`, `.resource-dual-nav-arrow`, `.resource-dual-nav-right` are still in `resources.css` but the HTML no longer uses them on the summary page. Retain for now — do not delete until a cleanup pass is explicitly approved.
 
 ### Staging / Production State
-- This pass is **staging only**.
-- Updated staging preview:
-  - `https://rbediner.github.io/romanbediner-preview/`
-- Production remains unchanged:
-  - `https://romanbediner.com/`
-- Do **not** promote to `prod` from this pass.
 
-### Release watcher hygiene
-- Keep release watcher hygiene in place for this repo.
-- Use:
-  - `npm run release:watchers:status`
-  - `npm run release:watchers:cleanup`
-- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+- This pass is **staging only**.
+- Commit: `2bf144f` on `staging`.
+- Staging preview URL (confirm after CI): `https://rbediner.github.io/romanbediner-preview/`
+- Production remains unchanged: `https://romanbediner.com/`
+- Do **not** promote to `prod` from this pass without human visual review on staging.
 
 ### Notes For The Next Session
+
 - Start human review on staging at:
-  - `/resources/`
-  - `/resources/ai-enabled-operations-framework-summary/`
-- If new visual feedback appears, compare directly against accepted About/Framework family language before adding any new motif.
-- Keep `prod` untouched unless there is a later explicit promotion instruction after human review.
+  - `/resources/` — confirm: no inset block, clean forward-only nav to Framework, divider visible above nav.
+  - `/resources/ai-enabled-operations-framework-summary/` — confirm: icon expand button, card callout (no blue rule), site-family dual nav, divider above nav, copy corrections exact.
+  - `/framework/` — confirm: summary CTA is visibly louder, divider above bottom nav.
+  - `/services/` — confirm: no stray blue line under header.
+- If the PRD update is pending, use the ticket readout above as source of truth for what changed.
+- Next logical work: prod promotion after human visual approval, then PRD + handoff update for the full release cycle.
+- Release watcher hygiene remains in place. Use `npm run release:watchers:status` before any promotion.
