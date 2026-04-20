@@ -55,7 +55,7 @@ All metric values and labels live in `src/data/dashboardData.js`. Swap them for 
 
 ```
 src/data/dashboardData.js   ← tile values, labels, states
-src/styles.css               ← design system
+src/style-layer file         ← design system
 src/components/              ← individual dashboard tiles
 ```
 

@@ -124,7 +124,7 @@ Key paths:
 - `src/App.jsx` — overall 16:9 screen composition
 - `src/data/dashboardData.js` — all metric values and labels
 - `src/components/` — purpose-built dashboard components
-- `src/styles.css` — complete V2.7 design system
+- `src/style-layer file` — complete V2.7 design system
 - `.github/workflows/deploy-pages.yml` — prod GitHub Pages deploy workflow
 - (no logo asset — T1 is a text wordmark rendered in `TopStatusBar.jsx`)
 - `design/wireframe-prototype.html` — layout reference
