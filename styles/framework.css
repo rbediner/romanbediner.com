@@ -683,6 +683,69 @@ html {
   background: linear-gradient(180deg, rgba(148, 163, 184, 0.09) 0%, rgba(148, 163, 184, 0.03) 100%);
 }
 
+/* Framework companion summary CTA lives on /framework/, so style it in framework.css (not resources.css). */
+.framework-summary-cta {
+  margin: 48px 0 0;
+  padding-top: 18px;
+}
+
+.framework-summary-cta-inset {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 32px 30px;
+  border: 1px solid rgba(59, 108, 255, 0.28);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(243, 248, 255, 0.98) 0%, rgba(250, 252, 255, 0.98) 100%);
+  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.08);
+}
+
+.framework-summary-cta-copy {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text-primary);
+  font-weight: 500;
+  max-width: 560px;
+}
+
+.resource-companion-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.resource-companion-cta-framework {
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(59, 108, 255, 0.34);
+  background: linear-gradient(135deg, #f4f8ff 0%, rgba(244, 248, 255, 0.9) 100%);
+  color: var(--accent-blue);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.resource-companion-cta-framework:hover,
+.resource-companion-cta-framework:focus-visible {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transform: translateY(-1px);
+  border-color: rgba(59, 108, 255, 0.5);
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.09);
+}
+
+.resource-companion-cta-arrow {
+  transition: transform 0.18s ease;
+}
+
+.resource-companion-cta-framework:hover .resource-companion-cta-arrow,
+.resource-companion-cta-framework:focus-visible .resource-companion-cta-arrow {
+  transform: translateX(6px);
+}
+
 @media (max-width: 768px) {
   .framework-main {
     padding: 0 24px;
@@ -741,6 +804,25 @@ html {
   .framework-brief-article {
     margin-top: 0;
     padding-left: 0;
+  }
+
+  .framework-summary-cta {
+    margin-top: 36px;
+    padding-top: 0;
+  }
+
+  .framework-summary-cta-inset {
+    padding: 22px 22px 24px;
+  }
+
+  .framework-summary-cta-copy {
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  .resource-companion-cta-framework {
+    min-height: 48px;
+    padding: 0 20px;
   }
 
   .brief-section {

@@ -400,7 +400,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 0;
+  padding: 0 52px;
   min-height: 0;
 }
 
@@ -444,6 +445,9 @@
 }
 
 .resource-preview-modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 44px;
   height: 44px;
   border-radius: 999px;
@@ -458,6 +462,14 @@
   justify-content: center;
   box-shadow: 0 4px 10px rgba(10, 15, 30, 0.1);
   transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.resource-preview-modal-prev {
+  left: 10px;
+}
+
+.resource-preview-modal-next {
+  right: 10px;
 }
 
 .resource-preview-modal-nav:hover:not([disabled]),
@@ -486,14 +498,25 @@
     padding: 16px;
   }
   .resource-preview-modal-inner {
-    padding: 20px 16px 16px;
+    width: min(100%, calc(100vw - 20px));
+    padding: 16px 12px 12px;
+  }
+  .resource-preview-modal-stage {
+    padding: 0 36px;
   }
   .resource-preview-modal-nav {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  .resource-preview-modal-prev {
+    left: 4px;
+  }
+  .resource-preview-modal-next {
+    right: 4px;
   }
   .resource-preview-modal-img {
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 220px);
   }
 }
 
@@ -846,7 +869,12 @@
 
   .resource-page-nav-links {
     flex-direction: column;
-    gap: 24px;
+    gap: 14px;
+  }
+
+  /* Mobile: keep forward action as primary and remove stacked backward nav clutter. */
+  .resource-page-nav .resource-nav-back {
+    display: none;
   }
 
   .framework-summary-cta-inset {

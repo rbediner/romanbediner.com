@@ -1,59 +1,52 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 172
-- Updated At (UTC): 2026-04-20T17:30:38Z
+- Handoff Sequence: 173
+- Updated At (UTC): 2026-04-20T18:16:02Z
 - Source Branch: staging
-- Source Commit: 6aafb0dc34fb1f3474b4ed869a8a1229b4bf4ae8 (pre-handoff baseline)
+- Source Commit: af80229d0fc184accaaceb26b16e128445156929
 
 ## Session Summary (2026-04-20)
 
-Staging-only refinement pass was pushed and validated for commit `b76127390a5db192d7b4ad9ccf5fb7cfc5a965ec`.
+Staging-only UI refinement pass for home/framework/connect/resources summary.
 
-This follow-up session also updated release SOP wording in `README.md` to enforce communication discipline:
-- do not share staging preview links until both `CI` and `Deploy Staging` are complete and green for the exact same SHA
-- if either workflow fails, fix and re-run before sharing preview links
-- if deploy is canceled by concurrency, wait for replacement run success before sharing
+### What changed
+- Home: bottom transition now uses full-width blue `page-nav-divider` before footer area.
+- Framework: summary companion CTA now renders as a large pill-style action (styled from `framework.css`), so it no longer reads like a second plain-link nav row.
+- Connect: added intentional blue divider before footer and removed duplicate gray footer divider on this page to avoid double-divider clutter.
+- Summary page modal (mobile): modal prev/next controls now stay inside modal frame with tighter mobile sizing/insets.
+- Summary page nav (mobile): hidden back-nav link on mobile to reduce stacked bottom-nav clutter; kept forward `Reach Out for a Chat` visible.
+- Transition contract test updated to allow either `section-accent` or `page-nav-divider` in shared next-page-nav blocks.
 
-## Branch State
-
-- `staging` HEAD: `b76127390a5db192d7b4ad9ccf5fb7cfc5a965ec`
-- `prod` HEAD: unchanged in this session
-- Alignment: `staging` is ahead of `prod` (staging-only; no promotion)
-
-## Staging Workflow Status (for `b761273`)
-
-- `CI` run: success
-  - https://github.com/rbediner/romanbediner.com/actions/runs/24680494527
-- `Deploy Staging` initial run: cancelled by concurrency
-  - https://github.com/rbediner/romanbediner.com/actions/runs/24680494511
-- `Deploy Staging` replacement run: success
-  - https://github.com/rbediner/romanbediner.com/actions/runs/24680619053
-
-Staging preview URL:
-- https://rbediner.github.io/romanbediner-preview/
-
-## Files Changed In This Session
-
-- `README.md`
+## Files changed
+- `index.html`
+- `connect/index.html`
+- `styles/connect.css`
+- `styles/framework.css`
+- `styles/resources.css`
+- `QA/tests/test-transition-blocks.js`
 - `docs/handoff/latest.md`
 
-## Validation
+## Validation run (token-frugal)
+- `node QA/tests/test-resources-phase1.js` — PASS
+- `node QA/tests/test-transition-blocks.js` — PASS
+- Targeted Playwright sanity script (local server) — PASS for:
+  - home divider presence
+  - framework summary CTA pill styling
+  - connect divider cleanup
+  - summary mobile back-nav hidden
+  - summary modal arrows inside frame on mobile
 
-- `npm run docs:verify` — PASS
-- Live workflow watch performed via `gh run watch` until both staging CI and staging deploy were complete.
-
-## Known Notes / Blockers
-
-- Local husky `pre-push` full-regression gate can fail on existing visual baseline drift (`insights--desktop-full.png`) unrelated to current staged changes. Remote CI/deploy status remains source of truth for release readiness.
+## Branch / release state
+- `staging`: active branch for this pass
+- `prod`: unchanged in this session
+- Promotion: not performed
 
 ## Release Watcher Hygiene
-
 - Keep release watcher hygiene in place for this repo.
 - Use:
   - `npm run release:watchers:status`
   - `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-## PRD Status
-
-- Live PRD was not updated in this session (no product-level behavior change; SOP/process documentation update only).
+## PRD status
+- PRD not yet updated for this pass; use this handoff summary to update the live PRD if these UI decisions are accepted.

@@ -25,11 +25,16 @@ function assertSingleTransitionBlock(html, pageLabel) {
     console.error(`FAIL: ${pageLabel} must contain exactly one next-page-nav block, found ${count}.`);
   }
 
-  for (const className of ['section-accent', 'nav-anchor', 'nav-header-row', 'nav-label', 'nav-title', 'nav-arrow']) {
+  for (const className of ['nav-anchor', 'nav-header-row', 'nav-label', 'nav-title', 'nav-arrow']) {
     if (!new RegExp(`class="[^"]*\\b${className}\\b[^"]*"`).test(html)) {
       failures += 1;
       console.error(`FAIL: ${pageLabel} transition block is missing class ${className}.`);
     }
+  }
+
+  if (!/class="[^"]*\b(section-accent|page-nav-divider)\b[^"]*"/.test(html)) {
+    failures += 1;
+    console.error(`FAIL: ${pageLabel} transition block must include section-accent or page-nav-divider.`);
   }
 
   if (!/class="nav-title sr-only"/.test(html)) {
