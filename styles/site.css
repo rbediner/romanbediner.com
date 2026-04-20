@@ -346,12 +346,21 @@ body > main {
   margin: 24px 0 32px 0;
 }
 
-/* About-family divider treatment reused before bottom-nav rows on scoped pages. */
+/* Default nav divider remains subtle and neutral for global non-scoped pages. */
 .page-nav-divider {
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/* Scoped accent divider variant for framework/resources family pages in this pass. */
+.framework-main .next-page-nav .page-nav-divider,
+.resources-main .next-page-nav .page-nav-divider,
+.resource-page-nav .page-nav-divider {
   height: 3px;
+  border-top: 0;
   border-radius: 999px;
   background: rgba(59, 108, 255, 0.62);
-  width: 100%;
   margin: 12px 0 32px;
 }
 
