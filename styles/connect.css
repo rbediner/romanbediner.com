@@ -432,18 +432,7 @@
       transform: translateX(6px);
     }
 
-    /* Connect keeps one intentional blue divider before footer and removes duplicate gray footer rule. */
-    .connect-page-divider {
-      width: 100%;
-      height: 3px;
-      margin: 26px 0 0;
-      border-radius: 999px;
-      background: rgba(59, 108, 255, 0.62);
-    }
-
-    .connect-main + .footer .footer-divider {
-      display: none;
-    }
+    /* Connect uses the shared footer divider with blue accent; no extra page divider block. */
 
     /* Keep Connect vertical rhythm aligned with global page-top spacing from site.css. */
     .connect-main .section {

@@ -108,9 +108,14 @@ mustInclude('P1-FS-03 secondary text CTA', summaryHtml, 'Explore the Full Framew
 mustInclude('P1-FS-03 stronger companion CTA class', summaryHtml, 'class="resource-companion-cta" href="/framework/"');
 mustInclude('P1-FS-03 site-family nav wrapper', summaryHtml, 'class="resource-page-nav"');
 mustInclude('P1-FS-03 nav back to resources hub', summaryHtml, 'Back to Resources Hub');
-mustInclude('P1-FS-03 nav forward to connect', summaryHtml, 'href="/connect/" class="nav-anchor"');
+mustInclude('P1-FS-03 conversational CTA label', summaryHtml, '>Reach out for a chat<');
+mustInclude('P1-FS-03 conversational CTA target', summaryHtml, 'class="resource-primary-cta resource-conversation-cta" href="/connect/"');
 mustInclude('P1-FS-03 divider above bottom nav', summaryHtml, 'class="page-nav-divider"');
 mustInclude('P1-FS-03 compact mobile toolbar hook', summaryHtml, 'class="resource-carousel-toolbar"');
+
+if (summaryHtml.includes('href="/connect/" class="nav-anchor"')) {
+  fail('P1-FS-03 connect CTA must be in the conversational card, not bottom page navigation.');
+}
 
 // PRD-locked copy: P1-FW-01 (framework bottom CTA)
 mustInclude('P1-FW-01 locked framework CTA', frameworkHtml, 'Explore the Framework Summary at a Glance');

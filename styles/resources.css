@@ -534,7 +534,7 @@
 }
 
 .resource-conversation-card {
-  padding: 24px 28px;
+  padding: 24px 28px 26px;
   background: #f8fafc;
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -544,6 +544,14 @@
   max-width: 820px;
   color: var(--text-secondary);
   margin: 0;
+}
+
+.resource-conversation-cta {
+  margin-top: 18px;
+  min-height: 50px;
+  padding: 0 24px;
+  background: linear-gradient(135deg, #3b6cff 0%, #2f5bea 100%);
+  box-shadow: 0 14px 30px rgba(59, 108, 255, 0.22);
 }
 
 .resource-framework-linkback {
@@ -803,13 +811,22 @@
   .resource-card,
   .resource-blue-box,
   .resource-carousel-shell {
-    padding: 22px;
+    padding: 24px;
   }
 
   .resource-family-callout .shelf-content,
   .resources-inset-cta,
   .framework-summary-cta-inset {
-    padding: 22px;
+    padding: 24px;
+  }
+
+  .resource-family-callout {
+    margin-bottom: 24px;
+  }
+
+  .resource-family-copy {
+    font-size: 17px;
+    line-height: 1.58;
   }
 
   .resource-card-row,
@@ -869,12 +886,8 @@
 
   .resource-page-nav-links {
     flex-direction: column;
-    gap: 14px;
-  }
-
-  /* Mobile: keep forward action as primary and remove stacked backward nav clutter. */
-  .resource-page-nav .resource-nav-back {
-    display: none;
+    gap: 12px;
+    margin-top: 22px;
   }
 
   .framework-summary-cta-inset {
@@ -891,6 +904,25 @@
     width: auto;
     min-height: 48px;
     padding: 0 20px;
+  }
+
+  .resource-card h2 {
+    margin-bottom: 12px;
+    line-height: 1.26;
+  }
+
+  .resource-card p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+
+  .resource-card-actions {
+    margin-top: 18px;
+  }
+
+  .resources-forward-nav {
+    margin-top: 48px;
+    margin-bottom: 44px;
   }
 }
 
@@ -912,10 +944,10 @@
 
 .resource-page-nav-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 32px;
-  margin-top: 32px;
+  margin-top: 26px;
 }
 
 .resource-nav-back .nav-arrow {
@@ -929,4 +961,5 @@
 /* Resources hub forward nav — uses next-page-nav but scoped margin */
 .resources-forward-nav {
   margin-top: 60px;
+  margin-bottom: 44px;
 }
