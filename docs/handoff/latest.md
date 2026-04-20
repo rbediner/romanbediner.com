@@ -62,7 +62,6 @@ Phase 2 + Phase 3 of the AI-Enabled Operations Dashboard migration spec. Full pa
   - `src/App.jsx` — overall 16:9 screen composition
   - `src/data/dashboardData.js` — all metric values
   - `src/components/` — dashboard tiles
-  - `src/styles.css` — design system
   - `vite.config.js` — build config
   - `package.json` — `npm install && npm run build` outputs to `dist/`
 - The built output (`dist/`) is what will be served as the iframe source on the resource page
