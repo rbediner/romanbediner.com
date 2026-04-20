@@ -20,7 +20,8 @@ const pages = [
   'connect/index.html',
   'framework/index.html',
   'resources/index.html',
-  'resources/ai-enabled-operations-framework-summary/index.html'
+  'resources/ai-enabled-operations-framework-summary/index.html',
+  'resources/ai-enabled-operations-dashboard/index.html'
 ];
 
 const seenTitles = new Set();

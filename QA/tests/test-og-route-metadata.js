@@ -60,6 +60,12 @@ const expected = [
     canonical: 'https://romanbediner.com/connect/',
     ogTitle: 'Connect | AI-Enabled Operations Advisory',
     ogDescription: 'Start a conversation about AI-enabled operations, execution systems, engineering operating models, or platform execution architecture.'
+  },
+  {
+    file: 'resources/ai-enabled-operations-dashboard/index.html',
+    canonical: 'https://romanbediner.com/resources/ai-enabled-operations-dashboard/',
+    ogTitle: 'AI-Enabled Operations Dashboard',
+    ogDescription: 'An interactive, single-screen dashboard prototype for AI-enabled operating visibility, structured execution, and faster review in modern AI-enabled work.'
   }
 ];
 

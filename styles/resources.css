@@ -963,3 +963,254 @@
   margin-top: 60px;
   margin-bottom: 44px;
 }
+
+/* ============================================================
+   Dashboard resource page
+   /resources/ai-enabled-operations-dashboard/
+   ============================================================ */
+
+.resource-dashboard-main {
+  overflow-x: clip;
+}
+
+/* Dashboard callout variants */
+.resource-dashboard-callout .shelf-content,
+.resource-dashboard-prose-callout .shelf-content {
+  padding: 26px 32px;
+}
+
+.resource-dashboard-prose-callout {
+  margin-top: 24px;
+}
+
+/* Top CTA row — sits between supporting subhead and blue callout */
+.resource-dashboard-top-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+/* Blue callout wrapper */
+.resource-dashboard-blue-callout {
+  margin-top: 0;
+}
+
+/* In This Dashboard — lead line + screen-story list */
+.resource-dashboard-lead {
+  margin: 0 0 16px;
+  font-size: 17px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.resource-dashboard-screen-story {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.resource-dashboard-screen-story li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.resource-dashboard-screen-story li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(59, 108, 255, 0.56);
+}
+
+/* Live dashboard artifact container */
+.resource-dashboard-artifact-section {
+  margin-top: 48px;
+}
+
+/* Desktop/tablet frame shell — placeholder until Phase 5 iframe wiring */
+.resource-dashboard-frame-shell {
+  display: block;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  background: #f0f4ff;
+  overflow: hidden;
+  box-shadow: 0 24px 56px rgba(15, 23, 42, 0.09);
+  /* Wider than reading text — fills site width */
+  margin-left: calc(-1 * clamp(0px, (100vw - 980px) / 2, 60px));
+  margin-right: calc(-1 * clamp(0px, (100vw - 980px) / 2, 60px));
+}
+
+/* Placeholder maintains 16:9 aspect ratio until iframe is wired */
+.resource-dashboard-frame-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 420px;
+  background: linear-gradient(160deg, #e8eeff 0%, #f0f4ff 60%, #e4ecff 100%);
+}
+
+/* Mobile fallback — hidden on desktop/tablet, shown on mobile */
+.resource-dashboard-mobile-fallback {
+  display: none;
+}
+
+/* Core Dashboard Views — three text blocks */
+.resource-dashboard-views-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.resource-dashboard-view-block {
+  padding: 22px 24px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #f8fafc;
+}
+
+.resource-dashboard-view-block p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.resource-dashboard-view-block strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: var(--accent-blue);
+}
+
+/* Source-availability supporting callout — restrained */
+.resource-dashboard-source-callout {
+  margin-top: 40px;
+  padding: 20px 24px;
+  border-radius: 10px;
+  border: 1px solid rgba(59, 108, 255, 0.14);
+  background: rgba(244, 248, 255, 0.7);
+}
+
+.resource-dashboard-source-callout p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* Bottom CTA row */
+.resource-dashboard-bottom-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 20px;
+  margin-top: 44px;
+}
+
+/* Mobile CTA inside fallback */
+.resource-dashboard-mobile-cta {
+  margin-top: 20px;
+}
+
+/* Mobile: tile placeholder for preview asset */
+.resource-dashboard-mobile-tile {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+}
+
+.resource-dashboard-mobile-tile-inner {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(160deg, #e8eeff 0%, #f0f4ff 60%, #e4ecff 100%);
+}
+
+.resource-dashboard-mobile-message {
+  margin: 0 0 4px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  /* Hide live dashboard frame, show mobile fallback */
+  .resource-dashboard-frame-shell {
+    display: none;
+  }
+
+  .resource-dashboard-mobile-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+  }
+
+  /* Full-width frame on mobile — cancel bleed margins */
+  .resource-dashboard-frame-shell {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Views stack to single column on mobile */
+  .resource-dashboard-views-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  /* Bottom CTA stacks vertically */
+  .resource-dashboard-bottom-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin-top: 36px;
+  }
+
+  .resource-dashboard-bottom-cta .resource-primary-cta,
+  .resource-dashboard-bottom-cta .resource-companion-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .resource-dashboard-top-cta {
+    margin-top: 20px;
+  }
+
+  .resource-dashboard-callout .shelf-content,
+  .resource-dashboard-prose-callout .shelf-content {
+    padding: 22px 24px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet: show live dashboard frame, hide mobile fallback */
+  .resource-dashboard-frame-shell {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .resource-dashboard-mobile-fallback {
+    display: none;
+  }
+
+  /* Views: two columns on tablet */
+  .resource-dashboard-views-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

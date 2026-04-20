@@ -14,6 +14,7 @@ Canonical public routes:
 - `/about/`
 - `/resources/`
 - `/resources/ai-enabled-operations-framework-summary/`
+- `/resources/ai-enabled-operations-dashboard/`
 - `/services/`
 - `/connect/`
 - `/framework/`
@@ -206,6 +207,7 @@ Required handoff content for cross-machine continuity:
   - `/about/index.html`
   - `/resources/index.html`
   - `/resources/ai-enabled-operations-framework-summary/index.html`
+  - `/resources/ai-enabled-operations-dashboard/index.html`
   - `/services/index.html`
   - `/framework/index.html`
   - `/connect/index.html`

@@ -24,6 +24,10 @@ const summaryHtml = fs.readFileSync(
   path.join(root, 'resources', 'ai-enabled-operations-framework-summary', 'index.html'),
   'utf8'
 );
+const dashboardHtml = fs.readFileSync(
+  path.join(root, 'resources', 'ai-enabled-operations-dashboard', 'index.html'),
+  'utf8'
+);
 const frameworkHtml = fs.readFileSync(path.join(root, 'framework', 'index.html'), 'utf8');
 const carouselJs = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-carousel.js'), 'utf8');
 const analyticsJs = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-analytics.js'), 'utf8');
@@ -66,11 +70,14 @@ mustInclude('P1-RH-01 locked intro', resourcesHtml,
 mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
 mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
 
-// PRD-locked copy: P1-RH-03 (Dashboard placeholder — title + full body)
+// PRD-locked copy: P1-RH-03 (Dashboard card — title + launched body + CTA)
 mustInclude('P1-RH-03 locked title', resourcesHtml, 'AI-Enabled Operations Dashboard');
 mustInclude('P1-RH-03 locked body', resourcesHtml,
-  'An interactive dashboard concept for AI-enabled operating visibility, structured execution, and leadership review. Designed as a free, shareable prototype, it offers a practical starting point for teams that want a clearer at-a-glance view of the business and a flexible artifact they can adapt to their own context.'
+  'An interactive, single-screen dashboard prototype for AI-enabled operating visibility, structured execution, and faster review in modern AI-enabled work.'
 );
+mustInclude('P1-RH-03 locked CTA button', resourcesHtml, '>Open the Dashboard<');
+mustInclude('P1-RH-03 CTA target', resourcesHtml, 'href="/resources/ai-enabled-operations-dashboard/"');
+mustInclude('P1-RH-03 card no longer coming-soon', resourcesHtml, 'data-resource-card="dashboard"');
 
 // PRD-locked copy: P1-RH-04 (hub forward nav)
 mustInclude('P1-RH-04 locked CTA', resourcesHtml, 'Explore the Full Framework');
@@ -182,6 +189,49 @@ const modalChecks = [
   ['modal prev/next controls', 'resource-preview-modal-nav']
 ];
 modalChecks.forEach(([label, needle]) => mustInclude(`modal contract: ${label}`, carouselJs, needle));
+
+// Dashboard resource page contract (Phase 2)
+mustInclude('dashboard page: canonical URL', dashboardHtml, 'href="https://romanbediner.com/resources/ai-enabled-operations-dashboard/"');
+mustInclude('dashboard page: H1', dashboardHtml, '<h1>AI-Enabled Operations Dashboard</h1>');
+mustInclude('dashboard page: label', dashboardHtml, '>DASHBOARD<');
+mustInclude('dashboard page: supporting subhead', dashboardHtml,
+  'An interactive, single-screen dashboard prototype for AI-enabled operating visibility, structured execution, and faster review in modern AI-enabled work.'
+);
+mustInclude('dashboard page: blue callout', dashboardHtml,
+  'Designed as a shareable operating artifact, this dashboard prototype brings demand, delivery, financial tension, customer pressure, and AI leverage into a single-screen view.'
+);
+mustInclude('dashboard page: What This Dashboard Helps Answer heading', dashboardHtml, '>What This Dashboard Helps Answer<');
+mustInclude('dashboard page: demand question', dashboardHtml, 'Are we creating enough demand?');
+mustInclude('dashboard page: AI question', dashboardHtml, 'Is AI creating real leverage?');
+mustInclude('dashboard page: In This Dashboard heading', dashboardHtml, '>In This Dashboard<');
+mustInclude('dashboard page: fixed narrative', dashboardHtml, 'The layout follows one fixed business narrative.');
+mustInclude('dashboard page: Core Dashboard Views heading', dashboardHtml, '>Core Dashboard Views<');
+mustInclude('dashboard page: Margin view', dashboardHtml, '<strong>Margin</strong>');
+mustInclude('dashboard page: Revenue view', dashboardHtml, '<strong>Revenue</strong>');
+mustInclude('dashboard page: AI view', dashboardHtml, '<strong>AI</strong>');
+mustInclude('dashboard page: Operating Principles heading', dashboardHtml, '>Operating Principles<');
+mustInclude('dashboard page: one screen one story', dashboardHtml, 'One screen, one story');
+mustInclude('dashboard page: AI operating signal', dashboardHtml, 'Treat AI as an operating signal, not a novelty');
+mustInclude('dashboard page: source-availability callout', dashboardHtml,
+  'The source code is available in a dedicated standalone repository'
+);
+mustInclude('dashboard page: closing conversation copy', dashboardHtml,
+  'If this sparks ideas about how your business is reviewed, managed, or scaled, feel free to reach out.'
+);
+mustInclude('dashboard page: Reach Out for a Chat CTA', dashboardHtml, '>Reach Out for a Chat<');
+mustInclude('dashboard page: Reach Out links to /connect/', dashboardHtml, 'href="/connect/"');
+mustInclude('dashboard page: View Source Code top CTA', dashboardHtml, '>View Source Code<');
+mustInclude('dashboard page: Explore the Full Framework bottom CTA', dashboardHtml, '>Explore the Full Framework<');
+mustInclude('dashboard page: mobile fallback message', dashboardHtml,
+  'This interactive dashboard is designed for TV, desktop, or tablet review. For the full experience, please switch to a larger screen.'
+);
+mustInclude('dashboard page: back to resources hub nav', dashboardHtml, 'Back to Resources Hub');
+mustInclude('dashboard page: analytics slug attr', dashboardHtml, 'data-resource-slug="ai-enabled-operations-dashboard"');
+mustInclude('dashboard page: analytics type attr', dashboardHtml, 'data-resource-type="dashboard_prototype"');
+mustInclude('dashboard page: analytics location attr', dashboardHtml, 'data-resource-location="dashboard_page"');
+mustInclude('dashboard page: shelf callout family', dashboardHtml, 'class="shelf-callout resource-family-callout resource-dashboard-callout"');
+mustInclude('dashboard page: mobile fallback shell', dashboardHtml, 'resource-dashboard-mobile-fallback');
+mustInclude('dashboard page: artifact frame shell', dashboardHtml, 'resource-dashboard-frame-shell');
 
 if (failures > 0) {
   process.exit(1);
