@@ -3,7 +3,7 @@
 - Handoff Sequence: 176
 - Updated At (UTC): 2026-04-20T23:00:00Z
 - Source Branch: staging
-- Source Commit: cebf829fe2928bb232869804281c783c9387a48c
+- Source Commit: 7425b0ad8e199de025bf851a4a41668afe4fea8a
 
 ## Session Summary (2026-04-20)
 
@@ -44,7 +44,7 @@ Phase 2 + Phase 3 of the AI-Enabled Operations Dashboard migration spec. Full pa
 
 ## Branch / release state
 
-- `staging`: active — this commit pending push
+- `staging`: `7425b0a` — CI green, Deploy Staging success, staging preview live
 - `prod`: unchanged in this session (romanbediner.com)
 - Public dashboard repo: `staging` and `prod` both at `5f2e440`
 - Promotion: not performed for romanbediner.com
