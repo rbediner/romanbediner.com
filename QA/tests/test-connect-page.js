@@ -65,16 +65,12 @@ if (!connectCss.includes('.connect-themes-divider')) {
   fail('Connect CSS must define a subtle divider for the themes section.');
 }
 
-if (!connectHtml.includes('class="footer-divider"')) {
-  fail('Connect page must include a shared footer divider.');
-}
-
-if (connectHtml.includes('footer-divider-accent')) {
-  fail('Connect page footer divider must not use blue accent styling.');
+if (connectHtml.includes('class="footer-divider"') || connectHtml.includes('footer-divider-accent')) {
+  fail('Connect page must not render an extra short footer divider element.');
 }
 
 if (connectHtml.includes('connect-page-divider') || connectCss.includes('.connect-page-divider')) {
-  fail('Connect page must not keep a separate connect-page-divider block; use shared footer divider accent only.');
+  fail('Connect page must not keep any legacy page-divider block.');
 }
 
 if (!connectCss.includes('.connect-closing') || !connectCss.includes('.connect-expectation')) {
