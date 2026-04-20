@@ -91,7 +91,7 @@ Rules:
 - Deploy-time cache-busting is automatic for staging/prod artifacts:
   - `scripts/build/create-artifact.js` rewrites cache tokens per release commit for shared assets (`/styles/site.css`, `/styles/framework.css`, `/scripts/runtime/site-navigation.js`)
   - this prevents stale CSS/JS from prior deploys without manual token bumping in source files
-- Artifact route packaging: `INCLUDE_PATHS` in `scripts/build/create-artifact.js` controls which top-level directories are bundled into the deploy artifact. When a new top-level route directory is added, it must be added to `INCLUDE_PATHS` or that route will 404 in staging and production. Current packaged routes: `about`, `services`, `framework`, `resources`, `insights`, `connect`.
+- Artifact route packaging: `INCLUDE_PATHS` in `scripts/build/create-artifact.js` controls which top-level directories are bundled into the deploy artifact. When a new top-level route directory is added, it must be added to `INCLUDE_PATHS` or that route will 404 in staging and production. Current packaged routes: `about`, `services`, `framework`, `resources`, `insights`, `connect`, plus dashboard build output from `ai-enabled-operations-dashboard/dist` promoted to `/ai-enabled-operations-dashboard/` during artifact creation.
 
 ## Cross-Machine Handoff Protocol
 - Canonical handoff file: `/docs/handoff/latest.md`.
@@ -214,9 +214,13 @@ Required handoff content for cross-machine continuity:
 - Resource assets:
   - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
   - `/assets/resources/framework-summary/slides/`
+  - `/assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png`
+- Dashboard source-of-truth folder:
+  - `/ai-enabled-operations-dashboard/` (React/Vite source + committed `dist/` build output for release artifacts)
 - Resources presentation contract:
   - `/resources/` opens with the shared shelf-callout family treatment (vertical blue rule, blue-tinted bg) and closes with a forward-only site-family nav block (`.next-page-nav resources-forward-nav`) to `/framework/`. The inset companion panel (`resources-inset-cta`) no longer exists on this page.
   - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family, keeps `Who This Is For` as a restrained non-interactive companion card (`.resource-blue-box`), and moves the locked conversational paragraph into a `.resource-conversation-card` (card surface, no vertical blue rule) below the preview/CTA cluster.
+  - `/resources/ai-enabled-operations-dashboard/` renders the live same-origin dashboard iframe at `src="/ai-enabled-operations-dashboard/"` on desktop/tablet and uses an inline static screenshot fallback on mobile.
   - Summary-page action hierarchy is intentionally ordered: download primary CTA → companion CTA → conversational card → site-family page nav.
     - `Download Framework Summary PDF` remains the dominant primary CTA.
     - `Explore the Full Framework` uses the shared companion CTA treatment.

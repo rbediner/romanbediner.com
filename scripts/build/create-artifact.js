@@ -33,7 +33,8 @@ const INCLUDE_PATHS = [
   'connect',
   'assets',
   'styles',
-  path.join('scripts', 'runtime')
+  path.join('scripts', 'runtime'),
+  path.join('ai-enabled-operations-dashboard', 'dist')
 ];
 const RELEASE_CACHE_BUST_PATHS = [
   '/styles/site.css',
@@ -69,6 +70,26 @@ function copyIncludedPaths(siteDir) {
     fs.mkdirSync(path.dirname(destination), { recursive: true });
     fs.cpSync(source, destination, { recursive: true });
   }
+}
+
+function promoteDashboardDistRoute(siteDir) {
+  const dashboardRoot = path.join(siteDir, 'ai-enabled-operations-dashboard');
+  const dashboardDist = path.join(dashboardRoot, 'dist');
+  if (!fs.existsSync(dashboardDist)) {
+    return;
+  }
+
+  // Publish built dashboard files at /ai-enabled-operations-dashboard/ while
+  // keeping source code outside deploy artifacts.
+  const distEntries = fs.readdirSync(dashboardDist);
+  for (const entry of distEntries) {
+    const fromPath = path.join(dashboardDist, entry);
+    const toPath = path.join(dashboardRoot, entry);
+    fs.rmSync(toPath, { recursive: true, force: true });
+    fs.cpSync(fromPath, toPath, { recursive: true });
+  }
+
+  fs.rmSync(dashboardDist, { recursive: true, force: true });
 }
 
 function listFilesRecursive(baseDir) {
@@ -171,6 +192,7 @@ function main() {
   removeAndRecreateDir(outDir);
   fs.mkdirSync(siteDir, { recursive: true });
   copyIncludedPaths(siteDir);
+  promoteDashboardDistRoute(siteDir);
 
   const commit = resolveCommitSha();
   const releaseCacheBustToken = applyReleaseCacheBust(siteDir, commit);

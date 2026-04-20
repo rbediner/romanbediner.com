@@ -1036,7 +1036,7 @@
   margin-top: 48px;
 }
 
-/* Desktop/tablet frame shell — placeholder until Phase 5 iframe wiring */
+/* Desktop/tablet frame shell for the live iframe dashboard. */
 .resource-dashboard-frame-shell {
   display: block;
   border-radius: 16px;
@@ -1049,12 +1049,14 @@
   margin-right: calc(-1 * clamp(0px, (100vw - 980px) / 2, 60px));
 }
 
-/* Placeholder maintains 16:9 aspect ratio until iframe is wired */
-.resource-dashboard-frame-placeholder {
+/* The iframe keeps the 16:9 footprint and fills the frame shell exactly. */
+.resource-dashboard-frame-iframe {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   min-height: 420px;
-  background: linear-gradient(160deg, #e8eeff 0%, #f0f4ff 60%, #e4ecff 100%);
+  border: 0;
+  background: #f0f4ff;
 }
 
 /* Mobile fallback — hidden on desktop/tablet, shown on mobile */
@@ -1121,7 +1123,7 @@
   margin-top: 20px;
 }
 
-/* Mobile: tile placeholder for preview asset */
+/* Mobile: static screenshot preview for the unsupported inline fallback. */
 .resource-dashboard-mobile-tile {
   width: 100%;
   max-width: 480px;
@@ -1135,7 +1137,11 @@
 .resource-dashboard-mobile-tile-inner {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(160deg, #e8eeff 0%, #f0f4ff 60%, #e4ecff 100%);
+  background-color: #eaf0ff;
+  background-image: url("/assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .resource-dashboard-mobile-message {

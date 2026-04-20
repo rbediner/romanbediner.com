@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+# Dist is intentionally tracked in this repo because release artifacts package
+# /ai-enabled-operations-dashboard/ from committed output files.
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Editor / OS artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

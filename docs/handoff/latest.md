@@ -1,107 +1,67 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 177
-- Updated At (UTC): 2026-04-20T23:45:00Z
+- Handoff Sequence: 178
+- Updated At (UTC): 2026-04-20T23:58:00Z
 - Source Branch: staging
 - Source Commit: 31b8ac44d18dc9cf3bb55098985dcebe37c1dd48
 
 ## Session Summary (2026-04-20)
 
-Phase 2 + Phase 3 of the AI-Enabled Operations Dashboard migration spec are complete on staging. Phase 3 is NOT yet on prod (dashboard page shell intentionally held back — iframe not wired yet). Codex separately cherry-picked connect divider fix to prod.
+Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and validated with targeted QA. The dashboard source is now imported, the resource page now uses a live iframe, and artifact packaging now publishes the dashboard route correctly.
 
-## Phase 2 — Complete (staging)
+## Phase 4 — Complete (local)
 
-- New route `/resources/ai-enabled-operations-dashboard/` with full spec-locked page shell
-- Resources hub card flipped from Coming Soon to launched state with `Open the Dashboard` button
-- CSS, sitemap, test files, README all updated
-- All node tests passing, CI green, staging preview live
+- Imported `https://github.com/rbediner/ai-enabled-operations-dashboard` into top-level `ai-enabled-operations-dashboard/` (no nested `.git`)
+- Kept source structure intact (`src/`, `components/`, `data/`, scripts/tests)
+- Updated `ai-enabled-operations-dashboard/vite.config.js` base path to `/ai-enabled-operations-dashboard/`
+- Built dashboard successfully (`npm run build`) to produce `dist/`
 
-## Phase 3 — Complete (staging)
+## Phase 5 — Complete (local)
 
-### Public dashboard repo (`rbediner/ai-enabled-operations-dashboard`)
-- Repo renamed from `canopy-exec-dashboard` → `ai-enabled-operations-dashboard`
-- README rewritten as clean public artifact doc (no internal/client framing)
-- `package.json` name updated: `exec-operating-screen` → `ai-enabled-operations-dashboard`
-- `docs/HANDOFF-SOP.md` and `docs/PRD.md` scrubbed of old repo name
+- Wired live iframe in `resources/ai-enabled-operations-dashboard/index.html`
+  - removed `.resource-dashboard-frame-placeholder`
+  - added `<iframe class="resource-dashboard-frame-iframe" src="/ai-enabled-operations-dashboard/">`
+- Replaced mobile placeholder gradient with real screenshot asset:
+  - `assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png` (1920x1080)
+- Updated `styles/resources.css` for iframe shell + mobile fallback image presentation
 
-### romanbediner.com
-- `resources/ai-enabled-operations-dashboard/index.html`: `View Source Code` links now point to live renamed repo
-- Visual baselines refreshed to absorb Codex connect-divider changes
-- All CI passing, Deploy Staging success at `31b8ac4`
+## Phase 6 — Complete (local)
 
-## Branch / release state
+- Updated artifact packaging (`scripts/build/create-artifact.js`):
+  - includes `ai-enabled-operations-dashboard/dist`
+  - promotes dist output to deploy route `/ai-enabled-operations-dashboard/` in artifact build
+- Updated preview rewrite coverage (`scripts/build/create-preview-artifact.js`) to include `/ai-enabled-operations-dashboard/`
+- Added/updated QA guardrails:
+  - `QA/tests/test-resources-phase1.js` checks iframe wiring, screenshot contract, and placeholder removal
+  - `QA/tests/test-framework-artifact-packaging.js` checks dashboard packaging/rewrite contract and dist presence
 
-- `staging`: `31b8ac4` — CI green, Deploy Staging success, staging preview live
-- `prod`: Codex cherry-picked connect divider fix — Phase 2/3 dashboard NOT on prod yet
-- Public dashboard repo: `staging` and `prod` both at `5f2e440`
-- Promotion of Phase 2/3: not performed (dashboard iframe not wired yet)
+## Validation Run Results
 
-## Staging preview URL
+- `cd ai-enabled-operations-dashboard && npm run build` ✅
+- `cd ai-enabled-operations-dashboard && npm run test:unit` ✅
+- `cd ai-enabled-operations-dashboard && npm run test:qa` ✅ (run with local dev server)
+- `node QA/tests/test-canonical.js` ✅
+- `node QA/tests/test-resources-phase1.js` ✅
+- `node QA/tests/test-framework-artifact-packaging.js` ✅
+- `node scripts/build/create-artifact.js --out /tmp/rb-site-artifact-phase4b` ✅
+  - verified `/tmp/rb-site-artifact-phase4b/site/ai-enabled-operations-dashboard/index.html` exists
 
-`https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
+## Branch / Release State
 
-## What's next — Phase 4 (start here)
+- `staging`: local changes ready to commit/push for staging CI + Deploy Staging
+- `prod`: unchanged in this session
+- Staging preview URL (last successful prior run):
+  - `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
 
-### Phase 4 — Import dashboard source into romanbediner.com
+## Remaining Phases
 
-**Goal:** Copy the React/Vite dashboard source into `romanbediner.com` under `ai-enabled-operations-dashboard/` so it can be built and served as an iframe.
+- Phase 7 — public source-repo sync automation (not started)
+- Phase 8 — final docs/report + PRD sync (partially updated README in this session; live Google PRD update still required)
 
-**Steps:**
-1. Clone or download source files from `https://github.com/rbediner/ai-enabled-operations-dashboard`
-2. Copy into a new top-level folder `ai-enabled-operations-dashboard/` inside `romanbediner.com`
-3. Do NOT create a nested `.git` directory — copy source files only
-4. Key paths in the dashboard source:
-   - `src/App.jsx` — overall 16:9 screen composition
-   - `src/data/dashboardData.js` — all metric values
-   - `src/components/` — dashboard tiles
-   - `vite.config.js` — check `base` path is set to `/ai-enabled-operations-dashboard/`
-   - `package.json` — `npm install && npm run build` outputs to `dist/`
-5. Run `npm install && npm run build` inside that folder to produce `dist/`
-6. Verify `dist/index.html` exists and loads correctly on a local server
-7. Update `INCLUDE_PATHS` in `scripts/build/create-artifact.js` — add `ai-enabled-operations-dashboard/dist` so the build artifact includes dashboard output
-8. Run `node QA/tests/test-canonical.js` and `node QA/tests/test-resources-phase1.js` — both should still pass
-9. Commit, push to staging, verify CI green
+## Important Notes For Next Agent
 
-### Phase 5 — Wire the live dashboard into the resource page
-
-- Embed built dashboard as an iframe inside `.resource-dashboard-frame-shell` in `resources/ai-enabled-operations-dashboard/index.html`
-- iframe `src` should be `/ai-enabled-operations-dashboard/` (relative, not absolute)
-- Remove `.resource-dashboard-frame-placeholder` div once iframe is wired
-- CSP already allows `default-src 'self'` — same-origin iframe needs no CSP change
-- Frame shell already has `aspect-ratio: 16/9` and `min-height: 420px` — preserve this
-- Replace `.resource-dashboard-mobile-tile-inner` placeholder with a real screenshot (capture at 1920x1080, save as web-optimized PNG under `assets/`)
-- Verify desktop and tablet render on page load — no blank frame
-
-### Phase 6 — CI/CD, packaging, analytics alignment
-- Verify build artifact includes `ai-enabled-operations-dashboard/dist/`
-- Verify dashboard route appears in staging preview and sitemap check
-- Add QA smoke test for the dashboard iframe route if needed
-
-### Phase 7 — Public source-repo sync automation
-- GitHub Action in `romanbediner.com` that syncs dashboard source changes back to `rbediner/ai-enabled-operations-dashboard`
-- Keep the public repo dashboard-only (no site files)
-
-### Phase 8 — Docs and final report
-- Update README with all phases
-- Write final implementation report per spec section 15
-
-## Important notes for the next agent
-
-- Public repo: `https://github.com/rbediner/ai-enabled-operations-dashboard` — all Canopy references scrubbed
-- Dashboard is a React/Vite app — must be built (`npm run build`) to produce static `dist/` output
-- The dashboard's built `dist/index.html` is the iframe entry point — not the raw React source
-- Dashboard canvas is fixed 1920x1080, scaled via `--dash-scale` CSS variable
-- No Canopy references remain anywhere public
-- Spec file: `/Users/roman.bediner/Downloads/dashboard_migration_and_resource_page_spec.md`
-
-## Release Watcher Hygiene
-
-Keep release watcher hygiene in place for this repo.
-- Use:
-  - `npm run release:watchers:status`
-  - `npm run release:watchers:cleanup`
-- Do not use ad-hoc shell polling loops for CI or preview monitoring.
-
-## PRD status
-
-- PRD not yet updated for this pass; use this handoff summary to update the live PRD.
+- Dashboard iframe now depends on packaged artifact route `/ai-enabled-operations-dashboard/`
+- Release artifact build must retain dashboard dist promotion logic in `create-artifact.js`
+- If dashboard source changes, regenerate dist before release
+- PRD update still pending for this phase set:
+  - `SEO Authority PRD` — `https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`

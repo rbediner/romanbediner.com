@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Enabled Operations Dashboard — Wireframe</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #111;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    /* ── 16:9 TV canvas ── */
+    #tv {
+      width: min(100vw, 177.78vh);
+      height: min(56.25vw, 100vh);
+      flex-shrink: 0;
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Wireframe box base ── */
+    .wf {
+      border: 3px dashed #555;
+      border-radius: 12px;
+      background: #252525;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ID badge — top-left corner of every box */
+    .bid {
+      position: absolute;
+      top: 5px;
+      left: 7px;
+      font-family: 'Courier New', monospace;
+      font-size: clamp(8px, 1vw, 13px);
+      font-weight: 700;
+      color: #aaa;
+      background: #1a1a1a;
+      border: 1px solid #444;
+      border-radius: 4px;
+      padding: 1px 5px;
+      line-height: 1.4;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* Short metric name — centered in box */
+    .bname {
+      font-size: clamp(7px, 0.75vw, 11px);
+      color: #666;
+      text-align: center;
+      padding: 0 8px;
+      line-height: 1.3;
+    }
+
+    /* ── TOP BAR ── */
+    #top-bar {
+      height: 8%;
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      padding: 12px 20px;
+      border-bottom: 2px solid #333;
+      flex-shrink: 0;
+    }
+
+    #top-bar .logo-area  { width: 14%; }
+    #top-bar .date-area  { flex: 1; }
+    #top-bar .status-icons { width: 22%; display: flex; gap: 10px; }
+    #top-bar .status-icons .wf { flex: 1; }
+
+    /* ── MAIN GRID ── */
+    #main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 7% 16% 1fr 16% 7%;
+      gap: 12px;
+      padding: 12px 20px;
+      overflow: hidden;
+    }
+
+    #preset-left, #preset-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #preset-left .preset-btn,
+    #preset-right .preset-btn { flex: 1; }
+
+    #cards-left, #cards-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #cards-left .metric-card,
+    #cards-right .metric-card { flex: 1; }
+
+    #center {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #view-toggle {
+      height: 7%;
+      flex-shrink: 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    #view-toggle .tab {
+      flex: 1;
+      border-radius: 10px;
+      border: 3px dashed #444;
+      background: #252525;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #view-toggle .tab.active {
+      border-color: #777;
+      background: #333;
+    }
+
+    #hero-ring {
+      flex: 1;
+      position: relative;
+    }
+
+    #hero-ring svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ID + name overlay in the ring center */
+    #hero-ring .ring-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      pointer-events: none;
+    }
+
+    #hero-ring .ring-label .bid {
+      position: static;         /* override absolute so flexbox centers it */
+    }
+
+    #goal-bar {
+      height: 9%;
+      flex-shrink: 0;
+      display: flex;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    #goal-bar .goal-minus,
+    #goal-bar .goal-plus { width: 8%; }
+    #goal-bar .goal-display { flex: 1; }
+
+    /* ── BOTTOM BAR ── */
+    #bottom-bar {
+      height: 9%;
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      padding: 12px 20px;
+      border-top: 2px solid #333;
+      flex-shrink: 0;
+    }
+
+    #bottom-bar .nav-btns          { display: flex; gap: 8px; width: 10%; }
+    #bottom-bar .nav-btns .wf      { flex: 1; }
+    #bottom-bar .ctrl-left         { display: flex; gap: 8px; flex: 1; }
+    #bottom-bar .ctrl-left .wf     { flex: 1; }
+    #bottom-bar .primary-action    { width: 12%; border-color: #c0392b; }
+    #bottom-bar .ctrl-right        { display: flex; gap: 8px; flex: 1; }
+    #bottom-bar .ctrl-right .wf    { flex: 1; }
+    #bottom-bar .util-btns         { display: flex; gap: 8px; width: 7%; }
+    #bottom-bar .util-btns .wf     { flex: 1; }
+
+    /* ── LEGEND ── */
+    #legend {
+      width: min(100vw, 177.78vh);
+      background: #1a1a1a;
+      border-top: 2px solid #333;
+      padding: 24px 32px 32px;
+      flex-shrink: 0;
+    }
+
+    #legend h2 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #777;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 6px 24px;
+    }
+
+    .legend-section {
+      margin-bottom: 16px;
+    }
+
+    .legend-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #2e2e2e;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 3px 0;
+    }
+
+    .legend-id {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #aaa;
+      background: #1a1a1a;
+      border: 1px solid #444;
+      border-radius: 4px;
+      padding: 1px 6px;
+      min-width: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .legend-name {
+      font-size: 11px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     16:9 TV CANVAS
+════════════════════════════════════════ -->
+<div id="tv">
+
+  <!-- TOP BAR -->
+  <div id="top-bar">
+    <div class="wf logo-area">
+      <span class="bid">T1</span>
+      <span class="bname">Logo</span>
+    </div>
+    <div class="wf date-area">
+      <span class="bid">T2</span>
+      <span class="bname">Date / Freshness</span>
+    </div>
+    <div class="status-icons">
+      <div class="wf"><span class="bid">T3</span><span class="bname">Company Heartbeat</span></div>
+      <div class="wf"><span class="bid">T4</span><span class="bname">AI Leverage</span></div>
+      <div class="wf"><span class="bid">T5</span><span class="bname">Client Health</span></div>
+      <div class="wf"><span class="bid">T6</span><span class="bname">Cash Status</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div id="main">
+
+    <!-- Left rail — Demand -->
+    <div id="preset-left">
+      <div class="wf preset-btn"><span class="bid">D1</span><span class="bname">New Qualified Opps</span></div>
+      <div class="wf preset-btn"><span class="bid">D2</span><span class="bname">Active Pipeline</span></div>
+      <div class="wf preset-btn"><span class="bid">D3</span><span class="bname">Stalled Pipeline</span></div>
+      <div class="wf preset-btn"><span class="bid">D4</span><span class="bname">Lead-to-Opp Conv.</span></div>
+    </div>
+
+    <!-- Left stack — Commercial Quality -->
+    <div id="cards-left">
+      <div class="wf metric-card"><span class="bid">C1</span><span class="bname">Revenue Forecast</span></div>
+      <div class="wf metric-card"><span class="bid">C2</span><span class="bname">Close Rate</span></div>
+      <div class="wf metric-card"><span class="bid">C3</span><span class="bname">Avg Deal Size</span></div>
+    </div>
+
+    <!-- Center -->
+    <div id="center">
+
+      <!-- View toggles -->
+      <div id="view-toggle">
+        <div class="tab active"><span class="bid">M1</span><span class="bname">Margin View</span></div>
+        <div class="tab"><span class="bid">M2</span><span class="bname">Revenue View</span></div>
+        <div class="tab"><span class="bid">M3</span><span class="bname">AI View</span></div>
+      </div>
+
+      <!-- Hero ring -->
+      <div id="hero-ring">
+        <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#3a3a3a" stroke-width="12"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#555" stroke-width="12"
+            stroke-dasharray="352" stroke-dashoffset="106" stroke-linecap="round"
+            transform="rotate(-90 100 100)"/>
+        </svg>
+        <div class="ring-label">
+          <span class="bid">H1</span>
+          <span class="bname">Operating Margin</span>
+        </div>
+      </div>
+
+      <!-- Goal bar -->
+      <div id="goal-bar">
+        <div class="wf goal-minus"><span class="bid">H2</span></div>
+        <div class="wf goal-display"><span class="bid">H3</span><span class="bname">Margin Target</span></div>
+        <div class="wf goal-plus"><span class="bid">H4</span></div>
+      </div>
+
+    </div>
+
+    <!-- Right stack — Delivery Efficiency -->
+    <div id="cards-right">
+      <div class="wf metric-card"><span class="bid">O1</span><span class="bname">Team Utilization</span></div>
+      <div class="wf metric-card"><span class="bid">O2</span><span class="bname">AGI per FTE</span></div>
+      <div class="wf metric-card"><span class="bid">O3</span><span class="bname">Onboarding Velocity</span></div>
+    </div>
+
+    <!-- Right rail — Operational Reality -->
+    <div id="preset-right">
+      <div class="wf preset-btn"><span class="bid">R1</span><span class="bname">Capacity Gap</span></div>
+      <div class="wf preset-btn"><span class="bid">R2</span><span class="bname">Cycle Time</span></div>
+      <div class="wf preset-btn"><span class="bid">R3</span><span class="bname">AI-Assisted Delivery</span></div>
+      <div class="wf preset-btn"><span class="bid">R4</span><span class="bname">Client Health Score</span></div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div id="bottom-bar">
+    <div class="nav-btns">
+      <div class="wf"><span class="bid">B1</span></div>
+      <div class="wf"><span class="bid">B2</span></div>
+    </div>
+    <div class="ctrl-left">
+      <div class="wf"><span class="bid">B3</span><span class="bname">Revenue Target</span></div>
+      <div class="wf"><span class="bid">B4</span><span class="bname">Cash Collected vs Billed</span></div>
+      <div class="wf"><span class="bid">B5</span><span class="bname">Rocks On-Track</span></div>
+    </div>
+    <div class="wf primary-action"><span class="bid">B6</span><span class="bname">Focus Now</span></div>
+    <div class="ctrl-right">
+      <div class="wf"><span class="bid">B7</span><span class="bname">AI Efficiency Gain</span></div>
+      <div class="wf"><span class="bid">B8</span><span class="bname">SLA Adherence</span></div>
+      <div class="wf"><span class="bid">B9</span><span class="bname">Escalations</span></div>
+    </div>
+    <div class="util-btns">
+      <div class="wf"><span class="bid">B10</span></div>
+      <div class="wf"><span class="bid">B11</span></div>
+    </div>
+  </div>
+
+</div><!-- /#tv -->
+
+<!-- ════════════════════════════════════════
+     LEGEND
+════════════════════════════════════════ -->
+<div id="legend">
+  <h2>Box ID Legend</h2>
+  <div class="legend-grid">
+
+    <div class="legend-section">
+      <div class="legend-section-title">Top Bar</div>
+      <div class="legend-row"><span class="legend-id">T1</span><span class="legend-name">Logo</span></div>
+      <div class="legend-row"><span class="legend-id">T2</span><span class="legend-name">Date / Freshness</span></div>
+      <div class="legend-row"><span class="legend-id">T3</span><span class="legend-name">Company Heartbeat</span></div>
+      <div class="legend-row"><span class="legend-id">T4</span><span class="legend-name">AI Leverage</span></div>
+      <div class="legend-row"><span class="legend-id">T5</span><span class="legend-name">Client Health Status</span></div>
+      <div class="legend-row"><span class="legend-id">T6</span><span class="legend-name">Cash Status</span></div>
+    </div>
+
+    <div class="legend-section">
+      <div class="legend-section-title">Left Rail — Demand</div>
+      <div class="legend-row"><span class="legend-id">D1</span><span class="legend-name">New Qualified Opps</span></div>
+      <div class="legend-row"><span class="legend-id">D2</span><span class="legend-name">Active Pipeline</span></div>
+      <div class="legend-row"><span class="legend-id">D3</span><span class="legend-name">Stalled Pipeline</span></div>
+      <div class="legend-row"><span class="legend-id">D4</span><span class="legend-name">Lead-to-Opp Conversion</span></div>
+    </div>
+
+    <div class="legend-section">
+      <div class="legend-section-title">Left Stack — Commercial Quality</div>
+      <div class="legend-row"><span class="legend-id">C1</span><span class="legend-name">Revenue Forecast</span></div>
+      <div class="legend-row"><span class="legend-id">C2</span><span class="legend-name">Close Rate</span></div>
+      <div class="legend-row"><span class="legend-id">C3</span><span class="legend-name">Avg Deal Size</span></div>
+    </div>
+
+    <div class="legend-section">
+      <div class="legend-section-title">Center — View Toggles</div>
+      <div class="legend-row"><span class="legend-id">M1</span><span class="legend-name">View Toggle — Margin</span></div>
+      <div class="legend-row"><span class="legend-id">M2</span><span class="legend-name">View Toggle — Revenue</span></div>
+      <div class="legend-row"><span class="legend-id">M3</span><span class="legend-name">View Toggle — AI</span></div>
+    </div>
+
+    <div class="legend-section">
+      <div class="legend-section-title">Center — Hero</div>
+      <div class="legend-row"><span class="legend-id">H1</span><span class="legend-name">Hero Ring — Operating Margin</span></div>
+      <div class="legend-row"><span class="legend-id">H2</span><span class="legend-name">Goal Minus</span></div>
+      <div class="legend-row"><span class="legend-id">H3</span><span class="legend-name">Margin Target Display</span></div>
+      <div class="legend-row"><span class="legend-id">H4</span><span class="legend-name">Goal Plus</span></div>
+    </div>
+
+    <div class="legend-section">
+      <div class="legend-section-title">Right Stack — Delivery Efficiency</div>
+      <div class="legend-row"><span class="legend-id">O1</span><span class="legend-name">Team Utilization</span></div>
+      <div class="legend-row"><span class="legend-id">O2</span><span class="legend-name">AGI per FTE</span></div>
+      <div class="legend-row"><span class="legend-id">O3</span><span class="legend-name">Onboarding Velocity</span></div>
+    </div>
+
+    <div class="legend-section">
+      <div class="legend-section-title">Right Rail — Operational Reality</div>
+      <div class="legend-row"><span class="legend-id">R1</span><span class="legend-name">Capacity Gap</span></div>
+      <div class="legend-row"><span class="legend-id">R2</span><span class="legend-name">Cycle Time</span></div>
+      <div class="legend-row"><span class="legend-id">R3</span><span class="legend-name">AI-Assisted Delivery</span></div>
+      <div class="legend-row"><span class="legend-id">R4</span><span class="legend-name">Client Health Score</span></div>
+    </div>
+
+    <div class="legend-section">
+      <div class="legend-section-title">Bottom Bar</div>
+      <div class="legend-row"><span class="legend-id">B1</span><span class="legend-name">Home</span></div>
+      <div class="legend-row"><span class="legend-id">B2</span><span class="legend-name">Back</span></div>
+      <div class="legend-row"><span class="legend-id">B3</span><span class="legend-name">Revenue Target</span></div>
+      <div class="legend-row"><span class="legend-id">B4</span><span class="legend-name">Cash Collected vs Billed</span></div>
+      <div class="legend-row"><span class="legend-id">B5</span><span class="legend-name">Rocks On-Track</span></div>
+      <div class="legend-row"><span class="legend-id">B6</span><span class="legend-name">Focus Now</span></div>
+      <div class="legend-row"><span class="legend-id">B7</span><span class="legend-name">AI Efficiency Gain</span></div>
+      <div class="legend-row"><span class="legend-id">B8</span><span class="legend-name">SLA Adherence</span></div>
+      <div class="legend-row"><span class="legend-id">B9</span><span class="legend-name">Escalations</span></div>
+      <div class="legend-row"><span class="legend-id">B10</span><span class="legend-name">Alerts</span></div>
+      <div class="legend-row"><span class="legend-id">B11</span><span class="legend-name">Presentation Mode</span></div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

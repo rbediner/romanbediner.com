@@ -29,6 +29,7 @@ const dashboardHtml = fs.readFileSync(
   'utf8'
 );
 const frameworkHtml = fs.readFileSync(path.join(root, 'framework', 'index.html'), 'utf8');
+const resourcesCss = fs.readFileSync(path.join(root, 'styles', 'resources.css'), 'utf8');
 const carouselJs = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-carousel.js'), 'utf8');
 const analyticsJs = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-analytics.js'), 'utf8');
 
@@ -36,6 +37,7 @@ const requiredFiles = [
   'assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf',
   'assets/resources/framework-summary/slides/slide-01.png',
   'assets/resources/framework-summary/slides/slide-08.png',
+  'assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png',
   'styles/resources.css',
   'scripts/runtime/resources-carousel.js',
   'scripts/runtime/resources-analytics.js'
@@ -232,6 +234,13 @@ mustInclude('dashboard page: analytics location attr', dashboardHtml, 'data-reso
 mustInclude('dashboard page: shelf callout family', dashboardHtml, 'class="shelf-callout resource-family-callout resource-dashboard-callout"');
 mustInclude('dashboard page: mobile fallback shell', dashboardHtml, 'resource-dashboard-mobile-fallback');
 mustInclude('dashboard page: artifact frame shell', dashboardHtml, 'resource-dashboard-frame-shell');
+mustInclude('dashboard page: iframe route', dashboardHtml, 'src="/ai-enabled-operations-dashboard/"');
+mustInclude('dashboard page: iframe class', dashboardHtml, 'class="resource-dashboard-frame-iframe"');
+mustInclude('dashboard page: mobile screenshot path', resourcesCss, 'dashboard-home-mobile-preview.png');
+
+if (dashboardHtml.includes('resource-dashboard-frame-placeholder')) {
+  fail('dashboard page must not include Phase 5 placeholder shell after iframe wiring.');
+}
 
 if (failures > 0) {
   process.exit(1);
