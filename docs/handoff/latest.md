@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 180
-- Updated At (UTC): 2026-04-20T23:21:42Z
+- Handoff Sequence: 181
+- Updated At (UTC): 2026-04-20T23:33:00Z
 - Source Branch: staging
-- Source Commit: 244315858c6a19eaf673ff145f4edd8bec3e11dd
+- Source Commit: cff65551a80fdfa71d9a2ceece42f8d6e2287a99
 
 ## Session Summary (2026-04-20)
 
@@ -50,10 +50,13 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
 
 ## Branch / Release State
 
-- `staging`: commit `2443158` ready to push for staging CI + Deploy Staging
+- `staging`: `cff6555` pushed, CI + Deploy Staging both succeeded
 - `prod`: unchanged in this session
-- Staging preview URL (last successful prior run):
+- Staging preview URL:
   - `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
+- CI run: `https://github.com/rbediner/romanbediner.com/actions/runs/24695757111`
+- Deploy Staging run: `https://github.com/rbediner/romanbediner.com/actions/runs/24695846889`
+- Live preview smoke: `PASS` (RB_PREVIEW_URL=`https://rbediner.github.io/romanbediner-preview/`)
 
 ## Remaining Phases
 
