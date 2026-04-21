@@ -73,6 +73,10 @@ if (connectHtml.includes('connect-page-divider') || connectCss.includes('.connec
   fail('Connect page must not keep any legacy page-divider block.');
 }
 
+if (!/\.footer::before\s*\{[\s\S]*border-top:\s*1px\s+solid/s.test(connectCss)) {
+  fail('Connect CSS must render the shared pre-footer divider via .footer::before.');
+}
+
 if (!connectCss.includes('.connect-closing') || !connectCss.includes('.connect-expectation')) {
   fail('Connect CSS must include muted styles for closing lines.');
 }

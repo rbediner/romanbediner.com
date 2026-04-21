@@ -432,7 +432,15 @@
       transform: translateX(6px);
     }
 
-    /* Connect uses the shared footer divider with blue accent; no extra page divider block. */
+    /* Connect renders the shared pre-footer divider via a pseudo-element so
+       we keep clean markup while restoring the expected visual separator. */
+    .footer::before {
+      content: "";
+      display: block;
+      width: min(960px, 92%);
+      margin: 0 auto 18px auto;
+      border-top: 1px solid var(--neutral-border, var(--border-color, #e6e6e6));
+    }
 
     /* Keep Connect vertical rhythm aligned with global page-top spacing from site.css. */
     .connect-main .section {

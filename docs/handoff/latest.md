@@ -74,3 +74,18 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
   - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 - PRD update still pending for this phase set:
   - `SEO Authority PRD` — `https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`
+
+---
+
+## Append-Only Session Note (2026-04-21)
+
+- Request: restore visible footer divider on `/connect/` and promote via fast-forward to `prod`.
+- Implemented a Connect-only divider render in `styles/connect.css` using `.footer::before` so the shared divider is visible again without reintroducing extra divider markup in `connect/index.html`.
+- Updated Connect QA contract in `QA/tests/test-connect-page.js` to enforce this divider behavior.
+- Refreshed Connect visual baselines:
+  - `QA/tests/visual-baselines/connect--desktop-full.png`
+  - `QA/tests/visual-baselines/connect--mobile-full.png`
+- Validation run locally:
+  - `node QA/tests/test-connect-page.js` ✅
+  - `RUN_VISUAL_TESTS=1 python3 -m unittest QA/tests/test_visual_regression_playwright.py -v` ✅
+- Next: push `staging`, verify CI + Deploy Staging, then fast-forward same tested SHA to `prod`.
