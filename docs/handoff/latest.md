@@ -122,3 +122,15 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
   - Added inline disabled style on dashboard CTA element in `resources/index.html`
   - Strengthened `.resource-primary-cta.is-disabled` in `styles/resources.css` with explicit disabled hover/focus overrides
 - Release intent: express production polish fix; no functional link re-enabled.
+
+---
+
+## Append-Only Session Note (2026-04-21, connect footer full-width divider)
+
+- Request: Connect page footer divider should be one divider only, spanning full page width.
+- Implemented a Connect-only CSS refinement in `styles/connect.css`:
+  - `.footer::before` width changed from `min(960px, 92%)` to `100%`
+  - retained single pseudo-element divider approach (no extra divider markup)
+- Updated `QA/tests/test-connect-page.js` to enforce `width: 100%` for `.footer::before`.
+- Local validation:
+  - `node QA/tests/test-connect-page.js` ✅

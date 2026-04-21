@@ -437,7 +437,7 @@
     .footer::before {
       content: "";
       display: block;
-      width: min(960px, 92%);
+      width: 100%;
       margin: 0 auto 18px auto;
       border-top: 1px solid var(--neutral-border, var(--border-color, #e6e6e6));
     }
