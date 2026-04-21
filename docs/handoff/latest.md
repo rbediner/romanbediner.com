@@ -89,3 +89,14 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
   - `node QA/tests/test-connect-page.js` ✅
   - `RUN_VISUAL_TESTS=1 python3 -m unittest QA/tests/test_visual_regression_playwright.py -v` ✅
 - Next: push `staging`, verify CI + Deploy Staging, then fast-forward same tested SHA to `prod`.
+
+---
+
+## Append-Only Session Note (2026-04-21, prod promotion)
+
+- Promotion action complete: fast-forwarded `prod` from `e1cc914` to `2774c0c1196c028f394172010cc4972bc08f747d`.
+- Result: Connect footer divider restored in production via Connect-scoped CSS (`styles/connect.css`), with updated Connect QA contract and refreshed Connect desktop/mobile visual baselines.
+- Prod verification:
+  - CI run (success): https://github.com/rbediner/romanbediner.com/actions/runs/24698127611
+  - Deploy Pages run (success): https://github.com/rbediner/romanbediner.com/actions/runs/24698127575
+- Process note: entry appended only per operator request; existing handoff content preserved.
