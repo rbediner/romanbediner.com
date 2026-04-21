@@ -15,37 +15,38 @@
  * Migration considerations:
  * - If HANDOFF_PATH moves, update the git add path below to match.
  */
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const HANDOFF_PATH = 'docs/handoff/latest.md';
 
-function run(cmd, opts = {}) {
-  return execSync(cmd, { cwd: ROOT, stdio: 'inherit', ...opts });
+/* Use argv-based execution so repo/script paths with spaces are handled safely. */
+function run(command, args = [], opts = {}) {
+  return execFileSync(command, args, { cwd: ROOT, stdio: 'inherit', ...opts });
 }
 
-function runCapture(cmd) {
-  return execSync(cmd, { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+function runCapture(command, args = []) {
+  return execFileSync(command, args, { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
 }
 
 function main() {
-  const branch = runCapture('git branch --show-current');
+  const branch = runCapture('git', ['branch', '--show-current']);
   if (!branch) {
     throw new Error('[handoff:push] Could not determine current branch.');
   }
 
   console.log(`[handoff:push] Branch: ${branch}`);
   console.log('[handoff:push] Refreshing handoff metadata...');
-  run(`node ${path.join(__dirname, 'update-handoff-latest.js')}`);
+  run('node', [path.join(__dirname, 'update-handoff-latest.js')]);
 
-  const status = runCapture(`git status --porcelain -- ${HANDOFF_PATH}`);
+  const status = runCapture('git', ['status', '--porcelain', '--', HANDOFF_PATH]);
   if (!status) {
     console.log('[handoff:push] No changes to handoff file — nothing to commit.');
     return;
   }
 
-  run(`git add ${HANDOFF_PATH}`);
+  run('git', ['add', HANDOFF_PATH]);
 
   const sequence = (() => {
     try {
@@ -57,9 +58,9 @@ function main() {
     }
   })();
 
-  run(`git commit -m "handoff: update sequence ${sequence} [docs-only]"`);
+  run('git', ['commit', '-m', `handoff: update sequence ${sequence} [docs-only]`]);
   console.log(`[handoff:push] Pushing isolated handoff commit to origin/${branch}...`);
-  run(`git push origin ${branch}`);
+  run('git', ['push', 'origin', branch]);
   console.log('[handoff:push] Done. Gate ran docs-only profile (~10s).');
 }
 

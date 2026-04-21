@@ -128,6 +128,7 @@ npm run handoff:update
 ```bash
 npm run handoff:push
 ```
+- `handoff:push` is path-safe for workspace roots containing spaces (it executes commands with argv semantics, not shell-joined command strings).
 **Use `handoff:push` at session end** to keep the handoff separate from code commits. Mixing handoff with code changes escalates the pre-push gate to full-regression (~2 min).
 
 Required handoff content for cross-machine continuity:
