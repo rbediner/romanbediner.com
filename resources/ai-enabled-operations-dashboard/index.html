@@ -116,6 +116,7 @@
           src="/ai-enabled-operations-dashboard/"
           title="AI-Enabled Operations Dashboard interactive view"
           loading="eager"
+          allowfullscreen
           referrerpolicy="strict-origin-when-cross-origin">
         </iframe>
       </div>
@@ -129,6 +130,13 @@
         <a class="resource-primary-cta resource-dashboard-mobile-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
       </div>
     </section>
+    <button
+      type="button"
+      class="resource-dashboard-expand-cta"
+      aria-label="Expand dashboard to fullscreen"
+      data-dashboard-expand>
+      EXPAND DASHBOARD
+    </button>
     <p class="resource-dashboard-helper-line">Source package and supporting artifacts below.</p>
 
     <!-- What This Dashboard Helps Answer -->
@@ -313,6 +321,7 @@
 
   <script src="../../scripts/runtime/site-navigation.js?v=20260313a"></script>
   <script src="../../scripts/runtime/resources-analytics.js" defer></script>
+  <script src="../../scripts/runtime/dashboard-expand.js" defer></script>
   <script src="../../scripts/runtime/dashboard-wireframe-modal.js" defer></script>
 </body>
 </html>
