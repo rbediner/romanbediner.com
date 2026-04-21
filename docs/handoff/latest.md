@@ -1,86 +1,76 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 186
-- Updated At (UTC): 2026-04-21T16:30:00Z
+- Handoff Sequence: 187
+- Updated At (UTC): 2026-04-21T17:15:00Z
 - Source Branch: staging
-- Source Commit: 7dbd5549459753d09dacf1e17bfb8eff784b983c
-- Active Agent: Codex to pick up UX Pass 2 items
+- Source Commit: 928b631e2ad4805aefe4178758e80aa301bab3de
+- Active Agent: No active agent — staging complete, awaiting owner review
 
 ## Current State
 
-Wireframe tile + modal committed and pushed to staging (`7dbd554`). CI + Deploy Staging should run next. Staging preview URL when green: `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
+UX Pass 2 committed and pushed to staging (`928b631`). All CI should be green. Staging preview: `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
 
 Prod has NONE of the dashboard work. Do not promote to prod until explicitly instructed.
 
-## What This Session Changed (committed `7dbd554`)
+## What Was Completed This Full Session
 
-### assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html (NEW)
-- Copied from `/Users/roman.bediner/.../Canopy Management/design/wireframe-prototype.html`
-- Served as a same-origin static asset, embedded in the wireframe modal iframe
-- Will be synced to `rbediner/ai-enabled-operations-dashboard` via Phase 7 workflow on next staging push touching `ai-enabled-operations-dashboard/**`
+### Commits on staging this session:
+- `1535157` — UX Pass 1 (iframe raised, single callout, source card redesign, nav-anchor bottom)
+- `3b82521` — Handoff seq 185
+- `38e275c` — Fix em dashes in HTML comments (CI guardrail)
+- `7dbd554` — Wireframe tile + modal (main feature work)
+- `b97972c` — Handoff seq 186
+- `928b631` — UX Pass 2 (view cards, conversation card, spacing, README)
 
-### resources/ai-enabled-operations-dashboard/index.html
-1. **Source callout copy updated** — body copy now explicitly mentions dashboard source code, interactive wireframe prototype, and product requirements document. Em dashes removed (CI guardrail compliance).
-2. **Wireframe tile section added** — between source callout and conversational close. Contains: eyebrow "Included in the source package", `<h3>Dashboard Wireframe</h3>`, supporting copy, framed button tile with dark chrome, preview area, and "Explore Wireframe" label.
-3. **Wireframe modal added** — `role="dialog"`, `aria-modal="true"`, dark backdrop, close button (SVG ×), lazy iframe (`data-wireframe-src` attribute, src injected on first open). Not browser fullscreen — pure CSS/JS overlay.
-4. **Modal script wired** — `dashboard-wireframe-modal.js` added as deferred `<script>` at bottom of body.
+### Full Feature Set Now Live on Staging
 
-### scripts/runtime/dashboard-wireframe-modal.js (NEW)
-- External IIFE, CSP-safe (no inline scripts allowed on this page)
-- Opens modal on tile click, injects iframe src lazily on first open
-- Closes on: close button click, Escape key, backdrop click
-- Manages `aria-hidden` toggle and `body.wireframe-modal-open` scroll lock
-- Returns focus to trigger button on close
+**resources/ai-enabled-operations-dashboard/index.html**
+- Single intro callout (shelf-callout pattern), prose lede below
+- Iframe raised to immediately follow intro lede
+- Browser-chrome header on iframe frame shell (dark bar, three dots, label)
+- "What This Dashboard Helps Answer" and "In This Dashboard" sections below iframe
+- Core Dashboard Views, Operating Principles sections
+- Source callout card with blue left border — mentions dashboard source, wireframe, and PRD
+- Wireframe tile section (eyebrow, title, copy, dark framed button tile)
+- Wireframe modal (role=dialog, aria-modal, backdrop, close, Escape key, lazy iframe)
+- Conversational close with top divider separator, flex row layout (CTA right-aligned desktop)
+- Page nav: "Back to Resources Hub" (left arrow) + "Explore the Full Framework" (right arrow)
 
-### styles/resources.css
-- Added `.resource-dashboard-wireframe-section`, `.resource-dashboard-wireframe-eyebrow`, `.resource-dashboard-wireframe-title`, `.resource-dashboard-wireframe-copy`
-- Added `.resource-dashboard-wireframe-tile` (dark button card, chrome bar, preview area, CTA label strip)
-- Added `.resource-dashboard-wireframe-tile-chrome`, `.resource-dashboard-wireframe-tile-chrome-dots`, `.resource-dashboard-wireframe-tile-chrome-label`
-- Added `.resource-dashboard-wireframe-tile-preview`, `.resource-dashboard-wireframe-tile-preview-inner`
-- Added `.resource-dashboard-wireframe-tile-cta`
-- Added `.resource-dashboard-wireframe-modal`, `.resource-dashboard-wireframe-modal-backdrop`, `.resource-dashboard-wireframe-modal-inner`, `.resource-dashboard-wireframe-modal-close`, `.resource-dashboard-wireframe-modal-iframe`
-- Added `body.wireframe-modal-open { overflow: hidden }`
-- Mobile media query: tile full-width, modal inner 96vw/80vh
+**styles/resources.css**
+- View block cards: tighter padding (18/20/20), 4px title gap, blue 2px top border anchor
+- Conversation card: increased padding (32/36/34), flex row desktop, top border divider
+- Post-iframe section spacing: 44px → 36px
+- Source callout closing-zone margin: 48px → 56px
+- Wireframe tile CSS: dark card, chrome bar, preview area, CTA label strip
+- Wireframe modal CSS: backdrop, centered inner, close button, mobile responsive
+- Mobile: conversation card stacks vertically
 
-### QA/tests/test-resources-phase1.js
-- Updated source callout assertion to match new copy ("The full source package...")
-- Added assertions: source callout mentions wireframe + PRD, source callout position < conversational close, wireframe section present with eyebrow + title + trigger, wireframe tile between source callout and conversational close, modal element with role/aria-modal/close/backdrop/iframe src, modal script tag, JS Escape key + backdrop + aria-hidden behavior, wireframe asset exists on disk
+**scripts/runtime/dashboard-wireframe-modal.js (NEW)**
+- CSP-safe external IIFE
+- Lazy iframe src injection on first open
+- Escape key, backdrop click, close button handlers
+- aria-hidden toggle, scroll-lock body class, focus return
 
-## UX Pass 2 — Remaining Items for Codex
+**assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html (NEW)**
+- Copied from Canopy Management design directory
+- Served as same-origin static asset for modal iframe
 
-These were explicitly requested by the owner but not yet implemented. Pick these up next session:
+**ai-enabled-operations-dashboard/README.md**
+- Added "What Is Included" table listing src, design/wireframe-prototype.html, docs/PRD.md, docs/HANDOFF-SOP.md
 
-### P2-1: Core Dashboard Views cards — polish
-- Reduce gap between blue title (`strong`) and body copy: `margin-bottom: 8px` → `4px` on `.resource-dashboard-view-block strong`
-- Add a 2px top border in `rgba(59, 108, 255, 0.18)` to `.resource-dashboard-view-block` for visual anchor
-- Slightly reduce card padding from `22px 24px 24px` to `18px 20px 20px`
-
-### P2-2: Conversational callout layout
-- Increase block padding in `.resource-conversation-card`
-- Right-align `Reach Out for a Chat` button on desktop (`display: flex; justify-content: space-between; align-items: flex-start` on the card)
-- Add subtle top border rule above the section to separate from Operating Principles
-
-### P2-3: Section spacing tighten (post-iframe sections)
-- Sections below the iframe (`resource-section`) can have `margin-top: 36px` instead of `44px` — they're supporting context, not primary navigation
-- Add `margin-top: 56px` before source callout to create a clear closing-zone feel
-
-### P2-4: Public repo README update
-- Update `ai-enabled-operations-dashboard/README.md` to document all three artifacts: dashboard source, wireframe (`design/wireframe-prototype.html`), and PRD (`docs/PRD.md`)
-- Note: wireframe asset also served as `assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html` from the main site repo (for the modal iframe)
-
-### P2-5: Footer closing rhythm
-- Review `resource-page-nav` bottom spacing — ensure the page ends cleanly before footer
-- Consider adding a subtle top divider before the conversational callout (`.resource-conversational-close`)
+**QA/tests/test-resources-phase1.js**
+- Updated source callout assertion to match new copy
+- Added: wireframe tile position/content assertions, modal role/aria/attrs/JS behavior, wireframe asset on disk
 
 ## Architecture Notes
 
-- Dashboard iframe at `src="/ai-enabled-operations-dashboard/"` — final static-site architecture, not temporary
+- Dashboard iframe: `src="/ai-enabled-operations-dashboard/"` — final static-site architecture
 - `/resources/ai-enabled-operations-dashboard/` = human-facing page
 - `/ai-enabled-operations-dashboard/` = Vite/React artifact route (iframe src only)
-- Wireframe modal iframe points to `src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html"` (same-origin static asset, lazy-loaded)
-- Phase 7 sync: `.github/workflows/sync-dashboard-public.yml` — triggers on staging push when `ai-enabled-operations-dashboard/**` changes; needs `DASHBOARD_REPO_TOKEN` secret (already created by owner)
+- Wireframe modal iframe: `src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html"` (same-origin, lazy-loaded)
+- Phase 7 sync: `.github/workflows/sync-dashboard-public.yml` — triggers on staging push when `ai-enabled-operations-dashboard/**` changes; needs `DASHBOARD_REPO_TOKEN` secret (already set)
 - Public repo: `https://github.com/rbediner/ai-enabled-operations-dashboard`
-- PRD lives at: `ai-enabled-operations-dashboard/docs/PRD.md` in main repo, synced to public repo via Phase 7
+- PRD: `ai-enabled-operations-dashboard/docs/PRD.md` in main repo, synced to public repo via Phase 7
 
 ## Release Watcher Hygiene
 
