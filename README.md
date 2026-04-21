@@ -124,6 +124,11 @@ Rules:
 ```bash
 npm run handoff:update
 ```
+- To commit and push the handoff as an isolated `docs-only` gate commit (fast, ~10s):
+```bash
+npm run handoff:push
+```
+**Use `handoff:push` at session end** to keep the handoff separate from code commits. Mixing handoff with code changes escalates the pre-push gate to full-regression (~2 min).
 
 Required handoff content for cross-machine continuity:
 - active branches (`staging`, `prod`) and head commits

@@ -14,7 +14,7 @@ These rules apply to all sessions working in this repository.
   4. Promote exact tested SHA to `prod` (fast-forward only)
   5. Verify prod CI and deploy pass
   6. Run `node scripts/qa/verify-live-production.js`
-  7. Update `docs/handoff/latest.md` and push to both branches
+  7. Update `docs/handoff/latest.md` and push using `npm run handoff:push` — this commits the handoff in isolation so it gets the fast `docs-only` gate (~10s). Never bundle handoff with code commits.
 - Never promote a SHA that differs from the tested staging commit.
 
 ## Cleanup
