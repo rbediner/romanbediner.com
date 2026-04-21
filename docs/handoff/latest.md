@@ -1,71 +1,47 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 205
-- Updated At (UTC): 2026-04-21T21:36:53Z
+- Handoff Sequence: 207
+- Updated At (UTC): 2026-04-21T22:05:01Z
 - Source Branch: staging
-- Source Commit: 63b42b1907676acfda78c33259398a2628df7d3d (pre-handoff baseline)
-- Active Agent: No active agent - workflow split and handoff policy patch complete
+- Source Commit: 8cef5064ef4dec7fde53d8003a80502d67ea991b (pre-handoff baseline)
+- Active Agent: No active agent - prod release complete
 
 ## Current State
 
-Release workflow policy now supports efficient multi-agent handoff with isolated docs checks.
+Prod promoted to SHA `8cef5064ef4dec7fde53d8003a80502d67ea991b`. staging and prod are aligned.
 
-Completed in this pass:
-- Added dedicated docs workflow: `.github/workflows/docs-sync.yml`.
-- Added handoff sync script: `scripts/qa/verify-handoff-sync.js`.
-- Added `handoff-sync` job at the front of `CI`.
-- Added docs-only `paths-ignore` to `CI`, `Deploy Staging`, and `Deploy Pages` push triggers.
-- Added advisory mode for push-triggered handoff checks (`--advisory`) so isolated handoff commits do not create avoidable CI failures.
-- Kept strict handoff enforcement available for PR/manual contexts.
-- Updated workflow manifest, README deployment section, and automation tests to lock this behavior.
+Completed in this release (staging -> prod promotion):
+- Launched `/resources/ai-enabled-operations-dashboard/` resource page with live iframe embed (desktop/tablet), static screenshot fallback (mobile), wireframe prototype tile + modal, and explicit expand control.
+- Dashboard app (React/Vite): removed 7th question for clean 3x2 grid; patched Operating Principles copy + desktop/mobile behavior.
+- Phase 7 public repo sync workflow added (`.github/workflows/sync-dashboard-public.yml`).
+- Docs-only workflow split: `docs-sync.yml`, advisory handoff mode, CI/Deploy skip for docs-only pushes.
+- `handoff:push` script path-safe for cloud-synced workspace roots.
+- `insights-toggle.js` removed (orphaned).
 
 Google PRD status:
-- No product behavior changed in this pass; PRD update not required.
-
-## Files Changed In This Pass
-
-- `.github/workflows/ci.yml`
-- `.github/workflows/deploy-staging.yml`
-- `.github/workflows/deploy-pages.yml`
-- `.github/workflows/docs-sync.yml`
-- `scripts/qa/verify-handoff-sync.js`
-- `docs/architecture/workflow-manifest.json`
-- `QA/tests/test-docs-sync-automation.js`
-- `package.json`
-- `README.md`
+- PRD update required: dashboard resource page launched, new route live at `/resources/ai-enabled-operations-dashboard/`.
 
 ## Validation
 
-Targeted + gate validation:
-- `node scripts/qa/verify-workflow-integrity.js`
-- `node QA/tests/test-docs-sync-automation.js`
-- `node QA/tests/test-ci-gate-profile-automation.js`
-- `node QA/tests/test-workflow-integrity-automation.js`
-- `node QA/tests/test-staging-preview-automation.js`
-- `node QA/tests/test-release-sop-automation.js`
-- `npm run test:docs-gate`
-- Local pre-push full-regression gate (`qa:ci-parity`) passed for workflow code pushes.
-
-Remote status for latest staging SHA `63b42b1907676acfda78c33259398a2628df7d3d`:
-- Docs Sync: success (`https://github.com/rbediner/romanbediner.com/actions/runs/24747550306`)
-- CI: success (`https://github.com/rbediner/romanbediner.com/actions/runs/24747550305`)
-- Deploy Staging: success (`https://github.com/rbediner/romanbediner.com/actions/runs/24747667806`)
-
-Staging preview URL:
-- `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
+Remote status for prod SHA `8cef5064ef4dec7fde53d8003a80502d67ea991b`:
+- CI: success (run 24748604125)
+- Deploy Pages: success (run 24748604092)
+- Live smoke: PASS — `https://romanbediner.com/` and critical routes validated
 
 ## Remaining Work / Known Issues
 
-- Older failed runs for intermediate SHA `c2b696c...` remain in history from pre-advisory strict mode; latest head is green.
-- Recommended repo setting: require `Docs Sync` check in branch protection for `staging`/`prod`.
+- **PRD update required**: document new dashboard resource page route and wireframe modal feature.
+- Recommended repo setting (not yet applied): require `Docs Sync` as a required branch-protection check on `staging`/`prod`.
+- Older failed CI runs for intermediate SHA `c2b696c...` remain in history (pre-advisory strict mode) — benign.
+- Prod promotion pre-push gate does not yet handle docs-only tip SHAs gracefully (requires `SKIP_PREPUSH_QA=1` bypass when staging tip is a docs-only commit).
 
 ## Explicit Pickup Note
 
-- Continue on `staging` from commit `63b42b1907676acfda78c33259398a2628df7d3d`.
-- Keep future workflow tuning surgical and release-policy focused.
+- staging and prod both at `8cef5064ef4dec7fde53d8003a80502d67ea991b`.
+- Next work: PRD update, then new feature work on `staging`.
 
 ## Release Watcher Hygiene
 
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
-- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+- Do not use ad-hoc shell polling loops for CI or production monitoring.
