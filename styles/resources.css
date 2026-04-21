@@ -1001,7 +1001,7 @@
   margin-top: 24px;
 }
 
-/* Top CTA row — sits between supporting subhead and blue callout */
+/* Top CTA row — sits after the blue callout, before content sections */
 .resource-dashboard-top-cta {
   display: flex;
   flex-wrap: wrap;
