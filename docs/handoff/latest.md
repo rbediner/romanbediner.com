@@ -1,51 +1,75 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 203
-- Updated At (UTC): 2026-04-21T21:10:34Z
+- Handoff Sequence: 204
+- Updated At (UTC): 2026-04-21T21:28:29Z
 - Source Branch: staging
-- Source Commit: 30d311bc2b986a1ea2883d9ec3744f27eab8115c (pre-handoff baseline)
-- Active Agent: No active agent - staging verified
+- Source Commit: c2b696c5efecf15c335eee67c1e0c74f440dd2be (pre-handoff baseline)
+- Active Agent: No active agent - release workflow policy patch complete
 
 ## Current State
 
-Phase 2 follow-up fixes for `/resources/ai-enabled-operations-dashboard/` are live on `staging`.
+Staging now uses a clean split between docs workflow checks and deployable-site workflow checks.
 
-Completed in this follow-up:
-- Removed `What needs attention right now?` from `What This Dashboard Helps Answer` for a clean 3x2 question grid.
-- Fixed mobile overflow in Source Package CTA (`View Source Code`) so the button stays within card bounds.
-- Rechecked staging preview output for updated dashboard resource content.
+Completed in this pass:
+- Added `.github/workflows/docs-sync.yml` as a dedicated docs pipeline (`Docs Sync`).
+- Added `scripts/qa/verify-handoff-sync.js` to enforce handoff updates when non-doc files change.
+- Added `handoff-sync` job at the front of `.github/workflows/ci.yml`.
+- Added `paths-ignore` docs-only filters to:
+  - `.github/workflows/ci.yml`
+  - `.github/workflows/deploy-staging.yml`
+  - `.github/workflows/deploy-pages.yml`
+- Updated workflow integrity manifest for new docs workflow.
+- Added guard test: `QA/tests/test-docs-sync-automation.js`.
+- Updated `package.json` node test chain to include the new docs-sync automation guard.
+- Updated `README.md` deployment section to document the new docs-sync + handoff policy.
 
 Google PRD status:
-- Google PRD intentionally ignored for this scoped staging polish/fix pass.
+- No product behavior changed in this pass; PRD update not required.
 
-## Files Changed In Follow-Up
+## Files Changed In This Pass
 
-- `resources/ai-enabled-operations-dashboard/index.html`
-- `styles/resources.css`
+- `.github/workflows/ci.yml`
+- `.github/workflows/deploy-staging.yml`
+- `.github/workflows/deploy-pages.yml`
+- `.github/workflows/docs-sync.yml`
+- `scripts/qa/verify-handoff-sync.js`
+- `docs/architecture/workflow-manifest.json`
+- `QA/tests/test-docs-sync-automation.js`
+- `package.json`
+- `README.md`
 
 ## Validation
 
-Targeted validation only:
-- Confirmed preview no longer contains `What needs attention right now?`.
-- Confirmed `What This Dashboard Helps Answer` section still renders.
-- Confirmed `OPERATING PRINCIPLES` label is present.
-- Mobile viewport check confirms source CTA does not overflow left/right card boundaries.
+Targeted validation run:
+- `node scripts/qa/verify-workflow-integrity.js`
+- `node QA/tests/test-docs-sync-automation.js`
+- `node QA/tests/test-ci-gate-profile-automation.js`
+- `node QA/tests/test-workflow-integrity-automation.js`
+- `node QA/tests/test-staging-preview-automation.js`
+- `node QA/tests/test-release-sop-automation.js`
+- `npm run test:docs-gate`
+- Local pre-push gate on `git push origin staging` ran `qa:ci-parity` and passed.
 
-Remote workflow status for staging SHA `30d311bc2b986a1ea2883d9ec3744f27eab8115c`:
-- CI: success (`https://github.com/rbediner/romanbediner.com/actions/runs/24746382939`)
-- Deploy Staging: success (`https://github.com/rbediner/romanbediner.com/actions/runs/24746511102`)
+## Deployment Status
+
+Latest staging code SHA:
+- `c2b696cae3ac9a5e2891dc434b739d7ccf9d0e15`
 
 Staging preview URL:
-`https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
+- `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
+
+Note:
+- This pass changes workflow policy; monitor the first `CI`, `Docs Sync`, and `Deploy Staging` runs for this SHA to confirm expected path-filter behavior.
 
 ## Remaining Work / Known Issues
 
-- No known blockers for this dashboard resource page after this follow-up.
+- No blocking issues known at handoff time.
+- Branch protection should mark `Docs Sync` as a required check so handoff sync stays enforced across multi-agent sessions.
 
 ## Explicit Pickup Note
 
-- Continue on `staging` at commit `30d311bc2b986a1ea2883d9ec3744f27eab8115c`.
-- If additional polish is requested, keep scope surgical and staging-only.
+- Continue on `staging` from commit `c2b696cae3ac9a5e2891dc434b739d7ccf9d0e15`.
+- If follow-up is requested, keep to workflow policy tuning only; avoid unrelated product/page edits.
 
 ## Release Watcher Hygiene
 
