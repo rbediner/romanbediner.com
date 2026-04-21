@@ -26,9 +26,27 @@
 - Treat the PRD update as required when a session adds or changes a feature, deploy-worthy behavior, UX rule, analytics rule, metadata rule, information architecture decision, content-system rule, or any other product-level decision that changes how the site works or what it promises.
 
 ## Dashboard Sub-Project Rule
-- The dashboard source lives at `ai-enabled-operations-dashboard/` inside this repo.
-- After any session that adds, changes, or removes dashboard features, **both** of the following must be updated before ending work:
-  1. `ai-enabled-operations-dashboard/docs/PRD.md` — update the relevant tile, behavior, or release section in the same commit as the code change.
-  2. `ai-enabled-operations-dashboard/docs/handoff/latest.md` — overwrite with current state at session end (what changed, current SHA, next steps).
-- These files sync automatically to the public repo (`rbediner/ai-enabled-operations-dashboard`) on every prod promotion that touches `ai-enabled-operations-dashboard/**`. **This sync is the required public doc update** — do not edit the public repo directly.
-- After promotion to prod, verify the sync workflow (`sync-dashboard-public.yml`) ran green in GitHub Actions. A release is not complete until the sync is confirmed green. The public repo's `docs/PRD.md` and `docs/handoff/latest.md` must reflect the shipped state before the session ends.
+
+### What syncs to the public repo
+The sync workflow (`sync-dashboard-public.yml`) copies **only** `ai-enabled-operations-dashboard/` to the root of `rbediner/ai-enabled-operations-dashboard` on every prod promotion that touches those files. Nothing outside that folder ever reaches the public repo.
+
+| File | Syncs to public? | Rule |
+|---|---|---|
+| `ai-enabled-operations-dashboard/docs/PRD.md` | ✅ Yes | Dashboard PRD only — never include website-level content |
+| `ai-enabled-operations-dashboard/docs/handoff/latest.md` | ✅ Yes | Dashboard state only — never include website-level changes |
+| `ai-enabled-operations-dashboard/README.md` | ✅ Yes | Dashboard README only — already correct |
+| `docs/handoff/latest.md` (repo root) | ❌ Never | Website handoff — stays private, never touches dashboard subfolder |
+| `README.md` (repo root) | ❌ Never | Website README — stays private |
+
+### Required doc updates after dashboard changes
+After any session that adds, changes, or removes dashboard features, **both** of the following must be updated before ending work:
+1. `ai-enabled-operations-dashboard/docs/PRD.md` — update the relevant tile, behavior, or release section **in the same commit** as the code change.
+2. `ai-enabled-operations-dashboard/docs/handoff/latest.md` — overwrite with **dashboard-only** state (what changed in the dashboard, current SHA, next dashboard steps). Do not include website-level changes here.
+
+### Boundary rules — never cross these
+- `ai-enabled-operations-dashboard/docs/handoff/latest.md` must contain **only dashboard content**. If a session touched the website but not the dashboard, do not update this file.
+- `docs/handoff/latest.md` (repo root) is the **website handoff only**. Never reference dashboard-specific tile or behavior changes there — those belong in the dashboard handoff.
+- Do not edit the public repo (`rbediner/ai-enabled-operations-dashboard`) directly. It is a read-only sync target.
+
+### Release completion gate
+After promoting to prod, verify `sync-dashboard-public.yml` ran green in GitHub Actions. A dashboard release is not complete until the sync is confirmed green and the public repo's `docs/PRD.md` and `docs/handoff/latest.md` reflect the shipped state.
