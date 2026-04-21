@@ -127,10 +127,21 @@
 }
 
 .resource-primary-cta.is-disabled {
-  background: #c7cfdf;
-  color: #6d7688;
-  box-shadow: none;
+  background: #c7cfdf !important;
+  color: #6d7688 !important;
+  box-shadow: none !important;
   pointer-events: none;
+  transform: none !important;
+  filter: none !important;
+}
+
+.resource-primary-cta.is-disabled:hover,
+.resource-primary-cta.is-disabled:focus-visible {
+  background: #c7cfdf !important;
+  color: #6d7688 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  filter: none !important;
 }
 
 .resource-primary-cta:focus-visible,

@@ -112,3 +112,13 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
   - resources CSS includes disabled CTA styling (`.resource-primary-cta.is-disabled`)
   - QA contract updated in `QA/tests/test-resources-phase1.js` to enforce no dashboard hub link while in coming-soon state
 - Release mode: emergency express push requested by operator.
+
+---
+
+## Append-Only Session Note (2026-04-21, emergency dashboard CTA visual lock)
+
+- Follow-up hotfix: dashboard CTA on `/resources/` was still appearing blue for some clients.
+- Hardened disabled rendering so CTA is visibly grey even under stale CSS cache conditions:
+  - Added inline disabled style on dashboard CTA element in `resources/index.html`
+  - Strengthened `.resource-primary-cta.is-disabled` in `styles/resources.css` with explicit disabled hover/focus overrides
+- Release intent: express production polish fix; no functional link re-enabled.
