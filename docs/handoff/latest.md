@@ -1,16 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 196
-- Updated At (UTC): 2026-04-21T19:07:35Z
+- Handoff Sequence: 198
+- Updated At (UTC): 2026-04-21T19:17:14Z
 - Source Branch: staging
-- Source Commit: 7f9a694510e98bfc4e4870a79ff0c6130f5bf396 (pre-handoff baseline)
-- Active Agent: No active agent - Phase 1.5 clipping relief complete
+- Source Commit: c0a1b8587cf40a9b353d7d5d7a7e30c33e881b6d (pre-handoff baseline)
+- Active Agent: No active agent - Final Phase 1 fit correction complete
 
 ## Current State
 
-Phase 1.5 (staging-only) is complete and intentionally narrow: dashboard embed clipping relief only.
+Final Phase 1 correction (staging-only) is complete and intentionally narrow: dashboard embed fit only.
 
-- Scope completed: iframe/dashboard sizing + centering stability + edge-safe clipping relief
+- Scope completed: iframe/dashboard sizing + centering stability + final edge-safe fit correction
 - Scope deferred: all page polish and README cleanup (Phase 2)
 - Prod untouched
 
@@ -37,14 +37,15 @@ Embed stabilization now anchors the dashboard frame explicitly to viewport cente
 
 This removes dependence on overflow alignment and keeps the 16:9 frame centered consistently.
 
-## Phase 1.5 Clipping Relief Applied
+## Final Phase 1 Fit Correction Applied
 
-Follow-up clipping issue (fullscreen control and rail edges tight to frame) was corrected with a small two-part adjustment:
+Follow-up clipping was still visible in staging, so fit was hardened with a stronger three-part adjustment:
 
-- dashboard scale safety inset increased slightly in non-fullscreen mode so edge utilities sit comfortably inside the viewport
-- desktop iframe shell bleed widened slightly to preserve the same perceived visual size after the safety inset
+- non-fullscreen scaling now uses a true per-side safety inset model (`window - inset*2`) instead of a single-width subtraction
+- per-side safety inset increased to `24px`, which intentionally reduces effective scale slightly to guarantee fit
+- internal dashboard frame padding increased to `24px` and desktop shell bleed relaxed slightly to preserve strong perceived size
 
-Result: edge UI no longer clips while dashboard remains visually strong at approximately the same apparent size.
+Result: the dashboard now sits centered with explicit breathing room on all sides in iframe context.
 
 ## Files Changed (Phase 1)
 
@@ -54,12 +55,15 @@ Result: edge UI no longer clips while dashboard remains visually strong at appro
 - `ai-enabled-operations-dashboard/dist/assets/index-BNXxZJYf.css`
 - removed old dist css hash file: `ai-enabled-operations-dashboard/dist/assets/index-CuEemfOt.css`
 
-## Files Changed (Phase 1.5)
+## Files Changed (Final Phase 1 correction)
 
 - `ai-enabled-operations-dashboard/src/App.jsx`
+- `ai-enabled-operations-dashboard/src/` dashboard stylesheet (frame padding)
 - `styles/resources.css`
-- `ai-enabled-operations-dashboard/dist/assets/index-ChnMqt2s.js`
-- removed old dist js hash file: `ai-enabled-operations-dashboard/dist/assets/index-BGkSDS3v.js`
+- `ai-enabled-operations-dashboard/dist/index.html`
+- `ai-enabled-operations-dashboard/dist/assets/index-C__Lj5gl.js`
+- `ai-enabled-operations-dashboard/dist/assets/index-CufhamHw.css`
+- removed prior dist hash files for js/css
 
 ## Targeted Validation (Phase 1 only)
 
@@ -71,16 +75,17 @@ Local artifact validation (built artifact path, not dev source path):
 Validation output snapshot:
 `{"before":{"x":21,"y":12,"w":1056,"h":594,"scale":"0.55"},"fullscreen":{"isFullscreen":true}}`
 
-## Targeted Validation (Phase 1.5 only)
+## Targeted Validation (Final Phase 1 correction)
 
-Artifact-path verification confirmed internal edge clearance with no meaningful size loss:
+Artifact-path verification + visual screenshot check confirmed clean fit:
 
-- fullscreen toggle inset from right edge: `8.82px`
-- left rail inset from left edge: `7.16px`
-- right rail inset from right edge: `7.16px`
-- bottom strip inset from bottom edge: `7.16px`
-- computed scale remained effectively unchanged (`0.5509`)
-- fullscreen toggle still works (`{"isFullscreen":true}`)
+- frame-to-viewport margins: left/right `42.78px`, top/bottom `24px`
+- fullscreen toggle inset from frame edge: `15.35px` right, `15.35px` top
+- left rail inset from frame edge: `13.7px`
+- right rail inset from frame edge: `13.7px`
+- bottom strip inset from frame edge: `13.7px`
+- final effective scale: `0.5481`
+- fullscreen toggle still works (`{"fullscreenWorks":true}`)
 
 ## Intentionally Deferred To Phase 2
 
@@ -93,7 +98,7 @@ Artifact-path verification confirmed internal edge clearance with no meaningful 
 
 ## Explicit Phase 2 Pickup Note
 
-Start from `staging` at commit `77f0f8f6ec95b813d8f503a8eac0e258d5ec9bbf`.
+Start from `staging` at commit `c0a1b850cf8ba5f3250bc9ea0893895609be9691`.
 
 Do not reopen embed architecture. Embed stabilization is now the baseline. Use Phase 2 only for below-the-dashboard/page-polish backlog.
 
