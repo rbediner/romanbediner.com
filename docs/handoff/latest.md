@@ -1,14 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 188
-- Updated At (UTC): 2026-04-21T17:45:00Z
+- Handoff Sequence: 189
+- Updated At (UTC): 2026-04-21T18:00:00Z
 - Source Branch: staging
-- Source Commit: 428b265fbf668d7a69b2becb045a6fa8eb6b1b5b
+- Source Commit: 873a1ce (full SHA pending push confirmation)
 - Active Agent: No active agent — staging complete and verified, awaiting owner review
 
 ## Current State
 
-All work complete and verified on staging (`428b265`). CI passed, Deploy Staging succeeded. Phase 7 sync confirmed working — public repo is up to date.
+All work complete on staging (`873a1ce`). CI passed, Deploy Staging succeeded. Phase 7 sync confirmed working.
+
+**Critical fix landed**: dashboard iframe was rendering in the lower-right corner instead of centered/filling the frame. Root cause: `.app-shell` used `width: 100vw; height: 100vh` — inside an iframe, `100vh` resolves to the parent page height, not the iframe's height. Fixed to `width: 100%; height: 100%` in both the dashboard source CSS and the compiled dist asset.
 
 Staging preview: `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
 
