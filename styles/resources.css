@@ -1368,6 +1368,10 @@
 
   .resource-dashboard-source-actions .resource-primary-cta {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
     justify-content: center;
   }
 
