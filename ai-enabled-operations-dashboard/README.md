@@ -91,9 +91,18 @@ npm run test:qa     # dashboard QA verification
 
 ---
 
-## Use With Repomix
+## What Is Included in This Repository
 
-This repo is kept dashboard-only so you can package the full source with [Repomix](https://github.com/yamadashy/repomix) or similar tools without pulling unrelated website code.
+This repo contains the complete source package for the dashboard artifact:
+
+| Path | What it is |
+|---|---|
+| `src/` | Dashboard source code (React/Vite) |
+| `design/wireframe-prototype.html` | Interactive wireframe prototype used during design — open in any browser |
+| `docs/PRD.md` | Product requirements document — current source of truth for the shipped prototype |
+| `docs/HANDOFF-SOP.md` | Handoff and release procedures |
+
+The repo is kept dashboard-only so you can package the full source with [Repomix](https://github.com/yamadashy/repomix) or similar tools without pulling unrelated website code.
 
 ---
 
