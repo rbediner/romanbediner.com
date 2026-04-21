@@ -1,62 +1,72 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 182
-- Updated At (UTC): 2026-04-21T00:30:00Z
+- Handoff Sequence: 183
+- Updated At (UTC): 2026-04-21T11:00:00Z
 - Source Branch: staging
-- Source Commit: f55141b208e8d0a3982f913d3b8bd6fb5964e6bf
+- Source Commit: 5c5fa948658ce31dc2a9a799a2cc7fe86639961e
 
 ## Session Summary (2026-04-21)
 
-Codex completed Phases 4, 5, 6 (dashboard import, iframe wiring, artifact packaging). Claude session did codebase cleanup: removed orphaned `scripts/runtime/insights-toggle.js`.
+Claude session completed remaining dashboard migration work on staging:
+- Flipped `/resources/` dashboard card from Coming Soon to launched state
+- Created Phase 7 GitHub Action for automatic public repo sync
+- Updated test-resources-phase1.js to assert launched card state
 
-## Phases Complete (from Codex — see prior handoffs for detail)
+## Dashboard Migration Phases Status
 
-- **Phase 4** — Dashboard source imported into `ai-enabled-operations-dashboard/`, built to `dist/`
-- **Phase 5** — Live iframe wired in resource page, mobile screenshot asset added
-- **Phase 6** — Artifact packaging updated, QA guardrails added
-- Staging CI + Deploy Staging both green at `cff6555` (Codex) → now at `f55141b` (post-cleanup)
+- **Phase 2** — Dashboard resource page at `/resources/ai-enabled-operations-dashboard/` — complete, all locked copy ✓
+- **Phase 3** — Public repo renamed to `rbediner/ai-enabled-operations-dashboard`, Canopy refs scrubbed — complete ✓
+- **Phase 4** — Dashboard source imported into `ai-enabled-operations-dashboard/` — complete ✓
+- **Phase 5** — Live iframe wired in resource page, mobile screenshot asset added — complete ✓
+- **Phase 6** — Artifact packaging updated, QA guardrails added — complete ✓
+- **Phase 7** — GitHub Action `.github/workflows/sync-dashboard-public.yml` created — complete (requires one manual step, see below) ✓
+- **Phase 8** — Docs update — this file ✓
 
-## Cleanup This Session
+## Resources Card State
 
-- Deleted `scripts/runtime/insights-toggle.js` — confirmed dead code. Framework migration removed it from all HTML pages; a Jest invariant test (`QA/tests/jest/insights-analytics.test.js`) explicitly asserts it must NOT be loaded. File was never referenced by any `<script>` tag.
+The dashboard card on `/resources/` now shows `Available Now` with a real link to `/resources/ai-enabled-operations-dashboard/`. The coming-soon/disabled state has been removed. This is staging-only — prod still has the old coming-soon state since dashboard phases have not been promoted to prod.
 
-## Codebase Health Notes (for future cleanup passes)
+## Required Manual Step (Phase 7)
 
-- **`assets/asset-library/concept-images/`** — 4 PNG/JPG concept images with no HTML/CSS references. Left in place per owner preference (not dead code, may be design references).
-- **`assets/asset-library/brand-sources/og-logo-source.psd`** — design source file, no CI/build dependency. Left in place.
-- **`scripts/qa/route-health.js`** — shared helper used by `verify-live-preview.js` and `verify-live-production.js`. Not orphaned — leave in place.
-- **Gate profile optimization** — `docs/handoff/latest.md` already maps to `docs-only` profile (fast, ~10s). Gate escalates to full-regression when handoff is bundled with code changes. Commit handoff separately from code to keep gate fast.
+The sync workflow needs a secret to push to the public dashboard repo:
+- Go to GitHub → `rbediner/romanbediner.com` → Settings → Secrets → Actions
+- Create secret: `DASHBOARD_REPO_TOKEN`
+- Token must have `contents:write` permission scoped to `rbediner/ai-enabled-operations-dashboard`
+- Workflow: `.github/workflows/sync-dashboard-public.yml`
 
 ## Branch / Release State
 
-- `staging`: green, Deploy Staging passing
-- `prod`: Codex cherry-picked connect divider fix; Phase 2–6 dashboard NOT yet on prod
+- `staging`: green at `5c5fa94` (local) — `425df88` remote (one local commit unpushed, includes push-handoff.js infra)
+- `prod`: Codex cherry-picked connect divider fix only; dashboard phases NOT on prod
 - Public dashboard repo: `rbediner/ai-enabled-operations-dashboard` — clean, no Canopy refs
-- Promotion of Phase 2–6: not performed
+- Promotion to prod: not performed — staying staging-only per session intent
 
 ## Staging Preview URL
 
 `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
 
-## Remaining Phases
-
-- **Phase 7** — GitHub Action to sync `romanbediner.com/ai-enabled-operations-dashboard/` changes back to `rbediner/ai-enabled-operations-dashboard`
-- **Phase 8** — Final docs/report, PRD update (Google Doc link in prior Codex handoff)
-
-## Important Notes for Next Agent
+## Key Architecture Notes
 
 - Dashboard iframe depends on packaged artifact route `/ai-enabled-operations-dashboard/`
+- Resource page URL: `/resources/ai-enabled-operations-dashboard/` (human-facing)
+- Artifact route URL: `/ai-enabled-operations-dashboard/` (iframe src, build output)
 - If dashboard source changes, rebuild dist before release
 - `resources/ai-enabled-operations-dashboard/index.html` has the live iframe wired — no placeholder
 - Spec file: `/Users/roman.bediner/Downloads/dashboard_migration_and_resource_page_spec.md`
+- Public repo: `https://github.com/rbediner/ai-enabled-operations-dashboard`
+
+## QA Contract (test-resources-phase1.js)
+
+Test now asserts launched state (not coming-soon). Key assertions:
+- `class="resource-meta">Available Now<` — present
+- `href="/resources/ai-enabled-operations-dashboard/"` — present as real link
+- `is-coming-soon` — must NOT be present
+- `class="resource-primary-cta is-disabled"` — must NOT be present
 
 ## Release Watcher Hygiene
 
-Keep release watcher hygiene in place for this repo.
-- Use:
-  - `npm run release:watchers:status`
-  - `npm run release:watchers:cleanup`
-- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops
 
 ## PRD Status
 
