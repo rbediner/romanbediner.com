@@ -1,16 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 193
-- Updated At (UTC): 2026-04-21T18:42:59Z
+- Handoff Sequence: 194
+- Updated At (UTC): 2026-04-21T18:58:14Z
 - Source Branch: staging
-- Source Commit: 77f0f8f6ec95b813d8f503a8eac0e258d5ec9bbf
-- Active Agent: No active agent - Phase 1 embed stabilization complete
+- Source Commit: 1ccc1e5549f7f7fc82350fa3fa11129244c367f2
+- Active Agent: No active agent - Phase 1.5 clipping relief complete
 
 ## Current State
 
-Phase 1 (staging-only) is complete and intentionally narrow: dashboard embed stabilization only.
+Phase 1.5 (staging-only) is complete and intentionally narrow: dashboard embed clipping relief only.
 
-- Scope completed: iframe/dashboard sizing + centering stability
+- Scope completed: iframe/dashboard sizing + centering stability + edge-safe clipping relief
 - Scope deferred: all page polish and README cleanup (Phase 2)
 - Prod untouched
 
@@ -37,6 +37,15 @@ Embed stabilization now anchors the dashboard frame explicitly to viewport cente
 
 This removes dependence on overflow alignment and keeps the 16:9 frame centered consistently.
 
+## Phase 1.5 Clipping Relief Applied
+
+Follow-up clipping issue (fullscreen control and rail edges tight to frame) was corrected with a small two-part adjustment:
+
+- dashboard scale safety inset increased slightly in non-fullscreen mode so edge utilities sit comfortably inside the viewport
+- desktop iframe shell bleed widened slightly to preserve the same perceived visual size after the safety inset
+
+Result: edge UI no longer clips while dashboard remains visually strong at approximately the same apparent size.
+
 ## Files Changed (Phase 1)
 
 - `ai-enabled-operations-dashboard/src/` dashboard stylesheet (app-shell + screen-frame centering rules)
@@ -44,6 +53,13 @@ This removes dependence on overflow alignment and keeps the 16:9 frame centered 
 - `ai-enabled-operations-dashboard/dist/assets/index-BGkSDS3v.js`
 - `ai-enabled-operations-dashboard/dist/assets/index-BNXxZJYf.css`
 - removed old dist css hash file: `ai-enabled-operations-dashboard/dist/assets/index-CuEemfOt.css`
+
+## Files Changed (Phase 1.5)
+
+- `ai-enabled-operations-dashboard/src/App.jsx`
+- `styles/resources.css`
+- `ai-enabled-operations-dashboard/dist/assets/index-ChnMqt2s.js`
+- removed old dist js hash file: `ai-enabled-operations-dashboard/dist/assets/index-BGkSDS3v.js`
 
 ## Targeted Validation (Phase 1 only)
 
@@ -54,6 +70,17 @@ Local artifact validation (built artifact path, not dev source path):
 
 Validation output snapshot:
 `{"before":{"x":21,"y":12,"w":1056,"h":594,"scale":"0.55"},"fullscreen":{"isFullscreen":true}}`
+
+## Targeted Validation (Phase 1.5 only)
+
+Artifact-path verification confirmed internal edge clearance with no meaningful size loss:
+
+- fullscreen toggle inset from right edge: `8.82px`
+- left rail inset from left edge: `7.16px`
+- right rail inset from right edge: `7.16px`
+- bottom strip inset from bottom edge: `7.16px`
+- computed scale remained effectively unchanged (`0.5509`)
+- fullscreen toggle still works (`{"isFullscreen":true}`)
 
 ## Intentionally Deferred To Phase 2
 
