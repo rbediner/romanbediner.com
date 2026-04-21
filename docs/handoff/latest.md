@@ -3,7 +3,7 @@
 - Handoff Sequence: 184
 - Updated At (UTC): 2026-04-21T13:00:00Z
 - Source Branch: staging
-- Source Commit: 353efd0 (local) — pending remote CI
+- Source Commit: 3ffc266664868013fa2039dfa74ae3b8a7ffc52d
 
 ## Session Summary (2026-04-21)
 
@@ -99,8 +99,9 @@ Test asserts launched state. Key assertions:
 
 ## Release Watcher Hygiene
 
+Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
-- Do not use ad-hoc shell polling loops
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
 ## PRD Status
 
