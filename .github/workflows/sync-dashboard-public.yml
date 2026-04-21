@@ -7,7 +7,7 @@ name: Sync Dashboard to Public Repo
 on:
   push:
     branches:
-      - staging
+      - prod
     paths:
       - 'ai-enabled-operations-dashboard/**'
   workflow_dispatch:
