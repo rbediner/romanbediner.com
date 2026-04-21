@@ -42,7 +42,7 @@ Replace demo operating metrics while preserving the one-screen story:
 ```text
 src/data/dashboardData.js   <- metric values, labels, states
 src/components/             <- dashboard components
-src/styles.css              <- visual system and layout styling
+src/                        <- visual system and layout styling lives alongside components/data
 ```
 
 ## What's Included
