@@ -992,26 +992,17 @@
 }
 
 /* Dashboard callout variants */
-.resource-dashboard-callout .shelf-content,
-.resource-dashboard-prose-callout .shelf-content {
+.resource-dashboard-callout .shelf-content {
   padding: 26px 32px;
 }
 
-.resource-dashboard-prose-callout {
-  margin-top: 24px;
-}
-
-/* Top CTA row — sits after the blue callout, before content sections */
-.resource-dashboard-top-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 28px;
-}
-
-/* Blue callout wrapper */
-.resource-dashboard-blue-callout {
-  margin-top: 0;
+/* Prose lede — replaces the second shelf callout */
+.resource-dashboard-prose-lede {
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 720px;
 }
 
 /* In This Dashboard — lead line + screen-story list */
@@ -1035,20 +1026,50 @@
 
 /* Live dashboard artifact container */
 .resource-dashboard-artifact-section {
-  margin-top: 48px;
+  margin-top: 32px;
 }
 
 /* Desktop/tablet frame shell for the live iframe dashboard. */
 .resource-dashboard-frame-shell {
   display: block;
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  background: #f0f4ff;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  background: #1a1e2e;
   overflow: hidden;
-  box-shadow: 0 24px 56px rgba(15, 23, 42, 0.09);
-  /* Wider than reading text — fills site width */
+  box-shadow: 0 28px 64px rgba(15, 23, 42, 0.18), 0 2px 8px rgba(15, 23, 42, 0.12);
   margin-left: calc(-1 * clamp(0px, (100vw - 980px) / 2, 60px));
   margin-right: calc(-1 * clamp(0px, (100vw - 980px) / 2, 60px));
+}
+
+/* Browser-chrome header bar above the iframe */
+.resource-dashboard-frame-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #13161f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.resource-dashboard-frame-chrome-dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.resource-dashboard-frame-chrome-dots span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.resource-dashboard-frame-chrome-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.04em;
 }
 
 /* The iframe keeps the 16:9 footprint and fills the frame shell exactly. */
@@ -1058,7 +1079,7 @@
   aspect-ratio: 16 / 9;
   min-height: 420px;
   border: 0;
-  background: #f0f4ff;
+  background: #1a1e2e;
 }
 
 /* Mobile fallback — hidden on desktop/tablet, shown on mobile */
@@ -1095,29 +1116,45 @@
   color: var(--accent-blue);
 }
 
-/* Source-availability supporting callout — restrained */
+/* Source-availability card — prominent artifact-access block */
 .resource-dashboard-source-callout {
-  margin-top: 40px;
-  padding: 20px 24px;
-  border-radius: 10px;
-  border: 1px solid rgba(59, 108, 255, 0.14);
-  background: rgba(244, 248, 255, 0.7);
+  margin-top: 48px;
+  padding: 28px 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 108, 255, 0.2);
+  border-left: 3px solid var(--accent-blue);
+  background: rgba(244, 248, 255, 0.8);
 }
 
-.resource-dashboard-source-callout p {
+.resource-dashboard-source-inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.resource-dashboard-source-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.resource-dashboard-source-heading {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+}
+
+.resource-dashboard-source-text p:last-child {
   margin: 0;
   font-size: 15px;
   line-height: 1.65;
   color: var(--text-secondary);
 }
 
-/* Bottom CTA row */
-.resource-dashboard-bottom-cta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 18px 20px;
-  margin-top: 44px;
+.resource-dashboard-source-actions {
+  flex-shrink: 0;
 }
 
 /* Mobile CTA inside fallback */
@@ -1181,26 +1218,23 @@
     gap: 14px;
   }
 
-  /* Bottom CTA stacks vertically */
-  .resource-dashboard-bottom-cta {
+  /* Source card stacks vertically on mobile */
+  .resource-dashboard-source-inner {
     flex-direction: column;
     align-items: stretch;
-    gap: 14px;
-    margin-top: 36px;
+    gap: 20px;
   }
 
-  .resource-dashboard-bottom-cta .resource-primary-cta,
-  .resource-dashboard-bottom-cta .resource-companion-cta {
+  .resource-dashboard-source-callout {
+    padding: 22px 20px;
+  }
+
+  .resource-dashboard-source-actions .resource-primary-cta {
     width: 100%;
     justify-content: center;
   }
 
-  .resource-dashboard-top-cta {
-    margin-top: 20px;
-  }
-
-  .resource-dashboard-callout .shelf-content,
-  .resource-dashboard-prose-callout .shelf-content {
+  .resource-dashboard-callout .shelf-content {
     padding: 22px 24px;
   }
 }

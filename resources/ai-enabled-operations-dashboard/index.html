@@ -74,7 +74,7 @@
     <h1>AI-Enabled Operations Dashboard</h1>
     <div class="section-accent" aria-hidden="true"></div>
 
-    <!-- Supporting subhead -->
+    <!-- Supporting subhead — single intro callout -->
     <section class="resource-top-section" aria-label="Dashboard introduction">
       <div class="shelf-callout resource-family-callout resource-dashboard-callout">
         <div class="shelf-border" aria-hidden="true"></div>
@@ -84,23 +84,35 @@
       </div>
     </section>
 
-    <!-- Blue callout -->
-    <aside class="resource-dashboard-blue-callout" aria-label="Dashboard overview">
-      <div class="shelf-callout resource-family-callout resource-dashboard-prose-callout">
-        <div class="shelf-border" aria-hidden="true"></div>
-        <div class="shelf-content">
-          <p class="resource-family-copy">Designed as a shareable operating artifact, this dashboard prototype brings demand, delivery, financial tension, customer pressure, and AI leverage into a single-screen view. It offers a structured way to review what matters, spot pressure quickly, and make decisions with less translation across tools and reports.</p>
-        </div>
-      </div>
-    </aside>
+    <p class="resource-dashboard-prose-lede">Designed as a shareable operating artifact, this dashboard prototype brings demand, delivery, financial tension, customer pressure, and AI leverage into a single-screen view. It offers a structured way to review what matters, spot pressure quickly, and make decisions with less translation across tools and reports.</p>
 
-    <!-- Top CTA row: View Source Code only -->
-    <div class="resource-dashboard-top-cta">
-      <a class="resource-companion-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">
-        <span>View Source Code</span>
-        <span class="resource-companion-cta-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
+    <!-- Live dashboard artifact — shown immediately after intro -->
+    <section class="resource-dashboard-artifact-section" aria-label="Interactive dashboard">
+
+      <!-- Desktop and tablet: live dashboard iframe (same-origin artifact route). -->
+      <div class="resource-dashboard-frame-shell" aria-label="Dashboard artifact frame">
+        <div class="resource-dashboard-frame-chrome" aria-hidden="true">
+          <span class="resource-dashboard-frame-chrome-dots"><span></span><span></span><span></span></span>
+          <span class="resource-dashboard-frame-chrome-label">AI-Enabled Operations Dashboard</span>
+        </div>
+        <iframe
+          class="resource-dashboard-frame-iframe"
+          src="/ai-enabled-operations-dashboard/"
+          title="AI-Enabled Operations Dashboard interactive view"
+          loading="eager"
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+
+      <!-- Mobile fallback: inline, no modal -->
+      <div class="resource-dashboard-mobile-fallback" role="region" aria-label="Dashboard preview for mobile">
+        <div class="resource-dashboard-mobile-tile">
+          <div class="resource-dashboard-mobile-tile-inner" aria-hidden="true"></div>
+        </div>
+        <p class="resource-dashboard-mobile-message">This interactive dashboard is designed for TV, desktop, or tablet review. For the full experience, please switch to a larger screen.</p>
+        <a class="resource-primary-cta resource-dashboard-mobile-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
+      </div>
+    </section>
 
     <!-- What This Dashboard Helps Answer -->
     <section class="resource-section" aria-labelledby="dashboard-helps-answer">
@@ -126,30 +138,6 @@
         <li>Right shows delivery efficiency and operational risk. It surfaces capacity pressure, onboarding friction, service health, and cycle time.</li>
         <li>Bottom shows target context and the current action signal. It tells leadership what target matters and what should happen next.</li>
       </ul>
-    </section>
-
-    <!-- Live dashboard artifact container -->
-    <section class="resource-dashboard-artifact-section" aria-label="Interactive dashboard">
-
-      <!-- Desktop and tablet: live dashboard iframe (same-origin artifact route). -->
-      <div class="resource-dashboard-frame-shell" aria-label="Dashboard artifact frame">
-        <iframe
-          class="resource-dashboard-frame-iframe"
-          src="/ai-enabled-operations-dashboard/"
-          title="AI-Enabled Operations Dashboard interactive view"
-          loading="eager"
-          referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
-      </div>
-
-      <!-- Mobile fallback: inline, no modal -->
-      <div class="resource-dashboard-mobile-fallback" role="region" aria-label="Dashboard preview for mobile">
-        <div class="resource-dashboard-mobile-tile">
-          <div class="resource-dashboard-mobile-tile-inner" aria-hidden="true"></div>
-        </div>
-        <p class="resource-dashboard-mobile-message">This interactive dashboard is designed for TV, desktop, or tablet review. For the full experience, please switch to a larger screen.</p>
-        <a class="resource-primary-cta resource-dashboard-mobile-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
-      </div>
     </section>
 
     <!-- Core Dashboard Views -->
@@ -181,9 +169,17 @@
       </ul>
     </section>
 
-    <!-- Source-availability supporting callout -->
+    <!-- Source-availability card — artifact access block -->
     <aside class="resource-dashboard-source-callout" aria-label="Source code availability">
-      <p>The source code is available in a dedicated standalone repository so this artifact can be reviewed, adapted, downloaded, or packaged with repository tools such as Repomix without pulling the full site codebase.</p>
+      <div class="resource-dashboard-source-inner">
+        <div class="resource-dashboard-source-text">
+          <p class="resource-dashboard-source-heading">Source Code Available</p>
+          <p>The source code is available in a dedicated standalone repository so this artifact can be reviewed, adapted, downloaded, or packaged with repository tools such as Repomix without pulling the full site codebase.</p>
+        </div>
+        <div class="resource-dashboard-source-actions">
+          <a class="resource-primary-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
+        </div>
+      </div>
     </aside>
 
     <!-- Closing conversational callout -->
@@ -194,16 +190,7 @@
       </div>
     </section>
 
-    <!-- Final bottom CTA row: View Source Code + Explore the Full Framework -->
-    <div class="resource-dashboard-bottom-cta">
-      <a class="resource-primary-cta resource-primary-cta-featured" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
-      <a class="resource-companion-cta resource-companion-cta-framework" href="/framework/">
-        <span>Explore the Full Framework</span>
-        <span class="resource-companion-cta-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-
-    <!-- Page nav: Back to Resources Hub -->
+    <!-- Page nav: Back to Resources Hub + Forward to Framework -->
     <div class="resource-page-nav" aria-label="Page navigation">
       <div class="page-nav-divider" aria-hidden="true"></div>
       <div class="resource-page-nav-links">
@@ -214,6 +201,15 @@
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
             <span class="nav-label">Back to Resources Hub</span>
+          </div>
+        </a>
+        <a href="/framework/" class="nav-anchor">
+          <div class="nav-header-row">
+            <span class="nav-label">Explore the Full Framework</span>
+            <svg class="nav-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
           </div>
         </a>
       </div>
