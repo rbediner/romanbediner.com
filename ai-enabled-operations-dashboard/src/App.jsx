@@ -292,7 +292,8 @@ function App() {
 
   useEffect(() => {
     function updateScale() {
-      const padding = document.fullscreenElement ? 0 : 24;
+      /* Keep a small safety gutter in iframe mode so edge utilities never clip. */
+      const padding = document.fullscreenElement ? 0 : 36;
       const scale = Math.min(
         (window.innerWidth - padding) / 1920,
         (window.innerHeight - padding) / 1080,

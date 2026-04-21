@@ -1042,8 +1042,9 @@
   background: #1a1e2e;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
-  margin-left: calc(-1 * clamp(0px, (100vw - 980px) / 2, 60px));
-  margin-right: calc(-1 * clamp(0px, (100vw - 980px) / 2, 60px));
+  /* Slight desktop bleed offsets iframe safe-gutter scaling to preserve perceived size. */
+  margin-left: calc(-1 * clamp(12px, (100vw - 980px) / 2, 72px));
+  margin-right: calc(-1 * clamp(12px, (100vw - 980px) / 2, 72px));
 }
 
 /* Browser-chrome header bar above the iframe */
