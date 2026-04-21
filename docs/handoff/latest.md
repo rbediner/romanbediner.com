@@ -65,6 +65,7 @@ Test now asserts launched state (not coming-soon). Key assertions:
 
 ## Release Watcher Hygiene
 
+Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops
 
