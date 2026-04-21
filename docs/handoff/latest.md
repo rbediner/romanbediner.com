@@ -100,3 +100,15 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
   - CI run (success): https://github.com/rbediner/romanbediner.com/actions/runs/24698127611
   - Deploy Pages run (success): https://github.com/rbediner/romanbediner.com/actions/runs/24698127575
 - Process note: entry appended only per operator request; existing handoff content preserved.
+
+---
+
+## Append-Only Session Note (2026-04-21, emergency dashboard rollback)
+
+- Urgent production rollback request: hide dashboard public entry from `/resources/` because dashboard page is not ready.
+- Changes shipped on `prod` hotfix:
+  - dashboard card status pill changed from `Available Now` to `Coming Soon`
+  - dashboard CTA is now a disabled grey pill (`Open the Dashboard`) with no link target
+  - resources CSS includes disabled CTA styling (`.resource-primary-cta.is-disabled`)
+  - QA contract updated in `QA/tests/test-resources-phase1.js` to enforce no dashboard hub link while in coming-soon state
+- Release mode: emergency express push requested by operator.

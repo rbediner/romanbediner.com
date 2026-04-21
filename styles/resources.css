@@ -126,6 +126,13 @@
   filter: brightness(1.02);
 }
 
+.resource-primary-cta.is-disabled {
+  background: #c7cfdf;
+  color: #6d7688;
+  box-shadow: none;
+  pointer-events: none;
+}
+
 .resource-primary-cta:focus-visible,
 .resource-companion-cta:focus-visible,
 .resource-dual-nav-item:focus-visible,
