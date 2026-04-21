@@ -86,7 +86,9 @@
 
     <p class="resource-dashboard-prose-lede">Designed as a shareable operating artifact, this dashboard prototype brings demand, delivery, financial tension, customer pressure, and AI leverage into a single-screen view. It offers a structured way to review what matters, spot pressure quickly, and make decisions with less translation across tools and reports.</p>
 
+    <!-- Operating principles label + row stays directly above the dashboard artifact -->
     <section class="resource-dashboard-principles-band" aria-label="Operating principles">
+      <p class="resource-dashboard-principles-label">Operating principles</p>
       <p class="resource-dashboard-principles-row">
         <span>One Screen, One Story</span>
         <span class="resource-dashboard-principles-sep" aria-hidden="true">|</span>
@@ -137,20 +139,20 @@
       data-dashboard-expand>
       EXPAND DASHBOARD
     </button>
-    <p class="resource-dashboard-helper-line">Source package and supporting artifacts below.</p>
 
     <!-- What This Dashboard Helps Answer -->
     <section class="resource-section" aria-labelledby="dashboard-helps-answer">
       <h2 id="dashboard-helps-answer">What This Dashboard Helps Answer</h2>
-      <ul class="service-list resource-dashboard-questions">
-        <li>Are we creating enough demand?</li>
-        <li>Are we closing the right business?</li>
-        <li>Are we delivering efficiently?</li>
-        <li>Are we improving operating margin?</li>
-        <li>Is customer friction increasing?</li>
-        <li>Is AI creating real leverage?</li>
-        <li>What needs attention right now?</li>
-      </ul>
+      <!-- Structured question grid (no bullets) for faster scan rhythm -->
+      <div class="resource-dashboard-questions-grid" role="list">
+        <article class="resource-dashboard-question-item" role="listitem">Are we creating enough demand?</article>
+        <article class="resource-dashboard-question-item" role="listitem">Are we closing the right business?</article>
+        <article class="resource-dashboard-question-item" role="listitem">Are we delivering efficiently?</article>
+        <article class="resource-dashboard-question-item" role="listitem">Are we improving operating margin?</article>
+        <article class="resource-dashboard-question-item" role="listitem">Is customer friction increasing?</article>
+        <article class="resource-dashboard-question-item" role="listitem">Is AI creating real leverage?</article>
+        <article class="resource-dashboard-question-item" role="listitem">What needs attention right now?</article>
+      </div>
     </section>
 
     <!-- In This Dashboard -->
@@ -286,12 +288,14 @@
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
-            <span class="nav-label">Back to Resources Hub</span>
+            <span class="nav-label nav-label-desktop">Back to Resources Hub</span>
+            <span class="nav-label nav-label-mobile" aria-hidden="true">← Resources Hub</span>
           </div>
         </a>
         <a href="/framework/" class="nav-anchor">
           <div class="nav-header-row">
-            <span class="nav-label">Explore the Full Framework</span>
+            <span class="nav-label nav-label-desktop">Explore the Full Framework</span>
+            <span class="nav-label nav-label-mobile" aria-hidden="true">Full Framework →</span>
             <svg class="nav-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>

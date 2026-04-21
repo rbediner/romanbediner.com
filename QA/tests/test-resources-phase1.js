@@ -53,6 +53,11 @@ function mustInclude(label, haystack, needle) {
     fail(`${label} missing: ${JSON.stringify(needle)}`);
   }
 }
+function mustNotInclude(label, haystack, needle) {
+  if (haystack.includes(needle)) {
+    fail(`${label} unexpectedly present: ${JSON.stringify(needle)}`);
+  }
+}
 
 for (const rel of requiredFiles) {
   if (!fs.existsSync(path.join(root, rel))) {
@@ -212,8 +217,11 @@ mustInclude('dashboard page: blue callout', dashboardHtml,
   'Designed as a shareable operating artifact, this dashboard prototype brings demand, delivery, financial tension, customer pressure, and AI leverage into a single-screen view.'
 );
 mustInclude('dashboard page: What This Dashboard Helps Answer heading', dashboardHtml, '>What This Dashboard Helps Answer<');
+mustInclude('dashboard page: questions grid class', dashboardHtml, 'resource-dashboard-questions-grid');
+mustInclude('dashboard page: question card class', dashboardHtml, 'resource-dashboard-question-item');
 mustInclude('dashboard page: demand question', dashboardHtml, 'Are we creating enough demand?');
 mustInclude('dashboard page: AI question', dashboardHtml, 'Is AI creating real leverage?');
+mustNotInclude('dashboard page: old question bullet class removed', dashboardHtml, 'service-list resource-dashboard-questions');
 mustInclude('dashboard page: In This Dashboard heading', dashboardHtml, '>In This Dashboard<');
 mustInclude('dashboard page: quadrants container', dashboardHtml, 'resource-dashboard-quadrants');
 mustInclude('dashboard page: demand/commercial quadrant', dashboardHtml, 'Demand / Commercial');
@@ -225,10 +233,14 @@ mustInclude('dashboard page: Margin view', dashboardHtml, '<strong>Margin</stron
 mustInclude('dashboard page: Revenue view', dashboardHtml, '<strong>Revenue</strong>');
 mustInclude('dashboard page: AI view', dashboardHtml, '<strong>AI</strong>');
 mustInclude('dashboard page: principles row class', dashboardHtml, 'resource-dashboard-principles-row');
+mustInclude('dashboard page: principles label', dashboardHtml, '>Operating principles<');
 mustInclude('dashboard page: principles one screen', dashboardHtml, 'One Screen, One Story');
 mustInclude('dashboard page: principles numeric first', dashboardHtml, 'Numeric First');
 mustInclude('dashboard page: principles ai signal', dashboardHtml, 'AI as Operating Signal');
-mustInclude('dashboard page: helper line copy', dashboardHtml, 'Source package and supporting artifacts below.');
+mustNotInclude('dashboard page: helper line removed', dashboardHtml, 'Source package and supporting artifacts below.');
+mustInclude('dashboard page: expand dashboard control', dashboardHtml, 'EXPAND DASHBOARD');
+mustInclude('dashboard page: expand dashboard data hook', dashboardHtml, 'data-dashboard-expand');
+mustInclude('dashboard page: expand dashboard runtime script', dashboardHtml, 'dashboard-expand.js');
 // Source callout: updated copy mentions all three artifacts
 mustInclude('dashboard page: source-availability callout', dashboardHtml,
   'The full artifact package is available in a dedicated standalone repository'
@@ -301,6 +313,8 @@ mustInclude('dashboard page: mobile fallback message', dashboardHtml,
   'This interactive dashboard is designed for TV, desktop, or tablet review. For the full experience, please switch to a larger screen.'
 );
 mustInclude('dashboard page: back to resources hub nav', dashboardHtml, 'Back to Resources Hub');
+mustInclude('dashboard page: mobile previous nav label', dashboardHtml, '← Resources Hub');
+mustInclude('dashboard page: mobile next nav label', dashboardHtml, 'Full Framework →');
 mustInclude('dashboard page: analytics slug attr', dashboardHtml, 'data-resource-slug="ai-enabled-operations-dashboard"');
 mustInclude('dashboard page: analytics type attr', dashboardHtml, 'data-resource-type="dashboard_prototype"');
 mustInclude('dashboard page: analytics location attr', dashboardHtml, 'data-resource-location="dashboard_page"');
