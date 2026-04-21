@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 198
-- Updated At (UTC): 2026-04-21T19:17:14Z
+- Handoff Sequence: 199
+- Updated At (UTC): 2026-04-21T19:32:38Z
 - Source Branch: staging
-- Source Commit: c0a1b8587cf40a9b353d7d5d7a7e30c33e881b6d (pre-handoff baseline)
+- Source Commit: 5edd88f28fc9765b212dbfe95bb0fefde6f695ad (pre-handoff baseline)
 - Active Agent: No active agent - Final Phase 1 fit correction complete
 
 ## Current State
@@ -11,6 +11,7 @@
 Final Phase 1 correction (staging-only) is complete and intentionally narrow: dashboard embed fit only.
 
 - Scope completed: iframe/dashboard sizing + centering stability + final edge-safe fit correction
+- Follow-up discoverability update added: explicit `EXPAND DASHBOARD` control above the helper line to make fullscreen entry obvious.
 - Scope deferred: all page polish and README cleanup (Phase 2)
 - Prod untouched
 
