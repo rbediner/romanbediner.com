@@ -113,7 +113,8 @@ button { font: inherit; color: inherit; cursor: pointer; border: none; backgroun
   flex-shrink: 0;
   transform: translate(-50%, -50%) scale(var(--dash-scale, 1));
   transform-origin: center center;
-  padding: 12px;
+  /* Extra internal breathing room keeps edge utilities clear of the clip line. */
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: var(--gap);
