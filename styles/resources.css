@@ -1256,3 +1256,227 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* =========================================================
+   Dashboard Wireframe Tile + Modal
+   ========================================================= */
+
+.resource-dashboard-wireframe-section {
+  margin-top: 48px;
+  margin-bottom: 0;
+}
+
+.resource-dashboard-wireframe-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent, #3b6cff);
+  margin: 0 0 8px;
+}
+
+.resource-dashboard-wireframe-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-primary, #0f172a);
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.resource-dashboard-wireframe-copy {
+  font-size: 15px;
+  color: var(--color-secondary, #475569);
+  max-width: 640px;
+  margin: 0 0 20px;
+  line-height: 1.6;
+}
+
+/* Tile button */
+.resource-dashboard-wireframe-tile {
+  display: block;
+  width: 100%;
+  max-width: 680px;
+  background: #1a1e2e;
+  border: 1px solid rgba(59, 108, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.14);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
+}
+
+.resource-dashboard-wireframe-tile:hover,
+.resource-dashboard-wireframe-tile:focus-visible {
+  border-color: rgba(59, 108, 255, 0.5);
+  box-shadow: 0 12px 40px rgba(59, 108, 255, 0.15);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.resource-dashboard-wireframe-tile:focus-visible {
+  outline: 2px solid #3b6cff;
+  outline-offset: 3px;
+}
+
+/* Chrome bar inside tile */
+.resource-dashboard-wireframe-tile-chrome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #13161f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 9px 14px;
+}
+
+.resource-dashboard-wireframe-tile-chrome-dots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.resource-dashboard-wireframe-tile-chrome-dots span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.resource-dashboard-wireframe-tile-chrome-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.02em;
+  font-family: monospace;
+}
+
+/* Preview area inside tile */
+.resource-dashboard-wireframe-tile-preview {
+  height: 160px;
+  background: #1e2335;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.resource-dashboard-wireframe-tile-preview-inner {
+  width: 90%;
+  height: 80%;
+  border: 1px dashed rgba(59, 108, 255, 0.25);
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(59, 108, 255, 0.04) 0px,
+    rgba(59, 108, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CTA label at bottom of tile */
+.resource-dashboard-wireframe-tile-cta {
+  display: block;
+  padding: 11px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(59, 108, 255, 0.8);
+  background: rgba(59, 108, 255, 0.06);
+  border-top: 1px solid rgba(59, 108, 255, 0.12);
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   Wireframe Modal
+   ========================================================= */
+
+.resource-dashboard-wireframe-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  align-items: center;
+  justify-content: center;
+}
+
+.resource-dashboard-wireframe-modal.is-open {
+  display: flex;
+}
+
+.resource-dashboard-wireframe-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 14, 26, 0.82);
+  backdrop-filter: blur(3px);
+}
+
+.resource-dashboard-wireframe-modal-inner {
+  position: relative;
+  z-index: 1;
+  background: #13161f;
+  border-radius: 10px;
+  border: 1px solid rgba(59, 108, 255, 0.18);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+  width: min(92vw, 1100px);
+  height: min(86vh, 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.resource-dashboard-wireframe-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.resource-dashboard-wireframe-modal-close:hover,
+.resource-dashboard-wireframe-modal-close:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  outline: none;
+}
+
+.resource-dashboard-wireframe-modal-close:focus-visible {
+  outline: 2px solid #3b6cff;
+  outline-offset: 2px;
+}
+
+.resource-dashboard-wireframe-modal-iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #fff;
+}
+
+body.wireframe-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .resource-dashboard-wireframe-tile {
+    max-width: 100%;
+  }
+
+  .resource-dashboard-wireframe-modal-inner {
+    width: 96vw;
+    height: 80vh;
+  }
+}

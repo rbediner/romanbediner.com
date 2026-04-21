@@ -174,13 +174,64 @@
       <div class="resource-dashboard-source-inner">
         <div class="resource-dashboard-source-text">
           <p class="resource-dashboard-source-heading">Source Code Available</p>
-          <p>The source code is available in a dedicated standalone repository so this artifact can be reviewed, adapted, downloaded, or packaged with repository tools such as Repomix without pulling the full site codebase.</p>
+          <p>The full source package is available in a dedicated standalone repository. It includes the dashboard source code, the interactive wireframe prototype used in design, and the product requirements document, so this artifact can be reviewed, adapted, downloaded, or packaged with repository tools such as Repomix without pulling the full site codebase.</p>
         </div>
         <div class="resource-dashboard-source-actions">
           <a class="resource-primary-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
         </div>
       </div>
     </aside>
+
+    <!-- Wireframe tile - artifact companion -->
+    <section class="resource-dashboard-wireframe-section" aria-labelledby="dashboard-wireframe-heading">
+      <p class="resource-dashboard-wireframe-eyebrow">Included in the source package</p>
+      <h3 id="dashboard-wireframe-heading" class="resource-dashboard-wireframe-title">Dashboard Wireframe</h3>
+      <p class="resource-dashboard-wireframe-copy">The interactive wireframe prototype used during design. Shows the intended layout, panel structure, and navigation flow before the dashboard was built. Click to explore it in a modal overlay.</p>
+      <button
+        class="resource-dashboard-wireframe-tile"
+        type="button"
+        aria-label="Open dashboard wireframe prototype"
+        data-wireframe-trigger>
+        <div class="resource-dashboard-wireframe-tile-chrome" aria-hidden="true">
+          <span class="resource-dashboard-wireframe-tile-chrome-dots"><span></span><span></span><span></span></span>
+          <span class="resource-dashboard-wireframe-tile-chrome-label">wireframe-prototype.html</span>
+        </div>
+        <div class="resource-dashboard-wireframe-tile-preview" aria-hidden="true">
+          <div class="resource-dashboard-wireframe-tile-preview-inner"></div>
+        </div>
+        <span class="resource-dashboard-wireframe-tile-cta" aria-hidden="true">Explore Wireframe</span>
+      </button>
+    </section>
+
+    <!-- Wireframe modal -->
+    <div
+      class="resource-dashboard-wireframe-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Dashboard wireframe prototype"
+      aria-hidden="true"
+      data-wireframe-modal>
+      <div class="resource-dashboard-wireframe-modal-backdrop" data-wireframe-backdrop></div>
+      <div class="resource-dashboard-wireframe-modal-inner">
+        <button
+          class="resource-dashboard-wireframe-modal-close"
+          type="button"
+          aria-label="Close wireframe"
+          data-wireframe-close>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="4" x2="16" y2="16"></line>
+            <line x1="16" y1="4" x2="4" y2="16"></line>
+          </svg>
+        </button>
+        <iframe
+          class="resource-dashboard-wireframe-modal-iframe"
+          src=""
+          data-wireframe-src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html"
+          title="Dashboard wireframe prototype"
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
 
     <!-- Closing conversational callout -->
     <section class="resource-conversational-close" aria-label="Closing invitation">
@@ -235,5 +286,6 @@
 
   <script src="../../scripts/runtime/site-navigation.js?v=20260313a"></script>
   <script src="../../scripts/runtime/resources-analytics.js" defer></script>
+  <script src="../../scripts/runtime/dashboard-wireframe-modal.js" defer></script>
 </body>
 </html>

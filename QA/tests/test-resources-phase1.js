@@ -223,9 +223,61 @@ mustInclude('dashboard page: AI view', dashboardHtml, '<strong>AI</strong>');
 mustInclude('dashboard page: Operating Principles heading', dashboardHtml, '>Operating Principles<');
 mustInclude('dashboard page: one screen one story', dashboardHtml, 'One screen, one story');
 mustInclude('dashboard page: AI operating signal', dashboardHtml, 'Treat AI as an operating signal, not a novelty');
+// Source callout: updated copy mentions all three artifacts
 mustInclude('dashboard page: source-availability callout', dashboardHtml,
-  'The source code is available in a dedicated standalone repository'
+  'The full source package is available in a dedicated standalone repository'
 );
+mustInclude('dashboard page: source callout mentions wireframe', dashboardHtml,
+  'interactive wireframe prototype used in design'
+);
+mustInclude('dashboard page: source callout mentions PRD', dashboardHtml,
+  'product requirements document'
+);
+
+// Source callout must appear before the conversational close
+const sourceCalloutIdx = dashboardHtml.indexOf('resource-dashboard-source-callout');
+const conversationalCloseIdx = dashboardHtml.indexOf('resource-conversational-close');
+if (!(sourceCalloutIdx !== -1 && conversationalCloseIdx !== -1 && sourceCalloutIdx < conversationalCloseIdx)) {
+  fail('dashboard page: source callout must appear before conversational close section.');
+}
+
+// Wireframe tile section
+mustInclude('dashboard page: wireframe section', dashboardHtml, 'resource-dashboard-wireframe-section');
+mustInclude('dashboard page: wireframe eyebrow', dashboardHtml, 'Included in the source package');
+mustInclude('dashboard page: wireframe title', dashboardHtml, 'Dashboard Wireframe');
+mustInclude('dashboard page: wireframe tile trigger', dashboardHtml, 'data-wireframe-trigger');
+mustInclude('dashboard page: wireframe tile button type', dashboardHtml, 'type="button"');
+
+// Wireframe tile must appear between source callout and conversational close
+const wireframeSectionIdx = dashboardHtml.indexOf('resource-dashboard-wireframe-section');
+if (!(wireframeSectionIdx !== -1 && wireframeSectionIdx > sourceCalloutIdx && wireframeSectionIdx < conversationalCloseIdx)) {
+  fail('dashboard page: wireframe tile must appear between source callout and conversational close.');
+}
+
+// Wireframe modal
+mustInclude('dashboard page: wireframe modal element', dashboardHtml, 'data-wireframe-modal');
+mustInclude('dashboard page: wireframe modal role dialog', dashboardHtml, 'role="dialog"');
+mustInclude('dashboard page: wireframe modal aria-modal', dashboardHtml, 'aria-modal="true"');
+mustInclude('dashboard page: wireframe modal close button', dashboardHtml, 'data-wireframe-close');
+mustInclude('dashboard page: wireframe modal backdrop', dashboardHtml, 'data-wireframe-backdrop');
+mustInclude('dashboard page: wireframe iframe src attr', dashboardHtml, 'data-wireframe-src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html"');
+
+// Modal JS must be wired in
+mustInclude('dashboard page: wireframe modal script', dashboardHtml, 'dashboard-wireframe-modal.js');
+
+// Modal JS must contain Escape key and outside-click handlers
+const wireframeModalJs = require('fs').readFileSync(require('path').join(root, 'scripts', 'runtime', 'dashboard-wireframe-modal.js'), 'utf8');
+mustInclude('wireframe modal JS: Escape key', wireframeModalJs, "'Escape'");
+mustInclude('wireframe modal JS: backdrop click closes', wireframeModalJs, 'data-wireframe-backdrop');
+mustInclude('wireframe modal JS: aria-hidden open state', wireframeModalJs, "setAttribute('aria-hidden', 'false')");
+mustInclude('wireframe modal JS: aria-hidden close state', wireframeModalJs, "setAttribute('aria-hidden', 'true')");
+
+// Wireframe asset must exist on disk
+const wireframeAssetPath = require('path').join(root, 'assets', 'resources', 'ai-enabled-operations-dashboard', 'wireframe-prototype.html');
+if (!require('fs').existsSync(wireframeAssetPath)) {
+  fail('wireframe asset missing: assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html');
+}
+
 mustInclude('dashboard page: closing conversation copy', dashboardHtml,
   'If this sparks ideas about how your business is reviewed, managed, or scaled, feel free to reach out.'
 );
