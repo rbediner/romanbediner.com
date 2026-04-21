@@ -39,6 +39,7 @@ Routing requirements:
   - preview URL emitted in logs and in job summary as clickable markdown link
 - Docs synchronization is enforced by `.github/workflows/docs-sync.yml`, which runs the docs gate and a handoff sync guard on every push/PR.
 - Dashboard public sync is handled by `.github/workflows/sync-dashboard-public.yml`, which mirrors `ai-enabled-operations-dashboard/` source from this repo to `rbediner/ai-enabled-operations-dashboard` on every `push` to `prod` that touches dashboard files. Staging changes are not synced; only prod-promoted code reaches the public repo.
+- Dashboard PRD rule: when adding, changing, or removing dashboard features, update `ai-enabled-operations-dashboard/docs/PRD.md` in the same commit or PR. The public repo is a consumer-facing artifact — its docs must match the shipped code at every sync point. See `ai-enabled-operations-dashboard/docs/HANDOFF-SOP.md` for the full dashboard-specific SOP.
 - `CI` now runs a dedicated `handoff-sync` job before the full selective test graph; push checks run in advisory mode for isolated handoff commits, while PR/manual checks remain strict.
 - Docs-only pushes (`README.md`, `docs/**`, `AGENTS.md`) are excluded from `CI`, `Deploy Staging`, and `Deploy Pages` workflow push triggers to avoid unnecessary release/deploy churn.
 - Hosting portability is mandatory for:

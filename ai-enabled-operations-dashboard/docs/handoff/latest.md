@@ -1,58 +1,30 @@
 # AI-Enabled Operations Dashboard — Handoff
-**Session date:** 2026-04-20
+**Session date:** 2026-04-21
 
 ## Status
-- **Release complete.** `staging` and `prod` are both at `3a4852b` and GitHub Pages is serving the build at `https://rbediner.github.io/ai-enabled-operations-dashboard/`.
-- This docs pass: de-clientization and repo rename. Repo renamed from `canopy-exec-dashboard` to `ai-enabled-operations-dashboard`. README rewritten as clean public artifact doc. Internal Canopy/old-repo-name references scrubbed from docs.
+- **Release complete.** Dashboard source is live at `https://romanbediner.com/resources/ai-enabled-operations-dashboard/` (embedded iframe, prod SHA `72c9b7b`).
+- Public distribution repo (`rbediner/ai-enabled-operations-dashboard`) is synced and current.
+- `HANDOFF-SOP.md` rewritten to reflect new workflow: develop in `romanbediner.com`, sync to public on prod promotion.
 
-## What Changed This Session
-- **Repo renamed.** `rbediner/canopy-exec-dashboard` → `rbediner/ai-enabled-operations-dashboard`. GitHub redirects old URLs automatically but all internal references have been updated.
-- **README rewritten.** Clean public artifact README — no internal agent instructions, no client-specific framing, no Cloudflare tunnel workflow details. Now introduces the dashboard as a standalone public artifact with usage, customization, and build/deploy instructions.
-- **`package.json` name updated.** `exec-operating-screen` → `ai-enabled-operations-dashboard`.
-- **`docs/HANDOFF-SOP.md` updated.** `canopy-exec-dashboard` repo URL references replaced with `ai-enabled-operations-dashboard`.
-- **`docs/PRD.md` updated.** Same URL scrub.
-- **This handoff file updated.**
+## Current State
 
-## Current Branch / Head
-- `staging`: `3a4852b` (dashboard code unchanged — this is a docs-only pass)
-- `prod`: `3a4852b` (unchanged)
-- Source repo: `https://github.com/rbediner/ai-enabled-operations-dashboard`
-- Live site: `https://rbediner.github.io/ai-enabled-operations-dashboard/`
+The dashboard is now fully integrated into `romanbediner.com` under `ai-enabled-operations-dashboard/`. The standalone public repo is a read-only sync target — do not edit it directly.
 
-## Context: Migration to romanbediner.com
-This standalone repo is now the **public source repository** for the dashboard artifact. The canonical live dashboard experience is being migrated to [romanbediner.com](https://romanbediner.com/resources/ai-enabled-operations-dashboard/), where it runs embedded in a dedicated resource page under the website's staging/prod release model.
+Development flow:
+1. Edit `romanbediner.com/ai-enabled-operations-dashboard/`
+2. Push to `staging` in `romanbediner.com` → iterate freely
+3. Promote to `prod` in `romanbediner.com` → auto-sync fires to public repo
 
-The public source repo (this repo) remains for:
-- Public artifact distribution
-- Repomix / tooling packaging
-- Direct fork and adaptation
+## Source Repo
+- Private: `https://github.com/rbediner/romanbediner.com` (branch: `staging`)
+- Public sync target: `https://github.com/rbediner/ai-enabled-operations-dashboard`
+- Live experience: `https://romanbediner.com/resources/ai-enabled-operations-dashboard/`
 
-The website (`rbediner/romanbediner.com`) owns the live embedded experience going forward.
+## Next Steps
+- PRD (`docs/PRD.md`) needs updating to reflect shipped features: 3x2 question grid, Operating Principles section, wireframe prototype tile + modal, expand control.
+- Any new dashboard features must include a `docs/PRD.md` update in the same commit.
 
-## Next Steps (Phase 4 — dashboard import into romanbediner.com)
-- Import the dashboard source from this repo into `romanbediner.com` under a dedicated `ai-enabled-operations-dashboard/` folder
-- Do NOT create a nested `.git` directory
-- Wire the imported source into the resource page iframe
-- Set up sync automation so future changes here also land in the website repo
-
-## Cloudflare Preview Path
-- Local app: `http://127.0.0.1:5173/`
-- Stakeholder tunnel: run `npm run dev` + `npm run tunnel` to regenerate a `https://...trycloudflare.com` URL on demand.
-
-## Production Release Status
-- Pages deploy from the last promotion (`3a4852b`) ran green.
-- On the next code promotion, monitor with `gh run watch <run-id> --repo rbediner/ai-enabled-operations-dashboard --exit-status` before reporting done.
-
----
-
-## Append-Only Note (2026-04-21)
-
-- Website hotfix context: romanbediner.com resources hub now marks the dashboard card as `Coming Soon` and disables the hub CTA link pending readiness.
-- Source dashboard repository remains unchanged functionally; this note is for cross-repo rollout awareness.
-
----
-
-## Append-Only Note (2026-04-21, CTA visual lock)
-
-- Cross-repo note: website resources hub dashboard CTA disabled state was visually hardened to a grey pill for cache-resilient rendering.
-- No dashboard source behavior changed in this repository.
+## Pickup Note
+- Continue on `staging` in `romanbediner.com` from the current HEAD.
+- Read `romanbediner.com/docs/handoff/latest.md` for the full cross-repo session state.
+- Read `docs/HANDOFF-SOP.md` in this folder for the development and release workflow.
