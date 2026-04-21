@@ -29,6 +29,7 @@
     "qa:ci-parity": "bash scripts/qa/run-ci-parity.sh",
     "qa:full-local": "bash scripts/qa/run-local-full-qa.sh",
     "handoff:update": "node scripts/release/update-handoff-latest.js",
+    "handoff:push": "node scripts/release/push-handoff.js",
     "ci:monitor": "node scripts/release/watch-ci-run.js",
     "release:watchers:status": "node scripts/release/manage-release-watchers.js status",
     "release:watchers:cleanup": "node scripts/release/manage-release-watchers.js cleanup",

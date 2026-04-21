@@ -72,18 +72,22 @@ mustInclude('P1-RH-01 locked intro', resourcesHtml,
 mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
 mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
 
-// PRD-locked copy: P1-RH-03 (Dashboard card — title + body + coming-soon state)
+// PRD-locked copy: P1-RH-03 (Dashboard card — title + body + launched state)
 mustInclude('P1-RH-03 locked title', resourcesHtml, 'AI-Enabled Operations Dashboard');
 mustInclude('P1-RH-03 locked body', resourcesHtml,
   'An interactive, single-screen dashboard prototype for AI-enabled operating visibility, structured execution, and faster review in modern AI-enabled work.'
 );
 mustInclude('P1-RH-03 locked CTA button copy', resourcesHtml, '>Open the Dashboard<');
-mustInclude('P1-RH-03 coming soon badge', resourcesHtml, 'class="resource-meta is-coming-soon">Coming Soon<');
-mustInclude('P1-RH-03 disabled CTA state', resourcesHtml, 'class="resource-primary-cta is-disabled"');
+mustInclude('P1-RH-03 launched CTA link', resourcesHtml, 'href="/resources/ai-enabled-operations-dashboard/"');
+mustInclude('P1-RH-03 launched badge', resourcesHtml, 'class="resource-meta">Available Now<');
 mustInclude('P1-RH-03 card present', resourcesHtml, 'data-resource-card="dashboard"');
 
-if (resourcesHtml.includes('href="/resources/ai-enabled-operations-dashboard/"')) {
-  fail('P1-RH-03 dashboard link must be disabled on the resources hub while the dashboard is not public.');
+if (resourcesHtml.includes('is-coming-soon')) {
+  fail('P1-RH-03 dashboard card must not show Coming Soon once the dashboard resource page exists.');
+}
+
+if (resourcesHtml.includes('class="resource-primary-cta is-disabled"')) {
+  fail('P1-RH-03 dashboard CTA must be a live link, not a disabled state, once the dashboard page is launched.');
 }
 
 // PRD-locked copy: P1-RH-04 (hub forward nav)

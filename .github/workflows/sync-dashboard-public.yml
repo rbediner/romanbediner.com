@@ -1,0 +1,60 @@
+name: Sync Dashboard to Public Repo
+
+# Syncs ai-enabled-operations-dashboard/ source from romanbediner.com to
+# rbediner/ai-enabled-operations-dashboard whenever dashboard files change on staging.
+# Requires secret DASHBOARD_REPO_TOKEN with contents:write on the public repo.
+
+on:
+  push:
+    branches:
+      - staging
+    paths:
+      - 'ai-enabled-operations-dashboard/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout romanbediner.com (source)
+        uses: actions/checkout@v6
+        with:
+          path: source
+
+      - name: Checkout ai-enabled-operations-dashboard (public target)
+        uses: actions/checkout@v6
+        with:
+          repository: rbediner/ai-enabled-operations-dashboard
+          token: ${{ secrets.DASHBOARD_REPO_TOKEN }}
+          path: public-dashboard
+
+      - name: Sync dashboard source to public repo
+        run: |
+          # Remove all tracked files from public repo except .git
+          cd public-dashboard
+          git rm -rf . --quiet || true
+          cd ..
+
+          # Copy dashboard source (excluding nested .git dirs)
+          rsync -a --exclude='.git' \
+            source/ai-enabled-operations-dashboard/ \
+            public-dashboard/
+
+      - name: Commit and push if changed
+        run: |
+          cd public-dashboard
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to sync."
+            exit 0
+          fi
+
+          SOURCE_SHA=$(cd ../source && git rev-parse --short HEAD)
+          git commit -m "sync: dashboard source from romanbediner.com@${SOURCE_SHA}"
+          git push origin HEAD
