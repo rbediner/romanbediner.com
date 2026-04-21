@@ -1,0 +1,49 @@
+name: Docs Sync
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-sync-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Verify handoff sync policy
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            node scripts/qa/verify-handoff-sync.js --allow-empty
+          elif [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            node scripts/qa/verify-handoff-sync.js \
+              --base-sha "${{ github.event.pull_request.base.sha }}" \
+              --head-sha "${{ github.event.pull_request.head.sha }}"
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            node scripts/qa/verify-handoff-sync.js \
+              --base-sha "${{ github.event.before }}" \
+              --head-sha "${{ github.sha }}"
+          else
+            node scripts/qa/verify-handoff-sync.js --allow-empty
+          fi
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Run docs gate
+        run: npm run test:docs-gate

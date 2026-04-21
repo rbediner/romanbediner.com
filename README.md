@@ -37,6 +37,9 @@ Routing requirements:
   - artifact publication to `rbediner/romanbediner-preview` (never to the production repo)
   - mandatory CNAME removal and strict preview no-index policy in preview artifacts
   - preview URL emitted in logs and in job summary as clickable markdown link
+- Docs synchronization is enforced by `.github/workflows/docs-sync.yml`, which runs the docs gate and a handoff sync guard on every push/PR.
+- `CI` now runs a dedicated `handoff-sync` job before the full selective test graph; non-doc changes without `docs/handoff/latest.md` updates fail fast.
+- Docs-only pushes (`README.md`, `docs/**`, `AGENTS.md`) are excluded from `CI`, `Deploy Staging`, and `Deploy Pages` workflow push triggers to avoid unnecessary release/deploy churn.
 - Hosting portability is mandatory for:
   - S3 + CloudFront
   - Vercel

@@ -1,6 +1,7 @@
 {
   "required_workflows": [
     "ci.yml",
+    "docs-sync.yml",
     "deploy-pages.yml",
     "deploy-staging.yml",
     "rollback.yml"
@@ -18,6 +19,9 @@
       "lighthouse-validation",
       "link-validation",
       "build-artifact"
+    ],
+    "docs-sync.yml": [
+      "docs-sync"
     ],
     "deploy-pages.yml": [
       "deploy-pages",
