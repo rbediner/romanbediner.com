@@ -1,6 +1,7 @@
 function TopStatusBar({ now, freshnessMinutes, activeLensLabel, statusCards, liveSignalId, isFullscreen, onToggleFullscreen }) {
-  const day = now.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
-  const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  const nyOptions = { timeZone: 'America/New_York' };
+  const day = now.toLocaleDateString('en-US', { weekday: 'long', ...nyOptions }).toUpperCase();
+  const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit', ...nyOptions });
 
   const stateClass = { green: 's-green', yellow: 's-yellow', red: 's-red' };
   const freshnessClasses = liveSignalId === 'T2'
@@ -19,7 +20,7 @@ function TopStatusBar({ now, freshnessMinutes, activeLensLabel, statusCards, liv
       <div className={freshnessClasses} data-box-id="T2" data-live-region={liveSignalId === 'T2' ? 'top' : 'idle'}>
         <div className="freshness-panel__primary">
           <span className="freshness-panel__day">{day}</span>
-          <span className="freshness-panel__time">{time}</span>
+          <span className="freshness-panel__time">{time} <span className="freshness-panel__tz">NY</span></span>
         </div>
 
         <div className="freshness-panel__secondary freshness-panel__secondary--stacked">

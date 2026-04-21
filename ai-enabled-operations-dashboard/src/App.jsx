@@ -88,10 +88,9 @@ function App() {
   }, [hoveredTileId]);
 
   useEffect(() => {
-    /* Time and freshness are minute-based surfaces, not second-by-second clocks. */
     const minuteTimer = window.setInterval(() => {
-      setClockNow((previous) => new Date(previous.getTime() + 60_000));
-    }, 60_000);
+      setClockNow(new Date());
+    }, 1_000);
 
     return () => window.clearInterval(minuteTimer);
   }, []);

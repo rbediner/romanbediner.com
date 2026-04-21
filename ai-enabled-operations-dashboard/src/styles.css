@@ -335,14 +335,14 @@ button { font: inherit; color: inherit; cursor: pointer; border: none; backgroun
 }
 
 .logo-panel__eyebrow {
-  font-size: var(--sz-micro);
+  font-size: 12px;
   text-transform: uppercase; letter-spacing: 0.18em;
   color: var(--text-ghost); line-height: 1;
   white-space: nowrap;
 }
 
 .logo-panel__name {
-  font-size: 12px; font-weight: 800;
+  font-size: 15px; font-weight: 800;
   letter-spacing: -0.01em; line-height: 1;
   color: var(--text); white-space: nowrap;
   overflow: hidden; text-overflow: clip;
@@ -374,6 +374,13 @@ button { font: inherit; color: inherit; cursor: pointer; border: none; backgroun
   font-size: 17px; font-weight: 500;
   letter-spacing: -0.02em;
   color: rgba(238,241,246,0.62); line-height: 1;
+}
+
+.freshness-panel__tz {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(238,241,246,0.35);
+  vertical-align: middle; margin-left: 3px;
 }
 
 .freshness-panel__secondary {

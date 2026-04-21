@@ -265,7 +265,7 @@ mustInclude('dashboard page: wireframe copy', dashboardHtml, 'Original structura
 mustInclude('dashboard page: wireframe tile trigger', dashboardHtml, 'data-wireframe-trigger');
 mustInclude('dashboard page: wireframe tile button type', dashboardHtml, 'type="button"');
 mustInclude('dashboard page: wireframe image preview path', dashboardHtml, 'wireframe-prototype-preview.png');
-mustInclude('dashboard page: wireframe expand icon class', dashboardHtml, 'resource-dashboard-wireframe-expand-icon');
+mustInclude('dashboard page: wireframe tile cta', dashboardHtml, 'resource-dashboard-wireframe-tile-cta');
 
 // Wireframe tile must appear between source callout and conversational close
 const wireframeSectionIdx = dashboardHtml.indexOf('resource-dashboard-wireframe-section');
