@@ -30,5 +30,5 @@
 - After any session that adds, changes, or removes dashboard features, **both** of the following must be updated before ending work:
   1. `ai-enabled-operations-dashboard/docs/PRD.md` — update the relevant tile, behavior, or release section in the same commit as the code change.
   2. `ai-enabled-operations-dashboard/docs/handoff/latest.md` — overwrite with current state at session end (what changed, current SHA, next steps).
-- These files sync automatically to the public repo (`rbediner/ai-enabled-operations-dashboard`) when prod is promoted. Do not edit the public repo directly.
-- After promotion to prod, verify the sync workflow (`sync-dashboard-public.yml`) ran green in GitHub Actions.
+- These files sync automatically to the public repo (`rbediner/ai-enabled-operations-dashboard`) on every prod promotion that touches `ai-enabled-operations-dashboard/**`. **This sync is the required public doc update** — do not edit the public repo directly.
+- After promotion to prod, verify the sync workflow (`sync-dashboard-public.yml`) ran green in GitHub Actions. A release is not complete until the sync is confirmed green. The public repo's `docs/PRD.md` and `docs/handoff/latest.md` must reflect the shipped state before the session ends.
