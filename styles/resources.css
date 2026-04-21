@@ -1026,7 +1026,7 @@
 
 .resource-dashboard-principles-label {
   margin: 0 0 10px;
-  color: rgba(15, 23, 42, 0.62);
+  color: var(--text-primary);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -1036,20 +1036,25 @@
 .resource-dashboard-principles-row {
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-wrap: nowrap;
+  gap: 6px;
   align-items: center;
+  white-space: nowrap;
   color: rgba(15, 23, 42, 0.6);
-  font-size: 14px;
-  letter-spacing: 0.06em;
+  font-size: 12px;
+  letter-spacing: 0.045em;
   font-weight: 600;
   font-variant-caps: all-small-caps;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .resource-dashboard-principles-sep {
   color: rgba(15, 23, 42, 0.3);
   font-weight: 500;
+}
+
+.resource-dashboard-principles-mobile-list {
+  display: none;
 }
 
 /* Live dashboard artifact container */
@@ -1381,9 +1386,17 @@
   }
 
   .resource-dashboard-principles-row {
-    font-size: 13px;
-    gap: 7px;
-    line-height: 1.55;
+    display: none;
+  }
+
+  .resource-dashboard-principles-mobile-list {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .resource-dashboard-principles-mobile-list li {
+    margin-bottom: 10px;
+    line-height: 1.45;
   }
 
   /* Conversation card stacks vertically on mobile */
