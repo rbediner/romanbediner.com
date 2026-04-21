@@ -1,145 +1,63 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 181
-- Updated At (UTC): 2026-04-20T23:33:00Z
+- Handoff Sequence: 182
+- Updated At (UTC): 2026-04-21T00:30:00Z
 - Source Branch: staging
-- Source Commit: cff65551a80fdfa71d9a2ceece42f8d6e2287a99
+- Source Commit: f55141b208e8d0a3982f913d3b8bd6fb5964e6bf
 
-## Session Summary (2026-04-20)
+## Session Summary (2026-04-21)
 
-Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and validated with targeted QA. The dashboard source is now imported, the resource page now uses a live iframe, and artifact packaging now publishes the dashboard route correctly.
+Codex completed Phases 4, 5, 6 (dashboard import, iframe wiring, artifact packaging). Claude session did codebase cleanup: removed orphaned `scripts/runtime/insights-toggle.js`.
 
-## Phase 4 — Complete (local)
+## Phases Complete (from Codex — see prior handoffs for detail)
 
-- Imported `https://github.com/rbediner/ai-enabled-operations-dashboard` into top-level `ai-enabled-operations-dashboard/` (no nested `.git`)
-- Kept source structure intact (`src/`, `components/`, `data/`, scripts/tests)
-- Updated `ai-enabled-operations-dashboard/vite.config.js` base path to `/ai-enabled-operations-dashboard/`
-- Built dashboard successfully (`npm run build`) to produce `dist/`
+- **Phase 4** — Dashboard source imported into `ai-enabled-operations-dashboard/`, built to `dist/`
+- **Phase 5** — Live iframe wired in resource page, mobile screenshot asset added
+- **Phase 6** — Artifact packaging updated, QA guardrails added
+- Staging CI + Deploy Staging both green at `cff6555` (Codex) → now at `f55141b` (post-cleanup)
 
-## Phase 5 — Complete (local)
+## Cleanup This Session
 
-- Wired live iframe in `resources/ai-enabled-operations-dashboard/index.html`
-  - removed `.resource-dashboard-frame-placeholder`
-  - added `<iframe class="resource-dashboard-frame-iframe" src="/ai-enabled-operations-dashboard/">`
-- Replaced mobile placeholder gradient with real screenshot asset:
-  - `assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png` (1920x1080)
-- Updated `styles/resources.css` for iframe shell + mobile fallback image presentation
+- Deleted `scripts/runtime/insights-toggle.js` — confirmed dead code. Framework migration removed it from all HTML pages; a Jest invariant test (`QA/tests/jest/insights-analytics.test.js`) explicitly asserts it must NOT be loaded. File was never referenced by any `<script>` tag.
 
-## Phase 6 — Complete (local)
+## Codebase Health Notes (for future cleanup passes)
 
-- Updated artifact packaging (`scripts/build/create-artifact.js`):
-  - includes `ai-enabled-operations-dashboard/dist`
-  - promotes dist output to deploy route `/ai-enabled-operations-dashboard/` in artifact build
-- Updated preview rewrite coverage (`scripts/build/create-preview-artifact.js`) to include `/ai-enabled-operations-dashboard/`
-- Added/updated QA guardrails:
-  - `QA/tests/test-resources-phase1.js` checks iframe wiring, screenshot contract, and placeholder removal
-  - `QA/tests/test-framework-artifact-packaging.js` checks dashboard packaging/rewrite contract and dist presence
-
-## Validation Run Results
-
-- Push to staging was initially blocked by pre-push QA (`test-no-legacy-references`) due imported markdown mentioning legacy stylesheet reference; fixed in commit `2443158`.
-- Staging CI link-validation failure repro/fix: `ai-enabled-operations-dashboard/index.html` entry script changed from `/src/main.jsx` to `./src/main.jsx` so monorepo root crawl no longer 404s.
-- `cd ai-enabled-operations-dashboard && npm run build` ✅
-- `cd ai-enabled-operations-dashboard && npm run test:unit` ✅
-- `cd ai-enabled-operations-dashboard && npm run test:qa` ✅ (run with local dev server)
-- `node QA/tests/test-canonical.js` ✅
-- `node QA/tests/test-resources-phase1.js` ✅
-- `node QA/tests/test-framework-artifact-packaging.js` ✅
-- `node scripts/build/create-artifact.js --out /tmp/rb-site-artifact-phase4b` ✅
-  - verified `/tmp/rb-site-artifact-phase4b/site/ai-enabled-operations-dashboard/index.html` exists
+- **`assets/asset-library/concept-images/`** — 4 PNG/JPG concept images with no HTML/CSS references. Left in place per owner preference (not dead code, may be design references).
+- **`assets/asset-library/brand-sources/og-logo-source.psd`** — design source file, no CI/build dependency. Left in place.
+- **`scripts/qa/route-health.js`** — shared helper used by `verify-live-preview.js` and `verify-live-production.js`. Not orphaned — leave in place.
+- **Gate profile optimization** — `docs/handoff/latest.md` already maps to `docs-only` profile (fast, ~10s). Gate escalates to full-regression when handoff is bundled with code changes. Commit handoff separately from code to keep gate fast.
 
 ## Branch / Release State
 
-- `staging`: `cff6555` pushed, CI + Deploy Staging both succeeded
-- `prod`: unchanged in this session
-- Staging preview URL:
-  - `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
-- CI run: `https://github.com/rbediner/romanbediner.com/actions/runs/24695757111`
-- Deploy Staging run: `https://github.com/rbediner/romanbediner.com/actions/runs/24695846889`
-- Live preview smoke: `PASS` (RB_PREVIEW_URL=`https://rbediner.github.io/romanbediner-preview/`)
+- `staging`: green, Deploy Staging passing
+- `prod`: Codex cherry-picked connect divider fix; Phase 2–6 dashboard NOT yet on prod
+- Public dashboard repo: `rbediner/ai-enabled-operations-dashboard` — clean, no Canopy refs
+- Promotion of Phase 2–6: not performed
+
+## Staging Preview URL
+
+`https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
 
 ## Remaining Phases
 
-- Phase 7 — public source-repo sync automation (not started)
-- Phase 8 — final docs/report + PRD sync (partially updated README in this session; live Google PRD update still required)
+- **Phase 7** — GitHub Action to sync `romanbediner.com/ai-enabled-operations-dashboard/` changes back to `rbediner/ai-enabled-operations-dashboard`
+- **Phase 8** — Final docs/report, PRD update (Google Doc link in prior Codex handoff)
 
-## Important Notes For Next Agent
+## Important Notes for Next Agent
 
-- Dashboard iframe now depends on packaged artifact route `/ai-enabled-operations-dashboard/`
-- Release artifact build must retain dashboard dist promotion logic in `create-artifact.js`
-- If dashboard source changes, regenerate dist before release
-- Keep release watcher hygiene in place for this repo:
+- Dashboard iframe depends on packaged artifact route `/ai-enabled-operations-dashboard/`
+- If dashboard source changes, rebuild dist before release
+- `resources/ai-enabled-operations-dashboard/index.html` has the live iframe wired — no placeholder
+- Spec file: `/Users/roman.bediner/Downloads/dashboard_migration_and_resource_page_spec.md`
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use:
   - `npm run release:watchers:status`
   - `npm run release:watchers:cleanup`
-  - Do not use ad-hoc shell polling loops for CI or preview monitoring.
-- PRD update still pending for this phase set:
-  - `SEO Authority PRD` — `https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
----
+## PRD Status
 
-## Append-Only Session Note (2026-04-21)
-
-- Request: restore visible footer divider on `/connect/` and promote via fast-forward to `prod`.
-- Implemented a Connect-only divider render in `styles/connect.css` using `.footer::before` so the shared divider is visible again without reintroducing extra divider markup in `connect/index.html`.
-- Updated Connect QA contract in `QA/tests/test-connect-page.js` to enforce this divider behavior.
-- Refreshed Connect visual baselines:
-  - `QA/tests/visual-baselines/connect--desktop-full.png`
-  - `QA/tests/visual-baselines/connect--mobile-full.png`
-- Validation run locally:
-  - `node QA/tests/test-connect-page.js` ✅
-  - `RUN_VISUAL_TESTS=1 python3 -m unittest QA/tests/test_visual_regression_playwright.py -v` ✅
-- Next: push `staging`, verify CI + Deploy Staging, then fast-forward same tested SHA to `prod`.
-
----
-
-## Append-Only Session Note (2026-04-21, prod promotion)
-
-- Promotion action complete: fast-forwarded `prod` from `e1cc914` to `2774c0c1196c028f394172010cc4972bc08f747d`.
-- Result: Connect footer divider restored in production via Connect-scoped CSS (`styles/connect.css`), with updated Connect QA contract and refreshed Connect desktop/mobile visual baselines.
-- Prod verification:
-  - CI run (success): https://github.com/rbediner/romanbediner.com/actions/runs/24698127611
-  - Deploy Pages run (success): https://github.com/rbediner/romanbediner.com/actions/runs/24698127575
-- Process note: entry appended only per operator request; existing handoff content preserved.
-
----
-
-## Append-Only Session Note (2026-04-21, emergency dashboard rollback)
-
-- Urgent production rollback request: hide dashboard public entry from `/resources/` because dashboard page is not ready.
-- Changes shipped on `prod` hotfix:
-  - dashboard card status pill changed from `Available Now` to `Coming Soon`
-  - dashboard CTA is now a disabled grey pill (`Open the Dashboard`) with no link target
-  - resources CSS includes disabled CTA styling (`.resource-primary-cta.is-disabled`)
-  - QA contract updated in `QA/tests/test-resources-phase1.js` to enforce no dashboard hub link while in coming-soon state
-- Release mode: emergency express push requested by operator.
-
----
-
-## Append-Only Session Note (2026-04-21, emergency dashboard CTA visual lock)
-
-- Follow-up hotfix: dashboard CTA on `/resources/` was still appearing blue for some clients.
-- Hardened disabled rendering so CTA is visibly grey even under stale CSS cache conditions:
-  - Added inline disabled style on dashboard CTA element in `resources/index.html`
-  - Strengthened `.resource-primary-cta.is-disabled` in `styles/resources.css` with explicit disabled hover/focus overrides
-- Release intent: express production polish fix; no functional link re-enabled.
-
----
-
-## Append-Only Session Note (2026-04-21, connect footer full-width divider)
-
-- Request: Connect page footer divider should be one divider only, spanning full page width.
-- Implemented a Connect-only CSS refinement in `styles/connect.css`:
-  - `.footer::before` width changed from `min(960px, 92%)` to `100%`
-  - retained single pseudo-element divider approach (no extra divider markup)
-- Updated `QA/tests/test-connect-page.js` to enforce `width: 100%` for `.footer::before`.
-- Local validation:
-  - `node QA/tests/test-connect-page.js` ✅
-
----
-
-## Append-Only Session Note (2026-04-21, rollback connect footer divider width)
-
-- Rolled back prior Connect footer divider change that forced full-page width.
-- Restored Connect divider width to shared footer pattern: `width: min(960px, 92%)` in `styles/connect.css`.
-- Removed temporary Connect QA assertion that required `width: 100%` from `QA/tests/test-connect-page.js`.
-- Outcome: still one divider only (pseudo-element), no duplicate divider markup.
+- PRD update still pending — Google Doc: `https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`
