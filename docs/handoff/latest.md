@@ -134,3 +134,12 @@ Phase 4 + Phase 5 + Phase 6 are implemented locally in `romanbediner.com` and va
 - Updated `QA/tests/test-connect-page.js` to enforce `width: 100%` for `.footer::before`.
 - Local validation:
   - `node QA/tests/test-connect-page.js` ✅
+
+---
+
+## Append-Only Session Note (2026-04-21, rollback connect footer divider width)
+
+- Rolled back prior Connect footer divider change that forced full-page width.
+- Restored Connect divider width to shared footer pattern: `width: min(960px, 92%)` in `styles/connect.css`.
+- Removed temporary Connect QA assertion that required `width: 100%` from `QA/tests/test-connect-page.js`.
+- Outcome: still one divider only (pseudo-element), no duplicate divider markup.

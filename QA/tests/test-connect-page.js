@@ -77,10 +77,6 @@ if (!/\.footer::before\s*\{[\s\S]*border-top:\s*1px\s+solid/s.test(connectCss)) 
   fail('Connect CSS must render the shared pre-footer divider via .footer::before.');
 }
 
-if (!/\.footer::before\s*\{[\s\S]*width:\s*100%/s.test(connectCss)) {
-  fail('Connect CSS footer divider must span the full page width (width: 100%).');
-}
-
 if (!connectCss.includes('.connect-closing') || !connectCss.includes('.connect-expectation')) {
   fail('Connect CSS must include muted styles for closing lines.');
 }
