@@ -94,8 +94,8 @@ All values in this table reflect the canonical base story in `src/data/dashboard
 
 | ID | Label | Value | State | Notes |
 |----|-------|-------|-------|-------|
-| T1 | Wordmark | "AI-Enabled / Operations Dashboard" text lockup | — | Static |
-| T2 | Time / Lens / LIVE | `DAY HH:MM`, "Lens: <lens>", "LIVE Nm ago" | — | Minute clock; LIVE heartbeat only persistent pulse on screen |
+| T1 | Wordmark | "AI-Enabled / Operations Dashboard" text lockup | — | Eyebrow 12px, name 15px; legible at embedded scale |
+| T2 | Time / Lens / LIVE | `DAY HH:MM:SS NY`, "Lens: <lens>", "LIVE Nm ago" | — | Second clock; live New York time (America/New_York) with seconds; LIVE heartbeat only persistent pulse on screen |
 | T3 | Pipeline Cov | `2.8x` | green | |
 | T4 | Margin Gap | `-5.8 pts` | yellow | |
 | T5 | Client Friction | `18 pts` | red | |
@@ -214,7 +214,7 @@ Three independent clocks drive motion. There is no single global tick.
 
 ### 9.1 Freshness clock
 
-- Minute-based. Updates the wall clock in T2 and the "LIVE Nm ago" token.
+- Second-based (1s interval). Updates the live wall clock in T2 (New York time, HH:MM:SS) and the "LIVE Nm ago" token.
 - Also advances immediately on each simulated recompute.
 
 ### 9.2 Visual cadence clock — 4 s
@@ -281,21 +281,23 @@ Deterministic scenario frames drive all live updates. No external data sources a
 
 ### 11.1 Stack
 
-- Vite + React (SPA), deployed to GitHub Pages from the `prod` branch via `.github/workflows/deploy-pages.yml`.
+- Vite + React (SPA). Source lives in `romanbediner.com/ai-enabled-operations-dashboard/`. Built `dist/` is committed alongside source and deployed as part of the main website release.
+- Live embedded experience: `https://romanbediner.com/resources/ai-enabled-operations-dashboard/`
+- Public distribution: `https://github.com/rbediner/ai-enabled-operations-dashboard` (auto-synced from romanbediner.com on prod promotion)
 - No backend. All simulated behavior runs client-side in `src/live/dashboardLiveModel.js`.
 
-### 11.2 Branch model
+### 11.2 Branch model (romanbediner.com)
 
-- `staging` — all development and stakeholder review.
-- `prod` — release branch. **Fast-forward only** from `staging`. Never edit `prod` directly.
+- `staging` — all development and iteration. No public sync on staging pushes.
+- `prod` — release branch. Fast-forward only from `staging`. Prod promotion triggers auto-sync to public repo.
+- See `docs/HANDOFF-SOP.md` for the full development and release workflow.
 
 ### 11.3 npm scripts
 
 | Script | Purpose |
 |--------|---------|
-| `npm run dev` | Local dev server on `:5173` |
-| `npm run tunnel` | Cloudflare tunnel → public `https://...trycloudflare.com` for stakeholder review |
-| `npm run build` | Production build (output `dist/`, gitignored) |
+| `npm run dev` | Local dev server on `:5173` (run from `ai-enabled-operations-dashboard/`) |
+| `npm run build` | Production build — commit `dist/` output alongside source |
 | `npm run preview` | Serve the build locally |
 | `npm run screenshot` | Capture M1 / M2 / M3 states and verification strip into `screenshots/` |
 | `npm run test:unit` | Unit tests on `dashboardData` |
@@ -303,12 +305,13 @@ Deterministic scenario frames drive all live updates. No external data sources a
 
 ### 11.4 Release workflow
 
-1. Develop and commit on `staging`.
-2. `npm run screenshot` — visually verify M1, M2, M3.
-3. `npm run dev` + `npm run tunnel` for stakeholder review if needed.
-4. Fast-forward promote: `git checkout prod && git merge --ff-only staging && git push origin prod`.
-5. **Monitor the GitHub Pages deploy to success** (`gh run watch <id> --repo rbediner/ai-enabled-operations-dashboard --exit-status`). A release is not done until the Action run is green AND the live URL serves the new build.
-6. Rewrite `docs/handoff/latest.md` with the new prod head, deploy status, and exact next step.
+1. Develop in `romanbediner.com/ai-enabled-operations-dashboard/` on `staging`.
+2. Run `npm run build` and commit `dist/` alongside source changes.
+3. Update `docs/PRD.md` if any feature changed (required by SOP).
+4. Push to `staging` in `romanbediner.com` — iterate until green.
+5. Promote to `prod` in `romanbediner.com` (fast-forward only).
+6. Prod CI + Deploy Pages run automatically; sync to public repo fires on prod push.
+7. Rewrite `docs/handoff/latest.md` and push via `npm run handoff:push` in romanbediner.com.
 
 ### 11.5 Acceptance (must all be true before calling a release done)
 
