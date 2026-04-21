@@ -24,3 +24,11 @@
   ```
 - After any meaningful product change, also update the live PRD in Google Docs: `SEO Authority PRD` (`https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`).
 - Treat the PRD update as required when a session adds or changes a feature, deploy-worthy behavior, UX rule, analytics rule, metadata rule, information architecture decision, content-system rule, or any other product-level decision that changes how the site works or what it promises.
+
+## Dashboard Sub-Project Rule
+- The dashboard source lives at `ai-enabled-operations-dashboard/` inside this repo.
+- After any session that adds, changes, or removes dashboard features, **both** of the following must be updated before ending work:
+  1. `ai-enabled-operations-dashboard/docs/PRD.md` — update the relevant tile, behavior, or release section in the same commit as the code change.
+  2. `ai-enabled-operations-dashboard/docs/handoff/latest.md` — overwrite with current state at session end (what changed, current SHA, next steps).
+- These files sync automatically to the public repo (`rbediner/ai-enabled-operations-dashboard`) when prod is promoted. Do not edit the public repo directly.
+- After promotion to prod, verify the sync workflow (`sync-dashboard-public.yml`) ran green in GitHub Actions.
