@@ -86,6 +86,22 @@
 
     <p class="resource-dashboard-prose-lede">Designed as a shareable operating artifact, this dashboard prototype brings demand, delivery, financial tension, customer pressure, and AI leverage into a single-screen view. It offers a structured way to review what matters, spot pressure quickly, and make decisions with less translation across tools and reports.</p>
 
+    <section class="resource-dashboard-principles-band" aria-label="Operating principles">
+      <p class="resource-dashboard-principles-row">
+        <span>One Screen, One Story</span>
+        <span class="resource-dashboard-principles-sep" aria-hidden="true">|</span>
+        <span>Numeric First</span>
+        <span class="resource-dashboard-principles-sep" aria-hidden="true">|</span>
+        <span>Center the Truth</span>
+        <span class="resource-dashboard-principles-sep" aria-hidden="true">|</span>
+        <span>Customer Pressure Visible</span>
+        <span class="resource-dashboard-principles-sep" aria-hidden="true">|</span>
+        <span>Clear Action Signals</span>
+        <span class="resource-dashboard-principles-sep" aria-hidden="true">|</span>
+        <span>AI as Operating Signal</span>
+      </p>
+    </section>
+
     <!-- Live dashboard artifact - shown immediately after intro -->
     <section class="resource-dashboard-artifact-section" aria-label="Interactive dashboard">
 
@@ -113,6 +129,7 @@
         <a class="resource-primary-cta resource-dashboard-mobile-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
       </div>
     </section>
+    <p class="resource-dashboard-helper-line">Source package and supporting artifacts below.</p>
 
     <!-- What This Dashboard Helps Answer -->
     <section class="resource-section" aria-labelledby="dashboard-helps-answer">
@@ -131,13 +148,24 @@
     <!-- In This Dashboard -->
     <section class="resource-section" aria-labelledby="in-this-dashboard">
       <h2 id="in-this-dashboard">In This Dashboard</h2>
-      <p class="resource-dashboard-lead">The layout follows one fixed business narrative.</p>
-      <ul class="service-list resource-dashboard-screen-story">
-        <li>Left shows demand generation and commercial quality. It answers whether the pipeline is healthy, conversion is moving, and revenue forecast is holding.</li>
-        <li>The center shows the core truth of the business right now. This is the primary focal point and rotates between Margin, Revenue, and AI.</li>
-        <li>Right shows delivery efficiency and operational risk. It surfaces capacity pressure, onboarding friction, service health, and cycle time.</li>
-        <li>Bottom shows target context and the current action signal. It tells leadership what target matters and what should happen next.</li>
-      </ul>
+      <div class="resource-dashboard-quadrants" role="list" aria-label="Dashboard structural quadrants">
+        <article class="resource-dashboard-quadrant" role="listitem">
+          <h3>Demand / Commercial</h3>
+          <p>Left-side zones track opportunity flow, conversion quality, and revenue pressure signals.</p>
+        </article>
+        <article class="resource-dashboard-quadrant" role="listitem">
+          <h3>Core Truth / Center Lens</h3>
+          <p>The center module anchors the current operating truth through Margin, Revenue, and AI views.</p>
+        </article>
+        <article class="resource-dashboard-quadrant" role="listitem">
+          <h3>Delivery / Operations</h3>
+          <p>Right-side zones surface utilization, onboarding velocity, and delivery risk as service pressure rises.</p>
+        </article>
+        <article class="resource-dashboard-quadrant" role="listitem">
+          <h3>Targets / Action Signals</h3>
+          <p>The bottom strip keeps target context and the immediate operating action visible in one line.</p>
+        </article>
+      </div>
     </section>
 
     <!-- Core Dashboard Views -->
@@ -156,25 +184,18 @@
       </div>
     </section>
 
-    <!-- Operating Principles -->
-    <section class="resource-section" aria-labelledby="operating-principles">
-      <h2 id="operating-principles">Operating Principles</h2>
-      <ul class="service-list">
-        <li>One screen, one story</li>
-        <li>Numeric first, not status-language first</li>
-        <li>Show tension without clutter</li>
-        <li>Keep the center as the truth anchor</li>
-        <li>Treat AI as an operating signal, not a novelty</li>
-        <li>Make customer and service pressure visible as part of margin pressure</li>
-      </ul>
-    </section>
-
     <!-- Source-availability card - artifact access block -->
-    <aside class="resource-dashboard-source-callout" aria-label="Source code availability">
+    <aside class="resource-dashboard-source-callout" aria-label="Source package availability">
       <div class="resource-dashboard-source-inner">
         <div class="resource-dashboard-source-text">
-          <p class="resource-dashboard-source-heading">Source Code Available</p>
-          <p>The full source package is available in a dedicated standalone repository. It includes the dashboard source code, the interactive wireframe prototype used in design, and the product requirements document, so this artifact can be reviewed, adapted, downloaded, or packaged with repository tools such as Repomix without pulling the full site codebase.</p>
+          <p class="resource-dashboard-source-heading">Source Package</p>
+          <p class="resource-dashboard-source-intro">The full artifact package is available in a dedicated standalone repository for review, adaptation, and team handoff.</p>
+          <p class="resource-dashboard-source-includes-label">Includes:</p>
+          <ul class="service-list resource-dashboard-source-includes">
+            <li>Prototype dashboard</li>
+            <li>Original wireframe</li>
+            <li>Working PRD</li>
+          </ul>
         </div>
         <div class="resource-dashboard-source-actions">
           <a class="resource-primary-cta" href="https://github.com/rbediner/ai-enabled-operations-dashboard" target="_blank" rel="noopener noreferrer">View Source Code</a>
@@ -186,20 +207,27 @@
     <section class="resource-dashboard-wireframe-section" aria-labelledby="dashboard-wireframe-heading">
       <p class="resource-dashboard-wireframe-eyebrow">Included in the source package</p>
       <h3 id="dashboard-wireframe-heading" class="resource-dashboard-wireframe-title">Dashboard Wireframe</h3>
-      <p class="resource-dashboard-wireframe-copy">The interactive wireframe prototype used during design. Shows the intended layout, panel structure, and navigation flow before the dashboard was built. Click to explore it in a modal overlay.</p>
+      <p class="resource-dashboard-wireframe-copy">Original structural wireframe used to map the operating view, screen zones, and information hierarchy.</p>
       <button
         class="resource-dashboard-wireframe-tile"
         type="button"
         aria-label="Open dashboard wireframe prototype"
         data-wireframe-trigger>
-        <div class="resource-dashboard-wireframe-tile-chrome" aria-hidden="true">
-          <span class="resource-dashboard-wireframe-tile-chrome-dots"><span></span><span></span><span></span></span>
-          <span class="resource-dashboard-wireframe-tile-chrome-label">wireframe-prototype.html</span>
-        </div>
         <div class="resource-dashboard-wireframe-tile-preview" aria-hidden="true">
-          <div class="resource-dashboard-wireframe-tile-preview-inner"></div>
+          <img
+            src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype-preview.png"
+            alt=""
+            class="resource-dashboard-wireframe-preview-image" />
+          <span class="resource-dashboard-wireframe-expand-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 2 14 2 14 10"></polyline>
+              <line x1="14" y1="2" x2="8" y2="8"></line>
+              <polyline points="10 14 2 14 2 6"></polyline>
+              <line x1="2" y1="14" x2="8" y2="8"></line>
+            </svg>
+          </span>
         </div>
-        <span class="resource-dashboard-wireframe-tile-cta" aria-hidden="true">Explore Wireframe</span>
+        <span class="resource-dashboard-wireframe-tile-cta" aria-hidden="true">Expand Wireframe</span>
       </button>
     </section>
 
@@ -223,13 +251,12 @@
             <line x1="16" y1="4" x2="4" y2="16"></line>
           </svg>
         </button>
-        <iframe
-          class="resource-dashboard-wireframe-modal-iframe"
+        <img
+          class="resource-dashboard-wireframe-modal-image"
           src=""
-          data-wireframe-src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html"
-          title="Dashboard wireframe prototype"
-          loading="lazy">
-        </iframe>
+          data-wireframe-src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype-preview.png"
+          alt="Dashboard wireframe preview"
+          loading="lazy" />
       </div>
     </div>
 

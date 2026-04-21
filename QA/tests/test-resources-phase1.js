@@ -215,24 +215,29 @@ mustInclude('dashboard page: What This Dashboard Helps Answer heading', dashboar
 mustInclude('dashboard page: demand question', dashboardHtml, 'Are we creating enough demand?');
 mustInclude('dashboard page: AI question', dashboardHtml, 'Is AI creating real leverage?');
 mustInclude('dashboard page: In This Dashboard heading', dashboardHtml, '>In This Dashboard<');
-mustInclude('dashboard page: fixed narrative', dashboardHtml, 'The layout follows one fixed business narrative.');
+mustInclude('dashboard page: quadrants container', dashboardHtml, 'resource-dashboard-quadrants');
+mustInclude('dashboard page: demand/commercial quadrant', dashboardHtml, 'Demand / Commercial');
+mustInclude('dashboard page: core truth quadrant', dashboardHtml, 'Core Truth / Center Lens');
+mustInclude('dashboard page: delivery quadrant', dashboardHtml, 'Delivery / Operations');
+mustInclude('dashboard page: targets quadrant', dashboardHtml, 'Targets / Action Signals');
 mustInclude('dashboard page: Core Dashboard Views heading', dashboardHtml, '>Core Dashboard Views<');
 mustInclude('dashboard page: Margin view', dashboardHtml, '<strong>Margin</strong>');
 mustInclude('dashboard page: Revenue view', dashboardHtml, '<strong>Revenue</strong>');
 mustInclude('dashboard page: AI view', dashboardHtml, '<strong>AI</strong>');
-mustInclude('dashboard page: Operating Principles heading', dashboardHtml, '>Operating Principles<');
-mustInclude('dashboard page: one screen one story', dashboardHtml, 'One screen, one story');
-mustInclude('dashboard page: AI operating signal', dashboardHtml, 'Treat AI as an operating signal, not a novelty');
+mustInclude('dashboard page: principles row class', dashboardHtml, 'resource-dashboard-principles-row');
+mustInclude('dashboard page: principles one screen', dashboardHtml, 'One Screen, One Story');
+mustInclude('dashboard page: principles numeric first', dashboardHtml, 'Numeric First');
+mustInclude('dashboard page: principles ai signal', dashboardHtml, 'AI as Operating Signal');
+mustInclude('dashboard page: helper line copy', dashboardHtml, 'Source package and supporting artifacts below.');
 // Source callout: updated copy mentions all three artifacts
 mustInclude('dashboard page: source-availability callout', dashboardHtml,
-  'The full source package is available in a dedicated standalone repository'
+  'The full artifact package is available in a dedicated standalone repository'
 );
-mustInclude('dashboard page: source callout mentions wireframe', dashboardHtml,
-  'interactive wireframe prototype used in design'
-);
-mustInclude('dashboard page: source callout mentions PRD', dashboardHtml,
-  'product requirements document'
-);
+mustInclude('dashboard page: source includes label', dashboardHtml, 'Includes:');
+mustInclude('dashboard page: source includes prototype dashboard', dashboardHtml, 'Prototype dashboard');
+mustInclude('dashboard page: source includes original wireframe', dashboardHtml, 'Original wireframe');
+mustInclude('dashboard page: source includes working prd', dashboardHtml, 'Working PRD');
+mustInclude('dashboard page: source includes service list', dashboardHtml, 'resource-dashboard-source-includes');
 
 // Source callout must appear before the conversational close
 const sourceCalloutIdx = dashboardHtml.indexOf('resource-dashboard-source-callout');
@@ -245,8 +250,11 @@ if (!(sourceCalloutIdx !== -1 && conversationalCloseIdx !== -1 && sourceCalloutI
 mustInclude('dashboard page: wireframe section', dashboardHtml, 'resource-dashboard-wireframe-section');
 mustInclude('dashboard page: wireframe eyebrow', dashboardHtml, 'Included in the source package');
 mustInclude('dashboard page: wireframe title', dashboardHtml, 'Dashboard Wireframe');
+mustInclude('dashboard page: wireframe copy', dashboardHtml, 'Original structural wireframe used to map the operating view, screen zones, and information hierarchy.');
 mustInclude('dashboard page: wireframe tile trigger', dashboardHtml, 'data-wireframe-trigger');
 mustInclude('dashboard page: wireframe tile button type', dashboardHtml, 'type="button"');
+mustInclude('dashboard page: wireframe image preview path', dashboardHtml, 'wireframe-prototype-preview.png');
+mustInclude('dashboard page: wireframe expand icon class', dashboardHtml, 'resource-dashboard-wireframe-expand-icon');
 
 // Wireframe tile must appear between source callout and conversational close
 const wireframeSectionIdx = dashboardHtml.indexOf('resource-dashboard-wireframe-section');
@@ -260,7 +268,7 @@ mustInclude('dashboard page: wireframe modal role dialog', dashboardHtml, 'role=
 mustInclude('dashboard page: wireframe modal aria-modal', dashboardHtml, 'aria-modal="true"');
 mustInclude('dashboard page: wireframe modal close button', dashboardHtml, 'data-wireframe-close');
 mustInclude('dashboard page: wireframe modal backdrop', dashboardHtml, 'data-wireframe-backdrop');
-mustInclude('dashboard page: wireframe iframe src attr', dashboardHtml, 'data-wireframe-src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html"');
+mustInclude('dashboard page: wireframe image src attr', dashboardHtml, 'data-wireframe-src="/assets/resources/ai-enabled-operations-dashboard/wireframe-prototype-preview.png"');
 
 // Modal JS must be wired in
 mustInclude('dashboard page: wireframe modal script', dashboardHtml, 'dashboard-wireframe-modal.js');
@@ -276,6 +284,10 @@ mustInclude('wireframe modal JS: aria-hidden close state', wireframeModalJs, "se
 const wireframeAssetPath = require('path').join(root, 'assets', 'resources', 'ai-enabled-operations-dashboard', 'wireframe-prototype.html');
 if (!require('fs').existsSync(wireframeAssetPath)) {
   fail('wireframe asset missing: assets/resources/ai-enabled-operations-dashboard/wireframe-prototype.html');
+}
+const wireframePreviewImagePath = require('path').join(root, 'assets', 'resources', 'ai-enabled-operations-dashboard', 'wireframe-prototype-preview.png');
+if (!require('fs').existsSync(wireframePreviewImagePath)) {
+  fail('wireframe preview image missing: assets/resources/ai-enabled-operations-dashboard/wireframe-prototype-preview.png');
 }
 
 mustInclude('dashboard page: closing conversation copy', dashboardHtml,
