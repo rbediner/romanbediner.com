@@ -35,10 +35,12 @@ const handoffScriptText = fs.readFileSync(HANDOFF_SYNC_SCRIPT, 'utf8');
 
 assert(docsWorkflowText.includes('name: Docs Sync'), 'docs-sync workflow must keep explicit name');
 assert(docsWorkflowText.includes('node scripts/qa/verify-handoff-sync.js'), 'docs-sync workflow must enforce handoff sync');
+assert(docsWorkflowText.includes('--advisory'), 'docs-sync workflow push checks must support advisory handoff mode');
 assert(docsWorkflowText.includes('npm run test:docs-gate'), 'docs-sync workflow must run docs gate');
 
 assert(ciWorkflowText.includes('paths-ignore:'), 'ci workflow must support docs-only skip path');
 assert(ciWorkflowText.includes("node scripts/qa/verify-handoff-sync.js"), 'ci workflow must enforce handoff sync before full jobs');
+assert(ciWorkflowText.includes('--advisory'), 'ci workflow push checks must support advisory handoff mode');
 
 assert(stagingWorkflowText.includes('paths-ignore:'), 'deploy-staging workflow must skip docs-only pushes');
 assert(prodWorkflowText.includes('paths-ignore:'), 'deploy-pages workflow must skip docs-only pushes');

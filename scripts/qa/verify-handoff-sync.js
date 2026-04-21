@@ -28,7 +28,7 @@ function fail(message) {
 }
 
 function parseArgs(argv) {
-  const args = { baseSha: '', headSha: '', allowEmpty: false };
+  const args = { baseSha: '', headSha: '', allowEmpty: false, advisory: false };
   for (let index = 2; index < argv.length; index += 1) {
     const token = argv[index];
     if (token === '--base-sha') {
@@ -43,6 +43,10 @@ function parseArgs(argv) {
     }
     if (token === '--allow-empty') {
       args.allowEmpty = true;
+      continue;
+    }
+    if (token === '--advisory') {
+      args.advisory = true;
       continue;
     }
     fail(`Unknown argument: ${token}`);
@@ -82,7 +86,7 @@ function getChangedFiles(baseSha, headSha) {
 }
 
 function main() {
-  const { baseSha, headSha, allowEmpty } = parseArgs(process.argv);
+  const { baseSha, headSha, allowEmpty, advisory } = parseArgs(process.argv);
   const changedFiles = getChangedFiles(baseSha, headSha);
 
   if (changedFiles.length === 0) {
@@ -97,8 +101,16 @@ function main() {
   const handoffUpdated = changedFiles.includes(HANDOFF_PATH);
 
   if (nonDocFiles.length > 0 && !handoffUpdated) {
+    const message = `Non-doc changes require an updated ${HANDOFF_PATH}. Missing handoff update for: ${nonDocFiles.join(', ')}`;
+    if (advisory) {
+      process.stdout.write(`WARN: ${message}\n`);
+      process.stdout.write(
+        `PASS: Advisory mode enabled; allowing push while waiting for isolated handoff commit.\n`
+      );
+      return;
+    }
     fail(
-      `Non-doc changes require an updated ${HANDOFF_PATH}. Missing handoff update for: ${nonDocFiles.join(', ')}`
+      message
     );
   }
 

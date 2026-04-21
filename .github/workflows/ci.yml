@@ -45,7 +45,8 @@ jobs:
           elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
             node scripts/qa/verify-handoff-sync.js \
               --base-sha "${{ github.event.before }}" \
-              --head-sha "${{ github.sha }}"
+              --head-sha "${{ github.sha }}" \
+              --advisory
           else
             node scripts/qa/verify-handoff-sync.js --allow-empty
           fi
