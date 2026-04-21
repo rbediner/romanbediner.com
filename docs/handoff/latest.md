@@ -1,94 +1,83 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 191
-- Updated At (UTC): 2026-04-21T17:18:19Z
+- Handoff Sequence: 192
+- Updated At (UTC): 2026-04-21T18:38:59Z
 - Source Branch: staging
-- Source Commit: 8d4fd3b6458089d64ec28c59114813bc58d40a93
-- Active Agent: No active agent - staging pass complete and verified
+- Source Commit: 77f0f8f6ec95b813d8f503a8eac0e258d5ec9bbf
+- Active Agent: No active agent - Phase 1 embed stabilization complete
 
 ## Current State
 
-Dashboard resource-page pickup/stabilize pass is complete on `staging`.
+Phase 1 (staging-only) is complete and intentionally narrow: dashboard embed stabilization only.
 
-- CI run: success (`24735974185`)
-- Deploy Staging (push-triggered): cancelled by concurrency (`24735974180`)
-- Deploy Staging replacement (`workflow_run`): success (`24736219024`)
-- Staging preview URL: `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
+- Scope completed: iframe/dashboard sizing + centering stability
+- Scope deferred: all page polish and README cleanup (Phase 2)
+- Prod untouched
 
-Prod has none of this pass. Do not promote to prod.
+Staging preview URL:
+`https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/`
 
-## What Changed This Session
+## Confirmed Root Cause
 
-### Iframe continuity and fix status
-- Continued from Claude's in-progress iframe debugging context.
-- Root cause remains confirmed: `.app-shell` viewport units (`100vw/100vh`) inside iframe context caused incorrect sizing/positioning.
-- Fix remains in place and non-regressed in source and compiled CSS (`width: 100%; height: 100%`).
+Original `100vw/100vh` issue was already fixed, but embed still rendered offset with large black space because:
 
-### Resource-page implementation updates
+- `.screen-frame` is a fixed `1920x1080` element scaled via CSS transform
+- browser overflow alignment in iframe context laid out the oversized unscaled frame from top-left
+- transform scaling from center then pushed the visible dashboard down/right
 
-**resources/ai-enabled-operations-dashboard/index.html**
-- Kept locked route architecture:
-  - human-facing page: `/resources/ai-enabled-operations-dashboard/`
-  - embedded artifact route: `/ai-enabled-operations-dashboard/`
-- Added compact small-caps operating-principles row above the dashboard.
-- Added subtle non-interactive helper line below the dashboard.
-- Converted "In This Dashboard" from bullets to a 2x2 quadrant structure.
-- Removed the lower-page competing "Operating Principles" section.
-- Refined source package block to intro + Includes list + primary CTA.
-- Includes list now explicitly calls out: Prototype dashboard, Original wireframe, Working PRD.
-- Rebuilt wireframe companion tile as a secondary artifact card using exported image preview.
-- Added subtle expand affordance icon in wireframe preview.
-- Updated wireframe modal to image-based large preview with close/backdrop/Escape behavior.
-- Kept closing conversational CTA as single-column paragraph + left-aligned CTA.
+In short: transform centering depended on layout alignment behavior that is unstable for oversized transformed elements inside the iframe viewport.
 
-**styles/resources.css**
-- Top/middle spacing rhythm tightened to get to dashboard faster without rushing.
-- Added muted principles row styling and light separators.
-- Refined iframe shell to a cleaner premium treatment (lighter border/shadow).
-- Added helper-line spacing and muted text style.
-- Improved scan speed for "What This Dashboard Helps Answer".
-- Added 2x2 quadrant styling for "In This Dashboard".
-- Tightened Core Dashboard Views card spacing and non-interactive presentation.
-- Elevated source package card treatment and orb-bullet Includes styling.
-- Restyled wireframe companion tile/modal to restrained premium behavior.
-- Removed divider treatment above conversational close.
-- Adjusted bottom navigation spacing/alignment rhythm.
+## Phase 1 Fix Applied
 
-**scripts/runtime/dashboard-wireframe-modal.js**
-- Switched lazy-loaded modal target from iframe to image while preserving close interactions.
+Embed stabilization now anchors the dashboard frame explicitly to viewport center before scaling:
 
-**assets/resources/ai-enabled-operations-dashboard/wireframe-prototype-preview.png**
-- Added exported 1920x1080 preview image used for tile and modal.
-- `wireframe-prototype.html` remains in repo for source-package completeness but is no longer used as public-facing preview rendering.
+- `.app-shell` set to `position: relative`
+- `.screen-frame` changed to absolute centering (`top:50%`, `left:50%`)
+- transform changed from `scale(...)` to `translate(-50%, -50%) scale(...)`
 
-**QA/tests/test-resources-phase1.js**
-- Updated targeted dashboard contract checks for:
-  - principles row
-  - helper line
-  - quadrant structure
-  - source-package Includes list
-  - image-based wireframe preview/modal
+This removes dependence on overflow alignment and keeps the 16:9 frame centered consistently.
 
-## Validation Performed
+## Files Changed (Phase 1)
 
-Local targeted:
-- `node QA/tests/test-resources-phase1.js` -> PASS
-- targeted iframe CSS contract check (`src` + `dist`) -> PASS
+- `ai-enabled-operations-dashboard/src/styles.css`
+- `ai-enabled-operations-dashboard/dist/index.html`
+- `ai-enabled-operations-dashboard/dist/assets/index-BGkSDS3v.js`
+- `ai-enabled-operations-dashboard/dist/assets/index-BNXxZJYf.css`
+- removed old dist css hash file: `ai-enabled-operations-dashboard/dist/assets/index-CuEemfOt.css`
 
-Pre-push local gate:
-- full-regression selective gate profile -> PASS
+## Targeted Validation (Phase 1 only)
 
-Remote staging validation:
-- CI success for exact SHA `8d4fd3b6458089d64ec28c59114813bc58d40a93`
-- Deploy Staging success via replacement workflow_run after concurrency cancel
+Local artifact validation (built artifact path, not dev source path):
+- dashboard rect in iframe now starts near top-left of viewport (`x:21, y:12`) and fills correctly
+- no lower-right offset behavior
+- fullscreen toggle still enters fullscreen (`document.fullscreenElement === true`)
+
+Validation output snapshot:
+`{"before":{"x":21,"y":12,"w":1056,"h":594,"scale":"0.55"},"fullscreen":{"isFullscreen":true}}`
+
+## Intentionally Deferred To Phase 2
+
+- operating principles row polish
+- helper-line polish
+- section layout/content polish below dashboard
+- source package/wireframe/conversational/nav polish
+- broader spacing pass
+- dashboard-only repo README updates
+
+## Explicit Phase 2 Pickup Note
+
+Start from `staging` at commit `77f0f8f6ec95b813d8f503a8eac0e258d5ec9bbf`.
+
+Do not reopen embed architecture. Embed stabilization is now the baseline. Use Phase 2 only for below-the-dashboard/page-polish backlog.
+
+## Constraints Followed In This Pass
+
+- Google PRD intentionally ignored for this pass
+- README work intentionally deferred to Phase 2
+- staging only; no prod promotion
 
 ## Release Watcher Hygiene
 
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
-
-## PRD Status
-
-- Live PRD Google Doc update is still pending for this product-level refinement pass:
-  - https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit
