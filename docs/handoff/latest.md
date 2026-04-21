@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 194
-- Updated At (UTC): 2026-04-21T18:58:14Z
+- Handoff Sequence: 195
+- Updated At (UTC): 2026-04-21T19:06:33Z
 - Source Branch: staging
-- Source Commit: 1ccc1e5549f7f7fc82350fa3fa11129244c367f2
+- Source Commit: bf1b89f4a44d137c2f76cdebed203ee337208895 (pre-handoff baseline)
 - Active Agent: No active agent - Phase 1.5 clipping relief complete
 
 ## Current State
