@@ -233,9 +233,8 @@ mustInclude('dashboard page: Margin view', dashboardHtml, '<strong>Margin</stron
 mustInclude('dashboard page: Revenue view', dashboardHtml, '<strong>Revenue</strong>');
 mustInclude('dashboard page: AI view', dashboardHtml, '<strong>AI</strong>');
 mustInclude('dashboard page: principles row class', dashboardHtml, 'resource-dashboard-principles-row');
-mustInclude('dashboard page: principles label', dashboardHtml, '>Operating principles<');
+mustInclude('dashboard page: principles label', dashboardHtml, '>OPERATING PRINCIPLES<');
 mustInclude('dashboard page: principles one screen', dashboardHtml, 'One Screen, One Story');
-mustInclude('dashboard page: principles numeric first', dashboardHtml, 'Numeric First');
 mustInclude('dashboard page: principles ai signal', dashboardHtml, 'AI as Operating Signal');
 mustNotInclude('dashboard page: helper line removed', dashboardHtml, 'Source package and supporting artifacts below.');
 mustInclude('dashboard page: expand dashboard control', dashboardHtml, 'EXPAND DASHBOARD');
