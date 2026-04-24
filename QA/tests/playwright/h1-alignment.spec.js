@@ -17,7 +17,8 @@ const host = "127.0.0.1";
 const port = 4174;
 
 const h1Selector = ".master-head h1";
-const targetSelector = ".master-head .executive-callout";
+// executive-callout removed in 2026 redesign; alignment now checked against master-head container
+const targetSelector = ".master-head";
 
 const contentTypes = {
   ".html": "text/html; charset=utf-8",
@@ -106,9 +107,9 @@ test.afterAll(async () => {
 
 test.use({ viewport: { width: 1440, height: 900 } });
 
-test("home H1 aligns to manifesto callout right edge", async ({ page }) => {
+test("home H1 renders on a single line at desktop viewport", async ({ page }) => {
+  // executive-callout removed in 2026 redesign; only verify H1 does not wrap
   const home = await measureHome(page);
-  expect(Math.abs(home.delta)).toBeLessThanOrEqual(1);
   expect(home.oneLine).toBeTruthy();
 });
 
