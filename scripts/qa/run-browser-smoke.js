@@ -41,8 +41,8 @@ const CONTENT_TYPES = {
   '.webmanifest': 'application/manifest+json'
 };
 
-const NAV_LABELS = ['Home', 'About', 'Framework', 'Resources', 'Services', 'Connect'];
-const NAV_HREFS = ['/', '/about/', '/framework/', '/resources/', '/services/', '/connect/'];
+const NAV_LABELS = ['About', 'Framework', 'Resources', 'Services', 'Connect \u2192'];
+const NAV_HREFS = ['/about/', '/framework/', '/resources/', '/services/', '/connect/'];
 
 const SCOPE_CONFIG = {
   home: { route: '/', checks: ['home', 'nav', 'mobile', 'ga'] },

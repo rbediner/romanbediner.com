@@ -43,8 +43,9 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
             cls.server.server_close()
 
     def test_nav_links_and_snapshot_stability(self):
-        expected_labels = ["Home", "About", "Framework", "Resources", "Services", "Connect"]
-        expected_hrefs = ["/", "/about/", "/framework/", "/resources/", "/services/", "/connect/"]
+        # Home removed from nav in 2026 redesign; Connect renders as "Connect →" (CTA button).
+        expected_labels = ["About", "Framework", "Resources", "Services", "Connect \u2192"]
+        expected_hrefs = ["/about/", "/framework/", "/resources/", "/services/", "/connect/"]
         routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/connect/"]
 
         baseline_header = None
@@ -59,14 +60,16 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
             self.assertEqual(labels, expected_labels, f"Desktop nav labels mismatch on {route}")
             self.assertEqual(hrefs, expected_hrefs, f"Desktop nav hrefs mismatch on {route}")
             desktop_active = page.eval_on_selector_all(".site-nav a.active", "nodes => nodes.map(n => n.getAttribute('href'))")
-            self.assertEqual(len(desktop_active), 1, f"Desktop nav should have one active link on {route}")
+            # Homepage has no active link — Home was removed from NAV_LINKS in 2026 redesign.
+            expected_active_count = 0 if route == "/" else 1
+            self.assertEqual(len(desktop_active), expected_active_count, f"Desktop nav active link count mismatch on {route}")
 
             mobile_labels = page.eval_on_selector_all("#mobile-nav a", "nodes => nodes.map(n => n.textContent.trim())")
             mobile_hrefs = page.eval_on_selector_all("#mobile-nav a", "nodes => nodes.map(n => n.getAttribute('href'))")
             self.assertEqual(mobile_labels, expected_labels, f"Mobile nav labels mismatch on {route}")
             self.assertEqual(mobile_hrefs, expected_hrefs, f"Mobile nav hrefs mismatch on {route}")
             mobile_active = page.eval_on_selector_all("#mobile-nav a.active", "nodes => nodes.map(n => n.getAttribute('href'))")
-            self.assertEqual(len(mobile_active), 1, f"Mobile nav should have one active link on {route}")
+            self.assertEqual(len(mobile_active), expected_active_count, f"Mobile nav active link count mismatch on {route}")
 
             # Snapshot normalized header markup to detect structural drift.
             header_html = page.eval_on_selector(

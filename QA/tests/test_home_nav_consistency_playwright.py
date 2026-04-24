@@ -43,10 +43,12 @@ class HomeNavConsistencyPlaywrightTest(unittest.TestCase):
             cls.server.server_close()
 
     def test_header_nav_consistent_across_canonical_routes(self):
-        expected_labels = ["Home", "About", "Framework", "Resources", "Services", "Connect"]
-        expected_hrefs = ["/", "/about/", "/framework/", "/resources/", "/services/", "/connect/"]
+        # Home removed from nav in 2026 redesign; Connect renders as "Connect →" (CTA button).
+        expected_labels = ["About", "Framework", "Resources", "Services", "Connect \u2192"]
+        expected_hrefs = ["/about/", "/framework/", "/resources/", "/services/", "/connect/"]
+        # None = homepage has no matching nav link (Home removed from NAV_LINKS).
         route_expectations = {
-            "/": "/",
+            "/": None,
             "/about/": "/about/",
             "/resources/": "/resources/",
             "/services/": "/services/",
@@ -71,8 +73,12 @@ class HomeNavConsistencyPlaywrightTest(unittest.TestCase):
 
             desktop_active = page.eval_on_selector_all(".site-nav a.active", "nodes => nodes.map(n => n.getAttribute('href'))")
             mobile_active = page.eval_on_selector_all("#mobile-nav a.active", "nodes => nodes.map(n => n.getAttribute('href'))")
-            self.assertEqual(desktop_active, [expected_active], f"Desktop active nav mismatch on {route}")
-            self.assertEqual(mobile_active, [expected_active], f"Mobile active nav mismatch on {route}")
+            if expected_active is None:
+                self.assertEqual(desktop_active, [], f"Desktop active nav mismatch on {route} (no active link expected)")
+                self.assertEqual(mobile_active, [], f"Mobile active nav mismatch on {route} (no active link expected)")
+            else:
+                self.assertEqual(desktop_active, [expected_active], f"Desktop active nav mismatch on {route}")
+                self.assertEqual(mobile_active, [expected_active], f"Mobile active nav mismatch on {route}")
 
             context.close()
 

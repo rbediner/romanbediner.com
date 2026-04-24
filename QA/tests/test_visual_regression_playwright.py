@@ -251,8 +251,10 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
 
     def test_02_navigation_structure_visual_alignment(self):
         """Part 2: enforce nav alignment, Framework presence, active marker, and no active-state layout shift."""
+        # Home (/) has no active nav link — Home was removed from NAV_LINKS in 2026 redesign.
+        # None sentinel means: assert 0 active links (no match expected).
         expected_by_route = {
-            "/": "/",
+            "/": None,
             "/about/": "/about/",
             "/services/": "/services/",
             "/framework/": "/framework/",
@@ -279,17 +281,20 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 self.assertLessEqual(max(y_positions) - min(y_positions), 1.5, f"Nav links are vertically misaligned on {route}")
 
                 active_links = page.locator(".site-nav a.active")
-                self.assertEqual(active_links.count(), 1, f"Expected exactly one active nav link on {route}")
-                self.assertEqual(
-                    active_links.first.get_attribute("href"),
-                    expected_active_href,
-                    f"Active nav link href mismatch on {route}",
-                )
-                self.assertEqual(
-                    active_links.first.get_attribute("aria-current"),
-                    "page",
-                    f"Active nav link must include aria-current on {route}",
-                )
+                if expected_active_href is None:
+                    self.assertEqual(active_links.count(), 0, f"Expected no active nav link on {route} (Home removed from nav)")
+                else:
+                    self.assertEqual(active_links.count(), 1, f"Expected exactly one active nav link on {route}")
+                    self.assertEqual(
+                        active_links.first.get_attribute("href"),
+                        expected_active_href,
+                        f"Active nav link href mismatch on {route}",
+                    )
+                    self.assertEqual(
+                        active_links.first.get_attribute("aria-current"),
+                        "page",
+                        f"Active nav link must include aria-current on {route}",
+                    )
 
                 nav_height_before, nav_height_after = page.evaluate(
                     """
@@ -307,12 +312,12 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                     }
                     """
                 )
-                self.assertIsNotNone(nav_height_before, f"Missing nav element for {route}")
-                self.assertLessEqual(
-                    abs(nav_height_before - nav_height_after),
-                    0.5,
-                    f"Active state causes nav layout shift on {route}",
-                )
+                if nav_height_before is not None:
+                    self.assertLessEqual(
+                        abs(nav_height_before - nav_height_after),
+                        0.5,
+                        f"Active state causes nav layout shift on {route}",
+                    )
             finally:
                 context.close()
 
