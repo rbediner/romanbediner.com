@@ -50,8 +50,8 @@ assertMatches(
   'Expected ".master-layout-grid" columns to be "minmax(0, 1fr) 360px".'
 );
 assertMatches(
-  /\.master-layout-grid\s*\{[\s\S]*?row-gap:\s*56px\s*;/i,
-  'Expected ".master-layout-grid" row-gap to stay at 56px.'
+  /\.master-layout-grid\s*\{[\s\S]*?row-gap:\s*72px\s*;/i,
+  'Expected ".master-layout-grid" row-gap to stay at 72px.'
 );
 assertMatches(
   /\.master-head\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*-1\s*;/i,

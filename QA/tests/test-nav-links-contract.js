@@ -24,11 +24,12 @@ const PAGES = [
   'resources/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html'
 ];
-const REQUIRED_HREFS = ['/', '/about/', '/framework/', '/resources/', '/services/', '/connect/'];
+// Home (/) removed from nav (logo serves as home link); Connect remains as CTA button.
+const REQUIRED_HREFS = ['/about/', '/framework/', '/resources/', '/services/', '/connect/'];
 
 function parseNavLinks(navScript) {
   const links = [];
-  const entryRegex = /\{\s*label:\s*["']([^"']+)["']\s*,\s*href:\s*["']([^"']+)["']\s*\}/g;
+  const entryRegex = /\{\s*label:\s*["']([^"']+)["']\s*,\s*href:\s*["']([^"']+)["'][^}]*\}/g;
   let match;
   while ((match = entryRegex.exec(navScript)) !== null) {
     links.push({ label: match[1], href: match[2] });

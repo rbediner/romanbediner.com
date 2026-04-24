@@ -245,7 +245,6 @@ h1 {
   font-weight: var(--h1-weight);
   margin: 0 0 32px 0;
   color: var(--text-primary);
-  white-space: nowrap;
 }
 
 /* Canonical page-main spacing contract.

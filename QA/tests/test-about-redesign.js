@@ -37,14 +37,11 @@ if (!aboutHtml.includes('<main class="about-main">')) {
   console.error('FAIL: About page is missing the about-main container.');
 }
 
-// The About hero is a manifesto-led text block with a blue callout block.
+// The About hero is a manifesto-led text block with H1 + body paragraph (shelf-callout removed in redesign).
 const requiredContainers = [
   'class="container"',
   'class="about-hero-refactored"',
-  'class="page-title"',
-  'class="shelf-callout"',
-  'class="shelf-border"',
-  'class="shelf-content"'
+  'class="page-title"'
 ];
 for (const marker of requiredContainers) {
   if (!aboutHtml.includes(marker)) {

@@ -82,8 +82,8 @@ if (!mainMatch) {
     failures.push('Home CSS must keep ".master-head" spanning both grid columns.');
   }
 
-  if (!/\.master-layout-grid\s*\{[\s\S]*row-gap:\s*56px/i.test(homeCss)) {
-    failures.push('Home CSS must keep ".master-layout-grid" row-gap at 56px.');
+  if (!/\.master-layout-grid\s*\{[\s\S]*row-gap:\s*72px/i.test(homeCss)) {
+    failures.push('Home CSS must keep ".master-layout-grid" row-gap at 72px.');
   }
 
   if (!/\.master-photo\s*\{[\s\S]*grid-row:\s*2/i.test(homeCss)) {

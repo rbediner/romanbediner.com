@@ -43,16 +43,8 @@ for (const sharedNeedle of [
   }
 }
 
-for (const marker of ['class="shelf-callout"', 'class="shelf-border"', 'class="shelf-content"']) {
-  if (!aboutHtml.includes(marker)) {
-    failures += 1;
-    console.error(`FAIL: About page is missing shared callout marker ${marker}`);
-  }
-  if (!servicesHtml.includes(marker)) {
-    failures += 1;
-    console.error(`FAIL: Services page is missing shared callout marker ${marker}`);
-  }
-}
+// shelf-callout removed from About and Services heroes in redesign (opens typography after H1).
+// The CSS classes remain in site.css for use on Framework/Resources pages.
 
 for (const [file, content] of [
   ['styles/about.css', aboutCss],

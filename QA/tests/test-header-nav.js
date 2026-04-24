@@ -23,8 +23,8 @@ const pages = [
   'resources/ai-enabled-operations-framework-summary/index.html'
 ];
 
+// Home removed from nav (logo serves as home link); Connect is a CTA button (cta:true).
 const navModel = [
-  { label: 'Home', href: '/' },
   { label: 'About', href: '/about/' },
   { label: 'Framework', href: '/framework/' },
   { label: 'Resources', href: '/resources/' },
@@ -101,7 +101,7 @@ if (!/const NAV_LINKS = \[/s.test(navScript)) {
 
 for (const link of navModel) {
   const escapedHref = link.href.replace(/\//g, '\\/');
-  const regex = new RegExp(`\\{\\s*label:\\s*['"]${link.label}['"],\\s*href:\\s*['"]${escapedHref}['"]\\s*\\}`);
+  const regex = new RegExp(`\\{\\s*label:\\s*['"]${link.label}['"],\\s*href:\\s*['"]${escapedHref}['"][^}]*\\}`);
   if (!regex.test(navScript)) {
     failures += 1;
     console.error(`FAIL: NAV_LINKS missing entry ${link.label} (${link.href}).`);

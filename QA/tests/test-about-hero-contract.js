@@ -21,13 +21,11 @@ const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 
 const failures = [];
 
+// shelf-callout removed from About hero in redesign; hero is now H1 + plain body paragraph.
 for (const required of [
   'class="container"',
   'class="about-hero-refactored"',
-  'class="page-title"',
-  'class="shelf-callout"',
-  'class="shelf-border"',
-  'class="shelf-content"'
+  'class="page-title"'
 ]) {
   if (!aboutHtml.includes(required)) {
     failures.push(`Missing About hero contract marker: ${required}`);

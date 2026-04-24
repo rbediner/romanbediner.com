@@ -8,6 +8,15 @@
 - Analytics architecture is centralized, CSP-compatible, and validated by tests.
 - Footer includes a responsive literary quote rendered with Cormorant Garamond, centered as a block with left-aligned text lines; desktop typography is tuned for a wider single-line presentation with stronger contrast, and attribution uses an em dash (`— Walt Disney`) under footer-aware QA guardrails.
 
+## Typography & Design System (2026 Redesign)
+- **H1**: 54px desktop / 34px mobile, Cormorant Garamond 400 weight, sentence case. Token: `--h1-size-desktop`.
+- **H2**: 32px Cormorant Garamond 400 weight site-wide. Guardrail: `h1, h2 { font-family: var(--font-serif) !important }`.
+- **Body/nav/labels**: DM Sans (300–600), loaded via `@import` in `styles/site.css` so all pages inherit.
+- **Shelf-callout removed** from Home, About, and Services heroes; still used on Framework and Resources per design spec.
+- **Nav**: Connect promoted to `.nav-cta` blue button; core links reduced to About, Framework, Resources, Services.
+- **Homepage layout**: Row-gap 56px → 72px. Section icons 22px → 36px height. `align-items: baseline → center`.
+- `document.fonts.ready` added to `syncAboutTimelineOrbs()` to re-position timeline orbs after web font load.
+
 ## Canonical Route Architecture
 Canonical public routes:
 - `/`

@@ -17,8 +17,7 @@ const root = path.resolve(__dirname, '..', '..');
 
 const expectedHomepageTitle = 'Roman Bediner | AI-Enabled Operations & Execution Systems';
 const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operations, execution systems, and engineering operating models that productize operations for scalable platform execution architecture.';
-// Homepage hero headline is intentionally all caps for executive visual hierarchy.
-const expectedHomepageH1 = 'PRODUCTIZING OPERATIONS FOR MODERN, AI-ENABLED WORK';
+const expectedHomepageH1 = 'Productizing Operations for Modern, AI-Enabled Work.';
 const expectedFrameworkTitle = 'The AI-Enabled Operations Framework';
 const expectedFrameworkDescription = 'The AI-Enabled Operations Framework for productizing operations through Opportunity, Design, Integration, Execution, Signals, and Evolution.';
 
