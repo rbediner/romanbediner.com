@@ -26,8 +26,7 @@ class AboutRedesignTest(unittest.TestCase):
         self.assertIn('<main class="about-main">', self.about_html)
         self.assertIn('class="container"', self.about_html)
         self.assertIn('class="about-hero-refactored"', self.about_html)
-        self.assertIn('class="shelf-callout"', self.about_html)
-        self.assertIn('class="shelf-content"', self.about_html)
+        # shelf-callout removed from About hero in 2026 redesign (replaced by lede-description paragraph)
         self.assertNotIn('class="about-photo-wrapper"', self.about_html)
         self.assertNotIn('class="hero-photo"', self.about_html)
         self.assertRegex(self.about_html, r'class="[^"]*about-timeline[^"]*"')
@@ -37,14 +36,14 @@ class AboutRedesignTest(unittest.TestCase):
         """Ensure professional arc structure and shared service-list bullets are used."""
         self.assertIn('id="professional-arc"', self.about_html)
         self.assertEqual(self.about_html.count('class="era-header"'), 3)
-        self.assertIn('class="lede-primary"', self.about_html)
+        # lede-primary removed in 2026 redesign; lede-description remains as standalone paragraph
         self.assertIn('class="lede-description"', self.about_html)
         self.assertIn(
             "Restoring clarity at the point of delivery through durable operating architecture.",
             self.about_html,
         )
         self.assertIn(
-            "High-growth environments require the re-architecting of underlying systems - aligning engineering, product, and finance to turn strategy into reality.",
+            "High-growth environments require re-architecting underlying systems and aligning engineering, product, and finance to turn strategy into reality.",
             self.about_html,
         )
         self.assertGreaterEqual(self.about_html.count('<ul class="service-list">'), 2)

@@ -89,7 +89,8 @@ class HomeSpacingPlaywrightTest(unittest.TestCase):
     def test_desktop_spacing_guard(self):
         metrics = self._measure_home(1200, 900)
         self.assertIsNotNone(metrics, "Desktop metrics unavailable.")
-        self.assertLessEqual(metrics["headingHeight"], 52, f"Desktop H1 appears to wrap: {metrics['headingHeight']}px")
+        # Threshold raised in 2026 redesign: 54px font × 1.05 line-height ≈ 57px single line.
+        self.assertLessEqual(metrics["headingHeight"], 80, f"Desktop H1 appears to wrap: {metrics['headingHeight']}px")
         gap = metrics["headingGap"]
         self.assertGreaterEqual(gap, 40, f"Desktop blurb-to-experience heading gap too small: {gap}px")
         self.assertLessEqual(gap, 96, f"Desktop blurb-to-experience heading gap too large: {gap}px")

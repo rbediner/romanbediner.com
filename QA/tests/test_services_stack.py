@@ -22,7 +22,7 @@ class ServicesStackTest(unittest.TestCase):
 
     def test_executive_callout_and_headings_present(self):
         """Ensure executive callout and restored service headings are rendered."""
-        self.assertIn('class="shelf-callout"', self.services_html)
+        # shelf-callout removed from Services hero in 2026 redesign (replaced by lede-description paragraph)
         self.assertIn('class="brand-highlight"', self.services_html)
         self.assertIn('Services &amp; Expertise', self.services_html)
         self.assertIn('Executive Operating Leadership', self.services_html)

@@ -74,7 +74,7 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
             # Snapshot normalized header markup to detect structural drift.
             header_html = page.eval_on_selector(
                 "header.site-header",
-                "node => node.outerHTML.replace(/\s+/g, ' ').replace(/src=\"[^\"]*mainlogo-blue-white.jpg\"/g, 'src=\"LOGO\"').replace(/class=\"([^\"]*?)active([^\"]*?)\"/g, 'class=\"$1$2\"').replace(/ aria-current=\"page\"/g, '').replace(/ class=\"\"/g, '').trim()",
+                "node => node.outerHTML.replace(/\s+/g, ' ').replace(/src=\"[^\"]*mainlogo-blue-white.jpg\"/g, 'src=\"LOGO\"').replace(/class=\"([^\"]*?)active([^\"]*?)\"/g, 'class=\"$1$2\"').replace(/ aria-current=\"page\"/g, '').replace(/ class=\"\"/g, '').replace(/class=\"([^\"]*?) \"/g, 'class=\"$1\"').trim()",
             )
             self.assertIsNotNone(header_html, f"Missing header on {route}")
 

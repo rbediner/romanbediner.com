@@ -91,8 +91,9 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
         metrics = self._capture_metrics(1200, 900)
         self.assertIsNotNone(metrics, "Desktop metrics unavailable for Home spacing test.")
 
-        # Desktop headline should stay on a single line.
-        self.assertLessEqual(metrics["headingHeight"], 52, f"Desktop H1 appears to wrap: {metrics['headingHeight']}px")
+        # Desktop headline should stay on a single line. Threshold raised in 2026 redesign:
+        # 54px font × 1.05 line-height ≈ 57px; 80px headroom catches Cormorant Garamond rendering.
+        self.assertLessEqual(metrics["headingHeight"], 80, f"Desktop H1 appears to wrap: {metrics['headingHeight']}px")
         # Experience should sit below blurb on tight grid rhythm with no giant void.
         self.assertGreaterEqual(
             metrics["blurbToExperienceGap"],
