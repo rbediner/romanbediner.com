@@ -16,13 +16,13 @@
  * - Update route normalization and link map if canonical URL scheme changes on new hosts.
  */
 // Shared global navigation model used by all pages.
+// Home is accessible via the logo; Connect is a CTA button rendered separately.
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
   { label: "About", href: "/about/" },
   { label: "Framework", href: "/framework/" },
   { label: "Resources", href: "/resources/" },
   { label: "Services", href: "/services/" },
-  { label: "Connect", href: "/connect/" }
+  { label: "Connect", href: "/connect/", cta: true }
 ];
 
 // Normalize paths so active-state matching is stable with or without trailing slashes.
@@ -57,6 +57,7 @@ function resolveNavHref(href, basePath) {
 }
 
 // Render a nav using the shared NAV_LINKS list to prevent per-page drift.
+// Links with cta:true are rendered as accent buttons (Connect).
 function renderSharedNav(navElement) {
   if (!navElement) {
     return;
@@ -64,6 +65,9 @@ function renderSharedNav(navElement) {
   const basePath = resolveBasePath();
   navElement.innerHTML = NAV_LINKS.map((link) => {
     const resolvedHref = resolveNavHref(link.href, basePath);
+    if (link.cta) {
+      return `<a href="${resolvedHref}" class="nav-cta">${link.label} &rarr;</a>`;
+    }
     return `<a href="${resolvedHref}">${link.label}</a>`;
   }).join("");
 }
@@ -308,6 +312,10 @@ function applyActiveNavState(navElement, activePath) {
   }
 
   document.addEventListener("DOMContentLoaded", schedule);
+  // Re-position after web fonts load; DM Sans/Cormorant Garamond reflow changes arc-narrative heights.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionTimeline);
+  }
 
   window.addEventListener("resize", function () {
     clearTimeout(window.__timeline);
