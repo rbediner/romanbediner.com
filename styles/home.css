@@ -95,6 +95,17 @@ main .master-head h1 {
   max-width: 100%;
 }
 
+.credential-eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  max-width: none;
+}
+
 /* Subhead fills the grid width and aligns with photo edge. */
 .master-head .subhead.executive-callout {
   grid-column: 1 / -1;

@@ -14,11 +14,11 @@ class ServicesStackTest(unittest.TestCase):
         cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
 
     def test_service_stack_structure_present(self):
-        """Ensure services use a stack container with five restored cards."""
-        self.assertIn('class="service-stack"', self.services_html)
-        self.assertEqual(self.services_html.count('<div class="service-stack">'), 1)
-        # Services page should render exactly five service cards in the restored stack.
-        self.assertEqual(self.services_html.count('<div class="service-card">'), 5)
+        """Ensure services use numbered svc-entry layout with five entries (2026 redesign)."""
+        self.assertIn('class="svc-list"', self.services_html)
+        self.assertEqual(self.services_html.count('<div class="svc-list">'), 1)
+        # Services page should render exactly five numbered service entries.
+        self.assertEqual(self.services_html.count('<div class="svc-entry">'), 5)
 
     def test_executive_callout_and_headings_present(self):
         """Ensure executive callout and restored service headings are rendered."""
@@ -32,12 +32,13 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('Productizing Operations for Modern AI-Enabled Work', self.services_html)
 
     def test_stack_css_rules_present(self):
-        """Ensure stack, hover, and icon rules exist in the services stylesheet."""
-        self.assertIn('.service-stack', self.services_css)
-        self.assertIn('.service-header-row', self.services_css)
+        """Ensure numbered entry, impact box, and icon rules exist in the services stylesheet."""
+        self.assertIn('.svc-entry', self.services_css)
+        self.assertIn('.svc-num', self.services_css)
+        self.assertIn('.svc-h3', self.services_css)
         self.assertIn('.shelf-callout', self.site_css)
-        self.assertIn('.service-card:hover', self.services_css)
-        self.assertIn('.service-icon', self.services_css)
+        self.assertIn('.svc-impact', self.services_css)
+        self.assertIn('.svc-icon', self.services_css)
 
     def test_bottom_navigation_anchor_present(self):
         """Ensure the Services page includes the transition anchor to Connect."""

@@ -646,13 +646,18 @@ footer .footer-quote-author {
   }
 }
 
-/* Typography Guardrail — h1/h2 use serif display font; h3–h6 stay sans for UI clarity. */
+/* Typography system: h1/h2 always serif; h3 editorial contexts also serif (framework cards, service entries, brief sections). */
 h1, h2 {
   font-family: var(--font-serif) !important;
 }
 
-h3, h4, h5, h6 {
-  font-family: var(--font-sans) !important;
+/* Editorial display elements use serif per the 2026 design system. */
+.framework-section h3,
+.svc-h3,
+.svc-num,
+.brief-section h2,
+.brief-section .brief-section-heading {
+  font-family: var(--font-serif);
 }
 
 body {
