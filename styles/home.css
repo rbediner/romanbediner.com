@@ -41,9 +41,11 @@ a:hover {
 }
 
 h2 {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 32px;
+  font-weight: 400;
   margin: 0;
+  font-family: var(--font-serif);
+  line-height: 1.1;
 }
 
 p {
@@ -72,7 +74,7 @@ p + .divider {
     "focus photo"
     "principles principles";
   column-gap: 48px;
-  row-gap: 56px;
+  row-gap: 72px;
   align-items: start;
   padding-bottom: 56px;
 }
@@ -169,7 +171,7 @@ main .master-head h1 {
 
 .section-title {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
   line-height: 1.2;
   margin: 0;
@@ -177,10 +179,10 @@ main .master-head h1 {
 
 .section-icon {
   width: auto;
-  height: 22px;
+  height: 36px;
   flex-shrink: 0;
   position: relative;
-  top: 2px;
+  top: 0;
 }
 
 .section-body {

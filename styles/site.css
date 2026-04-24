@@ -1,13 +1,17 @@
 /* Shared site architecture styles.
    This file normalizes header and navigation behavior across canonical routes. */
 
+/* DM Sans for body/nav/labels; loaded here so all pages inherit without per-page <link> duplication. */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap");
+
 :root {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  --h1-size-desktop: 32px;
-  --h1-size-mobile: 22px;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --h1-size-desktop: 54px;
+  --h1-size-mobile: 34px;
   /* Global header-to-content spacing token used across canonical page mains. */
   --page-top-spacing: 72px;
-  --h1-weight: 800;
+  --h1-weight: 400;
   --lede-size: 26px;
   --lede-weight: 600;
   --body-size: 16px;
@@ -227,10 +231,10 @@ body {
 
 h1 {
   font-size: var(--h1-size-desktop);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  line-height: 1.1;
-  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  font-family: var(--font-serif);
   font-weight: var(--h1-weight);
   margin: 0 0 32px 0;
   color: var(--text-primary);
@@ -636,11 +640,45 @@ footer .footer-quote-author {
   }
 }
 
-/* Typography Guardrail */
-h1, h2, h3, h4, h5, h6 {
+/* Typography Guardrail — h1/h2 use serif display font; h3–h6 stay sans for UI clarity. */
+h1, h2 {
+  font-family: var(--font-serif) !important;
+}
+
+h3, h4, h5, h6 {
   font-family: var(--font-sans) !important;
 }
 
 body {
   font-family: var(--font-sans) !important;
+}
+
+/* Connect CTA nav button — promotes the conversion action above equal nav links. */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent-blue);
+  color: #ffffff !important;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 7px 20px;
+  border-radius: 4px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.nav-cta:hover {
+  opacity: 0.88;
+  text-decoration: none !important;
+  transform: none;
+}
+
+.mobile-nav .nav-cta {
+  margin-top: 8px;
+  justify-content: center;
+  font-size: 15px;
+  padding: 12px 20px;
+  border-radius: 6px;
 }
