@@ -1,10 +1,10 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 218
-- Updated At (UTC): 2026-04-25T10:52:31Z
+- Handoff Sequence: 220
+- Updated At (UTC): 2026-04-25T11:11:57Z
 - Source Branch: staging
-- Source Commit: 81cf51ab9f78e58be676530c7bc2d19e47d59749 (pre-handoff baseline)
-- Active Agent: No active agent — 6 polish fixes applied, QA complete, awaiting user go/no-go on prod promotion
+- Source Commit: ba939832216401b6fb8cd3d213e4d3a86920d27c (pre-handoff baseline)
+- Active Agent: No active agent — 4 additional mobile/legibility polish fixes applied, QA complete, awaiting user go/no-go on prod promotion
 
 ## Current State
 
@@ -97,6 +97,12 @@ Full prod vs staging comparison run at 390px mobile and 1440px desktop across al
 - **Dashboard resource page**: question grid 3-col (was 2-col); box border-radius 6px (was 10-12px); quadrant h3 font-weight 600; Core Views `strong` uses `--text-primary` (was `--accent-blue`); source callout padding/radius tightened to match mockup
 - Visual baselines refreshed: home/about/services mobile PNGs updated for eyebrow + footer spacing changes
 - QA/tests/test-insights-layout.js + test_insights_layout.py: Lane Anatomy heading contract updated to match nowrap span HTML
+
+### Session 219 Polish Fixes (staging only) — commits 12ceb6a + ba93983
+- **Resources hub CTA button**: "Open the Framework Summary" → "Open Framework Summary" — removes "the" so pill fits on one mobile line
+- **Framework summary back nav mobile**: added `← Resources Hub` mobile label (`nav-label-mobile`) — matches arrow pattern used on dashboard page; SVG arrow was hidden on mobile via CSS
+- **Resource pages mobile footer spacing**: `.resources-main` mobile override adds `padding-bottom: 32px` (was unset, inheriting 72px); `.resource-page-nav` mobile margins reduced (top: 32px, bottom: 20px) — eliminates ~112px dead space above footer across all resource pages on mobile
+- **Operating Principles legibility (dashboard page)**: label 13px → 15px desktop / 12px → 13px mobile; row items 12px → 14px desktop; mobile list view unaffected (hidden row, visible stacked list)
 
 ---
 
