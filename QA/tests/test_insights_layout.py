@@ -127,7 +127,7 @@ class FrameworkLayoutTest(unittest.TestCase):
                 elif stage["id"] == "integration":
                     self.assertIn('<h2>Integration Maturity</h2>', html)
                 elif stage["id"] == "execution":
-                    self.assertIn('<h2>Lane Anatomy (Structured View)</h2>', html)
+                    self.assertIn('<h2>Lane Anatomy <span style="white-space:nowrap">(Structured View)</span></h2>', html)
                 elif stage["id"] == "signals":
                     self.assertIn('<h2>Operational signals worth watching</h2>', html)
                 elif stage["id"] == "evolution":
