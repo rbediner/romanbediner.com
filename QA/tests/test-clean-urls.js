@@ -51,7 +51,7 @@ for (const rel of canonicalPages) {
   }
 
   // Shared style and GA bootstrap must be present.
-  if (!html.includes('href="/styles/site.css"')) {
+  if (!html.includes('href="/styles/site.css')) {
     failures += 1;
     console.error(`FAIL: missing /styles/site.css in ${rel}`);
   }

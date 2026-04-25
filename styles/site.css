@@ -650,6 +650,11 @@ footer .footer-quote-author {
     margin-top: 48px;
     margin-bottom: 32px;
   }
+
+  /* Reduce the 32px bottom margin on the accent divider inside resource page navs. */
+  .resource-page-nav .page-nav-divider {
+    margin-bottom: 14px;
+  }
 }
 
 /* Typography system: h1/h2 always serif; h3 editorial contexts also serif (framework cards, service entries, brief sections). */
