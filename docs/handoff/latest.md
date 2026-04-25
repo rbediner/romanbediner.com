@@ -1,10 +1,10 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 216
-- Updated At (UTC): 2026-04-25T10:18:56Z
+- Handoff Sequence: 218
+- Updated At (UTC): 2026-04-25T10:52:31Z
 - Source Branch: staging
-- Source Commit: 59ff6361f43a9ea68cfef73ad0ff0936edbae1eb
-- Active Agent: No active agent — QA complete, awaiting user go/no-go on prod promotion
+- Source Commit: 81cf51ab9f78e58be676530c7bc2d19e47d59749 (pre-handoff baseline)
+- Active Agent: No active agent — 6 polish fixes applied, QA complete, awaiting user go/no-go on prod promotion
 
 ## Current State
 
@@ -87,6 +87,16 @@ Full prod vs staging comparison run at 390px mobile and 1440px desktop across al
 
 ### Test Infrastructure
 - `QA/tests/test_visual_regression_playwright.py`: added `PER_FILE_THRESHOLDS` dict with `insights--mobile-full.png` raised to `0.02` — absorbs DM Sans sub-pixel kerning variance in headless Chromium without masking structural regressions
+
+### Post-QA Polish Fixes (staging only)
+- **Credential eyebrow mobile**: `.credential-eyebrow` at ≤768px → `font-size: 9px; letter-spacing: 0.12em` — company names now wrap between entries, not mid-name
+- **Footer spacing mobile**: `.next-page-nav` at ≤768px → `margin-top: 48px; margin-bottom: 32px` (was 100px/60px) — eliminates excessive whitespace above footer on all pages
+- **Integration brief Level 4**: "Adaptive Operations Layer" → "Adaptive Operations" — removes orphaned "Layer" on mobile line break
+- **Execution brief Lane Anatomy**: `(Structured View)` wrapped in `white-space:nowrap` span — forces line break before parenthetical rather than inside it
+- **Resources hub**: Removed redundant `<p class="resources-label">RESOURCES</p>` above H1 — H1 "Resources" stands alone
+- **Dashboard resource page**: question grid 3-col (was 2-col); box border-radius 6px (was 10-12px); quadrant h3 font-weight 600; Core Views `strong` uses `--text-primary` (was `--accent-blue`); source callout padding/radius tightened to match mockup
+- Visual baselines refreshed: home/about/services mobile PNGs updated for eyebrow + footer spacing changes
+- QA/tests/test-insights-layout.js + test_insights_layout.py: Lane Anatomy heading contract updated to match nowrap span HTML
 
 ---
 
