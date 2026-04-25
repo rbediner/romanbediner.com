@@ -1,14 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 222
-- Updated At (UTC): 2026-04-25T11:29:03Z
+- Handoff Sequence: 224
+- Updated At (UTC): 2026-04-25T11:55:06Z
 - Source Branch: staging
-- Source Commit: 8b22f42c93739ebd5f134383e4929ac6f86cadd4 (pre-handoff baseline)
-- Active Agent: No active agent — full session polish complete, promoted to prod, live verification passed
+- Source Commit: bd41fdde690e6e64960fc87e985e1ef242f43eda (pre-handoff baseline)
+- Active Agent: No active agent — all session fixes on prod, live verification passed
 
 ## Current State
 
-**staging and prod are in sync** at `8b22f42`. The full 2026 redesign is now live on prod.
+**staging and prod are in sync** at `bd41fdd`. The full 2026 redesign plus all session polish is live on prod.
 
 **Live verification passed** — 14 routes checked, all 200. https://romanbediner.com is live.
 
@@ -105,6 +105,13 @@ Full prod vs staging comparison run at 390px mobile and 1440px desktop across al
 - **Operating Principles legibility (dashboard page)**: label 13px → 15px desktop / 12px → 13px mobile; row items 12px → 15px desktop (two passes); mobile list view unaffected
 - **Mobile footer gap (second pass)**: `.resource-page-nav .page-nav-divider` mobile `margin-bottom` 32px → 14px in site.css — the hidden culprit adding space above nav links
 - **CSS cache-bust**: `?v=20260425a` added to site.css and resources.css links on all 3 resource pages; `test-clean-urls.js` contract updated to allow version query params on site.css href
+
+### Session 223 Fixes (now on prod) — commit bd41fdd
+- **Footer gap desktop + mobile (root fix)**: `next-page-nav` desktop margins 100px/60px → 60px/36px (site.css); `resources-main` padding-bottom 72px → 40px desktop; `resource-page-nav` desktop margins 54px/40px → 36px/20px
+- **Services page legibility**: `svc-label` eyebrow 10px → 12px; `svc-impact-label` 9px → 11px; `svc-impact p` body 14px → 16px
+- **CSS cache-bust v2**: `?v=20260425b` on site.css across all 15 HTML pages; resources.css and services.css bumped on their pages
+- **QA contract fixes**: `test-clean-urls.js`, `scripts/qa/validate-links.js`, `QA/tests/test_contact_form.py` all updated to allow `?v=` query params on site.css href (three separate exact-match checks)
+- **Visual baselines refreshed**: about, insights, services desktop/mobile PNGs updated for nav margin + font size changes
 
 ---
 
