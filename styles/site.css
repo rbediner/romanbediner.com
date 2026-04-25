@@ -644,6 +644,12 @@ footer .footer-quote-author {
   .nav-title {
     font-size: 28px;
   }
+
+  /* Reduce next-page-nav margins — 100px/60px is excessive on mobile. */
+  .next-page-nav {
+    margin-top: 48px;
+    margin-bottom: 32px;
+  }
 }
 
 /* Typography system: h1/h2 always serif; h3 editorial contexts also serif (framework cards, service entries, brief sections). */

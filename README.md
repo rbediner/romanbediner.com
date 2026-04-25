@@ -20,6 +20,10 @@
 - **About philosophy section**: `.philosophy-stack` now a 2-col grid on desktop (1fr 1fr, 48px gap); collapses to stacked on mobile ≤768px. `about.css` cache-busted at `?v=20260424a`.
 - **Framework/brief mobile pills**: `.framework-progress-markers` uses `overflow-x: auto` + `flex-wrap: nowrap` + `scrollbar-width: thin` on mobile — all 5 stage pills scroll horizontally with a visible thin scrollbar. Framework CSS cache-bust at `?v=20260424c`.
 - **Connect CSS**: `styles/connect.css` rewritten to remove ~165 lines of duplicated site-level styles (old `-apple-system` font stack). Page-specific styles now use 2026 design tokens (`--text-primary`, `--text-secondary`, `--accent-blue`) inherited from `site.css`. Cache-busted at `?v=20260424a`.
+- **Credential eyebrow mobile**: `.credential-eyebrow` reduces to `font-size: 9px; letter-spacing: 0.12em` at ≤768px so company names wrap between entries rather than mid-name.
+- **Mobile footer spacing**: `.next-page-nav` overridden at ≤768px to `margin-top: 48px; margin-bottom: 32px` (was 100px/60px) to eliminate excessive whitespace above footer on mobile.
+- **Resources hub**: redundant `<p class="resources-label">RESOURCES</p>` eyebrow removed — the H1 "Resources" alone is sufficient.
+- **Dashboard resource page**: question grid changed to 3 columns (`repeat(3,1fr)`); box border-radius reduced to 6px to match mockup; `.resource-dashboard-quadrant h3` set to `font-weight: 600; font-size: 14px`; Core Dashboard Views `strong` color changed from `--accent-blue` to `--text-primary`.
 - `document.fonts.ready` added to `syncAboutTimelineOrbs()` to re-position timeline orbs after web font load.
 
 ## Canonical Route Architecture

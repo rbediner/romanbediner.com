@@ -302,4 +302,10 @@ a:focus-visible {
   .section-body {
     margin-top: 20px;
   }
+
+  /* Tighten eyebrow so company names break between entries, not mid-name. */
+  .credential-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
 }

@@ -1143,16 +1143,16 @@
 .resource-dashboard-questions-grid {
   margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .resource-dashboard-question-item {
-  padding: 14px 16px;
-  border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(249, 251, 255, 0.92);
-  font-size: 15px;
+  padding: 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #e6e6e6);
+  background: #ffffff;
+  font-size: 13px;
   line-height: 1.5;
   color: var(--text-primary);
 }
@@ -1160,27 +1160,28 @@
 .resource-dashboard-quadrants {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
   margin-top: 12px;
 }
 
 .resource-dashboard-quadrant {
-  padding: 18px 19px;
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.26);
-  background: #fafbfe;
+  padding: 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #e6e6e6);
+  background: #ffffff;
 }
 
 .resource-dashboard-quadrant h3 {
   margin: 0 0 6px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
 .resource-dashboard-quadrant p {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--text-secondary);
 }
 
@@ -1199,36 +1200,35 @@
 }
 
 .resource-dashboard-view-block {
-  padding: 16px 18px 18px;
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.28);
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
-  background: #fcfdff;
+  padding: 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #e6e6e6);
+  background: #ffffff;
   display: flex;
 }
 
 .resource-dashboard-view-block p {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--text-primary);
 }
 
 .resource-dashboard-view-block strong {
   display: block;
-  margin-bottom: 2px;
-  font-size: 16px;
-  color: var(--accent-blue);
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--text-primary);
 }
 
 /* Source-availability card — prominent artifact-access block */
 .resource-dashboard-source-callout {
-  margin-top: 56px;
-  padding: 34px 34px 32px;
-  border-radius: 14px;
+  margin-top: 40px;
+  padding: 24px;
+  border-radius: 10px;
   border: 1px solid rgba(59, 108, 255, 0.2);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
-  background: linear-gradient(180deg, rgba(245, 249, 255, 0.98) 0%, rgba(250, 252, 255, 0.98) 100%);
+  box-shadow: none;
+  background: linear-gradient(180deg, #f4f8ff 0%, #fafcff 100%);
 }
 
 .resource-dashboard-source-inner {
