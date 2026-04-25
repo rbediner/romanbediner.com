@@ -1,64 +1,50 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 227
-- Updated At (UTC): 2026-04-25T12:41:55Z
+- Handoff Sequence: 229
+- Updated At (UTC): 2026-04-25T14:13:38Z
 - Source Branch: staging
-- Source Commit: 9ac2368e38a3dc06f605560f7d3c7709938a75d2 (pre-handoff baseline)
-- Active Agent: Codex (current session) — finalized staging->prod promotion + verification + documentation
+- Source Commit: a96d3e13884dfe68f069e895ece54feab55064f5 (pre-handoff baseline)
+- Active Agent: Codex (current session) — investigated and corrected Home bottom-navigation divider ordering
 
 ## Current State
 
-**staging and prod are fully aligned** at `9ac2368e38a3dc06f605560f7d3c7709938a75d2`.
+`staging` is one docs-only handoff commit ahead of `prod`; the last promoted production release remains `9ac2368e38a3dc06f605560f7d3c7709938a75d2`.
 
-This release includes:
-- Services IMPACT label hierarchy enforcement (`.svc-impact-label` > body text)
-- Home-page bottom nav spacing bug fix completion from prior session
-- CSP `connect-src` parity fix for `https://www.googletagmanager.com` on canonical routes (prevents smoke/runtime CSP violations)
-- Updated visual baselines for intentional styling/layout deltas
+Current local working tree contains an uncommitted Home UX fix:
+- `index.html`: Home transition block now uses `home-next-page-nav` and a `page-nav-divider` before the `Explore the Operating Model` CTA.
+- `index.html`: Home footer no longer uses `footer-divider-accent`; the footer divider is back to the standard footer treatment.
+- `styles/site.css`: `.home-next-page-nav .page-nav-divider` is included in the blue full-width page-navigation divider family.
+- `QA/tests/test-transition-blocks.js`: added a regression guard requiring the Home CTA to render below the blue divider and forbidding use of the footer accent divider as the transition separator.
+
+Live PRD update:
+- Updated `SEO Authority PRD` / `romanbediner.com PRD` in Google Docs.
+- Added the rule: Home bottom page navigation must render below its blue page-navigation divider; the footer divider must not serve as the Home transition separator.
+- Connector readback verified the inserted PRD paragraph in document `15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8`.
 
 Staging preview: https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
 
-## Release Evidence (Exact SHA)
-
-Promoted SHA: `9ac2368e38a3dc06f605560f7d3c7709938a75d2`
-
-Staging workflows (same SHA):
-- CI: https://github.com/rbediner/romanbediner.com/actions/runs/24930869058 (success)
-- Deploy Staging: https://github.com/rbediner/romanbediner.com/actions/runs/24930922146 (success)
-
-Prod workflows (same SHA):
-- CI: https://github.com/rbediner/romanbediner.com/actions/runs/24931037570 (success)
-- Deploy Pages: https://github.com/rbediner/romanbediner.com/actions/runs/24931037573 (success)
-- Docs Sync: https://github.com/rbediner/romanbediner.com/actions/runs/24931037567 (success)
-
-Live production verification:
-- `node scripts/qa/verify-live-production.js` passed
-- Base URL: `https://romanbediner.com`
-- Sitemap: 200
-- Route checks: 14/14
-
 ## QA Summary (This Session)
 
-All required suites passed for the promoted SHA:
-- `npm run qa:ci-parity` (Node + Jest + Python/Playwright parity)
-- `npm run test:qa-full`
-- `npm run test:playwright`
-- `npm run test:visual` (after intentional baseline updates)
-- `node scripts/qa/run-browser-smoke.js --scopes home,services`
-- `npm run qa:browser:smoke`
-- `npm run release:verify-prod -- --sha 9ac2368e38a3dc06f605560f7d3c7709938a75d2` completed via release flow lock-safe path (background verifier), with prod CI/deploy + live checks all green
+Passed locally:
+- `node QA/tests/test-transition-blocks.js`
+- `node QA/tests/test-home-spacing-contract.js`
+- `python3 -m unittest QA.tests.test_home_spacing_playwright -v`
+- Mobile Playwright geometry probe confirmed Home transition CTA is below the transition divider (`ctaBelowDivider: true`) and footer nav remains below the footer divider (`footerNavBelowFooterDivider: true`).
+
+One discarded one-off Node probe attempted to import unavailable `serve-handler`; no repo files or dependencies were changed by that failed probe.
 
 ## Branch Alignment
 
-- `staging`: `9ac2368e38a3dc06f605560f7d3c7709938a75d2`
+- `staging`: `a96d3e13884dfe68f069e895ece54feab55064f5` before this handoff update
 - `prod`: `9ac2368e38a3dc06f605560f7d3c7709938a75d2`
-- Alignment: **in sync** (fast-forward promotion completed)
+- Alignment: `staging` is docs-only ahead of `prod`; product fix is currently local and uncommitted pending the next code commit/release pass.
 
 ## Open Items / Follow-ups
 
-- Live PRD update (`SEO Authority PRD`) is still pending for this release and should be updated in the next operator pass if not completed in-session.
-- No active release watcher processes remain.
+- Commit the Home bottom-navigation divider fix separately from this handoff commit.
+- Run the appropriate selective gate for the code commit, then follow the staging-first preview and prod promotion flow if releasing.
+- No active release watcher processes were started in this session.
 - No manual GitHub environment overrides are currently required.
 
 ## Release Watcher Hygiene
