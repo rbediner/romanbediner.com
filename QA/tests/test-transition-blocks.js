@@ -58,6 +58,16 @@ if (!/href="\/about\/"/.test(homeHtml)) {
   failures += 1;
   console.error('FAIL: index.html transition must link to /about/.');
 }
+if (
+  !/<section class="next-page-nav home-next-page-nav container">\s*<div class="page-nav-divider" aria-hidden="true"><\/div>\s*<a href="\/about\/" class="nav-anchor">/s.test(homeHtml)
+) {
+  failures += 1;
+  console.error('FAIL: index.html transition CTA must render below the blue page-nav-divider.');
+}
+if (/footer-divider footer-divider-accent/.test(homeHtml)) {
+  failures += 1;
+  console.error('FAIL: index.html must not use the footer accent divider for the home transition CTA.');
+}
 
 if (!insightsHtml.includes('Explore Service Models')) {
   failures += 1;

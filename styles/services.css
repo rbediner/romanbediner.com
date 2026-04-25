@@ -126,7 +126,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -135,7 +135,7 @@
 }
 
 .svc-icon {
-  height: 18px;
+  height: 22px;
   width: auto;
   display: block;
   mix-blend-mode: multiply;

@@ -41,6 +41,16 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('.svc-impact', self.services_css)
         self.assertIn('.svc-icon', self.services_css)
 
+    def test_service_label_and_icon_scale(self):
+        """Ensure service category labels and their icons remain legible."""
+        label_match = re.search(r"\.svc-label\s*\{[\s\S]*?font-size:\s*(\d+)px;", self.services_css)
+        icon_match = re.search(r"\.svc-icon\s*\{[\s\S]*?height:\s*(\d+)px;", self.services_css)
+        self.assertIsNotNone(label_match, "Expected .svc-label font-size rule in services.css")
+        self.assertIsNotNone(icon_match, "Expected .svc-icon height rule in services.css")
+
+        self.assertGreaterEqual(int(label_match.group(1)), 13, "Service label font-size must stay at least 13px.")
+        self.assertGreaterEqual(int(icon_match.group(1)), 22, "Service label icons must stay at least 22px tall.")
+
     def test_impact_label_font_size_exceeds_body_font_size(self):
         """Ensure IMPACT label remains larger than the supporting text for visual hierarchy."""
         label_match = re.search(r"\.svc-impact-label\s*\{[\s\S]*?font-size:\s*(\d+)px;", self.services_css)

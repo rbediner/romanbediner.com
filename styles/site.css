@@ -366,6 +366,7 @@ body > main {
 /* Scoped accent divider variant for framework/resources family pages in this pass. */
 .framework-main .next-page-nav .page-nav-divider,
 .resources-main .next-page-nav .page-nav-divider,
+.home-next-page-nav .page-nav-divider,
 .resource-page-nav .page-nav-divider {
   height: 3px;
   border-top: 0;
