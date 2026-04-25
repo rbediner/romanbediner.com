@@ -1,16 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 220
-- Updated At (UTC): 2026-04-25T11:11:57Z
+- Handoff Sequence: 222
+- Updated At (UTC): 2026-04-25T11:29:03Z
 - Source Branch: staging
-- Source Commit: ba939832216401b6fb8cd3d213e4d3a86920d27c (pre-handoff baseline)
-- Active Agent: No active agent — 4 additional mobile/legibility polish fixes applied, QA complete, awaiting user go/no-go on prod promotion
+- Source Commit: 8b22f42c93739ebd5f134383e4929ac6f86cadd4 (pre-handoff baseline)
+- Active Agent: No active agent — full session polish complete, promoted to prod, live verification passed
 
 ## Current State
 
-**staging** is ahead of **prod** by ~10 commits. prod is still at `8cef5064ef4dec7fde53d8003a80502d67ea991b` (pre-redesign).
+**staging and prod are in sync** at `8b22f42`. The full 2026 redesign is now live on prod.
 
-**Visual QA is complete — no regressions found.** User must explicitly sign off before promoting to prod.
+**Live verification passed** — 14 routes checked, all 200. https://romanbediner.com is live.
 
 Staging preview: https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
@@ -98,11 +98,13 @@ Full prod vs staging comparison run at 390px mobile and 1440px desktop across al
 - Visual baselines refreshed: home/about/services mobile PNGs updated for eyebrow + footer spacing changes
 - QA/tests/test-insights-layout.js + test_insights_layout.py: Lane Anatomy heading contract updated to match nowrap span HTML
 
-### Session 219 Polish Fixes (staging only) — commits 12ceb6a + ba93983
+### Session 219–221 Polish Fixes (now on prod) — commits 12ceb6a, ba93983, 8b22f42
 - **Resources hub CTA button**: "Open the Framework Summary" → "Open Framework Summary" — removes "the" so pill fits on one mobile line
 - **Framework summary back nav mobile**: added `← Resources Hub` mobile label (`nav-label-mobile`) — matches arrow pattern used on dashboard page; SVG arrow was hidden on mobile via CSS
 - **Resource pages mobile footer spacing**: `.resources-main` mobile override adds `padding-bottom: 32px` (was unset, inheriting 72px); `.resource-page-nav` mobile margins reduced (top: 32px, bottom: 20px) — eliminates ~112px dead space above footer across all resource pages on mobile
-- **Operating Principles legibility (dashboard page)**: label 13px → 15px desktop / 12px → 13px mobile; row items 12px → 14px desktop; mobile list view unaffected (hidden row, visible stacked list)
+- **Operating Principles legibility (dashboard page)**: label 13px → 15px desktop / 12px → 13px mobile; row items 12px → 15px desktop (two passes); mobile list view unaffected
+- **Mobile footer gap (second pass)**: `.resource-page-nav .page-nav-divider` mobile `margin-bottom` 32px → 14px in site.css — the hidden culprit adding space above nav links
+- **CSS cache-bust**: `?v=20260425a` added to site.css and resources.css links on all 3 resource pages; `test-clean-urls.js` contract updated to allow version query params on site.css href
 
 ---
 
@@ -110,7 +112,7 @@ Full prod vs staging comparison run at 390px mobile and 1440px desktop across al
 
 - **Connect page visual fidelity**: User acknowledged it doesn't fully match the mockup but explicitly deferred further work. Do not restyle Connect without explicit instruction.
 - **PRD update**: Google Doc PRD still needs updating for the dashboard resource page (carried over from previous sessions).
-- **prod still at pre-redesign SHA**: Do not touch prod until user explicitly signs off.
+- **prod is now live** at the 2026 redesign SHA. All session polish fixes are included.
 
 ---
 
