@@ -181,14 +181,18 @@
 }
 
 @media (max-width: 640px) {
+  .svc-list {
+    margin-bottom: 40px;
+  }
+
   .svc-entry {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 28px 0;
+    padding: 24px 0;
   }
 
   .svc-num {
-    font-size: 32px;
-    margin-bottom: 12px;
+    font-size: 28px;
+    margin-bottom: 8px;
   }
 }

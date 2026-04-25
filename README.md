@@ -17,6 +17,9 @@
 - **Nav**: Connect promoted to `.nav-cta` blue button; core links reduced to About, Framework, Resources, Services. Home removed from nav; accessible via logo.
 - **Homepage**: Credential eyebrow (`THE WALT DISNEY COMPANY · AMAZON WEB SERVICES`) rendered above H1 via `.credential-eyebrow` in `styles/home.css`. Row-gap 56px → 72px. Section icons 22px → 36px height.
 - **Services page**: Restructured from `.service-stack`/`.service-card` to numbered `.svc-list`/`.svc-entry` layout — large serif number (01–05), icon+label, serif H3, bullets, `.svc-impact` box with tan background.
+- **About philosophy section**: `.philosophy-stack` now a 2-col grid on desktop (1fr 1fr, 48px gap); collapses to stacked on mobile ≤768px.
+- **Framework/brief mobile**: `.framework-progress` gets `overflow-x: clip` at mobile to prevent progress-line bleed; scrollbar hidden via `scrollbar-width: none`.
+- **Framework CSS cache-bust**: bumped to `?v=20260424a` so brief-page browsers fetch updated serif/weight styles.
 - `document.fonts.ready` added to `syncAboutTimelineOrbs()` to re-position timeline orbs after web font load.
 
 ## Canonical Route Architecture

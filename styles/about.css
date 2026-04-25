@@ -89,20 +89,33 @@
 }
 
 .philosophy-stack {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
 }
 
 .philosophy-item {
-  padding-bottom: 40px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
 }
 
-.philosophy-item:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
+@media (max-width: 768px) {
+  .philosophy-stack {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .philosophy-item {
+    padding-bottom: 32px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .philosophy-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 }
 
 .philosophy-item h3 {
