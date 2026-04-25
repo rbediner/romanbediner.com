@@ -165,17 +165,17 @@
 }
 
 .svc-impact-label {
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #b8924a;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .svc-impact p {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-primary);
   line-height: 1.6;
 }
