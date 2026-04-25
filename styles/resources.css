@@ -822,6 +822,12 @@
   .resources-main {
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 32px;
+  }
+
+  .resource-page-nav {
+    margin-top: 32px;
+    margin-bottom: 20px;
   }
 
   .resources-subhead {
