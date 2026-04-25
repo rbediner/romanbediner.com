@@ -17,6 +17,7 @@
 - **Nav**: Connect promoted to `.nav-cta` blue button; core links reduced to About, Framework, Resources, Services. Home removed from nav; accessible via logo.
 - **Homepage**: Credential eyebrow (`THE WALT DISNEY COMPANY · AMAZON WEB SERVICES`) rendered above H1 via `.credential-eyebrow` in `styles/home.css`. Row-gap 56px → 72px. Section icons 22px → 36px height.
 - **Services page**: Restructured from `.service-stack`/`.service-card` to numbered `.svc-list`/`.svc-entry` layout — large serif number (01–05), icon+label, serif H3, bullets, `.svc-impact` box with tan background.
+- **Services impact hierarchy**: `.svc-impact-label` is intentionally larger than `.svc-impact p` (16px vs 14px) to keep section titles visually dominant in each impact block; protected by `QA/tests/test_services_stack.py`.
 - **About philosophy section**: `.philosophy-stack` now a 2-col grid on desktop (1fr 1fr, 48px gap); collapses to stacked on mobile ≤768px. `about.css` cache-busted at `?v=20260424a`.
 - **Framework/brief mobile pills**: `.framework-progress-markers` uses `overflow-x: auto` + `flex-wrap: nowrap` + `scrollbar-width: thin` on mobile — all 5 stage pills scroll horizontally with a visible thin scrollbar. Framework CSS cache-bust at `?v=20260424c`.
 - **Connect CSS**: `styles/connect.css` rewritten to remove ~165 lines of duplicated site-level styles (old `-apple-system` font stack). Page-specific styles now use 2026 design tokens (`--text-primary`, `--text-secondary`, `--accent-blue`) inherited from `site.css`. Cache-busted at `?v=20260424a`.
@@ -167,6 +168,7 @@ Required handoff content for cross-machine continuity:
 - `/scripts/runtime/ga4-bootstrap.js` is the single analytics bootstrap point.
 - Inline GA bootstrap is forbidden.
 - External bootstrap keeps analytics compatible with strict CSP and avoids `unsafe-inline` dependency.
+- CSP `connect-src` explicitly allows `https://www.googletagmanager.com` in addition to GA/Google domains so GA transport calls do not generate runtime CSP violations during smoke checks.
 - Runtime analytics context now standardizes environment tagging:
   - `production` for `romanbediner.com`
   - `preview` for `*.github.io`

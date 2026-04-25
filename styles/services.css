@@ -165,7 +165,8 @@
 }
 
 .svc-impact-label {
-  font-size: 15px;
+  /* Keep impact label visibly larger than body copy for quick scan hierarchy. */
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;

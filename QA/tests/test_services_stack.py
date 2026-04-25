@@ -1,5 +1,6 @@
 import unittest
 from pathlib import Path
+import re
 
 
 class ServicesStackTest(unittest.TestCase):
@@ -39,6 +40,17 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('.shelf-callout', self.site_css)
         self.assertIn('.svc-impact', self.services_css)
         self.assertIn('.svc-icon', self.services_css)
+
+    def test_impact_label_font_size_exceeds_body_font_size(self):
+        """Ensure IMPACT label remains larger than the supporting text for visual hierarchy."""
+        label_match = re.search(r"\.svc-impact-label\s*\{[\s\S]*?font-size:\s*(\d+)px;", self.services_css)
+        body_match = re.search(r"\.svc-impact\s+p\s*\{[\s\S]*?font-size:\s*(\d+)px;", self.services_css)
+        self.assertIsNotNone(label_match, "Expected .svc-impact-label font-size rule in services.css")
+        self.assertIsNotNone(body_match, "Expected .svc-impact p font-size rule in services.css")
+
+        label_px = int(label_match.group(1))
+        body_px = int(body_match.group(1))
+        self.assertGreater(label_px, body_px, "IMPACT label font-size must be larger than IMPACT body text.")
 
     def test_bottom_navigation_anchor_present(self):
         """Ensure the Services page includes the transition anchor to Connect."""
