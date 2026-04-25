@@ -1,700 +1,443 @@
-    html {
-      scroll-behavior: smooth;
-    }
-
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #111111;
-      --muted-text: #5f5f5f;
-      --border-color: #e6e6e6;
-      --surface-color: #ffffff;
-      --link-color: #3b6cff;
-      --accent-blue: #3b6cff;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
-    }
-
-    a {
-      color: var(--link-color);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .site-header {
-      padding: 6px 0;
-      position: sticky;
-      top: 0;
-      background-color: var(--bg-color);
-      z-index: 10;
-    }
-
-    .site-header img {
-      height: 44px;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: nowrap;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand-logo {
-      height: 44px;
-      width: auto;
-      flex-shrink: 0;
-      display: block;
-    }
-
-    .brand-name {
-      font-size: 22px;
-      font-weight: 600;
-      line-height: 1.1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--text-color);
-    }
-
-    .site-nav {
-      display: none;
-      gap: 32px;
-      font-size: 16px;
-    }
-
-    .site-nav a {
-      color: var(--text-color);
-    }
-
-    .site-nav a:hover {
-      color: var(--link-color);
-    }
-
-    .menu-toggle {
-      display: inline-flex;
-      background: none;
-      border: none;
-      padding: 6px 8px;
-      font-size: 16px;
-      color: var(--text-color);
-      cursor: pointer;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .menu-toggle .menu-icon {
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-      display: inline-block;
-      position: relative;
-    }
-
-    .menu-toggle .menu-icon::before,
-    .menu-toggle .menu-icon::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 18px;
-      height: 2px;
-      background-color: var(--text-color);
-    }
-
-    .menu-toggle .menu-icon::before {
-      top: -6px;
-    }
-
-    .menu-toggle .menu-icon::after {
-      top: 6px;
-    }
-
-    .mobile-nav {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100%;
-      background-color: var(--bg-color);
-      border-top: 1px solid var(--border-color);
-      display: none;
-      flex-direction: column;
-      padding: 12px 24px 20px 24px;
-      z-index: 20;
-    }
-
-    .mobile-nav a {
-      padding: 12px 0;
-      font-size: 16px;
-      color: var(--text-color);
-      text-decoration: none;
-    }
-
-    .mobile-nav.open {
-      display: flex;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .page-main {
-      padding: 0;
-    }
-
-    /* Connect page ambient-layer container: keeps decorative effects clipped and behind content. */
-    .connect-main {
-      position: relative;
-      overflow: hidden;
-      /* Anchor ambient light closer to the hero for intentional top-of-page composition. */
-      background:
-        radial-gradient(
-          circle at 78% 14%,
-          rgba(90, 120, 255, 0.12),
-          rgba(90, 120, 255, 0.05) 40%,
-          transparent 70%
-        );
-    }
-
-    /* Preserve content legibility above background orbs. */
-    .connect-main > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Ambient orb 1: upper-right light source, mostly off-canvas. */
-    .connect-main::before {
-      content: "";
-      position: absolute;
-      top: 120px;
-      right: -140px;
-      width: 700px;
-      height: 700px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 22%),
-        radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
-      opacity: 0.12;
-      filter: blur(70px);
-      z-index: 0;
-      pointer-events: none;
-      animation: floatOrb 36s ease-in-out infinite;
-    }
-
-    /* Ambient orb 2: lower-right ambient glow pushed behind footer region. */
-    .connect-main::after {
-      content: "";
-      position: absolute;
-      right: 120px;
-      bottom: -80px;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 24%),
-        radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
-      opacity: 0.08;
-      filter: blur(70px);
-      z-index: 0;
-      pointer-events: none;
-      animation: floatOrb 36s ease-in-out infinite;
-    }
-
-    /* Single calm animation curve for both ambient orbs. */
-    @keyframes floatOrb {
-      0% {
-        transform: translate(0px, 0px) scale(1);
-      }
-      50% {
-        transform: translate(8px, 12px) scale(1.03);
-      }
-      100% {
-        transform: translate(0px, 0px) scale(1);
-      }
-    }
-
-    .contact-shell {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .contact-hero {
-      margin: 0;
-      max-width: none;
-    }
-
-    .hero-title {
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .hero-title img {
-      width: 52px;
-      height: auto;
-      flex-shrink: 0;
-    }
-
-    .contact-hero h1 {
-      margin: 0;
-      /* Subtle premium-type polish: tighter tracking and cleaner line rhythm. */
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-    }
-
-    .contact-hero p {
-      margin: 14px 0 0 0;
-      font-size: 19px;
-      color: var(--muted-text);
-      max-width: none;
-      text-align: center;
-    }
-
-    .form-wrap {
-      max-width: none;
-      margin: 0;
-    }
-
-    .field {
-      margin-top: 20px;
-    }
-
-    .field:first-child {
-      margin-top: 0;
-    }
-
-    .field-hidden {
-      display: none;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      color: var(--text-color);
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    input {
-      width: 100%;
-      font-size: 16px;
-      padding: 12px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      font-family: inherit;
-      color: var(--text-color);
-      background-color: #ffffff;
-    }
-
-    input:focus,
-    .ql-container:focus-within,
-    .ql-toolbar:focus-within {
-      outline: none;
-      border-color: #b7b7b7;
-    }
-
-    .ql-toolbar.ql-snow {
-      border: 1px solid var(--border-color);
-      border-bottom: none;
-      border-radius: 8px 8px 0 0;
-      background-color: #fcfcfc;
-    }
-
-    .ql-container.ql-snow {
-      border: 1px solid var(--border-color);
-      border-radius: 0 0 8px 8px;
-      font-size: 16px;
-      color: var(--text-color);
-      font-family: inherit;
-    }
-
-    .ql-editor {
-      line-height: 1.6;
-    }
-
-    .submit-btn {
-      margin-top: 20px;
-      background-color: #111111;
-      color: #ffffff;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 24px;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      min-width: 148px;
-    }
-
-    .form-error {
-      margin-top: 12px;
-      font-size: 14px;
-      color: #a42525;
-      min-height: 21px;
-    }
-
-    .success-message {
-      margin: 0;
-      font-size: 18px;
-      color: var(--muted-text);
-    }
-
-    /* Executive Action Block (Connect Page) */
-    /* LinkedIn secondary CTA polish with restrained interaction. */
-    .executive-action-block,
-    .linkedin-connect {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 32px;
-      margin: 32px 0;
-      border-left: 4px solid var(--accent-blue);
-      background: rgba(70, 100, 255, 0.04);
-      border-radius: 0 8px 8px 0;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      color: var(--text-color);
-    }
-
-    .executive-action-block:hover,
-    .linkedin-connect:hover {
-      background: rgba(70, 100, 255, 0.07);
-      transform: translateY(-2px);
-      text-decoration: none;
-    }
-
-    .action-content {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    /* Groups the icon and text together on the left */
-    .action-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    /* Styles the SVG to match the brand accent color */
-    .action-icon {
-      color: var(--accent-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .action-title,
-    .linkedin-connect h3 {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--accent-blue);
-      margin: 0;
-    }
-
-    .action-desc {
-      font-size: 16px;
-      color: var(--muted-text);
-      margin: 0;
-    }
-
-    .action-arrow,
-    .arrow {
-      font-size: 24px;
-      color: var(--accent-blue);
-      transition: transform 0.25s ease;
-    }
-
-    .executive-action-block:hover .action-arrow,
-    .linkedin-connect:hover .arrow {
-      transform: translateX(6px);
-    }
-
-    /* Connect renders the shared pre-footer divider via a pseudo-element so
-       we keep clean markup while restoring the expected visual separator. */
-    .footer::before {
-      content: "";
-      display: block;
-      width: min(960px, 92%);
-      margin: 0 auto 18px auto;
-      border-top: 1px solid var(--neutral-border, var(--border-color, #e6e6e6));
-    }
-
-    /* Keep Connect vertical rhythm aligned with global page-top spacing from site.css. */
-    .connect-main .section {
-      margin: 0;
-    }
-
-    /* Explicitly pin first hero to shared top-spacing contract from site.css. */
-    .connect-main .contact-hero.section {
-      margin-top: 0;
-      padding-top: 0;
-    }
-
-    /* Section-to-section spacing only, so the first section does not drift below global top spacing. */
-    .connect-main .section + .section {
-      margin-top: 56px;
-    }
-
-    .section h2,
-    .section h3 {
-      margin-bottom: 14px;
-    }
-
-    .section p {
-      margin-bottom: 18px;
-    }
-
-    /* Conversation themes block aligns Connect rhythm with Services without duplicating service content. */
-    .connect-themes {
-      margin: 0;
-    }
-
-    /* Subtle structural divider above "How we might connect" content. */
-    .connect-themes-divider {
-      width: 100%;
-      border-top: 1px solid var(--border-color);
-      margin: 0 0 28px 0;
-    }
-
-    .connect-themes h2 {
-      margin: 0 0 14px 0;
-      font-size: 26px;
-      line-height: 1.25;
-      color: var(--text-color);
-    }
-
-    .connect-themes p {
-      color: var(--text-color);
-      margin: 0 0 16px 0;
-    }
-
-    /* Shared orb bullets are inherited from styles/site.css via .service-list. */
-    .connect-themes .service-list {
-      margin-bottom: 20px;
-    }
-
-    /* De-emphasize closing guidance so bullet themes remain the visual focus. */
-    .connect-closing,
-    .connect-expectation {
-      color: var(--muted-text);
-    }
-
-    .connect-expectation {
-      margin-bottom: 0;
-      font-size: 0.95rem;
-      color: #666666;
-      opacity: 1;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,0.06);
-      padding: 28px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-    }
-
-    /* Premium glass-like card polish without changing form layout or spacing. */
-    .form-card,
-    .contact-card {
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.96),
-          rgba(255, 255, 255, 0.92)
-        );
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .form-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
-    }
-
-    button,
-    .btn {
-      transition: all 0.2s ease;
-    }
-
-    button:hover,
-    .btn:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-
-    input:focus-visible,
-    textarea:focus-visible,
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid rgba(45,92,255,0.35);
-      outline-offset: 2px;
-    }
-
-    @media (min-width: 768px) {
-      .header-inner {
-        padding: 0;
-      }
-
-      .brand-logo {
-        height: 44px;
-      }
-
-    .site-nav {
-      display: flex;
-    }
-
-      .menu-toggle {
-        display: none;
-      }
-
-      .container {
-        padding: 0 24px;
-      }
-
-      .form-card {
-        padding: 40px;
-      }
-    }
-
-    @media (max-width: 767px) {
-      .container {
-        padding: 0 24px;
-      }
-
-      .hero-title {
-        align-items: center;
-      }
-
-      .connect-themes h2 {
-        font-size: 24px;
-      }
-    }
-
-    /* Mobile Adjustments */
-    @media (max-width: 768px) {
-      /* Mobile safety: disable ambient orb layers to keep viewport clean. */
-      .connect-main::before,
-      .connect-main::after {
-        display: none;
-      }
-
-      /* Mobile composition: stack icon and headline for cleaner vertical hierarchy. */
-      .hero-title {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        text-align: center;
-      }
-
-      .hero-title img {
-        width: 100%;
-        max-width: 72px;
-        height: auto;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 16px;
-      }
-
-      /* Mobile hero typography: preserve emphasis while improving legibility. */
-      .contact-hero {
-        padding-top: 28px;
-      }
-
-      .contact-hero h1 {
-        font-size: 28px;
-        line-height: 1.2;
-      }
-
-      .contact-hero p {
-        font-size: 17px;
-        margin-top: 10px;
-      }
-
-      /* Mobile rhythm: tighten section spacing for easier scanning. */
-      .connect-main .section + .section {
-        margin-top: 40px;
-      }
-
-      .connect-themes p {
-        font-size: 16px;
-        line-height: 1.65;
-      }
-
-      .service-list li {
-        margin-bottom: 12px;
-        line-height: 1.65;
-      }
-
-      /* Touch-friendly form controls and full-width primary action. */
-      .form-card {
-        padding: 24px;
-      }
-
-      .submit-btn {
-        width: 100%;
-        padding: 14px 20px;
-      }
-
-      /* Mobile CTA layout: stack content and remove decorative arrow noise. */
-      .executive-action-block {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .action-arrow {
-        display: none;
-      }
-
-      .executive-action-block {
-        padding: 20px 24px;
-      }
-
-      .action-left {
-        gap: 16px;
-      }
-
-      .action-icon svg {
-        width: 28px;
-        height: 28px;
-      }
-
-      .action-title {
-        font-size: 18px;
-      }
-
-      .action-desc {
-        font-size: 15px;
-      }
-    }
+/* Connect page specific styling.
+   Shared layout tokens, typography, and site chrome live in styles/site.css. */
+
+/* Connect page ambient-layer container: keeps decorative effects clipped and behind content. */
+.connect-main {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 78% 14%,
+      rgba(90, 120, 255, 0.12),
+      rgba(90, 120, 255, 0.05) 40%,
+      transparent 70%
+    );
+}
+
+/* Preserve content legibility above background orbs. */
+.connect-main > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ambient orb 1: upper-right light source, mostly off-canvas. */
+.connect-main::before {
+  content: "";
+  position: absolute;
+  top: 120px;
+  right: -140px;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 22%),
+    radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
+  opacity: 0.12;
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+  animation: floatOrb 36s ease-in-out infinite;
+}
+
+/* Ambient orb 2: lower-right ambient glow. */
+.connect-main::after {
+  content: "";
+  position: absolute;
+  right: 120px;
+  bottom: -80px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 24%),
+    radial-gradient(circle at center, #2f6db3 0%, #1b4f8a 40%, #0b2c59 70%, #03132a 90%, transparent 100%);
+  opacity: 0.08;
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+  animation: floatOrb 36s ease-in-out infinite;
+}
+
+@keyframes floatOrb {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  50%  { transform: translate(8px, 12px) scale(1.03); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.contact-shell {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.contact-hero {
+  margin: 0;
+  max-width: none;
+}
+
+.hero-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-title img {
+  width: 52px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.contact-hero h1 {
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.contact-hero p {
+  margin: 14px 0 0 0;
+  font-size: 19px;
+  color: var(--text-secondary);
+  max-width: none;
+  text-align: center;
+}
+
+.form-wrap {
+  max-width: none;
+  margin: 0;
+}
+
+.field {
+  margin-top: 20px;
+}
+
+.field:first-child {
+  margin-top: 0;
+}
+
+.field-hidden {
+  display: none;
+}
+
+.contact-shell label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.contact-shell input {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background-color: #ffffff;
+}
+
+.contact-shell input:focus,
+.ql-container:focus-within,
+.ql-toolbar:focus-within {
+  outline: none;
+  border-color: #b7b7b7;
+}
+
+.ql-toolbar.ql-snow {
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background-color: #fcfcfc;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 8px 8px;
+  font-size: 16px;
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+.ql-editor {
+  line-height: 1.6;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 148px;
+  transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.form-error {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #a42525;
+  min-height: 21px;
+}
+
+.success-message {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+/* Executive Action Block — LinkedIn CTA */
+.executive-action-block,
+.linkedin-connect {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  margin: 32px 0;
+  border-left: 4px solid var(--accent-blue);
+  background: rgba(70, 100, 255, 0.04);
+  border-radius: 0 8px 8px 0;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  color: var(--text-primary);
+}
+
+.executive-action-block:hover,
+.linkedin-connect:hover {
+  background: rgba(70, 100, 255, 0.07);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.action-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.action-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.action-icon {
+  color: var(--accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.action-title,
+.linkedin-connect h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin: 0;
+}
+
+.action-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.action-arrow,
+.arrow {
+  font-size: 24px;
+  color: var(--accent-blue);
+  transition: transform 0.25s ease;
+}
+
+.executive-action-block:hover .action-arrow,
+.linkedin-connect:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* Pre-footer divider */
+.connect-main ~ .footer::before {
+  content: "";
+  display: block;
+  width: min(960px, 92%);
+  margin: 0 auto 18px auto;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Section spacing */
+.connect-main .section {
+  margin: 0;
+}
+
+.connect-main .contact-hero.section {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.connect-main .section + .section {
+  margin-top: 56px;
+}
+
+/* Themes block */
+.connect-themes {
+  margin: 0;
+}
+
+.connect-themes-divider {
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  margin: 0 0 28px 0;
+}
+
+.connect-themes h2 {
+  margin: 0 0 14px 0;
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.connect-themes p {
+  margin: 0 0 16px 0;
+}
+
+.connect-themes .service-list {
+  margin-bottom: 20px;
+}
+
+.connect-closing,
+.connect-expectation {
+  color: var(--text-secondary);
+}
+
+.connect-expectation {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  color: #666666;
+}
+
+/* Form card */
+.form-card,
+.contact-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.92));
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(45, 92, 255, 0.35);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .form-card {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Disable ambient orbs on mobile for clean viewport. */
+  .connect-main::before,
+  .connect-main::after {
+    display: none;
+  }
+
+  /* Stack icon and headline vertically on mobile. */
+  .hero-title {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .hero-title img {
+    width: 100%;
+    max-width: 72px;
+    height: auto;
+    display: block;
+    margin: 0 auto 16px;
+  }
+
+  .contact-hero {
+    padding-top: 28px;
+  }
+
+  .contact-hero h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .contact-hero p {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+
+  .connect-main .section + .section {
+    margin-top: 40px;
+  }
+
+  .connect-themes p {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .service-list li {
+    margin-bottom: 12px;
+    line-height: 1.65;
+  }
+
+  .form-card {
+    padding: 24px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px 20px;
+  }
+
+  .executive-action-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 24px;
+  }
+
+  .action-arrow {
+    display: none;
+  }
+
+  .action-left {
+    gap: 16px;
+  }
+
+  .action-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .action-title {
+    font-size: 18px;
+  }
+
+  .action-desc {
+    font-size: 15px;
+  }
+}

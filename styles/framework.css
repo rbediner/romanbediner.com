@@ -776,7 +776,6 @@ html {
 
   .framework-progress {
     margin: 14px 0 24px;
-    overflow-x: clip;
   }
 
   .framework-diagram {
@@ -792,16 +791,9 @@ html {
 
   .framework-progress-markers {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 6px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 6px;
-    scrollbar-width: none;
-  }
-
-  .framework-progress-markers::-webkit-scrollbar {
-    display: none;
+    padding-bottom: 4px;
   }
 
   .framework-section {
