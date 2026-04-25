@@ -97,7 +97,7 @@ class ContactPageQATest(unittest.TestCase):
     def test_externalized_css_and_layout_hooks_exist(self):
         # Allow optional cache-busting query strings while enforcing the canonical connect stylesheet path.
         self.assertRegex(self.html, r'<link rel="stylesheet" href="/styles/connect\.css(?:\?[^"]+)?"\s*/>')
-        self.assertIn('<link rel="stylesheet" href="/styles/site.css" />', self.html)
+        self.assertRegex(self.html, r'<link rel="stylesheet" href="/styles/site\.css(?:\?[^"]+)?"\s*/>')
         # Allow cache-busted nav runtime script include.
         self.assertRegex(
             self.html,

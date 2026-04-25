@@ -4,7 +4,7 @@
 .resources-main {
   max-width: 980px;
   margin: 0 auto;
-  padding: 0 24px 72px;
+  padding: 0 24px 40px;
 }
 
 .resource-summary-main {
@@ -964,8 +964,8 @@
 
 /* Summary page site-family nav (replaces pill dual nav) */
 .resource-page-nav {
-  margin-top: 54px;
-  margin-bottom: 40px;
+  margin-top: 36px;
+  margin-bottom: 20px;
 }
 
 .resource-page-nav-links {

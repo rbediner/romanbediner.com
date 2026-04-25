@@ -43,7 +43,7 @@ for (const page of pages) {
     }
   }
 
-  if (!html.includes('href="/styles/site.css"')) {
+  if (!html.includes('href="/styles/site.css')) {
     hasError = true;
     console.error(`Missing shared stylesheet include in ${page}`);
   }
