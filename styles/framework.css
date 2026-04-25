@@ -843,8 +843,11 @@ html {
   }
 
   .resource-companion-cta-framework {
+    display: flex;
+    width: 100%;
     min-height: 50px;
     padding: 0 22px;
+    text-align: center;
   }
 
   .framework-main .next-page-nav {
