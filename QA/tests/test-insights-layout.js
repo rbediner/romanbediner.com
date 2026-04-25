@@ -210,7 +210,7 @@ for (const stage of stages) {
           ? '<h2>Operational signals worth watching</h2>'
           : stage.id === 'evolution'
             ? '<h2>What adaptive guardrails should define</h2>'
-            : '<h2>Lane Anatomy (Structured View)</h2>';
+            : '<h2>Lane Anatomy <span style="white-space:nowrap">(Structured View)</span></h2>';
     if (!briefHtml.includes(expectedInsetHeading)) {
       failures += 1;
       console.error(`FAIL: ${stage.brief} missing required inset list heading.`);
