@@ -76,7 +76,7 @@ p + .divider {
   column-gap: 48px;
   row-gap: 72px;
   align-items: start;
-  padding-bottom: 56px;
+  padding-bottom: 24px;
 }
 
 /* Header spans both columns so title and callout share the hero boundary. */

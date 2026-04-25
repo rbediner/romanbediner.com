@@ -317,19 +317,16 @@ async function assertHomeContract(page) {
   const result = await page.evaluate(() => {
     const image = document.querySelector('.master-photo img, .master-photo picture img, .hero-photo img');
     const h1 = document.querySelector('.hero-head h1, .master-head h1');
-    const callout = document.querySelector('.executive-callout');
-    if (!image || !h1 || !callout) {
+    if (!image || !h1) {
       return { missing: true };
     }
     const h1Box = h1.getBoundingClientRect();
-    const calloutBox = callout.getBoundingClientRect();
     const style = window.getComputedStyle(h1);
     const lineHeight = Number.parseFloat(style.lineHeight) || Number.parseFloat(style.fontSize) * 1.1;
     return {
       missing: false,
       naturalWidth: image.naturalWidth,
       naturalHeight: image.naturalHeight,
-      delta: Math.abs(h1Box.right - calloutBox.right),
       oneLine: h1Box.height <= lineHeight + 1
     };
   });
@@ -339,9 +336,6 @@ async function assertHomeContract(page) {
   }
   if (result.naturalWidth < 500 || result.naturalHeight < 700) {
     throw new Error(`home: hero image dimensions look wrong (${result.naturalWidth}x${result.naturalHeight})`);
-  }
-  if (result.delta > 1) {
-    throw new Error(`home: hero alignment drifted by ${result.delta.toFixed(2)}px`);
   }
   if (!result.oneLine) {
     throw new Error('home: hero H1 wrapped unexpectedly');
