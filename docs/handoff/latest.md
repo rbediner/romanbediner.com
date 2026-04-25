@@ -3,7 +3,7 @@
 - Handoff Sequence: 216
 - Updated At (UTC): 2026-04-25T10:18:56Z
 - Source Branch: staging
-- Source Commit: a4c2ef0 (post-QA, insights threshold fix pending commit)
+- Source Commit: 59ff6361f43a9ea68cfef73ad0ff0936edbae1eb
 - Active Agent: No active agent — QA complete, awaiting user go/no-go on prod promotion
 
 ## Current State
