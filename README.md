@@ -484,6 +484,7 @@ nvm install
   - keep `prod` promotion fast, then rely on `qa:smoke:prod` after deploy
 - Playwright spec tests are executed through `scripts/qa/run-local-playwright-suite.sh`, which mirrors the repo to `/tmp` and runs against local Playwright package extracts to prevent cloud-synced filesystem read timeouts.
 - Visual regression baselines are stored in `QA/tests/visual-baselines/`. To refresh stale baselines after confirmed intentional visual changes, run `UPDATE_VISUAL_BASELINES=1 npm run test:visual`. Commit the updated PNG files alongside the change that caused the visual delta.
+- `PER_FILE_THRESHOLDS` dict in `QA/tests/test_visual_regression_playwright.py` allows per-baseline threshold overrides. Currently: `insights--mobile-full.png` raised to `0.02` to absorb DM Sans sub-pixel kerning variance in headless Chromium. Only add entries here with a documented, reproducible root cause.
 - Playwright defaults to parallel workers via `scripts/qa/run-local-playwright-suite.sh` (`--workers=50%`) unless a specific `--workers` value is explicitly passed.
 - Release SOP mandate: Playwright regression execution must use at least 3 concurrent workers (`--workers>=3`) in CI-parity and release gates.
 - Additional targeted browser entrypoints:
