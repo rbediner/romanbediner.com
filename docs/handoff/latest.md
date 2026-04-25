@@ -132,5 +132,6 @@ CI actions: https://github.com/rbediner/romanbediner.com/actions
 
 ## Release Watcher Hygiene
 
+Maintain release watcher hygiene between sessions:
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or production monitoring
