@@ -2,9 +2,10 @@
  * Purpose:
  * - Track resource-specific GA4 interactions that are not covered by the
  *   global site-navigation tracker.
- * - Events (locked in PRD P3-AD-01):
+ * - Events (locked in PRD P3-AD-01 + source telemetry extension):
  *     resource_card_click
  *     resource_pdf_download
+ *     resource_source_code_click
  *   (resource_preview_expand is emitted by resources-carousel.js on modal open.)
  *
  * Architectural role:
@@ -15,6 +16,7 @@
  * Event parameter contract (PRD P3-AD-01):
  *   resource_card_click:     resource_slug, resource_title, resource_type, resource_location
  *   resource_pdf_download:   resource_slug, resource_title, resource_type, resource_location, file_path
+ *   resource_source_code_click: resource_slug, resource_title, resource_type, resource_location, destination, cta_label
  *   resource_preview_expand: resource_slug, resource_title, resource_type, resource_location, slide_index
  *
  * Dependencies:
@@ -27,6 +29,7 @@
  * Migration considerations:
  * - Any resource card must carry the four data-resource-* attributes listed below.
  * - Any downloadable resource link must carry data-track-pdf-download and data-file-path.
+ * - Source-code links must carry data-track-dashboard-source-code.
  */
 (function initResourcesAnalytics() {
   function waitForAnalytics(cb) {
@@ -73,6 +76,16 @@
       primaryLink.addEventListener('click', () => {
         const ctx = readResourceContext(card);
         window.__rbAnalytics.trackEvent('resource_card_click', ctx);
+      });
+    });
+
+    document.querySelectorAll('[data-track-dashboard-source-code]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const ctx = readResourceContext(link);
+        window.__rbAnalytics.trackEvent('resource_source_code_click', Object.assign({}, ctx, {
+          destination: link.getAttribute('href') || '',
+          cta_label: link.getAttribute('data-source-code-label') || ''
+        }));
       });
     });
   });

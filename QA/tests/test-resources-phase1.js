@@ -181,11 +181,14 @@ mustInclude('P3-AD-01 pdf file_path data attr', summaryHtml, 'data-file-path="/a
 // P3-AD-01 analytics event + required parameter contract in runtime JS
 mustInclude('analytics: resource_card_click event', analyticsJs, "trackEvent('resource_card_click'");
 mustInclude('analytics: resource_pdf_download event', analyticsJs, "trackEvent('resource_pdf_download'");
+mustInclude('analytics: resource_source_code_click event', analyticsJs, "trackEvent('resource_source_code_click'");
 mustInclude('analytics: file_path param', analyticsJs, 'file_path');
 mustInclude('analytics: resource_slug param', analyticsJs, 'resource_slug');
 mustInclude('analytics: resource_title param', analyticsJs, 'resource_title');
 mustInclude('analytics: resource_type param', analyticsJs, 'resource_type');
 mustInclude('analytics: resource_location param', analyticsJs, 'resource_location');
+mustInclude('analytics: destination param', analyticsJs, 'destination');
+mustInclude('analytics: cta_label param', analyticsJs, 'cta_label');
 
 mustInclude('carousel: resource_preview_expand event', carouselJs, "trackEvent('resource_preview_expand'");
 mustInclude('carousel: slide_index param', carouselJs, 'slide_index');
@@ -306,7 +309,9 @@ mustInclude('dashboard page: closing conversation copy', dashboardHtml,
 );
 mustInclude('dashboard page: Reach Out for a Chat CTA', dashboardHtml, '>Reach Out for a Chat<');
 mustInclude('dashboard page: Reach Out links to /connect/', dashboardHtml, 'href="/connect/"');
-mustInclude('dashboard page: View Source Code top CTA', dashboardHtml, '>View Source Code<');
+mustInclude('dashboard page: View Source Code top CTA', dashboardHtml, 'View Source Code');
+mustInclude('dashboard page: source CTA tracking hook', dashboardHtml, 'data-track-dashboard-source-code');
+mustInclude('dashboard page: source CTA label contract', dashboardHtml, 'data-source-code-label="view_dashboard_source_code"');
 mustInclude('dashboard page: Explore the Full Framework bottom CTA', dashboardHtml, '>Explore the Full Framework<');
 mustInclude('dashboard page: mobile fallback message', dashboardHtml,
   'This interactive dashboard is designed for TV, desktop, or tablet review. For the full experience, please switch to a larger screen.'

@@ -192,9 +192,10 @@ Required handoff content for cross-machine continuity:
 - Resources telemetry in `/scripts/runtime/resources-analytics.js` and `/scripts/runtime/resources-carousel.js` emits the locked PRD P3-AD-01 contract:
   - `resource_card_click` — fires on a resource card's primary CTA click; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`
   - `resource_pdf_download` — fires on click of any `[data-track-pdf-download]` download link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `file_path`
+  - `resource_source_code_click` — fires on click of any `[data-track-dashboard-source-code]` link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `destination`, `cta_label`
   - `resource_preview_expand` — fires from `resources-carousel.js` on Expand Preview modal open; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `slide_index`
   - `environment` is added automatically by the shared `window.__rbAnalytics.trackEvent()` wrapper in `/scripts/runtime/ga4-bootstrap.js`
-  - DOM contract: resource cards and the summary-page `<main>` must declare `data-resource-slug`, `data-resource-title`, `data-resource-type`, and `data-resource-location`; PDF links must declare `data-track-pdf-download` and `data-file-path`
+  - DOM contract: resource cards and the summary-page `<main>` must declare `data-resource-slug`, `data-resource-title`, `data-resource-type`, and `data-resource-location`; PDF links must declare `data-track-pdf-download` and `data-file-path`; source links must declare `data-track-dashboard-source-code` and `data-source-code-label`
 - Allowed event taxonomy for this phase:
   - `nav_click`
   - `internal_link_click`
@@ -202,6 +203,7 @@ Required handoff content for cross-machine continuity:
   - `framework_nav_click`
   - `scroll_depth`
   - `connect_intent`
+  - `resource_source_code_click`
 - Guardrails enforce analytics correctness:
   - GA meta tag presence and uniqueness
   - Allowed GA IDs only
