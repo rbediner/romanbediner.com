@@ -72,9 +72,11 @@ body {
   min-width: 0;
   text-decoration: none;
   color: var(--text-color, #111111);
+  transition: opacity 0.2s ease;
 }
 
 .brand:hover {
+  opacity: 0.82;
   text-decoration: none;
   color: var(--text-color, #111111);
 }
