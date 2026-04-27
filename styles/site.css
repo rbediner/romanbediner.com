@@ -72,6 +72,7 @@ body {
   min-width: 0;
   text-decoration: none;
   color: var(--text-color, #111111);
+  /* Keep the home-linked brand affordance subtle and layout-safe across pages. */
   transition: opacity 0.2s ease;
 }
 
