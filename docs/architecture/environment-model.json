@@ -22,13 +22,14 @@
     ]
   },
   "machine_readable_summary": {
-    "routes": ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/connect/"],
+    "routes": ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/resources/pasteflow/", "/connect/"],
     "transitions": {
       "flow": [
         { "from": "/", "to": "/about/", "label": "THE EXECUTION LAYER", "title": "Transition to Operating Philosophy" },
         { "from": "/about/", "to": "/services/", "label": "THE OPERATING MODEL", "title": "Transition to Strategic Services" },
         { "from": "/services/", "to": "/framework/", "label": "THE STRATEGY LAYER", "title": "Transition to Strategic Insights" },
         { "from": "/framework/", "to": "/resources/ai-enabled-operations-framework-summary/", "label": "THE ARTIFACT LAYER", "title": "Transition to Framework Summary" },
+        { "from": "/resources/", "to": "/resources/pasteflow/", "label": "THE ARTIFACT LAYER", "title": "Transition to PasteFlow" },
         { "from": "/resources/ai-enabled-operations-framework-summary/", "to": "/connect/", "label": "THE RELATIONSHIP LAYER", "title": "Transition to Connect" }
       ],
       "intent": "Guide a linear narrative from operating context to engagement."

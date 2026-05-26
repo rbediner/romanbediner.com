@@ -1,55 +1,94 @@
 # Cross-Machine Handoff (Latest)
 
 - Handoff Sequence: 236
-- Updated At (UTC): 2026-04-27T19:16:12Z
+- Updated At (UTC): 2026-05-26T16:15:48Z
 - Source Branch: staging
-- Source Commit: fd53df5a11e6fd539cbb2fb0db86a5f24e2d9e17 (pre-handoff baseline)
-- Active Agent: Codex (current session) — added dedicated dashboard source-code click analytics contract
+- Source Commit: af4afba6ba3cd6a5df105d08bd06390311728336 (pre-change baseline)
+- Active Agent: Codex (current session) — implemented PasteFlow resource hub + detail artifact launch on staging
 
 ## Current State
 
-`staging` and `prod` are currently divergent in local refs.
+`staging` is checked out locally with uncommitted implementation changes for the PasteFlow resource release.
 
-Uncommitted working tree changes in this session:
-- `resources/ai-enabled-operations-dashboard/index.html`
-  - Added explicit telemetry hooks on both `View Source Code` links:
-    - `data-track-dashboard-source-code`
-    - `data-source-code-label="view_dashboard_source_code"`
-- `scripts/runtime/resources-analytics.js`
-  - Added GA4 event `resource_source_code_click` for source-code CTA clicks.
-  - Payload contract includes: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `destination`, `cta_label`.
-- `QA/tests/test-resources-phase1.js`
-  - Added analytics contract checks for `resource_source_code_click`, `destination`, `cta_label`, and source-link data attributes.
-- `QA/tests/jest/resources-source-code-analytics.test.js` (new)
-  - Unit guard to ensure both source links are tagged and runtime emits the new event/params.
-- `README.md`
-  - Updated analytics architecture section to document the new event and DOM contract.
-
-Staging preview: https://rbediner.github.io/romanbediner-preview/
+Staging preview target (workflow-managed): https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
+
+## Implemented Changes (Working Tree)
+
+- New resource route and page:
+  - `resources/pasteflow/index.html`
+- Resources hub update:
+  - `resources/index.html` (third card for PasteFlow with locked copy + metadata attrs)
+- Resource assets:
+  - `assets/resources/pasteflow/*` (all provided PasteFlow CWS images copied with required filenames)
+- Resource runtime analytics:
+  - `scripts/runtime/resources-analytics.js`
+  - Added `resource_external_cta_click` for `[data-track-resource-external-cta]`
+- Resource page styles:
+  - `styles/resources.css` (scoped PasteFlow layout blocks only)
+- Sitemap updates:
+  - `scripts/content/generate-sitemap.js`
+  - `sitemap.xml` regenerated
+- QA/test coverage updates:
+  - `QA/tests/test-resources-phase1.js`
+  - `QA/tests/test-og-route-metadata.js`
+  - `QA/tests/test-route-metadata-parity.js`
+  - `QA/tests/test-canonical.js`
+  - `QA/tests/test-clean-urls.js`
+  - `QA/tests/test-ga4-installation.js`
+  - `QA/tests/test-favicon-contract.js`
+  - `QA/tests/test_favicon_assets.py`
+  - `QA/tests/test-nav-links-contract.js`
+  - `QA/tests/test-header-nav.js`
+  - `QA/tests/test-metadata-consistency.js`
+  - `QA/tests/playwright/csp-ga-runtime.spec.js` (route coverage includes `/resources/pasteflow/`)
+  - `QA/tests/test_ga_runtime_playwright.py`
+  - `QA/tests/test_nav_runtime_playwright.py`
+  - `QA/tests/jest/resources-external-cta-analytics.test.js` (new)
+  - `QA/tests/jest/readme_structure.test.js`
+- Architecture/docs parity updates:
+  - `README.md`
+  - `docs/architecture/environment-model.json`
 
 ## QA Summary (This Session)
 
 Passed locally:
 - `node QA/tests/test-resources-phase1.js`
-- `node scripts/qa/run-jest-suite.js QA/tests/jest/resources-source-code-analytics.test.js --runInBand`
+- `node QA/tests/test-og-route-metadata.js`
+- `node QA/tests/test-route-metadata-parity.js`
+- `node QA/tests/test-canonical.js`
+- `node QA/tests/test-clean-urls.js`
+- `node QA/tests/test-ga4-installation.js`
+- `node QA/tests/test-favicon-contract.js`
+- `node QA/tests/test-nav-links-contract.js`
+- `node QA/tests/test-header-nav.js`
+- `node QA/tests/test-metadata-consistency.js`
+- `node scripts/qa/run-jest-suite.js QA/tests/jest/resources-source-code-analytics.test.js QA/tests/jest/resources-external-cta-analytics.test.js QA/tests/jest/readme_structure.test.js --runInBand`
+- `node QA/tests/test-jsonld-schema.js`
+- `node scripts/qa/validate-links.js`
+- `python3 -m unittest QA/tests/test_favicon_assets.py -v`
+
+Known failing runtime suite (pre-existing CSP baseline issue, not introduced by PasteFlow route):
+- `node node_modules/playwright/cli.js test QA/tests/playwright/csp-ga-runtime.spec.js --reporter=line`
+- Failure reason: GA runtime now attempts `https://stats.g.doubleclick.net/g/collect`, which is not currently whitelisted by page `connect-src` across canonical routes.
 
 ## Branch Alignment
 
-- `staging`: `19a4d1f33f55280aae27116687425395cbf0e402`
-- `prod`: `c2ff22f14943bb9470c4999088a03a5d8f54032e`
-- Alignment: divergent locally; this session's analytics changes are uncommitted on `staging` working tree.
+- Current branch: `staging`
+- Local HEAD: `af4afba6ba3cd6a5df105d08bd06390311728336`
+- Working tree: dirty (PasteFlow implementation pending commit)
 
 ## Open Items / Follow-ups
 
-- Commit the analytics contract update on `staging`.
-- Run broader selective gate profile before release promotion.
-- Update live PRD in Google Docs (`SEO Authority PRD`) because this session changed analytics behavior.
-- No release watcher processes were started in this session.
-- No manual GitHub environment overrides are currently required.
+1. Review local visual output for:
+   - `/resources/`
+   - `/resources/pasteflow/`
+2. Commit working tree changes to `staging` with a single implementation commit.
+3. Push `staging` and wait for CI + Deploy Staging preview workflow completion.
+4. Return staging preview URL + deploy status in the final implementation report.
+5. Decide whether to separately remediate global CSP runtime failures for `stats.g.doubleclick.net` (outside this PasteFlow scope).
 
 ## Release Watcher Hygiene
 
-Keep release watcher hygiene in place for this repo.
-- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
-- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup` when monitoring release/deploy state.
+- Avoid ad-hoc polling loops.

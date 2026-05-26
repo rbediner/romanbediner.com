@@ -6,6 +6,7 @@
  *     resource_card_click
  *     resource_pdf_download
  *     resource_source_code_click
+ *     resource_external_cta_click
  *   (resource_preview_expand is emitted by resources-carousel.js on modal open.)
  *
  * Architectural role:
@@ -17,6 +18,7 @@
  *   resource_card_click:     resource_slug, resource_title, resource_type, resource_location
  *   resource_pdf_download:   resource_slug, resource_title, resource_type, resource_location, file_path
  *   resource_source_code_click: resource_slug, resource_title, resource_type, resource_location, destination, cta_label
+ *   resource_external_cta_click: resource_slug, resource_title, resource_type, resource_location, destination, cta_label, external_url_type
  *   resource_preview_expand: resource_slug, resource_title, resource_type, resource_location, slide_index
  *
  * Dependencies:
@@ -85,6 +87,17 @@
         window.__rbAnalytics.trackEvent('resource_source_code_click', Object.assign({}, ctx, {
           destination: link.getAttribute('href') || '',
           cta_label: link.getAttribute('data-source-code-label') || ''
+        }));
+      });
+    });
+
+    document.querySelectorAll('[data-track-resource-external-cta]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const ctx = readResourceContext(link);
+        window.__rbAnalytics.trackEvent('resource_external_cta_click', Object.assign({}, ctx, {
+          destination: link.getAttribute('href') || '',
+          cta_label: link.getAttribute('data-resource-cta-label') || '',
+          external_url_type: link.getAttribute('data-resource-external-url-type') || ''
         }));
       });
     });

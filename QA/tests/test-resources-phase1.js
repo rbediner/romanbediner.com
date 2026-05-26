@@ -28,6 +28,10 @@ const dashboardHtml = fs.readFileSync(
   path.join(root, 'resources', 'ai-enabled-operations-dashboard', 'index.html'),
   'utf8'
 );
+const pasteflowHtml = fs.readFileSync(
+  path.join(root, 'resources', 'pasteflow', 'index.html'),
+  'utf8'
+);
 const frameworkHtml = fs.readFileSync(path.join(root, 'framework', 'index.html'), 'utf8');
 const resourcesCss = fs.readFileSync(path.join(root, 'styles', 'resources.css'), 'utf8');
 const carouselJs = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-carousel.js'), 'utf8');
@@ -38,6 +42,14 @@ const requiredFiles = [
   'assets/resources/framework-summary/slides/slide-01.png',
   'assets/resources/framework-summary/slides/slide-08.png',
   'assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png',
+  'assets/resources/pasteflow/pasteflow-cws-01-hero.png',
+  'assets/resources/pasteflow/pasteflow-cws-02-control.png',
+  'assets/resources/pasteflow/pasteflow-cws-03-multilingual.png',
+  'assets/resources/pasteflow/pasteflow-cws-04-compatibility.png',
+  'assets/resources/pasteflow/pasteflow-cws-05-privacy.png',
+  'assets/resources/pasteflow/pasteflow-cws-marquee-promo-tile.png',
+  'assets/resources/pasteflow/pasteflow-cws-small-promo-tile.png',
+  'assets/resources/pasteflow/pasteflow-cws-store-icon-128x128.png',
   'styles/resources.css',
   'scripts/runtime/resources-carousel.js',
   'scripts/runtime/resources-analytics.js'
@@ -67,6 +79,7 @@ for (const rel of requiredFiles) {
 
 // Route linkage preserved
 mustInclude('resources hub', resourcesHtml, 'href="/resources/ai-enabled-operations-framework-summary/"');
+mustInclude('resources hub', resourcesHtml, 'href="/resources/pasteflow/"');
 mustInclude('summary page', summaryHtml, 'href="/framework/"');
 mustInclude('summary page', summaryHtml, 'href="/connect/"');
 
@@ -86,6 +99,17 @@ mustInclude('P1-RH-03 locked CTA button copy', resourcesHtml, '>Open the Dashboa
 mustInclude('P1-RH-03 launched CTA link', resourcesHtml, 'href="/resources/ai-enabled-operations-dashboard/"');
 mustInclude('P1-RH-03 launched badge', resourcesHtml, 'class="resource-meta">Available Now<');
 mustInclude('P1-RH-03 card present', resourcesHtml, 'data-resource-card="dashboard"');
+mustInclude('pasteflow card present', resourcesHtml, 'data-resource-card="pasteflow"');
+mustInclude('pasteflow card title', resourcesHtml, '<h2>PasteFlow</h2>');
+mustInclude('pasteflow card cta', resourcesHtml, '>Explore PasteFlow<');
+mustInclude('pasteflow card copy', resourcesHtml, 'A shipped Chrome extension that turns browser-based input friction into human-rhythm typing for web editors, forms, surveys, and AI-assisted work. Built as a proof point for productizing operations in modern AI-enabled workflows.');
+
+const frameworkCardPos = resourcesHtml.indexOf('data-resource-card="framework-summary"');
+const dashboardCardPos = resourcesHtml.indexOf('data-resource-card="dashboard"');
+const pasteflowCardPos = resourcesHtml.indexOf('data-resource-card="pasteflow"');
+if (!(frameworkCardPos !== -1 && dashboardCardPos !== -1 && pasteflowCardPos !== -1 && frameworkCardPos < dashboardCardPos && dashboardCardPos < pasteflowCardPos)) {
+  fail('PasteFlow hub card must appear after framework-summary and dashboard cards.');
+}
 
 if (resourcesHtml.includes('is-coming-soon')) {
   fail('P1-RH-03 dashboard card must not show Coming Soon once the dashboard resource page exists.');
@@ -182,6 +206,7 @@ mustInclude('P3-AD-01 pdf file_path data attr', summaryHtml, 'data-file-path="/a
 mustInclude('analytics: resource_card_click event', analyticsJs, "trackEvent('resource_card_click'");
 mustInclude('analytics: resource_pdf_download event', analyticsJs, "trackEvent('resource_pdf_download'");
 mustInclude('analytics: resource_source_code_click event', analyticsJs, "trackEvent('resource_source_code_click'");
+mustInclude('analytics: resource_external_cta_click event', analyticsJs, "trackEvent('resource_external_cta_click'");
 mustInclude('analytics: file_path param', analyticsJs, 'file_path');
 mustInclude('analytics: resource_slug param', analyticsJs, 'resource_slug');
 mustInclude('analytics: resource_title param', analyticsJs, 'resource_title');
@@ -189,6 +214,7 @@ mustInclude('analytics: resource_type param', analyticsJs, 'resource_type');
 mustInclude('analytics: resource_location param', analyticsJs, 'resource_location');
 mustInclude('analytics: destination param', analyticsJs, 'destination');
 mustInclude('analytics: cta_label param', analyticsJs, 'cta_label');
+mustInclude('analytics: external_url_type param', analyticsJs, 'external_url_type');
 
 mustInclude('carousel: resource_preview_expand event', carouselJs, "trackEvent('resource_preview_expand'");
 mustInclude('carousel: slide_index param', carouselJs, 'slide_index');
@@ -328,6 +354,55 @@ mustInclude('dashboard page: artifact frame shell', dashboardHtml, 'resource-das
 mustInclude('dashboard page: iframe route', dashboardHtml, 'src="/ai-enabled-operations-dashboard/"');
 mustInclude('dashboard page: iframe class', dashboardHtml, 'class="resource-dashboard-frame-iframe"');
 mustInclude('dashboard page: mobile screenshot path', resourcesCss, 'dashboard-home-mobile-preview.png');
+
+// PasteFlow page contract
+mustInclude('pasteflow page: canonical URL', pasteflowHtml, 'href="https://romanbediner.com/resources/pasteflow/"');
+mustInclude('pasteflow page: h1', pasteflowHtml, '<h1>PasteFlow</h1>');
+mustInclude('pasteflow page: eyebrow', pasteflowHtml, '>PRODUCT PROOF POINT<');
+mustInclude('pasteflow page: title', pasteflowHtml, '<title>PasteFlow Chrome Extension | Human-Like Auto Typer for Web Editors</title>');
+mustInclude('pasteflow page: meta description', pasteflowHtml, 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A shipped product proof point for AI-enabled operations.');
+mustInclude('pasteflow page: cws CTA', pasteflowHtml, 'href="https://chromewebstore.google.com/detail/pasteflow/paenffoomjmkonbgkmfdbnfaljoiilgm"');
+mustInclude('pasteflow page: hero image path', pasteflowHtml, '/assets/resources/pasteflow/pasteflow-cws-01-hero.png');
+mustInclude('pasteflow page: hero image alt', pasteflowHtml, 'PasteFlow product interface showing human-rhythm typing for browser-based work');
+mustInclude('pasteflow page: youtube title', pasteflowHtml, '>90-Second Product Overview<');
+mustInclude('pasteflow page: youtube iframe', pasteflowHtml, 'https://www.youtube-nocookie.com/embed/lKfc8dehasg');
+mustInclude('pasteflow page: human engine copy', pasteflowHtml, '<h3>Human Engine</h3>');
+mustInclude('pasteflow page: responsible use note', pasteflowHtml, "PasteFlow only types into fields the user chooses. It does not submit forms, click buttons, or make decisions on the user's behalf. Users remain responsible for where and how they use it.");
+mustInclude('pasteflow page: closing CTA link', pasteflowHtml, 'href="/connect/"');
+mustInclude('pasteflow page: back nav', pasteflowHtml, 'href="/resources/"');
+mustInclude('pasteflow page: ga bootstrap', pasteflowHtml, 'src="/scripts/runtime/ga4-bootstrap.js"');
+mustInclude('pasteflow page: resources stylesheet', pasteflowHtml, 'href="/styles/resources.css');
+mustInclude('pasteflow page: site stylesheet', pasteflowHtml, 'href="/styles/site.css');
+mustInclude('pasteflow page: software schema', pasteflowHtml, '"@type": "SoftwareApplication"');
+mustInclude('pasteflow page: webpage schema', pasteflowHtml, '"@type": "WebPage"');
+mustInclude('pasteflow page: no html public links', pasteflowHtml, 'href="/resources/"');
+mustInclude('pasteflow page: csp frame-src', pasteflowHtml, 'frame-src https://www.youtube.com https://www.youtube-nocookie.com');
+mustInclude('pasteflow page: external cta hook', pasteflowHtml, 'data-track-resource-external-cta');
+mustInclude('pasteflow page: external cta label', pasteflowHtml, 'data-resource-cta-label="add_to_chrome"');
+mustInclude('pasteflow page: external url type', pasteflowHtml, 'data-resource-external-url-type="chrome_web_store"');
+mustNotInclude('pasteflow page: source code link forbidden', pasteflowHtml, 'View Source Code');
+mustNotInclude('pasteflow page: offers schema forbidden', pasteflowHtml, '"offers"');
+mustNotInclude('pasteflow page: support email forbidden', pasteflowHtml, 'mailto:');
+mustNotInclude('pasteflow page: support email forbidden', pasteflowHtml, 'connect@romanbediner.com');
+
+[
+  'pricing',
+  'Free',
+  'Plus',
+  '$4.99',
+  'lifetime',
+  'character limit',
+  'source code',
+  'support email',
+  'bypass',
+  'evade',
+  'defeat',
+  'circumvent'
+].forEach((term) => {
+  if (pasteflowHtml.toLowerCase().includes(term.toLowerCase())) {
+    fail(`pasteflow page contains prohibited term: ${term}`);
+  }
+});
 
 if (dashboardHtml.includes('resource-dashboard-frame-placeholder')) {
   fail('dashboard page must not include Phase 5 placeholder shell after iframe wiring.');

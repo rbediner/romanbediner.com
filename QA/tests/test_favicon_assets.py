@@ -23,6 +23,7 @@ class FaviconAssetsTest(unittest.TestCase):
             ("framework/index.html", "../assets/favicon/"),
             ("resources/index.html", "../assets/favicon/"),
             ("resources/ai-enabled-operations-framework-summary/index.html", "../../assets/favicon/"),
+            ("resources/pasteflow/index.html", "../../assets/favicon/"),
         ]
 
     def test_favicon_assets_exist(self):

@@ -66,6 +66,12 @@ const expected = [
     canonical: 'https://romanbediner.com/resources/ai-enabled-operations-dashboard/',
     ogTitle: 'AI-Enabled Operations Dashboard',
     ogDescription: 'An interactive, single-screen dashboard prototype for AI-enabled operating visibility, structured execution, and faster review in modern AI-enabled work.'
+  },
+  {
+    file: 'resources/pasteflow/index.html',
+    canonical: 'https://romanbediner.com/resources/pasteflow/',
+    ogTitle: 'PasteFlow Chrome Extension | Human-Like Auto Typer for Web Editors',
+    ogDescription: 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A shipped product proof point for AI-enabled operations.'
   }
 ];
 

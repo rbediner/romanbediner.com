@@ -22,7 +22,8 @@ const PAGES = [
   'framework/index.html',
   'connect/index.html',
   'resources/index.html',
-  'resources/ai-enabled-operations-framework-summary/index.html'
+  'resources/ai-enabled-operations-framework-summary/index.html',
+  'resources/pasteflow/index.html'
 ];
 // Home (/) removed from nav (logo serves as home link); Connect remains as CTA button.
 const REQUIRED_HREFS = ['/about/', '/framework/', '/resources/', '/services/', '/connect/'];

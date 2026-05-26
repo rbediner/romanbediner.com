@@ -21,7 +21,8 @@ const pages = [
   'framework/index.html',
   'resources/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html',
-  'resources/ai-enabled-operations-dashboard/index.html'
+  'resources/ai-enabled-operations-dashboard/index.html',
+  'resources/pasteflow/index.html'
 ];
 
 const seenTitles = new Set();

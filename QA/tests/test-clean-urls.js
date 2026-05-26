@@ -23,6 +23,7 @@ const canonicalPages = [
   'framework/index.html',
   'resources/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html',
+  'resources/pasteflow/index.html',
   'framework/opportunity/productizing-operations/index.html',
   'framework/design/operations-as-product/index.html',
   'framework/integration/ai-operating-layer/index.html',
@@ -77,6 +78,10 @@ if (!fs.existsSync(path.join(root, 'resources', 'index.html'))) {
 if (!fs.existsSync(path.join(root, 'resources', 'ai-enabled-operations-framework-summary', 'index.html'))) {
   failures += 1;
   console.error('FAIL: /resources/ai-enabled-operations-framework-summary/ page is missing.');
+}
+if (!fs.existsSync(path.join(root, 'resources', 'pasteflow', 'index.html'))) {
+  failures += 1;
+  console.error('FAIL: /resources/pasteflow/ page is missing.');
 }
 if (!fs.existsSync(path.join(root, 'insights', 'index.html'))) {
   failures += 1;

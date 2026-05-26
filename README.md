@@ -36,6 +36,7 @@ Canonical public routes:
 - `/resources/`
 - `/resources/ai-enabled-operations-framework-summary/`
 - `/resources/ai-enabled-operations-dashboard/`
+- `/resources/pasteflow/`
 - `/services/`
 - `/connect/`
 - `/framework/`
@@ -193,9 +194,11 @@ Required handoff content for cross-machine continuity:
   - `resource_card_click` — fires on a resource card's primary CTA click; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`
   - `resource_pdf_download` — fires on click of any `[data-track-pdf-download]` download link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `file_path`
   - `resource_source_code_click` — fires on click of any `[data-track-dashboard-source-code]` link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `destination`, `cta_label`
+  - `resource_external_cta_click` — fires on click of any `[data-track-resource-external-cta]` link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `destination`, `cta_label`, `external_url_type`
   - `resource_preview_expand` — fires from `resources-carousel.js` on Expand Preview modal open; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `slide_index`
   - `environment` is added automatically by the shared `window.__rbAnalytics.trackEvent()` wrapper in `/scripts/runtime/ga4-bootstrap.js`
   - DOM contract: resource cards and the summary-page `<main>` must declare `data-resource-slug`, `data-resource-title`, `data-resource-type`, and `data-resource-location`; PDF links must declare `data-track-pdf-download` and `data-file-path`; source links must declare `data-track-dashboard-source-code` and `data-source-code-label`
+  - External CTAs must declare `data-track-resource-external-cta`, `data-resource-cta-label`, and `data-resource-external-url-type`
 - Allowed event taxonomy for this phase:
   - `nav_click`
   - `internal_link_click`
@@ -204,6 +207,7 @@ Required handoff content for cross-machine continuity:
   - `scroll_depth`
   - `connect_intent`
   - `resource_source_code_click`
+  - `resource_external_cta_click`
 - Guardrails enforce analytics correctness:
   - GA meta tag presence and uniqueness
   - Allowed GA IDs only
@@ -240,22 +244,25 @@ Required handoff content for cross-machine continuity:
 - Canonical page entrypoints:
   - `/index.html`
   - `/about/index.html`
-  - `/resources/index.html`
-  - `/resources/ai-enabled-operations-framework-summary/index.html`
-  - `/resources/ai-enabled-operations-dashboard/index.html`
+- `/resources/index.html`
+- `/resources/ai-enabled-operations-framework-summary/index.html`
+- `/resources/ai-enabled-operations-dashboard/index.html`
+- `/resources/pasteflow/index.html`
   - `/services/index.html`
   - `/framework/index.html`
   - `/connect/index.html`
 - Resource assets:
-  - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
-  - `/assets/resources/framework-summary/slides/`
-  - `/assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png`
+- `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
+- `/assets/resources/framework-summary/slides/`
+- `/assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png`
+- `/assets/resources/pasteflow/`
 - Dashboard source-of-truth folder:
   - `/ai-enabled-operations-dashboard/` (React/Vite source + committed `dist/` build output for release artifacts)
 - Resources presentation contract:
   - `/resources/` opens with the shared shelf-callout family treatment (vertical blue rule, blue-tinted bg) and closes with a forward-only site-family nav block (`.next-page-nav resources-forward-nav`) to `/framework/`. The inset companion panel (`resources-inset-cta`) no longer exists on this page.
   - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family, keeps `Who This Is For` as a restrained non-interactive companion card (`.resource-blue-box`), and moves the locked conversational paragraph into a `.resource-conversation-card` (card surface, no vertical blue rule) below the preview/CTA cluster.
   - `/resources/ai-enabled-operations-dashboard/` renders the live same-origin dashboard iframe at `src="/ai-enabled-operations-dashboard/"` on desktop/tablet and uses an inline static screenshot fallback on mobile.
+  - `/resources/pasteflow/` follows the same detail-page family with a shelf-callout opening, a clickable artifact hero rectangle to the Chrome Web Store, a lower-page 16:9 YouTube no-cookie overview embed, and a back-only site-family nav to `/resources/`.
   - Summary-page action hierarchy is intentionally ordered: download primary CTA → companion CTA → conversational card → site-family page nav.
     - `Download Framework Summary PDF` remains the dominant primary CTA.
     - `Explore the Full Framework` uses the shared companion CTA treatment.
@@ -767,6 +774,7 @@ flowchart LR
     "/framework/",
     "/resources/",
     "/resources/ai-enabled-operations-framework-summary/",
+    "/resources/pasteflow/",
     "/connect/"
   ],
   "transitions": {
@@ -794,6 +802,12 @@ flowchart LR
         "to": "/resources/ai-enabled-operations-framework-summary/",
         "label": "THE ARTIFACT LAYER",
         "title": "Transition to Framework Summary"
+      },
+      {
+        "from": "/resources/",
+        "to": "/resources/pasteflow/",
+        "label": "THE ARTIFACT LAYER",
+        "title": "Transition to PasteFlow"
       },
       {
         "from": "/resources/ai-enabled-operations-framework-summary/",

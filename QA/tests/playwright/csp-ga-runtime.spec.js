@@ -15,7 +15,7 @@ const { test, expect } = require('playwright/test');
 const rootDir = path.resolve(__dirname, '..', '..', '..');
 const host = '127.0.0.1';
 const port = 4175;
-const routes = ['/', '/about/', '/services/', '/framework/', '/resources/', '/resources/ai-enabled-operations-framework-summary/', '/connect/'];
+const routes = ['/', '/about/', '/services/', '/framework/', '/resources/', '/resources/ai-enabled-operations-framework-summary/', '/resources/pasteflow/', '/connect/'];
 
 const contentTypes = {
   '.html': 'text/html; charset=utf-8',

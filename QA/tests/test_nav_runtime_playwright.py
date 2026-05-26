@@ -46,7 +46,7 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
         # Home removed from nav in 2026 redesign; Connect renders as "Connect →" (CTA button).
         expected_labels = ["About", "Framework", "Resources", "Services", "Connect \u2192"]
         expected_hrefs = ["/about/", "/framework/", "/resources/", "/services/", "/connect/"]
-        routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/connect/"]
+        routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/resources/pasteflow/", "/connect/"]
 
         baseline_header = None
 
@@ -86,7 +86,7 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
             context.close()
 
     def test_insights_link_persists_across_route_clicks(self):
-        routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/connect/"]
+        routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/resources/pasteflow/", "/connect/"]
 
         for route in routes:
             context = self.browser.new_context()
