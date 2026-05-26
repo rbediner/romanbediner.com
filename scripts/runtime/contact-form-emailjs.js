@@ -223,6 +223,8 @@
 
     const editor = document.querySelector(".ql-editor");
     if (editor) {
+      editor.setAttribute("role", "textbox");
+      editor.setAttribute("aria-labelledby", "message-label");
       editor.style.resize = "vertical";
       editor.style.minHeight = "220px";
       editor.style.maxHeight = "600px";
