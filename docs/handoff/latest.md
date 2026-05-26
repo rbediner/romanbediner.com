@@ -90,5 +90,7 @@ Known failing runtime suite (pre-existing CSP baseline issue, not introduced by 
 
 ## Release Watcher Hygiene
 
+release watcher hygiene is required for this repository.
+
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup` when monitoring release/deploy state.
 - Avoid ad-hoc polling loops.
