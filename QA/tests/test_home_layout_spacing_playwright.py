@@ -59,9 +59,11 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
               const experienceTitle = document.querySelector('#experience .section-title');
               const focus = document.querySelector('#areas-of-focus');
               const photo = document.querySelector('.master-photo img');
-              const blurb = document.querySelector('.master-blurb p');
+              const blurbParagraphs = document.querySelectorAll('.master-blurb p');
               const heading = document.querySelector('.master-head h1');
-              if (!grid || !experience || !experienceTitle || !focus || !photo || !blurb || !heading) {
+              const blurbFirst = blurbParagraphs.length ? blurbParagraphs[0] : null;
+              const blurbLast = blurbParagraphs.length ? blurbParagraphs[blurbParagraphs.length - 1] : null;
+              if (!grid || !experience || !experienceTitle || !focus || !photo || !blurbFirst || !blurbLast || !heading) {
                 return null;
               }
               const gridRect = grid.getBoundingClientRect();
@@ -69,16 +71,17 @@ class HomeLayoutSpacingPlaywrightTest(unittest.TestCase):
               const expTitleRect = experienceTitle.getBoundingClientRect();
               const focusRect = focus.getBoundingClientRect();
               const photoRect = photo.getBoundingClientRect();
-              const blurbRect = blurb.getBoundingClientRect();
+              const blurbFirstRect = blurbFirst.getBoundingClientRect();
+              const blurbLastRect = blurbLast.getBoundingClientRect();
               const headingRect = heading.getBoundingClientRect();
               return {
                 headingHeight: headingRect.height,
                 gridToExperienceGap: expRect.top - gridRect.top,
-                blurbToExperienceGap: expTitleRect.top - blurbRect.bottom,
+                blurbToExperienceGap: expTitleRect.top - blurbLastRect.bottom,
                 photoToExperienceGap: expTitleRect.top - photoRect.bottom,
                 experienceToFocusGap: focusRect.top - expRect.bottom,
                 photoTop: photoRect.top,
-                blurbTop: blurbRect.top,
+                blurbTop: blurbFirstRect.top,
                 scrollWidth: document.documentElement.scrollWidth
               };
             }

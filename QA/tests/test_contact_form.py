@@ -33,7 +33,7 @@ class ContactPageQATest(unittest.TestCase):
             '<input id="company" name="company" type="hidden" autocomplete="off" tabindex="-1" aria-hidden="true" />',
             self.html,
         )
-        self.assertIn('<label for="message-editor">Message</label>', self.html)
+        self.assertIn('<label id="message-label" for="message-editor">Message</label>', self.html)
         self.assertIn('<div id="message-editor" aria-required="true"></div>', self.html)
         self.assertNotIn('id="subject"', self.html)
 
