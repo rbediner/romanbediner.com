@@ -1,31 +1,33 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 237
-- Updated At (UTC): 2026-05-26T17:04:40Z
+- Handoff Sequence: 238
+- Updated At (UTC): 2026-05-26T18:15:57Z
 - Source Branch: staging
-- Source Commit: 1b503b84988c360edb9c3c049db2e8c2001c041f (latest staging baseline before this correction pass)
-- Active Agent: Codex (current session) — rebuilt PasteFlow resource detail narrative cohesion + shared opening lede width fix
+- Source Commit: 0bf9c811e8058754d8977b93a82ea9c02d77fb21 (latest staging baseline before final pre-prod polish)
+- Active Agent: Codex (current session) — final pre-production PasteFlow resource polish pass
 
 ## Current State
 
-`staging` is checked out locally with uncommitted correction changes for PasteFlow resource cohesion and responsive detail-page polish.
+`staging` is checked out locally with uncommitted final polish changes for PasteFlow copy, capability model, metadata wording, and spacing.
 
 Staging preview target (workflow-managed): https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
 
 ## Implemented Changes (Working Tree)
 
-- Resources hub refinement:
-  - `resources/index.html`
-  - Updated PasteFlow card paragraph copy to remove visible `shipped` language.
-- PasteFlow detail-page cohesion rebuild:
+- PasteFlow detail-page final polish:
   - `resources/pasteflow/index.html`
-  - Reordered to one narrative flow, removed duplicate Add to Chrome button under hero, replaced Build Anatomy + Product System with Product Capabilities, and moved Responsible Use directly below capabilities.
-- Shared opening-lede width fix across detail pages:
-  - `resources/ai-enabled-operations-dashboard/index.html`
+  - Updated opening thesis to thesis-led operating-artifact framing.
+  - Updated In This Product narrative to locked four-paragraph operating-motion copy.
+  - Updated Product Capabilities cards to the final user-facing six-card model (`Human Rhythm`, `Multilingual Support`; removed `Product Infrastructure`).
+  - Renamed callout heading to `User-Controlled by Design` with final copy.
+  - Updated closing CTA copy to model-bridge wording.
+  - Removed `shipped` from page metadata/OG/Twitter/WebPage description.
+- Shared spacing and lede-width polish:
   - `styles/resources.css`
-  - Added shared `.resource-detail-prose-lede` class and applied it to PasteFlow + Dashboard opening prose.
-- QA contract updates for revised content/layout:
+  - Retained shared `.resource-detail-prose-lede` pattern and added dedicated spacing separation between PasteFlow hero artifact and audience card.
+- Metadata and QA contract updates:
+  - `QA/tests/test-og-route-metadata.js`
   - `QA/tests/test-resources-phase1.js`
 
 ## QA Summary (This Session)
@@ -40,13 +42,13 @@ Passed locally:
 - `node QA/tests/test-jsonld-schema.js`
 - `node scripts/qa/validate-links.js`
 - `node node_modules/playwright/cli.js test QA/tests/playwright/csp-ga-runtime.spec.js --reporter=line`
-- manual responsive runtime check (desktop/tablet/mobile 390px, `/resources/` + `/resources/pasteflow/`) confirmed no horizontal overflow.
+- manual responsive runtime check (desktop/tablet/mobile 390px, `/resources/`, `/resources/pasteflow/`, `/resources/ai-enabled-operations-dashboard/`) confirmed no horizontal overflow.
 
 ## Branch Alignment
 
 - Current branch: `staging`
-- Local HEAD: `1b503b84988c360edb9c3c049db2e8c2001c041f`
-- Working tree: dirty (correction pass pending commit)
+- Local HEAD: `0bf9c811e8058754d8977b93a82ea9c02d77fb21`
+- Working tree: dirty (final pre-prod polish pending commit)
 
 ## Open Items / Follow-ups
 

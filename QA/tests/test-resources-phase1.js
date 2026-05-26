@@ -361,29 +361,36 @@ mustInclude('pasteflow page: canonical URL', pasteflowHtml, 'href="https://roman
 mustInclude('pasteflow page: h1', pasteflowHtml, '<h1>PasteFlow</h1>');
 mustInclude('pasteflow page: eyebrow', pasteflowHtml, '>PRODUCT PROOF POINT<');
 mustInclude('pasteflow page: title', pasteflowHtml, '<title>PasteFlow Chrome Extension | Human-Like Auto Typer for Web Editors</title>');
-mustInclude('pasteflow page: meta description', pasteflowHtml, 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A shipped product proof point for AI-enabled operations.');
+mustInclude('pasteflow page: meta description', pasteflowHtml, 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A product proof point for AI-enabled operations.');
 mustInclude('pasteflow page: cws CTA', pasteflowHtml, 'href="https://chromewebstore.google.com/detail/pasteflow/paenffoomjmkonbgkmfdbnfaljoiilgm"');
 mustInclude('pasteflow page: hero image path', pasteflowHtml, '/assets/resources/pasteflow/pasteflow-cws-01-hero.png');
 mustInclude('pasteflow page: hero image alt', pasteflowHtml, 'PasteFlow product interface showing human-rhythm typing for browser-based work');
 mustInclude('pasteflow page: shelf callout copy', pasteflowHtml, 'A workflow tool that turns browser-based input friction into controlled, human-rhythm typing for web editors, forms, surveys, and AI-assisted work.');
-mustInclude('pasteflow page: opening thesis', pasteflowHtml, 'PasteFlow started with a common workflow problem: prepared text often needs to move into browser-based editors, forms, and tools where normal paste behavior can be unreliable or messy.');
+mustInclude('pasteflow page: opening thesis', pasteflowHtml, 'PasteFlow is the artifact behind a simple operating thesis: AI can accelerate building, but useful products still require clear workflow definition, QA, release discipline, and customer-ready execution.');
 mustInclude('pasteflow page: learn how it works anchor', pasteflowHtml, 'href="#pasteflow-capabilities"');
 mustInclude('pasteflow page: youtube title', pasteflowHtml, '>90-Second Product Overview<');
 mustInclude('pasteflow page: youtube iframe', pasteflowHtml, 'https://www.youtube-nocookie.com/embed/lKfc8dehasg');
 mustInclude('pasteflow page: product capabilities section', pasteflowHtml, '>Product Capabilities<');
 mustInclude('pasteflow page: capability card controlled input', pasteflowHtml, '<h3>Controlled Input</h3>');
-mustInclude('pasteflow page: capability card human engine', pasteflowHtml, '<h3>Human Engine</h3>');
+mustInclude('pasteflow page: capability card human rhythm', pasteflowHtml, '<h3>Human Rhythm</h3>');
 mustInclude('pasteflow page: capability card target inspection', pasteflowHtml, '<h3>Target Inspection</h3>');
 mustInclude('pasteflow page: capability card session control', pasteflowHtml, '<h3>Session Control</h3>');
 mustInclude('pasteflow page: capability card editor coverage', pasteflowHtml, '<h3>Editor Coverage</h3>');
-mustInclude('pasteflow page: capability card product infrastructure', pasteflowHtml, '<h3>Product Infrastructure</h3>');
+mustInclude('pasteflow page: capability card multilingual support', pasteflowHtml, '<h3>Multilingual Support</h3>');
+mustNotInclude('pasteflow page: capability card product infrastructure removed', pasteflowHtml, '<h3>Product Infrastructure</h3>');
 mustNotInclude('pasteflow page: removed build anatomy section', pasteflowHtml, '>Build Anatomy<');
 mustNotInclude('pasteflow page: removed product system section', pasteflowHtml, '>Product System<');
 mustNotInclude('pasteflow page: removed snippets mention', pasteflowHtml, 'Snippets');
 mustNotInclude('pasteflow page: no duplicate hero CTA block', pasteflowHtml, 'resource-pasteflow-hero-actions');
-mustInclude('pasteflow page: responsible use heading', pasteflowHtml, '>Responsible Use<');
-mustInclude('pasteflow page: responsible use note', pasteflowHtml, "PasteFlow only types into fields the user chooses. It does not submit forms, click buttons, or make decisions on the user's behalf. Users remain responsible for where and how they use it.");
+mustInclude('pasteflow page: user-controlled heading', pasteflowHtml, '>User-Controlled by Design<');
+mustNotInclude('pasteflow page: responsible use heading removed', pasteflowHtml, '>Responsible Use<');
+mustInclude('pasteflow page: user-controlled note', pasteflowHtml, 'PasteFlow is intentionally user-directed. It types only into fields the user chooses, never submits forms, and keeps start, pause, resume, and stop controls visible throughout the session.');
+mustInclude('pasteflow page: in-this-product narrative paragraph 1', pasteflowHtml, 'PasteFlow began with a practical workflow constraint: prepared text often needs to move into browser-based editors, forms, and tools where normal paste behavior can be unreliable, messy, or difficult to control.');
+mustInclude('pasteflow page: in-this-product narrative paragraph 2', pasteflowHtml, 'The visible product is simple by design: choose the destination, inspect the target, set the typing behavior, start the session, and stay in control.');
+mustInclude('pasteflow page: in-this-product narrative paragraph 3', pasteflowHtml, 'Behind that simple workflow is the operating work that turns an AI-assisted build into a real product: requirements, browser behavior testing, defect triage, release packaging, Chrome Web Store approval, licensing, payments, support documentation, and post-launch iteration.');
+mustInclude('pasteflow page: in-this-product narrative paragraph 4', pasteflowHtml, 'The hard part was not prompting. The hard part was turning a recurring workflow problem into a usable system.');
 mustInclude('pasteflow page: closing CTA link', pasteflowHtml, 'href="/connect/"');
+mustInclude('pasteflow page: closing CTA copy', pasteflowHtml, 'PasteFlow is one example of the broader operating model: identify repeated friction, define the workflow, build the system, test it, and make it usable.');
 mustInclude('pasteflow page: back nav', pasteflowHtml, 'href="/resources/"');
 mustInclude('pasteflow page: ga bootstrap', pasteflowHtml, 'src="/scripts/runtime/ga4-bootstrap.js"');
 mustInclude('pasteflow page: resources stylesheet', pasteflowHtml, 'href="/styles/resources.css');
@@ -401,6 +408,18 @@ mustNotInclude('pasteflow page: support email forbidden', pasteflowHtml, 'mailto
 mustNotInclude('pasteflow page: support email forbidden', pasteflowHtml, 'connect@romanbediner.com');
 mustNotInclude('pasteflow visible shelf should not say shipped', pasteflowHtml, 'A shipped workflow tool');
 mustNotInclude('pasteflow opening thesis should not say shipped product', pasteflowHtml, 'turns a common workflow constraint into a shipped product');
+mustNotInclude('pasteflow page copy should not say shipped', pasteflowHtml, 'shipped');
+
+const addToChromeVisibleCount = (pasteflowHtml.match(/>Add to Chrome</g) || []).length;
+if (addToChromeVisibleCount !== 1) {
+  fail(`pasteflow page must contain exactly one visible Add to Chrome button label; found ${addToChromeVisibleCount}`);
+}
+
+const heroPos = pasteflowHtml.indexOf('resource-pasteflow-hero-link');
+const audiencePos = pasteflowHtml.indexOf('id="pasteflow-audience"');
+if (!(heroPos !== -1 && audiencePos !== -1 && heroPos < audiencePos)) {
+  fail('pasteflow page must place Who This Is For after the hero image section.');
+}
 
 [
   'pricing',
@@ -411,10 +430,14 @@ mustNotInclude('pasteflow opening thesis should not say shipped product', pastef
   'character limit',
   'source code',
   'support email',
+  'snippets',
   'bypass',
   'evade',
   'defeat',
-  'circumvent'
+  'circumvent',
+  'detection avoidance',
+  'paste restriction',
+  'anti-detection'
 ].forEach((term) => {
   if (pasteflowHtml.toLowerCase().includes(term.toLowerCase())) {
     fail(`pasteflow page contains prohibited term: ${term}`);

@@ -71,7 +71,7 @@ const expected = [
     file: 'resources/pasteflow/index.html',
     canonical: 'https://romanbediner.com/resources/pasteflow/',
     ogTitle: 'PasteFlow Chrome Extension | Human-Like Auto Typer for Web Editors',
-    ogDescription: 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A shipped product proof point for AI-enabled operations.'
+    ogDescription: 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A product proof point for AI-enabled operations.'
   }
 ];
 

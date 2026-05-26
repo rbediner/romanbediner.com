@@ -1714,6 +1714,7 @@ body.wireframe-modal-open {
 
 .resource-pasteflow-hero-section {
   margin-top: 24px;
+  margin-bottom: 8px;
 }
 
 .resource-pasteflow-hero-link {
@@ -1770,6 +1771,10 @@ body.wireframe-modal-open {
 .resource-pasteflow-responsible-callout h2 {
   margin: 0 0 8px;
   font-size: 18px;
+}
+
+.resource-pasteflow-audience-card {
+  margin-top: 38px;
 }
 
 .resource-pasteflow-video-intro {
