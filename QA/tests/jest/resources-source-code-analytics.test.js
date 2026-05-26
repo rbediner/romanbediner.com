@@ -14,9 +14,9 @@ const dashboardHtml = fs.readFileSync(
 const resourcesAnalytics = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-analytics.js'), 'utf8');
 
 describe('Dashboard source code analytics contract', () => {
-  test('dashboard page marks both source-code CTAs with explicit tracking hooks', () => {
+  test('dashboard page marks one source-code CTA with explicit tracking hooks', () => {
     const markerMatches = dashboardHtml.match(/data-track-dashboard-source-code/g) || [];
-    expect(markerMatches.length).toBe(2);
+    expect(markerMatches.length).toBe(1);
   });
 
   test('resources analytics emits the dedicated source-code event with destination payload', () => {

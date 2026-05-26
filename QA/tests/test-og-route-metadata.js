@@ -47,7 +47,7 @@ const expected = [
     file: 'resources/index.html',
     canonical: 'https://romanbediner.com/resources/',
     ogTitle: 'Resources | AI-Enabled Operations Artifacts',
-    ogDescription: 'Curated resources for the AI-Enabled Operations Framework, beginning with the downloadable framework summary and expanding to additional public artifacts over time.'
+    ogDescription: 'Working artifacts for AI-enabled operations: a six-stage framework summary, an executive dashboard prototype, and PasteFlow, a product proof point built from workflow friction.'
   },
   {
     file: 'resources/ai-enabled-operations-framework-summary/index.html',
@@ -70,7 +70,7 @@ const expected = [
   {
     file: 'resources/pasteflow/index.html',
     canonical: 'https://romanbediner.com/resources/pasteflow/',
-    ogTitle: 'PasteFlow Chrome Extension | Human-Like Auto Typer for Web Editors',
+    ogTitle: 'PasteFlow | Product Proof Point for AI-Enabled Operations',
     ogDescription: 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A product proof point for AI-enabled operations.'
   }
 ];

@@ -239,6 +239,16 @@ body {
   margin: 0 0 32px 0;
 }
 
+/* Shared eyebrow label used above select page H1 headings. */
+.section-eyebrow {
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
 h1 {
   font-size: var(--h1-size-desktop);
   text-transform: none;

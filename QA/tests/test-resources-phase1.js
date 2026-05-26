@@ -85,7 +85,7 @@ mustInclude('summary page', summaryHtml, 'href="/connect/"');
 
 // PRD-locked copy: P1-RH-01 (Resources hub intro — two sentences, verbatim)
 mustInclude('P1-RH-01 locked intro', resourcesHtml,
-  'Selected resources that make the operating model tangible. These materials provide a faster way to review the framework, its practical application, and the tools being developed around it.'
+  'These resources show the operating model in three forms: a framework summary, an executive dashboard prototype, and a real product built from workflow friction.'
 );
 mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
 mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
@@ -95,7 +95,7 @@ mustInclude('P1-RH-03 locked title', resourcesHtml, 'AI-Enabled Operations Dashb
 mustInclude('P1-RH-03 locked body', resourcesHtml,
   'An interactive, single-screen dashboard prototype for AI-enabled operating visibility, structured execution, and faster review in modern AI-enabled work.'
 );
-mustInclude('P1-RH-03 locked CTA button copy', resourcesHtml, '>Open the Dashboard<');
+mustInclude('P1-RH-03 locked CTA button copy', resourcesHtml, '>Explore the Dashboard<');
 mustInclude('P1-RH-03 launched CTA link', resourcesHtml, 'href="/resources/ai-enabled-operations-dashboard/"');
 mustInclude('P1-RH-03 launched badge', resourcesHtml, 'class="resource-meta">Available Now<');
 mustInclude('P1-RH-03 card present', resourcesHtml, 'data-resource-card="dashboard"');
@@ -121,7 +121,7 @@ if (resourcesHtml.includes('class="resource-primary-cta is-disabled"')) {
 }
 
 // PRD-locked copy: P1-RH-04 (hub forward nav)
-mustInclude('P1-RH-04 locked CTA', resourcesHtml, 'Explore the Full Framework');
+mustInclude('P1-RH-04 locked CTA', resourcesHtml, 'Explore the Operating Model');
 mustInclude('P1-RH-04 forward nav wrapper', resourcesHtml, 'class="next-page-nav resources-forward-nav"');
 mustInclude('P1-RH-04 nav anchor to framework', resourcesHtml, 'href="/framework/" class="nav-anchor"');
 mustInclude('P1-RH-04 divider above nav', resourcesHtml, 'class="page-nav-divider"');
@@ -151,12 +151,12 @@ if (!(carouselIdx !== -1 && conversationIdx !== -1 && carouselIdx < conversation
 
 // PRD-locked copy: P1-FS-03 (download CTA + helper line + secondary text CTA)
 mustInclude('P1-FS-03 download CTA label', summaryHtml, 'Download Framework Summary PDF');
-mustInclude('P1-FS-03 utility line', summaryHtml, 'Six slides. Fast review. Easy to share.');
+mustInclude('P1-FS-03 utility line', summaryHtml, 'Eight slides. Fast review. Easy to share.');
 mustInclude('P1-FS-03 secondary text CTA', summaryHtml, 'Explore the Full Framework');
 mustInclude('P1-FS-03 stronger companion CTA class', summaryHtml, 'class="resource-companion-cta" href="/framework/"');
 mustInclude('P1-FS-03 site-family nav wrapper', summaryHtml, 'class="resource-page-nav"');
 mustInclude('P1-FS-03 nav back to resources hub', summaryHtml, 'Back to Resources Hub');
-mustInclude('P1-FS-03 conversational CTA label', summaryHtml, '>Reach out for a chat<');
+mustInclude('P1-FS-03 conversational CTA label', summaryHtml, '>Start the Conversation<');
 mustInclude('P1-FS-03 conversational CTA target', summaryHtml, 'class="resource-primary-cta resource-conversation-cta" href="/connect/"');
 mustInclude('P1-FS-03 divider above bottom nav', summaryHtml, 'class="page-nav-divider"');
 mustInclude('P1-FS-03 compact mobile toolbar hook', summaryHtml, 'class="resource-carousel-toolbar"');
@@ -334,7 +334,7 @@ if (!require('fs').existsSync(wireframePreviewImagePath)) {
 mustInclude('dashboard page: closing conversation copy', dashboardHtml,
   'If this sparks ideas about how your business is reviewed, managed, or scaled, feel free to reach out.'
 );
-mustInclude('dashboard page: Reach Out for a Chat CTA', dashboardHtml, '>Reach Out for a Chat<');
+mustInclude('dashboard page: Reach Out for a Chat CTA', dashboardHtml, '>Start the Conversation<');
 mustInclude('dashboard page: Reach Out links to /connect/', dashboardHtml, 'href="/connect/"');
 mustInclude('dashboard page: View Source Code top CTA', dashboardHtml, 'View Source Code');
 mustInclude('dashboard page: source CTA tracking hook', dashboardHtml, 'data-track-dashboard-source-code');
@@ -360,7 +360,7 @@ mustInclude('dashboard page: mobile screenshot path', resourcesCss, 'dashboard-h
 mustInclude('pasteflow page: canonical URL', pasteflowHtml, 'href="https://romanbediner.com/resources/pasteflow/"');
 mustInclude('pasteflow page: h1', pasteflowHtml, '<h1>PasteFlow</h1>');
 mustInclude('pasteflow page: eyebrow', pasteflowHtml, '>PRODUCT PROOF POINT<');
-mustInclude('pasteflow page: title', pasteflowHtml, '<title>PasteFlow Chrome Extension | Human-Like Auto Typer for Web Editors</title>');
+mustInclude('pasteflow page: title', pasteflowHtml, '<title>PasteFlow | Product Proof Point for AI-Enabled Operations</title>');
 mustInclude('pasteflow page: meta description', pasteflowHtml, 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A product proof point for AI-enabled operations.');
 mustInclude('pasteflow page: cws CTA', pasteflowHtml, 'href="https://chromewebstore.google.com/detail/pasteflow/paenffoomjmkonbgkmfdbnfaljoiilgm"');
 mustInclude('pasteflow page: hero image path', pasteflowHtml, '/assets/resources/pasteflow/pasteflow-cws-01-hero.png');
