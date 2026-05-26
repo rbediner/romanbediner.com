@@ -71,7 +71,7 @@ if (!frameworkHtml.includes('<h1>The AI-Enabled Operations Framework</h1>')) {
   console.error('FAIL: framework page must keep exact H1.');
 }
 
-if (!frameworkHtml.includes('<h2 class="framework-subtitle">Insights and Briefs on Productizing Operations for Modern AI-Enabled Work</h2>')) {
+if (!frameworkHtml.includes('<h2 class="framework-subtitle">A Six-Stage Model for Productizing Operations in Modern AI-Enabled Work</h2>')) {
   failures += 1;
   console.error('FAIL: framework subtitle must match required copy.');
 }
