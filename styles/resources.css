@@ -45,6 +45,14 @@
   max-width: 720px;
 }
 
+.resource-detail-prose-lede {
+  margin-top: 16px;
+  max-width: none;
+  font-size: 17px;
+  line-height: 1.62;
+  color: var(--text-secondary);
+}
+
 .resources-grid {
   display: grid;
   gap: 24px;
@@ -1018,11 +1026,7 @@
 
 /* Prose lede — replaces the second shelf callout */
 .resource-dashboard-prose-lede {
-  margin-top: 16px;
-  font-size: 17px;
-  line-height: 1.62;
-  color: var(--text-secondary);
-  max-width: 720px;
+  margin-bottom: 0;
 }
 
 .resource-dashboard-principles-band {
@@ -1706,10 +1710,10 @@ body.wireframe-modal-open {
 
 .resource-pasteflow-lede {
   margin: 0 0 10px;
-  max-width: 760px;
-  font-size: 17px;
-  line-height: 1.62;
-  color: var(--text-secondary);
+}
+
+.resource-pasteflow-hero-section {
+  margin-top: 24px;
 }
 
 .resource-pasteflow-hero-link {
@@ -1727,83 +1731,45 @@ body.wireframe-modal-open {
   height: auto;
 }
 
-.resource-pasteflow-hero-actions {
-  margin-top: 18px;
-}
-
-.resource-pasteflow-anatomy-grid {
+.resource-pasteflow-capabilities-grid {
   margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
-.resource-pasteflow-anatomy-item {
+.resource-pasteflow-capability-item {
   padding: 18px;
   border-radius: 8px;
   border: 1px solid var(--border-color, #e6e6e6);
   background: #ffffff;
 }
 
-.resource-pasteflow-anatomy-item h3 {
+.resource-pasteflow-capability-item h3 {
   margin: 0 0 8px;
   font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
-.resource-pasteflow-anatomy-item p {
+.resource-pasteflow-capability-item p {
   margin: 0;
   font-size: 14px;
   line-height: 1.65;
   color: var(--text-secondary);
 }
 
-.resource-pasteflow-system-callout {
-  margin-top: 32px;
-  padding: 24px;
-  border-radius: 10px;
-  border: 1px solid rgba(59, 108, 255, 0.2);
-  background: linear-gradient(180deg, #f4f8ff 0%, #fafcff 100%);
-}
-
-.resource-pasteflow-system-layout {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 20px;
-  align-items: start;
-}
-
-.resource-pasteflow-system-text h2 {
-  margin: 0 0 8px;
-}
-
-.resource-pasteflow-system-label {
-  margin: 0 0 12px;
-  font-size: 15px;
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.resource-pasteflow-system-list {
+.resource-pasteflow-responsible-callout {
   margin: 0;
-}
-
-.resource-pasteflow-supporting-image-wrap {
-  margin: 0;
-}
-
-.resource-pasteflow-supporting-image {
-  display: block;
-  width: 100%;
-  height: auto;
+  padding: 18px 20px;
   border-radius: 10px;
   border: 1px solid rgba(15, 23, 42, 0.1);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+  background: #f8fafc;
 }
 
-.resource-pasteflow-video-section {
-  margin-top: 34px;
+.resource-pasteflow-responsible-callout h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
 }
 
 .resource-pasteflow-video-intro {
@@ -1828,25 +1794,13 @@ body.wireframe-modal-open {
 
 .resource-pasteflow-responsible-note {
   margin: 0;
-  padding: 18px 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  background: #f8fafc;
   color: var(--text-secondary);
   font-size: 15px;
   line-height: 1.62;
 }
 
 @media (max-width: 767px) {
-  .resource-pasteflow-anatomy-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .resource-pasteflow-system-callout {
-    padding: 20px;
-  }
-
-  .resource-pasteflow-system-layout {
+  .resource-pasteflow-capabilities-grid {
     grid-template-columns: 1fr;
   }
 }

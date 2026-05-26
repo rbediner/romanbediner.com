@@ -102,7 +102,8 @@ mustInclude('P1-RH-03 card present', resourcesHtml, 'data-resource-card="dashboa
 mustInclude('pasteflow card present', resourcesHtml, 'data-resource-card="pasteflow"');
 mustInclude('pasteflow card title', resourcesHtml, '<h2>PasteFlow</h2>');
 mustInclude('pasteflow card cta', resourcesHtml, '>Explore PasteFlow<');
-mustInclude('pasteflow card copy', resourcesHtml, 'A shipped Chrome extension that turns browser-based input friction into human-rhythm typing for web editors, forms, surveys, and AI-assisted work. Built as a proof point for productizing operations in modern AI-enabled workflows.');
+mustInclude('pasteflow card copy', resourcesHtml, 'A Chrome extension that turns browser-based input friction into human-rhythm typing for web editors, forms, surveys, and AI-assisted work. Built as a practical proof point for productizing operations in modern AI-enabled workflows.');
+mustNotInclude('pasteflow hub card copy should not say shipped', resourcesHtml, 'A shipped Chrome extension');
 
 const frameworkCardPos = resourcesHtml.indexOf('data-resource-card="framework-summary"');
 const dashboardCardPos = resourcesHtml.indexOf('data-resource-card="dashboard"');
@@ -364,9 +365,23 @@ mustInclude('pasteflow page: meta description', pasteflowHtml, 'PasteFlow is a C
 mustInclude('pasteflow page: cws CTA', pasteflowHtml, 'href="https://chromewebstore.google.com/detail/pasteflow/paenffoomjmkonbgkmfdbnfaljoiilgm"');
 mustInclude('pasteflow page: hero image path', pasteflowHtml, '/assets/resources/pasteflow/pasteflow-cws-01-hero.png');
 mustInclude('pasteflow page: hero image alt', pasteflowHtml, 'PasteFlow product interface showing human-rhythm typing for browser-based work');
+mustInclude('pasteflow page: shelf callout copy', pasteflowHtml, 'A workflow tool that turns browser-based input friction into controlled, human-rhythm typing for web editors, forms, surveys, and AI-assisted work.');
+mustInclude('pasteflow page: opening thesis', pasteflowHtml, 'PasteFlow started with a common workflow problem: prepared text often needs to move into browser-based editors, forms, and tools where normal paste behavior can be unreliable or messy.');
+mustInclude('pasteflow page: learn how it works anchor', pasteflowHtml, 'href="#pasteflow-capabilities"');
 mustInclude('pasteflow page: youtube title', pasteflowHtml, '>90-Second Product Overview<');
 mustInclude('pasteflow page: youtube iframe', pasteflowHtml, 'https://www.youtube-nocookie.com/embed/lKfc8dehasg');
-mustInclude('pasteflow page: human engine copy', pasteflowHtml, '<h3>Human Engine</h3>');
+mustInclude('pasteflow page: product capabilities section', pasteflowHtml, '>Product Capabilities<');
+mustInclude('pasteflow page: capability card controlled input', pasteflowHtml, '<h3>Controlled Input</h3>');
+mustInclude('pasteflow page: capability card human engine', pasteflowHtml, '<h3>Human Engine</h3>');
+mustInclude('pasteflow page: capability card target inspection', pasteflowHtml, '<h3>Target Inspection</h3>');
+mustInclude('pasteflow page: capability card session control', pasteflowHtml, '<h3>Session Control</h3>');
+mustInclude('pasteflow page: capability card editor coverage', pasteflowHtml, '<h3>Editor Coverage</h3>');
+mustInclude('pasteflow page: capability card product infrastructure', pasteflowHtml, '<h3>Product Infrastructure</h3>');
+mustNotInclude('pasteflow page: removed build anatomy section', pasteflowHtml, '>Build Anatomy<');
+mustNotInclude('pasteflow page: removed product system section', pasteflowHtml, '>Product System<');
+mustNotInclude('pasteflow page: removed snippets mention', pasteflowHtml, 'Snippets');
+mustNotInclude('pasteflow page: no duplicate hero CTA block', pasteflowHtml, 'resource-pasteflow-hero-actions');
+mustInclude('pasteflow page: responsible use heading', pasteflowHtml, '>Responsible Use<');
 mustInclude('pasteflow page: responsible use note', pasteflowHtml, "PasteFlow only types into fields the user chooses. It does not submit forms, click buttons, or make decisions on the user's behalf. Users remain responsible for where and how they use it.");
 mustInclude('pasteflow page: closing CTA link', pasteflowHtml, 'href="/connect/"');
 mustInclude('pasteflow page: back nav', pasteflowHtml, 'href="/resources/"');
@@ -384,6 +399,8 @@ mustNotInclude('pasteflow page: source code link forbidden', pasteflowHtml, 'Vie
 mustNotInclude('pasteflow page: offers schema forbidden', pasteflowHtml, '"offers"');
 mustNotInclude('pasteflow page: support email forbidden', pasteflowHtml, 'mailto:');
 mustNotInclude('pasteflow page: support email forbidden', pasteflowHtml, 'connect@romanbediner.com');
+mustNotInclude('pasteflow visible shelf should not say shipped', pasteflowHtml, 'A shipped workflow tool');
+mustNotInclude('pasteflow opening thesis should not say shipped product', pasteflowHtml, 'turns a common workflow constraint into a shipped product');
 
 [
   'pricing',
@@ -403,6 +420,10 @@ mustNotInclude('pasteflow page: support email forbidden', pasteflowHtml, 'connec
     fail(`pasteflow page contains prohibited term: ${term}`);
   }
 });
+
+mustInclude('pasteflow and dashboard share detail lede class on opening prose', pasteflowHtml, 'resource-detail-prose-lede');
+mustInclude('pasteflow and dashboard share detail lede class on opening prose', dashboardHtml, 'resource-detail-prose-lede');
+mustInclude('resources css: shared detail lede rule present', resourcesCss, '.resource-detail-prose-lede');
 
 if (dashboardHtml.includes('resource-dashboard-frame-placeholder')) {
   fail('dashboard page must not include Phase 5 placeholder shell after iframe wiring.');

@@ -1,54 +1,32 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 236
-- Updated At (UTC): 2026-05-26T16:15:48Z
+- Handoff Sequence: 237
+- Updated At (UTC): 2026-05-26T17:04:40Z
 - Source Branch: staging
-- Source Commit: af4afba6ba3cd6a5df105d08bd06390311728336 (pre-change baseline)
-- Active Agent: Codex (current session) — implemented PasteFlow resource hub + detail artifact launch on staging
+- Source Commit: 1b503b84988c360edb9c3c049db2e8c2001c041f (latest staging baseline before this correction pass)
+- Active Agent: Codex (current session) — rebuilt PasteFlow resource detail narrative cohesion + shared opening lede width fix
 
 ## Current State
 
-`staging` is checked out locally with uncommitted implementation changes for the PasteFlow resource release.
+`staging` is checked out locally with uncommitted correction changes for PasteFlow resource cohesion and responsive detail-page polish.
 
 Staging preview target (workflow-managed): https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
 
 ## Implemented Changes (Working Tree)
 
-- New resource route and page:
+- Resources hub refinement:
+  - `resources/index.html`
+  - Updated PasteFlow card paragraph copy to remove visible `shipped` language.
+- PasteFlow detail-page cohesion rebuild:
   - `resources/pasteflow/index.html`
-- Resources hub update:
-  - `resources/index.html` (third card for PasteFlow with locked copy + metadata attrs)
-- Resource assets:
-  - `assets/resources/pasteflow/*` (all provided PasteFlow CWS images copied with required filenames)
-- Resource runtime analytics:
-  - `scripts/runtime/resources-analytics.js`
-  - Added `resource_external_cta_click` for `[data-track-resource-external-cta]`
-- Resource page styles:
-  - `styles/resources.css` (scoped PasteFlow layout blocks only)
-- Sitemap updates:
-  - `scripts/content/generate-sitemap.js`
-  - `sitemap.xml` regenerated
-- QA/test coverage updates:
+  - Reordered to one narrative flow, removed duplicate Add to Chrome button under hero, replaced Build Anatomy + Product System with Product Capabilities, and moved Responsible Use directly below capabilities.
+- Shared opening-lede width fix across detail pages:
+  - `resources/ai-enabled-operations-dashboard/index.html`
+  - `styles/resources.css`
+  - Added shared `.resource-detail-prose-lede` class and applied it to PasteFlow + Dashboard opening prose.
+- QA contract updates for revised content/layout:
   - `QA/tests/test-resources-phase1.js`
-  - `QA/tests/test-og-route-metadata.js`
-  - `QA/tests/test-route-metadata-parity.js`
-  - `QA/tests/test-canonical.js`
-  - `QA/tests/test-clean-urls.js`
-  - `QA/tests/test-ga4-installation.js`
-  - `QA/tests/test-favicon-contract.js`
-  - `QA/tests/test_favicon_assets.py`
-  - `QA/tests/test-nav-links-contract.js`
-  - `QA/tests/test-header-nav.js`
-  - `QA/tests/test-metadata-consistency.js`
-  - `QA/tests/playwright/csp-ga-runtime.spec.js` (route coverage includes `/resources/pasteflow/`)
-  - `QA/tests/test_ga_runtime_playwright.py`
-  - `QA/tests/test_nav_runtime_playwright.py`
-  - `QA/tests/jest/resources-external-cta-analytics.test.js` (new)
-  - `QA/tests/jest/readme_structure.test.js`
-- Architecture/docs parity updates:
-  - `README.md`
-  - `docs/architecture/environment-model.json`
 
 ## QA Summary (This Session)
 
@@ -58,35 +36,26 @@ Passed locally:
 - `node QA/tests/test-route-metadata-parity.js`
 - `node QA/tests/test-canonical.js`
 - `node QA/tests/test-clean-urls.js`
-- `node QA/tests/test-ga4-installation.js`
-- `node QA/tests/test-favicon-contract.js`
-- `node QA/tests/test-nav-links-contract.js`
-- `node QA/tests/test-header-nav.js`
-- `node QA/tests/test-metadata-consistency.js`
-- `node scripts/qa/run-jest-suite.js QA/tests/jest/resources-source-code-analytics.test.js QA/tests/jest/resources-external-cta-analytics.test.js QA/tests/jest/readme_structure.test.js --runInBand`
+- `node scripts/qa/run-jest-suite.js QA/tests/jest/resources-external-cta-analytics.test.js --runInBand`
 - `node QA/tests/test-jsonld-schema.js`
 - `node scripts/qa/validate-links.js`
-- `python3 -m unittest QA/tests/test_favicon_assets.py -v`
-
-Known failing runtime suite (pre-existing CSP baseline issue, not introduced by PasteFlow route):
 - `node node_modules/playwright/cli.js test QA/tests/playwright/csp-ga-runtime.spec.js --reporter=line`
-- Failure reason: GA runtime now attempts `https://stats.g.doubleclick.net/g/collect`, which is not currently whitelisted by page `connect-src` across canonical routes.
+- manual responsive runtime check (desktop/tablet/mobile 390px, `/resources/` + `/resources/pasteflow/`) confirmed no horizontal overflow.
 
 ## Branch Alignment
 
 - Current branch: `staging`
-- Local HEAD: `af4afba6ba3cd6a5df105d08bd06390311728336`
-- Working tree: dirty (PasteFlow implementation pending commit)
+- Local HEAD: `1b503b84988c360edb9c3c049db2e8c2001c041f`
+- Working tree: dirty (correction pass pending commit)
 
 ## Open Items / Follow-ups
 
 1. Review local visual output for:
    - `/resources/`
    - `/resources/pasteflow/`
-2. Commit working tree changes to `staging` with a single implementation commit.
+2. Commit working tree changes to `staging`.
 3. Push `staging` and wait for CI + Deploy Staging preview workflow completion.
-4. Return staging preview URL + deploy status in the final implementation report.
-5. Decide whether to separately remediate global CSP runtime failures for `stats.g.doubleclick.net` (outside this PasteFlow scope).
+4. Return staging preview URL + deploy status in final report.
 
 ## Release Watcher Hygiene
 
