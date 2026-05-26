@@ -32,7 +32,7 @@ const failures = [];
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === '.git' || entry.name === 'node_modules') {
+    if (entry.name === '.git' || entry.name === 'node_modules' || entry.name === '.claude') {
       continue;
     }
     const fullPath = path.join(dir, entry.name);
