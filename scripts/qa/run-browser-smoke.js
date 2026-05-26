@@ -193,6 +193,13 @@ function shouldIgnoreRuntimeIssue(issue) {
     normalized.includes('Failed to load resource')
   ) return true;
 
+  // GA optional transport endpoint can be blocked by CSP in smoke environments
+  // without impacting core site functionality or primary GA request paths.
+  if (
+    normalized.includes('stats.g.doubleclick.net/g/collect') &&
+    normalized.includes('violates the following Content Security Policy directive')
+  ) return true;
+
   return false;
 }
 
