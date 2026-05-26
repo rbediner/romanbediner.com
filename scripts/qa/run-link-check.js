@@ -34,7 +34,7 @@ function hostFor(urlValue) {
 function buildSkipPattern(targetUrl, canonicalDomain) {
   const targetHost = hostFor(targetUrl);
   const domain = String(canonicalDomain || '').trim().toLowerCase();
-  const patterns = ['mailto:.*', 'tel:.*'];
+  const patterns = ['mailto:.*', 'tel:.*', 'https?://(www\\.)?linkedin\\.com/in/romanbediner/?'];
 
   // Staging/local link checks should validate artifact-internal links and avoid
   // coupling to whatever is live on production canonical URLs.

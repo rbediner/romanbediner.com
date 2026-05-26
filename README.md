@@ -483,6 +483,7 @@ nvm install
 - Shared header nav runtime detects GitHub Pages preview hosts and prefixes canonical nav routes with the active preview base path so `Home` and primary navigation never escape preview scope; already-prefixed preview routes are intentionally left unchanged to prevent double-prefix URLs.
 - Link validation (`scripts/qa/run-link-check.js`) is environment-aware:
   - when crawling local/staging targets, canonical production domain links are skipped to prevent false failures during staging-first route rollouts
+  - canonical LinkedIn profile URL checks are skipped to avoid third-party CI-only false 404 responses
   - when crawling production targets, canonical domain links remain validated
 - Local CI-parity execution from cloud-synced paths is automatically mirrored to `/tmp` by `scripts/qa/run-ci-parity.sh` so Node installs and Jest reads do not stall on synced filesystem latency.
 - `scripts/qa/run-ci-parity.sh` and `scripts/qa/run-in-local-mirror.sh` must retain the executable bit so the mirrored local runner can be invoked directly by release helpers and Husky-managed shell entrypoints.
