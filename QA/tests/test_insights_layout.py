@@ -61,7 +61,7 @@ class FrameworkLayoutTest(unittest.TestCase):
         self.assertIn('<p class="framework-label">FRAMEWORK</p>', self.framework_html)
         self.assertIn('<h1>The AI-Enabled Operations Framework</h1>', self.framework_html)
         self.assertIn(
-            '<h2 class="framework-subtitle">Insights and Briefs on Productizing Operations for Modern AI-Enabled Work</h2>',
+            '<h2 class="framework-subtitle">A Six-Stage Model for Productizing Operations in Modern AI-Enabled Work</h2>',
             self.framework_html,
         )
         self.assertIn('class="executive-callout framework-intro-block framework-thesis-block"', self.framework_html)
