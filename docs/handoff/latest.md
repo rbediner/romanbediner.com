@@ -1,85 +1,90 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 242
-- Updated At (UTC): 2026-05-26T22:53:06Z
-- Source Branch: prod
-- Source Commit: b00b9c3f7d4c22ef5bd4d8884d8dd1f6c8185701 (pre-handoff baseline)
+- Handoff Sequence: 244
+- Updated At (UTC): 2026-06-24T19:46:44Z
+- Source Branch: staging
+- Source Commit: f7c77a3b35dbd602b68d983506e3caab73351f25 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Current State
 
-`staging` and `prod` are aligned at `b00b9c3`.
+`staging` contains the operating-positioning refresh at `f7c77a3`.
 
 Staging preview target (workflow-managed): https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
 
+This session stopped at staging validation only. No prod promotion was attempted.
+
 ## Implemented Changes
 
-Second-pass Claude follow-up fixes are complete and promoted.
-
-- Added branded custom 404 page at `/404.html` using shared site header/nav/footer patterns and existing stylesheet.
-- Home hero problem sentence is now its own paragraph in the opening hero intro block on `/`.
-- Connect form accessibility contract updated for Quill message editor:
-  - visible `Message` label now has `id="message-label"`
-  - runtime sets `.ql-editor` `role="textbox"` and `aria-labelledby="message-label"`
-- Optional sitemap metadata cleanup applied:
-  - `/framework/` priority raised from `0.6` to `0.8` in `sitemap.xml`
-- QA contracts updated for the new semantic/layout/accessibility behavior.
-- Mobile home visual baseline refreshed to reflect approved hero paragraph separation.
-
-## Scope / Non-Goals Observed
-
-- `www` SSL/DNS/certificate behavior was intentionally out of scope for this pass and not modified in repo.
-- Connect nav pill styling unchanged.
-- Connect decorative icon unchanged.
-- Walt Disney footer quote unchanged.
-- Dashboard page title unchanged.
-- PasteFlow hero image unchanged.
+- Homepage updated to the new `AI-ENABLED OPERATING SYSTEMS` positioning, with revised hero copy, `About` CTA, and a selected operating experience logo row for Disney, AWS, Laser Light Communications, and Agentic Society.
+- About page restructured around `OPERATING BACKGROUND`, chapter navigation, four operating-background chapters, and a simplified `OPERATING PHILOSOPHY` close.
+- Services page rewritten around the approved operating-leadership framing, four core service entries, and the dedicated AI-enabled operating systems section.
+- Connect page rewritten to the conversation-first version, with the old theme-list section removed and the retained form framed by `Email Roman` and LinkedIn action blocks.
+- Framework page kept the six-stage structure and added the approved `APPLYING THE FRAMEWORK` close.
+- Framework summary and dashboard resource pages received the approved explanatory copy updates.
+- Homepage structured data, metadata, and regression tests were updated to match the new messaging and page contracts.
+- Added logo provenance assets under `assets/logos/` plus `assets/logos/logo-asset-manifest.json`.
+- Removed obsolete `assets/icons/services/execution-acceleration.png`.
+- README and the live Google Docs PRD were updated to reflect the new homepage/about/services/connect/framework decisions.
 
 ## Files Changed
 
-- `404.html`
+- `README.md`
 - `index.html`
+- `about/index.html`
+- `services/index.html`
 - `connect/index.html`
-- `scripts/runtime/contact-form-emailjs.js`
-- `sitemap.xml`
+- `framework/index.html`
+- `resources/ai-enabled-operations-framework-summary/index.html`
+- `resources/ai-enabled-operations-dashboard/index.html`
+- `styles/home.css`
+- `styles/about.css`
+- `styles/services.css`
+- `styles/connect.css`
+- `scripts/runtime/site-navigation.js`
+- `assets/logos/*`
+- `QA/tests/test-home-hero-layout.js`
+- `QA/tests/test-connect-page.js`
+- `QA/tests/test-about-redesign.js`
+- `QA/tests/test-about-hero-contract.js`
+- `QA/tests/test-operating-philosophy.js`
+- `QA/tests/test-transition-blocks.js`
+- `QA/tests/test-metadata-consistency.js`
+- `QA/tests/test-og-route-metadata.js`
+- `QA/tests/test-resources-phase1.js`
+- `QA/tests/test_about_redesign.py`
 - `QA/tests/test_contact_form.py`
-- `QA/tests/test_home_layout_spacing_playwright.py`
-- `QA/tests/test_home_spacing_playwright.py`
-- `QA/tests/visual-baselines/home--mobile-full.png`
+- `QA/tests/test_services_stack.py`
 
 ## QA Summary
 
 Executed and passing in this session:
-- `node QA/tests/test-clean-urls.js`
-- `node QA/tests/test-canonical.js`
-- `node QA/tests/test-route-metadata-parity.js`
-- `node QA/tests/test-og-route-metadata.js`
-- `node QA/tests/test-jsonld-schema.js`
-- `node scripts/qa/validate-links.js`
-- `node scripts/qa/run-browser-smoke.js`
-- `node QA/tests/test-connect-page.js`
-- `node QA/tests/test-home-hero-layout.js`
-- `node QA/tests/test-header-nav.js`
-- `node QA/tests/test-framework-artifact-packaging.js`
-- `python3 -m unittest QA.tests.test_contact_form -v`
-- `python3 -m unittest QA.tests.test_home_layout_spacing_playwright QA.tests.test_home_spacing_playwright -v`
-- `npm run test:visual:update`
 
-Release/promotion gates:
-- `npm run release:staging-prod` completed, with `origin/prod` now at `b00b9c3`.
+- `npm run test:node`
+- `npm run test:jest`
+- `npm run test:python`
+- `npm run test:playwright`
+- `npm run qa:ci-parity`
+- `node QA/tests/test-jsonld-schema.js`
+- `node QA/tests/test-js-header-comments.js`
+- `node QA/tests/test-repo-hygiene.js`
+
+PRD update completed:
+
+- `romanbediner.com PRD` Google Doc updated with a new `4.1 June 2026 operating-positioning refresh` section.
 
 ## Manual QA Notes
 
-- `/does-not-exist/` now resolves to branded custom 404 page with nav + return links + standard footer.
-- Home hero problem statement appears once and is visually separated as its own paragraph.
-- Connect message editor ARIA attributes are attached at runtime as required.
-- No `.html` navigation links were introduced.
-- No staging or localhost links were introduced on canonical pages.
+- Local QA confirms the homepage logo row loads from local assets and respects the new responsive layout rules.
+- About timeline scripting now supports the four-section version without the old three-orb assumption.
+- Connect page copy, CTA framing, and retained form behavior all align with the approved staging-only refresh.
+- No production release commands were run.
 
 ## Open Items / Follow-ups
 
-1. Update the live PRD (`SEO Authority PRD`) with this shipped second-pass follow-up, if not already completed in the release cycle.
+1. Push `staging`, wait for `CI` and `Deploy Staging` for the exact SHA, then visually inspect the preview URL before requesting approval.
+2. After preview validation, report staging status to Roman for approval. Do not promote to prod until explicitly approved.
 
 ## Release Watcher Hygiene
 
