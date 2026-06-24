@@ -15,14 +15,13 @@
 - **Body/nav/labels**: DM Sans (300–600), loaded via `@import` in `styles/site.css` so all pages inherit.
 - **Shelf-callout removed** from Home, About, and Services heroes; still used on Framework and Resources per design spec.
 - **Nav**: Connect promoted to `.nav-cta` blue button; core links reduced to About, Framework, Resources, Services. Home removed from nav; accessible via logo.
-- **Homepage**: Credential eyebrow (`THE WALT DISNEY COMPANY · AMAZON WEB SERVICES`) rendered above H1 via `.credential-eyebrow` in `styles/home.css`. Row-gap 56px → 72px. Section icons 22px → 36px height.
-- **Services page**: Restructured from `.service-stack`/`.service-card` to numbered `.svc-list`/`.svc-entry` layout — large serif number (01–05), icon+label, serif H3, bullets, `.svc-impact` box with tan background.
-- **Services label hierarchy**: `.svc-label` category text is 14px and paired `.svc-icon` assets are 26px tall to keep the service-category row legible without competing with the serif `.svc-h3` headline.
-- **Services impact hierarchy**: `.svc-impact-label` is intentionally larger than `.svc-impact p` (16px vs 14px) to keep section titles visually dominant in each impact block; protected by `QA/tests/test_services_stack.py`.
-- **About philosophy section**: `.philosophy-stack` now a 2-col grid on desktop (1fr 1fr, 48px gap); collapses to stacked on mobile ≤768px. `about.css` cache-busted at `?v=20260424a`.
+- **Homepage**: Credential eyebrow replaced by `AI-ENABLED OPERATING SYSTEMS`, with a dedicated `.home-primary-cta` and an `.experience-logo-row` for selected operating experience logos (Disney, AWS, Laser Light Communications, Agentic Society).
+- **Logo provenance**: Homepage operating-experience logo sources and fallback notes are tracked in `assets/logos/logo-asset-manifest.json`.
+- **Services page**: Simplified to four narrative `.svc-entry` blocks plus a dedicated `AI-ENABLED OPERATING SYSTEMS` framing section and an `APPLYING THE WORK` close. The old impact-card treatment is retired.
+- **About page**: Rebuilt around `OPERATING BACKGROUND`, a chapter-nav jump list, four operating chapters, and a simplified single-column `OPERATING PHILOSOPHY` close. The timeline now renders four orbs (`.orb-1` through `.orb-4`) instead of three.
 - **Framework/brief mobile pills**: `.framework-progress-markers` uses `overflow-x: auto` + `flex-wrap: nowrap` + `scrollbar-width: thin` on mobile — all 5 stage pills scroll horizontally with a visible thin scrollbar. Framework CSS cache-bust at `?v=20260424c`.
-- **Connect CSS**: `styles/connect.css` rewritten to remove ~165 lines of duplicated site-level styles (old `-apple-system` font stack). Page-specific styles now use 2026 design tokens (`--text-primary`, `--text-secondary`, `--accent-blue`) inherited from `site.css`. Cache-busted at `?v=20260424a`.
-- **Credential eyebrow mobile**: `.credential-eyebrow` reduces to `font-size: 9px; letter-spacing: 0.12em` at ≤768px so company names wrap between entries rather than mid-name.
+- **Connect page**: Hero copy is now conversation-first, the old `How we might connect` theme list is removed, and the primary action pair is `Email Roman` plus the retained LinkedIn executive-action block.
+- **Homepage mobile logo row**: `.experience-logo-grid` collapses to a wrapped, centered layout on small screens so the selected operating experience marks remain legible without clipping.
 - **Mobile footer spacing**: `.next-page-nav` overridden at ≤768px to `margin-top: 48px; margin-bottom: 32px` (was 100px/60px) to eliminate excessive whitespace above footer on mobile.
 - **Home bottom navigation**: Home uses `.home-next-page-nav` with a full-width blue `.page-nav-divider` immediately above the `Explore the Operating Model` CTA. The footer divider must not serve as the Home transition separator.
 - **Resources hub**: redundant `<p class="resources-label">RESOURCES</p>` eyebrow removed — the H1 "Resources" alone is sufficient.
@@ -719,20 +718,20 @@ flowchart LR
    - Internal-link additions must preserve the original layout, spacing, and editorial presentation.
 
 12. **About philosophy heading standard**
-   - The philosophy card heading on `/about/` uses the canonical label `Operating Philosophy`.
+   - The closing section heading on `/about/` uses the canonical label `Operating Philosophy`.
 
 13. **About professional arc timeline structure**
    - `/about/` professional arc content is wrapped by `.arc-timeline-wrapper` with a neutral grey structural spine rendered via `::before`.
-   - Exactly three orbs are rendered (`.orb-1` through `.orb-3`) as CSS radial-gradient circles; spine layering is above orb center to create a bisected structural mark.
-   - Orb alignment is computed dynamically in `/scripts/runtime/site-navigation.js` using arc item boundaries and CSS variables (`--orb1` to `--orb3`) with resize recalculation.
+   - Exactly four orbs are rendered (`.orb-1` through `.orb-4`) as CSS radial-gradient circles; spine layering is above orb center to create a bisected structural mark.
+   - Orb alignment is computed dynamically in `/scripts/runtime/site-navigation.js` by matching section count to orb count, then setting CSS variables with resize recalculation.
    - Timeline dividers are constrained to `.arc-item + .arc-item .arc-narrative` (right column only) so divider lines do not intersect the timeline spine.
    - Era subtitle labels use plain text without decorative bracket pseudo-elements.
    - Timeline spine and orbs are hidden at `max-width: 900px` to preserve mobile readability and layout stability.
 
 14. **Connect page conversation section contract**
-   - `/connect/` includes a dedicated `How we might connect` section above the form to frame the page as conversation-first rather than service-offering duplication.
-   - Theme bullets in this section must use shared `.service-list` orb bullets from `styles/site.css` with `/assets/icons/home/bullet.png` (no page-level bullet redefinition).
-   - Closing expectation lines are present and visually muted to keep the bullet themes as primary visual focus.
+   - `/connect/` opens with conversation-first editorial copy above the form to frame the page around a real operating challenge rather than service-offering duplication.
+   - The page includes an `Email Roman` executive-action block that anchors to `#form-card` while preserving the existing form behavior.
+   - The LinkedIn executive-action block remains present as the secondary off-site contact path.
 
 15. **Connect ambient polish contract**
    - Ambient decorative orbs on `/connect/` are CSS-only pseudo-elements (`.connect-main::before` and `.connect-main::after`) that use layered radial gradients, high blur, and a shared `floatOrb` animation for subtle ambient motion.

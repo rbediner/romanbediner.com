@@ -1,15 +1,11 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Regression guardrails for test-about-hero-contract.js.
+ * - About page opening section must preserve the approved headline, chapter anchors, and four-era timeline contract.
  * Why this exists:
- * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * - Protects the top-of-page about experience where narrative framing and wayfinding are introduced together.
  * What breaks if it fails:
- * - CI blocks deployment to prevent production regressions.
- */
-/**
- * Guardrail: About hero must keep the manifesto-only contract.
- * This prevents regressions that reintroduce legacy headings or profile photos.
+ * - CI blocks deployment to prevent about-hero contract regressions.
  */
 const fs = require('fs');
 const path = require('path');
@@ -17,53 +13,29 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const aboutHtml = fs.readFileSync(path.join(root, 'about/index.html'), 'utf8');
 const aboutCss = fs.readFileSync(path.join(root, 'styles/about.css'), 'utf8');
-const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 
 const failures = [];
 
-// shelf-callout removed from About hero in redesign; hero is now H1 + plain body paragraph.
-for (const required of [
-  'class="container"',
-  'class="about-hero-refactored"',
-  'class="page-title"'
-]) {
-  if (!aboutHtml.includes(required)) {
-    failures.push(`Missing About hero contract marker: ${required}`);
+for (const marker of ['class="about-hero-refactored"', 'class="page-title"', 'class="lede-description"']) {
+  if (!aboutHtml.includes(marker)) {
+    failures.push(`Missing About hero marker: ${marker}`);
   }
 }
 
-if (aboutHtml.includes('class="about-photo-wrapper"') || aboutHtml.includes('class="hero-photo"')) {
-  failures.push('About hero must not include a profile photo.');
+if (!aboutHtml.includes('The work is rarely blocked by strategy alone.')) {
+  failures.push('About hero is missing the approved opening sentence.');
 }
 
-if (aboutHtml.includes('About Roman Bediner')) {
-  failures.push('Legacy About heading copy should not appear in the manifesto hero.');
+if (!aboutHtml.includes('class="about-chapter-nav"')) {
+  failures.push('About page must include chapter navigation.');
 }
 
-for (const cssNeedle of ['.about-hero-refactored', '.about-timeline', '.philosophy-stack']) {
-  if (!aboutCss.includes(cssNeedle)) {
-    failures.push(`Missing About CSS guardrail: ${cssNeedle}`);
-  }
-}
-
-for (const sharedNeedle of [
-  '.container,\n.about-container',
-  '.page-title',
-  '.shelf-callout',
-  '.shelf-border',
-  '.shelf-content',
-  '.lede-description',
-  '.section-divider'
-]) {
-  if (!siteCss.includes(sharedNeedle)) {
-    failures.push(`Missing shared CSS guardrail in site.css: ${sharedNeedle}`);
-  }
+if (!aboutCss.includes('.about-chapter-nav')) {
+  failures.push('About CSS must include chapter-nav styling.');
 }
 
 if (failures.length > 0) {
-  for (const failure of failures) {
-    console.error(`FAIL: ${failure}`);
-  }
+  failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);
 }
 

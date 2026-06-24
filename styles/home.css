@@ -161,6 +161,89 @@ main .master-head h1 {
   margin: 0;
 }
 
+.master-blurb p + p {
+  margin-top: 18px;
+}
+
+.home-hero-actions {
+  margin-top: 28px;
+}
+
+.home-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.home-primary-cta:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.experience-logo-row {
+  margin-top: 36px;
+}
+
+.experience-logo-label,
+.experience-logo-qualifier {
+  max-width: none;
+}
+
+.experience-logo-label {
+  margin: 0 0 18px;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.experience-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  align-items: center;
+}
+
+.experience-logo {
+  width: 100%;
+  height: 44px;
+  object-fit: contain;
+  object-position: center left;
+  filter: grayscale(1) brightness(0);
+  opacity: 0.88;
+}
+
+.experience-logo-disney {
+  height: 34px;
+}
+
+.experience-logo-aws {
+  height: 36px;
+}
+
+.experience-logo-laser-light {
+  height: 42px;
+}
+
+.experience-logo-agentic {
+  height: 38px;
+}
+
+.experience-logo-qualifier {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: var(--muted-text);
+}
+
 #experience.master-section {
   grid-area: experience;
   grid-column: 1;
@@ -202,19 +285,6 @@ main .master-head h1 {
 
 .section-body p {
   margin: 0;
-}
-
-/* Hidden semantic support copy for search indexing without visual impact. */
-.semantic-authority {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  white-space: nowrap;
 }
 
 /* Preserve existing interactive affordances used across pages. */
@@ -301,6 +371,11 @@ a:focus-visible {
 
   .section-body {
     margin-top: 20px;
+  }
+
+  .experience-logo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 24px;
   }
 
   /* Tighten eyebrow so company names break between entries, not mid-name. */

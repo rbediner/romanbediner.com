@@ -129,7 +129,7 @@ mustInclude('P1-RH-04 no duplicate nav divider marker', resourcesHtml, '<section
 
 // PRD-locked copy: P1-FS-01 (conversational paragraph)
 mustInclude('P1-FS-01 locked conversational paragraph', summaryHtml,
-  'If this sounds relevant to what you are building, scaling, or trying to untangle, feel free to reach out. I am always glad to connect with thoughtful operators, leaders, and teams to exchange ideas, talk through challenges, and explore how this kind of framework can be applied in a real operating environment.'
+  'The summary is designed for teams evaluating how AI should participate in execution without weakening ownership, visibility, or control.'
 );
 mustInclude('P1-FS-01 family shelf callout', summaryHtml, 'class="shelf-callout resource-family-callout resource-summary-callout"');
 mustInclude('P1-FS-01 vertical blue rule', summaryHtml, 'class="shelf-border"');
@@ -156,7 +156,7 @@ mustInclude('P1-FS-03 secondary text CTA', summaryHtml, 'Explore the Full Framew
 mustInclude('P1-FS-03 stronger companion CTA class', summaryHtml, 'class="resource-companion-cta" href="/framework/"');
 mustInclude('P1-FS-03 site-family nav wrapper', summaryHtml, 'class="resource-page-nav"');
 mustInclude('P1-FS-03 nav back to resources hub', summaryHtml, 'Back to Resources Hub');
-mustInclude('P1-FS-03 conversational CTA label', summaryHtml, '>Start the Conversation<');
+mustInclude('P1-FS-03 conversational CTA label', summaryHtml, '>Discuss Applying the Framework<');
 mustInclude('P1-FS-03 conversational CTA target', summaryHtml, 'class="resource-primary-cta resource-conversation-cta" href="/connect/"');
 mustInclude('P1-FS-03 divider above bottom nav', summaryHtml, 'class="page-nav-divider"');
 mustInclude('P1-FS-03 compact mobile toolbar hook', summaryHtml, 'class="resource-carousel-toolbar"');

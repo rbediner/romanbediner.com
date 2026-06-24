@@ -3,91 +3,36 @@ from pathlib import Path
 
 
 class AboutRedesignTest(unittest.TestCase):
-    """Validate About hybrid redesign content blocks and current footer contract."""
-
     @classmethod
     def setUpClass(cls):
-        # QA/tests is nested one level under the repository root.
         cls.root = Path(__file__).resolve().parents[2]
         cls.about_html = (cls.root / "about/index.html").read_text(encoding="utf-8")
-        cls.site_css = (cls.root / "styles/site.css").read_text(encoding="utf-8")
         cls.about_css = (cls.root / "styles/about.css").read_text(encoding="utf-8")
-        cls.canonical_pages = [
-            "index.html",
-            "about/index.html",
-            "services/index.html",
-            "connect/index.html",
-            "framework/index.html",
-        ]
-        cls.footer_primary = "© Roman Bediner, PMP"
 
-    def test_about_structure_sections_present(self):
-        """Ensure the current About manifesto hero and section wrappers are present."""
-        self.assertIn('<main class="about-main">', self.about_html)
-        self.assertIn('class="container"', self.about_html)
-        self.assertIn('class="about-hero-refactored"', self.about_html)
-        # shelf-callout removed from About hero in 2026 redesign (replaced by lede-description paragraph)
-        self.assertNotIn('class="about-photo-wrapper"', self.about_html)
-        self.assertNotIn('class="hero-photo"', self.about_html)
-        self.assertRegex(self.about_html, r'class="[^"]*about-timeline[^"]*"')
-        self.assertRegex(self.about_html, r'class="[^"]*about-philosophy[^"]*"')
+    def test_opening_copy_exists(self):
+        for phrase in [
+            "OPERATING BACKGROUND",
+            "Execution is the Strategy",
+            "The work is rarely blocked by strategy alone.",
+            "The objective is not more process. It is a clearer, more accountable way for work to move from intent to outcome.",
+        ]:
+            self.assertIn(phrase, self.about_html)
 
-    def test_timeline_and_shared_bullet_usage(self):
-        """Ensure professional arc structure and shared service-list bullets are used."""
-        self.assertIn('id="professional-arc"', self.about_html)
-        self.assertEqual(self.about_html.count('class="era-header"'), 3)
-        # lede-primary removed in 2026 redesign; lede-description remains as standalone paragraph
-        self.assertIn('class="lede-description"', self.about_html)
-        self.assertIn(
-            "Restoring clarity at the point of delivery through durable operating architecture.",
-            self.about_html,
-        )
-        self.assertIn(
-            "High-growth environments require re-architecting underlying systems and aligning engineering, product, and finance to turn strategy into reality.",
-            self.about_html,
-        )
-        self.assertGreaterEqual(self.about_html.count('<ul class="service-list">'), 2)
+    def test_four_chapter_structure_exists(self):
+        self.assertEqual(self.about_html.count('class="era-header"'), 4)
+        self.assertIn('id="enterprise-scale"', self.about_html)
+        self.assertIn('id="global-delivery-leadership"', self.about_html)
+        self.assertIn('id="global-infrastructure-advisory"', self.about_html)
+        self.assertIn('id="ai-enabled-operating-systems"', self.about_html)
 
-    def test_pmp_and_css_blocks_present(self):
-        """Ensure required About layout/style hooks and footer classes exist."""
-        self.assertIn(".about-main", self.about_css)
-        self.assertIn(".container", self.site_css)
-        self.assertIn(".about-hero-refactored", self.about_css)
-        self.assertIn(".page-title", self.site_css)
-        self.assertIn(".shelf-callout", self.site_css)
-        self.assertIn(".shelf-border", self.site_css)
-        self.assertIn(".about-timeline", self.about_css)
-        self.assertIn(".about-philosophy", self.about_css)
-        self.assertIn(".philosophy-stack", self.about_css)
-        self.assertIn(".lede-description", self.site_css)
-        self.assertIn(".footer-primary", self.site_css)
-        self.assertIn("#professional-arc", self.about_css)
+    def test_old_philosophy_card_removed(self):
+        self.assertNotIn('class="philosophy-stack"', self.about_html)
+        self.assertNotIn('Systems Over Heroics', self.about_html)
+        self.assertIn("The strongest operating systems make execution visible.", self.about_html)
 
-    def test_embedded_operating_leadership_section_replaces_today(self):
-        """Ensure the close section uses the new heading and copy."""
-        self.assertNotIn("<h2>TODAY</h2>", self.about_html)
-        self.assertIn("<h3>Embedded Operating Leadership</h3>", self.about_html)
-        self.assertIn("<h3>Systems Over Heroics</h3>", self.about_html)
-        self.assertIn(
-            "This is not about advising from the sidelines. It is about embedding operational discipline directly into workflows, ensuring that delivery commitments are met reliably and strategy is translated into daily execution.",
-            self.about_html,
-        )
-
-    def test_footer_contract_global_on_canonical_pages(self):
-        """Ensure legacy disclaimer is removed and footer attribution remains globally."""
-        for rel in self.canonical_pages:
-            html = (self.root / rel).read_text(encoding="utf-8")
-            self.assertNotIn(
-                "This site was developed with automated coding assistance from OpenAI Codex and complementary modern AI tooling.",
-                html,
-            )
-            self.assertIn(self.footer_primary, html)
-            self.assertIn('class="footer-primary"', html)
-            html_without_allowed_footer_dash = html.replace(
-                '<p class="footer-quote-author">— Walt Disney</p>',
-                "",
-            )
-            self.assertNotIn("—", html_without_allowed_footer_dash)
+    def test_supporting_css_exists(self):
+        self.assertIn(".about-chapter-nav", self.about_css)
+        self.assertIn(".timeline-orb.orb-4", self.about_css)
 
 
 if __name__ == "__main__":

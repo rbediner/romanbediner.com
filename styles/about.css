@@ -46,117 +46,44 @@
 
 .timeline-orb.orb-1,
 .timeline-orb.orb-2,
-.timeline-orb.orb-3 {
+.timeline-orb.orb-3,
+.timeline-orb.orb-4 {
   transform: translateY(-50%);
 }
 
 .timeline-orb.orb-1 { top: var(--orb1, 0px); }
 .timeline-orb.orb-2 { top: var(--orb2, 0px); }
 .timeline-orb.orb-3 { top: var(--orb3, 0px); }
+.timeline-orb.orb-4 { top: var(--orb4, 0px); }
 
 .about-philosophy {
   margin-top: 0;
 }
 
-.card-philosophy {
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: transform 150ms ease, box-shadow 150ms ease;
+.about-philosophy-copy h2 {
+  margin: 0 0 18px;
 }
 
-.card-philosophy:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-}
-
-.philosophy-card-title {
-  margin: 0;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  line-height: 1.1;
-  color: var(--text-primary);
-}
-
-.philosophy-card-accent {
-  width: 48px;
-  height: 3px;
-  background: var(--accent-blue);
-  margin: 12px 0 28px 0;
-}
-
-.philosophy-stack {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-}
-
-.philosophy-item {
-  padding-bottom: 0;
-  margin-bottom: 0;
-  border-bottom: none;
-}
-
-@media (max-width: 768px) {
-  .philosophy-stack {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .philosophy-item {
-    padding-bottom: 32px;
-    margin-bottom: 0;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .philosophy-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-}
-
-.philosophy-item h3 {
-  font-size: 24px;
-  margin: 0 0 12px 0;
-  color: var(--accent-blue);
-}
-
-.philosophy-item p {
+.about-philosophy-copy p {
   max-width: 760px;
-  margin: 0 0 14px 0;
+  margin: 0 0 14px;
   color: var(--text-secondary);
 }
 
-.philosophy-insights-link-wrap {
-  margin: 28px 0 0 0;
-  text-align: right;
+.about-chapter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
 }
 
-.philosophy-insights-link {
-  font-size: 0.9rem;
-  color: var(--accent-blue);
+.about-chapter-nav a {
+  font-size: 14px;
+  color: var(--text-secondary);
   text-decoration: none;
 }
 
-.philosophy-insights-link:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-  .card-philosophy {
-    border-radius: 8px;
-  }
-
-  .philosophy-card-title {
-    font-size: 28px;
-  }
-
-  .philosophy-item h3 {
-    font-size: 22px;
-  }
+.about-chapter-nav a:hover {
+  color: var(--accent-blue);
 }
 
 /* =====================================================
@@ -249,5 +176,10 @@
 
   .arc-narrative p {
     max-width: 100%;
+  }
+
+  .about-chapter-nav {
+    flex-direction: column;
+    gap: 10px;
   }
 }

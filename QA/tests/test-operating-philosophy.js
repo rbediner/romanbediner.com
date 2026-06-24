@@ -1,14 +1,11 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Regression guardrails for test-operating-philosophy.js.
+ * - About page operating-philosophy close must remain in its simplified approved form.
  * Why this exists:
- * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * - Protects the new closing section from drifting back toward the removed card-based layout.
  * What breaks if it fails:
- * - CI blocks deployment to prevent production regressions.
- */
-/**
- * Test: About Operating Philosophy structure and styling refinements.
+ * - CI blocks deployment to prevent operating-philosophy structure or styling regressions.
  */
 const fs = require('fs');
 const path = require('path');
@@ -16,59 +13,29 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const aboutHtml = fs.readFileSync(path.join(root, 'about/index.html'), 'utf8');
 const aboutCss = fs.readFileSync(path.join(root, 'styles/about.css'), 'utf8');
-const siteCss = fs.readFileSync(path.join(root, 'styles/site.css'), 'utf8');
 
-let failures = 0;
+const failures = [];
 
-// Test 1: ensure unified philosophy card exists.
-if (!/class="[^"]*\bcard-philosophy\b[^"]*"/.test(aboutHtml)) {
-  failures += 1;
-  console.error('FAIL: .card-philosophy container is missing in About page.');
-}
-if (!aboutHtml.includes('class="philosophy-card-title"')) {
-  failures += 1;
-  console.error('FAIL: Operating Philosophy title is missing from inside the unified card.');
+if (!aboutHtml.includes('id="operating-philosophy"')) {
+  failures.push('About page is missing the operating-philosophy section.');
 }
 
-// Test 2: ensure card hover elevation transform exists.
-if (!/\.card-philosophy:hover\s*\{[^}]*transform:\s*translateY\(-3px\);/s.test(aboutCss)) {
-  failures += 1;
-  console.error('FAIL: .card-philosophy hover transform is missing.');
+for (const phrase of [
+  'The strongest operating systems make execution visible.',
+  'They clarify how work enters the organization, where ownership changes, which decisions require human judgment, what signals matter, and where coordination repeatedly breaks down.',
+  'The objective is not more process. It is a durable operating system that reduces dependence on heroics, strengthens accountability, and allows the organization to scale with greater clarity and control.'
+]) {
+  if (!aboutHtml.includes(phrase)) {
+    failures.push(`Operating Philosophy missing required copy: ${phrase}`);
+  }
 }
 
-// Test 3: ensure philosophy dividers are removed in favor of stacked layout.
-const dividerCount = (aboutHtml.match(/class="philosophy-divider"/g) || []).length;
-if (dividerCount !== 0) {
-  failures += 1;
-  console.error(`FAIL: expected 0 philosophy dividers after stack refactor, found ${dividerCount}.`);
-}
-if (!aboutHtml.includes('class="philosophy-stack"')) {
-  failures += 1;
-  console.error('FAIL: philosophy-stack container is missing.');
-}
-if ((aboutHtml.match(/class="philosophy-item"/g) || []).length !== 2) {
-  failures += 1;
-  console.error('FAIL: expected exactly 2 philosophy items in the stack.');
+if (!aboutCss.includes('.about-philosophy-copy h2')) {
+  failures.push('About CSS must style the new Operating Philosophy heading.');
 }
 
-// Test 4: ensure orb bullets use /assets/icons/home/bullet.png and 8px sizing globally.
-if (!/\.service-list li::before\s*\{[^}]*width:\s*8px;[^}]*height:\s*8px;[^}]*margin-right:\s*14px;[^}]*background-image:\s*url\("\/assets\/icons\/home\/bullet\.png"\);/s.test(siteCss)) {
-  failures += 1;
-  console.error('FAIL: service-list orb bullet spec does not match required /assets/icons/home/bullet.png and 8px sizing.');
-}
-
-// Test 5: ensure standardized About transition CTA routes to /services/.
-if (
-  !/<section[^>]*class="[^"]*\bnext-page-nav\b[^"]*"/.test(aboutHtml) ||
-  !/<a[^>]*href="\/framework\/"[^>]*class="nav-anchor"/.test(aboutHtml) ||
-  !/Explore the Framework/.test(aboutHtml) ||
-  !/class="nav-title sr-only">Transition to Framework</.test(aboutHtml)
-) {
-  failures += 1;
-  console.error('FAIL: About transition CTA is missing or incorrectly routed.');
-}
-
-if (failures > 0) {
+if (failures.length > 0) {
+  failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);
 }
 

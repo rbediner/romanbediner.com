@@ -1,104 +1,64 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Connect page keeps a conversation-first "How we might connect" section with shared orb bullets.
+ * - Connect page must preserve the approved conversation framing, CTA copy, and retained contact form.
  * Why this exists:
- * - Prevents drift into duplicated Services copy while preserving the shared design system.
+ * - Protects the conversion flow and keeps the new connect narrative aligned with the live route contract.
  * What breaks if it fails:
- * - Connect page intent and visual consistency regress.
+ * - CI blocks deployment to prevent connect-page content or structure regressions.
  */
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', '..');
-const connectHtmlPath = path.join(ROOT, 'connect', 'index.html');
-const connectCssPath = path.join(ROOT, 'styles', 'connect.css');
-const siteCssPath = path.join(ROOT, 'styles', 'site.css');
+const root = path.resolve(__dirname, '..', '..');
+const connectHtml = fs.readFileSync(path.join(root, 'connect', 'index.html'), 'utf8');
+const connectCss = fs.readFileSync(path.join(root, 'styles', 'connect.css'), 'utf8');
 
-const connectHtml = fs.readFileSync(connectHtmlPath, 'utf8');
-const connectCss = fs.readFileSync(connectCssPath, 'utf8');
-const siteCss = fs.readFileSync(siteCssPath, 'utf8');
+const failures = [];
 
-function fail(message) {
-  console.error(`FAIL: ${message}`);
-  process.exit(1);
+const requiredCopy = [
+  '<h1>Start a Conversation</h1>',
+  'The most useful conversations begin with a real operating challenge.',
+  'That may involve executive or embedded operating leadership, a complex transformation or strategic initiative, AI enablement, or the development of a stronger operator.',
+  'The work is most relevant when execution has become fragmented, ownership is unclear, systems no longer support the pace of the business, or AI needs to be integrated into real workflows with greater discipline.',
+  'A short note describing the context, the challenge, and the type of support being considered is enough to begin.',
+  'Email Roman',
+  'Connect on LinkedIn'
+];
+
+for (const phrase of requiredCopy) {
+  if (!connectHtml.includes(phrase)) {
+    failures.push(`Connect page missing required copy: ${phrase}`);
+  }
 }
 
-if (!connectHtml.includes('<h2 id="connect-themes-title">How we might connect</h2>')) {
-  fail('Connect page is missing the "How we might connect" section heading.');
+if (!connectHtml.includes('id="form-card"')) {
+  failures.push('Connect page must keep the existing email form action target.');
 }
 
-if (!connectHtml.includes('Many conversations start with a simple exchange of ideas rather than a defined engagement.')) {
-  fail('Connect page is missing the conversation-first framing paragraph.');
+if (!connectHtml.includes('https://www.linkedin.com/in/romanbediner')) {
+  failures.push('Connect page must keep the existing LinkedIn destination.');
 }
 
-if (!connectHtml.includes('<ul class="service-list">')) {
-  fail('Connect page themes must use shared service-list orb bullets.');
-}
-
-const requiredBulletPhrases = [
-  'Exploring operational challenges in product, engineering, or platform organizations',
-  'Comparing notes on scaling execution in high-growth environments',
-  'Leadership conversations with operators navigating growth or career transitions',
-  'Execution leadership coaching for operators and emerging leaders',
+const removedCopy = [
+  'How we might connect',
+  'Many conversations start with a simple exchange of ideas rather than a defined engagement.',
   'Brainstorming ideas, exchanging perspectives, or connecting across networks'
 ];
 
-for (const phrase of requiredBulletPhrases) {
-  if (!connectHtml.includes(phrase)) {
-    fail(`Connect page missing expected bullet theme: ${phrase}`);
-  }
-}
-
-const prohibitedServiceCopy = [
-  'Fractional leadership',
-  'Strategic program leadership'
-];
-
-for (const phrase of prohibitedServiceCopy) {
+for (const phrase of removedCopy) {
   if (connectHtml.includes(phrase)) {
-    fail(`Connect page should not include services-style offering copy: ${phrase}`);
+    failures.push(`Connect page still includes removed legacy copy: ${phrase}`);
   }
-}
-
-if (!connectCss.includes('.connect-themes-divider')) {
-  fail('Connect CSS must define a subtle divider for the themes section.');
-}
-
-if (connectHtml.includes('class="footer-divider"') || connectHtml.includes('footer-divider-accent')) {
-  fail('Connect page must not render an extra short footer divider element.');
-}
-
-if (connectHtml.includes('connect-page-divider') || connectCss.includes('.connect-page-divider')) {
-  fail('Connect page must not keep any legacy page-divider block.');
-}
-
-if (!/\.footer::before\s*\{[\s\S]*border-top:\s*1px\s+solid/s.test(connectCss)) {
-  fail('Connect CSS must render the shared pre-footer divider via .footer::before.');
-}
-
-if (!connectCss.includes('.connect-closing') || !connectCss.includes('.connect-expectation')) {
-  fail('Connect CSS must include muted styles for closing lines.');
 }
 
 if (!connectCss.includes('.connect-main::before') || !connectCss.includes('.connect-main::after')) {
-  fail('Connect CSS must keep the ambient orb pseudo-elements.');
+  failures.push('Connect page must keep ambient background styling.');
 }
 
-if (!/\.connect-main::before\s*\{[^}]*animation:\s*floatOrb/s.test(connectCss)) {
-  fail('Connect CSS must animate the primary orb with floatOrb on desktop.');
-}
-
-if (!/\.connect-main::after\s*\{[^}]*animation:\s*floatOrb/s.test(connectCss)) {
-  fail('Connect CSS must animate the secondary orb with floatOrb on desktop.');
-}
-
-if (!/@media\s*\(max-width:\s*768px\)\s*\{[\s\S]*\.connect-main::before[\s\S]*\.connect-main::after[\s\S]*display:\s*none/s.test(connectCss)) {
-  fail('Connect CSS must hide both ambient orb pseudo-elements on mobile (max-width: 768px).');
-}
-
-if (!/\.service-list li::before\s*\{[^}]*background-image:\s*url\("\/assets\/icons\/home\/bullet\.png"\);/s.test(siteCss)) {
-  fail('Shared orb bullet source must remain /assets/icons/home/bullet.png in site.css.');
+if (failures.length > 0) {
+  failures.forEach((message) => console.error(`FAIL: ${message}`));
+  process.exit(1);
 }
 
 console.log('PASS: connect conversation section and orb bullet integration checks passed.');

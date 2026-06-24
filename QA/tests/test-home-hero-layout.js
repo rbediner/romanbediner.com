@@ -1,106 +1,82 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Regression guardrails for test-home-hero-layout.js.
+ * - Homepage hero copy, CTA, and operating-experience logo layout must remain intact.
  * Why this exists:
- * - Prevents architectural drift in routing, analytics, CSP, metadata, or shared UI contracts.
+ * - Protects the approved homepage positioning and visual hierarchy from silent regressions.
  * What breaks if it fails:
- * - CI blocks deployment to prevent production regressions.
- */
-/**
- * Home hero layout regression guardrails.
- * Prevents geometry regressions in the master-grid layout.
+ * - CI blocks deployment to prevent homepage messaging or layout drift.
  */
 const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
-const homepagePath = path.join(root, 'index.html');
-const homeCssPath = path.join(root, 'styles', 'home.css');
-const html = fs.readFileSync(homepagePath, 'utf8');
-const homeCss = fs.readFileSync(homeCssPath, 'utf8');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const homeCss = fs.readFileSync(path.join(root, 'styles/home.css'), 'utf8');
 
 const failures = [];
 
-const mainMatch = html.match(/<main class="page-main">([\s\S]*?)<section class="semantic-authority"/i);
-if (!mainMatch) {
-  failures.push('Missing page-main content block in index.html.');
-} else {
-  const mainHtml = mainMatch[1];
+if (!html.includes('<main class="page-main">')) {
+  failures.push('Homepage is missing page-main.');
+}
 
-  // Guard against the exact inline styles that previously caused vertical spacing breakage.
-  if (/direction\s*:\s*rtl/i.test(mainHtml)) {
-    failures.push('Home main contains forbidden "direction: rtl" override.');
-  }
+if (!html.includes('AI-ENABLED OPERATING SYSTEMS')) {
+  failures.push('Homepage eyebrow must equal AI-ENABLED OPERATING SYSTEMS.');
+}
 
-  if (/align-items\s*:\s*flex-end/i.test(mainHtml)) {
-    failures.push('Home main contains forbidden "align-items: flex-end" override.');
-  }
+if (!html.includes('Productizing Operations for Modern, AI-Enabled Work.')) {
+  failures.push('Homepage must preserve the approved H1.');
+}
 
-  // Guard for required structural hooks used by master-grid layout rules.
-  if (!/class="container master-layout-grid"/i.test(mainHtml)) {
-    failures.push('Home main is missing required ".master-layout-grid" container.');
-  }
+const requiredCopy = [
+  'The work focuses on designing execution systems that connect product, engineering, finance, commercial operations, and customer delivery through clear ownership, measurable signals, disciplined operating cadence, and AI-enabled coordination.',
+  'The work is rarely blocked by strategy alone. It breaks down when ownership, systems, signals, and execution rhythms are not designed together.',
+  'SELECTED OPERATING EXPERIENCE',
+  'Selected leadership, advisory, and embedded operating engagements.',
+  'OPERATING EXPERIENCE',
+  'EXECUTION SYSTEMS',
+  'OPERATING PRINCIPLES'
+];
 
-  if (!/class="master-head"/i.test(mainHtml)) {
-    failures.push('Home main is missing required ".master-head" container.');
+for (const phrase of requiredCopy) {
+  if (!html.includes(phrase)) {
+    failures.push(`Homepage missing required copy: ${phrase}`);
   }
+}
 
-  if (!/class="master-photo"/i.test(mainHtml)) {
-    failures.push('Home main is missing required ".master-photo" container.');
-  }
+if (!/href="\/about\/">About<\/a>/.test(html)) {
+  failures.push('Homepage hero CTA must be About -> /about/.');
+}
 
-  if (!/class="master-blurb"/i.test(mainHtml)) {
-    failures.push('Home main is missing required ".master-blurb" container.');
+const logoOrder = [
+  'class="experience-logo experience-logo-disney"',
+  'class="experience-logo experience-logo-aws"',
+  'class="experience-logo experience-logo-laser-light"',
+  'class="experience-logo experience-logo-agentic"'
+];
+let previousIndex = -1;
+for (const marker of logoOrder) {
+  const index = html.indexOf(marker);
+  if (index === -1) {
+    failures.push(`Missing homepage logo marker: ${marker}`);
+    continue;
   }
+  if (index <= previousIndex) {
+    failures.push('Homepage logos are not in the approved order.');
+  }
+  previousIndex = index;
+}
 
-  // The support copy must remain inside the hero bio text column.
-  const bioTextMatch = mainHtml.match(/<div class="master-blurb">\s*<p>([\s\S]*?)<\/p>\s*<\/div>/i);
-  if (!bioTextMatch) {
-    failures.push('Unable to inspect ".master-blurb" contents in home main.');
-  } else if (!/The Walt Disney Company/i.test(bioTextMatch[1])) {
-    failures.push('Support copy text in ".master-blurb" no longer matches expected Disney anchor.');
-  }
+if (html.includes('semantic-authority')) {
+  failures.push('Homepage hidden semantic-authority block must be removed.');
+}
 
-  // Ensure key content blocks keep expected IDs.
-  if (!/id="experience"/i.test(mainHtml)) {
-    failures.push('Missing #experience block.');
-  }
-  if (!/id="areas-of-focus"/i.test(mainHtml)) {
-    failures.push('Missing #areas-of-focus block.');
-  }
-  if (!/id="operating-principles"/i.test(mainHtml)) {
-    failures.push('Missing #operating-principles block.');
-  }
+if (html.includes('The Walt Disney Company &middot; Amazon Web Services')) {
+  failures.push('Homepage must remove the legacy Disney/AWS eyebrow.');
+}
 
-  // Ensure CSS keeps the home in deterministic master-grid layout.
-  if (!/\.master-layout-grid\s*\{[\s\S]*display:\s*grid/i.test(homeCss)) {
-    failures.push('Home CSS must keep ".master-layout-grid" on CSS Grid.');
-  }
-
-  if (!/\.master-head\s*\{[\s\S]*grid-column:\s*1\s*\/\s*-1/i.test(homeCss)) {
-    failures.push('Home CSS must keep ".master-head" spanning both grid columns.');
-  }
-
-  if (!/\.master-layout-grid\s*\{[\s\S]*row-gap:\s*72px/i.test(homeCss)) {
-    failures.push('Home CSS must keep ".master-layout-grid" row-gap at 72px.');
-  }
-
-  if (!/\.master-photo\s*\{[\s\S]*grid-row:\s*2/i.test(homeCss)) {
-    failures.push('Home CSS must keep ".master-photo" starting on row 2.');
-  }
-
-  if (!/\.master-blurb\s*\{[\s\S]*grid-row:\s*2/i.test(homeCss)) {
-    failures.push('Home CSS must keep ".master-blurb" on row 2.');
-  }
-
-  if (!/#experience\.master-section\s*\{[\s\S]*grid-column:\s*1/i.test(homeCss)) {
-    failures.push('Home CSS must keep "#experience" in left grid column.');
-  }
-
-  if (!/#areas-of-focus\.master-section\s*\{[\s\S]*grid-column:\s*1/i.test(homeCss)) {
-    failures.push('Home CSS must keep "#areas-of-focus" in left grid column.');
-  }
+if (!homeCss.includes('.experience-logo-grid') || !homeCss.includes('.home-primary-cta')) {
+  failures.push('Homepage CSS must include logo-grid and hero CTA styles.');
 }
 
 if (failures.length > 0) {

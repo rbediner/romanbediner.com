@@ -291,7 +291,7 @@ function applyActiveNavState(navElement, activePath) {
     const sections = wrapper.querySelectorAll(".arc-item");
     const orbs = wrapper.querySelectorAll(".timeline-orb");
 
-    if (sections.length !== 3 || orbs.length !== 3) return;
+    if (sections.length === 0 || sections.length !== orbs.length) return;
 
     const wrapperRect = wrapper.getBoundingClientRect();
 
@@ -301,7 +301,9 @@ function applyActiveNavState(navElement, activePath) {
 
       const rect = narrative.getBoundingClientRect();
       const visualCenter = rect.top + rect.height / 2 - wrapperRect.top;
-      orbs[index].style.top = `${visualCenter}px`;
+      if (orbs[index]) {
+        orbs[index].style.top = `${visualCenter}px`;
+      }
     });
   }
 

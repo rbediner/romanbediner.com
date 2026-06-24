@@ -15,11 +15,11 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 
-const expectedHomepageTitle = 'Roman Bediner | AI-Enabled Operations & Execution Systems';
-const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operations, execution systems, and engineering operating models that productize operations for scalable platform execution architecture.';
+const expectedHomepageTitle = 'Roman Bediner | AI-Enabled Operating Systems';
+const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operating systems that connect product, engineering, finance, commercial operations, and customer delivery through clear ownership, measurable signals, disciplined operating cadence, and AI-enabled coordination.';
 const expectedHomepageH1 = 'Productizing Operations for Modern, AI-Enabled Work.';
-const expectedFrameworkTitle = 'The AI-Enabled Operations Framework';
-const expectedFrameworkDescription = 'The AI-Enabled Operations Framework for productizing operations through Opportunity, Design, Integration, Execution, Signals, and Evolution.';
+const expectedFrameworkTitle = 'AI-Enabled Operations Framework | Roman Bediner';
+const expectedFrameworkDescription = 'A six-stage framework for designing visible, accountable, and adaptable execution systems with disciplined AI participation.';
 
 const htmlPages = [
   'index.html',

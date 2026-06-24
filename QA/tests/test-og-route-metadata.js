@@ -22,26 +22,26 @@ const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Roman Bediner | AI-Enabled Operations & Execution Systems',
-    ogDescription: 'Roman Bediner designs AI-enabled operations, execution systems, and engineering operating models that productize operations for scalable platform execution architecture.'
+    ogTitle: 'Roman Bediner | AI-Enabled Operating Systems',
+    ogDescription: 'Roman Bediner designs AI-enabled operating systems that connect product, engineering, finance, commercial operations, and customer delivery through clear ownership, measurable signals, disciplined operating cadence, and AI-enabled coordination.'
   },
   {
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
-    ogTitle: 'About | AI-Enabled Operations Leadership',
-    ogDescription: 'Leadership background building AI-enabled operations, execution systems, and engineering operating models that productize operations across complex organizations.'
+    ogTitle: 'About | Roman Bediner',
+    ogDescription: 'Execution systems background across enterprise scale, global delivery leadership, global infrastructure advisory, and AI-enabled operating systems.'
   },
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
-    ogTitle: 'Services | AI-Enabled Operations & Operating Models',
-    ogDescription: 'Operating model design, execution systems leadership, and platform execution architecture for organizations productizing operations in AI-enabled environments.'
+    ogTitle: 'Services | Roman Bediner',
+    ogDescription: 'Operating leadership for organizations navigating growth, transformation, platform complexity, and AI-enabled execution.'
   },
   {
     file: 'framework/index.html',
     canonical: 'https://romanbediner.com/framework/',
-    ogTitle: 'Framework | AI-Enabled Operations Framework',
-    ogDescription: 'The AI-Enabled Operations Framework for productizing operations through Opportunity, Design, Integration, Execution, Signals, and Evolution.'
+    ogTitle: 'AI-Enabled Operations Framework | Roman Bediner',
+    ogDescription: 'A six-stage framework for designing visible, accountable, and adaptable execution systems with disciplined AI participation.'
   },
   {
     file: 'resources/index.html',
@@ -58,8 +58,8 @@ const expected = [
   {
     file: 'connect/index.html',
     canonical: 'https://romanbediner.com/connect/',
-    ogTitle: 'Connect | AI-Enabled Operations Advisory',
-    ogDescription: 'Start a conversation about AI-enabled operations, execution systems, engineering operating models, or platform execution architecture.'
+    ogTitle: 'Connect | Roman Bediner',
+    ogDescription: 'Start a conversation about a real operating challenge involving executive leadership, transformation, AI enablement, or operator development.'
   },
   {
     file: 'resources/ai-enabled-operations-dashboard/index.html',

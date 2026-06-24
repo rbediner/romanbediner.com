@@ -17,8 +17,8 @@ class ContactPageQATest(unittest.TestCase):
 
     def test_has_expected_hero_and_icon(self):
         self.assertIn('src="../assets/icons/connect/contact-transparent.png"', self.html)
-        self.assertIn("<h1>Let's start a conversation.</h1>", self.html)
-        self.assertIn("Share what you're working on or just reach out to connect.", self.html)
+        self.assertIn("<h1>Start a Conversation</h1>", self.html)
+        self.assertIn("The most useful conversations begin with a real operating challenge.", self.html)
 
     def test_has_accessible_form_fields(self):
         self.assertRegex(
@@ -92,7 +92,7 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn('class="executive-action-block"', self.html)
         self.assertIn('href="https://www.linkedin.com/in/romanbediner"', self.html)
         self.assertIn("Connect on LinkedIn", self.html)
-        self.assertIn("For executive search, advisory opportunities, and professional networking.", self.html)
+        self.assertIn("Use the existing LinkedIn profile destination.", self.html)
 
     def test_externalized_css_and_layout_hooks_exist(self):
         # Allow optional cache-busting query strings while enforcing the canonical connect stylesheet path.

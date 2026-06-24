@@ -1,0 +1,41 @@
+{
+  "retrieved_date": "2026-06-24",
+  "logos": [
+    {
+      "organization": "The Walt Disney Company",
+      "source_url": "https://thewaltdisneycompany.com/",
+      "local_file_path": "assets/logos/disney.svg",
+      "file_format": "svg",
+      "transformation_applied_for_display": "Extracted the inline header SVG from the official homepage into a standalone local SVG file; geometry unchanged.",
+      "fallback_used": "none",
+      "notes": "Official website asset."
+    },
+    {
+      "organization": "Amazon Web Services",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_Logo.svg",
+      "local_file_path": "assets/logos/aws.svg",
+      "file_format": "svg",
+      "transformation_applied_for_display": "None.",
+      "fallback_used": "Wikimedia Commons",
+      "notes": "Fallback used because the official website exposed anniversary lockups more readily than a clean standalone wordmark."
+    },
+    {
+      "organization": "Laser Light Communications",
+      "source_url": "https://www.laserlightcomms.com/wp-content/uploads/2025/04/LaserLight_Logo_Light.png",
+      "local_file_path": "assets/logos/laser-light-communications.png",
+      "file_format": "png",
+      "transformation_applied_for_display": "None.",
+      "fallback_used": "none",
+      "notes": "Official website asset; transparent PNG."
+    },
+    {
+      "organization": "Agentic Society",
+      "source_url": "https://agenticsociety.com/_astro/logo-wordmark.BpjeLDCb.svg",
+      "local_file_path": "assets/logos/agentic-society.svg",
+      "file_format": "svg",
+      "transformation_applied_for_display": "None.",
+      "fallback_used": "none",
+      "notes": "Official website asset."
+    }
+  ]
+}
