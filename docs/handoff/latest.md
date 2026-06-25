@@ -1,66 +1,46 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 244
-- Updated At (UTC): 2026-06-24T19:46:44Z
+- Handoff Sequence: 246
+- Updated At (UTC): 2026-06-25T15:47:27Z
 - Source Branch: staging
-- Source Commit: f7c77a3b35dbd602b68d983506e3caab73351f25 (pre-handoff baseline)
+- Source Commit: 56577d369f6c81790ec2669c6b2788eccf4c2532 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Current State
 
-`staging` contains the operating-positioning refresh at `f7c77a3`.
+`staging` now contains the homepage/framework spacing polish at `56577d3` on top of the operating-positioning refresh.
 
 Staging preview target (workflow-managed): https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
 
-This session stopped at staging validation only. No prod promotion was attempted.
+This session remains staging-only. No prod promotion was attempted.
 
 ## Implemented Changes
 
-- Homepage updated to the new `AI-ENABLED OPERATING SYSTEMS` positioning, with revised hero copy, `About` CTA, and a selected operating experience logo row for Disney, AWS, Laser Light Communications, and Agentic Society.
-- About page restructured around `OPERATING BACKGROUND`, chapter navigation, four operating-background chapters, and a simplified `OPERATING PHILOSOPHY` close.
-- Services page rewritten around the approved operating-leadership framing, four core service entries, and the dedicated AI-enabled operating systems section.
-- Connect page rewritten to the conversation-first version, with the old theme-list section removed and the retained form framed by `Email Roman` and LinkedIn action blocks.
-- Framework page kept the six-stage structure and added the approved `APPLYING THE FRAMEWORK` close.
-- Framework summary and dashboard resource pages received the approved explanatory copy updates.
-- Homepage structured data, metadata, and regression tests were updated to match the new messaging and page contracts.
-- Added logo provenance assets under `assets/logos/` plus `assets/logos/logo-asset-manifest.json`.
-- Removed obsolete `assets/icons/services/execution-acceleration.png`.
-- README and the live Google Docs PRD were updated to reflect the new homepage/about/services/connect/framework decisions.
+- Homepage hero spacing tightened without changing the approved content model: the photo column is narrower, the gap rhythm is rebalanced, and the selected operating experience band now uses a top divider plus centered logo alignment.
+- Homepage mobile treatment now keeps the portrait tighter and the logo band closer to the hero copy to avoid the large white-space break found in staging review.
+- Framework mobile progress pills now reserve trailing horizontal scroll space so the final stage chip does not clip at the right edge.
+- Added explicit guardrails for the framework mobile pill treatment and refreshed the home spacing contracts/README notes to match the shipped layout.
+- README and the live Google Docs PRD were updated to reflect this staging polish pass.
 
 ## Files Changed
 
 - `README.md`
-- `index.html`
-- `about/index.html`
-- `services/index.html`
-- `connect/index.html`
-- `framework/index.html`
-- `resources/ai-enabled-operations-framework-summary/index.html`
-- `resources/ai-enabled-operations-dashboard/index.html`
 - `styles/home.css`
-- `styles/about.css`
-- `styles/services.css`
-- `styles/connect.css`
-- `scripts/runtime/site-navigation.js`
-- `assets/logos/*`
+- `styles/framework.css`
 - `QA/tests/test-home-hero-layout.js`
-- `QA/tests/test-connect-page.js`
-- `QA/tests/test-about-redesign.js`
-- `QA/tests/test-about-hero-contract.js`
-- `QA/tests/test-operating-philosophy.js`
-- `QA/tests/test-transition-blocks.js`
-- `QA/tests/test-metadata-consistency.js`
-- `QA/tests/test-og-route-metadata.js`
-- `QA/tests/test-resources-phase1.js`
-- `QA/tests/test_about_redesign.py`
-- `QA/tests/test_contact_form.py`
-- `QA/tests/test_services_stack.py`
+- `QA/tests/test-home-spacing-contract.js`
+- `QA/tests/test-framework-mobile-progress.js`
+- `package.json`
 
 ## QA Summary
 
 Executed and passing in this session:
 
+- `node QA/tests/test-home-hero-layout.js`
+- `node QA/tests/test-home-spacing-contract.js`
+- `node QA/tests/test-framework-mobile-progress.js`
+- `python3 -m unittest QA.tests.test_home_layout_spacing_playwright.HomeLayoutSpacingPlaywrightTest.test_desktop_home_spacing_and_alignment QA.tests.test_home_layout_spacing_playwright.HomeLayoutSpacingPlaywrightTest.test_mobile_home_spacing_and_overflow QA.tests.test_home_spacing_playwright.HomeSpacingPlaywrightTest.test_desktop_spacing_guard QA.tests.test_home_spacing_playwright.HomeSpacingPlaywrightTest.test_mobile_spacing_guard -v`
 - `npm run test:node`
 - `npm run test:jest`
 - `npm run test:python`
@@ -72,19 +52,19 @@ Executed and passing in this session:
 
 PRD update completed:
 
-- `romanbediner.com PRD` Google Doc updated with a new `4.1 June 2026 operating-positioning refresh` section.
+- `romanbediner.com PRD` Google Doc updated to record the follow-up staging polish for homepage spacing and framework mobile pill overflow handling.
 
 ## Manual QA Notes
 
-- Local QA confirms the homepage logo row loads from local assets and respects the new responsive layout rules.
-- About timeline scripting now supports the four-section version without the old three-orb assumption.
-- Connect page copy, CTA framing, and retained form behavior all align with the approved staging-only refresh.
+- Local CI-parity is green after the staging polish pass.
+- Live staging visual QA is still required after pushing `56577d3`, specifically across every touched page on desktop and mobile, using both browser inspection and computer mode.
 - No production release commands were run.
 
 ## Open Items / Follow-ups
 
-1. Push `staging`, wait for `CI` and `Deploy Staging` for the exact SHA, then visually inspect the preview URL before requesting approval.
-2. After preview validation, report staging status to Roman for approval. Do not promote to prod until explicitly approved.
+1. Push `staging`, wait for `CI` and `Deploy Staging` for `56577d3`, then visually inspect the preview URL before requesting approval.
+2. Recheck all touched pages on staging desktop/mobile and confirm the homepage spacing plus framework mobile pill fix hold up in live preview.
+3. After preview validation, report staging status to Roman for approval. Do not promote to prod until explicitly approved.
 
 ## Release Watcher Hygiene
 
