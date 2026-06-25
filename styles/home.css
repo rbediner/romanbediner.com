@@ -66,15 +66,15 @@ p + .divider {
    ========================================= */
 .master-layout-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr) 332px;
   grid-template-areas:
     "head head"
     "blurb photo"
     "experience photo"
     "focus photo"
     "principles principles";
-  column-gap: 48px;
-  row-gap: 72px;
+  column-gap: 56px;
+  row-gap: 64px;
   align-items: start;
   padding-bottom: 24px;
 }
@@ -166,7 +166,7 @@ main .master-head h1 {
 }
 
 .home-hero-actions {
-  margin-top: 28px;
+  margin-top: 30px;
 }
 
 .home-primary-cta {
@@ -188,7 +188,9 @@ main .master-head h1 {
 }
 
 .experience-logo-row {
-  margin-top: 36px;
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-color);
 }
 
 .experience-logo-label,
@@ -209,7 +211,7 @@ main .master-head h1 {
 .experience-logo-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  gap: 24px 28px;
   align-items: center;
 }
 
@@ -217,7 +219,7 @@ main .master-head h1 {
   width: 100%;
   height: 44px;
   object-fit: contain;
-  object-position: center left;
+  object-position: center;
   filter: grayscale(1) brightness(0);
   opacity: 0.88;
 }
@@ -349,8 +351,8 @@ a:focus-visible {
   .master-photo {
     grid-column: 1;
     grid-row: 3;
-    max-width: 400px;
-    margin: 0 auto 32px auto;
+    max-width: 340px;
+    margin: 0 auto;
     aspect-ratio: 3 / 4;
   }
 
@@ -375,7 +377,12 @@ a:focus-visible {
 
   .experience-logo-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px 24px;
+    gap: 18px 20px;
+  }
+
+  .experience-logo-row {
+    margin-top: 28px;
+    padding-top: 18px;
   }
 
   /* Tighten eyebrow so company names break between entries, not mid-name. */

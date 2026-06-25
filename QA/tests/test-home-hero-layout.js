@@ -75,8 +75,8 @@ if (html.includes('The Walt Disney Company &middot; Amazon Web Services')) {
   failures.push('Homepage must remove the legacy Disney/AWS eyebrow.');
 }
 
-if (!homeCss.includes('.experience-logo-grid') || !homeCss.includes('.home-primary-cta')) {
-  failures.push('Homepage CSS must include logo-grid and hero CTA styles.');
+if (!homeCss.includes('.experience-logo-grid') || !homeCss.includes('.home-primary-cta') || !homeCss.includes('.experience-logo-row')) {
+  failures.push('Homepage CSS must include logo-grid, hero CTA, and logo-row styles.');
 }
 
 if (failures.length > 0) {

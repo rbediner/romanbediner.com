@@ -795,8 +795,13 @@ html {
     gap: 6px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
+    padding: 0 20px 8px 0;
+    scroll-padding-right: 20px;
     scrollbar-width: thin;
+  }
+
+  .framework-progress-marker:last-child {
+    margin-right: 6px;
   }
 
   .framework-section {

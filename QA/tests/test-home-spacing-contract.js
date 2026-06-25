@@ -46,20 +46,20 @@ assertMatches(
 
 // Master grid desktop geometry contract.
 assertMatches(
-  /\.master-layout-grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)\s+360px\s*;/i,
-  'Expected ".master-layout-grid" columns to be "minmax(0, 1fr) 360px".'
+  /\.master-layout-grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)\s+332px\s*;/i,
+  'Expected ".master-layout-grid" columns to be "minmax(0, 1fr) 332px".'
 );
 assertMatches(
-  /\.master-layout-grid\s*\{[\s\S]*?row-gap:\s*72px\s*;/i,
-  'Expected ".master-layout-grid" row-gap to stay at 72px.'
+  /\.master-layout-grid\s*\{[\s\S]*?row-gap:\s*64px\s*;/i,
+  'Expected ".master-layout-grid" row-gap to stay at 64px.'
 );
 assertMatches(
   /\.master-head\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*-1\s*;/i,
   'Expected ".master-head" to span both grid columns.'
 );
 assertMatches(
-  /\.master-layout-grid\s*\{[\s\S]*?grid-template-areas:\s*[\s\S]*?"blurb\s+photo"/i,
-  'Expected ".master-layout-grid" template to place "blurb photo" on the same row.'
+  /\.master-layout-grid\s*\{[\s\S]*?grid-template-areas:\s*[\s\S]*?"blurb\s+photo"[\s\S]*?"experience\s+photo"[\s\S]*?"focus\s+photo"/i,
+  'Expected ".master-layout-grid" template to keep blurb, experience, and focus aligned with the photo column.'
 );
 assertMatches(
   /\.master-photo\s*\{[\s\S]*?grid-area:\s*photo\s*;/i,
@@ -71,11 +71,11 @@ assertMatches(
 );
 assertMatches(
   /#experience\.master-section\s*\{[\s\S]*?grid-column:\s*1\s*;/i,
-  'Expected "#experience.master-section" to remain in left column.'
+  'Expected "#experience.master-section" to remain in the left desktop column.'
 );
 assertMatches(
   /#areas-of-focus\.master-section\s*\{[\s\S]*?grid-column:\s*1\s*;/i,
-  'Expected "#areas-of-focus.master-section" to remain in left column.'
+  'Expected "#areas-of-focus.master-section" to remain in the left desktop column.'
 );
 
 // Mobile padding contract.
@@ -99,6 +99,10 @@ if (!mobileBlockMatch) {
 
   if (!/\.master-photo\s*\{[\s\S]*?grid-row:\s*3\s*;/i.test(mobileBlock)) {
     failures.push('Expected mobile ".master-photo" to move to row 3.');
+  }
+
+  if (!/\.experience-logo-row\s*\{[\s\S]*?margin-top:\s*28px\s*;/i.test(mobileBlock)) {
+    failures.push('Expected mobile ".experience-logo-row" to keep the tightened margin-top spacing.');
   }
 }
 
