@@ -15,13 +15,18 @@ class ServicesStackTest(unittest.TestCase):
         self.assertNotIn('Productizing Operations for Modern AI-Enabled Work', self.services_html)
 
     def test_new_headings_exist(self):
+        # Section headings (H2) remain uppercase
         for phrase in [
             'AI-ENABLED OPERATING SYSTEMS',
-            'EXECUTIVE OPERATING LEADERSHIP',
-            'FRACTIONAL AND EMBEDDED OPERATING LEADERSHIP',
-            'STRATEGIC PROGRAM AND TRANSFORMATION LEADERSHIP',
-            'OPERATOR DEVELOPMENT AND AI ENABLEMENT',
             'APPLYING THE WORK',
+        ]:
+            self.assertIn(phrase, self.services_html)
+        # svc-h3 elements were removed; svc-label carries the heading in mixed case
+        for phrase in [
+            'Executive Operating Leadership',
+            'Fractional and Embedded Operating Leadership',
+            'Strategic Program and Transformation Leadership',
+            'Operator Development and AI Enablement',
         ]:
             self.assertIn(phrase, self.services_html)
 
