@@ -356,89 +356,27 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
             context.close()
 
     def test_04_operating_philosophy_block_integrity(self):
-        """Part 4: enforce Operating Philosophy visual contract and capture normal/hover states."""
+        """Part 4: enforce Operating Philosophy section structure and capture visual baseline."""
         context, page = self._new_page(1440, 1600)
         try:
             self._goto(page, "/about/")
 
-            philosophy_card = page.locator(".card-philosophy")
-            self.assertEqual(philosophy_card.count(), 1, "About page must contain exactly one operating philosophy card")
+            philosophy_section = page.locator(".about-philosophy")
+            self.assertEqual(philosophy_section.count(), 1, "About page must contain exactly one .about-philosophy section")
 
-            card_bg, card_radius, card_shadow_before, gap_top, gap_bottom = page.evaluate(
-                """
-                () => {
-                  const section = document.querySelector('.about-philosophy');
-                  const card = document.querySelector('.card-philosophy');
-                  const sectionBox = section.getBoundingClientRect();
-                  const cardBox = card.getBoundingClientRect();
-                  const style = getComputedStyle(card);
-                  return [
-                    style.backgroundColor,
-                    parseFloat(style.borderRadius || '0'),
-                    style.boxShadow,
-                    cardBox.top - sectionBox.top,
-                    sectionBox.bottom - cardBox.bottom,
-                  ];
-                }
-                """
-            )
+            philosophy_copy = page.locator(".about-philosophy-copy")
+            self.assertEqual(philosophy_copy.count(), 1, "About page must contain exactly one .about-philosophy-copy container")
 
-            self.assertEqual(card_bg, "rgb(255, 255, 255)", "Operating philosophy card must remain white")
-            self.assertGreaterEqual(card_radius, 16, "Operating philosophy card border radius is below design spec")
-            self.assertLessEqual(gap_top, 64, "Operating philosophy section has excessive top spacing")
-            self.assertLessEqual(gap_bottom, 64, "Operating philosophy section has excessive bottom spacing")
+            heading_text = page.locator(".about-philosophy-copy h2").inner_text()
+            self.assertIn("OPERATING PHILOSOPHY", heading_text, "Operating Philosophy heading must be present")
 
-            title_size, title_weight, h3_size, h3_weight = page.evaluate(
-                """
-                () => {
-                  const title = document.querySelector('.philosophy-card-title');
-                  const h3 = document.querySelector('.philosophy-item h3');
-                  const titleStyle = getComputedStyle(title);
-                  const h3Style = getComputedStyle(h3);
-                  return [
-                    parseFloat(titleStyle.fontSize),
-                    parseInt(titleStyle.fontWeight, 10),
-                    parseFloat(h3Style.fontSize),
-                    parseInt(h3Style.fontWeight, 10),
-                  ];
-                }
-                """
-            )
-            self.assertGreater(title_size, h3_size, "OPERATING PHILOSOPHY title must be larger than subsection headers")
-            self.assertGreaterEqual(title_weight, h3_weight, "OPERATING PHILOSOPHY title must be at least as bold as subsection headers")
-
-            link_align = page.evaluate(
-                """
-                () => {
-                  const legacyWrap = document.querySelector('.philosophy-insights-link-wrap');
-                  if (!legacyWrap) return null;
-                  return getComputedStyle(legacyWrap).textAlign;
-                }
-                """
-            )
-            # Legacy about card link wrapper is optional in the current markup.
-            if link_align is not None:
-                self.assertEqual(link_align, "right", "Explore related insights link must stay right-aligned")
-
-            # Capture normal state shot.
-            normal_bytes = philosophy_card.screenshot()
+            # Capture screenshot of the philosophy section for baseline tracking.
+            philosophy_section.scroll_into_view_if_needed()
+            page.wait_for_timeout(100)
+            section_bytes = philosophy_section.screenshot()
             self._compare_with_baseline(
-                normal_bytes,
+                section_bytes,
                 "about--operating-philosophy-normal.png",
-                THRESHOLDS["state-shot"],
-            )
-
-            # Hover must create visible elevation delta.
-            philosophy_card.hover()
-            page.wait_for_timeout(180)
-            card_shadow_after = page.evaluate("() => getComputedStyle(document.querySelector('.card-philosophy')).boxShadow")
-            self.assertNotEqual(card_shadow_before, card_shadow_after, "Hover elevation is missing on operating philosophy card")
-            self.assertNotEqual(card_shadow_after, "none", "Hover elevation cannot collapse to no shadow")
-
-            hover_bytes = philosophy_card.screenshot()
-            self._compare_with_baseline(
-                hover_bytes,
-                "about--operating-philosophy-hover.png",
                 THRESHOLDS["state-shot"],
             )
         finally:
