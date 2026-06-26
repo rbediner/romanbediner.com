@@ -386,7 +386,7 @@ async function assertConnectContract(page) {
     email: await page.locator('#email').count(),
     editor: await page.locator('#message-editor').count(),
     submit: await page.locator('#submit-btn').count(),
-    linkedin: await page.locator('.executive-action-block').count()
+    linkedin: await page.locator('.executive-action-block:not(.executive-action-block-email)').count()
   };
 
   for (const [key, count] of Object.entries(counts)) {
