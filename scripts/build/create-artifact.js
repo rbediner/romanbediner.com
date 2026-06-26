@@ -22,6 +22,7 @@ const DEFAULT_OUT = path.join(os.tmpdir(), 'rb-site-artifact');
 const INCLUDE_PATHS = [
   '.nojekyll',
   'CNAME',
+  '404.html',
   'index.html',
   'robots.txt',
   'sitemap.xml',
