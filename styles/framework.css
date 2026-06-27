@@ -799,14 +799,20 @@ html {
     padding: 0;
   }
 
+  /* Stretch each marker to fill its grid cell (override the desktop centered, content-sized
+     marker) so pills cannot exceed their column and overlap the adjacent one. */
   .framework-progress-marker {
     width: 100%;
+    justify-self: stretch;
+    align-items: stretch;
   }
 
   .framework-progress-marker .framework-progress-link {
     display: flex;
     justify-content: center;
     width: 100%;
+    box-sizing: border-box;
+    text-align: center;
   }
 
   /* The connecting dots belong to the desktop rail, which is hidden on mobile. */
