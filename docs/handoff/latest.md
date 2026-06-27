@@ -1,14 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 246
-- Updated At (UTC): 2026-06-25T15:47:27Z
+- Handoff Sequence: 248
+- Updated At (UTC): 2026-06-27T22:17:00Z
 - Source Branch: staging
-- Source Commit: 56577d369f6c81790ec2669c6b2788eccf4c2532 (pre-handoff baseline)
-- Active Agent: Codex
+- Source Commit: 30b8e7c0c68b4ff6c6a7eaf2bd560a0fce60a588 (pre-handoff baseline)
+- Active Agent: Claude
 
 ## Current State
 
-`staging` now contains the homepage/framework spacing polish at `56577d3` on top of the operating-positioning refresh.
+`staging` contains the pre-production polish / SEO / responsive / accessibility pass at `30b8e7c`. CI, Deploy Staging, and Docs Sync all succeeded; the preview has been re-fetched and confirms the new content is live.
 
 Staging preview target (workflow-managed): https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
@@ -17,54 +17,42 @@ This session remains staging-only. No prod promotion was attempted.
 
 ## Implemented Changes
 
-- Homepage hero spacing tightened without changing the approved content model: the photo column is narrower, the gap rhythm is rebalanced, and the selected operating experience band now uses a top divider plus centered logo alignment.
-- Homepage mobile treatment now keeps the portrait tighter and the logo band closer to the hero copy to avoid the large white-space break found in staging review.
-- Framework mobile progress pills now reserve trailing horizontal scroll space so the final stage chip does not clip at the right edge.
-- Added explicit guardrails for the framework mobile pill treatment and refreshed the home spacing contracts/README notes to match the shipped layout.
-- README and the live Google Docs PRD were updated to reflect this staging polish pass.
+- Home: removed the logo-band qualifier sentence; added modest hero breathing room; optically normalized operating-experience logos (Laser Light enlarged, Agentic Society reduced).
+- About: chapter index items are now functional same-page anchors with fixed-header `scroll-margin-top` and hover/focus states; fixed the timeline label overflow (labels wrap and the `.arc-item` clears the rail so GLOBAL INFRASTRUCTURE ADVISORY no longer crosses it); durable Agentic Society opening wording (the coordinated fleet of agentic AI employees claim is preserved); Operating Philosophy now uses a thin blue left-rule inset; final CTA reads "Explore Service Models" → `/services/`.
+- Services: final CTA hierarchy — "Start a Conversation" primary (first), "Explore the Framework" secondary; labels/destinations unchanged.
+- Connect: removed the "Email Roman" action card entirely; the contact form is now the only direct contact method and the first action; LinkedIn block + black "Send message" button retained.
+- PasteFlow: exact approved opening thesis and "In This Product" copy; single "Add to Chrome"; added a clear hero-to-"Who This Is For" gap.
+- Framework: mobile stage nav is now a two-column grid (no horizontal scroll); framework.css cache-bust `?v=20260627a`.
+- SEO: approved titles/descriptions across all canonical routes + the six framework detail routes; extended `Person.knowsAbout` and About/Services `WebPage.about` schema with agentic terms; `noindex,follow` added to `/insights/` and all six `/brief/` redirect stubs.
+- Tests, visual baselines, and README updated to match.
 
 ## Files Changed
 
-- `README.md`
-- `styles/home.css`
-- `styles/framework.css`
-- `QA/tests/test-home-hero-layout.js`
-- `QA/tests/test-home-spacing-contract.js`
-- `QA/tests/test-framework-mobile-progress.js`
-- `package.json`
+- 50 files: page HTML (home, about, services, connect, resources hub, dashboard, pasteflow, framework hub + 6 detail + 6 brief stubs), `styles/home.css`, `styles/about.css`, `styles/services.css`, `styles/resources.css`, `styles/framework.css`, README, and the QA contract tests + refreshed visual baselines.
 
 ## QA Summary
 
 Executed and passing in this session:
 
-- `node QA/tests/test-home-hero-layout.js`
-- `node QA/tests/test-home-spacing-contract.js`
-- `node QA/tests/test-framework-mobile-progress.js`
-- `python3 -m unittest QA.tests.test_home_layout_spacing_playwright.HomeLayoutSpacingPlaywrightTest.test_desktop_home_spacing_and_alignment QA.tests.test_home_layout_spacing_playwright.HomeLayoutSpacingPlaywrightTest.test_mobile_home_spacing_and_overflow QA.tests.test_home_spacing_playwright.HomeSpacingPlaywrightTest.test_desktop_spacing_guard QA.tests.test_home_spacing_playwright.HomeSpacingPlaywrightTest.test_mobile_spacing_guard -v`
-- `npm run test:node`
+- `npm run test:node` (full node suite)
 - `npm run test:jest`
 - `npm run test:python`
-- `npm run test:playwright`
-- `npm run qa:ci-parity`
-- `node QA/tests/test-jsonld-schema.js`
-- `node QA/tests/test-js-header-comments.js`
-- `node QA/tests/test-repo-hygiene.js`
-
-PRD update completed:
-
-- `romanbediner.com PRD` Google Doc updated to record the follow-up staging polish for homepage spacing and framework mobile pill overflow handling.
+- `npm run test:visual:update` then `RUN_VISUAL_TESTS=1` regression (8/8 pass against refreshed baselines)
+- `npm run test:docs-gate`
+- Husky pre-push full-regression gate passed (`qa:ci-parity` green) on push of `30b8e7c`.
 
 ## Manual QA Notes
 
-- Local CI-parity is green after the staging polish pass.
-- Live staging visual QA is still required after pushing `56577d3`, specifically across every touched page on desktop and mobile, using both browser inspection and computer mode.
+- Local CI-parity green. Live preview re-fetched: home/services/connect/framework-detail titles updated, Email Roman absent on connect, brief stubs `noindex`, PasteFlow single Add-to-Chrome, framework summary "Eight slides".
+- Desktop browser visual QA confirmed the About timeline overflow fix renders correctly (long heading wraps inside its column, clear of the rail).
+- Mobile layouts (framework 2-col stage nav, about timeline collapse) are covered by the refreshed Playwright visual baselines.
 - No production release commands were run.
 
 ## Open Items / Follow-ups
 
-1. Push `staging`, wait for `CI` and `Deploy Staging` for `56577d3`, then visually inspect the preview URL before requesting approval.
-2. Recheck all touched pages on staging desktop/mobile and confirm the homepage spacing plus framework mobile pill fix hold up in live preview.
-3. After preview validation, report staging status to Roman for approval. Do not promote to prod until explicitly approved.
+1. Roman to review the live staging preview across all pages (desktop + mobile) for the §4–§12 changes.
+2. After approval, promote the exact tested SHA `30b8e7c` to `prod` (fast-forward only); never promote a different SHA.
+3. Do not promote to prod until explicitly approved.
 
 ## Release Watcher Hygiene
 
