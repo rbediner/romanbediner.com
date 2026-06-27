@@ -13,6 +13,29 @@
   margin: 12px 0 28px 0;
 }
 
+/* Final CTA hierarchy: "Start a Conversation" is primary; "Explore the Framework" is
+   visually secondary. Labels and destinations are unchanged. */
+.services-final-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.services-final-cta .svc-cta-primary .nav-label {
+  font-size: 14px;
+}
+
+.services-final-cta .svc-cta-secondary .nav-label,
+.services-final-cta .svc-cta-secondary .nav-arrow {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.services-final-cta .svc-cta-secondary:hover .nav-label,
+.services-final-cta .svc-cta-secondary:hover .nav-arrow {
+  color: var(--accent-blue);
+}
+
 /* ── Numbered service entry layout (2026 redesign) ── */
 
 .svc-list {

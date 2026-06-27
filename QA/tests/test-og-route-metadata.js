@@ -22,56 +22,56 @@ const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Roman Bediner | AI-Enabled Operating Systems',
-    ogDescription: 'Roman Bediner designs AI-enabled operating systems that connect product, engineering, finance, commercial operations, and customer delivery through clear ownership, measurable signals, disciplined operating cadence, and AI-enabled coordination.'
+    ogTitle: 'Roman Bediner | AI-Enabled Operations & Agentic Operating Systems',
+    ogDescription: 'Roman Bediner designs AI-enabled operations, execution systems, and agentic operating models, including coordinated fleets of AI employees supporting project management, workflow orchestration, decision tracking, and executive visibility.'
   },
   {
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
-    ogTitle: 'About | Roman Bediner',
-    ogDescription: 'Execution systems background across enterprise scale, global delivery leadership, global infrastructure advisory, and AI-enabled operating systems.'
+    ogTitle: 'About Roman Bediner | AI-Enabled Operations & Agentic Systems',
+    ogDescription: 'Operating leadership background across Disney, AWS, global infrastructure, and founder-led AI businesses, including the design and deployment of coordinated fleets of agentic AI employees.'
   },
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
-    ogTitle: 'Services | Roman Bediner',
-    ogDescription: 'Operating leadership for organizations navigating growth, transformation, platform complexity, and AI-enabled execution.'
+    ogTitle: 'Services | AI-Enabled Operations for Modern Operating Teams',
+    ogDescription: 'Executive and fractional operating leadership for modern AI-enabled organizations, spanning operating model design, execution systems, agentic workflows, strategic initiatives, and the development of coordinated AI employee fleets.'
   },
   {
     file: 'framework/index.html',
     canonical: 'https://romanbediner.com/framework/',
-    ogTitle: 'AI-Enabled Operations Framework | Roman Bediner',
-    ogDescription: 'A six-stage framework for designing visible, accountable, and adaptable execution systems with disciplined AI participation.'
+    ogTitle: 'AI-Enabled Operations Framework | Productizing Modern Operating Teams',
+    ogDescription: 'A six-stage operating model for modern AI-enabled teams, covering opportunity, design, integration, execution, signals, and evolution to turn fragmented work into scalable operating systems.'
   },
   {
     file: 'resources/index.html',
     canonical: 'https://romanbediner.com/resources/',
-    ogTitle: 'Resources | AI-Enabled Operations Artifacts',
-    ogDescription: 'Working artifacts for AI-enabled operations: a six-stage framework summary, an executive dashboard prototype, and PasteFlow, a product proof point built from workflow friction.'
+    ogTitle: 'Resources | Working Proof Points for AI-Enabled Operations',
+    ogDescription: 'Explore the operating model in practice through a six-stage framework, an executive dashboard, and PasteFlow, a working product proof point for modern AI-enabled operating teams.'
   },
   {
     file: 'resources/ai-enabled-operations-framework-summary/index.html',
     canonical: 'https://romanbediner.com/resources/ai-enabled-operations-framework-summary/',
-    ogTitle: 'AI-Enabled Operations Framework Summary',
-    ogDescription: 'A concise, downloadable overview of the six-stage framework for productizing operations in modern AI-enabled environments.'
+    ogTitle: 'AI-Enabled Operations Framework Summary | Executive Guide to Productizing Operations',
+    ogDescription: 'Explore a concise executive guide to the six-stage AI-Enabled Operations Framework for productizing operations, integrating AI into workflows, and scaling modern operating teams.'
   },
   {
     file: 'connect/index.html',
     canonical: 'https://romanbediner.com/connect/',
-    ogTitle: 'Connect | Roman Bediner',
-    ogDescription: 'Start a conversation about a real operating challenge involving executive leadership, transformation, AI enablement, or operator development.'
+    ogTitle: 'Connect | Operating Leadership for Modern AI-Enabled Teams',
+    ogDescription: 'Start a conversation about building stronger operating systems for modern AI-enabled teams, including execution architecture, strategic initiatives, agentic workflows, coordinated AI employee fleets, and embedded operating leadership.'
   },
   {
     file: 'resources/ai-enabled-operations-dashboard/index.html',
     canonical: 'https://romanbediner.com/resources/ai-enabled-operations-dashboard/',
-    ogTitle: 'AI-Enabled Operations Dashboard',
-    ogDescription: 'An interactive, single-screen dashboard prototype for AI-enabled operating visibility, structured execution, and faster review in modern AI-enabled work.'
+    ogTitle: 'AI-Enabled Operations Dashboard | Executive Operating Visibility',
+    ogDescription: 'An executive dashboard prototype for modern AI-enabled operating teams, connecting workflow health, ownership, throughput, exceptions, and decision signals in one operating view.'
   },
   {
     file: 'resources/pasteflow/index.html',
     canonical: 'https://romanbediner.com/resources/pasteflow/',
-    ogTitle: 'PasteFlow | Product Proof Point for AI-Enabled Operations',
-    ogDescription: 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A product proof point for AI-enabled operations.'
+    ogTitle: 'PasteFlow Chrome Extension | Human-Rhythm Typing for Web Workflows',
+    ogDescription: 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input across web editors, forms, surveys, and browser-based workflows. A practical product proof point for AI-enabled operations.'
   }
 ];
 

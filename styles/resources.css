@@ -1714,7 +1714,8 @@ body.wireframe-modal-open {
 
 .resource-pasteflow-hero-section {
   margin-top: 24px;
-  margin-bottom: 8px;
+  /* Clear separation so the hero image and the Who This Is For card do not appear attached. */
+  margin-bottom: 30px;
 }
 
 .resource-pasteflow-hero-link {

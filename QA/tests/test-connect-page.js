@@ -22,7 +22,6 @@ const requiredCopy = [
   'That may involve executive or embedded operating leadership, a complex transformation or strategic initiative, AI enablement, or the development of a stronger operator.',
   'The work is most relevant when execution has become fragmented, ownership is unclear, systems no longer support the pace of the business, or AI needs to be integrated into real workflows with greater discipline.',
   'A short note describing the context, the challenge, and the type of support being considered is enough to begin.',
-  'Email Roman',
   'Connect on LinkedIn'
 ];
 
@@ -43,13 +42,34 @@ if (!connectHtml.includes('https://www.linkedin.com/in/romanbediner')) {
 const removedCopy = [
   'How we might connect',
   'Many conversations start with a simple exchange of ideas rather than a defined engagement.',
-  'Brainstorming ideas, exchanging perspectives, or connecting across networks'
+  'Brainstorming ideas, exchanging perspectives, or connecting across networks',
+  // The Email Roman action card was removed; the contact form is the only direct contact method.
+  'Email Roman',
+  'executive-action-block-email',
+  'connect-actions'
 ];
 
 for (const phrase of removedCopy) {
   if (connectHtml.includes(phrase)) {
     failures.push(`Connect page still includes removed legacy copy: ${phrase}`);
   }
+}
+
+// The contact form must be the first actionable element after the intro (form precedes the LinkedIn block).
+const formIndex = connectHtml.indexOf('id="contact-form"');
+const linkedinIndex = connectHtml.indexOf('https://www.linkedin.com/in/romanbediner');
+if (formIndex === -1 || linkedinIndex === -1 || formIndex > linkedinIndex) {
+  failures.push('Connect form must appear before the LinkedIn block as the first contact action.');
+}
+
+// LinkedIn block remains exactly one executive-action-block (email modifier removed).
+if ((connectHtml.match(/class="executive-action-block"/g) || []).length !== 1) {
+  failures.push('Connect page must keep exactly one LinkedIn executive-action-block.');
+}
+
+// Submit button must remain the approved black Send message control.
+if (!connectHtml.includes('Send message') || !connectHtml.includes('id="submit-btn"')) {
+  failures.push('Connect page must keep the Send message submit button.');
 }
 
 if (!connectCss.includes('.connect-main::before') || !connectCss.includes('.connect-main::after')) {

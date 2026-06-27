@@ -789,19 +789,29 @@ html {
     display: none;
   }
 
+  /* Mobile: present the six stages as a two-column index instead of a compressed,
+     horizontally scrolling rail. No horizontal scroll; full-width tap targets. */
   .framework-progress-markers {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 6px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 20px 8px 0;
-    scroll-padding-right: 20px;
-    scrollbar-width: thin;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    overflow-x: visible;
+    padding: 0;
   }
 
-  .framework-progress-marker:last-child {
-    margin-right: 6px;
+  .framework-progress-marker {
+    width: 100%;
+  }
+
+  .framework-progress-marker .framework-progress-link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* The connecting dots belong to the desktop rail, which is hidden on mobile. */
+  .framework-progress-dot {
+    display: none;
   }
 
   .framework-section {

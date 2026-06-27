@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Mobile framework stage pills must keep horizontal breathing room so the last pill is not clipped.
+ * - On mobile, the six framework stages render as a two-column index (no horizontal scroll),
+ *   so no stage pill is clipped and tap targets stay usable.
  * Why this exists:
- * - Protects the approved mobile framework navigation from edge-clipping regressions.
+ * - Protects the approved mobile framework navigation from edge-clipping / compressed-rail regressions.
  * What breaks if it fails:
  * - CI blocks deployment to prevent mobile framework navigation regressions.
  */
@@ -21,16 +22,17 @@ if (!mobileBlockMatch) {
 } else {
   const mobileBlock = mobileBlockMatch[1];
 
-  if (!/\.framework-progress-markers\s*\{[\s\S]*?padding:\s*0\s+20px\s+8px\s+0\s*;/i.test(mobileBlock)) {
-    failures.push('Expected mobile ".framework-progress-markers" to reserve right padding for the final stage pill.');
+  if (!/\.framework-progress-markers\s*\{[\s\S]*?display:\s*grid\s*;/i.test(mobileBlock)) {
+    failures.push('Expected mobile ".framework-progress-markers" to use a grid (two-column stage index).');
   }
 
-  if (!/\.framework-progress-markers\s*\{[\s\S]*?scroll-padding-right:\s*20px\s*;/i.test(mobileBlock)) {
-    failures.push('Expected mobile ".framework-progress-markers" to define scroll-padding-right.');
+  if (!/\.framework-progress-markers\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/i.test(mobileBlock)) {
+    failures.push('Expected mobile ".framework-progress-markers" to use two columns.');
   }
 
-  if (!/\.framework-progress-marker:last-child\s*\{[\s\S]*?margin-right:\s*6px\s*;/i.test(mobileBlock)) {
-    failures.push('Expected the final mobile framework progress marker to keep a small trailing margin.');
+  // Must not reintroduce the horizontally scrolling rail on mobile.
+  if (/\.framework-progress-markers\s*\{[\s\S]*?overflow-x:\s*auto\s*;/i.test(mobileBlock)) {
+    failures.push('Mobile ".framework-progress-markers" must not horizontally scroll (overflow-x: auto).');
   }
 }
 

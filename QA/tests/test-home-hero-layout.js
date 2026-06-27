@@ -32,7 +32,6 @@ const requiredCopy = [
   'The work focuses on designing execution systems that connect product, engineering, finance, commercial operations, and customer delivery through clear ownership, measurable signals, disciplined operating cadence, and AI-enabled coordination.',
   'The work is rarely blocked by strategy alone. It breaks down when ownership, systems, signals, and execution rhythms are not designed together.',
   'SELECTED OPERATING EXPERIENCE',
-  'Selected leadership, advisory, and embedded operating engagements.',
   'OPERATING EXPERIENCE',
   'EXECUTION SYSTEMS',
   'OPERATING PRINCIPLES'
@@ -75,8 +74,13 @@ if (html.includes('The Walt Disney Company &middot; Amazon Web Services')) {
   failures.push('Homepage must remove the legacy Disney/AWS eyebrow.');
 }
 
-if (!homeCss.includes('.experience-logo-grid') || !homeCss.includes('.home-primary-cta') || !homeCss.includes('.experience-logo-row')) {
-  failures.push('Homepage CSS must include logo-grid, hero CTA, and logo-row styles.');
+// The supporting "Selected leadership…" qualifier sentence was intentionally removed from the logo band.
+if (html.includes('Selected leadership, advisory, and embedded operating engagements.')) {
+  failures.push('Homepage logo band qualifier sentence must be removed.');
+}
+
+if (!homeCss.includes('.experience-logo-grid') || !homeCss.includes('.experience-logo-row')) {
+  failures.push('Homepage CSS must include logo-grid and logo-row styles.');
 }
 
 if (failures.length > 0) {

@@ -6,7 +6,12 @@
 }
 
 .about-hero-refactored {
-  margin: 0;
+  /* Modest breathing room below the opening copy before the chapter index. */
+  margin: 0 0 10px;
+}
+
+.about-hero-refactored .page-title {
+  margin-bottom: 24px;
 }
 
 .about-timeline {
@@ -57,7 +62,15 @@
 .timeline-orb.orb-4 { top: var(--orb4, 0px); }
 
 .about-philosophy {
-  margin-top: 0;
+  /* Modest separation from the timeline above. */
+  margin-top: 16px;
+  scroll-margin-top: 96px;
+}
+
+/* Restrained editorial inset: a thin blue left rule sets the close apart without a heavy card. */
+.about-philosophy-copy {
+  border-left: 3px solid var(--accent-blue);
+  padding-left: 28px;
 }
 
 .about-philosophy-copy h2 {
@@ -65,7 +78,7 @@
 }
 
 .about-philosophy-copy p {
-  max-width: 760px;
+  max-width: 680px;
   margin: 0 0 14px;
   color: var(--text-secondary);
 }
@@ -80,9 +93,17 @@
   font-size: 14px;
   color: var(--text-secondary);
   text-decoration: none;
+  border-radius: 3px;
+  transition: color 0.15s ease;
 }
 
 .about-chapter-nav a:hover {
+  color: var(--accent-blue);
+}
+
+.about-chapter-nav a:focus-visible {
+  outline: 3px solid rgba(45, 92, 255, 0.35);
+  outline-offset: 3px;
   color: var(--accent-blue);
 }
 
@@ -93,10 +114,14 @@
 
 .arc-item {
   display: grid;
-  grid-template-columns: 330px 1fr;
+  /* Narrow flexible label column + flexible narrative column. Left padding keeps
+     content clear of the vertical rail so headings never cross it. */
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   column-gap: 48px;
   align-items: start;
-  padding: 48px 0;
+  padding: 48px 0 48px 32px;
+  /* Offset fixed header for same-page anchor jumps. */
+  scroll-margin-top: 96px;
 }
 
 .arc-item:first-of-type {
@@ -108,8 +133,8 @@
 .era-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
   font-size: 19px;
   font-weight: 700;
   text-transform: uppercase;
@@ -117,16 +142,24 @@
   color: var(--accent-blue);
   line-height: 1.2;
   margin: 0;
+  max-width: 100%;
 }
 
 .era-title {
   display: block;
-  white-space: nowrap;
+  /* Allow long headings (e.g. GLOBAL INFRASTRUCTURE ADVISORY) to wrap inside the
+     label column instead of overflowing across the timeline rail. */
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  max-width: 100%;
 }
 
 .era-sub {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: 100%;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.025em;
@@ -181,5 +214,9 @@
   .about-chapter-nav {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .about-philosophy-copy {
+    padding-left: 16px;
   }
 }

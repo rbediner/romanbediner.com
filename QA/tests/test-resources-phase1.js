@@ -360,8 +360,8 @@ mustInclude('dashboard page: mobile screenshot path', resourcesCss, 'dashboard-h
 mustInclude('pasteflow page: canonical URL', pasteflowHtml, 'href="https://romanbediner.com/resources/pasteflow/"');
 mustInclude('pasteflow page: h1', pasteflowHtml, '<h1>PasteFlow</h1>');
 mustInclude('pasteflow page: eyebrow', pasteflowHtml, '>PRODUCT PROOF POINT<');
-mustInclude('pasteflow page: title', pasteflowHtml, '<title>PasteFlow | Product Proof Point for AI-Enabled Operations</title>');
-mustInclude('pasteflow page: meta description', pasteflowHtml, 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input in web editors, forms, surveys, and browser-based workflows. A product proof point for AI-enabled operations.');
+mustInclude('pasteflow page: title', pasteflowHtml, '<title>PasteFlow Chrome Extension | Human-Rhythm Typing for Web Workflows</title>');
+mustInclude('pasteflow page: meta description', pasteflowHtml, 'PasteFlow is a Chrome extension for controlled, human-rhythm typed input across web editors, forms, surveys, and browser-based workflows. A practical product proof point for AI-enabled operations.');
 mustInclude('pasteflow page: cws CTA', pasteflowHtml, 'href="https://chromewebstore.google.com/detail/pasteflow/paenffoomjmkonbgkmfdbnfaljoiilgm"');
 mustInclude('pasteflow page: hero image path', pasteflowHtml, '/assets/resources/pasteflow/pasteflow-cws-01-hero.png');
 mustInclude('pasteflow page: hero image alt', pasteflowHtml, 'PasteFlow product interface showing human-rhythm typing for browser-based work');

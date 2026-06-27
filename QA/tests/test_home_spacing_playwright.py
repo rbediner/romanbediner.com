@@ -59,10 +59,15 @@ class HomeSpacingPlaywrightTest(unittest.TestCase):
               const experienceTitle = document.querySelector('#experience .section-title');
               const focus = document.querySelector('#areas-of-focus');
               const photo = document.querySelector('.master-photo img');
-              const blurbParagraphs = document.querySelectorAll('.master-blurb p');
+              // Only the prose blurb paragraphs are direct children; the experience-logo
+              // label/qualifier live inside a nested section and must not be treated as blurb copy.
+              const blurbParagraphs = document.querySelectorAll('.master-blurb > p');
+              const blurbBlock = document.querySelector('.master-blurb');
               const heading = document.querySelector('.master-head h1');
               const blurbFirst = blurbParagraphs.length ? blurbParagraphs[0] : null;
-              const blurbLast = blurbParagraphs.length ? blurbParagraphs[blurbParagraphs.length - 1] : null;
+              // Measure the gap from the bottom of the whole left-column block (including the
+              // logo band) to the OPERATING EXPERIENCE heading below it.
+              const blurbLast = blurbBlock;
               if (!grid || !experience || !experienceTitle || !focus || !photo || !blurbFirst || !blurbLast || !heading) {
                 return null;
               }

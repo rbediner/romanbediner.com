@@ -46,8 +46,46 @@ for (const subheading of requiredSubheadings) {
   }
 }
 
-if (!aboutHtml.includes('Current work as Operating Partner with Agentic Society')) {
-  failures.push('About page must use Operating Partner as the public Agentic Society title.');
+// Durable, non-time-sensitive construction for the Agentic Society chapter opener.
+if (!aboutHtml.includes('Operating Partner work with Agentic Society focuses on')) {
+  failures.push('About page must use the durable Operating Partner construction for Agentic Society.');
+}
+
+// The substantive claim about a coordinated fleet of agentic AI employees must remain.
+if (!aboutHtml.includes('a coordinated fleet of agentic AI employees')) {
+  failures.push('About page must preserve the coordinated fleet of agentic AI employees claim.');
+}
+
+// Chapter index items must be functional same-page anchors with matching targets.
+const chapterAnchorTargets = [
+  'enterprise-scale',
+  'global-delivery-leadership',
+  'global-infrastructure-advisory',
+  'ai-enabled-operating-systems',
+  'operating-philosophy'
+];
+for (const target of chapterAnchorTargets) {
+  if (!aboutHtml.includes(`href="#${target}"`)) {
+    failures.push(`About chapter index missing anchor link: #${target}`);
+  }
+  if (!aboutHtml.includes(`id="${target}"`)) {
+    failures.push(`About page missing anchor target: id="${target}"`);
+  }
+}
+
+// Final CTA points to Services with the approved label.
+if (!aboutHtml.includes('Explore Service Models') || !aboutHtml.includes('href="/services/"')) {
+  failures.push('About final CTA must read Explore Service Models and link to /services/.');
+}
+
+// Fixed-header anchor offset must exist for same-page jumps.
+if (!aboutCss.includes('scroll-margin-top')) {
+  failures.push('About CSS must set scroll-margin-top for fixed-header anchor offset.');
+}
+
+// Long chapter labels must be allowed to wrap (no nowrap) so they do not cross the rail.
+if (aboutCss.includes('white-space: nowrap')) {
+  failures.push('About CSS must not force era headings to a single line (nowrap).');
 }
 
 if (aboutHtml.includes('Fractional CEO')) {
