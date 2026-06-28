@@ -1,64 +1,62 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 254
-- Updated At (UTC): 2026-06-28T13:53:26Z
+- Handoff Sequence: 256
+- Updated At (UTC): 2026-06-28T17:26:53Z
 - Source Branch: staging
-- Source Commit: e2d7719c5724ef3e068f082a5d221278cbfd615a (pre-handoff baseline)
-- Active Agent: Claude
+- Source Commit: 641e1fbb0c6e221b1cf8c81a179a1bd1e4a7aea5 (pre-handoff baseline)
+- Active Agent: Claude (Opus)
 
 ## Current State
 
-`staging` head is `98c6190`: the pre-production polish / SEO / responsive / accessibility pass (`30b8e7c`) plus a series of mobile + desktop UI follow-ups (`a8eaafc`, `43ad325`, `633e79f`, `98c6190`). Each push passed the full-regression pre-push gate; the docs-only handoff commits sit between them. Desktop and mobile viewport audits are complete. Preview re-fetch + CDN propagation lag applies after each push.
+`staging` head is `641e1fb` — committed and **pushed**; the husky pre-push full-regression gate passed locally (`ci-parity` green, 156s) before the push. GitHub Actions `CI` + `Deploy Staging` run from this push; allow GitHub Pages CDN propagation before reviewing.
+
+This session was started from a stale base (`3fdfe31`); Google Drive synced the other agent's newer commits (`e2d7719` → `186ac54`, handoff seq 254) mid-session. It was reconciled by hard-resetting to `186ac54` and re-applying only the non-overlapping fixes, so none of seq-254's work was lost.
 
 Staging preview target (workflow-managed): https://rbediner.github.io/romanbediner-preview/
 Prod: https://romanbediner.com/
 
-This session remains staging-only. No prod promotion was attempted.
+This session is staging-only. No prod promotion attempted.
 
-## Implemented Changes
+## Implemented Changes (this session, on top of 254)
 
-- Cache-bust tokens (`e2d7719`): `home.css` (20260425b->20260628a) and `framework.css` (20260627a->20260628a) were edited after their last token bump, so the GitHub Pages edge CDN served stale CSS under the unchanged `?v=` URLs (incognito does not bypass the edge cache). Bumping forced fresh fetches; live preview confirmed serving the new eyebrow/logo and framework-nav CSS.
-- Eyebrow consistency (`98c6190`): the home `.credential-eyebrow` was the only blue eyebrow and the smallest (11px desktop / 9px mobile). It now matches the shared eyebrow treatment used on About/Resources/Framework — secondary gray, 12px, 0.14em tracking, single line on mobile. NOTE: open follow-up to fully unify eyebrow size/color/weight/tracking across ALL pages (`.credential-eyebrow`, `.section-eyebrow`, `.resources-label`, `.framework-label` still differ in weight/tracking/gray token), pending a blue-vs-gray decision from Roman.
-- Mobile logo band v2 (`633e79f`): the "SELECTED OPERATING EXPERIENCE" label inherited 20px from `.master-blurb p` and wrapped to 2-3 lines on mobile; it is now pinned to 13px / one line. Laser Light read too small, so mobile logo max-heights were rebalanced (Laser up 30->42, Disney trimmed 40->36).
-- Desktop logo rebalance (`43ad325`): base per-mark heights tuned (Disney up; AWS, Laser, Agentic down) so the desktop operating-experience row reads at even visual weight.
-- Mobile follow-up (`a8eaafc`): home logos sized by capped height+width on the two-column mobile grid; framework mobile stage-nav markers `justify-self: stretch` so pills fill their cell and no longer overlap the adjacent column.
-- Desktop audit (Playwright @1440px) and mobile audit (@360/390/414px) across all nine main pages: no horizontal overflow; About chapter anchors resolve below the fixed header on both; spacing, CTA hierarchy, resource-detail lede widths all verified.
-- Home: removed the logo-band qualifier sentence; added modest hero breathing room; optically normalized operating-experience logos (Laser Light enlarged, Agentic Society reduced).
-- About: chapter index items are now functional same-page anchors with fixed-header `scroll-margin-top` and hover/focus states; fixed the timeline label overflow (labels wrap and the `.arc-item` clears the rail so GLOBAL INFRASTRUCTURE ADVISORY no longer crosses it); durable Agentic Society opening wording (the coordinated fleet of agentic AI employees claim is preserved); Operating Philosophy now uses a thin blue left-rule inset; final CTA reads "Explore Service Models" → `/services/`.
-- Services: final CTA hierarchy — "Start a Conversation" primary (first), "Explore the Framework" secondary; labels/destinations unchanged.
-- Connect: removed the "Email Roman" action card entirely; the contact form is now the only direct contact method and the first action; LinkedIn block + black "Send message" button retained.
-- PasteFlow: exact approved opening thesis and "In This Product" copy; single "Add to Chrome"; added a clear hero-to-"Who This Is For" gap.
-- Framework: mobile stage nav is now a two-column grid (no horizontal scroll); framework.css cache-bust `?v=20260627a`.
-- SEO: approved titles/descriptions across all canonical routes + the six framework detail routes; extended `Person.knowsAbout` and About/Services `WebPage.about` schema with agentic terms; `noindex,follow` added to `/insights/` and all six `/brief/` redirect stubs.
-- Tests, visual baselines, and README updated to match.
+These complete the seq-254 open follow-up ("fully unify eyebrow size/color across ALL pages, pending Roman's blue-vs-gray decision") and a set of layout fixes seq-254 had not addressed:
 
-## Files Changed
+- Eyebrows — unified to **13px** and **blue** across every page: `.credential-eyebrow` (home), `.section-eyebrow` (about/connect), `.framework-label`, `.resources-label`, `.svc-label` (14px→13px), and `.experience-logo-label`. Roman's call: bigger + blue.
+- Home `.experience-logo-label` ("SELECTED OPERATING EXPERIENCE"): scoped under `.master-blurb` to outrank `.master-blurb p` (latent specificity bug that forced 20px/dark), set to 13px blue, and given more breathing room before the logo row (margin-bottom 26px→40px).
+- Home H1: removed the trailing period ("...AI-Enabled Work") — no other page title carries one. Tests updated (`test-home-hero-layout`, `test-metadata-consistency`).
+- Framework summary CTA: relabeled "Explore the Framework Summary at a Glance" → **"View the Summary"**; pill set to `white-space: nowrap`; `.resource-companion-cta` given `box-sizing: border-box` + `max-width:100%` (was content-box, so `width:100%`+padding overflowed the panel on mobile); forward arrow restored. Test updated (`test-resources-phase1` P1-FW-01).
+- About chapter-nav: in-page jump links restyled as blue link-icon **chips** (bordered pill + leading link glyph via CSS mask) so they read as interactive; same treatment desktop + mobile.
+- About timeline era headers: widened label column 300px→**360px** and set `.era-title` to 18px so "GLOBAL INFRASTRUCTURE ADVISORY" sits on **one line** (supersedes seq-254's wrap-to-two-lines approach, which Roman disliked); mobile `.era-title` 16px / `.era-sub` 14px to stay single-line on phones.
+- Cache-bust: all six touched stylesheets bumped to `?v=20260628r3` across all 17 pages (uniform token; also added the missing `?v=` on about's `services.css` link).
 
-- 50 files: page HTML (home, about, services, connect, resources hub, dashboard, pasteflow, framework hub + 6 detail + 6 brief stubs), `styles/home.css`, `styles/about.css`, `styles/services.css`, `styles/resources.css`, `styles/framework.css`, README, and the QA contract tests + refreshed visual baselines.
+NOT changed (already shipped in seq 254, deliberately skipped to avoid clobbering): blue-eyebrow base treatment, stacked-lede spacing, SEO titles/descriptions + schema, metadata-parity test reconciliation, dashboard og:title fix, framework mobile two-column stage grid.
+
+## Files Changed (in 641e1fb)
+
+- `index.html` (H1 + token), `framework/index.html` (CTA label + token), `about/index.html` + 14 other page HTML (cache-bust tokens only)
+- `styles/home.css`, `styles/site.css`, `styles/about.css`, `styles/framework.css`, `styles/resources.css`, `styles/services.css`
+- `QA/tests/test-home-hero-layout.js`, `QA/tests/test-metadata-consistency.js`, `QA/tests/test-resources-phase1.js`
 
 ## QA Summary
 
-Executed and passing in this session:
+All green and pushed:
+- `npm run test:node` (full node suite) — PASS
+- `npm run test:jest` — 71/71 PASS (README integrity satisfied)
+- `npm run test:python` — PASS (43 run, 8 skipped)
+- `npm run test:visual:update` then `npm run test:visual` — 8/8 PASS against refreshed baselines (eyebrow size, chips, era headers, H1, CTA, resources all-caps all changed rendering)
+- Husky pre-push full-regression gate (`qa:ci-parity`) — PASS (156s) on push of `641e1fb`
+- Earlier preview-verified (own static server, computed-style + screenshots): framework CTA no longer overflows mobile / wraps desktop; about chips read as links; era headers one line desktop + mobile; logo label 13px blue with breathing room; H1 period gone.
 
-- `npm run test:node` (full node suite)
-- `npm run test:jest`
-- `npm run test:python`
-- `npm run test:visual:update` then `RUN_VISUAL_TESTS=1` regression (8/8 pass against refreshed baselines)
-- `npm run test:docs-gate`
-- Husky pre-push full-regression gate passed (`qa:ci-parity` green) on push of `30b8e7c` and again on `a8eaafc`.
+## Environment / Reliability Notes
 
-## Manual QA Notes
-
-- Local CI-parity green. Live preview re-fetched: home/services/connect/framework-detail titles updated, Email Roman absent on connect, brief stubs `noindex`, PasteFlow single Add-to-Chrome, framework summary "Eight slides".
-- Mobile audit (Playwright @390px) across all nine main pages: no horizontal overflow; About chapter anchors land below the fixed header; about timeline collapses; services CTA hierarchy correct; connect form is first action; pasteflow lede full width. Two defects found and fixed in `a8eaafc` (home logo balance, framework nav pill overlap).
-- Desktop audit (Playwright @1440px) across all nine main pages complete: clean; only the logo-row balance needed a fix (`43ad325`).
-- No production release commands were run.
+- This repo lives on a Google Drive File Stream mount. During this session it was slow and intermittently served **partially stale file contents** (a chunk of `framework.css` reverted under us; `git diff` underreported changes due to stat-cache confusion). Mitigations used: treat `git` (HEAD) as source of truth, `git checkout`/`reset --hard` to re-baseline, grep actual file contents to verify edits rather than trusting `git diff`, and re-run the full suite after any reset. A stale `.git/index.lock` from a killed process had to be removed once.
+- `npm run session:ready` hung indefinitely on git/Drive I/O this session and produced no output; do not block on it here.
 
 ## Open Items / Follow-ups
 
-1. Roman to review the live staging preview across all pages (desktop + mobile); allow for GitHub Pages CDN propagation after the latest push (`98c6190`) and hard-refresh if a stale build is cached.
-2. After approval, promote the exact tested staging HEAD to `prod` (fast-forward only); never promote a different SHA.
-3. Do not promote to prod until explicitly approved.
+1. Confirm GitHub Actions `CI` + `Deploy Staging` for `641e1fb` go green, then review the live preview across all pages on desktop + mobile (allow GitHub Pages CDN propagation; hard-refresh for stale CSS).
+2. Roman's recommendation backlog (not started — copy changes deferred per Roman): revive `/insights/` (currently `noindex`) with 2–3 indexable posts on building autonomous agent fleets (SEO + recruiter/founder magnet); add metric-backed proof points on About/Home; add an FAQ/Q&A block for answer-engine retrieval; consider adding the unified eyebrow to Resources/Services tops for cross-page consistency; replace the gradient OG image with a photo/descriptive card.
+3. Do not promote to prod until explicitly approved; promote the exact tested staging HEAD (fast-forward only).
 
 ## Release Watcher Hygiene
 
