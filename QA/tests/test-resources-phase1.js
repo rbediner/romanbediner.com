@@ -85,7 +85,7 @@ mustInclude('summary page', summaryHtml, 'href="/connect/"');
 
 // PRD-locked copy: P1-RH-01 (Resources hub intro — two sentences, verbatim)
 mustInclude('P1-RH-01 locked intro', resourcesHtml,
-  'These resources show the operating model in three forms: a framework summary, an executive dashboard prototype, and a real product built from workflow friction.'
+  'These resources show the operating model in four forms: a reference architecture for agentic AI employees, a framework summary, an executive dashboard prototype, and a real product built from workflow friction.'
 );
 mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
 mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
