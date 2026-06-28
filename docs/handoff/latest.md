@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 252
-- Updated At (UTC): 2026-06-28T13:41:02Z
+- Handoff Sequence: 254
+- Updated At (UTC): 2026-06-28T13:53:26Z
 - Source Branch: staging
-- Source Commit: 98c6190e5cfeeaceba3c8bac38e52c258069c1a8 (pre-handoff baseline)
+- Source Commit: e2d7719c5724ef3e068f082a5d221278cbfd615a (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Current State
@@ -17,7 +17,8 @@ This session remains staging-only. No prod promotion was attempted.
 
 ## Implemented Changes
 
-- Eyebrow consistency (`98c6190`): the home `.credential-eyebrow` was the only blue eyebrow and the smallest (11px desktop / 9px mobile). It now matches the shared eyebrow treatment used on About/Resources/Framework — secondary gray, 12px, 0.14em tracking, single line on mobile.
+- Cache-bust tokens (`e2d7719`): `home.css` (20260425b->20260628a) and `framework.css` (20260627a->20260628a) were edited after their last token bump, so the GitHub Pages edge CDN served stale CSS under the unchanged `?v=` URLs (incognito does not bypass the edge cache). Bumping forced fresh fetches; live preview confirmed serving the new eyebrow/logo and framework-nav CSS.
+- Eyebrow consistency (`98c6190`): the home `.credential-eyebrow` was the only blue eyebrow and the smallest (11px desktop / 9px mobile). It now matches the shared eyebrow treatment used on About/Resources/Framework — secondary gray, 12px, 0.14em tracking, single line on mobile. NOTE: open follow-up to fully unify eyebrow size/color/weight/tracking across ALL pages (`.credential-eyebrow`, `.section-eyebrow`, `.resources-label`, `.framework-label` still differ in weight/tracking/gray token), pending a blue-vs-gray decision from Roman.
 - Mobile logo band v2 (`633e79f`): the "SELECTED OPERATING EXPERIENCE" label inherited 20px from `.master-blurb p` and wrapped to 2-3 lines on mobile; it is now pinned to 13px / one line. Laser Light read too small, so mobile logo max-heights were rebalanced (Laser up 30->42, Disney trimmed 40->36).
 - Desktop logo rebalance (`43ad325`): base per-mark heights tuned (Disney up; AWS, Laser, Agentic down) so the desktop operating-experience row reads at even visual weight.
 - Mobile follow-up (`a8eaafc`): home logos sized by capped height+width on the two-column mobile grid; framework mobile stage-nav markers `justify-self: stretch` so pills fill their cell and no longer overlap the adjacent column.
