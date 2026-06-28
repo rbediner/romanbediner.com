@@ -97,14 +97,16 @@ main .master-head h1 {
   max-width: 100%;
 }
 
+/* Match the shared eyebrow treatment used on every other page (`.section-eyebrow`):
+   secondary/gray, 12px, 0.14em tracking — consistent color and size site-wide. */
 .credential-eyebrow {
-  margin: 0 0 10px;
-  font-size: 11px;
+  margin: 0 0 12px;
+  font-size: 12px;
   font-family: var(--font-sans);
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent-blue);
+  color: var(--text-secondary);
   max-width: none;
 }
 
@@ -397,9 +399,9 @@ a:focus-visible {
     padding-top: 18px;
   }
 
-  /* Tighten eyebrow so company names break between entries, not mid-name. */
+  /* Keep the eyebrow at the shared 12px on mobile (fits one line at 360px+);
+     only ease the tracking slightly so it never wraps. */
   .credential-eyebrow {
-    font-size: 9px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
   }
 }
