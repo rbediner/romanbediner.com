@@ -2109,6 +2109,69 @@ body.wireframe-modal-open {
   margin-bottom: 3px;
 }
 
+/* SVG architecture diagrams */
+.fleet-diagram {
+  border: 1px solid var(--border-color);
+  border-radius: 13px;
+  padding: 16px 16px 6px;
+  margin: 20px 0 6px;
+  background: var(--paper-2, #ffffff);
+  overflow-x: auto;
+}
+
+.fleet-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Keep diagrams legible on phones by scrolling rather than squishing. */
+  min-width: 540px;
+}
+
+.fleet-cap {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 6px 0 0;
+  max-width: 760px;
+}
+
+/* Stack / "how it's wired" two-column feature list */
+.fleet-stack {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 18px 0 0;
+}
+
+.fleet-stack-item {
+  border-left: 3px solid var(--accent-blue);
+  padding: 2px 0 2px 16px;
+}
+
+.fleet-stack-item h4 {
+  margin: 0 0 4px;
+  font-size: 15.5px;
+  font-weight: 600;
+}
+
+.fleet-stack-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.fleet-stack-item code,
+.resource-fleet-main code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86em;
+  background: rgba(59, 108, 255, 0.07);
+  border: 1px solid rgba(59, 108, 255, 0.18);
+  border-radius: 5px;
+  padding: 1px 5px;
+  color: var(--text-primary);
+}
+
 @media (max-width: 767px) {
   .fleet-split {
     grid-template-columns: 1fr;
@@ -2123,7 +2186,8 @@ body.wireframe-modal-open {
   }
   .fleet-grid,
   .fleet-feature-grid,
-  .fleet-principles {
+  .fleet-principles,
+  .fleet-stack {
     grid-template-columns: 1fr;
   }
 }
