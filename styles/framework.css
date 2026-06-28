@@ -31,6 +31,13 @@ html {
   position: relative;
 }
 
+/* Match the all-caps page-title treatment used on Services/Resources/About (rendering only; copy unchanged).
+   Hub only: brief pages carry BOTH .framework-main and .framework-brief-main on <main>, and their long
+   sentence-style H1s must stay title case — so exclude .framework-brief-main here. */
+.framework-main:not(.framework-brief-main) h1 {
+  text-transform: uppercase;
+}
+
 /* Unified site-wide eyebrow treatment (see `.section-eyebrow` in site.css). */
 .framework-label {
   margin: 0 0 12px;

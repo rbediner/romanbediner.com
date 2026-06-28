@@ -12,6 +12,8 @@
 
 .about-hero-refactored .page-title {
   margin-bottom: 24px;
+  /* Match the all-caps page-title treatment used on Services/Resources (rendering only; copy unchanged). */
+  text-transform: uppercase;
 }
 
 .about-timeline {
