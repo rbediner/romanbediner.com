@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 258
-- Updated At (UTC): 2026-06-28T18:27:05Z
+- Handoff Sequence: 259
+- Updated At (UTC): 2026-06-28T19:14:18Z
 - Source Branch: staging
-- Source Commit: e8cbca916271bc836c8d24c08e543b6bfcc5ad38 (pre-handoff baseline)
+- Source Commit: db6c5dc1388e76aca2efb021139892ab2ddefa38 (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
 ## Current State
@@ -59,9 +59,11 @@ All green and pushed:
 
 ## Open Items / Follow-ups
 
-1. Confirm GitHub Actions `CI` + `Deploy Staging` for `641e1fb` go green, then review the live preview across all pages on desktop + mobile (allow GitHub Pages CDN propagation; hard-refresh for stale CSS).
-2. Roman's recommendation backlog (not started — copy changes deferred per Roman): revive `/insights/` (currently `noindex`) with 2–3 indexable posts on building autonomous agent fleets (SEO + recruiter/founder magnet); add metric-backed proof points on About/Home; add an FAQ/Q&A block for answer-engine retrieval; consider adding the unified eyebrow to Resources/Services tops for cross-page consistency; replace the gradient OG image with a photo/descriptive card.
-3. Do not promote to prod until explicitly approved; promote the exact tested staging HEAD (fast-forward only).
+1. **Review the live staging preview** across all pages on desktop + mobile (allow GitHub Pages CDN propagation; hard-refresh for stale CSS) — especially the new `/resources/agentic-ai-employees/`.
+2. **Agentic resource diagrams — pending redesign.** Three placeholder diagrams are live: a hand-built **SVG** system diagram + an SVG Git→Vercel deploy diagram (both in `.fleet-diagram` slots), and the scheduled-run shown as a numbered step rail. Roman is commissioning polished replacements from Claude Design (a detailed prompt was provided for: Diagram 1 System, Diagram 2 Scheduled-run lifecycle, Diagram 3 Deploy pipeline — brand palette accent `#3b6cff`, navy `#0d1530`, gold `#9a6b1f`/`#f7f0e2`, green `#2e6b5e`/`#e7f1ed`; self-contained inline SVG, no script/external fonts per CSP, responsive viewBox). When the SVGs arrive: drop each into its `.fleet-diagram` slot in `resources/agentic-ai-employees/index.html`, bump `resources.css`/page token, re-verify mobile, push. Known nit in the current placeholder: the system diagram's "loaded at run time" label overlaps the runtime box.
+3. **When promoting to prod (only when Roman explicitly approves; fast-forward only, exact tested staging HEAD): immediately re-submit `sitemap.xml` in Google Search Console** so Google re-reads it and discovers the new resource (+ any new pages). GSC last auto-read the sitemap Feb 18; manual re-submit is what forces a fresh crawl. After prod, also run `node scripts/qa/verify-live-production.js`.
+4. **Known CI nuisance:** the pre-push visual gate deterministically fails ~first attempt with a phantom `home--mobile-full` 7.5% diff (stale `home.css` read from the Drive mount into the gate's temp copy). The committed baseline is correct. **Just `git push` again — the retry passes.**
+5. Backlog (deferred; copy-sensitive, Roman supplies copy): About-timeline mobile **progressive disclosure** (wrap long eras in tap-to-expand cards/accordions — no content cut); metric-backed proof points on About/Home; an FAQ/Q&A block for answer-engine retrieval; unified eyebrow atop Resources/Services for cross-page consistency; richer OG share image. NOTE: do not revive `/insights/` — confirmed it is an intentional empty noindex stub; the real briefs are indexable.
 
 ## Release Watcher Hygiene
 
