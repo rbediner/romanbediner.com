@@ -1,14 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 257
-- Updated At (UTC): 2026-06-28T17:58:27Z
+- Handoff Sequence: 258
+- Updated At (UTC): 2026-06-28T18:27:05Z
 - Source Branch: staging
-- Source Commit: 437dd8cee74ebb54c2c2c8955be855f0bebeceba (pre-handoff baseline)
+- Source Commit: e8cbca916271bc836c8d24c08e543b6bfcc5ad38 (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
 ## Current State
 
-`staging` head is `437dd8c` — committed and **pushed**. Two pushes this session: `641e1fb` (eyebrow unification 13px/blue + deferred UI fixes) and `437dd8c` (new Agentic AI Employees resource). Both passed the husky pre-push full-regression gate. NOTE: the visual-regression step intermittently fails on the first push attempt because the gate's temp-runtime copy reads a **stale file off the Google Drive mount** (saw a spurious 7.5% home-mobile diff with zero home changes); a retry with a clean copy passes. Local `test:visual:update` + `test:visual` are the reliable signal.
+`staging` head is `e8cbca9` — committed and **pushed**. Pushes this session: `641e1fb` (eyebrow unification 13px/blue + deferred UI fixes), `437dd8c` (new Agentic AI Employees resource), `e8cbca9` (SVG architecture diagrams + restored real stack on that resource). All passed the gate. NOTE: the visual-regression step **deterministically** fails on the first push attempt with a spurious `home--mobile-full` 7.5% diff (identical ratio every time) — the gate's temp-runtime copy intermittently reads a **stale home.css off the Google Drive mount**; the committed baseline is correct (prod home already shows no period). **A second `git push` passes.** Local `test:visual:update`/`test:visual` are the reliable signal.
+
+**Google Search Console (resolved this session):** the sitemap had last been read by Google on **Feb 18** and only **5 pages** were discovered — that, not any noindex, is why few pages ranked. Re-submitted `sitemap.xml` via GSC; Google re-read it immediately and **discovered jumped 5 → 15** (all current prod pages). Indexing will catch up over days. The only `noindex` pages are the `/framework/<stage>/brief/` redirect stubs + `/insights/` — correct, left in place. The real brief pages are indexable and were never blocked.
 
 This session was started from a stale base (`3fdfe31`); Google Drive synced the other agent's newer commits (`e2d7719` → `186ac54`, handoff seq 254) mid-session. It was reconciled by hard-resetting to `186ac54` and re-applying only the non-overlapping fixes, so none of seq-254's work was lost.
 
@@ -29,7 +31,8 @@ These complete the seq-254 open follow-up ("fully unify eyebrow size/color acros
 - About timeline era headers: widened label column 300px→**360px** and set `.era-title` to 18px so "GLOBAL INFRASTRUCTURE ADVISORY" sits on **one line** (supersedes seq-254's wrap-to-two-lines approach, which Roman disliked); mobile `.era-title` 16px / `.era-sub` 14px to stay single-line on phones.
 - Cache-bust: all six touched stylesheets bumped to `?v=20260628r3` across all 17 pages (uniform token; also added the missing `?v=` on about's `services.css` link).
 - **NEW resource (`437dd8c`): Agentic AI Employees** at `/resources/agentic-ai-employees/` — an evergreen reference-architecture page adapted from the Slack Agent Fleet doc, generalized to "agentic AI employees" (no Slack-as-headline, no model names, no costs). Sections: brain/body split (+ static CSS diagram), doer/operator roster (3 cards), scheduled-run lifecycle (numbered steps), the operating layer (4 features), operating principles, Git-driven deploy. Added as the **lead card** on the Resources hub (intro copy → "four forms"); `resources.css` gained `.resource-fleet-*` components (1-col ≤767px) and bumped to `?v=20260628r5`; `TechArticle` schema + agentic/autonomous-fleet keywords; added to `sitemap.xml`; `test-resources-phase1` P1-RH-01 intro updated; README updated. Targets the "agentic AI employees / autonomous AI agent fleets" search intent — the SEO + founder/recruiter magnet play.
-- SEO clarification: the six framework brief pages and the framework hub are **indexable** (no robots tag) and in the sitemap — they were never blocked. Only `/insights/` (an empty redirect stub) carries `noindex`, which is correct. Offered to delete the dead `/insights/` stub; left in place pending Roman's confirm.
+- SEO clarification: the six framework brief pages and the framework hub are **indexable** (no robots tag) and in the sitemap — they were never blocked. Only `/insights/` and the `/framework/<stage>/brief/` redirect stubs carry `noindex`, which is correct.
+- **Agentic resource enhanced (`e8cbca9`):** restored the real architecture (Roman: "evergreen" = no models/costs, but the stack stays). Added two hand-built inline **SVG diagrams** (system "what talks to what"; Git→Vercel deploy pipeline) that scroll inside their frame on mobile (no runtime JS, CSP-safe), a **"How it's wired"** stack section (Vercel cron runtime, JS agent loop, integration clients, self-healing access), and an **Install & setup** how-to. `resources.css` → `?v=20260628r6`.
 
 NOT changed (already shipped in seq 254, deliberately skipped to avoid clobbering): blue-eyebrow base treatment, stacked-lede spacing, SEO titles/descriptions + schema, metadata-parity test reconciliation, dashboard og:title fix, framework mobile two-column stage grid.
 
