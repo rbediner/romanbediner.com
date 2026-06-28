@@ -1,14 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 256
-- Updated At (UTC): 2026-06-28T17:26:53Z
+- Handoff Sequence: 257
+- Updated At (UTC): 2026-06-28T17:58:27Z
 - Source Branch: staging
-- Source Commit: 641e1fbb0c6e221b1cf8c81a179a1bd1e4a7aea5 (pre-handoff baseline)
+- Source Commit: 437dd8cee74ebb54c2c2c8955be855f0bebeceba (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
 ## Current State
 
-`staging` head is `641e1fb` — committed and **pushed**; the husky pre-push full-regression gate passed locally (`ci-parity` green, 156s) before the push. GitHub Actions `CI` + `Deploy Staging` run from this push; allow GitHub Pages CDN propagation before reviewing.
+`staging` head is `437dd8c` — committed and **pushed**. Two pushes this session: `641e1fb` (eyebrow unification 13px/blue + deferred UI fixes) and `437dd8c` (new Agentic AI Employees resource). Both passed the husky pre-push full-regression gate. NOTE: the visual-regression step intermittently fails on the first push attempt because the gate's temp-runtime copy reads a **stale file off the Google Drive mount** (saw a spurious 7.5% home-mobile diff with zero home changes); a retry with a clean copy passes. Local `test:visual:update` + `test:visual` are the reliable signal.
 
 This session was started from a stale base (`3fdfe31`); Google Drive synced the other agent's newer commits (`e2d7719` → `186ac54`, handoff seq 254) mid-session. It was reconciled by hard-resetting to `186ac54` and re-applying only the non-overlapping fixes, so none of seq-254's work was lost.
 
@@ -28,6 +28,8 @@ These complete the seq-254 open follow-up ("fully unify eyebrow size/color acros
 - About chapter-nav: in-page jump links restyled as blue link-icon **chips** (bordered pill + leading link glyph via CSS mask) so they read as interactive; same treatment desktop + mobile.
 - About timeline era headers: widened label column 300px→**360px** and set `.era-title` to 18px so "GLOBAL INFRASTRUCTURE ADVISORY" sits on **one line** (supersedes seq-254's wrap-to-two-lines approach, which Roman disliked); mobile `.era-title` 16px / `.era-sub` 14px to stay single-line on phones.
 - Cache-bust: all six touched stylesheets bumped to `?v=20260628r3` across all 17 pages (uniform token; also added the missing `?v=` on about's `services.css` link).
+- **NEW resource (`437dd8c`): Agentic AI Employees** at `/resources/agentic-ai-employees/` — an evergreen reference-architecture page adapted from the Slack Agent Fleet doc, generalized to "agentic AI employees" (no Slack-as-headline, no model names, no costs). Sections: brain/body split (+ static CSS diagram), doer/operator roster (3 cards), scheduled-run lifecycle (numbered steps), the operating layer (4 features), operating principles, Git-driven deploy. Added as the **lead card** on the Resources hub (intro copy → "four forms"); `resources.css` gained `.resource-fleet-*` components (1-col ≤767px) and bumped to `?v=20260628r5`; `TechArticle` schema + agentic/autonomous-fleet keywords; added to `sitemap.xml`; `test-resources-phase1` P1-RH-01 intro updated; README updated. Targets the "agentic AI employees / autonomous AI agent fleets" search intent — the SEO + founder/recruiter magnet play.
+- SEO clarification: the six framework brief pages and the framework hub are **indexable** (no robots tag) and in the sitemap — they were never blocked. Only `/insights/` (an empty redirect stub) carries `noindex`, which is correct. Offered to delete the dead `/insights/` stub; left in place pending Roman's confirm.
 
 NOT changed (already shipped in seq 254, deliberately skipped to avoid clobbering): blue-eyebrow base treatment, stacked-lede spacing, SEO titles/descriptions + schema, metadata-parity test reconciliation, dashboard og:title fix, framework mobile two-column stage grid.
 
