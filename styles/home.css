@@ -358,30 +358,38 @@ a:focus-visible {
     justify-items: center;
   }
 
+  /* Keep the section label on a single line (it inherits 20px from `.master-blurb p`,
+     which wraps awkwardly on mobile); this selector outranks that inheritance. */
+  .master-blurb .experience-logo-label {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    margin-bottom: 22px;
+  }
+
   /* On the narrow two-column grid, size logos by both a capped height and width
      (auto/auto) and tune per mark so bold/wide logos (AWS, Agentic) don't visually
      dominate the compact ones (Disney). Optical balance, not literal parity. */
   .experience-logo {
     width: auto;
     height: auto;
-    max-width: 86%;
+    max-width: 88%;
     margin: 0 auto;
   }
 
   .experience-logo-disney {
-    max-height: 40px;
+    max-height: 36px;
   }
 
   .experience-logo-aws {
-    max-height: 27px;
+    max-height: 28px;
   }
 
   .experience-logo-laser-light {
-    max-height: 30px;
+    max-height: 42px;
   }
 
   .experience-logo-agentic {
-    max-height: 29px;
+    max-height: 31px;
   }
 
   .experience-logo-row {
