@@ -204,15 +204,16 @@ main .master-head h1 {
   height: 44px;
   object-fit: contain;
   object-position: center;
-  /* Uniform soft-graphite monochrome (not heavy pure black) for an
-     understated, premium "selected experience" row; lifts to full ink on hover. */
-  filter: grayscale(1) brightness(0);
-  opacity: 0.6;
-  transition: opacity 0.25s ease;
+  /* Premium single-ink monochrome: each mark is recolored to the brand
+     deep-navy at full strength (crisp and unified — not faded, not washed
+     grayscale, not flat black). The real brand color blooms back in on hover. */
+  filter: brightness(0) invert(13%) sepia(46%) saturate(1700%) hue-rotate(196deg) brightness(95%) contrast(95%);
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .experience-logo:hover {
-  opacity: 1;
+  filter: none;
+  transform: translateY(-2px);
 }
 
 /* Per-mark heights tuned for OPTICAL balance, not literal parity: bold/wide marks
