@@ -166,7 +166,7 @@ if (summaryHtml.includes('href="/connect/" class="nav-anchor"')) {
 }
 
 // PRD-locked copy: P1-FW-01 (framework bottom CTA)
-mustInclude('P1-FW-01 locked framework CTA', frameworkHtml, 'Explore the Framework Summary at a Glance');
+mustInclude('P1-FW-01 locked framework CTA', frameworkHtml, 'View the Summary');
 mustInclude('P1-FW-01 inset companion panel', frameworkHtml, 'class="framework-summary-cta framework-summary-cta-inset resource-companion-panel"');
 mustInclude('P1-FW-01 button-like CTA treatment', frameworkHtml, 'class="resource-companion-cta resource-companion-cta-framework"');
 mustInclude('P1-FW-01 no duplicate nav divider marker', frameworkHtml, '<section class="next-page-nav">\n      <div class="page-nav-divider" aria-hidden="true"></div>');

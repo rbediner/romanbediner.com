@@ -86,25 +86,46 @@
 .about-chapter-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 18px;
+  gap: 12px;
 }
 
+/* In-page jump links styled as unmistakable interactive chips so they no longer
+   read as plain body text. Each is led by a small blue link icon. */
 .about-chapter-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
-  color: var(--text-secondary);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent-blue);
   text-decoration: none;
-  border-radius: 3px;
-  transition: color 0.15s ease;
+  padding: 8px 15px;
+  border: 1px solid rgba(59, 108, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(59, 108, 255, 0.06);
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.about-chapter-nav a::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/><path d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/><path d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/></svg>") center / contain no-repeat;
 }
 
 .about-chapter-nav a:hover {
-  color: var(--accent-blue);
+  background: rgba(59, 108, 255, 0.14);
+  border-color: rgba(59, 108, 255, 0.5);
+  transform: translateY(-1px);
 }
 
 .about-chapter-nav a:focus-visible {
   outline: 3px solid rgba(45, 92, 255, 0.35);
   outline-offset: 3px;
-  color: var(--accent-blue);
 }
 
 /* =====================================================
@@ -116,7 +137,7 @@
   display: grid;
   /* Narrow flexible label column + flexible narrative column. Left padding keeps
      content clear of the vertical rail so headings never cross it. */
-  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
   column-gap: 48px;
   align-items: start;
   padding: 48px 0 48px 32px;
@@ -138,7 +159,7 @@
   font-size: 19px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   color: var(--accent-blue);
   line-height: 1.2;
   margin: 0;
@@ -147,8 +168,10 @@
 
 .era-title {
   display: block;
-  /* Allow long headings (e.g. GLOBAL INFRASTRUCTURE ADVISORY) to wrap inside the
-     label column instead of overflowing across the timeline rail. */
+  font-size: 18px;
+  /* The widened label column keeps the longest heading
+     (GLOBAL INFRASTRUCTURE ADVISORY) on a single line; balance is a
+     graceful fallback only if a heading still needs to wrap. */
   white-space: normal;
   overflow-wrap: break-word;
   text-wrap: balance;
@@ -207,12 +230,24 @@
     margin-bottom: 8px;
   }
 
+  .era-title {
+    /* Smaller on mobile so the longest era heading stays on one line. */
+    font-size: 16px;
+  }
+
+  .era-sub {
+    font-size: 14px;
+  }
+
   .arc-narrative p {
     max-width: 100%;
   }
 
   .about-chapter-nav {
-    flex-direction: column;
+    /* Keep the link chips hugging their content and wrapping, rather than
+       stretching to full width when the row stacks on small screens. */
+    flex-direction: row;
+    align-items: flex-start;
     gap: 10px;
   }
 

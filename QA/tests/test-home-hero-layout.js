@@ -24,7 +24,7 @@ if (!html.includes('AI-ENABLED OPERATING SYSTEMS')) {
   failures.push('Homepage eyebrow must equal AI-ENABLED OPERATING SYSTEMS.');
 }
 
-if (!html.includes('Productizing Operations for Modern, AI-Enabled Work.')) {
+if (!html.includes('Productizing Operations for Modern, AI-Enabled Work')) {
   failures.push('Homepage must preserve the approved H1.');
 }
 

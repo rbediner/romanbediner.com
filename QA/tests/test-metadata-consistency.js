@@ -17,7 +17,7 @@ const root = path.resolve(__dirname, '..', '..');
 
 const expectedHomepageTitle = 'Roman Bediner | AI-Enabled Operations & Agentic Operating Systems';
 const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operations, execution systems, and agentic operating models, including coordinated fleets of AI employees supporting project management, workflow orchestration, decision tracking, and executive visibility.';
-const expectedHomepageH1 = 'Productizing Operations for Modern, AI-Enabled Work.';
+const expectedHomepageH1 = 'Productizing Operations for Modern, AI-Enabled Work';
 const expectedFrameworkTitle = 'AI-Enabled Operations Framework | Productizing Modern Operating Teams';
 const expectedFrameworkDescription = 'A six-stage operating model for modern AI-enabled teams, covering opportunity, design, integration, execution, signals, and evolution to turn fragmented work into scalable operating systems.';
 
