@@ -1,14 +1,17 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 275
-- Updated At (UTC): 2026-06-28T23:13:28Z
+- Handoff Sequence: 277
+- Updated At (UTC): 2026-06-28T23:33:50Z
 - Source Branch: staging
-- Source Commit: 1af606b6ff2aa310642681c5f7c018eb06d66efb (pre-handoff baseline)
+- Source Commit: 27c28ad66ec9b72729950d220f3cbb5433b6d9fa (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
-## Current State — 🚀 PROMOTED TO PROD
+## Current State — 🚀 LIVE ON PROD (both branches at `27c28ad`)
 
-**`prod` and `staging` are both at `1af606b`** (fast-forward promotion). This session's entire body of work is now **LIVE on https://romanbediner.com**. Prod workflows all green for `1af606b`: `CI` (3m17s), `Deploy Pages` (5m19s, post-deploy validation incl.), `Docs Sync`. `node scripts/qa/verify-live-production.js` PASS (homepage 200, sitemap 200, 16 routes OK). **Live-verified in Chrome:** home navy-ink logos; About chips removed + floating "On this page" + era colors (blue function / gray company); agentic page roster-first + "A human is always in charge" callout + 6 all-caps pills; Framework H1 one line (48px).
+**`prod` and `staging` are both at `27c28ad`.** Latest release (`27c28ad`): the agentic page eyebrow changed **"REFERENCE ARCHITECTURE" → "AVAILABLE NOW"** (availability badge; `.resources-label`, still blue/uppercase). FF-promoted to prod; prod `CI` ✓ (3m7s), `Deploy Pages` ✓ (5m13s), `verify-live-production.js` ✓ (homepage/sitemap 200, 16 routes); live-verified in Chrome (eyebrow reads "AVAILABLE NOW"). **GSC sitemap re-submission still pending Roman (manual).**
+
+Prior release this session (the big one):
+**`prod` and `staging` were brought to `1af606b`** (fast-forward promotion). This session's entire body of work is now **LIVE on https://romanbediner.com**. Prod workflows all green for `1af606b`: `CI` (3m17s), `Deploy Pages` (5m19s, post-deploy validation incl.), `Docs Sync`. `node scripts/qa/verify-live-production.js` PASS (homepage 200, sitemap 200, 16 routes OK). **Live-verified in Chrome:** home navy-ink logos; About chips removed + floating "On this page" + era colors (blue function / gray company); agentic page roster-first + "A human is always in charge" callout + 6 all-caps pills; Framework H1 one line (48px).
 
 **⚠️ ACTION FOR ROMAN (manual, I can't access GSC):** re-submit `sitemap.xml` in Google Search Console now that prod has new/changed pages — that's what forces Google to re-crawl (GSC last auto-read it Feb 18). This is the documented post-prod step.
 
