@@ -202,21 +202,22 @@ main .master-head h1 {
   opacity: 0.88;
 }
 
+/* Per-mark heights tuned for OPTICAL balance, not literal parity: bold/wide marks
+   (AWS, Agentic) are held smaller so they do not dominate the compact Disney mark. */
 .experience-logo-disney {
-  height: 34px;
+  height: 42px;
 }
 
 .experience-logo-aws {
-  height: 36px;
+  height: 30px;
 }
 
 .experience-logo-laser-light {
-  /* Reads small/light at parity; nudge up for optical balance. */
-  height: 50px;
+  height: 40px;
 }
 
 .experience-logo-agentic {
-  height: 36px;
+  height: 32px;
 }
 
 #experience.master-section {
