@@ -1,14 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 271
-- Updated At (UTC): 2026-06-28T22:29:41Z
+- Handoff Sequence: 273
+- Updated At (UTC): 2026-06-28T22:47:20Z
 - Source Branch: staging
-- Source Commit: 0970d0be3510ef20f9e48eb970e30f289c0d840a (pre-handoff baseline)
+- Source Commit: df29f9a6f696993b19e77a1450f3e323293a8798 (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
 ## Current State
 
-`staging` head is `0970d0b` — `Agentic page: lead with the roster + add human-in-charge framing`. On the `/resources/agentic-ai-employees/` page: the **roster** ("Two doers and an operator") now leads (moved to directly after the overview pills); the "How they relate" box was lightly reworded to stand alone at the top (dropped the forward-reference to "the brain" → "a shared library"); and a **human-oversight** point was added so the page doesn't read as job replacement — a lede sentence ("A person stays in charge of the fleet…") + a callout after the roster ("A human is always in charge" — agents as human-directed **direct reports**, "nothing consequential ships without a human's green light"; positive/non-defensive framing). Evergreen (no models/costs/tools-by-name). README updated. All green for `0970d0b`; verified live in Chrome.
+`staging` head is `df29f9a` — `Home logos: premium single-ink monochrome + color-on-hover`. **Home-logos item RESOLVED.** The faded grayscale (opacity 0.6) is replaced with a crisp **single-ink monochrome**: each mark recolored to the brand **deep-navy** at full strength via a CSS filter (`brightness(0) invert(13%) sepia(46%) saturate(1700%) hue-rotate(196deg) brightness(95%) contrast(95%)`) — uniform, premium, not faded/gray/black. On **hover** the real brand color blooms back in (`filter:none`) with a subtle lift. CSS-only on `styles/home.css` (no asset/markup changes, kept current size + position); home.css token r7→r8; 4 home visual baselines refreshed. All green; verified live in Chrome (navy at rest; AWS orange returned on hover). Rejected: Variant A solid-black (Roman: "back where we were"), faded grayscale (washed/cheap). True per-brand monochrome SVG swap was deemed unnecessary — the navy-ink filter + color-hover achieves the premium look with zero markup/asset risk.
+
+### Prior — `staging` head was `0970d0b` — `Agentic page: lead with the roster + add human-in-charge framing`. On the `/resources/agentic-ai-employees/` page: the **roster** ("Two doers and an operator") now leads (moved to directly after the overview pills); the "How they relate" box was lightly reworded to stand alone at the top (dropped the forward-reference to "the brain" → "a shared library"); and a **human-oversight** point was added so the page doesn't read as job replacement — a lede sentence ("A person stays in charge of the fleet…") + a callout after the roster ("A human is always in charge" — agents as human-directed **direct reports**, "nothing consequential ships without a human's green light"; positive/non-defensive framing). Evergreen (no models/costs/tools-by-name). README updated. All green for `0970d0b`; verified live in Chrome.
 
 **OPEN — home logos still pending Roman's pick.** The faded grayscale (opacity 0.6) was the wrong call (looked washed-out/cheap; hover-reveal is undiscoverable). Prototyped two crisp full-strength options at the current size/position on the preview: **A** = uniform solid-black monochrome (`grayscale(1) brightness(0)`, opacity 1, no hover) — cohesive, premium; **B** = real logos in full color (`filter:none`, opacity 1) — recognizable but mixed (AWS orange vs Disney black; Laser reads light). Roman to pick A vs B (or true monochrome brand assets, which would need sourcing official one-color AWS/Laser/Agentic marks). Nothing committed for logos yet — `styles/home.css` still has the opacity-0.6 fade from seq-265 that Roman dislikes; revert/replace once he picks.
 
