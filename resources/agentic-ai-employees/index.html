@@ -124,42 +124,67 @@
       <p class="resource-section-lede">A serverless runtime on a schedule, a cloud drive for behavior, and a workspace as the surface. What talks to what:</p>
 
       <div class="fleet-diagram">
-        <svg viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vercel cron triggers the runtime; the runtime loads skills from the cloud brain, calls integration clients that act on the team workspace, a structured tracker, and external data, and writes a heartbeat ledger.">
+        <svg viewBox="0 0 760 492" role="img" aria-label="System architecture: a Vercel cron trigger drives the Vercel runtime — the body — which loads the company brain at run time, writes a heartbeat ledger, and routes through integration clients to the team workspace, structured tracker, and external data." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
+          <title>Agentic AI system architecture</title>
           <defs>
-            <marker id="ah-sys" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#3b6cff"/></marker>
-            <marker id="ah-brain" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#9a6b1f"/></marker>
-            <marker id="ah-grn" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#2e6b5e"/></marker>
+            <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18244e"></stop><stop offset="1" stop-color="#0a1026"></stop></linearGradient>
+            <filter id="soft" x="-40%" y="-50%" width="180%" height="200%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#141308" flood-opacity="0.10"></feDropShadow></filter>
+            <filter id="lift" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#16213f" flood-opacity="0.20"></feDropShadow></filter>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="5.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0.6,0.6 L5.6,3 L0.6,5.4" fill="none" stroke="#b3b9c4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></marker>
+            <marker id="ahg" markerWidth="9" markerHeight="9" refX="5.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0.6,0.6 L5.6,3 L0.6,5.4" fill="none" stroke="#cba35a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></marker>
           </defs>
-          <rect x="270" y="16" width="180" height="46" rx="9" fill="#eef2fe" stroke="#3b6cff"/>
-          <text x="360" y="43" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#16213f">Vercel cron — schedule</text>
-          <rect x="250" y="118" width="220" height="66" rx="10" fill="#0d1530"/>
-          <text x="360" y="145" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" font-weight="600" fill="#ffffff">Vercel Runtime — the body</text>
-          <text x="360" y="166" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11.5" fill="#c9cee0">scheduling · auth · agent loop (JS)</text>
-          <rect x="500" y="118" width="200" height="66" rx="10" fill="#f7f0e2" stroke="#9a6b1f"/>
-          <text x="600" y="144" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#4a3712">Company Brain</text>
-          <text x="600" y="163" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11.5" fill="#6b5a36">skill files · cloud drive</text>
-          <rect x="20" y="118" width="190" height="66" rx="10" fill="#e7f1ed" stroke="#2e6b5e"/>
-          <text x="115" y="144" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#173b33">Heartbeat ledger</text>
-          <text x="115" y="163" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11.5" fill="#3a5a52">proof every run ran</text>
-          <rect x="250" y="232" width="220" height="46" rx="9" fill="#eef2fe" stroke="#3b6cff"/>
-          <text x="360" y="259" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#16213f">Integration clients</text>
-          <rect x="20" y="344" width="200" height="62" rx="9" fill="#e7f1ed" stroke="#2e6b5e"/>
-          <text x="120" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#173b33">Team workspace</text>
-          <text x="120" y="388" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a5a52">the surface</text>
-          <rect x="260" y="344" width="200" height="62" rx="9" fill="#e7f1ed" stroke="#2e6b5e"/>
-          <text x="360" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#173b33">Structured tracker</text>
-          <text x="360" y="388" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a5a52">shared state</text>
-          <rect x="500" y="344" width="200" height="62" rx="9" fill="#e7f1ed" stroke="#2e6b5e"/>
-          <text x="600" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#173b33">External data</text>
-          <text x="600" y="388" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a5a52">CRM · community</text>
-          <line x1="360" y1="62" x2="360" y2="116" stroke="#3b6cff" stroke-width="1.6" marker-end="url(#ah-sys)"/>
-          <line x1="500" y1="151" x2="474" y2="151" stroke="#9a6b1f" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ah-brain)"/>
-          <text x="488" y="138" text-anchor="end" font-family="DM Sans,sans-serif" font-size="9.5" fill="#9a6b1f">loaded at run time</text>
-          <line x1="250" y1="151" x2="214" y2="151" stroke="#2e6b5e" stroke-width="1.6" marker-end="url(#ah-grn)"/>
-          <line x1="360" y1="184" x2="360" y2="230" stroke="#3b6cff" stroke-width="1.6" marker-end="url(#ah-sys)"/>
-          <line x1="360" y1="278" x2="360" y2="342" stroke="#3b6cff" stroke-width="1.6" marker-end="url(#ah-sys)"/>
-          <line x1="305" y1="278" x2="150" y2="342" stroke="#3b6cff" stroke-width="1.4" marker-end="url(#ah-sys)"/>
-          <line x1="415" y1="278" x2="570" y2="342" stroke="#3b6cff" stroke-width="1.4" marker-end="url(#ah-sys)"/>
+          <g fill="none" stroke="#d6dae2" stroke-width="1.4" stroke-linecap="round">
+            <path d="M380,80 C380,104 380,116 380,137" marker-end="url(#ah)"></path>
+            <path d="M240,184 C226,182 222,186 209,186" marker-end="url(#ah)"></path>
+            <path d="M380,232 C380,256 380,274 380,297" marker-end="url(#ah)"></path>
+            <path d="M352,362 C300,378 206,378 134,389" marker-end="url(#ah)"></path>
+            <path d="M380,362 C380,372 380,379 380,389" marker-end="url(#ah)"></path>
+            <path d="M408,362 C460,378 554,378 626,389" marker-end="url(#ah)"></path>
+          </g>
+          <path d="M520,188 C540,152 540,152 555,184" fill="none" stroke="#cba35a" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="1 5" marker-end="url(#ahg)"></path>
+          <text x="540" y="126" text-anchor="middle" font-size="10.5" fill="#6b6a63">loaded at run time</text>
+          <g filter="url(#soft)"><rect x="265" y="24" width="230" height="56" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="281" y="35" width="34" height="34" rx="10" fill="#eef2fe"></rect>
+          <g fill="none" stroke="#3b6cff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(286 40)"><circle cx="12" cy="12" r="8"></circle><path d="M12 7.5 V12 L15.2 13.8"></path></g>
+          <text x="329" y="48" font-size="14.5" font-weight="600" fill="#16213f">Vercel cron</text>
+          <text x="329" y="66" font-size="11.5" fill="#6b6a63">scheduled trigger</text>
+          <g filter="url(#lift)"><rect x="240" y="140" width="280" height="92" rx="20" fill="url(#navy)"></rect></g>
+          <rect x="240.6" y="140.6" width="278.8" height="90.8" rx="19.4" fill="none" stroke="#ffffff" stroke-opacity="0.10"></rect>
+          <rect x="262" y="166" width="40" height="40" rx="12" fill="#ffffff" fill-opacity="0.07"></rect>
+          <g fill="none" stroke="#cfe0ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(268 172)"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5"></rect><rect x="10" y="10" width="4" height="4" rx="1"></rect><path d="M9 3 V6.5 M15 3 V6.5 M9 17.5 V21 M15 17.5 V21 M3 9 H6.5 M3 15 H6.5 M17.5 9 H21 M17.5 15 H21"></path></g>
+          <text x="318" y="170" font-size="10" font-weight="600" letter-spacing="0.16em" fill="#8fa0d6">THE BODY</text>
+          <text x="318" y="194" font-size="18" font-weight="600" fill="#ffffff">Vercel Runtime</text>
+          <text x="318" y="214" font-size="11.5" fill="#aab3d6">scheduling · auth · agent loop (JS)</text>
+          <g filter="url(#soft)"><rect x="556" y="152" width="196" height="72" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="572" y="171" width="34" height="34" rx="10" fill="#f7f0e2"></rect>
+          <g fill="none" stroke="#9a6b1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(577 176)"><path d="M11 4 L12.6 9 L17.5 11 L12.6 13 L11 18 L9.4 13 L4.5 11 L9.4 9 Z"></path><path d="M17.5 4 L18.3 6.2 L20.5 7 L18.3 7.8 L17.5 10 L16.7 7.8 L14.5 7 L16.7 6.2 Z"></path></g>
+          <text x="620" y="184" font-size="14" font-weight="600" fill="#4a3712">Company Brain</text>
+          <text x="620" y="202" font-size="11" fill="#6b6a63">skill files · cloud drive</text>
+          <g filter="url(#soft)"><rect x="8" y="152" width="196" height="72" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="24" y="171" width="34" height="34" rx="10" fill="#e7f1ed"></rect>
+          <g fill="none" stroke="#2e6b5e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(29 176)"><path d="M3 12 H7 L9.2 6.5 L12.4 17.5 L14.6 12 H21"></path></g>
+          <text x="72" y="184" font-size="14" font-weight="600" fill="#173b33">Heartbeat ledger</text>
+          <text x="72" y="202" font-size="11" fill="#6b6a63">proof every run ran</text>
+          <g filter="url(#soft)"><rect x="260" y="300" width="240" height="62" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="276" y="314" width="34" height="34" rx="10" fill="#eef2fe"></rect>
+          <g fill="none" stroke="#3b6cff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(281 319)"><circle cx="6" cy="12" r="2.6"></circle><circle cx="17" cy="6" r="2.6"></circle><circle cx="17" cy="18" r="2.6"></circle><path d="M8.3 10.8 L14.7 7.2 M8.3 13.2 L14.7 16.8"></path></g>
+          <text x="324" y="326" font-size="14" font-weight="600" fill="#16213f">Integration clients</text>
+          <text x="324" y="344" font-size="11" fill="#6b6a63">outbound API surface</text>
+          <g filter="url(#soft)"><rect x="8" y="392" width="232" height="74" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="24" y="412" width="34" height="34" rx="10" fill="#e7f1ed"></rect>
+          <g fill="none" stroke="#2e6b5e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(29 417)"><circle cx="9.5" cy="9" r="3.2"></circle><path d="M3.8 18.5 C3.8 14.9 6.4 13.2 9.5 13.2 C12.6 13.2 15.2 14.9 15.2 18.5"></path><path d="M15.5 6.4 C17.2 6.7 18.3 7.8 18.3 9.2 C18.3 10.6 17.2 11.7 15.5 12"></path><path d="M17 13.5 C19.2 14 20.7 15.4 20.7 18.5"></path></g>
+          <text x="72" y="424" font-size="13.5" font-weight="600" fill="#173b33">Team workspace</text>
+          <text x="72" y="442" font-size="11" fill="#6b6a63">the surface</text>
+          <g filter="url(#soft)"><rect x="264" y="392" width="232" height="74" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="280" y="412" width="34" height="34" rx="10" fill="#e7f1ed"></rect>
+          <g fill="none" stroke="#2e6b5e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(285 417)"><rect x="4" y="5" width="16" height="14" rx="2.2"></rect><path d="M4 9.6 H20 M11.5 9.6 V19 M4 14.3 H20"></path></g>
+          <text x="328" y="424" font-size="13.5" font-weight="600" fill="#173b33">Structured tracker</text>
+          <text x="328" y="442" font-size="11" fill="#6b6a63">shared state</text>
+          <g filter="url(#soft)"><rect x="520" y="392" width="232" height="74" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="536" y="412" width="34" height="34" rx="10" fill="#e7f1ed"></rect>
+          <g fill="none" stroke="#2e6b5e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(541 417)"><circle cx="12" cy="12" r="8"></circle><path d="M4 12 H20 M12 4 C14.6 6.6 14.6 17.4 12 20 M12 4 C9.4 6.6 9.4 17.4 12 20"></path></g>
+          <text x="584" y="424" font-size="13.5" font-weight="600" fill="#173b33">External data</text>
+          <text x="584" y="442" font-size="11" fill="#6b6a63">CRM · community</text>
         </svg>
       </div>
       <p class="fleet-cap">The repo is the body (scheduling, auth, the agent loop in JavaScript). The cloud brain holds behavior. Each run loads its skill at run time, calls its clients, acts on the workspace and the shared tracker, pulls only the external data that job needs, and writes a heartbeat — the durable proof it ran.</p>
@@ -218,6 +243,54 @@
       <p class="fleet-kicker">Inside a run</p>
       <h2 id="fleet-run">How one scheduled run executes</h2>
       <p class="resource-section-lede">A shared handler turns a job name into identity, authority, a skill, and a record. The same six steps run every time.</p>
+
+      <div class="fleet-diagram">
+        <svg viewBox="0 0 720 186" role="img" aria-label="Scheduled run lifecycle: step 1 cron fires, 2 authenticate, 3 local-hour guard, 4 load skill from brain, 5 agent loop (cached), 6 act in workspace, 7 write heartbeat. On error, the agent loop still writes a heartbeat." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
+          <title>Scheduled run lifecycle</title>
+          <defs>
+            <filter id="soft-lc" x="-40%" y="-60%" width="180%" height="220%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#141308" flood-opacity="0.10"></feDropShadow></filter>
+            <marker id="ah-lc" markerWidth="9" markerHeight="9" refX="5.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0.6,0.6 L5.6,3 L0.6,5.4" fill="none" stroke="#b3b9c4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></marker>
+          </defs>
+          <g fill="none" stroke="#d6dae2" stroke-width="1.4" stroke-linecap="round">
+            <path d="M98,83 C103,83 105,83 110,83" marker-end="url(#ah-lc)"></path>
+            <path d="M200,83 C205,83 207,83 212,83" marker-end="url(#ah-lc)"></path>
+            <path d="M302,83 C307,83 309,83 314,83" marker-end="url(#ah-lc)"></path>
+            <path d="M404,83 C409,83 411,83 416,83" marker-end="url(#ah-lc)"></path>
+            <path d="M506,83 C511,83 513,83 518,83" marker-end="url(#ah-lc)"></path>
+            <path d="M608,83 C613,83 615,83 620,83" marker-end="url(#ah-lc)"></path>
+          </g>
+          <path d="M461,118 C461,156 665,156 665,121" fill="none" stroke="#b3b9c4" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="1 5" marker-end="url(#ah-lc)"></path>
+          <text x="563" y="170" text-anchor="middle" font-size="10.5" fill="#6b6a63">on error</text>
+          <g filter="url(#soft-lc)"><rect x="8" y="48" width="90" height="70" rx="14" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <circle cx="53" cy="70" r="11" fill="#eef2fe"></circle><text x="53" y="74" text-anchor="middle" font-size="12" font-weight="600" fill="#3b6cff">1</text>
+          <text x="53" y="98" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">Cron</text>
+          <text x="53" y="111" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">fires</text>
+          <g filter="url(#soft-lc)"><rect x="110" y="48" width="90" height="70" rx="14" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <circle cx="155" cy="70" r="11" fill="#eef2fe"></circle><text x="155" y="74" text-anchor="middle" font-size="12" font-weight="600" fill="#3b6cff">2</text>
+          <text x="155" y="104" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">Authenticate</text>
+          <g filter="url(#soft-lc)"><rect x="212" y="48" width="90" height="70" rx="14" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <circle cx="257" cy="70" r="11" fill="#eef2fe"></circle><text x="257" y="74" text-anchor="middle" font-size="12" font-weight="600" fill="#3b6cff">3</text>
+          <text x="257" y="98" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">Local-hour</text>
+          <text x="257" y="111" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">guard</text>
+          <g filter="url(#soft-lc)"><rect x="314" y="48" width="90" height="70" rx="14" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <circle cx="359" cy="70" r="11" fill="#eef2fe"></circle><text x="359" y="74" text-anchor="middle" font-size="12" font-weight="600" fill="#3b6cff">4</text>
+          <text x="359" y="98" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">Load skill</text>
+          <text x="359" y="111" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">from brain</text>
+          <g filter="url(#soft-lc)"><rect x="416" y="48" width="90" height="70" rx="14" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <circle cx="461" cy="70" r="11" fill="#eef2fe"></circle><text x="461" y="74" text-anchor="middle" font-size="12" font-weight="600" fill="#3b6cff">5</text>
+          <text x="461" y="98" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">Agent loop</text>
+          <text x="461" y="111" text-anchor="middle" font-size="10.5" fill="#6b6a63">(cached)</text>
+          <g filter="url(#soft-lc)"><rect x="518" y="48" width="90" height="70" rx="14" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <circle cx="563" cy="70" r="11" fill="#eef2fe"></circle><text x="563" y="74" text-anchor="middle" font-size="12" font-weight="600" fill="#3b6cff">6</text>
+          <text x="563" y="98" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">Act in</text>
+          <text x="563" y="111" text-anchor="middle" font-size="11" font-weight="500" fill="#16213f">workspace</text>
+          <g filter="url(#soft-lc)"><rect x="620" y="48" width="90" height="70" rx="14" fill="#ffffff" stroke="#cfe2da" stroke-width="1.2"></rect></g>
+          <circle cx="665" cy="70" r="11" fill="#e7f1ed"></circle><text x="665" y="74" text-anchor="middle" font-size="12" font-weight="600" fill="#2e6b5e">7</text>
+          <text x="665" y="98" text-anchor="middle" font-size="11" font-weight="600" fill="#173b33">Write</text>
+          <text x="665" y="111" text-anchor="middle" font-size="11" font-weight="600" fill="#173b33">heartbeat</text>
+        </svg>
+      </div>
+
       <ol class="fleet-steps">
         <li><h4>The schedule fires</h4><p>A scheduled trigger calls the job at its configured time.</p></li>
         <li><h4>Authenticate</h4><p>The handler rejects anything without the correct token, so jobs can&rsquo;t be triggered by a random request.</p></li>
@@ -288,27 +361,42 @@
       <p class="resource-section-lede">Git is the source of truth for the body; Vercel is the only place it runs. The Vercel GitHub App wires them so a single <code>git push</code> is the entire deploy &mdash; and rollback never touches Git.</p>
 
       <div class="fleet-diagram">
-        <svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A push to the main branch triggers the Vercel GitHub App, which builds and promotes to production where the cron schedule runs; any other branch builds a preview where the schedule never runs; production can be rolled back instantly by promoting a previous build.">
-          <defs><marker id="ah-dep" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#3b6cff"/></marker></defs>
-          <rect x="16" y="96" width="150" height="58" rx="9" fill="#eef2fe" stroke="#3b6cff"/>
-          <text x="91" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#16213f">git push</text>
-          <text x="91" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a4a6a">code change</text>
-          <rect x="210" y="96" width="160" height="58" rx="9" fill="#eef2fe" stroke="#3b6cff"/>
-          <text x="290" y="121" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12.5" fill="#16213f">Vercel GitHub App</text>
-          <text x="290" y="139" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a4a6a">builds on every push</text>
-          <rect x="500" y="20" width="200" height="60" rx="9" fill="#e7f1ed" stroke="#2e6b5e"/>
-          <text x="600" y="46" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#173b33">Production</text>
-          <text x="600" y="64" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a5a52">cron schedule runs here</text>
-          <rect x="500" y="170" width="200" height="60" rx="9" fill="#f7f0e2" stroke="#9a6b1f"/>
-          <text x="600" y="196" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#4a3712">Preview</text>
-          <text x="600" y="214" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6b5a36">schedule never runs</text>
-          <line x1="166" y1="125" x2="208" y2="125" stroke="#3b6cff" stroke-width="1.6" marker-end="url(#ah-dep)"/>
-          <path d="M370,112 C440,112 452,54 498,51" fill="none" stroke="#3b6cff" stroke-width="1.6" marker-end="url(#ah-dep)"/>
-          <text x="430" y="80" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#2e6b5e">main branch</text>
-          <path d="M370,140 C440,140 452,199 498,201" fill="none" stroke="#3b6cff" stroke-width="1.6" marker-end="url(#ah-dep)"/>
-          <text x="432" y="180" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" fill="#9a6b1f">any other branch</text>
-          <path d="M690,80 C716,112 716,138 690,168" fill="none" stroke="#2e6b5e" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah-dep)"/>
-          <text x="713" y="126" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#2e6b5e" transform="rotate(90 713 126)">instant rollback</text>
+        <svg viewBox="0 0 720 250" role="img" aria-label="Deploy pipeline: a git push triggers the Vercel GitHub App, which builds on every push. The main branch deploys to Production where the cron schedule runs, with instant rollback. Any other branch deploys to a Preview where the schedule never runs." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
+          <title>Deploy pipeline — Git to Vercel</title>
+          <defs>
+            <filter id="soft-dep" x="-40%" y="-50%" width="180%" height="200%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#141308" flood-opacity="0.10"></feDropShadow></filter>
+            <marker id="ah-dep" markerWidth="9" markerHeight="9" refX="5.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0.6,0.6 L5.6,3 L0.6,5.4" fill="none" stroke="#b3b9c4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></marker>
+            <marker id="ahg-dep" markerWidth="9" markerHeight="9" refX="5.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0.6,0.6 L5.6,3 L0.6,5.4" fill="none" stroke="#cba35a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></marker>
+          </defs>
+          <g fill="none" stroke="#d6dae2" stroke-width="1.4" stroke-linecap="round">
+            <path d="M180,133 C200,133 212,133 231,133" marker-end="url(#ah-dep)"></path>
+            <path d="M445,116 C466,101 470,82 483,73" marker-end="url(#ah-dep)"></path>
+            <path d="M445,150 C466,167 470,189 483,203" marker-end="url(#ah-dep)"></path>
+          </g>
+          <path d="M560,40 C560,12 640,12 640,37" fill="none" stroke="#cba35a" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="1 5" marker-end="url(#ahg-dep)"></path>
+          <text x="478" y="92" text-anchor="end" font-size="10.5" fill="#6b6a63">main branch</text>
+          <text x="480" y="190" text-anchor="end" font-size="10.5" fill="#6b6a63">any other branch</text>
+          <text x="600" y="11" text-anchor="middle" font-size="10.5" fill="#6b6a63">instant rollback</text>
+          <g filter="url(#soft-dep)"><rect x="20" y="104" width="160" height="58" rx="16" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="36" y="116" width="34" height="34" rx="10" fill="#eef2fe"></rect>
+          <g fill="none" stroke="#3b6cff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(41 121)"><circle cx="7" cy="6" r="2.4"></circle><circle cx="7" cy="18" r="2.4"></circle><circle cx="17" cy="9" r="2.4"></circle><path d="M7 8.4 V15.6 M7 12 C7 10.2 9 9.2 14.6 9"></path></g>
+          <text x="84" y="129" font-size="13.5" font-weight="600" fill="#16213f">git push</text>
+          <text x="84" y="146" font-size="11" fill="#6b6a63">code change</text>
+          <g filter="url(#soft-dep)"><rect x="231" y="96" width="214" height="74" rx="17" fill="#ffffff" stroke="#e6e8ec" stroke-width="1.2"></rect></g>
+          <rect x="247" y="116" width="34" height="34" rx="10" fill="#eef2fe"></rect>
+          <g fill="none" stroke="#3b6cff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(252 121)"><path d="M12 3 L20 7.2 V16.8 L12 21 L4 16.8 V7.2 Z"></path><path d="M4 7.2 L12 11.4 L20 7.2 M12 11.4 V21"></path></g>
+          <text x="299" y="128" font-size="13.5" font-weight="600" fill="#16213f">Vercel GitHub App</text>
+          <text x="299" y="146" font-size="11" fill="#6b6a63">builds on every push</text>
+          <g filter="url(#soft-dep)"><rect x="485" y="40" width="215" height="62" rx="16" fill="#ffffff" stroke="#cfe2da" stroke-width="1.2"></rect></g>
+          <rect x="501" y="54" width="34" height="34" rx="10" fill="#e7f1ed"></rect>
+          <g fill="none" stroke="#2e6b5e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(506 59)"><path d="M12 3 L19 6 V11 C19 16 15.8 19.4 12 21 C8.2 19.4 5 16 5 11 V6 Z"></path><path d="M9 11.5 L11.2 13.8 L15.5 9.2"></path></g>
+          <text x="549" y="68" font-size="13.5" font-weight="600" fill="#173b33">Production</text>
+          <text x="549" y="86" font-size="11" fill="#173b33">cron schedule runs here</text>
+          <g filter="url(#soft-dep)"><rect x="485" y="178" width="215" height="56" rx="16" fill="#ffffff" stroke="#ecdfc4" stroke-width="1.2"></rect></g>
+          <rect x="501" y="189" width="34" height="34" rx="10" fill="#f7f0e2"></rect>
+          <g fill="none" stroke="#9a6b1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(506 194)"><path d="M2.5 12 C5 7 9 5 12 5 C15 5 19 7 21.5 12 C19 17 15 19 12 19 C9 19 5 17 2.5 12 Z"></path><circle cx="12" cy="12" r="3"></circle></g>
+          <text x="549" y="203" font-size="13.5" font-weight="600" fill="#4a3712">Preview</text>
+          <text x="549" y="220" font-size="11" fill="#4a3712">schedule never runs</text>
         </svg>
       </div>
       <p class="fleet-cap">Push to <code>main</code> and the Vercel GitHub App builds and promotes to production, where the schedule runs. Any other branch builds a preview that never fires the schedule. Roll back in seconds by promoting a previous production build &mdash; no Git change required.</p>
