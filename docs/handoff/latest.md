@@ -1,14 +1,22 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 273
-- Updated At (UTC): 2026-06-28T22:47:20Z
+- Handoff Sequence: 275
+- Updated At (UTC): 2026-06-28T23:13:28Z
 - Source Branch: staging
-- Source Commit: df29f9a6f696993b19e77a1450f3e323293a8798 (pre-handoff baseline)
+- Source Commit: 1af606b6ff2aa310642681c5f7c018eb06d66efb (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
-## Current State
+## Current State — 🚀 PROMOTED TO PROD
 
-`staging` head is `df29f9a` — `Home logos: premium single-ink monochrome + color-on-hover`. **Home-logos item RESOLVED.** The faded grayscale (opacity 0.6) is replaced with a crisp **single-ink monochrome**: each mark recolored to the brand **deep-navy** at full strength via a CSS filter (`brightness(0) invert(13%) sepia(46%) saturate(1700%) hue-rotate(196deg) brightness(95%) contrast(95%)`) — uniform, premium, not faded/gray/black. On **hover** the real brand color blooms back in (`filter:none`) with a subtle lift. CSS-only on `styles/home.css` (no asset/markup changes, kept current size + position); home.css token r7→r8; 4 home visual baselines refreshed. All green; verified live in Chrome (navy at rest; AWS orange returned on hover). Rejected: Variant A solid-black (Roman: "back where we were"), faded grayscale (washed/cheap). True per-brand monochrome SVG swap was deemed unnecessary — the navy-ink filter + color-hover achieves the premium look with zero markup/asset risk.
+**`prod` and `staging` are both at `1af606b`** (fast-forward promotion). This session's entire body of work is now **LIVE on https://romanbediner.com**. Prod workflows all green for `1af606b`: `CI` (3m17s), `Deploy Pages` (5m19s, post-deploy validation incl.), `Docs Sync`. `node scripts/qa/verify-live-production.js` PASS (homepage 200, sitemap 200, 16 routes OK). **Live-verified in Chrome:** home navy-ink logos; About chips removed + floating "On this page" + era colors (blue function / gray company); agentic page roster-first + "A human is always in charge" callout + 6 all-caps pills; Framework H1 one line (48px).
+
+**⚠️ ACTION FOR ROMAN (manual, I can't access GSC):** re-submit `sitemap.xml` in Google Search Console now that prod has new/changed pages — that's what forces Google to re-crawl (GSC last auto-read it Feb 18). This is the documented post-prod step.
+
+**Prod divergence reconciled:** prod had an out-of-band hotfix `56f910f fix: include 404.html in build artifact` (added `'404.html'` to `INCLUDE_PATHS` in `create-artifact.js` + a README note) that was never on staging. A clean `git merge origin/prod` into staging (commit `1af606b`, auto-merged, no conflicts) brought that fix back so prod was fast-forward-able and the branded 404 page keeps deploying. Going forward staging ⊇ prod again; future promotions are clean FF.
+
+**This-session final UI change before promo:** About visible chapter-nav chips **removed** (`e3ad826`) — redundant with the always-visible floating control; `.about-chapter-nav` markup kept but `.sr-only` so it remains the `[data-section-nav]` source + an SR landmark. (Home logos: the navy-ink + color-on-hover from `df29f9a` was kept — judged premium, not reverted.)
+
+### Prior (seq 273, staging-only) — head was `df29f9a` — `Home logos: premium single-ink monochrome + color-on-hover`. **Home-logos item RESOLVED.** The faded grayscale (opacity 0.6) is replaced with a crisp **single-ink monochrome**: each mark recolored to the brand **deep-navy** at full strength via a CSS filter (`brightness(0) invert(13%) sepia(46%) saturate(1700%) hue-rotate(196deg) brightness(95%) contrast(95%)`) — uniform, premium, not faded/gray/black. On **hover** the real brand color blooms back in (`filter:none`) with a subtle lift. CSS-only on `styles/home.css` (no asset/markup changes, kept current size + position); home.css token r7→r8; 4 home visual baselines refreshed. All green; verified live in Chrome (navy at rest; AWS orange returned on hover). Rejected: Variant A solid-black (Roman: "back where we were"), faded grayscale (washed/cheap). True per-brand monochrome SVG swap was deemed unnecessary — the navy-ink filter + color-hover achieves the premium look with zero markup/asset risk.
 
 ### Prior — `staging` head was `0970d0b` — `Agentic page: lead with the roster + add human-in-charge framing`. On the `/resources/agentic-ai-employees/` page: the **roster** ("Two doers and an operator") now leads (moved to directly after the overview pills); the "How they relate" box was lightly reworded to stand alone at the top (dropped the forward-reference to "the brain" → "a shared library"); and a **human-oversight** point was added so the page doesn't read as job replacement — a lede sentence ("A person stays in charge of the fleet…") + a callout after the roster ("A human is always in charge" — agents as human-directed **direct reports**, "nothing consequential ships without a human's green light"; positive/non-defensive framing). Evergreen (no models/costs/tools-by-name). README updated. All green for `0970d0b`; verified live in Chrome.
 
