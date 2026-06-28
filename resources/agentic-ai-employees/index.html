@@ -81,7 +81,7 @@
     <div class="section-accent" aria-hidden="true"></div>
 
     <section class="resource-top-section" aria-label="Overview">
-      <p class="resource-detail-prose-lede">A fleet of autonomous AI agents that wake on a schedule, load their behavior from a cloud brain, and do real work inside your team&rsquo;s workspace &mdash; operated like employees, not chatbots. This is the operating architecture, end to end: how the agents are wired, how they ship, and how you run them.</p>
+      <p class="resource-detail-prose-lede">A fleet of autonomous AI agents that wake on a schedule, load their behavior from a cloud brain, and do real work inside your team&rsquo;s workspace &mdash; operated like employees, not chatbots. This is the operating architecture, end to end: how the agents are wired, how they ship, and how you run them. A person stays in charge of the fleet &mdash; setting its direction, approving the moves that matter, and owning the outcome.</p>
       <div class="fleet-pillrow" aria-label="Architecture properties">
         <span class="fleet-pill">Brain / body split</span>
         <span class="fleet-pill">Scheduled autonomy</span>
@@ -89,6 +89,43 @@
         <span class="fleet-pill">Single alerting layer</span>
         <span class="fleet-pill">Git-driven deploys</span>
         <span class="fleet-pill">Human-in-the-loop</span>
+      </div>
+    </section>
+
+    <section class="resource-section" aria-labelledby="fleet-roster">
+      <p class="fleet-kicker">The roster</p>
+      <h2 id="fleet-roster">Two doers and an operator</h2>
+      <p class="resource-section-lede">Autonomous agents with distinct lanes. The doers produce the work; the operator runs the fleet. All three take initiative and bring consequential moves to their owner for a green light.</p>
+      <div class="fleet-grid">
+        <article class="fleet-agent fleet-agent-pm">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Doer</p>
+          <h3>Project Agent</h3>
+          <p class="fleet-agent-body">Project intelligence &mdash; action items, open loops, decisions, blockers, daily standups, and a structured tracker the whole team can read.</p>
+        </article>
+        <article class="fleet-agent fleet-agent-cof">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Doer</p>
+          <h3>Chief of Staff</h3>
+          <p class="fleet-agent-body">Knowledge work &mdash; turning meetings and signals into durable documents, profiles, briefs, and weekly digests that keep the organization aligned.</p>
+        </article>
+        <article class="fleet-agent fleet-agent-dir">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Operator</p>
+          <h3>Orchestration Director</h3>
+          <p class="fleet-agent-body">Operates the fleet &mdash; health monitoring and a single alerting layer, a conversational front door, cross-agent hand-off, deploys, and durable memory.</p>
+        </article>
+      </div>
+      <div class="resource-blue-box fleet-note">
+        <span class="fleet-note-tag">How they relate</span>
+        <p>At runtime the doers are <strong>peers</strong> &mdash; neither bosses the other mid-task. They coordinate through a shared library and a hand-off broker, not a boss agent. The operator &mdash; the Director &mdash; sits above them: it watches health, routes work, enforces lane ownership, owns deploys, and is the single human-facing front door. Its living memory of the fleet&rsquo;s state is the cure for &ldquo;the agents keep forgetting.&rdquo;</p>
+      </div>
+    </section>
+
+    <section class="resource-section" aria-label="Human oversight">
+      <div class="resource-blue-box fleet-note">
+        <span class="fleet-note-tag">A human is always in charge</span>
+        <p>The fleet has an owner. The agents are direct reports &mdash; they take the execution and coordination off the team&rsquo;s plate, so the people they report to can spend their time on judgment, direction, and the decisions that matter. Nothing consequential ships without a human&rsquo;s green light.</p>
       </div>
     </section>
 
@@ -207,36 +244,6 @@
           <h4>Self-healing access</h4>
           <p>Data fetches try a cheap request first and fall back to an in-stack headless browser that clears bot challenges itself &mdash; no third party, no manual token grab. Tokens rotate from a brain file with an env-var fallback.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="resource-section" aria-labelledby="fleet-roster">
-      <p class="fleet-kicker">The roster</p>
-      <h2 id="fleet-roster">Two doers and an operator</h2>
-      <p class="resource-section-lede">Autonomous agents with distinct lanes. The doers produce the work; the operator runs the fleet. All three take initiative and bring consequential moves to their owner for a green light.</p>
-      <div class="fleet-grid">
-        <article class="fleet-agent fleet-agent-pm">
-          <span class="fleet-agent-bar" aria-hidden="true"></span>
-          <p class="fleet-agent-role">Doer</p>
-          <h3>Project Agent</h3>
-          <p class="fleet-agent-body">Project intelligence &mdash; action items, open loops, decisions, blockers, daily standups, and a structured tracker the whole team can read.</p>
-        </article>
-        <article class="fleet-agent fleet-agent-cof">
-          <span class="fleet-agent-bar" aria-hidden="true"></span>
-          <p class="fleet-agent-role">Doer</p>
-          <h3>Chief of Staff</h3>
-          <p class="fleet-agent-body">Knowledge work &mdash; turning meetings and signals into durable documents, profiles, briefs, and weekly digests that keep the organization aligned.</p>
-        </article>
-        <article class="fleet-agent fleet-agent-dir">
-          <span class="fleet-agent-bar" aria-hidden="true"></span>
-          <p class="fleet-agent-role">Operator</p>
-          <h3>Orchestration Director</h3>
-          <p class="fleet-agent-body">Operates the fleet &mdash; health monitoring and a single alerting layer, a conversational front door, cross-agent hand-off, deploys, and durable memory.</p>
-        </article>
-      </div>
-      <div class="resource-blue-box fleet-note">
-        <span class="fleet-note-tag">How they relate</span>
-        <p>At runtime the doers are <strong>peers</strong> &mdash; neither bosses the other mid-task. They coordinate through shared files in the brain and a hand-off broker, not a boss agent. The Director sits above them: it watches health, routes work, enforces lane ownership, owns deploys, and is the single human-facing front door. Its living fleet-state memory is the cure for &ldquo;the agents keep forgetting.&rdquo;</p>
       </div>
     </section>
 
