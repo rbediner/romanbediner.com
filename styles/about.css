@@ -86,15 +86,18 @@
 }
 
 .about-chapter-nav {
-  display: flex;
-  flex-wrap: wrap;
+  /* Desktop: uniform 3-column grid (the five chapters read as a tidy 3x2 block
+     rather than a ragged 4 + 1 wrap). Mobile reverts to content-hugging wrap. */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
 /* In-page jump links styled as unmistakable interactive chips so they no longer
    read as plain body text. Each is led by a small blue link icon. */
 .about-chapter-nav a {
-  display: inline-flex;
+  /* Fills its grid cell on desktop so the chips are uniform width. */
+  display: flex;
   align-items: center;
   gap: 8px;
   font-size: 14px;
@@ -251,9 +254,15 @@
   .about-chapter-nav {
     /* Keep the link chips hugging their content and wrapping, rather than
        stretching to full width when the row stacks on small screens. */
-    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .about-chapter-nav a {
+    /* Hug content on mobile (override the desktop cell-fill). */
+    display: inline-flex;
   }
 
   .about-philosophy-copy {
