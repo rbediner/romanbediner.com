@@ -97,8 +97,8 @@ main .master-head h1 {
   max-width: 100%;
 }
 
-/* Match the shared eyebrow treatment used on every other page (`.section-eyebrow`):
-   secondary/gray, 12px, 0.14em tracking — consistent color and size site-wide. */
+/* Unified site-wide eyebrow treatment (see `.section-eyebrow` in site.css):
+   blue brand accent, 12px, weight 600, 0.14em tracking, uppercase. */
 .credential-eyebrow {
   margin: 0 0 12px;
   font-size: 12px;
@@ -106,7 +106,7 @@ main .master-head h1 {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--accent-blue);
   max-width: none;
 }
 

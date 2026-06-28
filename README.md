@@ -12,6 +12,7 @@
 - **H1**: 54px desktop / 34px mobile, Cormorant Garamond 400 weight, sentence case. Token: `--h1-size-desktop`.
 - **H2**: 32px Cormorant Garamond 400 weight site-wide. Guardrail: `h1, h2 { font-family: var(--font-serif) !important }`.
 - **Editorial H3s** (framework stage card titles, `.brief-section h2/h3` brief section headings): Cormorant Garamond 400 weight. Font ownership declared in `styles/site.css` under the editorial display selector group. `.svc-h3` service entry headings have been removed; the `.svc-label` (icon + mixed-case text) is the sole heading for each service entry.
+- **Eyebrows (unified)**: every page eyebrow — `.credential-eyebrow` (home), `.section-eyebrow` (about), `.resources-label` (resource pages), `.framework-label` (framework hub + detail) — shares one treatment: blue brand accent (`--accent-blue`), 12px, weight 600, 0.14em tracking, uppercase. Home eases tracking to 0.1em on mobile so `AI-ENABLED OPERATING SYSTEMS` stays on one line. The canonical definition lives on `.section-eyebrow` in `styles/site.css`; the other three classes mirror it.
 - **Body/nav/labels**: DM Sans (300–600), loaded via `@import` in `styles/site.css` so all pages inherit.
 - **Shelf-callout removed** from Home, About, and Services heroes; still used on Framework and Resources per design spec.
 - **Nav**: Connect promoted to `.nav-cta` blue button; core links reduced to About, Framework, Resources, Services. Home removed from nav; accessible via logo.

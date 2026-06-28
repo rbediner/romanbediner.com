@@ -240,13 +240,16 @@ body {
 }
 
 /* Shared eyebrow label used above select page H1 headings. */
+/* Unified site-wide eyebrow treatment (shared by `.credential-eyebrow`,
+   `.resources-label`, and `.framework-label`): blue brand accent, 12px,
+   weight 600, 0.14em tracking, uppercase. */
 .section-eyebrow {
   margin: 0 0 12px 0;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--accent-blue);
 }
 
 h1 {
