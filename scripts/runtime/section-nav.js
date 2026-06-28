@@ -107,18 +107,8 @@
       if (open && (e.key === 'Escape' || e.key === 'Esc')) { closeSheet(); fab.focus(); }
     });
 
-    // --- Show the control only after the inline nav scrolls away ---------
-    var visObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          fab.classList.remove('is-visible');
-          if (open) { closeSheet(); }
-        } else {
-          fab.classList.add('is-visible');
-        }
-      });
-    }, { rootMargin: '-12px 0px 0px 0px' });
-    visObserver.observe(source);
+    // --- Always visible (from page load, before any scroll) --------------
+    fab.classList.add('is-visible');
 
     // --- Active-section highlighting ------------------------------------
     var activeId = null;
