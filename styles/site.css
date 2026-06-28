@@ -289,6 +289,11 @@ body > main {
   margin: 0;
 }
 
+/* Breathing room between stacked lede paragraphs (About manifesto, Services intro). */
+.lede-description + .lede-description {
+  margin-top: 16px;
+}
+
 .brand-highlight {
   color: var(--accent-blue);
   font-weight: 700;
