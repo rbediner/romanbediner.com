@@ -171,6 +171,8 @@
 .era-title {
   display: block;
   font-size: 18px;
+  /* Function/role is the primary label — keep it in the brand accent. */
+  color: var(--accent-blue);
   /* The widened label column keeps the longest heading
      (GLOBAL INFRASTRUCTURE ADVISORY) on a single line; balance is a
      graceful fallback only if a heading still needs to wrap. */
@@ -189,7 +191,8 @@
   font-weight: 600;
   letter-spacing: 0.025em;
   margin-top: 6px;
-  color: var(--accent-blue);
+  /* Company line differentiated from the blue function label — muted gray for a two-tier header. */
+  color: var(--text-secondary);
   position: relative;
 }
 

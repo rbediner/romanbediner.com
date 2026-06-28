@@ -58,7 +58,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
   <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
   <link rel="stylesheet" href="/styles/site.css?v=20260628r3" />
-  <link rel="stylesheet" href="/styles/services.css?v=20260628r3" />
+  <link rel="stylesheet" href="/styles/services.css?v=20260628r7" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="../assets/icons/services/mainlogo.svg">
   <link rel="preload" as="image" href="../assets/icons/services/contact.png">
@@ -90,6 +90,14 @@
     <p class="lede-description">Operating leadership for organizations navigating growth, transformation, platform complexity, and AI-enabled execution.</p>
     <p class="lede-description">Engagements are grounded in the AI-Enabled Operations Framework, which treats execution as a designed, measurable, and continuously evolving operating system.</p>
 
+    <!-- Source for the floating "On this page" control (section-nav.js); visually hidden, links to the service entries below. -->
+    <nav class="sr-only" data-section-nav aria-label="Services on this page">
+      <a href="#executive-operating-leadership">Executive Operating Leadership</a>
+      <a href="#fractional-embedded-operating-leadership">Fractional and Embedded Operating Leadership</a>
+      <a href="#strategic-program-transformation-leadership">Strategic Program and Transformation Leadership</a>
+      <a href="#operator-development-ai-enablement">Operator Development and AI Enablement</a>
+    </nav>
+
     <section class="services-capability-section section">
       <div class="section-header">
         <h2>AI-ENABLED OPERATING SYSTEMS</h2>
@@ -105,7 +113,7 @@
 
     <div class="svc-list">
 
-      <div class="svc-entry">
+      <div class="svc-entry" id="executive-operating-leadership">
         <div class="svc-num">01</div>
         <div class="svc-body">
           <div class="svc-label">
@@ -120,7 +128,7 @@
         </div>
       </div>
 
-      <div class="svc-entry">
+      <div class="svc-entry" id="fractional-embedded-operating-leadership">
         <div class="svc-num">02</div>
         <div class="svc-body">
           <div class="svc-label">
@@ -136,7 +144,7 @@
         </div>
       </div>
 
-      <div class="svc-entry">
+      <div class="svc-entry" id="strategic-program-transformation-leadership">
         <div class="svc-num">03</div>
         <div class="svc-body">
           <div class="svc-label">
@@ -152,7 +160,7 @@
         </div>
       </div>
 
-      <div class="svc-entry">
+      <div class="svc-entry" id="operator-development-ai-enablement">
         <div class="svc-num">04</div>
         <div class="svc-body">
           <div class="svc-label">
@@ -225,5 +233,6 @@
   </footer>
 
   <script src="../scripts/runtime/site-navigation.js?v=20260313a"></script>
+  <script src="../scripts/runtime/section-nav.js?v=20260628a" defer></script>
 </body>
 </html>

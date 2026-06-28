@@ -48,6 +48,8 @@
   gap: 0 32px;
   padding: 36px 0;
   border-bottom: 1px solid var(--border-color);
+  /* Clear the fixed header when jumped to via the "On this page" control. */
+  scroll-margin-top: 96px;
 }
 
 .svc-entry:first-child {

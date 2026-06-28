@@ -38,6 +38,15 @@ html {
   text-transform: uppercase;
 }
 
+/* The all-caps hub title is ~6% too wide to fit one line at the 54px site H1
+   size; nudge it down on desktop so it sits on a single line. Mobile keeps its
+   responsive size and wraps as needed. */
+@media (min-width: 769px) {
+  .framework-main:not(.framework-brief-main) h1 {
+    font-size: 48px;
+  }
+}
+
 /* Unified site-wide eyebrow treatment (see `.section-eyebrow` in site.css). */
 .framework-label {
   margin: 0 0 12px;

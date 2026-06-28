@@ -193,7 +193,8 @@ main .master-head h1 {
 .experience-logo-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px 28px;
+  /* Generous, even column spacing reads more premium than a tight row. */
+  gap: 26px 48px;
   align-items: center;
   margin-bottom: 8px;
 }
@@ -203,8 +204,15 @@ main .master-head h1 {
   height: 44px;
   object-fit: contain;
   object-position: center;
+  /* Uniform soft-graphite monochrome (not heavy pure black) for an
+     understated, premium "selected experience" row; lifts to full ink on hover. */
   filter: grayscale(1) brightness(0);
-  opacity: 0.88;
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+}
+
+.experience-logo:hover {
+  opacity: 1;
 }
 
 /* Per-mark heights tuned for OPTICAL balance, not literal parity: bold/wide marks
