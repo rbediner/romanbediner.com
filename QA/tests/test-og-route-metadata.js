@@ -139,7 +139,7 @@ for (const page of expected) {
     'og:image:type',
     'og:image:alt'
   ];
-  const requiredNames = ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image'];
+  const requiredNames = ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image', 'twitter:image:alt'];
 
   for (const prop of requiredProps) {
     if (countMetaByProperty(html, prop) !== 1) {
@@ -201,6 +201,10 @@ for (const page of expected) {
   if (getMetaByProperty(html, 'og:image:type') !== 'image/png') {
     failures += 1;
     console.error(`FAIL: og:image:type mismatch in ${page.file}`);
+  }
+  if (getMetaByName(html, 'twitter:image:alt') !== OG_ALT) {
+    failures += 1;
+    console.error(`FAIL: twitter:image:alt must mirror og:image:alt in ${page.file}`);
   }
   if (getMetaByProperty(html, 'og:image:alt') !== OG_ALT) {
     failures += 1;
