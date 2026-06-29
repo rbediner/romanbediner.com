@@ -150,11 +150,11 @@ class FrameworkLayoutTest(unittest.TestCase):
             self.assertRegex(html, r'<meta property="og:description" content="[^"]+" />')
             self.assertIn('<meta property="og:type" content="article" />', html)
             self.assertRegex(html, r'<meta property="og:url" content="https://romanbediner\.com/framework/[^"]+" />')
-            self.assertIn('<meta property="og:image" content="https://romanbediner.com/assets/og/framework-preview.png" />', html)
+            self.assertIn('<meta property="og:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />', html)
             self.assertIn('<meta name="twitter:card" content="summary_large_image" />', html)
             self.assertRegex(html, r'<meta name="twitter:title" content="[^"]+" />')
             self.assertRegex(html, r'<meta name="twitter:description" content="[^"]+" />')
-            self.assertIn('<meta name="twitter:image" content="https://romanbediner.com/assets/og/framework-preview.png" />', html)
+            self.assertIn('<meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />', html)
 
     def test_framework_css_contracts(self):
         self.assertRegex(self.framework_css, r"\.framework-diagram\s*\{[^}]*position:\s*sticky;[^}]*top:\s*90px;[^}]*z-index:\s*50;", re.S)

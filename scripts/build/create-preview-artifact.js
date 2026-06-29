@@ -10,6 +10,10 @@
  * - Removes domain-claiming CNAME from preview artifacts.
  * Migration considerations:
  * - Keep preview robots policy strict unless preview indexing policy changes.
+ * - Social-image (og:image / twitter:image) absolute prod URLs are rewritten to the
+ *   preview origin so OG validators (e.g. Orca Scan) reflect the staged card rather
+ *   than fetching the live production image. Update the origin derivation if the
+ *   preview repo/owner naming convention changes.
  */
 const fs = require('fs');
 const path = require('path');
@@ -114,6 +118,43 @@ function rewriteRootRelativePathsForPreview(siteDir, basePath) {
   }
 }
 
+function computePreviewBaseUrl(basePath) {
+  const explicit = (process.env.PREVIEW_BASE_URL || '').trim();
+  if (explicit) {
+    return explicit.replace(/\/+$/, '');
+  }
+  // Mirror publish-preview-repo.js: project Pages live at https://<owner>.github.io/<repo>/.
+  const repo = (process.env.PREVIEW_REPO || 'rbediner/romanbediner-preview').trim();
+  const owner = repo.split('/')[0] || 'rbediner';
+  return `https://${owner}.github.io${basePath}`;
+}
+
+// Absolute production social-image URLs would otherwise make OG validators fetch the
+// live prod card. Rewrite og:image / twitter:image to the preview origin so the staged
+// card is what gets validated. Canonical/og:url are intentionally left pointing at prod.
+function rewritePreviewSocialImageUrls(siteDir, previewBaseUrl) {
+  const files = listFilesRecursive(siteDir).filter(
+    (relativePath) => path.extname(relativePath).toLowerCase() === '.html'
+  );
+  const pattern =
+    /(<meta\s+(?:property=("|')og:image(?::secure_url)?\2|name=("|')twitter:image\3)\s+content=("|'))https:\/\/romanbediner\.com(\/[^"']*)(\4)/gi;
+
+  let changed = 0;
+  for (const relativePath of files) {
+    const absolutePath = path.join(siteDir, relativePath);
+    const original = fs.readFileSync(absolutePath, 'utf8');
+    const rewritten = original.replace(
+      pattern,
+      (match, pre, _q1, _q2, _q3, assetPath, post) => `${pre}${previewBaseUrl}${assetPath}${post}`
+    );
+    if (rewritten !== original) {
+      fs.writeFileSync(absolutePath, rewritten);
+      changed += 1;
+    }
+  }
+  return changed;
+}
+
 function updateManifest(outDir, siteDir) {
   const manifestPath = path.join(outDir, 'artifact-manifest.json');
   if (!fs.existsSync(manifestPath)) {
@@ -151,6 +192,8 @@ function main() {
   // Project Pages previews are served from /<repo-name>/, so root-relative
   // production links need to be rewritten for parity in preview environments.
   rewriteRootRelativePathsForPreview(siteDir, basePath);
+  const previewBaseUrl = computePreviewBaseUrl(basePath);
+  const socialRewrites = rewritePreviewSocialImageUrls(siteDir, previewBaseUrl);
   ensurePreviewRobots(siteDir);
   const manifest = updateManifest(outDir, siteDir);
 
@@ -169,6 +212,8 @@ function main() {
       `- Site directory: ${siteDir}`,
       `- Manifest: ${manifest.manifestPath}`,
       `- Preview base path: ${basePath}`,
+      `- Preview base URL: ${previewBaseUrl}`,
+      `- Social image rewrites: ${socialRewrites}`,
       `- Preview checksum: ${manifest.checksum}`
     ].join('\n') + '\n'
   );
@@ -182,5 +227,7 @@ module.exports = {
   ensurePreviewRobots,
   normalizeBasePath,
   rewriteRootRelativePathsForPreview,
+  computePreviewBaseUrl,
+  rewritePreviewSocialImageUrls,
   parseArgs
 };

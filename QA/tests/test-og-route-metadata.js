@@ -14,9 +14,9 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const OG_IMAGE = 'https://romanbediner.com/assets/og-logo/og-final.png?v=4';
+const OG_IMAGE = 'https://romanbediner.com/assets/og-logo/og-final.png?v=5';
 // Shared OG image alt text must match the production metadata contract across pages.
-const OG_ALT = 'Roman Bediner brand mark on editorial gradient background';
+const OG_ALT = 'Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background';
 
 const expected = [
   {

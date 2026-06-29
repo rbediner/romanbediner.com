@@ -50,7 +50,7 @@ if (!getMetaByName('twitter:card')) {
   console.error('FAIL: missing twitter:card on homepage');
 }
 
-const expectedImage = 'https://romanbediner.com/assets/og-logo/og-final.png?v=4';
+const expectedImage = 'https://romanbediner.com/assets/og-logo/og-final.png?v=5';
 const expectedWidth = '1200';
 const expectedHeight = '630';
 

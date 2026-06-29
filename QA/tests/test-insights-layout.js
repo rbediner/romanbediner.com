@@ -270,11 +270,11 @@ for (const stage of stages) {
     /<meta property="og:description" content="[^"]+" \/>/,
     /<meta property="og:type" content="article" \/>/,
     /<meta property="og:url" content="https:\/\/romanbediner\.com\/framework\/[^"]+" \/>/,
-    /<meta property="og:image" content="https:\/\/romanbediner\.com\/assets\/og\/framework-preview\.png" \/>/,
+    /<meta property="og:image" content="https:\/\/romanbediner\.com\/assets\/og-logo\/og-final\.png\?v=5" \/>/,
     /<meta name="twitter:card" content="summary_large_image" \/>/,
     /<meta name="twitter:title" content="[^"]+" \/>/,
     /<meta name="twitter:description" content="[^"]+" \/>/,
-    /<meta name="twitter:image" content="https:\/\/romanbediner\.com\/assets\/og\/framework-preview\.png" \/>/
+    /<meta name="twitter:image" content="https:\/\/romanbediner\.com\/assets\/og-logo\/og-final\.png\?v=5" \/>/
   ];
   for (const check of metadataChecks) {
     if (!check.test(briefHtml)) {
