@@ -1,14 +1,25 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 280
-- Updated At (UTC): 2026-06-29T01:55:15Z
-- Source Branch: staging
-- Source Commit: edf1f162f4a8f861f3454652a038c2734d97fd1a (pre-handoff baseline)
+- Handoff Sequence: 281
+- Updated At (UTC): 2026-06-29T03:15:49Z
+- Source Branch: prod
+- Source Commit: ae87b626519713e01f13e9f6bc2575230c9212d1 (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
-## Current State — 🚀 LIVE ON PROD (both branches at `edf1f16`)
+## Current State — 🚀 LIVE ON PROD (both branches at `ae87b62`)
 
-**`prod` and `staging` are both at `edf1f16`.** Latest release — **OG share-card overhaul + site-wide metadata unification** (`65eb36c` card/meta/preview-build, `edf1f16` twitter:image:alt):
+**`prod` and `staging` are both at `ae87b62`.** A long autonomous session shipped **four prod releases** tonight (all FF-promoted from staging, all `verify-prod-release.js` green):
+- `edf1f16` — OG share-card overhaul + site-wide metadata unification (detail below).
+- `fdc466a` — **share-card coverage completed**: `insights/` → `summary_large_image` + card (item C); the `/ai-enabled-operations-dashboard/` app page got full `canonical`/`og`/`twitter` on **both** the Vite source template and the deployed `dist/index.html` (item D, distinct app-focused title/description, no em dash); `404.html` carded so broken-link shares aren't blank.
+- `c867994` — **GA4 event instrumentation**: `fleet-diagram-zoom.js` now emits `fleet_diagram_fullscreen` + `fleet_diagram_zoom` (`{diagram_index, diagram_label}`); `site-navigation.js` emits **site-wide `scroll_depth`** at 25/50/75/100% (`{percent_scrolled, page_path}`, rAF-throttled, self-detaches at 100%). README taxonomy updated.
+- `ae87b62` — **scroll-depth load-order fix**: `site-navigation.js` (non-deferred) runs before the deferred `ga4-bootstrap.js`, so the initial `evaluate()` marked already-visible thresholds as fired while `trackEvent` was still a no-op → those events were lost (every threshold on short pages). Now defers start until analytics is ready. **Found via live-Chrome verification** (dataLayer had zero scroll_depth pushes).
+
+**Verified live on prod (Chrome browser mode):** agentic page renders correctly (6 pills 2×3, roster with correct names, lightbox opens/zooms); `fleet_diagram_fullscreen` + `fleet_diagram_zoom` confirmed **arriving in GA4 Realtime**; no console errors; homepage GA4 env=production, fresh JS cache tokens, og:image v5.
+
+**GA4 setup done in-UI (Roman's account):** 7 event-scoped **custom dimensions** registered — `resource_slug` (Resource Slug), `resource_title` (Resource Title), `diagram_label` (Diagram Label), `percent_scrolled` (Scroll Percent), `link_type` (Link Type) + legacy `insight_slug`/`insight_title`. A native **Exploration "RB — Events & Engagement"** created under Explore (events by name × users; custom events populate as data accrues). GA4 Home/Reports/Realtime also serve as live dashboards.
+
+### OG overhaul detail (`65eb36c` / `edf1f16`):
+- New **lean share card** replaces the prior gradient card: name eyebrow (ROMAN BEDINER), a single Cormorant Garamond headline ("Productizing Operations for Modern, AI-Enabled Work"), the nested-square brand mark + glossy orb top-right, and `romanbediner.com`, on deep navy `#0d1530`. Saved as `assets/og-logo/og-final.png` (1200×630, ~108 KB). The earlier busy version (subhead sentence + "Disney · AWS · Agentic Society" credit line) was dropped — too cluttered at feed size.
 - New **lean share card** replaces the prior gradient card: name eyebrow (ROMAN BEDINER), a single Cormorant Garamond headline ("Productizing Operations for Modern, AI-Enabled Work"), the nested-square brand mark + glossy orb top-right, and `romanbediner.com`, on deep navy `#0d1530`. Saved as `assets/og-logo/og-final.png` (1200×630, ~108 KB). The earlier busy version (subhead sentence + "Disney · AWS · Agentic Society" credit line) was dropped — too cluttered at feed size.
 - **One default card site-wide:** `og:image` + `twitter:image` bumped `?v=4 → ?v=5` on all 16 routes; the separate `assets/og/framework-preview.png` was **retired** — the six framework detail routes now use the shared card (old asset returns 404).
 - `og:image:alt` refreshed (dropped stale "editorial gradient background" wording); **`twitter:image:alt` added** on all 16 routes (mirrors og alt; both locked into `test-og-route-metadata.js`).
@@ -92,7 +103,11 @@ Supporting:
 4. Possible polish follow-ups (Roman's call): a visible chip nav on Services (currently the nav source is visually hidden — only the floating control shows); tuning the FAB position/label.
 5. Backlog (copy-sensitive, Roman supplies copy): About-timeline mobile progressive disclosure; metric proof points; FAQ/Q&A block; richer OG image. Do not revive `/insights/`.
 6. PRD: this was visual/interaction polish (no behavior/IA/metadata/analytics change), so no `SEO Authority PRD` update required.
-7. **OG hygiene follow-ups (flagged, NOT done — Roman's call):** (C) `/insights/` redirect stub still uses `twitter:card=summary` (the lone non-large card) with no image; (D) the live app page `/ai-enabled-operations-dashboard/` has no `og`/`twitter`/`canonical` at all, so it unfurls blank if shared. Both deliberately left untouched this release (OG scope was the shared card + unification). The richer-OG-image backlog item (see #5) is now ✅ done. Optional real-X confirmation: drop `https://romanbediner.com/` into a tweet/DM (prod is robots-allowed, unlike the noindex preview) to see the live large-image card.
+7. **OG hygiene C + D — ✅ DONE** (`fdc466a`): insights now `summary_large_image` + card; dashboard app page + 404 fully carded. Optional real-X confirmation: drop `https://romanbediner.com/` into a tweet/DM (prod is robots-allowed, unlike the noindex preview).
+8. **⚠️ DAILY EMAIL — needs Roman's one OAuth click (blocked for the agent).** GA4 has **no native scheduled-email**; the only path is **Looker Studio**, which on first use shows an "Authorize Data Studio API to access your account" consent. Granting OAuth is outside the agent's autonomous authority, so it was **not** clicked. To finish: open https://lookerstudio.google.com → click **Continue/Authorize** → Create report → add a **Google Analytics** data source (property `romanbediner.com`, a384780622p524954289) → build charts (suggested: Events by event name + count; resource_card_click by `Resource Title`; `scroll_depth` by `Scroll Percent` + page path; sessions by source/medium; engagement time by page) → **Share ▸ Schedule email delivery** → daily → `roman@romanbediner.com`. The custom dimensions registered tonight make all those breakdowns available in Looker.
+9. **⚠️ GA4 KEY EVENTS mismatch (recommend reconciling).** The property's Key events are placeholder lead-funnel names (`close_convert_lead`, `qualify_lead`, `purchase`) that the site does **not** emit (all "No stream data"). The site's real high-intent signal is **`connect_intent`** (Connect CTA). Recommend: Admin → Events → mark `connect_intent` (and optionally `resource_card_click`) as a key event once it appears under Recent events, or create a "Create event" rule mapping it to a lead key event. This makes the Key events / conversions reports meaningful.
+10. **GA4 reporting foundation (done tonight):** 7 custom dimensions + the "RB — Events & Engagement" exploration. Enhanced Measurement was not explicitly re-verified — worth a glance (Admin → Data Streams → Enhanced measurement) to confirm scroll/outbound/site-search auto-events are on (custom `scroll_depth` supplements but does not replace them).
+11. PRD: the OG/metadata change is share-CTA/legibility, not a ranking lever, and analytics added event coverage — consider a brief `SEO Authority PRD` note for the analytics-contract extension (new events + custom dimensions) per the repo's "meaningful product change" rule.
 
 ## Release Watcher Hygiene
 
