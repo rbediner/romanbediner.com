@@ -1,14 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 277
-- Updated At (UTC): 2026-06-28T23:33:50Z
+- Handoff Sequence: 279
+- Updated At (UTC): 2026-06-29T00:02:48Z
 - Source Branch: staging
-- Source Commit: 27c28ad66ec9b72729950d220f3cbb5433b6d9fa (pre-handoff baseline)
+- Source Commit: 63c2f88b38cd78d36233ff3ba4e46ea0e5fa531b (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
-## Current State — 🚀 LIVE ON PROD (both branches at `27c28ad`)
+## Current State — 🚀 LIVE ON PROD (both branches at `63c2f88`)
 
-**`prod` and `staging` are both at `27c28ad`.** Latest release (`27c28ad`): the agentic page eyebrow changed **"REFERENCE ARCHITECTURE" → "AVAILABLE NOW"** (availability badge; `.resources-label`, still blue/uppercase). FF-promoted to prod; prod `CI` ✓ (3m7s), `Deploy Pages` ✓ (5m13s), `verify-live-production.js` ✓ (homepage/sitemap 200, 16 routes); live-verified in Chrome (eyebrow reads "AVAILABLE NOW"). **GSC sitemap re-submission still pending Roman (manual).**
+**`prod` and `staging` are both at `63c2f88`.** Latest release (`63c2f88`): agentic-page roster card names corrected to the agents' actual names — **Agent — Project Manager**, **Agent — Chief of Staff**, **Agent — Orchestration Director** (em-dash to match page typography); README roster mention updated. FF-promoted to prod; prod `CI` ✓ (3m11s), `Deploy Pages` ✓ (5m32s); live-verified in Chrome.
+
+Prior release (`27c28ad`): agentic eyebrow → "AVAILABLE NOW".
+Prior release (`1af606b`, the big one):
+**`prod` and `staging` were brought to `27c28ad`.** Latest release (`27c28ad`): the agentic page eyebrow changed **"REFERENCE ARCHITECTURE" → "AVAILABLE NOW"** (availability badge; `.resources-label`, still blue/uppercase). FF-promoted to prod; prod `CI` ✓ (3m7s), `Deploy Pages` ✓ (5m13s), `verify-live-production.js` ✓ (homepage/sitemap 200, 16 routes); live-verified in Chrome (eyebrow reads "AVAILABLE NOW"). **GSC sitemap re-submission still pending Roman (manual).**
 
 Prior release this session (the big one):
 **`prod` and `staging` were brought to `1af606b`** (fast-forward promotion). This session's entire body of work is now **LIVE on https://romanbediner.com**. Prod workflows all green for `1af606b`: `CI` (3m17s), `Deploy Pages` (5m19s, post-deploy validation incl.), `Docs Sync`. `node scripts/qa/verify-live-production.js` PASS (homepage 200, sitemap 200, 16 routes OK). **Live-verified in Chrome:** home navy-ink logos; About chips removed + floating "On this page" + era colors (blue function / gray company); agentic page roster-first + "A human is always in charge" callout + 6 all-caps pills; Framework H1 one line (48px).
