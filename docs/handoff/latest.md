@@ -1,14 +1,22 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 279
-- Updated At (UTC): 2026-06-29T00:02:48Z
+- Handoff Sequence: 280
+- Updated At (UTC): 2026-06-29T01:55:15Z
 - Source Branch: staging
-- Source Commit: 63c2f88b38cd78d36233ff3ba4e46ea0e5fa531b (pre-handoff baseline)
+- Source Commit: edf1f162f4a8f861f3454652a038c2734d97fd1a (pre-handoff baseline)
 - Active Agent: Claude (Opus)
 
-## Current State — 🚀 LIVE ON PROD (both branches at `63c2f88`)
+## Current State — 🚀 LIVE ON PROD (both branches at `edf1f16`)
 
-**`prod` and `staging` are both at `63c2f88`.** Latest release (`63c2f88`): agentic-page roster card names corrected to the agents' actual names — **Agent — Project Manager**, **Agent — Chief of Staff**, **Agent — Orchestration Director** (em-dash to match page typography); README roster mention updated. FF-promoted to prod; prod `CI` ✓ (3m11s), `Deploy Pages` ✓ (5m32s); live-verified in Chrome.
+**`prod` and `staging` are both at `edf1f16`.** Latest release — **OG share-card overhaul + site-wide metadata unification** (`65eb36c` card/meta/preview-build, `edf1f16` twitter:image:alt):
+- New **lean share card** replaces the prior gradient card: name eyebrow (ROMAN BEDINER), a single Cormorant Garamond headline ("Productizing Operations for Modern, AI-Enabled Work"), the nested-square brand mark + glossy orb top-right, and `romanbediner.com`, on deep navy `#0d1530`. Saved as `assets/og-logo/og-final.png` (1200×630, ~108 KB). The earlier busy version (subhead sentence + "Disney · AWS · Agentic Society" credit line) was dropped — too cluttered at feed size.
+- **One default card site-wide:** `og:image` + `twitter:image` bumped `?v=4 → ?v=5` on all 16 routes; the separate `assets/og/framework-preview.png` was **retired** — the six framework detail routes now use the shared card (old asset returns 404).
+- `og:image:alt` refreshed (dropped stale "editorial gradient background" wording); **`twitter:image:alt` added** on all 16 routes (mirrors og alt; both locked into `test-og-route-metadata.js`).
+- **Preview-build fix — `scripts/build/create-preview-artifact.js`:** absolute `https://romanbediner.com/...` og:image/twitter:image URLs are now rewritten to the preview origin (`https://rbediner.github.io/romanbediner-preview/...`) so OG validators (Orca Scan) reflect the *staged* card, not the live prod image. `canonical`/`og:url` intentionally left on prod. Durable for all future OG previews; covered by existing preview/artifact guard tests.
+- **QA:** full-regression pre-push gate green on both SHAs; 4 OG/insights metadata tests + README updated to match. Prod `CI` ✓, `Deploy Pages` ✓, `verify-prod-release.js` ✓ (homepage/sitemap 200, 16 routes). Verified live: prod `og:image` = `.../og-final.png?v=5` (200, image/png, 108285 B); `framework-preview.png` → 404.
+- **Validated in Orca Scan** (preview URL): Facebook / LinkedIn / Slack / WhatsApp render the full card cleanly. Orca's "Twitter" panel shows a legacy *summary* (square) crop — an Orca mock limitation, **not** a tag issue (`twitter:card=summary_large_image` is correct, verified); real X renders the large card. Orca's "missing `og:logo`" is also a non-issue (`og:logo` is not in the Open Graph spec; identity lives in the page's `Person`/`WebSite` JSON-LD).
+
+Prior release (`63c2f88`): agentic-page roster card names corrected to the agents' actual names — **Agent — Project Manager**, **Agent — Chief of Staff**, **Agent — Orchestration Director** (em-dash to match page typography); README roster mention updated. FF-promoted to prod; prod `CI` ✓ (3m11s), `Deploy Pages` ✓ (5m32s); live-verified in Chrome.
 
 Prior release (`27c28ad`): agentic eyebrow → "AVAILABLE NOW".
 Prior release (`1af606b`, the big one):
@@ -84,6 +92,7 @@ Supporting:
 4. Possible polish follow-ups (Roman's call): a visible chip nav on Services (currently the nav source is visually hidden — only the floating control shows); tuning the FAB position/label.
 5. Backlog (copy-sensitive, Roman supplies copy): About-timeline mobile progressive disclosure; metric proof points; FAQ/Q&A block; richer OG image. Do not revive `/insights/`.
 6. PRD: this was visual/interaction polish (no behavior/IA/metadata/analytics change), so no `SEO Authority PRD` update required.
+7. **OG hygiene follow-ups (flagged, NOT done — Roman's call):** (C) `/insights/` redirect stub still uses `twitter:card=summary` (the lone non-large card) with no image; (D) the live app page `/ai-enabled-operations-dashboard/` has no `og`/`twitter`/`canonical` at all, so it unfurls blank if shared. Both deliberately left untouched this release (OG scope was the shared card + unification). The richer-OG-image backlog item (see #5) is now ✅ done. Optional real-X confirmation: drop `https://romanbediner.com/` into a tweet/DM (prod is robots-allowed, unlike the noindex preview) to see the live large-image card.
 
 ## Release Watcher Hygiene
 
