@@ -208,6 +208,8 @@ Required handoff content for cross-machine continuity:
   - `environment` is added automatically by the shared `window.__rbAnalytics.trackEvent()` wrapper in `/scripts/runtime/ga4-bootstrap.js`
   - DOM contract: resource cards and the summary-page `<main>` must declare `data-resource-slug`, `data-resource-title`, `data-resource-type`, and `data-resource-location`; PDF links must declare `data-track-pdf-download` and `data-file-path`; source links must declare `data-track-dashboard-source-code` and `data-source-code-label`
   - External CTAs must declare `data-track-resource-external-cta`, `data-resource-cta-label`, and `data-resource-external-url-type`
+- Site-wide scroll-depth telemetry in `/scripts/runtime/site-navigation.js` emits `scroll_depth` at 25/50/75/100% thresholds (once per threshold per page load, on every page that loads the shared nav script); params: `percent_scrolled`, `page_path`, `environment`. Complements GA4 enhanced measurement's single 90% scroll event with drop-off granularity across all pages (not just briefs).
+- Agentic diagram lightbox telemetry in `/scripts/runtime/fleet-diagram-zoom.js` emits `fleet_diagram_fullscreen` (on full-screen open) and `fleet_diagram_zoom` (on zoom-in) on `/resources/agentic-ai-employees/`; params: `diagram_index`, `diagram_label`, `environment`.
 - Allowed event taxonomy for this phase:
   - `nav_click`
   - `internal_link_click`
@@ -217,6 +219,8 @@ Required handoff content for cross-machine continuity:
   - `connect_intent`
   - `resource_source_code_click`
   - `resource_external_cta_click`
+  - `fleet_diagram_fullscreen`
+  - `fleet_diagram_zoom`
 - Guardrails enforce analytics correctness:
   - GA meta tag presence and uniqueness
   - Allowed GA IDs only

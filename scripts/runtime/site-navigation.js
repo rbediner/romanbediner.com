@@ -283,6 +283,62 @@ function applyActiveNavState(navElement, activePath) {
   applyActiveNavState(mobileNav, activePath);
 })();
 
+// Scroll-depth telemetry: emit a `scroll_depth` event at 25/50/75/100% reached
+// (once each per page load), with { percent_scrolled, page_path }. Complements GA4
+// enhanced measurement's single 90% scroll event with the granularity needed to see
+// how far readers actually get on long pages (briefs, About, the agentic page).
+(function initScrollDepthTracking() {
+  const thresholds = [25, 50, 75, 100];
+  const fired = {};
+  let ticking = false;
+
+  function maxScrollPercent() {
+    const doc = document.documentElement;
+    const body = document.body;
+    const scrollTop = window.pageYOffset || doc.scrollTop || 0;
+    const viewport = window.innerHeight || doc.clientHeight || 0;
+    const full = Math.max(
+      doc.scrollHeight,
+      doc.offsetHeight,
+      body ? body.scrollHeight : 0,
+      body ? body.offsetHeight : 0
+    );
+    if (full <= viewport) {
+      return 100;
+    }
+    return Math.min(100, Math.round(((scrollTop + viewport) / full) * 100));
+  }
+
+  function evaluate() {
+    ticking = false;
+    const pct = maxScrollPercent();
+    thresholds.forEach((t) => {
+      if (pct >= t && !fired[t]) {
+        fired[t] = true;
+        trackEvent("scroll_depth", {
+          percent_scrolled: t,
+          page_path: window.location.pathname
+        });
+      }
+    });
+    if (fired[100]) {
+      window.removeEventListener("scroll", onScroll);
+    }
+  }
+
+  function onScroll() {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    window.requestAnimationFrame(evaluate);
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  // Evaluate once for already-scrolled loads or pages shorter than the viewport.
+  evaluate();
+})();
+
 (function syncAboutTimelineOrbs() {
   function positionTimeline() {
     const wrapper = document.querySelector(".arc-timeline-wrapper");

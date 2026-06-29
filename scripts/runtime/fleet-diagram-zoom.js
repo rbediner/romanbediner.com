@@ -12,6 +12,12 @@
  * Dependencies:
  * - Browser DOM APIs only (native <dialog>, no libraries, no inline handlers).
  *   Clones the live inline <svg> so it keeps DM Sans and the brand palette.
+ * - Optional window.__rbAnalytics.trackEvent() (from ga4-bootstrap.js) for GA4
+ *   telemetry; degrades to a no-op when analytics is absent.
+ *
+ * Analytics events emitted (optional):
+ * - fleet_diagram_fullscreen { diagram_index, diagram_label } on open
+ * - fleet_diagram_zoom       { diagram_index, diagram_label } on zoom-in
  *
  * Security/CSP considerations:
  * - Loaded as an external module from 'self' (no inline script, no 'unsafe-inline').
@@ -26,6 +32,21 @@
   'use strict';
 
   var DIAGRAM_SELECTOR = '.fleet-diagram';
+
+  function trackEvent(eventName, params) {
+    if (window.__rbAnalytics && typeof window.__rbAnalytics.trackEvent === 'function') {
+      window.__rbAnalytics.trackEvent(eventName, params || {});
+    }
+  }
+
+  function diagramLabel(svg, index) {
+    var label = svg.getAttribute('aria-label');
+    if (!label) {
+      var title = svg.querySelector('title');
+      label = title && title.textContent ? title.textContent.trim() : '';
+    }
+    return label || ('diagram_' + index);
+  }
 
   function buildLightbox() {
     var dialog = document.createElement('dialog');
@@ -58,6 +79,7 @@
     document.body.appendChild(dialog);
 
     var zoomed = false;
+    var currentCtx = {};
 
     function setFit() {
       zoomed = false;
@@ -83,7 +105,8 @@
       if (svg) { svg.style.width = ''; }
     }
 
-    function open(sourceSvg) {
+    function open(sourceSvg, ctx) {
+      currentCtx = ctx || {};
       stage.textContent = '';
       var clone = sourceSvg.cloneNode(true);
       clone.removeAttribute('id');
@@ -107,7 +130,7 @@
     }
 
     zoomBtn.addEventListener('click', function () {
-      if (zoomed) { clearSvgInline(); setFit(); } else { setZoom(); }
+      if (zoomed) { clearSvgInline(); setFit(); } else { setZoom(); trackEvent('fleet_diagram_zoom', currentCtx); }
     });
     closeBtn.addEventListener('click', close);
     // Click on the dim backdrop area (the dialog element itself) closes.
@@ -125,9 +148,10 @@
 
     var lightbox = buildLightbox();
 
-    diagrams.forEach(function (frame) {
+    diagrams.forEach(function (frame, i) {
       var svg = frame.querySelector('svg');
       if (!svg) { return; }
+      var ctx = { diagram_index: i + 1, diagram_label: diagramLabel(svg, i + 1) };
       // Wrap the (horizontally scrolling) frame so the button can be pinned to
       // the corner without scrolling away with the diagram on mobile.
       var wrap = document.createElement('div');
@@ -140,7 +164,10 @@
       btn.className = 'fleet-zoom-btn';
       btn.setAttribute('aria-label', 'Open diagram full screen');
       btn.textContent = '⛶ Full screen';
-      btn.addEventListener('click', function () { lightbox.open(svg); });
+      btn.addEventListener('click', function () {
+        trackEvent('fleet_diagram_fullscreen', ctx);
+        lightbox.open(svg, ctx);
+      });
       wrap.appendChild(btn);
     });
   }
