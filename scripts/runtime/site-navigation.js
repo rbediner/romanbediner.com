@@ -334,9 +334,22 @@ function applyActiveNavState(navElement, activePath) {
     window.requestAnimationFrame(evaluate);
   }
 
-  window.addEventListener("scroll", onScroll, { passive: true });
-  // Evaluate once for already-scrolled loads or pages shorter than the viewport.
-  evaluate();
+  function start() {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // Evaluate once for already-scrolled loads or pages shorter than the viewport.
+    evaluate();
+  }
+
+  // site-navigation.js runs before the deferred ga4-bootstrap.js, so
+  // window.__rbAnalytics may not exist yet when this IIFE executes. Defer the
+  // scroll-depth start until analytics is ready; otherwise the initial evaluate()
+  // would mark already-visible thresholds as fired while trackEvent() is still a
+  // no-op, permanently losing those events (notably every threshold on short pages).
+  if (window.__rbAnalytics && typeof window.__rbAnalytics.trackEvent === "function") {
+    start();
+  } else {
+    window.addEventListener("load", start, { once: true });
+  }
 })();
 
 (function syncAboutTimelineOrbs() {
