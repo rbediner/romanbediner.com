@@ -198,7 +198,8 @@ Required handoff content for cross-machine continuity:
   - `framework_stage_click`
   - `framework_nav_click`
   - `scroll_depth` (25/50/75/90 thresholds, once per threshold per load, brief pages only)
-  - required params: `source_page`, `target_page`, `link_type`, `environment`
+  - required params: `source_page`, `target_page`, `link_type`, `page_path`, `page_type`, `percent_scrolled`, `environment`
+  - guardrail: framework brief `scroll_depth` must use `percent_scrolled` as the shared parameter name; `scroll_percent` is legacy/invalid and must not be emitted
 - Resources telemetry in `/scripts/runtime/resources-analytics.js` and `/scripts/runtime/resources-carousel.js` emits the locked PRD P3-AD-01 contract:
   - `resource_card_click` — fires on a resource card's primary CTA click; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`
   - `resource_pdf_download` — fires on click of any `[data-track-pdf-download]` download link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `file_path`

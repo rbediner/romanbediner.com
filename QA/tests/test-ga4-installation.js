@@ -111,6 +111,16 @@ if (!frameworkAnalyticsRuntime.includes("page_type: 'framework_brief'")) {
   console.error("FAIL: scroll_depth payload must include page_type='framework_brief'.");
 }
 
+if (!frameworkAnalyticsRuntime.includes('percent_scrolled')) {
+  failures += 1;
+  console.error("FAIL: framework brief scroll_depth payload must include 'percent_scrolled'.");
+}
+
+if (frameworkAnalyticsRuntime.includes('scroll_percent')) {
+  failures += 1;
+  console.error("FAIL: framework brief scroll_depth payload must not use legacy 'scroll_percent'.");
+}
+
 if (!frameworkAnalyticsRuntime.includes('var thresholds = [25, 50, 75, 90]')) {
   failures += 1;
   console.error('FAIL: scroll_depth thresholds must be 25/50/75/90.');

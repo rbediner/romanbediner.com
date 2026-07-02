@@ -137,7 +137,8 @@
         link_type: 'framework',
         page_path: path,
         page_type: 'framework_brief',
-        scroll_percent: percent
+        // Match the shared GA4 contract and the registered custom dimension.
+        percent_scrolled: percent
       });
     }
 
