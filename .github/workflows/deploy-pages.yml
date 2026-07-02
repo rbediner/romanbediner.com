@@ -79,6 +79,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          # GitHub Pages can be slow to confirm a deployment. The 10-minute
+          # default made this step time out and report a false failure even
+          # when the deploy actually published (2026-07-02). 30 minutes gives
+          # the confirmation enough headroom. If a run still times out, trigger
+          # a fresh run via workflow_dispatch — do NOT re-run the failed run,
+          # which uploads a second "github-pages" artifact and hard-fails.
+          timeout: 1800000
 
   post-deploy-validation:
     runs-on: ubuntu-latest

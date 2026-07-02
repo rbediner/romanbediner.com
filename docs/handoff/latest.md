@@ -1,10 +1,22 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 284
-- Updated At (UTC): 2026-07-02T15:02:06Z
+- Handoff Sequence: 285
+- Updated At (UTC): 2026-07-02T20:11:22Z
 - Source Branch: staging
-- Source Commit: a25f71984de93d318bdf66551e6f0481b08d8d7f (pre-handoff baseline)
-- Active Agent: Codex (GPT-5)
+- Source Commit: 360a9f513a61ce472548bbe8222c1ed8f168ab3f (pre-handoff baseline)
+- Active Agent: Claude
+
+## Latest — 2026-07-02: Pages deploy false-failure fixed (Claude)
+
+**Symptom:** the prod `Deploy Pages` run for seq-284 showed a red failure ("Timeout reached, aborting!" on the `Deploy to GitHub Pages` step), making it look like the GA4 `percent_scrolled` fix never shipped.
+
+**Root cause:** the deploy actually **published** (live site was already serving `percent_scrolled`). `actions/deploy-pages@v5` uses a 10-minute default timeout waiting for GitHub to *confirm* the deployment; a transient Pages stall exceeded it and reported a false failure. Re-running made it worse — a re-run uploads a second `github-pages` artifact and the deploy step hard-fails with "Multiple artifacts named github-pages... Artifact count is 2."
+
+**Resolution:**
+- Cleared the failed state with a **fresh** `workflow_dispatch` run of `deploy-pages.yml` (new run id, clean artifact set) — went green in 22s; `post-deploy-validation` and `release-tag` (`v2026.07.02`) both ran.
+- **Durable fix:** bumped the `Deploy to GitHub Pages` step to `timeout: 1800000` (30 min) so a slow-but-successful Pages confirmation no longer false-fails. Operational rule recorded in-workflow: if a run ever times out, trigger a fresh run — never re-run the failed one.
+
+**Note:** the Google Drive-backed workspace git index was corrupted again (only 4 of 332 files tracked, broken refs); repaired by reconciling 18 `.git` conflict-copies and hard-resetting to `origin/staging`.
 
 ## Current State — 🚀 LIVE ON PROD (both branches at `ae87b62`)
 
