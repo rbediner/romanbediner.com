@@ -61,7 +61,7 @@ Routing requirements:
 - Runtime model: static-only delivery.
 - No server-side includes or server-rendered composition.
 - CSP is enforced in HTML via `<meta http-equiv="Content-Security-Policy">`.
-- Production publish flow uses GitHub Actions deployment on `push` to `prod`, with an explicit in-workflow wait for successful `CI` on the exact prod SHA (`.github/workflows/deploy-pages.yml`).
+- Production publish flow uses GitHub Actions deployment on `push` to `prod`, with an explicit in-workflow wait for successful `CI` on the exact prod SHA (`.github/workflows/deploy-pages.yml`). The `Deploy to GitHub Pages` step uses a 30-minute confirmation `timeout` so a slow-but-successful Pages confirmation does not report a false failure. If a run ever times out, trigger a fresh run via `workflow_dispatch` — do **not** re-run the failed run, which uploads a second `github-pages` artifact and hard-fails.
 - Staging preview flow uses isolated preview publication (`.github/workflows/deploy-staging.yml`) with:
   - trigger on `push` to `staging` (plus CI `workflow_run` + manual dispatch)
   - explicit wait for matching successful `CI` on staging push SHAs before preview publication
