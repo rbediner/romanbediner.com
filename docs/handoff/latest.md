@@ -1,12 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 281
-- Updated At (UTC): 2026-06-29T03:15:49Z
-- Source Branch: prod
-- Source Commit: ae87b626519713e01f13e9f6bc2575230c9212d1 (pre-handoff baseline)
-- Active Agent: Claude (Opus)
+- Handoff Sequence: 284
+- Updated At (UTC): 2026-07-02T15:02:06Z
+- Source Branch: staging
+- Source Commit: a25f71984de93d318bdf66551e6f0481b08d8d7f (pre-handoff baseline)
+- Active Agent: Codex (GPT-5)
 
 ## Current State — 🚀 LIVE ON PROD (both branches at `ae87b62`)
+
+**New staging release candidate:** `staging` now contains `26d6b59` (`fix: align framework scroll depth analytics`). This repairs a GA4/Looker contract mismatch on framework brief `scroll_depth` events: the runtime had been sending `scroll_percent`, while the registered GA4 custom dimension and shared site contract use `percent_scrolled`. The fix updates `/scripts/runtime/framework-brief-analytics.js` to emit `percent_scrolled` and adds QA guards in `QA/tests/test-ga4-installation.js` plus `QA/tests/jest/framework-brief-analytics-contract.test.js` so the legacy key cannot silently return.
+
+**Verification completed for the release candidate:** `node QA/tests/test-ga4-installation.js` PASS, `node scripts/qa/verify-ga4-installation.js` PASS, and the targeted Jest suite for the new contract test PASSed in a clean local clone (`node scripts/qa/run-jest-suite.js QA/tests/jest/framework-brief-analytics-contract.test.js --runInBand`). The original Google Drive-backed workspace had git/ref and Jest-runner instability, so the release work moved to a clean local clone where git operations behaved normally.
+
+**PRD updated in the same release cycle:** the live `romanbediner.com PRD` / `SEO Authority PRD` now explicitly states that framework brief `scroll_depth` must use `percent_scrolled` and must not use `scroll_percent`.
 
 **`prod` and `staging` are both at `ae87b62`.** A long autonomous session shipped **four prod releases** tonight (all FF-promoted from staging, all `verify-prod-release.js` green):
 - `edf1f16` — OG share-card overhaul + site-wide metadata unification (detail below).
