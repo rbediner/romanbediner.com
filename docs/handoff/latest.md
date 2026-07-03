@@ -1,10 +1,26 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 285
-- Updated At (UTC): 2026-07-02T20:11:22Z
+- Handoff Sequence: 286
+- Updated At (UTC): 2026-07-03T00:08:52Z
 - Source Branch: staging
-- Source Commit: 360a9f513a61ce472548bbe8222c1ed8f168ab3f (pre-handoff baseline)
+- Source Commit: 755dcdb9179ddfd54fbc47bf28eb8cd847b83f5f (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-02: seq-285 fix promoted to prod, both branches in parity (Claude)
+
+**Promoted `1d76a00` (the `deploy-pages` 30-min timeout fix) from `staging` to `prod`** via fast-forward push, per the Operator Release Workflow. `1d76a00` already had green `CI` and `Deploy Staging` on staging before promotion, so no additional staging validation was needed.
+
+**Prod result, all green:**
+- `CI` (prod, SHA `1d76a00`): success
+- `Deploy Pages` (prod, SHA `1d76a00`): success — and notably this run itself validated the fix, since the confirmation step took long enough that it would have false-failed under the old 10-minute default.
+- GitHub Deployments API independently confirms: SHA `1d76a00`, environment `github-pages`, state `success`.
+- Live smoke: `https://romanbediner.com/` returns 200; `framework-brief-analytics.js` confirmed serving `percent_scrolled` (not the retired `scroll_percent`).
+
+**Docs-only commit `755dcdb` (README note about the timeout fix) fast-forwarded to `prod` immediately after** for branch parity — this is a `paths-ignore` commit for both `CI` and `Deploy Pages`, so it did not trigger new runs by design (same pattern already proven safe on staging).
+
+**Formal gate:** `npm run release:verify-prod -- --sha 1d76a00` was run; if its output isn't reflected here yet, the workspace's Google Drive I/O was under heavy contention from concurrent multi-repo work at the time and the check was still finishing. Re-run it directly if you want the printed confirmation: `npm run release:verify-prod -- --sha 1d76a00`.
+
+**prod and staging are now in parity at `755dcdb`.**
 
 ## Latest — 2026-07-02: Pages deploy false-failure fixed (Claude)
 
