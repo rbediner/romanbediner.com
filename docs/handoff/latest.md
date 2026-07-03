@@ -1,10 +1,26 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 286
-- Updated At (UTC): 2026-07-03T00:08:52Z
+- Handoff Sequence: 287
+- Updated At (UTC): 2026-07-03T00:25:47Z
 - Source Branch: staging
-- Source Commit: 755dcdb9179ddfd54fbc47bf28eb8cd847b83f5f (pre-handoff baseline)
+- Source Commit: b0eb3558909ab85ad7d9fdb2c09349f1fbb10eb6 (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-02: Drive-workspace I/O fix + verify-prod-release follow-up (Claude)
+
+**Root cause of the "stuck" background commands (`npm run release:verify-prod`, test runs) from earlier tonight:** the Google Drive-mounted checkout at `.../My Drive/AI/Projects/RB Website/romanbediner.com` was under heavy on-demand file-materialization I/O contention — `verify-prod-release` and a Growth Engine test run both stalled for 15-20+ minutes with near-zero CPU usage (confirms I/O wait, not a real hang, deadlock, or infinite loop). This is separate from the `.git` conflict-copy corruption already documented below — a second, distinct Drive-caused failure mode.
+
+**Fix that works:** clone the repo to a fast local path once per session and run all heavy commands (`npm install`, test runs, release scripts) from there instead of the Drive-mounted folder:
+```bash
+mkdir -p ~/.local-repos && cd ~/.local-repos && rm -rf romanbediner.com
+git clone --branch staging https://github.com/rbediner/romanbediner.com.git
+```
+Commit and push from the local clone; GitHub is the source of truth, so the Drive-mounted folder simply becomes a viewer/editor copy that a plain `git pull` brings current. Never run two heavy processes against the Drive folder concurrently — that measurably worsens the contention.
+
+**`npm run release:verify-prod -- --sha 1d76a00` follow-up:** the script's CI-run-discovery step (`scripts/release/watch-ci-run.js`, `workflow="CI"`) gave up after 900s with "No matching run discovered," even though `CI` for that exact SHA on `prod` had already completed successfully (confirmed independently multiple ways — see below). This looks like a pre-existing edge case in the run-matching logic under `scripts/release/watch-ci-run.js` (~line 238), not a real release failure; worth a maintainer look but not urgent, since the actual deployment is unambiguously verified:
+- `gh run list --branch prod` — `CI` success, `Deploy Pages` success, both SHA `1d76a00`
+- GitHub Deployments API — SHA `1d76a00`, environment `github-pages`, state `success`
+- Live smoke — `https://romanbediner.com/` 200, correct `percent_scrolled` content
 
 ## Latest — 2026-07-02: seq-285 fix promoted to prod, both branches in parity (Claude)
 
