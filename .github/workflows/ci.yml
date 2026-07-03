@@ -33,6 +33,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Verify handoff sync policy
         run: |
@@ -64,6 +65,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Verify lockfile exists
         run: test -f package-lock.json
@@ -101,6 +103,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -157,6 +160,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -177,6 +181,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -199,6 +204,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -221,6 +227,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -256,6 +263,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -278,6 +286,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -303,6 +312,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -348,6 +358,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci
@@ -399,6 +410,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci

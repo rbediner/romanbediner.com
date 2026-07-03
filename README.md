@@ -432,6 +432,7 @@ nvm use
 nvm install
 ```
 - Dependency install in CI uses `npm ci`.
+- Every `actions/setup-node@v6` step enables built-in npm dependency caching (`cache: 'npm'`, keyed on `package-lock.json`) so repeated `npm ci` runs across CI/deploy jobs restore modules from cache instead of re-downloading them on every job. This is a performance-only optimization; it does not change install determinism, since `npm ci` still installs the exact locked versions.
 - Playwright browser installation is required in CI.
 - Local pre-push CI-parity uses an isolated temp mirror per run (`mktemp`) to avoid cloud-sync path lock collisions.
 - CI now resolves the smallest responsible selective gate profile from the changed files:
