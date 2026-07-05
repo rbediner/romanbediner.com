@@ -1,8 +1,9 @@
-import { andFilters, batchRunReports, excludeEventNamesFilter, excludePreviewPathFilter } from "./ga4";
+import { andFilters, batchRunReports, excludeEventNamesFilter, excludeLocalhostFilter, excludePreviewPathFilter } from "./ga4";
 import type { ReportRequest, ReportResult, ServiceAccountKey } from "./ga4";
 import { buildInsights } from "./insights";
 import type { ActionRow, DigestData, PageRow } from "./insights";
 import { renderDigestEmail, sendDigestEmail } from "./email";
+import { buildMockDigestData } from "./mock-data";
 
 export interface Env {
   ENVIRONMENT: string;
@@ -18,8 +19,11 @@ export interface Env {
 }
 
 // Passive/automatic GA4 events plus legacy/unrelated instrumentation
-// (fleet_diagram_* and a generic "click") -- mirrors the "Event name
-// filter" applied report-wide in the Looker Studio Key Actions page.
+// (fleet_diagram_* and a generic "click") -- mirrors the Looker Studio filter
+// named "Exclude passive & legacy events" applied report-wide on the Key
+// Actions page. These two lists are maintained independently (one is a Worker
+// constant, the other a Looker Studio RegExp filter value) -- if you add or
+// remove an event here, make the same change there, and vice versa.
 const EXCLUDED_EVENT_NAMES = [
   "page_view",
   "session_start",
@@ -75,16 +79,20 @@ function toPageRows(report: ReportResult): PageRow[] {
 }
 
 async function buildDigestData(env: Env, key: ServiceAccountKey): Promise<DigestData> {
-  const previewFilter = excludePreviewPathFilter(env.SITE_PREVIEW_PATH_MARKER);
-  const eventFilter = andFilters(previewFilter, excludeEventNamesFilter(EXCLUDED_EVENT_NAMES));
+  // Combines preview-path exclusion with localhost session-source exclusion --
+  // matches the Looker Studio "Page path filter" (2 AND'd Exclude clauses)
+  // exactly, so the digest email and the dashboard never disagree on what
+  // counts as real traffic.
+  const trafficFilter = andFilters(excludePreviewPathFilter(env.SITE_PREVIEW_PATH_MARKER), excludeLocalhostFilter());
+  const eventFilter = andFilters(trafficFilter, excludeEventNamesFilter(EXCLUDED_EVENT_NAMES));
 
   const requests: ReportRequest[] = [
     // 0: total users -- yesterday
-    { dateRanges: [{ name: "yesterday", startDate: "yesterday", endDate: "yesterday" }], metrics: ["activeUsers"], dimensionFilter: previewFilter },
+    { dateRanges: [{ name: "yesterday", startDate: "yesterday", endDate: "yesterday" }], metrics: ["activeUsers"], dimensionFilter: trafficFilter },
     // 1: total users -- trailing 7 days
-    { dateRanges: [{ name: "trailing7", startDate: "7daysAgo", endDate: "yesterday" }], metrics: ["activeUsers"], dimensionFilter: previewFilter },
+    { dateRanges: [{ name: "trailing7", startDate: "7daysAgo", endDate: "yesterday" }], metrics: ["activeUsers"], dimensionFilter: trafficFilter },
     // 2: total users -- previous 7 days
-    { dateRanges: [{ name: "previous7", startDate: "14daysAgo", endDate: "8daysAgo" }], metrics: ["activeUsers"], dimensionFilter: previewFilter },
+    { dateRanges: [{ name: "previous7", startDate: "14daysAgo", endDate: "8daysAgo" }], metrics: ["activeUsers"], dimensionFilter: trafficFilter },
     // 3: event breakdown -- yesterday
     { dateRanges: [{ name: "yesterday", startDate: "yesterday", endDate: "yesterday" }], dimensions: ["eventName"], metrics: ["eventCount"], dimensionFilter: eventFilter, limit: 50 },
     // 4: event breakdown -- trailing 7 days
@@ -96,7 +104,7 @@ async function buildDigestData(env: Env, key: ServiceAccountKey): Promise<Digest
       dateRanges: [{ name: "trailing7", startDate: "7daysAgo", endDate: "yesterday" }],
       dimensions: ["pagePath"],
       metrics: ["screenPageViews"],
-      dimensionFilter: previewFilter,
+      dimensionFilter: trafficFilter,
       orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
       limit: 10,
     },
@@ -134,6 +142,24 @@ async function buildDigestData(env: Env, key: ServiceAccountKey): Promise<Digest
   };
 }
 
+/**
+ * Sends a short plain-text failure notice via Resend when a run throws after
+ * GA4/Resend were both configured -- so a broken run is loud (an email
+ * Roman actually sees) instead of silent (only visible in `wrangler tail`,
+ * which nobody tails proactively for a once-a-day cron).
+ */
+async function sendFailureAlert(env: Env, message: string): Promise<void> {
+  const subject = `romanbediner.com daily digest -- FAILED (${dateLabel()})`;
+  const html = `<!doctype html>
+<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:24px;color:#1a1a1a;">
+  <h2 style="color:#b91c1c;margin:0 0 8px 0;">Analytics digest failed to send</h2>
+  <p style="margin:0 0 16px 0;">The scheduled run for ${dateLabel()} threw an error before it could email real numbers:</p>
+  <pre style="background:#f4f4f5;padding:12px;border-radius:6px;white-space:pre-wrap;font-size:13px;">${message.replace(/</g, "&lt;")}</pre>
+  <p style="color:#666;font-size:13px;margin-top:16px;">Check <code>npx wrangler tail</code> from the analytics-digest/ directory for the full stack trace.</p>
+</body></html>`;
+  await sendDigestEmail(env.RESEND_API_KEY!, env.DIGEST_FROM_EMAIL, env.DIGEST_TO_EMAIL, subject, html);
+}
+
 async function runDigest(env: Env): Promise<{ status: string; detail?: string }> {
   if (!env.GA4_SERVICE_ACCOUNT_JSON) {
     console.log("[analytics-digest] GA4_SERVICE_ACCOUNT_JSON not set -- skipping run. See README.md.");
@@ -151,14 +177,43 @@ async function runDigest(env: Env): Promise<{ status: string; detail?: string }>
     return { status: "error", detail: "GA4_SERVICE_ACCOUNT_JSON is not valid JSON" };
   }
 
-  const data = await buildDigestData(env, key);
-  const insights = buildInsights(data);
-  const { subject, html } = renderDigestEmail(data, insights);
+  try {
+    const data = await buildDigestData(env, key);
+    const insights = buildInsights(data);
+    const { subject, html } = renderDigestEmail(data, insights);
 
-  await sendDigestEmail(env.RESEND_API_KEY, env.DIGEST_FROM_EMAIL, env.DIGEST_TO_EMAIL, subject, html);
+    await sendDigestEmail(env.RESEND_API_KEY, env.DIGEST_FROM_EMAIL, env.DIGEST_TO_EMAIL, subject, html);
 
-  console.log(`[analytics-digest] Sent digest for ${data.dateLabel}: ${insights.length} insights.`);
-  return { status: "sent", detail: subject };
+    console.log(`[analytics-digest] Sent digest for ${data.dateLabel}: ${insights.length} insights.`);
+    return { status: "sent", detail: subject };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[analytics-digest] run failed, sending failure alert:", message);
+    try {
+      await sendFailureAlert(env, message);
+    } catch (alertErr) {
+      // Resend itself is the only dependency of the alert path, so this only
+      // fires if Resend is down -- rare, and already loud in Cloudflare's own
+      // dashboard/logs at that point.
+      console.error("[analytics-digest] failure alert also failed to send:", alertErr);
+    }
+    return { status: "error", detail: message };
+  }
+}
+
+/**
+ * Constant-time string comparison so the /trigger bearer check doesn't leak
+ * timing information char-by-char. (Length is still compared up front, which
+ * leaks length -- an accepted simplification for a low-value personal
+ * trigger endpoint, not a high-security secret.)
+ */
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) {
+    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return diff === 0;
 }
 
 export default {
@@ -166,6 +221,9 @@ export default {
     if (!isDigestHour()) return; // cheap no-op for the other 23 hourly firings
     ctx.waitUntil(
       runDigest(env).catch((err) => {
+        // runDigest() catches and reports its own errors (including sending a
+        // failure alert email); this is only a backstop for something going
+        // wrong in that error-handling path itself.
         console.error("[analytics-digest] run failed:", err);
       })
     );
@@ -174,9 +232,21 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    if (url.pathname === "/preview" && request.method === "GET") {
+      // Renders the digest email HTML from synthetic data -- no secrets
+      // required, no real GA4/Resend calls made. Lets the wording and
+      // thresholds in insights.ts/email.ts be sanity-checked in a browser at
+      // any time, independent of whether GA4_SERVICE_ACCOUNT_JSON is set.
+      const data = buildMockDigestData();
+      const insights = buildInsights(data);
+      const { html } = renderDigestEmail(data, insights);
+      return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+    }
+
     if (url.pathname === "/trigger" && request.method === "POST") {
       const auth = request.headers.get("Authorization");
-      if (!env.DIGEST_TRIGGER_TOKEN || auth !== `Bearer ${env.DIGEST_TRIGGER_TOKEN}`) {
+      const expected = `Bearer ${env.DIGEST_TRIGGER_TOKEN ?? ""}`;
+      if (!env.DIGEST_TRIGGER_TOKEN || !auth || !timingSafeEqual(auth, expected)) {
         return new Response("Unauthorized", { status: 401 });
       }
       try {
@@ -194,7 +264,7 @@ export default {
         ga4: Boolean(env.GA4_SERVICE_ACCOUNT_JSON),
         resend: Boolean(env.RESEND_API_KEY),
       },
-      note: "POST /trigger with Authorization: Bearer <DIGEST_TRIGGER_TOKEN> to run on demand.",
+      note: "GET /preview for a mock-data email render. POST /trigger with Authorization: Bearer <DIGEST_TRIGGER_TOKEN> to run on demand.",
     });
   },
 };

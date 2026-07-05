@@ -121,6 +121,19 @@ npm install
 npx wrangler deploy
 ```
 
+## Tests
+
+```bash
+npm test
+```
+
+Vitest, covering the pure threshold logic in `src/insights.ts` (trend
+direction/flat/no-baseline, per-action >=25% callouts capped at 4, zero-volume
+watched-event callouts, all three recommendation branches, top-page share
+math) plus an end-to-end smoke test against the shared mock fixture. No
+Workers runtime or network calls involved -- this only tests deterministic
+functions, so it's fast and has no secrets dependency.
+
 ## Verifying it works
 
 Check status (shows whether secrets resolved, doesn't send anything):
@@ -130,6 +143,17 @@ curl https://romanbediner-analytics-digest.rbediner.workers.dev/
 ```
 
 Expected once fully wired: `{"service":"romanbediner-analytics-digest","environment":"production","secretsConfigured":{"ga4":true,"resend":true},...}`
+
+Preview the actual email design and wording using synthetic data -- no
+secrets required, no real GA4/Resend calls made, safe to open in a browser
+any time:
+
+```
+https://romanbediner-analytics-digest.rbediner.workers.dev/preview
+```
+
+The mock data (`src/mock-data.ts`) is shared with the test suite (`npm test`)
+so both exercise the same fixture.
 
 Trigger a real send on demand (replace `<token>` with the value set for
 `DIGEST_TRIGGER_TOKEN`):
@@ -162,6 +186,14 @@ than throwing. Deploying before secrets are wired up is safe. (Current
 state: `RESEND_API_KEY` is set, `GA4_SERVICE_ACCOUNT_JSON` is not -- see
 [Known gap](#known-gap-ga4_service_account_json-not-set) above.)
 
+Once both secrets *are* set, a failure looks different on purpose: if
+`buildDigestData`/GA4/Resend throws partway through a run, the Worker catches
+it and sends a short failure-notice email via Resend instead (subject line
+`... -- FAILED`, includes the error message) rather than just logging to
+`wrangler tail`, which nobody tails proactively for a once-a-day cron. If
+even that alert fails to send (Resend itself down), that's logged and there's
+genuinely nothing left to signal with.
+
 ## What the digest actually says
 
 Everything is rule-based off real thresholds against GA4 numbers -- no LLM
@@ -181,9 +213,11 @@ call, so nothing is invented:
   week-over-week traffic drop -> suggest checking for a broken link or
   recent change).
 
-All numbers exclude `romanbediner-preview` staging traffic
-(`SITE_PREVIEW_PATH_MARKER` env var), matching the equivalent filter on the
-Looker Studio report.
+All numbers exclude both `romanbediner-preview` staging traffic
+(`SITE_PREVIEW_PATH_MARKER` env var) and `localhost` session-source traffic
+(`excludeLocalhostFilter()` in `src/ga4.ts`), matching the Looker Studio
+report's "Page path filter" exactly -- both systems now agree on what counts
+as real traffic.
 
 ## Companion system: Looker Studio report
 

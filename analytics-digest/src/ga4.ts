@@ -131,6 +131,22 @@ export function excludePreviewPathFilter(marker: string) {
   };
 }
 
+/**
+ * Dimension filter excluding rows whose sessionSource contains "localhost" (local dev
+ * traffic). Mirrors the Looker Studio "Page path filter" second clause -- keep these two
+ * in sync; see the "Companion system: Looker Studio report" section of README.md.
+ */
+export function excludeLocalhostFilter() {
+  return {
+    notExpression: {
+      filter: {
+        fieldName: "sessionSource",
+        stringFilter: { matchType: "CONTAINS", value: "localhost", caseSensitive: false },
+      },
+    },
+  };
+}
+
 /** Dimension filter excluding a specific list of literal event names. */
 export function excludeEventNamesFilter(eventNames: string[]) {
   return {
