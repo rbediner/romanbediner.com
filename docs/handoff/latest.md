@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 290
-- Updated At (UTC): 2026-07-05T17:52:43Z
+- Handoff Sequence: 291
+- Updated At (UTC): 2026-07-05T18:14:29Z
 - Source Branch: staging
-- Source Commit: fae84f44acc4909b24c33b8e701cff234f70beb1 (pre-handoff baseline)
+- Source Commit: 40125f27c7ca4a1b23d124271054131e86621fca (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-05: Looker Studio report finalized + new analytics-digest Worker built (Claude)
@@ -21,6 +21,11 @@
    - Deployed and confirmed live: `https://romanbediner-analytics-digest.rbediner.workers.dev`, cron `0 * * * *` (hourly, self-gates to 8am America/New_York in the handler so it survives DST without a static UTC value).
    - **⚠️ ACTION FOR ROMAN (manual, credential-handling — no agent should do this):** `GA4_SERVICE_ACCOUNT_JSON` secret is **not set**. The key file downloaded during an earlier session's browser automation landed in that browser's sandbox, not on this Mac (confirmed absent from `~/Downloads`, `~/Desktop`, `~/Documents`). Fix: generate a *new* key for the same service account from Google Cloud Console (IAM & Admin → Service Accounts → that account → Keys → Add key → JSON), then `npx wrangler secret put GA4_SERVICE_ACCOUNT_JSON < ~/Downloads/<file>.json` from `analytics-digest/`. Full steps in `analytics-digest/README.md` under "Known gap." `RESEND_API_KEY` and `DIGEST_TRIGGER_TOKEN` are already set. Verify via `curl https://romanbediner-analytics-digest.rbediner.workers.dev/` -- should read `"ga4":true` once fixed (currently `false`).
    - `analytics-digest/` is now **tracked and pushed** (`origin/staging`, commit `354e597`). Roman granted standing permission this session to commit/push to this repo's `staging` branch without asking first (does not extend to promoting `staging` → `prod`, which still follows the documented Release Flow).
+
+3. **EBI Round 1 (9 items) implemented on both systems, pushed at `40125f2`:**
+   - `analytics-digest/`: `excludeLocalhostFilter()` added to `ga4.ts` so the Worker's traffic exclusion now matches the Looker Studio filter exactly (previously the Worker only excluded preview-path traffic, not `localhost`); `runDigest()` now catches its own errors and emails a `-- FAILED` alert via Resend instead of only logging; `GET /preview` renders the digest from a shared synthetic fixture (`src/mock-data.ts`) with no secrets needed; `/trigger` bearer check is now constant-time; a cross-reference comment links `EXCLUDED_EVENT_NAMES` to the Looker "Exclude passive & legacy events" filter (two independently-maintained lists, drift risk flagged). Added `vitest` + 15 tests for `insights.ts`'s threshold logic (`npm test`). Redeployed and verified live (`curl .../` and `curl .../preview`).
+   - Looker Studio: added a caption to Executive Summary explaining the ~99% "New User %" is a GA4 heuristic on low-traffic sites, not literally zero repeat visitors; added a caption to Audience & Devices explaining the "(not set)" country bucket; **retired the redundant "Conversions" table** on the former "Conversions & Top Pages" page (it was a byte-for-byte duplicate of the Key Actions page's events under a misleading label — "no official GA4 key events are configured yet") and **renamed the page to "Top Pages"**, now pointing readers to the Key Actions page for the full event breakdown.
+   - EBI Round 2 requested next — if you're picking this up mid-round, check the conversation for what Round 2 proposed before assuming Round 1 is the latest state.
 
 ## Latest — 2026-07-02: Drive-workspace I/O fix + verify-prod-release follow-up (Claude)
 
