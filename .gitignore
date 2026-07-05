@@ -1,5 +1,22 @@
 # macOS
 .DS_Store
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and temp files
+*.log
+npm-debug.log*
+*.tmp
+*.bak
 
 # Node
 node_modules/

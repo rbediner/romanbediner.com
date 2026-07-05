@@ -1,5 +1,21 @@
 # RomanBediner.com
 
+## Architecture
+- **What it is**: The executive operating website for Roman Bediner (`romanbediner.com`) — a static, content-first marketing/portfolio site plus an embedded React "AI-Enabled Operations Dashboard" resource.
+- **Tech stack**: Hand-authored static HTML, CSS, and vanilla JavaScript for the main site (no build step, no framework, no bundler). The embedded dashboard is React + Vite. Tooling is Node 20 (`.nvmrc`) with npm; QA uses Jest, Playwright, and Python `unittest`.
+- **Routing**: Folder-based — each canonical URL maps to a folder `index.html` (e.g. `/about/index.html`). Clean URLs with a required trailing slash and no exposed `.html`; apex-only canonical domain (no `www`).
+- **Directory layout**:
+  - `index.html` and per-route folders (`about/`, `services/`, `framework/`, `resources/`, `connect/`, `insights/`) — page entrypoints.
+  - `styles/` — shared and page-scoped CSS (design tokens, `site.css`, per-page sheets).
+  - `scripts/` — `runtime/` (browser JS), `qa/` (test runners/gates), `release/` (promotion, handoff, CI watchers), `content/`, `docs/`, `diagnostics/`, plus `clean-drive-drift.sh`.
+  - `assets/` — favicons, icons, logos, resource media.
+  - `ai-enabled-operations-dashboard/` — self-contained React/Vite source with committed `dist/` build output; mirrored to a public repo on prod.
+  - `QA/` — Jest/Playwright/Python tests, visual baselines, and results.
+  - Root config: `package.json`, `playwright.config.js`, `CNAME`, `sitemap.xml`, `robots.txt`, `.github/workflows/`, `.githooks/`, `.husky/`.
+- **Build/run**: The main site needs no build — serve the repo root as static files (see "Local Development Instructions"). The dashboard builds with Vite (`npm install && npm run build` inside its folder). Content helpers (e.g. `npm run generate:insight-links`) generate auto-managed README/link blocks.
+- **QA gates**: A selective pre-push gate picks the smallest responsible test profile; a Husky `pre-push` hook and GitHub Actions `CI` run the Jest/Node/Python/Playwright suites, plus repo-contract, workflow-integrity, and docs-sync checks.
+- **Hosting & deploy flow**: Hosted on GitHub Pages (static delivery; CSP enforced via `<meta>`). Work integrates on `staging` → `Deploy Staging` publishes an isolated, no-index preview to a separate preview repo; the exact tested commit is fast-forward promoted to `prod`, where CI reruns and `Deploy Pages` publishes only on green, followed by live production smoke and `release:verify-prod`.
+
 ## System Overview
 - Executive operating website for Roman Bediner, focused on productizing operations for modern AI-enabled work.
 - Static-first architecture with deterministic HTML, CSS, and JavaScript assets.
@@ -421,6 +437,8 @@ nvm use
 nvm install
 ```
 - Dependency install in CI uses `npm ci`.
+- Dev dependencies updated via `npm audit fix` (non-force) to clear 4 advisories (1 low, 2 moderate, 1 high) in the jest/babel/husky/playwright toolchain; these are dev-only and not shipped to the site.
+- Every `actions/setup-node@v6` step enables built-in npm dependency caching (`cache: 'npm'`, keyed on `package-lock.json`) so repeated `npm ci` runs across CI/deploy jobs restore modules from cache instead of re-downloading them on every job. This is a performance-only optimization; it does not change install determinism, since `npm ci` still installs the exact locked versions.
 - Playwright browser installation is required in CI.
 - Local pre-push CI-parity uses an isolated temp mirror per run (`mktemp`) to avoid cloud-sync path lock collisions.
 - CI now resolves the smallest responsible selective gate profile from the changed files:
@@ -1207,3 +1225,11 @@ python3 -m playwright install chromium
 ## FRAMEWORK STAGE DIRECT LINKS
 
 <!-- AUTO-GENERATED INSIGHT LINKS END -->
+
+## Google Drive drift
+
+This repository is checked out inside Google Drive and synced across machines. Google Drive creates conflict-copies (filenames ending in ` 2`, ` 3`, or ` (1)`) — including inside `.git` — which corrupt the repo. A guardrail auto-removes them:
+
+- `scripts/clean-drive-drift.sh --fix` — remove conflict-copies then verify with `git fsck` (`--check` to only report).
+- Runs automatically via git hooks (`pre-commit`, `post-merge`, `post-checkout`) and, for Claude, on session start via `.claude/settings.json`.
+- Never commit a file whose name ends in ` 2`/` 3` — it is Google Drive junk, not a real file.
