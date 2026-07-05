@@ -1,10 +1,29 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 291
-- Updated At (UTC): 2026-07-05T18:14:29Z
+- Handoff Sequence: 292
+- Updated At (UTC): 2026-07-05T19:10:54Z
 - Source Branch: staging
-- Source Commit: 40125f27c7ca4a1b23d124271054131e86621fca (pre-handoff baseline)
+- Source Commit: 463d3c9cbbade9cc8f0476d4171978bc755a2e51 (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-05: EBI Round 2 (Looker Studio structure cleanup) + analytics documentation (Claude)
+
+**Committed and pushed to `origin/staging` at `463d3c9`.** This entry supersedes the "Looker Studio report finalized" one directly below for anything related to filter count, page names, or the Traffic Sources page layout -- that entry is now partially stale (see specifics below) and kept only for its account-boundary/setup history, which is still accurate.
+
+1. **Looker Studio structure cleanup (EBI Round 2, all live edits, no local files):**
+   - **Filter audit:** found 16 total filters existed (up from the 3 real ones documented in the previous entry) -- 11 were dead (0 charts using them, leftover from earlier iteration) and 1 was broken beyond repair (`Event = (page|screen)_view`, field showing "Missing," every field-picker option showing "Invalid," Save permanently disabled even after a valid Name-only edit). All 12 deleted. Final state: **exactly 4 filters** -- `Page path filter` (7 charts), `Exclude passive & legacy events` (3 charts), `Event = resource_pdf_download` (1 chart), `Event = resource_preview_expand` (1 chart).
+   - **Removed an unused blended data source** ("BL: eComm Funnel," confirmed 0 charts referencing it via Resource → Manage blends before deletion) that was cluttering the Data panel's field picker with eCommerce fields (`add_to_cart`, `purchase`, etc.) romanbediner.com has never used.
+   - **Redid the "Top Events" table removal** on the Traffic Sources & Landing Pages page (table + trend chart + title + container rectangle, 4 individual deletions) -- this was a byte-for-byte redundant duplicate of the Key Actions page's event breakdown, with none of that page's filtering context. Left a cosmetic gap rather than repositioning the Landing Pages block below it.
+   - **⚠️ New Looker Studio failure mode discovered and recovered from:** bulk arrow-key repositioning (100x `Up` presses on a multi-selected group, attempting to close the same layout gap on a first attempt) corrupted the ENTIRE page's rendering to a blank white canvas -- including completely untouched charts -- reproducibly across reload, View mode, and a brand-new browser tab (proving server-side saved-state corruption, not a client glitch; the underlying data model stayed intact per the accessibility tree). Recovered via `File → Version history → See version history`: bisected timestamped snapshots to find the last-good version (2:38 PM), restored it, then verified via Manage Filters that the filter cleanup above (which happened before the break) survived the restore while only the risky move sequence was rolled back. **Lesson applied on retry:** redid the Top Events deletion without any bulk repositioning at all -- verified each of the 4 deletions individually via screenshot before proceeding, then confirmed the whole page via reload and View mode. Full writeup of this gotcha is in the `project-romanbediner-analytics` memory and `analytics-digest/docs/analytics-scope.md`.
+   - Page 5 renamed **"Conversions & Top Pages" → "Top Pages"** (the Conversions table was already removed in Round 1; the name just hadn't caught up).
+
+2. **Two new documentation deliverables, per explicit request** ("document analytics scope... same with interpretation/analysis method... so if I want to replicate it for another property, we don't reinvent the wheel... point an agent to a file and say replicate this"):
+   - **`analytics-digest/docs/analytics-scope.md`** -- what's tracked: GA4 property, both traffic exclusions, full event taxonomy (passive/excluded vs. real interaction vs. watched-for-zero-volume), the `(not set)` bucket explanation, the current 4-filter inventory, and what's explicitly out of scope (eCommerce fields, the EmailJS contact form).
+   - **`analytics-digest/docs/replication-guide.md`** -- a property-agnostic runbook: GA4 service-account setup, the Looker Studio dashboard blueprint (including every structural lesson learned the hard way this session, so a future rebuild doesn't repeat them), the Worker scaffold with file-by-file guidance, and the insight-generation methodology/rationale (why 7-day-trailing not day-over-day, why a 25% notable threshold, why templated/condition-gated recommendations only). Written so an agent can be pointed at this single file and asked to rebuild the whole stack for a different property.
+   - Both READMEs (`analytics-digest/README.md` and the root `README.md`) now link to these two docs instead of duplicating filter/page detail inline, and the stale "Conversions & Top Pages" reference plus the Worker's architecture diagram (missing `/preview`, `/trigger`, and the failure-alert path added in Round 1) were fixed in the same pass.
+   - Confirmed via `npm test` (15/15 pass) and `npm run typecheck` (clean) before pushing -- no code changes in this round, docs/Looker-Studio-only, but ran the full check anyway since the Worker's README changed.
+
+3. **Digest cadence confirmed unchanged:** user confirmed once-a-day is exactly right ("I only need that email once a day") -- no code change needed, the existing 8am America/New_York cron already satisfies this.
 
 ## Latest — 2026-07-05: Looker Studio report finalized + new analytics-digest Worker built (Claude)
 
