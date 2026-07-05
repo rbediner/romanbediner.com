@@ -1,0 +1,8 @@
+# Purpose:
+# - Self-heal Google Drive conflict-copy corruption right after a merge/pull
+#   pulls in whatever Drive dropped into .git while this machine was offline.
+# Notes:
+# - Husky v9 hook files are plain executable scripts without shebang boilerplate.
+# - See AGENTS.md "Google Drive drift" for why this exists.
+
+bash "$(git rev-parse --show-toplevel)/scripts/clean-drive-drift.sh" --fix --quiet || true

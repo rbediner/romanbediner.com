@@ -34,6 +34,7 @@ scripts/clean-drive-drift.sh --fix      # remove conflict-copies + verify with g
 scripts/clean-drive-drift.sh --check    # report only (exit 1 if any found)
 ```
 
-- Runs automatically via git hooks (`pre-commit`, `post-merge`, `post-checkout`). If they are not active, run `git config core.hooksPath .githooks`.
-- Dependency-free (bash + git) — works for Codex, Claude, Cursor, or a human. Claude also runs it at session start via `.claude/settings.json`.
+- Runs automatically via Husky's own hooks (`.husky/pre-commit`, `.husky/post-merge`, `.husky/post-checkout`) -- **not** a separate `core.hooksPath`, since Husky's install step (`npm install` -> `prepare`) resets that on every install and would silently un-wire a standalone `.githooks` setup. Also runs on every `npm install` directly (`scripts/release/install-local-husky-hooks.js`), and at Claude session start via `.claude/settings.json`'s `SessionStart` hook.
+- `.claude/settings.json` and `.claude/launch.json` are intentionally tracked (not gitignored) so the session-start guardrail survives a fresh clone -- only `.claude/settings.local.json` (personal permission overrides) stays untracked.
+- Dependency-free (bash + git) — works for Codex, Claude, Cursor, or a human.
 - **Never commit a file whose name ends in ` 2`/` 3` — it is Drive junk, not a real file.**

@@ -43,4 +43,13 @@ QA/results/playwright/.last-run.json
 # Playwright runtime artifacts and duplicated local output folders.
 test-results*/
 .npm-cache/
-.claude/
+
+# .claude/ holds machine-local Claude Code config. settings.local.json carries
+# personal permission overrides and must stay untracked, but settings.json
+# (the Drive-drift SessionStart hook) and launch.json (dev-server config)
+# have no secrets and must be shared, or they silently vanish on every fresh
+# clone -- exactly the gap that let this repo's .git corrupt three times
+# before anyone noticed the guardrail wasn't actually wired up.
+.claude/*
+!.claude/settings.json
+!.claude/launch.json
