@@ -37,10 +37,20 @@ Cloudflare Worker (romanbediner-analytics-digest)
         |                        nothing invented.
         |
         +--> src/email.ts -- renders HTML, sends via Resend API
-                              (api.resend.com/emails)
-                              |
-                              v
-                     roman@romanbediner.com
+        |                     (api.resend.com/emails)
+        |                     |
+        |                     v
+        |            roman@romanbediner.com
+        |
+        +--> on error anywhere above: caught, sends a "-- FAILED" alert
+                      email via the same Resend path instead of failing
+                      silently (see "Degradation behavior" below).
+
+fetch() handler (independent of the cron path, for manual use):
+        GET  /            -- status: which secrets are configured
+        GET  /preview     -- renders the real email HTML from src/mock-data.ts,
+        |                     no secrets/GA4/Resend calls, safe anytime
+        POST /trigger     -- bearer-token-gated on-demand real run
 ```
 
 Full request/response flow per run: `scheduled()` in `src/index.ts` checks
@@ -228,36 +238,20 @@ separate from this Worker, sending its own scheduled PDF email:
   (`https://datastudio.google.com/u/0/reporting/520a765a-8529-48dc-b8d8-bc339564438a/`),
   connected to the `romanbediner.com` GA4 property (`524954289`).
 - **5 pages:** Executive Summary, Key Actions, Audience & Devices, Traffic
-  Sources & Landing Pages, Conversions & Top Pages.
-- **Report-wide traffic exclusions**, both applied via the compound filter
-  named **"Page path filter"** (7 charts, 2 AND'd Exclude clauses):
-  `Page path Contains "romanbediner-preview"` AND
-  `Session source Contains "localhost"`. This keeps staging/preview builds
-  and local dev traffic out of every number on every page.
-- **Event filters**, each with a distinct name (fixed 2026-07-05 -- all
-  three used to render as the ambiguous, identical "Event name filter"):
-  - `Exclude passive & legacy events` (5 charts) -- RegExp-excludes
-    `page_view|session_start|first_visit|user_engagement|
-    fleet_diagram_fullscreen|fleet_diagram_zoom|^click$` from the Key
-    Actions table/trend so only real interaction events show.
-  - `Event = resource_pdf_download` (1 chart, the "PDF Downloads"
-    scorecard).
-  - `Event = resource_preview_expand` (1 chart, the "Resource Preview
-    Expands" scorecard).
-  - Both of the two above were found with an **empty value** (a filter
-    matching nothing, silently rendering "0" regardless of real activity)
-    and were repaired with the correct event name, confirmed against the
-    site's own tracking source
-    (`scripts/runtime/resources-analytics.js`,
-    `scripts/runtime/resources-carousel.js`). If a similar "0" scorecard
-    with an "Equal to" condition ever looks suspicious again, open
-    Resource -> Manage filters and check whether the value column actually
-    shows a value -- Looker Studio will silently save an "Equal to" filter
-    with **no** value if "Show suggested values while typing" is on and you
-    type a value that has zero historical occurrences (which is exactly the
-    case for a genuinely zero-volume event). Workaround: toggle that switch
-    off before typing a value with no suggestion history, or the Save
-    button stays disabled/no-ops.
-- Both PDF-download and preview-expand scorecards show `0` as of
-  2026-07-05, and that `0` is now a real zero (filters confirmed working),
-  not a broken-filter artifact.
+  Sources & Landing Pages, Top Pages.
+- **Traffic exclusions, event taxonomy, and the full filter inventory**
+  (currently 4 filters, down from a peak of 16 after the 2026-07-05 EBI
+  Round 2 cleanup) are documented in
+  [`docs/analytics-scope.md`](docs/analytics-scope.md) rather than here, so
+  there's a single source of truth instead of two READMEs drifting out of
+  sync. Read that file before editing any report filter -- it also covers
+  two Looker Studio gotchas worth knowing before you touch Manage Filters
+  (a filter with an unrepairable "Missing"/"Invalid" field reference, and a
+  filter that silently saves with an empty value for zero-volume event
+  names).
+- **To replicate this whole stack (GA4 setup, dashboard blueprint, Worker
+  scaffold, insight-methodology rationale) for a different property**, see
+  [`docs/replication-guide.md`](docs/replication-guide.md) -- a
+  property-agnostic runbook written so an agent can be pointed at that one
+  file and asked to rebuild the pattern from scratch, without re-deriving
+  any of the design decisions made here.
