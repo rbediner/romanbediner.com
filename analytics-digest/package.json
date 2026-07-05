@@ -1,0 +1,17 @@
+{
+  "name": "romanbediner-analytics-digest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker: daily narrative analytics digest for romanbediner.com (GA4 -> plain-English insights -> Resend email).",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260701.0",
+    "typescript": "^5.5.4",
+    "wrangler": "^4.0.0"
+  }
+}

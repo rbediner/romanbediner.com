@@ -1,0 +1,53 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "romanbediner-analytics-digest",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-05",
+  "compatibility_flags": ["nodejs_compat"],
+  // romanbediner.com's own Cloudflare account (the one that owns the
+  // romanbediner.com DNS zone) -- deliberately separate from the
+  // pasteflow-growth-engine project, which lives under a different
+  // Cloudflare account (Pasteflow.support@gmail.com).
+  "account_id": "a00e5c592f3d32a0258528122cecde89",
+  "workers_dev": true,
+  // Cloud-native, disc-independent daily digest. Runs on Cloudflare's own
+  // clock -- never depends on Roman's Mac, Claude, or any local session
+  // being open. Fires hourly; the handler itself checks whether it is
+  // currently 8am in America/New_York (matching the existing Looker
+  // Studio email schedule) and no-ops otherwise (see isDigestHour in
+  // src/index.ts). This self-corrects across DST twice a year instead of
+  // needing a static UTC cron value updated by hand every March/November.
+  // Each "not yet 8am" invocation is a single cheap Intl call -- no GA4
+  // or Resend traffic.
+  "triggers": {
+    "crons": ["0 * * * *"]
+  },
+  // RESEND_API_KEY: create a dedicated key in the Resend dashboard (API
+  // keys) named e.g. "romanbediner-analytics-digest", then run:
+  //   npx wrangler secret put RESEND_API_KEY
+  // GA4_SERVICE_ACCOUNT_JSON: the full JSON key file content downloaded
+  // for the romanbediner-analytics-digest@gen-lang-client-0482186037
+  // service account. Run:
+  //   npx wrangler secret put GA4_SERVICE_ACCOUNT_JSON < /path/to/key.json
+  // DIGEST_TRIGGER_TOKEN: any random string, used to bearer-gate the
+  // manual /trigger endpoint for on-demand testing. Run:
+  //   npx wrangler secret put DIGEST_TRIGGER_TOKEN
+  //
+  // Until all three are set, the Worker still runs on schedule and logs
+  // what it would have sent -- it degrades gracefully rather than
+  // failing the cron run. See README.md for the full setup checklist.
+  "vars": {
+    "ENVIRONMENT": "production",
+    "GA4_PROPERTY_ID": "524954289",
+    "DIGEST_TO_EMAIL": "roman@romanbediner.com",
+    "DIGEST_FROM_EMAIL": "romanbediner.com Analytics <digest@romanbediner.com>",
+    "SITE_PREVIEW_PATH_MARKER": "romanbediner-preview"
+  },
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1
+    }
+  }
+}

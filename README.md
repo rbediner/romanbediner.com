@@ -228,6 +228,11 @@ Required handoff content for cross-machine continuity:
   - No inline GA snippets
   - Runtime request visibility checks
 
+## Reporting & Analytics Digest
+This section documents what's *built on top of* the raw GA4 events above, not the events themselves.
+- **Looker Studio dashboard:** "RB Website - Traffic, Pages, and Key Actions" (5 pages: Executive Summary, Key Actions, Audience & Devices, Traffic Sources & Landing Pages, Conversions & Top Pages), connected to GA4 property `524954289`, sends a scheduled PDF snapshot email. Report-wide traffic exclusions (preview builds + `localhost`) live in one compound filter ("Page path filter", 7 charts). Full filter inventory and known gotchas are documented in `analytics-digest/README.md` under "Companion system: Looker Studio report" -- read that before editing any report filter, since Looker Studio silently accepts empty-value filters under specific conditions.
+- **`analytics-digest/` (Cloudflare Worker):** a separate daily email — a short rule-based narrative (trend / notable changes / recommendations), not another dashboard. Own Cloudflare account, own GA4 service account, own Resend key; deliberately not sharing infrastructure with `pasteflow-growth-engine` even though the code pattern (Worker + Cron Trigger + Resend) is the same. Full architecture, account/secret inventory, and current wiring status: `analytics-digest/README.md`.
+
 ## Connect Form Delivery Contract
 - `/connect/` form submission is handled client-side via EmailJS in `/scripts/runtime/contact-form-emailjs.js`.
 - Email recipient target for website inquiries is `connect@romanbediner.com`.
