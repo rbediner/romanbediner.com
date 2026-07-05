@@ -1,10 +1,26 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 287
-- Updated At (UTC): 2026-07-03T00:25:47Z
+- Handoff Sequence: 289
+- Updated At (UTC): 2026-07-05T17:52:12Z
 - Source Branch: staging
-- Source Commit: b0eb3558909ab85ad7d9fdb2c09349f1fbb10eb6 (pre-handoff baseline)
+- Source Commit: 9efc5de452aba15d68f443a76d2f520c7af953fa (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-05: Looker Studio report finalized + new analytics-digest Worker built (Claude)
+
+**Two systems, not committed to git yet** (session ended before a commit was requested):
+
+1. **Looker Studio dashboard fixes** (all done live in the Looker Studio UI, no local files):
+   - 10 EBI-approved improvements shipped across all 5 report pages (legacy-event stripping, zero-volume-event surfacing, Conversions page repointed from a broken "Conversions" metric to `Event count` + event filter, vs-previous-period deltas, Daily Briefing block, 7-day trailing default comparison, page reorder, per-page captions, interactive-only element audit, mobile-render check).
+   - **Report-wide `localhost` traffic pollution fixed:** the compound "Page path filter" (7 charts) now excludes both `Page path Contains "romanbediner-preview"` AND `Session source Contains "localhost"` (2 AND'd Exclude clauses -- De Morgan's law: NOT(A OR B) = NOT A AND NOT B). Verified live: `localhost:4321` no longer appears in the Traffic Sources & Landing Pages page's Top Traffic Sources table.
+   - **Three ambiguous, identically-named "Event name filter" entries renamed** to `Exclude passive & legacy events` (5 charts), `Event = resource_pdf_download` (1 chart), `Event = resource_preview_expand` (1 chart).
+   - **Bonus bug caught while renaming:** the last two filters above had **no value set at all** (`Equal to (=)` with an empty condition) -- meaning the "PDF Downloads" and "Resource Preview Expands" scorecards were showing "0" from a broken filter matching nothing, not necessarily from real zero activity. Root cause: Looker Studio silently saves an "Equal to" filter with an empty value when "Show suggested values while typing" is on and the typed value has zero historical occurrences in the selected date range (true for these two genuinely-never-fired events). Fixed by toggling that switch off before entering the value, confirmed correct against the site's own tracking source (`scripts/runtime/resources-analytics.js`, `resources-carousel.js`). Both scorecards still show `0` -- now a real zero, backed by a working filter. **If a similar "0" scorecard ever looks suspicious, check Resource → Manage filters and confirm the value column actually shows a value, not just the condition type.**
+
+2. **New Cloudflare Worker: `analytics-digest/`** (deployed, partially wired) -- a separate daily narrative-insights email companion to the Looker Studio PDF. Full architecture, account/secret inventory, and setup steps are documented in `analytics-digest/README.md` -- read that file in full before touching this system, it is the single source of truth. Summary:
+   - Own Cloudflare account (`a00e5c592f3d32a0258528122cecde89`, `Rbediner@gmail.com`'s Account -- same account as the DNS zone, deliberately **separate** from `pasteflow-growth-engine`'s account), own GA4 service account (`romanbediner-analytics-digest@gen-lang-client-0482186037.iam.gserviceaccount.com`, Viewer role on GA4 property `524954289`), own Resend API key.
+   - Deployed and confirmed live: `https://romanbediner-analytics-digest.rbediner.workers.dev`, cron `0 * * * *` (hourly, self-gates to 8am America/New_York in the handler so it survives DST without a static UTC value).
+   - **⚠️ ACTION FOR ROMAN (manual, credential-handling — no agent should do this):** `GA4_SERVICE_ACCOUNT_JSON` secret is **not set**. The key file downloaded during an earlier session's browser automation landed in that browser's sandbox, not on this Mac (confirmed absent from `~/Downloads`, `~/Desktop`, `~/Documents`). Fix: generate a *new* key for the same service account from Google Cloud Console (IAM & Admin → Service Accounts → that account → Keys → Add key → JSON), then `npx wrangler secret put GA4_SERVICE_ACCOUNT_JSON < ~/Downloads/<file>.json` from `analytics-digest/`. Full steps in `analytics-digest/README.md` under "Known gap." `RESEND_API_KEY` and `DIGEST_TRIGGER_TOKEN` are already set. Verify via `curl https://romanbediner-analytics-digest.rbediner.workers.dev/` -- should read `"ga4":true` once fixed (currently `false`).
+   - `analytics-digest/` is currently **untracked in git** (new directory, nothing committed). No commit was made this session since committing wasn't explicitly requested — next session should confirm with Roman before committing/pushing, per repo norms.
 
 ## Latest — 2026-07-02: Drive-workspace I/O fix + verify-prod-release follow-up (Claude)
 
