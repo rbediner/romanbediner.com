@@ -1,14 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 289
-- Updated At (UTC): 2026-07-05T17:52:12Z
+- Handoff Sequence: 290
+- Updated At (UTC): 2026-07-05T17:52:43Z
 - Source Branch: staging
-- Source Commit: 9efc5de452aba15d68f443a76d2f520c7af953fa (pre-handoff baseline)
+- Source Commit: fae84f44acc4909b24c33b8e701cff234f70beb1 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-05: Looker Studio report finalized + new analytics-digest Worker built (Claude)
 
-**Two systems, not committed to git yet** (session ended before a commit was requested):
+**Two systems.** The Cloudflare Worker + doc updates below are committed and pushed to `origin/staging` (commit `354e597`, merged with concurrent origin changes at `9efc5de`). The Looker Studio changes have no local files — they're live edits in the Looker Studio UI itself, nothing to commit.
 
 1. **Looker Studio dashboard fixes** (all done live in the Looker Studio UI, no local files):
    - 10 EBI-approved improvements shipped across all 5 report pages (legacy-event stripping, zero-volume-event surfacing, Conversions page repointed from a broken "Conversions" metric to `Event count` + event filter, vs-previous-period deltas, Daily Briefing block, 7-day trailing default comparison, page reorder, per-page captions, interactive-only element audit, mobile-render check).
@@ -20,7 +20,7 @@
    - Own Cloudflare account (`a00e5c592f3d32a0258528122cecde89`, `Rbediner@gmail.com`'s Account -- same account as the DNS zone, deliberately **separate** from `pasteflow-growth-engine`'s account), own GA4 service account (`romanbediner-analytics-digest@gen-lang-client-0482186037.iam.gserviceaccount.com`, Viewer role on GA4 property `524954289`), own Resend API key.
    - Deployed and confirmed live: `https://romanbediner-analytics-digest.rbediner.workers.dev`, cron `0 * * * *` (hourly, self-gates to 8am America/New_York in the handler so it survives DST without a static UTC value).
    - **⚠️ ACTION FOR ROMAN (manual, credential-handling — no agent should do this):** `GA4_SERVICE_ACCOUNT_JSON` secret is **not set**. The key file downloaded during an earlier session's browser automation landed in that browser's sandbox, not on this Mac (confirmed absent from `~/Downloads`, `~/Desktop`, `~/Documents`). Fix: generate a *new* key for the same service account from Google Cloud Console (IAM & Admin → Service Accounts → that account → Keys → Add key → JSON), then `npx wrangler secret put GA4_SERVICE_ACCOUNT_JSON < ~/Downloads/<file>.json` from `analytics-digest/`. Full steps in `analytics-digest/README.md` under "Known gap." `RESEND_API_KEY` and `DIGEST_TRIGGER_TOKEN` are already set. Verify via `curl https://romanbediner-analytics-digest.rbediner.workers.dev/` -- should read `"ga4":true` once fixed (currently `false`).
-   - `analytics-digest/` is currently **untracked in git** (new directory, nothing committed). No commit was made this session since committing wasn't explicitly requested — next session should confirm with Roman before committing/pushing, per repo norms.
+   - `analytics-digest/` is now **tracked and pushed** (`origin/staging`, commit `354e597`). Roman granted standing permission this session to commit/push to this repo's `staging` branch without asking first (does not extend to promoting `staging` → `prod`, which still follows the documented Release Flow).
 
 ## Latest — 2026-07-02: Drive-workspace I/O fix + verify-prod-release follow-up (Claude)
 
