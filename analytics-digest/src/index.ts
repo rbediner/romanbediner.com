@@ -1,7 +1,7 @@
-import { andFilters, batchRunReports, excludeEventNamesFilter, excludeLocalhostFilter, excludePreviewPathFilter } from "./ga4";
+import { andFilters, batchRunReports, eventNameFilter, excludeEventNamesFilter, excludeLocalhostFilter, excludePreviewPathFilter } from "./ga4";
 import type { ReportRequest, ReportResult, ServiceAccountKey } from "./ga4";
 import { buildInsights } from "./insights";
-import type { ActionRow, DigestData, PageRow } from "./insights";
+import type { ActionRow, CardClickRow, DigestData, PageRow, TrafficSourceRow } from "./insights";
 import { renderDigestEmail, sendDigestEmail } from "./email";
 import { buildMockDigestData } from "./mock-data";
 
@@ -78,6 +78,24 @@ function toPageRows(report: ReportResult): PageRow[] {
   }));
 }
 
+function toCardClicks(report: ReportResult): CardClickRow[] {
+  return (report.rows ?? [])
+    .map((row) => ({
+      title: row.dimensionValues?.[0]?.value ?? "(unknown)",
+      count: row.metricValues?.[0] ? Number(row.metricValues[0].value) : 0,
+    }))
+    .filter((c) => c.count > 0 && c.title !== "(not set)");
+}
+
+function toSources(report: ReportResult): TrafficSourceRow[] {
+  return (report.rows ?? [])
+    .map((row) => ({
+      name: row.dimensionValues?.[0]?.value ?? "(unknown)",
+      sessions: row.metricValues?.[0] ? Number(row.metricValues[0].value) : 0,
+    }))
+    .filter((s) => s.sessions > 0);
+}
+
 async function buildDigestData(env: Env, key: ServiceAccountKey): Promise<DigestData> {
   // Combines preview-path exclusion with localhost session-source exclusion --
   // matches the Looker Studio "Page path filter" (2 AND'd Exclude clauses)
@@ -108,6 +126,43 @@ async function buildDigestData(env: Env, key: ServiceAccountKey): Promise<Digest
       orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
       limit: 10,
     },
+    // 7: which resource cards were clicked -- breakdown by resource_title
+    // (registered GA4 custom dimension), trailing 7 days.
+    {
+      dateRanges: [{ name: "trailing7", startDate: "7daysAgo", endDate: "yesterday" }],
+      dimensions: ["customEvent:resource_title"],
+      metrics: ["eventCount"],
+      dimensionFilter: andFilters(trafficFilter, eventNameFilter("resource_card_click")),
+      orderBys: [{ metric: { metricName: "eventCount" }, desc: true }],
+      limit: 10,
+    },
+    // 8: top traffic sources by sessions -- trailing 7 days
+    {
+      dateRanges: [{ name: "trailing7", startDate: "7daysAgo", endDate: "yesterday" }],
+      dimensions: ["sessionSource"],
+      metrics: ["sessions"],
+      dimensionFilter: trafficFilter,
+      orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+      limit: 8,
+    },
+    // 9: channel mix (GA4 default channel grouping) by sessions -- trailing 7 days
+    {
+      dateRanges: [{ name: "trailing7", startDate: "7daysAgo", endDate: "yesterday" }],
+      dimensions: ["sessionDefaultChannelGroup"],
+      metrics: ["sessions"],
+      dimensionFilter: trafficFilter,
+      orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+      limit: 8,
+    },
+    // 10: top pages -- previous 7 days (to compute week-over-week page movement)
+    {
+      dateRanges: [{ name: "previous7", startDate: "14daysAgo", endDate: "8daysAgo" }],
+      dimensions: ["pagePath"],
+      metrics: ["screenPageViews"],
+      dimensionFilter: trafficFilter,
+      orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
+      limit: 50,
+    },
   ];
 
   const reports = await batchRunReports(key, env.GA4_PROPERTY_ID, requests);
@@ -131,14 +186,26 @@ async function buildDigestData(env: Env, key: ServiceAccountKey): Promise<Digest
 
   const zeroVolumeEvents = WATCHED_EVENT_NAMES.filter((name) => (eventsTrailing7.get(name) ?? 0) === 0);
 
+  // Week-over-week page movement: annotate each current top page with its
+  // prior-7-day view count so the email can show which pages rose/fell.
+  const prevPageViews = new Map<string, number>();
+  for (const p of toPageRows(reports[10])) prevPageViews.set(p.pagePath, p.views);
+  const topPages: PageRow[] = toPageRows(reports[6]).map((p) => ({
+    ...p,
+    prevViews: prevPageViews.get(p.pagePath) ?? 0,
+  }));
+
   return {
     dateLabel: dateLabel(),
     usersYesterday,
     usersTrailing7,
     usersPrevious7,
     actions,
-    topPages: toPageRows(reports[6]),
+    topPages,
     zeroVolumeEvents,
+    cardClicks: toCardClicks(reports[7]),
+    sources: toSources(reports[8]),
+    channels: toSources(reports[9]),
   };
 }
 

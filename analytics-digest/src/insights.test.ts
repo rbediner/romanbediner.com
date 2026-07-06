@@ -129,7 +129,7 @@ describe("buildInsights -- recommendations", () => {
 });
 
 describe("buildInsights -- top page", () => {
-  it("reports the most-viewed page and its share of tracked pageviews", () => {
+  it("recommends leveraging the busiest page when one dominates pageviews", () => {
     const insights = buildInsights(
       baseData({
         topPages: [
@@ -138,8 +138,9 @@ describe("buildInsights -- top page", () => {
         ],
       })
     );
-    const topPage = insights.find((i) => i.text.startsWith("Most-viewed page:"));
-    expect(topPage?.text).toContain("/ (80 views, 80% of tracked pageviews)");
+    const rec = insights.find((i) => i.kind === "recommendation" && i.text.includes("busiest page"));
+    expect(rec?.text).toContain("Home");
+    expect(rec?.text).toContain("80%");
   });
 });
 

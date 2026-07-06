@@ -23,11 +23,28 @@ export function buildMockDigestData(): DigestData {
       { eventName: "resource_preview_expand", yesterday: 1, trailing7: 3, previous7: 2 },
     ],
     topPages: [
-      { pagePath: "/", views: 150 },
-      { pagePath: "/resources/agentic-ai-employees/", views: 40 },
-      { pagePath: "/about/", views: 22 },
-      { pagePath: "/framework/", views: 18 },
+      { pagePath: "/", views: 150, prevViews: 128 },
+      { pagePath: "/resources/agentic-ai-employees/", views: 40, prevViews: 20 },
+      { pagePath: "/about/", views: 22, prevViews: 31 },
+      { pagePath: "/framework/", views: 18, prevViews: 0 },
     ],
     zeroVolumeEvents: ["resource_pdf_download"],
+    cardClicks: [
+      { title: "Agentic AI Employees", count: 5 },
+      { title: "The Operator's Field Guide", count: 2 },
+      { title: "AI-Enabled Operations Dashboard", count: 1 },
+    ],
+    sources: [
+      { name: "google", sessions: 34 },
+      { name: "(direct)", sessions: 20 },
+      { name: "linkedin.com", sessions: 12 },
+      { name: "chatgpt.com", sessions: 6 },
+    ],
+    channels: [
+      { name: "Organic Search", sessions: 40 },
+      { name: "Direct", sessions: 20 },
+      { name: "Referral", sessions: 18 },
+      { name: "Organic Social", sessions: 4 },
+    ],
   };
 }

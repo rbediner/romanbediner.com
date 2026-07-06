@@ -13,6 +13,17 @@ export interface ActionRow {
 export interface PageRow {
   pagePath: string;
   views: number;
+  prevViews?: number; // views in the prior 7-day window, for week-over-week movement
+}
+
+export interface CardClickRow {
+  title: string; // resource_title custom dimension value
+  count: number;
+}
+
+export interface TrafficSourceRow {
+  name: string; // sessionSource value or GA4 default channel group
+  sessions: number;
 }
 
 export interface DigestData {
@@ -23,11 +34,46 @@ export interface DigestData {
   actions: ActionRow[];
   topPages: PageRow[];
   zeroVolumeEvents: string[]; // tracked key events with 0 in the last 7 days
+  cardClicks?: CardClickRow[]; // which specific resource cards were clicked (trailing 7d)
+  sources?: TrafficSourceRow[]; // top referring sources by sessions (trailing 7d)
+  channels?: TrafficSourceRow[]; // GA4 default channel grouping by sessions (trailing 7d)
 }
 
 export interface Insight {
   text: string;
-  kind: "trend" | "notable" | "recommendation";
+  kind: "summary" | "trend" | "notable" | "recommendation";
+}
+
+/** Turn a raw page path into a readable label, e.g. "/" -> "Home",
+ * "/resources/agentic-ai-employees/" -> "Agentic AI Employees". */
+export function prettyPage(path: string): string {
+  if (!path || path === "/") return "Home";
+  const seg = path.replace(/\/+$/, "").split("/").filter(Boolean).pop() ?? path;
+  return seg
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .replace(/\bAi\b/g, "AI");
+}
+
+/** Human-friendly label for a GA4 sessionSource value. */
+export function prettySource(name: string): string {
+  if (!name || name === "(not set)" || name === "(none)") return "Unknown";
+  if (name === "(direct)") return "Direct";
+  const map: Record<string, string> = {
+    google: "Google",
+    "chatgpt.com": "ChatGPT",
+    "t.co": "X / Twitter",
+    "com.linkedin.android": "LinkedIn",
+    "linkedin.com": "LinkedIn",
+    "lnkd.in": "LinkedIn",
+    "bing.com": "Bing",
+    "duckduckgo.com": "DuckDuckGo",
+    "reddit.com": "Reddit",
+    "out.reddit.com": "Reddit",
+  };
+  if (map[name]) return map[name];
+  const clean = name.replace(/^www\./, "");
+  return clean.charAt(0).toUpperCase() + clean.slice(1);
 }
 
 function pctChange(current: number, previous: number): number | null {
@@ -52,7 +98,7 @@ const ACTION_LABELS: Record<string, string> = {
   resource_preview_expand: "resource preview expansions",
 };
 
-function label(eventName: string): string {
+export function label(eventName: string): string {
   return ACTION_LABELS[eventName] ?? eventName;
 }
 
@@ -61,6 +107,7 @@ export function buildInsights(data: DigestData): Insight[] {
 
   // --- Overall traffic trend (7-day trailing vs previous 7 days, to smooth
   // out day-to-day noise on a low-traffic site) ---
+  const perDay = Math.round(data.usersTrailing7 / 7);
   const userTrend = pctChange(data.usersTrailing7, data.usersPrevious7);
   if (userTrend !== null) {
     const direction = userTrend > 5 ? "up" : userTrend < -5 ? "down" : "flat";
@@ -68,23 +115,12 @@ export function buildInsights(data: DigestData): Insight[] {
       kind: "trend",
       text:
         `Visitors: ${data.usersYesterday} yesterday, ${data.usersTrailing7} over the trailing 7 days ` +
-        `(${direction === "flat" ? "roughly flat" : `${direction} ${fmtPct(Math.abs(userTrend))}`} vs. the 7 days before that).`,
+        `(~${perDay}/day, ${direction === "flat" ? "roughly flat" : `${direction} ${fmtPct(Math.abs(userTrend))}`} vs. the 7 days before that).`,
     });
   } else {
     insights.push({
       kind: "trend",
-      text: `Visitors: ${data.usersYesterday} yesterday, ${data.usersTrailing7} over the trailing 7 days (no prior-week baseline yet).`,
-    });
-  }
-
-  // --- Top page ---
-  if (data.topPages.length > 0) {
-    const top = data.topPages[0];
-    const total = data.topPages.reduce((sum, p) => sum + p.views, 0);
-    const share = total > 0 ? Math.round((top.views / total) * 100) : 0;
-    insights.push({
-      kind: "trend",
-      text: `Most-viewed page: ${top.pagePath} (${top.views} views, ${share}% of tracked pageviews).`,
+      text: `Visitors: ${data.usersYesterday} yesterday, ${data.usersTrailing7} over the trailing 7 days (~${perDay}/day, no prior-week baseline yet).`,
     });
   }
 
@@ -98,7 +134,7 @@ export function buildInsights(data: DigestData): Insight[] {
     const dir = a.change! > 0 ? "up" : "down";
     insights.push({
       kind: "notable",
-      text: `${label(a.eventName)}: ${a.trailing7} this week vs. ${a.previous7} last week (${dir} ${fmtPct(Math.abs(a.change!))}).`,
+      text: `${label(a.eventName)}: ${a.trailing7} this week vs. ${a.previous7} last week (${dir} ${fmtPct(Math.abs(a.change!))}; ${a.yesterday} yesterday).`,
     });
   }
 
@@ -143,6 +179,54 @@ export function buildInsights(data: DigestData): Insight[] {
       text: `Traffic dropped ${fmtPct(Math.abs(userTrend))} week-over-week -- worth checking if a recent change (nav update, deploy, broken link) coincides with the drop.`,
     });
   }
+
+  // --- Positive/action recommendation: leverage the busiest page ---
+  if (data.topPages.length > 0) {
+    const top = data.topPages[0];
+    const total = data.topPages.reduce((sum, p) => sum + p.views, 0);
+    const share = total > 0 ? Math.round((top.views / total) * 100) : 0;
+    if (share >= 30) {
+      insights.push({
+        kind: "recommendation",
+        text: `${prettyPage(top.pagePath)} is your busiest page (${share}% of views this week) -- make sure its main call-to-action points where you want visitors to go next.`,
+      });
+    }
+  }
+
+  // --- Traffic-source concentration: flag over-reliance on a single source ---
+  if (data.sources && data.sources.length > 1) {
+    const totalSessions = data.sources.reduce((sum, s) => sum + s.sessions, 0);
+    const topSource = data.sources[0];
+    const share = totalSessions > 0 ? Math.round((topSource.sessions / totalSessions) * 100) : 0;
+    if (share >= 70) {
+      insights.push({
+        kind: "recommendation",
+        text: `${share}% of visits came from ${prettySource(topSource.name)} -- worth cultivating a second channel so your traffic doesn't hinge on one source.`,
+      });
+    }
+  }
+
+  // --- Bottom line: one synthesized takeaway, unshifted so it renders first ---
+  const summaryParts: string[] = [];
+  if (userTrend !== null && userTrend <= -25) {
+    summaryParts.push(`Heads up -- visitors down ${fmtPct(Math.abs(userTrend))} week-over-week.`);
+  } else if (userTrend !== null && userTrend > 5) {
+    summaryParts.push(`Good week -- visitors up ${fmtPct(userTrend)} vs. the prior 7 days.`);
+  } else if (userTrend === null) {
+    summaryParts.push(`${data.usersTrailing7} visitors over the last 7 days (first week of data).`);
+  } else {
+    summaryParts.push(`Steady week -- visitors roughly flat.`);
+  }
+  if (data.topPages.length > 0) {
+    summaryParts.push(`Most traffic went to ${prettyPage(data.topPages[0].pagePath)}.`);
+  }
+  if (data.sources && data.sources.length > 0) {
+    summaryParts.push(`Most visitors arrived via ${prettySource(data.sources[0].name)}.`);
+  }
+  if (data.zeroVolumeEvents.length > 0) {
+    summaryParts.push(`${data.zeroVolumeEvents.map(label).join(" and ")} saw zero activity.`);
+  }
+  insights.unshift({ kind: "summary", text: summaryParts.join(" ") });
 
   return insights;
 }

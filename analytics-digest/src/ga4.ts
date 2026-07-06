@@ -147,6 +147,16 @@ export function excludeLocalhostFilter() {
   };
 }
 
+/** Dimension filter matching rows for exactly one event name (e.g. resource_card_click). */
+export function eventNameFilter(name: string) {
+  return {
+    filter: {
+      fieldName: "eventName",
+      stringFilter: { matchType: "EXACT", value: name, caseSensitive: false },
+    },
+  };
+}
+
 /** Dimension filter excluding a specific list of literal event names. */
 export function excludeEventNamesFilter(eventNames: string[]) {
   return {
@@ -172,22 +182,43 @@ export async function batchRunReports(
   requests: ReportRequest[]
 ): Promise<ReportResult[]> {
   const accessToken = await getAccessToken(key);
-  const res = await fetch(
-    `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:batchRunReports`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ requests }),
+
+  // GA4 Data API expects metrics/dimensions as { name } objects, not bare
+  // strings. We keep the convenient string[] shape internally and convert
+  // only here, at the API boundary.
+  const toApiRequest = (r: ReportRequest) => {
+    const apiReq: Record<string, unknown> = {
+      ...r,
+      metrics: r.metrics.map((name) => ({ name })),
+    };
+    if (r.dimensions) apiReq.dimensions = r.dimensions.map((name) => ({ name }));
+    return apiReq;
+  };
+
+  // GA4 caps batchRunReports at 5 report requests per call, so split into
+  // chunks and concatenate the reports back in the original request order.
+  const CHUNK_SIZE = 5;
+  const results: ReportResult[] = [];
+  for (let i = 0; i < requests.length; i += CHUNK_SIZE) {
+    const apiRequests = requests.slice(i, i + CHUNK_SIZE).map(toApiRequest);
+    const res = await fetch(
+      `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:batchRunReports`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ requests: apiRequests }),
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`GA4 batchRunReports failed: ${res.status} ${await res.text()}`);
     }
-  );
 
-  if (!res.ok) {
-    throw new Error(`GA4 batchRunReports failed: ${res.status} ${await res.text()}`);
+    const data = (await res.json()) as { reports: ReportResult[] };
+    results.push(...data.reports);
   }
-
-  const data = (await res.json()) as { reports: ReportResult[] };
-  return data.reports;
+  return results;
 }
