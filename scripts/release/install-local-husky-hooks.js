@@ -26,7 +26,7 @@ const driftCleaner = path.join(ROOT, 'scripts', 'clean-drive-drift.sh');
 
 // Runs on every `npm install` (via the `prepare` lifecycle script), which is
 // far more frequent than any single git hook -- catches Google Drive
-// conflict-copy corruption (see AGENTS.md "Google Drive drift") even between
+// conflict-copy corruption (see docs/runbooks/google-drive-drift.md) even between
 // commits/merges/checkouts, when no git hook would otherwise fire.
 if (fs.existsSync(gitDir) && fs.existsSync(driftCleaner)) {
   spawnSync('bash', [driftCleaner, '--fix', '--quiet'], { cwd: ROOT, stdio: 'inherit' });

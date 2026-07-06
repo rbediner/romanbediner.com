@@ -3,6 +3,6 @@
 #   or checking out a fresh worktree, before it can spread further.
 # Notes:
 # - Husky v9 hook files are plain executable scripts without shebang boilerplate.
-# - See AGENTS.md "Google Drive drift" for why this exists.
+# - See docs/runbooks/google-drive-drift.md for why this exists.
 
 bash "$(git rev-parse --show-toplevel)/scripts/clean-drive-drift.sh" --fix --quiet || true

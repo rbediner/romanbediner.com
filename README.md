@@ -7,7 +7,7 @@
 - **Directory layout**:
   - `index.html` and per-route folders (`about/`, `services/`, `framework/`, `resources/`, `connect/`, `insights/`) — page entrypoints.
   - `styles/` — shared and page-scoped CSS (design tokens, `site.css`, per-page sheets).
-  - `scripts/` — `runtime/` (browser JS), `qa/` (test runners/gates), `release/` (promotion, handoff, CI watchers), `content/`, `docs/`, `diagnostics/`, plus `clean-drive-drift.sh`.
+  - `scripts/` — `runtime/` (browser JS), `qa/` (test runners/gates), `release/` (promotion, handoff, CI watchers), `content/`, `docs/`, `diagnostics/`, plus `clean-drive-drift.sh` (see `docs/runbooks/google-drive-drift.md`, the canonical, agent-agnostic install kit for the Google Drive `.git` corruption guardrail).
   - `assets/` — favicons, icons, logos, resource media.
   - `ai-enabled-operations-dashboard/` — self-contained React/Vite source with committed `dist/` build output; mirrored to a public repo on prod.
   - `QA/` — Jest/Playwright/Python tests, visual baselines, and results.

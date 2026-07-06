@@ -52,16 +52,11 @@ After any session that adds, changes, or removes dashboard features, **both** of
 After promoting to prod, verify `sync-dashboard-public.yml` ran green in GitHub Actions. A dashboard release is not complete until the sync is confirmed green and the public repo's `docs/PRD.md` and `docs/handoff/latest.md` reflect the shipped state.
 ## Google Drive drift (ALL agents & tools — read this)
 
-This repo is checked out inside **Google Drive** and synced across multiple machines. Google Drive creates conflict-copies of files (names ending in ` 2`, ` 3`, …) — **including inside `.git/objects` and `.git/refs`** — which corrupt the repository. This has caused real breakage.
-
-**Before starting work, and before committing, clean the drift:**
+This repo is checked out inside Google Drive and synced across machines, which can corrupt `.git`. Full explanation and install kit: **`docs/runbooks/google-drive-drift.md`**. Before starting work, and before committing:
 
 ```
 scripts/clean-drive-drift.sh --fix      # remove conflict-copies + verify with git fsck
 scripts/clean-drive-drift.sh --check    # report only (exit 1 if any found)
 ```
 
-- Runs automatically three ways, so it self-heals without anyone remembering to invoke it: (1) `.husky/pre-commit`, `.husky/post-merge`, `.husky/post-checkout` -- this repo uses **Husky** for hooks, so the cleaner lives inside Husky's own hook files rather than a separate `core.hooksPath`, which Husky's own install step (`npm install` -> `prepare` -> `scripts/release/install-local-husky-hooks.js`) resets on every install; a standalone `.githooks` directory would have been silently overridden the next time anyone ran `npm install`, which is exactly why this guardrail failed to prevent corruption three times before 2026-07-05. (2) `scripts/release/install-local-husky-hooks.js` itself also runs the cleaner directly, so every `npm install` self-heals even before Husky's hooks are (re)installed. (3) Claude also runs it at session start via `.claude/settings.json`'s `SessionStart` hook -- that file (and `.claude/launch.json`) are deliberately **not** gitignored (only `.claude/settings.local.json` is) so this survives a fresh clone; a blanket `.claude/` gitignore was the second reason this guardrail kept vanishing.
-- **If this pattern is ever copied into a repo that does NOT already use Husky (or another hook manager)**, a plain `.githooks` directory + `git config core.hooksPath .githooks` is fine -- the failure mode above is specifically about two things fighting over `core.hooksPath`. Check first with `git config core.hooksPath` and `cat package.json | grep prepare` whether something already owns it.
-- Dependency-free (bash + git) — works for Codex, Claude, Cursor, or a human. Claude also runs it at session start via `.claude/settings.json`.
-- **Never commit a file whose name ends in ` 2`/` 3` — it is Drive junk, not a real file.**
+This also runs automatically via git hooks, on every `npm install`, and at Claude session start. Never commit a file whose name ends in ` 2` / ` 3` — it is Drive junk, not a real file.

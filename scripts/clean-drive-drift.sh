@@ -7,7 +7,7 @@
 # in place, corrupts the repository.
 #
 # Dependency-free (bash + coreutils + git) so it works for ANY tool/agent —
-# Codex, Claude, Cursor, or a human. See AGENTS.md "Google Drive drift".
+# Codex, Claude, Cursor, or a human. See docs/runbooks/google-drive-drift.md.
 #
 # Usage:
 #   scripts/clean-drive-drift.sh            # check: report, exit 1 if any found
