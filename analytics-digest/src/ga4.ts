@@ -176,6 +176,19 @@ export function andFilters(...expressions: unknown[]) {
   return { andGroup: { expressions: filtered } };
 }
 
+/** Fetch with a short backoff retry on 429 / 5xx. Cloudflare Workers call out
+ * from shared egress IPs that Google intermittently flags with a transient
+ * "automated queries" 429 (an HTML "Sorry" page, not a JSON API error); a
+ * couple of spaced retries usually rides it out instead of failing the run. */
+async function fetchWithRetry(url: string, init: RequestInit, attempts = 3): Promise<Response> {
+  let res = await fetch(url, init);
+  for (let i = 1; i < attempts && (res.status === 429 || res.status >= 500); i++) {
+    await new Promise((resolve) => setTimeout(resolve, 1500 * i)); // 1.5s, then 3s
+    res = await fetch(url, init);
+  }
+  return res;
+}
+
 export async function batchRunReports(
   key: ServiceAccountKey,
   propertyId: string,
@@ -201,7 +214,7 @@ export async function batchRunReports(
   const results: ReportResult[] = [];
   for (let i = 0; i < requests.length; i += CHUNK_SIZE) {
     const apiRequests = requests.slice(i, i + CHUNK_SIZE).map(toApiRequest);
-    const res = await fetch(
+    const res = await fetchWithRetry(
       `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:batchRunReports`,
       {
         method: "POST",
