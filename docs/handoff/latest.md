@@ -1,10 +1,31 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 292
-- Updated At (UTC): 2026-07-05T19:10:54Z
+- Handoff Sequence: 293
+- Updated At (UTC): 2026-07-15T23:31:22Z
 - Source Branch: staging
-- Source Commit: 463d3c9cbbade9cc8f0476d4171978bc755a2e51 (pre-handoff baseline)
+- Source Commit: 6b032b82b55e17eb3a9394ce2bfec43a9695f247 (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-15: NC Courage responsibility integration for staging review
+
+This staging change updates the public positioning to include Fractional Integration Officer work for NC Courage while preserving Agentic Society as a primary AI-architecture proof point and Laser Light Communications as current operating-architecture work.
+
+- Homepage: added the NC Courage crest to the selected operating experience band in a CSS-driven monochrome treatment and added neutral current-responsibility copy.
+- About: added a fifth arc chapter for Fractional Integration Leadership / NC Courage; preserved the Agentic Society AI-enabled operating systems chapter; added the new chapter to the floating section navigation and timeline orbit system.
+- Services: added Fractional Integration Leadership as the first service model and retained the existing AI-enabled operations and operator-development models.
+- Framework: added integration-leadership and AI-architecture SEO language plus a public-safe application note connecting the framework to NC Courage, Laser Light Communications, and Agentic Society.
+- Connect: added neutral current-responsibility copy naming NC Courage, Laser Light Communications, and Agentic Society.
+- SEO: refreshed titles, descriptions, Open Graph/Twitter metadata, homepage Person schema, and page-level structured-data terms for fractional integration leadership, Fractional Integration Officer, AI architecture, technology integration, and vendor evaluation.
+- Public boundary: no confidential NC Courage portal findings, vendor judgments, stakeholder names, or internal systems were added to the public site.
+- Deferred Phase 2: create a public-safe NC Courage integration resource or case study after approval of the public narrative.
+- Required PRD update: the live `romanbediner.com PRD` Google Doc now records the new positioning, public-safety boundary, crest treatment, and SEO vocabulary.
+
+### Resume point
+
+- Visual baseline refresh completed successfully; the visual suite passed with the intentional copy and crest changes.
+- Full regression is otherwise green through Node, Jest, and most Python checks. The remaining failure is the stale Python contract `test_four_service_entries_exist`, which still expects four Services entries; update it to five and rerun `npm run qa:gate:full-regression`.
+- `QA/tests/test-connect-page.js` was strengthened to require the NC Courage, Laser Light Communications, and Agentic Society current-work contexts.
+- All product changes remain uncommitted in the staging worktree. No staging deployment has been started yet. After the QA fix passes: commit the product changes, push `staging`, run the isolated `npm run handoff:push`, then monitor the staging CI/deploy and verify the preview routes.
 
 ## Latest — 2026-07-05: EBI Round 2 (Looker Studio structure cleanup) + analytics documentation (Claude)
 
