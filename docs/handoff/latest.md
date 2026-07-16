@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 312
-- Updated At (UTC): 2026-07-16T17:33:22Z
+- Handoff Sequence: 313
+- Updated At (UTC): 2026-07-16T18:24:21Z
 - Source Branch: staging
-- Source Commit: f20537a04dbb4f25464b9025d2158a8148c3c46b (pre-handoff baseline)
+- Source Commit: cfa332e75f07faf23ad359e2b64a5051f2d29ca3 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: Homepage mobile current-work row tightening
