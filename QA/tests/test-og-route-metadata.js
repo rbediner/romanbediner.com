@@ -34,6 +34,7 @@ const expected = [
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
+    title: 'Services | Fractional Integration Leadership & AI Architecture',
     ogTitle: 'Services | Fractional Integration Leadership & AI Architecture',
     ogDescription: 'Fractional integration leadership, AI architecture, operating-model design, vendor evaluation, execution systems, and agentic workflows for organizations navigating growth and platform complexity.'
   },
@@ -58,6 +59,7 @@ const expected = [
   {
     file: 'connect/index.html',
     canonical: 'https://romanbediner.com/connect/',
+    title: 'Connect | Fractional Integration Officer & AI Architect',
     ogTitle: 'Connect | Fractional Integration Officer & AI Architect',
     ogDescription: 'Start a conversation about fractional integration leadership, AI architecture, operating-model design, vendor evaluation, and stronger execution systems for complex organizations.'
   },
@@ -95,6 +97,11 @@ function getMetaByName(html, name) {
   return value ? value[1] : null;
 }
 
+function getTitle(html) {
+  const match = html.match(/<title>([^<]+)<\/title>/i);
+  return match ? match[1].replace(/&amp;/g, '&') : null;
+}
+
 function countMetaByProperty(html, name) {
   const esc = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return (html.match(new RegExp(`<meta\\s+property="${esc}"\\s+content="[^"]+"\\s*\\/?>`, 'gi')) || []).length;
@@ -119,6 +126,7 @@ for (const page of expected) {
   const twitterTitle = getMetaByName(html, 'twitter:title');
   const twitterDescription = getMetaByName(html, 'twitter:description');
   const metaDescription = getMetaByName(html, 'description');
+  const title = getTitle(html);
 
   summaryRows.push({
     page: page.canonical,
@@ -161,6 +169,10 @@ for (const page of expected) {
   if (ogUrl !== page.canonical) {
     failures += 1;
     console.error(`FAIL: og:url mismatch in ${page.file}`);
+  }
+  if (page.title && title !== page.title) {
+    failures += 1;
+    console.error(`FAIL: title mismatch in ${page.file}`);
   }
   if (ogTitle !== page.ogTitle) {
     failures += 1;
