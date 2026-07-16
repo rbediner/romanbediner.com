@@ -81,10 +81,18 @@
 }
 
 .svc-icon {
-  height: 26px;
-  width: auto;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
   display: block;
   mix-blend-mode: multiply;
+}
+
+/* The current fractional model is the lead service, so its handoff mark gets
+   enough room to read as two connected operating blocks at a glance. */
+.svc-entry:first-child .svc-icon {
+  width: 44px;
+  height: 44px;
 }
 
 .current-responsibility-line {

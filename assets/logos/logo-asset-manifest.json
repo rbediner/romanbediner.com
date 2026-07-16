@@ -15,7 +15,7 @@
       "source_url": "https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_Logo.svg",
       "local_file_path": "assets/logos/aws-official.png",
       "file_format": "png",
-      "transformation_applied_for_display": "None; official AWS-supplied artwork retained as provided.",
+      "transformation_applied_for_display": "Official PNG retained; transparent source padding is handled by optical scale within a non-clipping logo cell.",
       "fallback_used": "none",
       "notes": "Official AWS brand-marketing asset."
     },

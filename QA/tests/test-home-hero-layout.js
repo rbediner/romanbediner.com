@@ -58,8 +58,8 @@ if (!/\.experience-logo-courage\s*\{[\s\S]*?height:\s*88px\s*;/i.test(homeCss)) 
   failures.push('NC Courage crest must remain large enough to read beside the wordmarks.');
 }
 
-if (!/\.experience-logo-cell\s*\{[\s\S]*?overflow:\s*hidden/i.test(homeCss)) {
-  failures.push('Experience logos must use bounded visual cells so transparent source padding cannot make marks disappear.');
+if (/\.experience-logo-cell\s*\{[\s\S]*?overflow:\s*hidden/i.test(homeCss)) {
+  failures.push('Experience logo cells must not clip official marks.');
 }
 
 const logoOrder = [

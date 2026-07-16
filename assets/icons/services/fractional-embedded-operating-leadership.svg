@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 570" role="img" aria-hidden="true">
-  <!-- Fractional integration icon: a black outlined operating handoff with two
-       glossy blue orbs, matching the existing service-icon family. -->
+  <!-- Clear fractional operating-handoff mark: two offset outlined blocks and two glossy nodes. -->
   <defs>
     <radialGradient id="fractional-orb" cx="34%" cy="28%" r="72%">
       <stop offset="0" stop-color="#d8efff" />
@@ -10,11 +9,11 @@
     </radialGradient>
   </defs>
   <g fill="none" stroke="#151515" stroke-linecap="round" stroke-linejoin="round" stroke-width="34">
-    <rect x="40" y="150" width="278" height="286" rx="36" />
-    <rect x="258" y="92" width="278" height="286" rx="36" />
-    <path d="M318 236h-72c-38 0-62 22-62 60v50" />
-    <path d="M258 314h72c38 0 62-22 62-60v-50" />
+    <rect x="44" y="144" width="270" height="286" rx="44" />
+    <rect x="262" y="90" width="270" height="286" rx="44" />
+    <path d="M252 286h70" />
+    <path d="m302 262 26 24-26 24" />
   </g>
-  <circle cx="134" cy="150" r="58" fill="url(#fractional-orb)" stroke="#151515" stroke-width="18" />
-  <circle cx="442" cy="378" r="58" fill="url(#fractional-orb)" stroke="#151515" stroke-width="18" />
+  <circle cx="138" cy="144" r="66" fill="url(#fractional-orb)" stroke="#151515" stroke-width="18" />
+  <circle cx="438" cy="376" r="66" fill="url(#fractional-orb)" stroke="#151515" stroke-width="18" />
 </svg>
