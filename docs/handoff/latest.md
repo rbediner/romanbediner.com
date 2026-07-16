@@ -1,19 +1,20 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 298
-- Updated At (UTC): 2026-07-16T11:26:30Z
+- Handoff Sequence: 299
+- Updated At (UTC): 2026-07-16T13:17:43Z
 - Source Branch: staging
-- Source Commit: a7fb60fdee3e9b7713f4adf6ab3fe4da0d3a89d0 (pre-handoff baseline)
+- Source Commit: 8196659faadffc78ff1be885d567a9981c97d03b (pre-handoff baseline)
 - Active Agent: Claude
 
-## Latest — 2026-07-16: NC Courage crest legibility correction for staging review
+## Latest — 2026-07-16: NC Courage crest color and mobile layout correction for staging review
 
-The first staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. This follow-up prepares a legible single-ink version and increases its display scale.
+The first staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. The subsequent review also caught a tonal mismatch and a stranded fifth logo on mobile. This follow-up corrects the crest color and five-logo responsive composition.
 
 - Replaced the filtered source image in `index.html` with `assets/logos/nc-courage-crest-monochrome.png`.
-- Created the prepared tonal monochrome asset from the official full-color source while preserving the original at `assets/asset-library/brand-sources/nc-courage/nc-courage-crest-full-color.png`.
-- Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 78px.
+- Created the prepared deep-navy tonal monochrome asset from the official full-color source while preserving the original at `assets/asset-library/brand-sources/nc-courage/nc-courage-crest-full-color.png`.
+- Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 64px.
 - Added a crest-specific `filter: none` override so the shared logo-row filter cannot erase the prepared lettering, lioness, border, and interior geometry.
+- Changed the mobile logo row to three columns and centered the fifth crest in the second row; desktop remains a balanced five-column row.
 - Compared continuous tonal, three-tone, high-contrast, and AI-generated variants. The source-derived tonal version was selected because it preserves the exact original geometry; the AI recreation was rejected because it altered brand geometry despite being visually polished.
 - Added regression assertions for the prepared asset path, asset existence, and desktop scale in `QA/tests/test-home-hero-layout.js`.
 - Refreshed the Home desktop/mobile visual baselines after inspecting the corrected crest.
