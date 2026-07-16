@@ -58,6 +58,10 @@ if (!/\.experience-logo-courage\s*\{[\s\S]*?height:\s*88px\s*;/i.test(homeCss)) 
   failures.push('NC Courage crest must remain large enough to read beside the wordmarks.');
 }
 
+if (!/\.experience-logo-cell\s*\{[\s\S]*?overflow:\s*hidden/i.test(homeCss)) {
+  failures.push('Experience logos must use bounded visual cells so transparent source padding cannot make marks disappear.');
+}
+
 const logoOrder = [
   'class="experience-logo experience-logo-disney"',
   'class="experience-logo experience-logo-aws"',
@@ -99,7 +103,7 @@ if (!/\.experience-logo\s*\{[\s\S]*?filter:\s*none/i.test(homeCss)) {
   failures.push('Experience logos must preserve the supplied official mark colors.');
 }
 
-if (!/\.experience-logo-courage\s*\{[\s\S]*?grid-column:\s*4\s*\/\s*span\s*2/i.test(homeCss)) {
+if (!/\.experience-logo-cell-courage\s*\{[\s\S]*?grid-column:\s*4\s*\/\s*span\s*2/i.test(homeCss)) {
   failures.push('NC Courage crest must occupy the centered second-row position in the mobile logo grid.');
 }
 

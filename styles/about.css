@@ -168,11 +168,11 @@
 
 /* Read the professional arc from current responsibility backward through the
    operating history while keeping the section anchors stable. */
-#fractional-integration-leadership { order: 1; }
-#global-infrastructure-advisory { order: 2; }
-#ai-enabled-operating-systems { order: 3; }
-#global-delivery-leadership { order: 4; }
-#enterprise-scale { order: 5; }
+#ai-enabled-operating-systems { order: 1; }
+#fractional-integration-leadership { order: 2; }
+#global-infrastructure-advisory { order: 3; }
+#enterprise-scale { order: 4; }
+#global-delivery-leadership { order: 5; }
 
 /* Sidebar Era Header */
 

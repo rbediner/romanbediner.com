@@ -22,11 +22,11 @@
     {
       "organization": "Laser Light Communications",
       "source_url": "https://www.laserlightcomms.com/wp-content/uploads/2025/04/LaserLight_Logo_Light.png",
-      "local_file_path": "assets/logos/laser-light-communications.png",
+      "local_file_path": "assets/logos/laser-light-communications-dark.png",
       "file_format": "png",
-      "transformation_applied_for_display": "None.",
+      "transformation_applied_for_display": "None; official dark-on-transparent website asset used for legibility on the white page.",
       "fallback_used": "none",
-      "notes": "Official website asset; transparent PNG."
+      "notes": "Official website asset; dark variant from the company's own site."
     },
     {
       "organization": "Agentic Society",

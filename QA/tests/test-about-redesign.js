@@ -75,11 +75,11 @@ for (const target of chapterAnchorTargets) {
 }
 
 const currentToHistoryOrder = [
+  'href="#ai-enabled-operating-systems"',
   'href="#fractional-integration-leadership"',
   'href="#global-infrastructure-advisory"',
-  'href="#ai-enabled-operating-systems"',
-  'href="#global-delivery-leadership"',
-  'href="#enterprise-scale"'
+  'href="#enterprise-scale"',
+  'href="#global-delivery-leadership"'
 ];
 let previousOrderIndex = -1;
 for (const marker of currentToHistoryOrder) {
