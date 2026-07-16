@@ -244,7 +244,7 @@ main .master-head h1 {
 
 .experience-logo-aws {
   /* Tight SVG geometry: constrain the visible wordmark directly. */
-  width: 112px;
+  width: 104px;
   height: auto;
   max-width: 100%;
   max-height: none;
@@ -458,7 +458,7 @@ a:focus-visible {
   .experience-logo-aws {
     /* AWS has the heaviest visual mass in the row; cap it below the other
        marks so its orange smile does not take over the mobile composition. */
-    width: 64px;
+    width: 60px;
     height: auto;
     max-width: none;
     max-height: none;
