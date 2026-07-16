@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 315
-- Updated At (UTC): 2026-07-16T21:24:07Z
+- Handoff Sequence: 316
+- Updated At (UTC): 2026-07-16T21:37:43Z
 - Source Branch: staging
-- Source Commit: 968e10a591278466000b9d6122ab5d261f9ebdff (pre-handoff baseline)
+- Source Commit: 134d7f8edcfd0e345055069e4681e79d3cda73a1 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: Color logo treatments and visible hover states
@@ -290,6 +290,14 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 ## Current staging correction — logo and icon QA
+
+## Current staging correction — optical logo sizing and navy Disney+
+
+The previous live staging pass was rejected after desktop AWS rendered oversized and the color treatment remained inconsistent. This correction uses a shared optical frame rather than a single literal width: the navy Disney+ wordmark, AWS, Laser Light, Agentic Society, and NC Courage are each constrained to fit their visible geometry without clipping. The NC Courage crest is restored to the tested 112px desktop height, and the mobile layout keeps Agentic + Courage together above the evenly distributed Disney+ / AWS / Laser Light row. The Disney+ source is the navy wordmark hosted on Wikimedia Commons and attributed in that file description to The Walt Disney Company; it is not represented as a current first-party downloadable brand-kit asset. CSS cache token is `20260716r12`.
+
+- Product files: `index.html`, `styles/home.css`, `assets/logos/disney-plus-navy.svg`, `assets/logos/logo-asset-manifest.json`, and refreshed home visual baselines.
+- QA: `scripts/clean-drive-drift.sh --check`, homepage layout guardrail, services-stack unit tests, `git diff --check`, and visual regression all pass locally.
+- Staging-only. Deploy only after the product commit is pushed, then verify the cache-busted desktop and mobile preview in browser.
 
 Staging-only correction in progress on `staging` after visual review found that the homepage experience row was clipping marks and the Fractional service icon was too small and ambiguous.
 
