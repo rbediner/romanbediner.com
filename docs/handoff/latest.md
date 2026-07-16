@@ -1,19 +1,19 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 301
-- Updated At (UTC): 2026-07-16T13:22:14Z
+- Handoff Sequence: 303
+- Updated At (UTC): 2026-07-16T13:36:59Z
 - Source Branch: staging
-- Source Commit: 94e895dc7566b9bdd12d6c19f9ee2ff8de9015a5 (pre-handoff baseline)
+- Source Commit: feee62dd03acf73460fac21c410ca8d5bf0c9c2c (pre-handoff baseline)
 - Active Agent: Claude
 
-## Latest — 2026-07-16: NC Courage crest color and mobile layout correction for staging review
+## Latest — 2026-07-16: First-party logo comparison for staging review
 
-The first staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. The subsequent review also caught a tonal mismatch and a stranded fifth logo on mobile. This follow-up corrects the crest color and five-logo responsive composition.
+The prior staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. The subsequent review also caught a tonal mismatch and a stranded fifth logo on mobile. This comparison preserves first-party source colors and geometry so the official-mark treatment can be judged before returning to the controlled deep-navy fallback if needed.
 
-- Replaced the filtered source image in `index.html` with `assets/logos/nc-courage-crest-monochrome.png`.
-- Created the prepared deep-navy tonal monochrome asset from the official full-color source while preserving the original at `assets/asset-library/brand-sources/nc-courage/nc-courage-crest-full-color.png`.
+- Replaced the fallback AWS artwork with the official AWS brand-marketing asset and replaced the derived crest display with the first-party NC Courage crest artwork sourced from the club's Our Brand page.
+- Preserved the prior derived monochrome crest and full-color source in the repository as comparison/fallback assets.
 - Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 64px.
-- Added a crest-specific `filter: none` override so the shared logo-row filter cannot erase the prepared lettering, lioness, border, and interior geometry.
+- Removed the shared recoloring filter for the official-mark comparison so supplied logo colors and geometry are shown unchanged.
 - Changed the mobile logo row to a six-track grid: three logos fill the first row, while Agentic Society and the crest form a centered second-row pair; desktop remains a balanced five-column row.
 - Compared continuous tonal, three-tone, high-contrast, and AI-generated variants. The source-derived tonal version was selected because it preserves the exact original geometry; the AI recreation was rejected because it altered brand geometry despite being visually polished.
 - Added regression assertions for the prepared asset path, asset existence, and desktop scale in `QA/tests/test-home-hero-layout.js`.
