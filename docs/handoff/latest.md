@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 318
-- Updated At (UTC): 2026-07-16T21:50:27Z
+- Handoff Sequence: 319
+- Updated At (UTC): 2026-07-16T22:01:01Z
 - Source Branch: staging
-- Source Commit: 327e366bc48e09983fb6605ac97d11f51ec9baf0 (pre-handoff baseline)
+- Source Commit: a9e8524ca73f2b5b191068506e73232feb482b6a (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: Color logo treatments and visible hover states
@@ -321,3 +321,10 @@ Staging-only correction in progress on `staging` after visual review found that 
 - The Fractional and Embedded Operating Leadership icon is now a clearer two-block operating handoff with two glossy blue nodes, rendered at 44px for the lead service entry; service icons remain distinct.
 - Local browser review confirmed all five desktop marks render without cropping, and the fractional icon reads clearly at the rendered size. Mobile visual regression passed after baseline refresh.
 - No production promotion has been attempted.
+
+## Current staging correction — AWS optical centerline rebalance
+
+The experience marks continue to use shared centered grid cells at desktop and mobile. The latest visual review identified an optical, not structural, mismatch: AWS carries substantially more visual weight because of its large lower smile. AWS is therefore reduced to 104px on desktop and 60px on mobile so the neighboring marks read as aligned to the same horizontal centerline without per-logo nudging. NC Courage remains at the larger 128px desktop crest treatment. CSS cache token is `20260716r15`.
+
+- Homepage layout guardrail, services tests, visual regression, diff hygiene, and Google Drive drift checks pass locally.
+- Staging-only; no production promotion.
