@@ -3,12 +3,12 @@
   "logos": [
     {
       "organization": "Disney+",
-      "source_url": "https://apps.apple.com/us/app/disney/id1446075923",
-      "local_file_path": "assets/logos/disney-plus-official.jpg",
-      "file_format": "jpg",
-      "transformation_applied_for_display": "Official app artwork retained; optical size and corner radius are applied by CSS for the logo row.",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Disney%2B_logo_(navy_blue).svg",
+      "local_file_path": "assets/logos/disney-plus-navy.svg",
+      "file_format": "svg",
+      "transformation_applied_for_display": "Navy wordmark geometry retained; optical width is applied by CSS for the logo row.",
       "fallback_used": "none",
-      "notes": "Official Disney+ App Store artwork; the homepage label identifies Disney+ rather than The Walt Disney Company."
+      "notes": "Navy Disney+ wordmark sourced from Wikimedia Commons, whose file description attributes the artwork to The Walt Disney Company. This is not asserted as a current first-party downloadable brand-kit file; trademark rights remain with Disney."
     },
     {
       "organization": "Amazon Web Services",
