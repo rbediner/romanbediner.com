@@ -74,6 +74,23 @@ for (const target of chapterAnchorTargets) {
   }
 }
 
+const currentToHistoryOrder = [
+  'href="#fractional-integration-leadership"',
+  'href="#global-infrastructure-advisory"',
+  'href="#ai-enabled-operating-systems"',
+  'href="#global-delivery-leadership"',
+  'href="#enterprise-scale"'
+];
+let previousOrderIndex = -1;
+for (const marker of currentToHistoryOrder) {
+  const index = aboutHtml.indexOf(marker);
+  if (index <= previousOrderIndex) {
+    failures.push('About chapter navigation must run from current responsibility backward through operating history.');
+    break;
+  }
+  previousOrderIndex = index;
+}
+
 // Final CTA points to Services with the approved label.
 if (!aboutHtml.includes('Explore Service Models') || !aboutHtml.includes('href="/services/"')) {
   failures.push('About final CTA must read Explore Service Models and link to /services/.');

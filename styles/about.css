@@ -10,6 +10,14 @@
   margin: 0 0 10px;
 }
 
+.current-responsibility-line {
+  color: var(--accent-blue);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .about-hero-refactored .page-title {
   margin-bottom: 24px;
   /* Match the all-caps page-title treatment used on Services/Resources (rendering only; copy unchanged). */
@@ -26,6 +34,8 @@
 
 .arc-timeline-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .arc-timeline-wrapper::before {
@@ -152,9 +162,17 @@
   scroll-margin-top: 96px;
 }
 
-.arc-item:first-of-type {
+#fractional-integration-leadership {
   padding-top: 32px;
 }
+
+/* Read the professional arc from current responsibility backward through the
+   operating history while keeping the section anchors stable. */
+#fractional-integration-leadership { order: 1; }
+#global-infrastructure-advisory { order: 2; }
+#ai-enabled-operating-systems { order: 3; }
+#global-delivery-leadership { order: 4; }
+#enterprise-scale { order: 5; }
 
 /* Sidebar Era Header */
 

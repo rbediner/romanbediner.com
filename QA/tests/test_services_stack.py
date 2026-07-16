@@ -41,6 +41,15 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('.svc-num', self.services_css)
         self.assertIn('.svc-icon', self.services_css)
 
+    def test_service_icons_are_distinct(self):
+        # Each service entry needs its own visual cue; repeated icons make
+        # separate service models look like the same offering.
+        import re
+        icons = re.findall(r'<img src="([^"]+)" class="svc-icon"', self.services_html)
+        self.assertEqual(len(icons), 5)
+        self.assertEqual(len(set(icons)), 5)
+        self.assertIn('fractional-embedded-operating-leadership.svg', self.services_html)
+
 
 if __name__ == "__main__":
     unittest.main()
