@@ -6,6 +6,16 @@
 - Source Commit: c1b5ae5231a8ce82ba2157c33556a2cb22cbf151 (pre-handoff baseline)
 - Active Agent: Claude
 
+## Latest — 2026-07-16: Homepage logo optical rebalance and mobile hierarchy
+
+Follow-up to the prior homepage logo correction: AWS was still optically too dominant on desktop/mobile, the NC Courage crest needed more presence, and the mobile three-across row was too cramped.
+
+- Reduced AWS optical scale to 250px desktop / 150px mobile image-box width while retaining the official source PNG and non-clipping logo cells.
+- Increased the NC Courage crest to 112px desktop / 88px mobile.
+- Reworked mobile into two intentional rows: Agentic Society + NC Courage lead as the current-work row; Disney + AWS + Laser Light Communications follow as the operating-background row.
+- Refreshed Home visual baselines and ran targeted home/services tests plus the full visual suite; mobile overflow remains false and the Services icon is unchanged.
+- Staging-only; no production promotion.
+
 ## Latest — 2026-07-16: Current-to-history About sequence and distinct Services icons
 
 The About and Services review identified three content and hierarchy issues: the About arc read in historical order instead of current-to-history order, the Services page reused an icon for two different models, and the current NC Courage responsibility was too easy to miss in the opening copy.

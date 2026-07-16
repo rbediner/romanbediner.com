@@ -54,7 +54,7 @@ if (!html.includes('/assets/logos/nc-courage-crest-official.svg')) {
 if (!fs.existsSync(officialCrest)) {
   failures.push('First-party NC Courage crest asset is missing.');
 }
-if (!/\.experience-logo-courage\s*\{[\s\S]*?height:\s*88px\s*;/i.test(homeCss)) {
+if (!/\.experience-logo-courage\s*\{[\s\S]*?height:\s*112px\s*;/i.test(homeCss)) {
   failures.push('NC Courage crest must remain large enough to read beside the wordmarks.');
 }
 
@@ -103,8 +103,14 @@ if (!/\.experience-logo\s*\{[\s\S]*?filter:\s*none/i.test(homeCss)) {
   failures.push('Experience logos must preserve the supplied official mark colors.');
 }
 
-if (!/\.experience-logo-cell-courage\s*\{[\s\S]*?grid-column:\s*4\s*\/\s*span\s*2/i.test(homeCss)) {
-  failures.push('NC Courage crest must occupy the centered second-row position in the mobile logo grid.');
+if (!/\.experience-logo-cell-agentic\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*span\s*3[\s\S]*?grid-row:\s*1/i.test(homeCss)) {
+  failures.push('Agentic Society must lead the centered first mobile logo row.');
+}
+if (!/\.experience-logo-cell-courage\s*\{[\s\S]*?grid-column:\s*4\s*\/\s*span\s*3[\s\S]*?grid-row:\s*1/i.test(homeCss)) {
+  failures.push('NC Courage crest must lead the centered first mobile logo row.');
+}
+if (!/\.experience-logo-cell-disney,[\s\S]*?\.experience-logo-cell-laser-light\s*\{[\s\S]*?grid-row:\s*2/i.test(homeCss)) {
+  failures.push('Disney, AWS, and Laser Light must occupy the second mobile logo row.');
 }
 
 if (failures.length > 0) {

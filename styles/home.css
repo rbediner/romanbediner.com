@@ -234,8 +234,9 @@ main .master-head h1 {
 
 .experience-logo-aws {
   /* The official PNG includes transparent canvas around the visible mark. The
-     larger image box restores a comparable visible footprint without clipping. */
-  width: 322px;
+     optical scale keeps the visible mark subordinate to the crest and Disney
+     wordmark without clipping the supplied artwork. */
+  width: 250px;
   height: auto;
   max-width: none;
   max-height: none;
@@ -253,7 +254,7 @@ main .master-head h1 {
 
 .experience-logo-courage {
   /* Use the first-party crest at a legible scale beside the wordmarks. */
-  height: 88px;
+  height: 112px;
 }
 
 #experience.master-section {
@@ -388,10 +389,10 @@ a:focus-visible {
   }
 
   .experience-logo-grid {
-    /* Six tracks let three logos fill the first row and center the final two
-       logos as a balanced pair on the second row. */
+    /* The current/relevant marks lead on mobile; the three background marks
+       follow in a separate row with six tracks for deliberate centering. */
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 22px 20px;
+    gap: 28px 10px;
     align-items: center;
     justify-items: center;
   }
@@ -416,7 +417,7 @@ a:focus-visible {
 
   .experience-logo-cell {
     grid-column: span 2;
-    height: 66px;
+    height: 78px;
     min-width: 0;
   }
 
@@ -425,7 +426,7 @@ a:focus-visible {
   }
 
   .experience-logo-aws {
-    width: 250px;
+    width: 150px;
     height: auto;
     max-width: none;
     max-height: none;
@@ -443,17 +444,25 @@ a:focus-visible {
   }
 
   .experience-logo-cell-agentic {
-    grid-column: 2 / span 2;
+    grid-column: 1 / span 3;
+    grid-row: 1;
   }
 
   .experience-logo-courage {
-    width: 64px;
+    width: 88px;
     max-width: none;
-    max-height: 64px;
+    max-height: 88px;
   }
 
   .experience-logo-cell-courage {
-    grid-column: 4 / span 2;
+    grid-column: 4 / span 3;
+    grid-row: 1;
+  }
+
+  .experience-logo-cell-disney,
+  .experience-logo-cell-aws,
+  .experience-logo-cell-laser-light {
+    grid-row: 2;
   }
 
   .experience-logo-row {
