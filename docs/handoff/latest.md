@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 316
-- Updated At (UTC): 2026-07-16T21:37:43Z
+- Handoff Sequence: 317
+- Updated At (UTC): 2026-07-16T21:45:20Z
 - Source Branch: staging
-- Source Commit: 134d7f8edcfd0e345055069e4681e79d3cda73a1 (pre-handoff baseline)
+- Source Commit: fe9864414d0ffe0be58955de41ed2407d3bdddde (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: Color logo treatments and visible hover states
@@ -293,7 +293,15 @@ Keep release watcher hygiene in place for this repo.
 
 ## Current staging correction — optical logo sizing and navy Disney+
 
-The previous live staging pass was rejected after desktop AWS rendered oversized and the color treatment remained inconsistent. This correction uses a shared optical frame rather than a single literal width: the navy Disney+ wordmark, AWS, Laser Light, Agentic Society, and NC Courage are each constrained to fit their visible geometry without clipping. The NC Courage crest is restored to the tested 112px desktop height, and the mobile layout keeps Agentic + Courage together above the evenly distributed Disney+ / AWS / Laser Light row. The Disney+ source is the navy wordmark hosted on Wikimedia Commons and attributed in that file description to The Walt Disney Company; it is not represented as a current first-party downloadable brand-kit asset. CSS cache token is `20260716r12`.
+## Current staging correction — mobile spacing, crest scale, and hover emphasis
+
+The follow-up visual review found the mobile three-mark row too tight and the crest slightly undersized. The mobile grid now uses 20px horizontal gutters, moves Agentic Society and NC Courage inward as a compact pair, and caps Disney+, AWS, and Laser Light to fit without crowding. The desktop crest increases from 112px to 120px. Logo hover/focus behavior is now deliberately stronger: an 8px lift, 1.14 scale, deeper blue halo, saturation lift, and a reduced-motion fallback. The CSS token is `20260716r13`.
+
+- QA contract updated for the new 120px crest and centered mobile pair.
+- Homepage guardrail, services tests, visual regression, diff hygiene, and Google Drive drift checks pass locally.
+- Staging-only; no production promotion.
+
+The previous live staging pass was rejected after desktop AWS rendered oversized and the color treatment remained inconsistent. This note is superseded by the mobile spacing, crest scale, and hover emphasis correction above. The navy Disney+ wordmark, AWS, Laser Light, Agentic Society, and NC Courage remain constrained to fit their visible geometry without clipping. The Disney+ source is the navy wordmark hosted on Wikimedia Commons and attributed in that file description to The Walt Disney Company; it is not represented as a current first-party downloadable brand-kit asset. CSS cache token for that earlier pass was `20260716r12`.
 
 - Product files: `index.html`, `styles/home.css`, `assets/logos/disney-plus-navy.svg`, `assets/logos/logo-asset-manifest.json`, and refreshed home visual baselines.
 - QA: `scripts/clean-drive-drift.sh --check`, homepage layout guardrail, services-stack unit tests, `git diff --check`, and visual regression all pass locally.
