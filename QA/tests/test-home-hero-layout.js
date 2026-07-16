@@ -54,7 +54,7 @@ if (!html.includes('/assets/logos/nc-courage-crest-official.svg')) {
 if (!fs.existsSync(officialCrest)) {
   failures.push('First-party NC Courage crest asset is missing.');
 }
-if (!/\.experience-logo-courage\s*\{[\s\S]*?height:\s*120px\s*;/i.test(homeCss)) {
+if (!/\.experience-logo-courage\s*\{[\s\S]*?height:\s*128px\s*;/i.test(homeCss)) {
   failures.push('NC Courage crest must remain large enough to read beside the wordmarks.');
 }
 

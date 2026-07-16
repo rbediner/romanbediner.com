@@ -283,7 +283,7 @@ main .master-head h1 {
 
 .experience-logo-courage {
   /* Use the first-party crest at a legible scale beside the wordmarks. */
-  height: 120px;
+  height: 128px;
 }
 
 #experience.master-section {
@@ -456,7 +456,9 @@ a:focus-visible {
   }
 
   .experience-logo-aws {
-    width: 82px;
+    /* AWS has the heaviest visual mass in the row; cap it below the other
+       marks so its orange smile does not take over the mobile composition. */
+    width: 64px;
     height: auto;
     max-width: none;
     max-height: none;
