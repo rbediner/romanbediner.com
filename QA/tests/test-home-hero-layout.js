@@ -95,6 +95,14 @@ if (!homeCss.includes('.experience-logo-grid') || !homeCss.includes('.experience
   failures.push('Homepage CSS must include logo-grid and logo-row styles.');
 }
 
+if (!/\.experience-logo-courage\s*\{[\s\S]*?filter:\s*none/i.test(homeCss)) {
+  failures.push('NC Courage crest must opt out of the shared logo filter.');
+}
+
+if (!/\.experience-logo-courage\s*\{[\s\S]*?grid-column:\s*4\s*\/\s*span\s*2/i.test(homeCss)) {
+  failures.push('NC Courage crest must occupy the centered second-row position in the mobile logo grid.');
+}
+
 if (failures.length > 0) {
   failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);
