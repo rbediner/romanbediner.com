@@ -1,10 +1,26 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 313
-- Updated At (UTC): 2026-07-16T18:24:21Z
+- Handoff Sequence: 314
+- Updated At (UTC): 2026-07-16T19:24:21Z
 - Source Branch: staging
 - Source Commit: cfa332e75f07faf23ad359e2b64a5051f2d29ca3 (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-16: Color logo treatments and visible hover states
+
+- Replaced the Disney corporate wordmark in the homepage experience band with the official blue Disney+ app artwork from the App Store listing, matching the requested visual direction.
+- Retained the AWS wordmark with its black-and-Amazon-Orange treatment; the larger Amazon Web Services cloud badge was reviewed and rejected for this row because it is a different, more dominant mark.
+- Kept Agentic Society's supplied wordmark geometry and applied a restrained navy presentation tint; the source site's standalone SVG is black, so this treatment is documented as a presentation adaptation.
+- Strengthened logo hover/focus feedback with a visible lift, scale, and blue halo while preserving non-clipping cells and mobile row spacing.
+- Reduced AWS optical width on mobile and desktop after visual QA found it dominating the neighboring marks.
+- Refreshed Home desktop/mobile visual baselines and reran the home guardrail, full visual suite, and diff checks successfully.
+- Staging-only; no production promotion.
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
 ## Latest — 2026-07-16: Homepage mobile current-work row tightening
 

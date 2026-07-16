@@ -103,10 +103,10 @@ if (!/\.experience-logo\s*\{[\s\S]*?filter:\s*none/i.test(homeCss)) {
   failures.push('Experience logos must preserve the supplied official mark colors.');
 }
 
-if (!/\.experience-logo-cell-agentic\s*\{[\s\S]*?grid-column:\s*2\s*\/\s*span\s*2[\s\S]*?grid-row:\s*1/i.test(homeCss)) {
+if (!/\.experience-logo-cell-agentic\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*span\s*2[\s\S]*?grid-row:\s*1/i.test(homeCss)) {
   failures.push('Agentic Society must lead the centered first mobile logo row.');
 }
-if (!/\.experience-logo-cell-courage\s*\{[\s\S]*?grid-column:\s*4\s*\/\s*span\s*2[\s\S]*?grid-row:\s*1/i.test(homeCss)) {
+if (!/\.experience-logo-cell-courage\s*\{[\s\S]*?grid-column:\s*5\s*\/\s*span\s*2[\s\S]*?grid-row:\s*1/i.test(homeCss)) {
   failures.push('NC Courage crest must lead the centered first mobile logo row.');
 }
 if (!/\.experience-logo-cell-disney\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*span\s*2[\s\S]*?grid-row:\s*2[\s\S]*?\.experience-logo-cell-aws\s*\{[\s\S]*?grid-column:\s*3\s*\/\s*span\s*2[\s\S]*?grid-row:\s*2[\s\S]*?\.experience-logo-cell-laser-light\s*\{[\s\S]*?grid-column:\s*5\s*\/\s*span\s*2[\s\S]*?grid-row:\s*2/i.test(homeCss)) {

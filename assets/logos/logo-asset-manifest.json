@@ -2,22 +2,22 @@
   "retrieved_date": "2026-06-24",
   "logos": [
     {
-      "organization": "The Walt Disney Company",
-      "source_url": "https://thewaltdisneycompany.com/",
-      "local_file_path": "assets/logos/disney.svg",
-      "file_format": "svg",
-      "transformation_applied_for_display": "Extracted the inline header SVG from the official homepage into a standalone local SVG file; geometry unchanged.",
+      "organization": "Disney+",
+      "source_url": "https://apps.apple.com/us/app/disney/id1446075923",
+      "local_file_path": "assets/logos/disney-plus-official.jpg",
+      "file_format": "jpg",
+      "transformation_applied_for_display": "Official app artwork retained; optical size and corner radius are applied by CSS for the logo row.",
       "fallback_used": "none",
-      "notes": "Official website asset."
+      "notes": "Official Disney+ App Store artwork; the homepage label identifies Disney+ rather than The Walt Disney Company."
     },
     {
       "organization": "Amazon Web Services",
       "source_url": "https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_Logo.svg",
-      "local_file_path": "assets/logos/aws-official.png",
-      "file_format": "png",
-      "transformation_applied_for_display": "Official PNG retained; transparent source padding is handled by optical scale within a non-clipping logo cell.",
+      "local_file_path": "assets/logos/aws-color.svg",
+      "file_format": "svg",
+      "transformation_applied_for_display": "Exact AWS wordmark and smile geometry retained in the black-and-Amazon-Orange treatment.",
       "fallback_used": "none",
-      "notes": "Official AWS brand-marketing asset."
+      "notes": "Public vector reproduces the official AWS mark; AWS permission and current trademark terms still govern use."
     },
     {
       "organization": "Laser Light Communications",
@@ -33,9 +33,9 @@
       "source_url": "https://agenticsociety.com/_astro/logo-wordmark.BpjeLDCb.svg",
       "local_file_path": "assets/logos/agentic-society.svg",
       "file_format": "svg",
-      "transformation_applied_for_display": "None.",
+      "transformation_applied_for_display": "Official wordmark geometry retained with a restrained navy presentation tint.",
       "fallback_used": "none",
-      "notes": "Official website asset."
+      "notes": "The official standalone website SVG is black; the navy tint is a presentation treatment, not an official brand-kit file."
     },
     {
       "organization": "NC Courage",
