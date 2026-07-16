@@ -235,10 +235,8 @@ main .master-head h1 {
 }
 
 .experience-logo-courage {
-  height: 48px;
-  /* Keep the source crest intact while presenting the affiliation as a
-     restrained single-ink mark in the personal site design system. */
-  filter: brightness(0) invert(13%) sepia(46%) saturate(1700%) hue-rotate(196deg) brightness(95%) contrast(95%);
+  /* Use the prepared single-ink crest at a legible scale beside the wordmarks. */
+  height: 88px;
 }
 
 #experience.master-section {
@@ -414,7 +412,9 @@ a:focus-visible {
   }
 
   .experience-logo-courage {
-    max-height: 44px;
+    width: 78px;
+    max-width: none;
+    max-height: 78px;
   }
 
   .experience-logo-row {

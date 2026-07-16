@@ -40,11 +40,11 @@
     {
       "organization": "NC Courage",
       "source_url": "https://nccourage.com/",
-      "local_file_path": "assets/logos/nc-courage-crest.png",
+      "local_file_path": "assets/logos/nc-courage-crest-monochrome.png",
       "file_format": "png",
-      "transformation_applied_for_display": "Displayed in a single-ink navy treatment through site CSS; source crest preserved unchanged.",
+      "transformation_applied_for_display": "Prepared a transparent single-ink navy treatment that preserves the crest lettering and interior marks as negative space; displayed at a larger scale for legibility.",
       "fallback_used": "Local NC Courage portal asset",
-      "notes": "Affiliation mark for the current Fractional Integration Officer responsibility; not an official NC Courage site lockup."
+      "notes": "Affiliation mark for the current Fractional Integration Officer responsibility; the full-color source is preserved under assets/asset-library/brand-sources/nc-courage/."
     }
   ]
 }
