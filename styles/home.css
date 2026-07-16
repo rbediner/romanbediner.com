@@ -390,7 +390,7 @@ a:focus-visible {
     margin-bottom: 22px;
   }
 
-  /* On the narrow three-column grid, size logos by both a capped height and width
+  /* On the narrow six-track grid, size logos by both a capped height and width
      (auto/auto) and tune per mark so bold/wide logos (AWS, Agentic) don't visually
      dominate the compact ones (Disney). Optical balance, not literal parity. */
   .experience-logo {
