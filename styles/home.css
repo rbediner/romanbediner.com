@@ -192,7 +192,7 @@ main .master-head h1 {
 
 .experience-logo-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   /* Generous, even column spacing reads more premium than a tight row. */
   gap: 26px 48px;
   align-items: center;
@@ -232,6 +232,13 @@ main .master-head h1 {
 
 .experience-logo-agentic {
   height: 32px;
+}
+
+.experience-logo-courage {
+  height: 48px;
+  /* Keep the source crest intact while presenting the affiliation as a
+     restrained single-ink mark in the personal site design system. */
+  filter: brightness(0) invert(13%) sepia(46%) saturate(1700%) hue-rotate(196deg) brightness(95%) contrast(95%);
 }
 
 #experience.master-section {
@@ -404,6 +411,10 @@ a:focus-visible {
 
   .experience-logo-agentic {
     max-height: 31px;
+  }
+
+  .experience-logo-courage {
+    max-height: 44px;
   }
 
   .experience-logo-row {

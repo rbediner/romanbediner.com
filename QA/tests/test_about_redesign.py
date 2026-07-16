@@ -18,12 +18,13 @@ class AboutRedesignTest(unittest.TestCase):
         ]:
             self.assertIn(phrase, self.about_html)
 
-    def test_four_chapter_structure_exists(self):
-        self.assertEqual(self.about_html.count('class="era-header"'), 4)
+    def test_five_chapter_structure_exists(self):
+        self.assertEqual(self.about_html.count('class="era-header"'), 5)
         self.assertIn('id="enterprise-scale"', self.about_html)
         self.assertIn('id="global-delivery-leadership"', self.about_html)
         self.assertIn('id="global-infrastructure-advisory"', self.about_html)
         self.assertIn('id="ai-enabled-operating-systems"', self.about_html)
+        self.assertIn('id="fractional-integration-leadership"', self.about_html)
 
     def test_old_philosophy_card_removed(self):
         self.assertNotIn('class="philosophy-stack"', self.about_html)

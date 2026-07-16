@@ -22,7 +22,10 @@ const requiredCopy = [
   'That may involve executive or embedded operating leadership, a complex transformation or strategic initiative, AI enablement, or the development of a stronger operator.',
   'The work is most relevant when execution has become fragmented, ownership is unclear, systems no longer support the pace of the business, or AI needs to be integrated into real workflows with greater discipline.',
   'A short note describing the context, the challenge, and the type of support being considered is enough to begin.',
-  'Connect on LinkedIn'
+  'Connect on LinkedIn',
+  'fractional integration leadership for NC Courage',
+  'operating architecture for Laser Light Communications',
+  'AI architecture and agentic operating-system design for Agentic Society'
 ];
 
 for (const phrase of requiredCopy) {

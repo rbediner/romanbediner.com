@@ -29,8 +29,8 @@ for (const heading of chapterHeadings) {
   }
 }
 
-if ((aboutHtml.match(/class="era-header"/g) || []).length !== 4) {
-  failures.push('About page must include exactly four chapter headers.');
+if ((aboutHtml.match(/class="era-header"/g) || []).length !== 5) {
+failures.push('About page must include exactly five chapter headers.');
 }
 
 const requiredSubheadings = [
@@ -62,6 +62,7 @@ const chapterAnchorTargets = [
   'global-delivery-leadership',
   'global-infrastructure-advisory',
   'ai-enabled-operating-systems',
+  'fractional-integration-leadership',
   'operating-philosophy'
 ];
 for (const target of chapterAnchorTargets) {

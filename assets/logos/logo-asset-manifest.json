@@ -36,6 +36,15 @@
       "transformation_applied_for_display": "None.",
       "fallback_used": "none",
       "notes": "Official website asset."
+    },
+    {
+      "organization": "NC Courage",
+      "source_url": "https://nccourage.com/",
+      "local_file_path": "assets/logos/nc-courage-crest.png",
+      "file_format": "png",
+      "transformation_applied_for_display": "Displayed in a single-ink navy treatment through site CSS; source crest preserved unchanged.",
+      "fallback_used": "Local NC Courage portal asset",
+      "notes": "Affiliation mark for the current Fractional Integration Officer responsibility; not an official NC Courage site lockup."
     }
   ]
 }

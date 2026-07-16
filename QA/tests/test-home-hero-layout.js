@@ -51,7 +51,8 @@ const logoOrder = [
   'class="experience-logo experience-logo-disney"',
   'class="experience-logo experience-logo-aws"',
   'class="experience-logo experience-logo-laser-light"',
-  'class="experience-logo experience-logo-agentic"'
+  'class="experience-logo experience-logo-agentic"',
+  'class="experience-logo experience-logo-courage"'
 ];
 let previousIndex = -1;
 for (const marker of logoOrder) {

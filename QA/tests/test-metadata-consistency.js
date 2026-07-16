@@ -15,11 +15,11 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 
-const expectedHomepageTitle = 'Roman Bediner | AI-Enabled Operations & Agentic Operating Systems';
-const expectedHomepageDescription = 'Roman Bediner designs AI-enabled operations, execution systems, and agentic operating models, including coordinated fleets of AI employees supporting project management, workflow orchestration, decision tracking, and executive visibility.';
+const expectedHomepageTitle = 'Roman Bediner | Fractional Integration Officer & AI Architect';
+const expectedHomepageDescription = 'Fractional integration leadership and AI architecture for organizations connecting business priorities, systems, vendors, data, and execution. Current work spans NC Courage, Laser Light Communications, Agentic Society, Disney, and AWS.';
 const expectedHomepageH1 = 'Productizing Operations for Modern, AI-Enabled Work';
-const expectedFrameworkTitle = 'AI-Enabled Operations Framework | Productizing Modern Operating Teams';
-const expectedFrameworkDescription = 'A six-stage operating model for modern AI-enabled teams, covering opportunity, design, integration, execution, signals, and evolution to turn fragmented work into scalable operating systems.';
+const expectedFrameworkTitle = 'AI-Enabled Operations Framework | Integration Leadership & AI Architecture';
+const expectedFrameworkDescription = 'A six-stage operating model for connecting business priorities, systems, vendors, data, and execution through integration leadership, AI architecture, measurable signals, and practical evolution.';
 
 const htmlPages = [
   'index.html',

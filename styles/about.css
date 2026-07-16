@@ -54,7 +54,8 @@
 .timeline-orb.orb-1,
 .timeline-orb.orb-2,
 .timeline-orb.orb-3,
-.timeline-orb.orb-4 {
+.timeline-orb.orb-4,
+.timeline-orb.orb-5 {
   transform: translateY(-50%);
 }
 
@@ -62,6 +63,7 @@
 .timeline-orb.orb-2 { top: var(--orb2, 0px); }
 .timeline-orb.orb-3 { top: var(--orb3, 0px); }
 .timeline-orb.orb-4 { top: var(--orb4, 0px); }
+.timeline-orb.orb-5 { top: var(--orb5, 0px); }
 
 .about-philosophy {
   /* Modest separation from the timeline above. */

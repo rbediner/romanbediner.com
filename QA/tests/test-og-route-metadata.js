@@ -22,32 +22,32 @@ const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Roman Bediner | AI-Enabled Operations & Agentic Operating Systems',
-    ogDescription: 'Roman Bediner designs AI-enabled operations, execution systems, and agentic operating models, including coordinated fleets of AI employees supporting project management, workflow orchestration, decision tracking, and executive visibility.'
+    ogTitle: 'Roman Bediner | Fractional Integration Officer & AI Architect',
+    ogDescription: 'Fractional integration leadership and AI architecture for organizations connecting business priorities, systems, vendors, data, and execution. Current work spans NC Courage, Laser Light Communications, Agentic Society, Disney, and AWS.'
   },
   {
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
-    ogTitle: 'About Roman Bediner | AI-Enabled Operations & Agentic Systems',
-    ogDescription: 'Operating leadership background across Disney, AWS, global infrastructure, and founder-led AI businesses, including the design and deployment of coordinated fleets of agentic AI employees.'
+    ogTitle: 'About Roman Bediner | Fractional Integration Officer & AI Architect',
+    ogDescription: 'Operating background across Disney, AWS, Laser Light Communications, Agentic Society, and NC Courage, spanning fractional integration leadership, AI architecture, and execution systems.'
   },
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
-    ogTitle: 'Services | AI-Enabled Operations for Modern Operating Teams',
-    ogDescription: 'Executive and fractional operating leadership for modern AI-enabled organizations, spanning operating model design, execution systems, agentic workflows, strategic initiatives, and the development of coordinated AI employee fleets.'
+    ogTitle: 'Services | Fractional Integration Leadership & AI Architecture',
+    ogDescription: 'Fractional integration leadership, AI architecture, operating-model design, vendor evaluation, execution systems, and agentic workflows for organizations navigating growth and platform complexity.'
   },
   {
     file: 'framework/index.html',
     canonical: 'https://romanbediner.com/framework/',
-    ogTitle: 'AI-Enabled Operations Framework | Productizing Modern Operating Teams',
-    ogDescription: 'A six-stage operating model for modern AI-enabled teams, covering opportunity, design, integration, execution, signals, and evolution to turn fragmented work into scalable operating systems.'
+    ogTitle: 'AI-Enabled Operations Framework | Integration Leadership & AI Architecture',
+    ogDescription: 'A six-stage operating model for connecting business priorities, systems, vendors, data, and execution through integration leadership, AI architecture, measurable signals, and practical evolution.'
   },
   {
     file: 'resources/index.html',
     canonical: 'https://romanbediner.com/resources/',
-    ogTitle: 'Resources | Working Proof Points for AI-Enabled Operations',
-    ogDescription: 'Explore the operating model in practice through a six-stage framework, an executive dashboard, and PasteFlow, a working product proof point for modern AI-enabled operating teams.'
+    ogTitle: 'Resources | AI-Enabled Operations, Integration & AI Architecture',
+    ogDescription: 'Explore practical work across AI-enabled operations, technology integration, AI architecture, executive visibility, and operating systems through frameworks, dashboards, and product proof points.'
   },
   {
     file: 'resources/ai-enabled-operations-framework-summary/index.html',
@@ -58,8 +58,8 @@ const expected = [
   {
     file: 'connect/index.html',
     canonical: 'https://romanbediner.com/connect/',
-    ogTitle: 'Connect | Operating Leadership for Modern AI-Enabled Teams',
-    ogDescription: 'Start a conversation about building stronger operating systems for modern AI-enabled teams, including execution architecture, strategic initiatives, agentic workflows, coordinated AI employee fleets, and embedded operating leadership.'
+    ogTitle: 'Connect | Fractional Integration Officer & AI Architect',
+    ogDescription: 'Start a conversation about fractional integration leadership, AI architecture, operating-model design, vendor evaluation, and stronger execution systems for complex organizations.'
   },
   {
     file: 'resources/ai-enabled-operations-dashboard/index.html',
