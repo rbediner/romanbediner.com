@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 303
-- Updated At (UTC): 2026-07-16T13:36:59Z
+- Handoff Sequence: 304
+- Updated At (UTC): 2026-07-16T13:37:33Z
 - Source Branch: staging
-- Source Commit: feee62dd03acf73460fac21c410ca8d5bf0c9c2c (pre-handoff baseline)
+- Source Commit: 191883acbe0e193c455058e8d4730f6ac2a11551 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: First-party logo comparison for staging review
@@ -11,7 +11,7 @@
 The prior staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. The subsequent review also caught a tonal mismatch and a stranded fifth logo on mobile. This comparison preserves first-party source colors and geometry so the official-mark treatment can be judged before returning to the controlled deep-navy fallback if needed.
 
 - Replaced the fallback AWS artwork with the official AWS brand-marketing asset and replaced the derived crest display with the first-party NC Courage crest artwork sourced from the club's Our Brand page.
-- Preserved the prior derived monochrome crest and full-color source in the repository as comparison/fallback assets.
+- Kept the prior derived monochrome treatment recoverable in Git history; removed its now-unreferenced production-path file so repository hygiene stays clean.
 - Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 64px.
 - Removed the shared recoloring filter for the official-mark comparison so supplied logo colors and geometry are shown unchanged.
 - Changed the mobile logo row to a six-track grid: three logos fill the first row, while Agentic Society and the crest form a centered second-row pair; desktop remains a balanced five-column row.
