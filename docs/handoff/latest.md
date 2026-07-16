@@ -6,6 +6,16 @@
 - Source Commit: e8e8e65234d6875276e7492c48937236f39135cf (pre-handoff baseline)
 - Active Agent: Claude
 
+## Latest — 2026-07-16: Homepage mobile logo spacing refinement
+
+Follow-up to the mobile hierarchy correction: the three operating-background marks were still too close together, especially AWS and Laser Light Communications.
+
+- Changed the mobile logo band to three equal columns with a 24px gutter.
+- Kept Agentic Society and NC Courage in the first row, with Disney, AWS, and Laser Light Communications evenly distributed across the second row.
+- Reduced the mobile AWS image box to 128px and Laser Light to 90px so each mark stays inside its own visual column.
+- Refreshed Home visual baselines and reran the home/services guardrails and full visual suite.
+- Staging-only; no production promotion.
+
 ## Latest — 2026-07-16: Homepage logo optical rebalance and mobile hierarchy
 
 Follow-up to the prior homepage logo correction: AWS was still optically too dominant on desktop/mobile, the NC Courage crest needed more presence, and the mobile three-across row was too cramped.
