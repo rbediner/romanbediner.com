@@ -1,17 +1,20 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 304
-- Updated At (UTC): 2026-07-16T13:37:33Z
+- Handoff Sequence: 306
+- Updated At (UTC): 2026-07-16T13:53:33Z
 - Source Branch: staging
-- Source Commit: 191883acbe0e193c455058e8d4730f6ac2a11551 (pre-handoff baseline)
+- Source Commit: febb510f486c08c702fc7418fe04f82ac43b68d7 (pre-handoff baseline)
 - Active Agent: Claude
 
-## Latest — 2026-07-16: First-party logo comparison for staging review
+## Latest — 2026-07-16: Current-to-history About sequence and distinct Services icons
 
-The prior staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. The subsequent review also caught a tonal mismatch and a stranded fifth logo on mobile. This comparison preserves first-party source colors and geometry so the official-mark treatment can be judged before returning to the controlled deep-navy fallback if needed.
+The About and Services review identified three content and hierarchy issues: the About arc read in historical order instead of current-to-history order, the Services page reused an icon for two different models, and the current NC Courage responsibility was too easy to miss in the opening copy.
 
 - Replaced the fallback AWS artwork with the official AWS brand-marketing asset and replaced the derived crest display with the first-party NC Courage crest artwork sourced from the club's Our Brand page.
 - Kept the prior derived monochrome treatment recoverable in Git history; removed its now-unreferenced production-path file so repository hygiene stays clean.
+- Added a current-responsibility line to the About and Services openings so the Fractional Integration Officer role is visible without changing the neutral voice.
+- Reordered the visible About arc and floating chapter navigation from NC Courage backward through Laser Light Communications, Agentic Society, global delivery, and enterprise scale; section anchors remain stable.
+- Added a purpose-built handoff-and-scale SVG icon for Fractional and Embedded Operating Leadership and added a regression test that rejects duplicate service icon paths.
 - Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 64px.
 - Removed the shared recoloring filter for the official-mark comparison so supplied logo colors and geometry are shown unchanged.
 - Changed the mobile logo row to a six-track grid: three logos fill the first row, while Agentic Society and the crest form a centered second-row pair; desktop remains a balanced five-column row.
