@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 299
-- Updated At (UTC): 2026-07-16T13:17:43Z
+- Handoff Sequence: 301
+- Updated At (UTC): 2026-07-16T13:22:14Z
 - Source Branch: staging
-- Source Commit: 8196659faadffc78ff1be885d567a9981c97d03b (pre-handoff baseline)
+- Source Commit: 94e895dc7566b9bdd12d6c19f9ee2ff8de9015a5 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: NC Courage crest color and mobile layout correction for staging review
@@ -14,7 +14,7 @@ The first staging pass exposed a real visual QA failure: CSS recoloring had coll
 - Created the prepared deep-navy tonal monochrome asset from the official full-color source while preserving the original at `assets/asset-library/brand-sources/nc-courage/nc-courage-crest-full-color.png`.
 - Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 64px.
 - Added a crest-specific `filter: none` override so the shared logo-row filter cannot erase the prepared lettering, lioness, border, and interior geometry.
-- Changed the mobile logo row to three columns and centered the fifth crest in the second row; desktop remains a balanced five-column row.
+- Changed the mobile logo row to a six-track grid: three logos fill the first row, while Agentic Society and the crest form a centered second-row pair; desktop remains a balanced five-column row.
 - Compared continuous tonal, three-tone, high-contrast, and AI-generated variants. The source-derived tonal version was selected because it preserves the exact original geometry; the AI recreation was rejected because it altered brand geometry despite being visually polished.
 - Added regression assertions for the prepared asset path, asset existence, and desktop scale in `QA/tests/test-home-hero-layout.js`.
 - Refreshed the Home desktop/mobile visual baselines after inspecting the corrected crest.
