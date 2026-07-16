@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 309
-- Updated At (UTC): 2026-07-16T15:08:52Z
+- Handoff Sequence: 310
+- Updated At (UTC): 2026-07-16T15:27:34Z
 - Source Branch: staging
-- Source Commit: 69e21d78637f499138ef9627843555bd90dce3be (pre-handoff baseline)
+- Source Commit: c1b5ae5231a8ce82ba2157c33556a2cb22cbf151 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: Current-to-history About sequence and distinct Services icons
@@ -243,3 +243,12 @@ Supporting:
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
+## Current staging correction — logo and icon QA
+
+Staging-only correction in progress on `staging` after visual review found that the homepage experience row was clipping marks and the Fractional service icon was too small and ambiguous.
+
+- Homepage logo cells no longer clip official marks. AWS keeps the official PNG and is optically scaled around its transparent source canvas; Disney, Laser Light, Agentic Society, and NC Courage remain official color assets.
+- The mobile six-track arrangement remains, with desktop and mobile visual baselines refreshed after browser review.
+- The Fractional and Embedded Operating Leadership icon is now a clearer two-block operating handoff with two glossy blue nodes, rendered at 44px for the lead service entry; service icons remain distinct.
+- Local browser review confirmed all five desktop marks render without cropping, and the fractional icon reads clearly at the rendered size. Mobile visual regression passed after baseline refresh.
+- No production promotion has been attempted.
