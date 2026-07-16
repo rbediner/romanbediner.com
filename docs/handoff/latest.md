@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 294
-- Updated At (UTC): 2026-07-16T00:33:54Z
+- Handoff Sequence: 295
+- Updated At (UTC): 2026-07-16T00:50:00Z
 - Source Branch: staging
-- Source Commit: 45e09543dfe6099c006f55ce031b434ddb6a1105 (pre-handoff baseline)
+- Source Commit: 9dde32bb855253a2aca41c3e4a562afc1dfcae7b (local follow-up; pending authenticated push)
 - Active Agent: Claude
 
 ## Latest — 2026-07-15: NC Courage responsibility integration for staging review
@@ -22,10 +22,11 @@ This staging change updates the public positioning to include Fractional Integra
 
 ### Resume point
 
-- Visual baseline refresh completed successfully; the visual suite passed with the intentional copy and crest changes.
-- Full regression is otherwise green through Node, Jest, and most Python checks. The remaining failure is the stale Python contract `test_four_service_entries_exist`, which still expects four Services entries; update it to five and rerun `npm run qa:gate:full-regression`.
-- `QA/tests/test-connect-page.js` was strengthened to require the NC Courage, Laser Light Communications, and Agentic Society current-work contexts.
-- All product changes remain uncommitted in the staging worktree. No staging deployment has been started yet. After the QA fix passes: commit the product changes, push `staging`, run the isolated `npm run handoff:push`, then monitor the staging CI/deploy and verify the preview routes.
+- Hosted CI and Deploy Staging are green for the prior product release; the preview is available at https://rbediner.github.io/romanbediner-preview/.
+- Browser verification covered the homepage and canonical About, Services, Framework, Resources, and Connect routes; Computer Use confirmed the desktop Chrome view, navigation, current-work copy, and five-logo experience band.
+- Mobile responsive and visual QA passed locally, including the affected Home, About, Services, Framework, and Connect views.
+- A live browser check found that Services and Connect had stale `<title>` tags while their Open Graph/Twitter metadata was current. Commit `9dde32b` aligns those titles and adds a regression assertion in `QA/tests/test-og-route-metadata.js`.
+- The follow-up commit is local but not yet pushed because the configured GitHub token is invalid (`gh auth status` reports re-authentication required). Resume by authenticating GitHub, pushing `staging`, running the isolated handoff push, then rerunning the hosted staging deploy and live browser verification.
 
 ## Latest — 2026-07-05: EBI Round 2 (Looker Studio structure cleanup) + analytics documentation (Claude)
 
