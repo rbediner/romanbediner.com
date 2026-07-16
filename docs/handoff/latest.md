@@ -1,10 +1,19 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 319
-- Updated At (UTC): 2026-07-16T22:01:01Z
+- Handoff Sequence: 320
+- Updated At (UTC): 2026-07-16T22:27:36Z
 - Source Branch: staging
-- Source Commit: a9e8524ca73f2b5b191068506e73232feb482b6a (pre-handoff baseline)
+- Source Commit: e148fd85fbd0f4c392a8eaef14261f20b1237fc7 (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-16: Six-mark experience row with historical Omnigon mark
+
+- Added the user-supplied historical Omnigon Communications LLC `OG` mark as the sixth homepage experience logo; provenance is explicitly recorded as user-provided in `assets/logos/logo-asset-manifest.json`.
+- Kept the requested color treatments: navy Disney+, AWS with orange smile, Laser Light Communications, navy Agentic Society, full-color NC Courage crest, and the red Omnigon square.
+- Rebalanced desktop sizing so AWS no longer dominates the six-mark row, while preserving a single equal-cell row with no clipping.
+- Reworked mobile into two non-overlapping rows of three: Agentic Society, NC Courage, and Omnigon above; Disney+, AWS, and Laser Light below.
+- Refreshed desktop/mobile visual baselines and passed the home guardrail plus full visual regression suite locally; all six logo assets returned HTTP 200 in the browser harness.
+- Staging-only; no production promotion.
 
 ## Latest — 2026-07-16: Color logo treatments and visible hover states
 
