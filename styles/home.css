@@ -219,18 +219,19 @@ main .master-head h1 {
   /* Official-source review mode: preserve each first-party mark's supplied
      color and geometry while the row is evaluated on staging. */
   filter: none;
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: filter 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: filter, transform;
 }
 
 .experience-logo:hover {
-  /* Make the interaction obvious while keeping the mark itself intact. */
-  transform: translateY(-5px) scale(1.06);
-  filter: drop-shadow(0 8px 12px rgba(54, 103, 255, 0.28));
+  /* Make the interaction unmistakable while keeping the mark itself intact. */
+  transform: translateY(-8px) scale(1.14);
+  filter: drop-shadow(0 12px 18px rgba(54, 103, 255, 0.42)) saturate(1.12);
 }
 
 .experience-logo-cell:focus-within .experience-logo {
-  transform: translateY(-5px) scale(1.06);
-  filter: drop-shadow(0 8px 12px rgba(54, 103, 255, 0.28));
+  transform: translateY(-8px) scale(1.14);
+  filter: drop-shadow(0 12px 18px rgba(54, 103, 255, 0.42)) saturate(1.12);
 }
 
 /* The cells share one optical frame. Individual marks use their visible geometry
@@ -263,12 +264,26 @@ main .master-head h1 {
 
 .experience-logo-agentic:hover,
 .experience-logo-cell:focus-within .experience-logo-agentic {
-  filter: brightness(0) saturate(100%) invert(17%) sepia(22%) saturate(1450%) hue-rotate(181deg) brightness(88%) contrast(96%) drop-shadow(0 8px 12px rgba(54, 103, 255, 0.28));
+  transform: translateY(-8px) scale(1.14);
+  filter: brightness(0) saturate(100%) invert(17%) sepia(22%) saturate(1450%) hue-rotate(181deg) brightness(88%) contrast(96%) drop-shadow(0 12px 18px rgba(54, 103, 255, 0.42));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-logo {
+    transition: none;
+  }
+
+  .experience-logo:hover,
+  .experience-logo-cell:focus-within .experience-logo,
+  .experience-logo-agentic:hover,
+  .experience-logo-cell:focus-within .experience-logo-agentic {
+    transform: none;
+  }
 }
 
 .experience-logo-courage {
   /* Use the first-party crest at a legible scale beside the wordmarks. */
-  height: 112px;
+  height: 120px;
 }
 
 #experience.master-section {
@@ -406,7 +421,7 @@ a:focus-visible {
     /* The current/relevant marks lead in a slightly wider centered pair; the
        three background marks keep their equal-width columns below. */
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 28px 12px;
+    gap: 28px 20px;
     align-items: center;
     justify-items: center;
   }
@@ -435,20 +450,20 @@ a:focus-visible {
   }
 
   .experience-logo-disney {
-    width: 94px;
+    width: 88px;
     height: auto;
     max-width: 100%;
   }
 
   .experience-logo-aws {
-    width: 92px;
+    width: 82px;
     height: auto;
     max-width: none;
     max-height: none;
   }
 
   .experience-logo-laser-light {
-    width: 98px;
+    width: 90px;
     height: 52px;
     max-width: none;
     max-height: none;
@@ -459,18 +474,18 @@ a:focus-visible {
   }
 
   .experience-logo-cell-agentic {
-    grid-column: 1 / span 2;
+    grid-column: 2 / span 2;
     grid-row: 1;
   }
 
   .experience-logo-courage {
-    width: 92px;
+    width: 100px;
     max-width: none;
     max-height: 92px;
   }
 
   .experience-logo-cell-courage {
-    grid-column: 5 / span 2;
+    grid-column: 4 / span 2;
     grid-row: 1;
   }
 
