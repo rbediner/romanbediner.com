@@ -6,6 +6,16 @@
 - Source Commit: f20537a04dbb4f25464b9025d2158a8148c3c46b (pre-handoff baseline)
 - Active Agent: Claude
 
+## Latest — 2026-07-16: Homepage mobile current-work row tightening
+
+Follow-up to the successful bottom-row spacing correction: the two current-work marks were still spread across the full three-column width and created too much empty space.
+
+- Switched the mobile band to six internal tracks.
+- Kept Disney, AWS, and Laser Light Communications in evenly spaced two-track columns on row two.
+- Moved Agentic Society and NC Courage into the centered middle four tracks on row one, bringing the pair closer without changing their scale.
+- Refreshed Home visual baselines and reran the home/services guardrails and full visual suite.
+- Staging-only; no production promotion.
+
 ## Latest — 2026-07-16: Homepage mobile logo spacing refinement
 
 Follow-up to the mobile hierarchy correction: the three operating-background marks were still too close together, especially AWS and Laser Light Communications.
