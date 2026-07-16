@@ -45,6 +45,14 @@
       "transformation_applied_for_display": "None; official NC Courage brand artwork retained as provided.",
       "fallback_used": "none",
       "notes": "Official NC Courage brand asset sourced from the club's Our Brand page; use remains subject to club permission and applicable trademark terms."
+    },
+    {
+      "organization": "Omnigon",
+      "source_url": null,
+      "local_file_path": "assets/logos/omnigon-communications-logo.jpeg",
+      "file_format": "jpeg",
+      "transformation_applied_for_display": "None; the user-supplied historical square OG mark is retained at its native geometry.",
+      "notes": "Historical Omnigon Communications LLC mark supplied by the site owner; provenance is user-provided rather than independently verified."
     }
   ]
 }

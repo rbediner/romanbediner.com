@@ -192,9 +192,9 @@ main .master-head h1 {
 
 .experience-logo-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  /* Generous, even column spacing reads more premium than a tight row. */
-  gap: 26px 48px;
+  /* Six equal cells keep the expanded experience row aligned on one desktop line. */
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 26px 20px;
   align-items: center;
   margin-bottom: 8px;
 }
@@ -237,27 +237,27 @@ main .master-head h1 {
 /* The cells share one optical frame. Individual marks use their visible geometry
    to fill that frame without clipping or allowing one brand to dominate. */
 .experience-logo-disney {
-  width: 104px;
+  width: 86px;
   height: auto;
   max-width: 100%;
 }
 
 .experience-logo-aws {
   /* Tight SVG geometry: constrain the visible wordmark directly. */
-  width: 104px;
+  width: 88px;
   height: auto;
   max-width: 100%;
   max-height: none;
 }
 
 .experience-logo-laser-light {
-  width: 120px;
-  height: 58px;
+  width: 92px;
+  height: 52px;
   max-width: none;
 }
 
 .experience-logo-agentic {
-  height: 50px;
+  height: 46px;
   /* Reliable blue presentation tint for the supplied black wordmark geometry. */
   filter: brightness(0) saturate(100%) invert(17%) sepia(22%) saturate(1450%) hue-rotate(181deg) brightness(88%) contrast(96%);
 }
@@ -284,6 +284,12 @@ main .master-head h1 {
 .experience-logo-courage {
   /* Use the first-party crest at a legible scale beside the wordmarks. */
   height: 128px;
+}
+
+.experience-logo-omnigon {
+  /* User-supplied historical Omnigon mark; preserve its square geometry. */
+  width: 64px;
+  height: 64px;
 }
 
 #experience.master-section {
@@ -458,7 +464,7 @@ a:focus-visible {
   .experience-logo-aws {
     /* AWS has the heaviest visual mass in the row; cap it below the other
        marks so its orange smile does not take over the mobile composition. */
-    width: 60px;
+    width: 52px;
     height: auto;
     max-width: none;
     max-height: none;
@@ -476,7 +482,7 @@ a:focus-visible {
   }
 
   .experience-logo-cell-agentic {
-    grid-column: 2 / span 2;
+    grid-column: 1 / span 2;
     grid-row: 1;
   }
 
@@ -486,8 +492,20 @@ a:focus-visible {
     max-height: 92px;
   }
 
+  .experience-logo-omnigon {
+    width: 58px;
+    height: 58px;
+    max-width: none;
+    max-height: none;
+  }
+
   .experience-logo-cell-courage {
-    grid-column: 4 / span 2;
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  }
+
+  .experience-logo-cell-omnigon {
+    grid-column: 5 / span 2;
     grid-row: 1;
   }
 
