@@ -1,12 +1,24 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 295
-- Updated At (UTC): 2026-07-16T00:50:00Z
+- Handoff Sequence: 296
+- Updated At (UTC): 2026-07-16T11:18:39Z
 - Source Branch: staging
-- Source Commit: 9dde32bb855253a2aca41c3e4a562afc1dfcae7b (local follow-up; pending authenticated push)
+- Source Commit: e2009d73c80e3c8f27cc96351d0c44d788da0e88 (pre-handoff baseline)
 - Active Agent: Claude
 
-## Latest — 2026-07-15: NC Courage responsibility integration for staging review
+## Latest — 2026-07-16: NC Courage crest legibility correction for staging review
+
+The first staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. This follow-up prepares a legible single-ink version and increases its display scale.
+
+- Replaced the filtered source image in `index.html` with `assets/logos/nc-courage-crest-monochrome.png`.
+- Created the prepared asset from the official full-color source while preserving the original at `assets/asset-library/brand-sources/nc-courage/nc-courage-crest-full-color.png`.
+- Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 78px.
+- Added regression assertions for the prepared asset path, asset existence, and desktop scale in `QA/tests/test-home-hero-layout.js`.
+- Refreshed the Home desktop/mobile visual baselines after inspecting the corrected crest.
+- Local verification: hero layout guard passed, visual regression suite passed, and `git diff --check` passed.
+- Staging deployment remains pending this commit; after push, run hosted CI, Deploy Staging, preview smoke, and browser/mobile verification before considering this correction accepted.
+
+The prior responsibility-positioning notes remain below as historical context.
 
 This staging change updates the public positioning to include Fractional Integration Officer work for NC Courage while preserving Agentic Society as a primary AI-architecture proof point and Laser Light Communications as current operating-architecture work.
 
