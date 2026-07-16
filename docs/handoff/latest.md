@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 317
-- Updated At (UTC): 2026-07-16T21:45:20Z
+- Handoff Sequence: 318
+- Updated At (UTC): 2026-07-16T21:50:27Z
 - Source Branch: staging
-- Source Commit: fe9864414d0ffe0be58955de41ed2407d3bdddde (pre-handoff baseline)
+- Source Commit: 327e366bc48e09983fb6605ac97d11f51ec9baf0 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: Color logo treatments and visible hover states
@@ -294,6 +294,13 @@ Keep release watcher hygiene in place for this repo.
 ## Current staging correction — optical logo sizing and navy Disney+
 
 ## Current staging correction — mobile spacing, crest scale, and hover emphasis
+
+## Current staging correction — AWS optical rebalance
+
+The next mobile review showed that AWS still dominated the lower row because its heavy wordmark carries more visual mass than Disney+ and Laser Light at the same nominal width. Mobile AWS is now capped at 64px while Disney+ and Laser Light remain readable at 88px and 90px. The desktop NC Courage crest is increased to 128px. CSS cache token is `20260716r14`.
+
+- Local homepage guardrail, services tests, visual regression, diff hygiene, and drift checks pass.
+- Staging-only; no production promotion.
 
 The follow-up visual review found the mobile three-mark row too tight and the crest slightly undersized. The mobile grid now uses 20px horizontal gutters, moves Agentic Society and NC Courage inward as a compact pair, and caps Disney+, AWS, and Laser Light to fit without crowding. The desktop crest increases from 112px to 120px. Logo hover/focus behavior is now deliberately stronger: an 8px lift, 1.14 scale, deeper blue halo, saturation lift, and a reduced-motion fallback. The CSS token is `20260716r13`.
 
