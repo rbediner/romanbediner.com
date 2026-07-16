@@ -235,8 +235,11 @@ main .master-head h1 {
 }
 
 .experience-logo-courage {
-  /* Use the prepared single-ink crest at a legible scale beside the wordmarks. */
+  /* Use the prepared tonal crest at a legible scale beside the wordmarks. */
   height: 88px;
+  /* The prepared asset already carries its monochrome treatment; the shared
+     logo filter would erase the lettering and lioness detail. */
+  filter: none;
 }
 
 #experience.master-section {

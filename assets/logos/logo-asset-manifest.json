@@ -42,7 +42,7 @@
       "source_url": "https://nccourage.com/",
       "local_file_path": "assets/logos/nc-courage-crest-monochrome.png",
       "file_format": "png",
-      "transformation_applied_for_display": "Prepared a transparent single-ink navy treatment that preserves the crest lettering and interior marks as negative space; displayed at a larger scale for legibility.",
+      "transformation_applied_for_display": "Prepared a transparent tonal monochrome treatment derived from source luminance and shifted into the site's navy family, preserving the exact crest lettering, lioness, border, and interior geometry; displayed at a larger scale for legibility.",
       "fallback_used": "Local NC Courage portal asset",
       "notes": "Affiliation mark for the current Fractional Integration Officer responsibility; the full-color source is preserved under assets/asset-library/brand-sources/nc-courage/."
     }
