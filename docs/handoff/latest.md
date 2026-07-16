@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 297
-- Updated At (UTC): 2026-07-16T11:18:58Z
+- Handoff Sequence: 298
+- Updated At (UTC): 2026-07-16T11:26:30Z
 - Source Branch: staging
-- Source Commit: ca226814f8ed314d1020871d6fd75619982cae0e (pre-handoff baseline)
+- Source Commit: a7fb60fdee3e9b7713f4adf6ab3fe4da0d3a89d0 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: NC Courage crest legibility correction for staging review
@@ -11,12 +11,14 @@
 The first staging pass exposed a real visual QA failure: CSS recoloring had collapsed the NC Courage crest's internal white lettering and marks into a blank navy shield. This follow-up prepares a legible single-ink version and increases its display scale.
 
 - Replaced the filtered source image in `index.html` with `assets/logos/nc-courage-crest-monochrome.png`.
-- Created the prepared asset from the official full-color source while preserving the original at `assets/asset-library/brand-sources/nc-courage/nc-courage-crest-full-color.png`.
+- Created the prepared tonal monochrome asset from the official full-color source while preserving the original at `assets/asset-library/brand-sources/nc-courage/nc-courage-crest-full-color.png`.
 - Cropped the transparent source margin so the crest occupies its intended visual box; desktop display is 88px and mobile display is 78px.
+- Added a crest-specific `filter: none` override so the shared logo-row filter cannot erase the prepared lettering, lioness, border, and interior geometry.
+- Compared continuous tonal, three-tone, high-contrast, and AI-generated variants. The source-derived tonal version was selected because it preserves the exact original geometry; the AI recreation was rejected because it altered brand geometry despite being visually polished.
 - Added regression assertions for the prepared asset path, asset existence, and desktop scale in `QA/tests/test-home-hero-layout.js`.
 - Refreshed the Home desktop/mobile visual baselines after inspecting the corrected crest.
 - Local verification: hero layout guard passed, visual regression suite passed, and `git diff --check` passed.
-- Staging deployment remains pending this commit; after push, run hosted CI, Deploy Staging, preview smoke, and browser/mobile verification before considering this correction accepted.
+- Staging deployment remains pending this final correction; after push, run hosted CI, Deploy Staging, preview smoke, and browser/mobile verification before considering this correction accepted.
 
 The prior responsibility-positioning notes remain below as historical context.
 
