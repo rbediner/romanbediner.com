@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 310
-- Updated At (UTC): 2026-07-16T15:27:34Z
+- Handoff Sequence: 311
+- Updated At (UTC): 2026-07-16T16:26:29Z
 - Source Branch: staging
-- Source Commit: c1b5ae5231a8ce82ba2157c33556a2cb22cbf151 (pre-handoff baseline)
+- Source Commit: e8e8e65234d6875276e7492c48937236f39135cf (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-16: Homepage logo optical rebalance and mobile hierarchy
