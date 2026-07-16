@@ -13,11 +13,11 @@
     {
       "organization": "Amazon Web Services",
       "source_url": "https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_Logo.svg",
-      "local_file_path": "assets/logos/aws.svg",
-      "file_format": "svg",
-      "transformation_applied_for_display": "None.",
-      "fallback_used": "Wikimedia Commons",
-      "notes": "Fallback used because the official website exposed anniversary lockups more readily than a clean standalone wordmark."
+      "local_file_path": "assets/logos/aws-official.png",
+      "file_format": "png",
+      "transformation_applied_for_display": "None; official AWS-supplied artwork retained as provided.",
+      "fallback_used": "none",
+      "notes": "Official AWS brand-marketing asset."
     },
     {
       "organization": "Laser Light Communications",
@@ -40,11 +40,11 @@
     {
       "organization": "NC Courage",
       "source_url": "https://nccourage.com/",
-      "local_file_path": "assets/logos/nc-courage-crest-monochrome.png",
-      "file_format": "png",
-      "transformation_applied_for_display": "Prepared a transparent tonal monochrome treatment derived from source luminance and shifted into the site's navy family, preserving the exact crest lettering, lioness, border, and interior geometry; displayed at a larger scale for legibility.",
-      "fallback_used": "Local NC Courage portal asset",
-      "notes": "Affiliation mark for the current Fractional Integration Officer responsibility; the full-color source is preserved under assets/asset-library/brand-sources/nc-courage/."
+      "local_file_path": "assets/logos/nc-courage-crest-official.svg",
+      "file_format": "svg",
+      "transformation_applied_for_display": "None; official NC Courage brand artwork retained as provided.",
+      "fallback_used": "none",
+      "notes": "Official NC Courage brand asset sourced from the club's Our Brand page; use remains subject to club permission and applicable trademark terms."
     }
   ]
 }

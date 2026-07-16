@@ -204,15 +204,13 @@ main .master-head h1 {
   height: 44px;
   object-fit: contain;
   object-position: center;
-  /* Premium single-ink monochrome: each mark is recolored to the brand
-     deep-navy at full strength (crisp and unified — not faded, not washed
-     grayscale, not flat black). The real brand color blooms back in on hover. */
-  filter: brightness(0) invert(13%) sepia(46%) saturate(1700%) hue-rotate(196deg) brightness(95%) contrast(95%);
+  /* Official-source review mode: preserve each first-party mark's supplied
+     color and geometry while the row is evaluated on staging. */
+  filter: none;
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .experience-logo:hover {
-  filter: none;
   transform: translateY(-2px);
 }
 
@@ -235,11 +233,8 @@ main .master-head h1 {
 }
 
 .experience-logo-courage {
-  /* Use the prepared tonal crest at a legible scale beside the wordmarks. */
+  /* Use the first-party crest at a legible scale beside the wordmarks. */
   height: 88px;
-  /* The prepared asset already carries its monochrome treatment; the shared
-     logo filter would erase the lettering and lioness detail. */
-  filter: none;
 }
 
 #experience.master-section {

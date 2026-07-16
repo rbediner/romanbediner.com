@@ -13,7 +13,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const homeCss = fs.readFileSync(path.join(root, 'styles/home.css'), 'utf8');
-const monochromeCrest = path.join(root, 'assets/logos/nc-courage-crest-monochrome.png');
+const officialCrest = path.join(root, 'assets/logos/nc-courage-crest-official.svg');
 
 const failures = [];
 
@@ -48,11 +48,11 @@ if (!/href="\/about\/">About<\/a>/.test(html)) {
   failures.push('Homepage hero CTA must be About -> /about/.');
 }
 
-if (!html.includes('/assets/logos/nc-courage-crest-monochrome.png')) {
-  failures.push('Homepage must use the prepared NC Courage monochrome crest asset.');
+if (!html.includes('/assets/logos/nc-courage-crest-official.svg')) {
+  failures.push('Homepage must use the first-party NC Courage crest asset.');
 }
-if (!fs.existsSync(monochromeCrest)) {
-  failures.push('NC Courage monochrome crest asset is missing.');
+if (!fs.existsSync(officialCrest)) {
+  failures.push('First-party NC Courage crest asset is missing.');
 }
 if (!/\.experience-logo-courage\s*\{[\s\S]*?height:\s*88px\s*;/i.test(homeCss)) {
   failures.push('NC Courage crest must remain large enough to read beside the wordmarks.');
@@ -95,8 +95,8 @@ if (!homeCss.includes('.experience-logo-grid') || !homeCss.includes('.experience
   failures.push('Homepage CSS must include logo-grid and logo-row styles.');
 }
 
-if (!/\.experience-logo-courage\s*\{[\s\S]*?filter:\s*none/i.test(homeCss)) {
-  failures.push('NC Courage crest must opt out of the shared logo filter.');
+if (!/\.experience-logo\s*\{[\s\S]*?filter:\s*none/i.test(homeCss)) {
+  failures.push('Experience logos must preserve the supplied official mark colors.');
 }
 
 if (!/\.experience-logo-courage\s*\{[\s\S]*?grid-column:\s*4\s*\/\s*span\s*2/i.test(homeCss)) {
