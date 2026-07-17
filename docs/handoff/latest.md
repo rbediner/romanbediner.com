@@ -1,10 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 320
-- Updated At (UTC): 2026-07-16T22:27:36Z
+- Handoff Sequence: 321
+- Updated At (UTC): 2026-07-17T11:34:28Z
 - Source Branch: staging
-- Source Commit: e148fd85fbd0f4c392a8eaef14261f20b1237fc7 (pre-handoff baseline)
+- Source Commit: 762fcf8735fbf618a896ff9a9e11dd2e5f18b35e (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-17: Six-mark experience row promoted to production
+
+- Promoted verified staging release `762fcf8735fbf618a896ff9a9e11dd2e5f18b35e` to `prod`.
+- Production CI, Deploy Pages, and Docs Sync completed successfully.
+- Deploy Pages live smoke validated the production deployment after propagation, including the six-mark homepage experience row and responsive behavior.
+- README now documents the six-mark experience row, the historical user-supplied Omnigon mark, and the mobile row order.
+- Google Drive drift check passed before promotion; no conflict-copies were found.
 
 ## Latest — 2026-07-16: Six-mark experience row with historical Omnigon mark
 
