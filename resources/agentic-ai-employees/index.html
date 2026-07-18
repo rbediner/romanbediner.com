@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Agentic AI Employees | A Reference Architecture for Autonomous AI Operations" />
-  <meta property="og:description" content="A reference architecture for running a fleet of autonomous, agentic AI employees: how they are wired, how they ship, and how you operate them like a team. The operating method behind AI-enabled work." />
+  <meta property="og:title" content="Agentic AI Employees: From Request to Production" />
+  <meta property="og:description" content="A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely." />
   <meta property="og:url" content="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta property="og:site_name" content="Roman Bediner" />
   <meta property="og:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
@@ -14,16 +14,16 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
-  <meta name="description" content="A reference architecture for running a fleet of autonomous, agentic AI employees: how they are wired, how they ship, and how you operate them like a team. The operating method behind AI-enabled work." />
+  <meta name="description" content="A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely." />
   <link rel="canonical" href="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta name="geo.region" content="US-NC" />
   <meta name="geo.placename" content="Raleigh-Durham-Chapel Hill" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Agentic AI Employees | A Reference Architecture for Autonomous AI Operations" />
-  <meta name="twitter:description" content="A reference architecture for running a fleet of autonomous, agentic AI employees: how they are wired, how they ship, and how you operate them like a team. The operating method behind AI-enabled work." />
+  <meta name="twitter:title" content="Agentic AI Employees: From Request to Production" />
+  <meta name="twitter:description" content="A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely." />
   <meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
   <meta name="twitter:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
-  <title>Agentic AI Employees | A Reference Architecture for Autonomous AI Operations</title>
+  <title>Agentic AI Employees: From Request to Production</title>
   <!-- CSP architecture: inline scripts are forbidden (no 'unsafe-inline' in script-src); CI fails on CSP runtime violations. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://www.googletagmanager.com; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src https://api.emailjs.com https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://www.google.com https://www.google.com;">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon/favicon-32x32.png" />
@@ -39,17 +39,24 @@
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "name": "Agentic AI Employees | A Reference Architecture for Autonomous AI Operations",
-      "headline": "Agentic AI Employees: A Reference Architecture",
-      "description": "A reference architecture for running a fleet of autonomous, agentic AI employees: how they are wired, how they ship, and how you operate them like a team.",
+      "name": "Agentic AI Employees: From Request to Production",
+      "headline": "Agentic AI Employees That Move Work from Request to Production",
+      "description": "A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely.",
       "url": "https://romanbediner.com/resources/agentic-ai-employees/",
+      "dateModified": "2026-07-18",
+      "mainEntityOfPage": "https://romanbediner.com/resources/agentic-ai-employees/",
+      "keywords": "agentic AI employees, AI agent fleet, autonomous code review, multi-agent orchestration, AI agents that deploy to production",
       "about": [
         "Agentic AI employees",
         "Autonomous AI agent fleets",
         "Multi-agent orchestration",
         "AI operating systems",
         "Human-AI operating models",
-        "Scheduled autonomous agents"
+        "Scheduled autonomous agents",
+        "AI software engineering agents",
+        "Autonomous code review",
+        "Production deployment verification",
+        "Human approval boundaries"
       ],
       "author": { "@type": "Person", "name": "Roman Bediner" },
       "publisher": { "@type": "Person", "name": "Roman Bediner" }
@@ -78,68 +85,104 @@
         data-resource-type="reference_architecture"
         data-resource-location="agentic_fleet_page">
     <p class="resources-label">AVAILABLE NOW</p>
-    <h1>Agentic AI Employees</h1>
+    <h1>Agentic AI Employees That Move Work from Request to Production</h1>
     <div class="section-accent" aria-hidden="true"></div>
 
     <section class="resource-top-section" aria-label="Overview">
-      <p class="resource-detail-prose-lede">A fleet of autonomous AI agents that wake on a schedule, load their behavior from a cloud brain, and do real work inside your team&rsquo;s workspace &mdash; operated like employees, not chatbots. This is the operating architecture, end to end: how the agents are wired, how they ship, and how you run them. A person stays in charge of the fleet &mdash; setting its direction, approving the moves that matter, and owning the outcome.</p>
+      <p class="resource-detail-prose-lede">A fleet of autonomous AI employees that observe work, preserve memory, coordinate across systems, write and review code, merge eligible pull requests, deploy to production, and report what happened. Slack is one working surface; the agents are the operating system underneath it. This is the architecture end to end: how the fleet is organized, how it acts, how it ships, and how it stays accountable.</p>
       <div class="fleet-pillrow" aria-label="Architecture properties">
         <span class="fleet-pill">Brain / body split</span>
-        <span class="fleet-pill">Scheduled autonomy</span>
+        <span class="fleet-pill">Scheduled + event autonomy</span>
         <span class="fleet-pill">Self-healing</span>
         <span class="fleet-pill">Single alerting layer</span>
-        <span class="fleet-pill">Git-driven deploys</span>
-        <span class="fleet-pill">Human-in-the-loop</span>
+        <span class="fleet-pill">Code-to-production loop</span>
+        <span class="fleet-pill">Governed autonomy</span>
       </div>
     </section>
 
     <section class="resource-section" aria-labelledby="fleet-roster">
       <p class="fleet-kicker">The roster</p>
-      <h2 id="fleet-roster">Two doers and an operator</h2>
-      <p class="resource-section-lede">Autonomous agents with distinct lanes. The doers produce the work; the operator runs the fleet. All three take initiative and bring consequential moves to their owner for a green light.</p>
+      <h2 id="fleet-roster">An autonomous organization, not a chatbot collection</h2>
+      <p class="resource-section-lede">Each employee has a lane, a memory, a manager, and a controlled path to action. Slack is one surface; the agents operate across the workspace, cloud brain, GitHub, CI, and production runtime.</p>
       <div class="fleet-grid">
         <article class="fleet-agent fleet-agent-pm">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
-          <p class="fleet-agent-role">Doer</p>
+          <p class="fleet-agent-role">Operating employee</p>
           <h3>Agent &mdash; Project Manager</h3>
           <p class="fleet-agent-body">Project intelligence &mdash; action items, open loops, decisions, blockers, daily standups, and a structured tracker the whole team can read.</p>
         </article>
         <article class="fleet-agent fleet-agent-cof">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
-          <p class="fleet-agent-role">Doer</p>
+          <p class="fleet-agent-role">Operating employee</p>
           <h3>Agent &mdash; Chief of Staff</h3>
           <p class="fleet-agent-body">Knowledge work &mdash; turning meetings and signals into durable documents, profiles, briefs, and weekly digests that keep the organization aligned.</p>
         </article>
         <article class="fleet-agent fleet-agent-dir">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
-          <p class="fleet-agent-role">Operator</p>
-          <h3>Agent &mdash; Orchestration Director</h3>
-          <p class="fleet-agent-body">Operates the fleet &mdash; health monitoring and a single alerting layer, a conversational front door, cross-agent hand-off, deploys, and durable memory.</p>
+          <p class="fleet-agent-role">Control-plane employee</p>
+          <h3>Agent &mdash; Director of Fleet Orchestration &amp; Engineering</h3>
+          <p class="fleet-agent-body">Runs and engineers the fleet &mdash; health, alerting, hand-offs, memory, cost discipline, change management, and the engineering queue.</p>
+        </article>
+        <article class="fleet-agent fleet-agent-cie">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Engineering employee</p>
+          <h3>Agent &mdash; Continuous Improvement Engineer</h3>
+          <p class="fleet-agent-body">Audits cost, caching, health, and recurring friction; ranks the engineering backlog and turns improvement opportunities into actionable work.</p>
+        </article>
+        <article class="fleet-agent fleet-agent-staff">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Independent merge gate</p>
+          <h3>Agent &mdash; Staff Engineer</h3>
+          <p class="fleet-agent-body">Runs autonomous code review against every eligible pull request, rejects unsafe changes, merges approved work, verifies production, and automatically reverts an unhealthy deployment.</p>
         </article>
       </div>
       <div class="resource-blue-box fleet-note">
         <span class="fleet-note-tag">How they relate</span>
-        <p>At runtime the doers are <strong>peers</strong> &mdash; neither bosses the other mid-task. They coordinate through a shared library and a hand-off broker, not a boss agent. The operator &mdash; the Director &mdash; sits above them: it watches health, routes work, enforces lane ownership, owns deploys, and is the single human-facing front door. Its living memory of the fleet&rsquo;s state is the cure for &ldquo;the agents keep forgetting.&rdquo;</p>
+        <p>PM and Chief of Staff are peers in their lanes. The Director is the operating manager and human-facing front door. The Continuous Improvement Engineer supplies the ranked engineering queue. The Staff Engineer stays independent of the code author, creating a second set of eyes before eligible work reaches production.</p>
       </div>
     </section>
 
-    <section class="resource-section" aria-label="Human oversight">
+    <section class="resource-section" aria-labelledby="fleet-org-chart">
+      <p class="fleet-kicker">The organization</p>
+      <h2 id="fleet-org-chart">A company-shaped system with clear accountability</h2>
+      <p class="resource-section-lede">The org chart is not decoration. It defines who owns a lane, who coordinates the lanes, who reviews the code, and where human authority remains absolute.</p>
+      <div class="fleet-org-chart" role="img" aria-label="Roman Bediner leads the agent organization. The Director manages the Project Manager, Chief of Staff, and Continuous Improvement Engineer. The Staff Engineer is an independent code review and merge gate connected to the Director's pull requests.">
+        <div class="fleet-org-human"><span class="fleet-org-symbol">R</span><div><strong>Roman Bediner</strong><span>Founder &middot; owner of direction, spend, and protected decisions</span></div></div>
+        <div class="fleet-org-connector" aria-hidden="true"></div>
+        <div class="fleet-org-director"><span class="fleet-org-symbol">D</span><div><strong>Director of Fleet Orchestration &amp; Engineering</strong><span>Operating manager &middot; front door &middot; fleet memory &middot; change management</span></div></div>
+        <div class="fleet-org-branches">
+          <div class="fleet-org-branch"><span class="fleet-org-symbol">PM</span><strong>Project Manager</strong><span>Execution intelligence</span></div>
+          <div class="fleet-org-branch"><span class="fleet-org-symbol">CoS</span><strong>Chief of Staff</strong><span>Knowledge intelligence</span></div>
+          <div class="fleet-org-branch"><span class="fleet-org-symbol">CI</span><strong>Continuous Improvement Engineer</strong><span>Backlog intelligence</span></div>
+        </div>
+        <div class="fleet-org-independent"><span class="fleet-org-symbol">SE</span><div><strong>Staff Engineer</strong><span>Independent code review, merge, deployment verification, and rollback safety net</span></div></div>
+      </div>
+    </section>
+
+    <section class="resource-section" aria-labelledby="fleet-autonomy">
       <div class="resource-blue-box fleet-note">
         <span class="fleet-note-tag">A human is always in charge</span>
-        <p>The fleet has an owner. The agents are direct reports &mdash; they take the execution and coordination off the team&rsquo;s plate, so the people they report to can spend their time on judgment, direction, and the decisions that matter. Nothing consequential ships without a human&rsquo;s green light.</p>
+        <h2 id="fleet-autonomy">Autonomy with boundaries, not autonomy theater</h2>
+        <p>The agents act independently inside explicit lanes. Human authority is concentrated where the downside is highest: protected code paths, credentials, spending, outbound commitments, and decisions that change the organization&rsquo;s risk profile.</p>
+        <div class="fleet-autonomy-grid">
+          <div><strong>Autonomous</strong><span>Read, monitor, summarize, classify, coordinate, create issues, and maintain durable records.</span></div>
+          <div><strong>Branch-only</strong><span>Write code, open pull requests, and propose changes without writing directly to <code>main</code>.</span></div>
+          <div><strong>Automated gate</strong><span>Run deterministic checks, adversarial review, eligible merges, deployment verification, and automatic rollback.</span></div>
+          <div><strong>Human-controlled</strong><span>Protected paths, credentials, spend, outbound commitments, and high-risk changes remain Roman&rsquo;s call.</span></div>
+        </div>
       </div>
     </section>
 
     <section class="resource-section" aria-labelledby="fleet-bigidea">
       <p class="fleet-kicker">The core idea</p>
       <h2 id="fleet-bigidea">The repo is the body. The cloud brain holds behavior.</h2>
-      <p>A code repository holds the <strong>runtime</strong> &mdash; scheduling, authentication, the agent loop, and the clients that connect to your workspace and tools. A cloud drive folder &mdash; the <strong>Company Brain</strong> &mdash; holds <strong>behavior</strong>: everything the agents say and decide lives there as plain skill files.</p>
-      <p>Each scheduled job loads its skill from the brain at runtime. Editing a skill changes behavior on the very next run, with no redeploy. That single decision is what makes the fleet easy to operate: <strong>behavior is content you edit, not code you ship.</strong></p>
+      <p>A code repository holds the <strong>runtime</strong> &mdash; scheduling, authentication, the agent loop, integration clients, engineering workflows, and deployment safeguards. A cloud drive folder &mdash; the <strong>Company Brain</strong> &mdash; holds the behavior that can change safely as plain skill files.</p>
+      <p>Most jobs load their skill from the brain at runtime, so editing a skill changes behavior on the next run with no redeploy. The engineering agents are the deliberate exception: the Continuous Improvement Engineer and Staff Engineer live in the code-and-deployment loop because they must inspect, change, review, and verify the body itself.</p>
 
       <div class="fleet-split" role="img" aria-label="The body is the code repository; the brain is the cloud drive; the two meet in one runtime.">
         <div class="fleet-split-col fleet-split-body">
           <span class="fleet-split-tag">The Body &middot; code repo</span>
-          <p>Scheduling, auth, the agent loop, and integration clients. Shipped by Git.</p>
+          <p>Scheduling, auth, agent loops, integrations, engineering workflows, and production safeguards. Shipped by Git.</p>
         </div>
         <div class="fleet-split-link" aria-hidden="true">
           <span class="fleet-split-arrow">&harr;</span>
@@ -147,23 +190,23 @@
         </div>
         <div class="fleet-split-col fleet-split-brain">
           <span class="fleet-split-tag">The Brain &middot; cloud drive</span>
-          <p>Skill files &mdash; the voice and judgment of every agent. Edited like documents.</p>
+          <p>Skill files, memory, and operating rules. Edited like documents; consumed at runtime.</p>
         </div>
       </div>
 
       <div class="resource-blue-box fleet-note">
         <span class="fleet-note-tag">Two update paths</span>
-        <p><strong>Change behavior</strong> &rarr; edit a skill file in the brain. Live on the next run, no deploy. &nbsp; <strong>Change the system</strong> &rarr; push code to the <code>main</code> branch; Vercel auto-builds and promotes to production.</p>
+        <p><strong>Change behavior</strong> &rarr; edit a skill file in the brain. Live on the next run, no deploy. &nbsp; <strong>Change the system</strong> &rarr; open a branch and pull request; independent review, merge controls, deployment verification, and rollback protect production.</p>
       </div>
     </section>
 
     <section class="resource-section" aria-labelledby="fleet-wired">
       <p class="fleet-kicker">How it's wired</p>
       <h2 id="fleet-wired">The stack, end to end</h2>
-      <p class="resource-section-lede">A serverless runtime on a schedule, a cloud drive for behavior, and a workspace as the surface. What talks to what:</p>
+      <p class="resource-section-lede">A multi-agent runtime across the cloud brain, working surfaces, GitHub, CI, deployment, and production systems. Slack is where people can reach the fleet; it is not where the architecture ends.</p>
 
       <div class="fleet-diagram">
-        <svg viewBox="0 0 760 492" role="img" aria-label="System architecture: a Vercel cron trigger drives the Vercel runtime — the body — which loads the company brain at run time, writes a heartbeat ledger, and routes through integration clients to the team workspace, structured tracker, and external data." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
+        <svg viewBox="0 0 760 492" role="img" aria-label="Agentic organization architecture: scheduled and event triggers drive a Vercel runtime that loads behavior from the Company Brain, routes work through integration clients, records heartbeats, and connects the operating fleet to workspace, GitHub, deployment, and external data systems." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
           <title>Agentic AI system architecture</title>
           <defs>
             <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18244e"></stop><stop offset="1" stop-color="#0a1026"></stop></linearGradient>
@@ -248,6 +291,22 @@
       </div>
     </section>
 
+    <section class="resource-section fleet-engineering-section" aria-labelledby="fleet-engineering">
+      <p class="fleet-kicker">The self-engineering loop</p>
+      <h2 id="fleet-engineering">From engineering queue to verified production</h2>
+      <p class="resource-section-lede">The fleet can improve its own runtime without giving one agent unchecked authority. Discovery, implementation, review, deployment, and recovery are separate responsibilities.</p>
+      <div class="fleet-engineering-flow" role="img" aria-label="Continuous Improvement Engineer ranks an engineering queue, the Director writes code and opens a pull request, the Staff Engineer reviews and merges eligible changes, Vercel deploys and verifies production, and failed deployments are automatically reverted.">
+        <div class="fleet-flow-card fleet-flow-ci"><span>01</span><strong>Find the work</strong><small>Continuous Improvement Engineer audits cost, health, caching, and recurring friction.</small></div>
+        <div class="fleet-flow-arrow" aria-hidden="true">&rarr;</div>
+        <div class="fleet-flow-card fleet-flow-director"><span>02</span><strong>Build the change</strong><small>Director selects the top ticket, writes the fix on a branch, and opens a pull request.</small></div>
+        <div class="fleet-flow-arrow" aria-hidden="true">&rarr;</div>
+        <div class="fleet-flow-card fleet-flow-review"><span>03</span><strong>Review independently</strong><small>Staff Engineer runs deterministic checks and adversarial code review.</small></div>
+        <div class="fleet-flow-arrow" aria-hidden="true">&rarr;</div>
+        <div class="fleet-flow-card fleet-flow-ship"><span>04</span><strong>Ship safely</strong><small>Eligible work merges, Vercel deploys, production is checked, and unhealthy releases revert.</small></div>
+      </div>
+      <div class="fleet-engineering-caption"><strong>What makes this autonomous:</strong> no single agent writes, approves, and ships its own change. The system separates initiative from authority and makes failure recoverable.</div>
+    </section>
+
     <section class="resource-section" aria-labelledby="fleet-run">
       <p class="fleet-kicker">Inside a run</p>
       <h2 id="fleet-run">How one scheduled run executes</h2>
@@ -312,8 +371,8 @@
 
     <section class="resource-section" aria-labelledby="fleet-operate">
       <p class="fleet-kicker">The operating layer</p>
-      <h2 id="fleet-operate">The Director operates the fleet &mdash; it doesn&rsquo;t do the fleet&rsquo;s work</h2>
-      <p class="resource-section-lede">The operator is itself a scheduled agent, with one job: keep the doers healthy, coordinated, and accountable across four functions.</p>
+      <h2 id="fleet-operate">The Director is the operating layer over the fleet</h2>
+      <p class="resource-section-lede">The Director is both operator and engineering manager: it keeps the organization healthy, coordinated, accountable, and continuously improving across six functions.</p>
       <div class="fleet-feature-grid">
         <div class="fleet-feature">
           <span class="fleet-feature-lbl">Observability</span>
@@ -333,7 +392,17 @@
         <div class="fleet-feature">
           <span class="fleet-feature-lbl">Front door &amp; memory</span>
           <h4>Conversational, persistent</h4>
-          <p>Through the workday the Director reads its channel, replies, enforces lane ownership, and keeps a living fleet-state memory current &mdash; so context survives across sessions. It also owns deploys and change management.</p>
+          <p>Through the workday the Director receives direction, routes work, enforces lane ownership, and keeps a living fleet-state memory current &mdash; so context survives across sessions.</p>
+        </div>
+        <div class="fleet-feature">
+          <span class="fleet-feature-lbl">Continuous improvement</span>
+          <h4>A ranked engineering queue</h4>
+          <p>The improvement engineer turns observed cost, caching, health, and workflow friction into ranked, measurable engineering work instead of vague ideas.</p>
+        </div>
+        <div class="fleet-feature">
+          <span class="fleet-feature-lbl">Change management</span>
+          <h4>A controlled path to production</h4>
+          <p>The Director works through branches and pull requests. Independent review, protected paths, deployment readiness checks, and rollback keep autonomy from becoming unchecked authority.</p>
         </div>
       </div>
     </section>
@@ -342,11 +411,11 @@
       <p class="fleet-kicker">House rules</p>
       <h2 id="fleet-principles">Operating principles</h2>
       <ul class="fleet-principles">
-        <li><b>The brain is the source of truth for behavior.</b> Edit skills in the cloud drive, not the repo. The repo is the runtime body.</li>
+        <li><b>Separate behavior from the body.</b> Most agent behavior lives in the cloud brain; runtime code, engineering workflows, and deployment safeguards live in Git.</li>
         <li><b>All infrastructure in one project.</b> Runtime, schedule, and every capability live together &mdash; not scattered across personal repos.</li>
         <li><b>Nothing on local disk.</b> Artifacts the agents create go to the brain; temporary files are cleaned up.</li>
         <li><b>Skills belong in their agent&rsquo;s folder.</b> Each agent&rsquo;s capabilities live under its own folder, never loose in the root.</li>
-        <li><b>Autonomous, reporting to one owner.</b> Propose and act; surface consequential moves for a green light; don&rsquo;t wait to be micromanaged.</li>
+        <li><b>Autonomous, with explicit authority.</b> Propose and act inside a lane; use independent gates for code; escalate protected paths and high-risk decisions.</li>
         <li><b>Voice is centralized per agent.</b> Personality lives in one file per agent, so a voice change lands everywhere at once.</li>
       </ul>
     </section>
@@ -354,10 +423,10 @@
     <section class="resource-section" aria-labelledby="fleet-install">
       <p class="fleet-kicker">Stand it up</p>
       <h2 id="fleet-install">Install &amp; setup</h2>
-      <p class="resource-section-lede">From an empty project to a running fleet. The wiring is GitHub-to-Vercel plus a set of secrets; behavior arrives separately, from the cloud brain.</p>
+      <p class="resource-section-lede">From an empty project to a running fleet. The wiring is GitHub-to-Vercel plus a cloud brain, a set of integrations, and an authority model that keeps every employee accountable.</p>
       <ol class="fleet-steps">
         <li><h4>Connect GitHub to Vercel</h4><p>Install the Vercel GitHub App on the code org and link it to a Vercel project. A push to <code>main</code> now builds and promotes automatically.</p></li>
-        <li><h4>Create the brain in the cloud drive</h4><p>Author each agent&rsquo;s skill files &mdash; <code>skill.md</code>, <code>personality.md</code>, and per-job <code>cron/*.md</code>. All behavior lives here; the repo holds none of it.</p></li>
+        <li><h4>Create the brain in the cloud drive</h4><p>Author each agent&rsquo;s skill files &mdash; <code>skill.md</code>, <code>personality.md</code>, and per-job <code>cron/*.md</code>. Most behavior lives here; engineering and deployment controls remain in the repo.</p></li>
         <li><h4>Set the secrets in Vercel</h4><p>Workspace token + signing secret, the cloud-drive service account, per-job skill file IDs, the cron bearer secret, and any CRM/community tokens. Secrets live only in Vercel env vars, never in the repo.</p></li>
         <li><h4>Declare the schedule in <code>vercel.json</code></h4><p>Every job and its timing live there; each production deploy re-registers the schedule. The repo folder path maps one-to-one to the cron route.</p></li>
         <li><h4>Push to <code>main</code> and verify</h4><p>Vercel builds and promotes to production; crons fire only there. Confirm the newest deployment matches your commit, then watch the heartbeat ledger fill in as jobs run.</p></li>
@@ -366,12 +435,12 @@
 
     <section class="resource-section" aria-labelledby="fleet-deploy">
       <p class="fleet-kicker">Ship &amp; roll back</p>
-      <h2 id="fleet-deploy">One git push is the whole deploy</h2>
-      <p class="resource-section-lede">Git is the source of truth for the body; Vercel is the only place it runs. The Vercel GitHub App wires them so a single <code>git push</code> is the entire deploy &mdash; and rollback never touches Git.</p>
+      <h2 id="fleet-deploy">One approved merge takes the body to production</h2>
+      <p class="resource-section-lede">Git is the source of truth for the body; Vercel is the only place it runs. A pull request passes through deterministic checks, independent review, merge controls, deployment verification, and rollback before it becomes a production change.</p>
 
       <div class="fleet-diagram">
         <svg viewBox="0 0 720 250" role="img" aria-label="Deploy pipeline: a git push triggers the Vercel GitHub App, which builds on every push. The main branch deploys to Production where the cron schedule runs, with instant rollback. Any other branch deploys to a Preview where the schedule never runs." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
-          <title>Deploy pipeline — Git to Vercel</title>
+          <title>Deploy pipeline — pull request to verified production</title>
           <defs>
             <filter id="soft-dep" x="-40%" y="-50%" width="180%" height="200%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#141308" flood-opacity="0.10"></feDropShadow></filter>
             <marker id="ah-dep" markerWidth="9" markerHeight="9" refX="5.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0.6,0.6 L5.6,3 L0.6,5.4" fill="none" stroke="#b3b9c4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></marker>

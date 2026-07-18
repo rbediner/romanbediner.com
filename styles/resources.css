@@ -1830,6 +1830,59 @@ body.wireframe-modal-open {
   margin: 0 0 4px;
 }
 
+/* Premium fleet treatment: quiet surfaces, sharp hierarchy, and restrained
+   depth keep the page feeling like an operating system rather than a dashboard. */
+.resource-fleet-main {
+  position: relative;
+}
+
+.resource-fleet-main::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  width: min(900px, 100vw);
+  height: 420px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(59, 108, 255, 0.10) 0%, rgba(59, 108, 255, 0) 68%);
+  z-index: -1;
+}
+
+.resource-fleet-main > h1 {
+  max-width: 900px;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-transform: none;
+  text-wrap: balance;
+  margin-bottom: 18px;
+}
+
+.resource-fleet-main > .section-accent {
+  width: 92px;
+  height: 4px;
+  margin-bottom: 28px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-blue), #9a6b1f);
+}
+
+.resource-fleet-main .resource-top-section {
+  padding: 26px 28px 24px;
+  border: 1px solid rgba(59, 108, 255, 0.14);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(242, 246, 255, 0.86));
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.08);
+}
+
+.resource-fleet-main .resource-detail-prose-lede {
+  max-width: 820px;
+  font-size: clamp(18px, 2.2vw, 23px);
+  line-height: 1.48;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
 .fleet-kicker {
   font-size: 13px;
   font-weight: 600;
@@ -1956,10 +2009,13 @@ body.wireframe-modal-open {
 /* Roster cards */
 .fleet-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 16px;
   margin: 18px 0 0;
 }
+
+.fleet-agent:nth-child(-n + 3) { grid-column: span 2; }
+.fleet-agent:nth-child(n + 4) { grid-column: span 3; }
 
 .fleet-agent {
   position: relative;
@@ -1968,6 +2024,14 @@ body.wireframe-modal-open {
   padding: 22px 20px 20px;
   background: var(--paper-2, #ffffff);
   overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.045);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.fleet-agent:hover {
+  transform: translateY(-3px);
+  border-color: rgba(59, 108, 255, 0.28);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.10);
 }
 
 .fleet-agent-bar {
@@ -1993,6 +2057,10 @@ body.wireframe-modal-open {
 
 .fleet-agent-cof .fleet-agent-role { color: #9a6b1f; }
 .fleet-agent-dir .fleet-agent-role { color: #2e6b5e; }
+.fleet-agent-cie .fleet-agent-bar { background: #8a5cc7; }
+.fleet-agent-cie .fleet-agent-role { color: #7543b1; }
+.fleet-agent-staff .fleet-agent-bar { background: #cba35a; }
+.fleet-agent-staff .fleet-agent-role { color: #9a6b1f; }
 
 .fleet-agent h3 {
   margin: 0 0 8px;
@@ -2005,6 +2073,139 @@ body.wireframe-modal-open {
   line-height: 1.55;
   color: var(--text-secondary);
 }
+
+/* Org chart */
+.fleet-org-chart {
+  position: relative;
+  margin-top: 22px;
+  padding: 28px;
+  border: 1px solid rgba(59, 108, 255, 0.16);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #0d1530 0%, #16213f 68%, #202b4b 100%);
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 24px 55px rgba(13, 21, 48, 0.20);
+}
+
+.fleet-org-chart::after {
+  content: "";
+  position: absolute;
+  right: -100px;
+  top: -120px;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(203, 163, 90, 0.25);
+  border-radius: 50%;
+  box-shadow: 0 0 0 30px rgba(203, 163, 90, 0.04), 0 0 0 60px rgba(203, 163, 90, 0.025);
+  pointer-events: none;
+}
+
+.fleet-org-human,
+.fleet-org-director,
+.fleet-org-independent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.fleet-org-human { border-color: rgba(203, 163, 90, 0.48); background: rgba(203, 163, 90, 0.14); }
+.fleet-org-director { border-color: rgba(143, 160, 214, 0.42); background: rgba(59, 108, 255, 0.18); }
+.fleet-org-independent { border-color: rgba(203, 163, 90, 0.4); background: rgba(203, 163, 90, 0.10); margin-top: 22px; }
+
+.fleet-org-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #dbe5ff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.fleet-org-human .fleet-org-symbol,
+.fleet-org-independent .fleet-org-symbol { background: rgba(203, 163, 90, 0.2); color: #f2d99f; }
+.fleet-org-chart strong { display: block; font-size: 15px; line-height: 1.25; }
+.fleet-org-chart span:not(.fleet-org-symbol) { display: block; margin-top: 4px; color: rgba(232, 237, 250, 0.68); font-size: 12px; line-height: 1.4; }
+.fleet-org-connector { width: 1px; height: 22px; margin: 0 auto; background: rgba(255, 255, 255, 0.28); }
+
+.fleet-org-branches {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 22px auto 0;
+  padding-top: 22px;
+  max-width: 860px;
+}
+
+.fleet-org-branches::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16.6%;
+  right: 16.6%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.fleet-org-branch {
+  position: relative;
+  padding: 16px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.055);
+  text-align: center;
+}
+
+.fleet-org-branch::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.fleet-org-branch .fleet-org-symbol { margin: 0 auto 10px; }
+.fleet-org-branch strong { font-size: 13px; }
+.fleet-org-independent::before { content: "independent gate"; position: absolute; top: -18px; left: 18px; transform: translateY(-100%); color: #f2d99f; font-size: 10px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; }
+
+/* Authority matrix */
+.fleet-note h2 { margin: 0 0 10px; font-size: clamp(24px, 3vw, 32px); }
+.fleet-autonomy-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
+.fleet-autonomy-grid > div { padding: 13px 14px; border: 1px solid rgba(59, 108, 255, 0.14); border-radius: 10px; background: rgba(255, 255, 255, 0.62); }
+.fleet-autonomy-grid strong { display: block; margin-bottom: 5px; font-size: 13px; color: var(--text-primary); }
+.fleet-autonomy-grid span { display: block; font-size: 12.5px; line-height: 1.45; color: var(--text-secondary); }
+
+/* The page's shareable hero diagram: a deliberate, linear system rather than a Slack-centric list. */
+.fleet-engineering-section { padding-top: 8px; }
+.fleet-engineering-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch; gap: 10px; margin-top: 22px; }
+.fleet-flow-card { min-height: 160px; padding: 18px 16px; border: 1px solid var(--border-color); border-radius: 14px; background: #fff; box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06); }
+.fleet-flow-card > span { display: block; margin-bottom: 24px; color: var(--accent-blue); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; }
+.fleet-flow-card strong { display: block; margin-bottom: 7px; font-size: 16px; line-height: 1.2; }
+.fleet-flow-card small { display: block; color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
+.fleet-flow-ci { border-top: 4px solid #7543b1; }
+.fleet-flow-director { border-top: 4px solid var(--accent-blue); }
+.fleet-flow-review { border-top: 4px solid #cba35a; }
+.fleet-flow-ship { border-top: 4px solid #2e6b5e; }
+.fleet-flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--accent-blue); font-size: 22px; }
+.fleet-engineering-caption { margin-top: 14px; padding: 14px 16px; border-left: 3px solid #cba35a; background: rgba(203, 163, 90, 0.08); color: var(--text-secondary); font-size: 14px; line-height: 1.55; }
+.fleet-engineering-caption strong { color: var(--text-primary); }
 
 /* Numbered step rail */
 .fleet-steps {
@@ -2304,6 +2505,13 @@ body.wireframe-modal-open {
 }
 
 @media (max-width: 767px) {
+  .resource-fleet-main > h1 {
+    font-size: clamp(40px, 12vw, 58px);
+  }
+  .resource-fleet-main .resource-top-section {
+    padding: 20px 18px 18px;
+    border-radius: 14px;
+  }
   .fleet-split {
     grid-template-columns: 1fr;
   }
@@ -2320,5 +2528,59 @@ body.wireframe-modal-open {
   .fleet-principles,
   .fleet-stack {
     grid-template-columns: 1fr;
+  }
+  .fleet-agent:nth-child(-n + 3),
+  .fleet-agent:nth-child(n + 4) {
+    grid-column: auto;
+  }
+  .fleet-org-chart {
+    padding: 18px 14px;
+  }
+  .fleet-org-branches {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+    margin-top: 14px;
+  }
+  .fleet-org-branches::before,
+  .fleet-org-branch::before {
+    display: none;
+  }
+  .fleet-org-branch {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    text-align: left;
+    align-items: center;
+  }
+  .fleet-org-branch .fleet-org-symbol {
+    grid-row: 1 / span 2;
+    margin: 0;
+  }
+  .fleet-org-branch span:not(.fleet-org-symbol) {
+    margin-top: 2px;
+  }
+  .fleet-org-independent::before {
+    position: static;
+    display: block;
+    margin: 0 0 8px;
+    transform: none;
+  }
+  .fleet-autonomy-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fleet-engineering-flow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .fleet-flow-card {
+    min-height: auto;
+  }
+  .fleet-flow-card > span {
+    margin-bottom: 12px;
+  }
+  .fleet-flow-arrow {
+    height: 18px;
+    transform: rotate(90deg);
   }
 }
