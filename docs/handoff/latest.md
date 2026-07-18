@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 323
-- Updated At (UTC): 2026-07-18T21:06:28Z
+- Handoff Sequence: 324
+- Updated At (UTC): 2026-07-18T21:11:11Z
 - Source Branch: staging
-- Source Commit: 0ebf120d8964d11289ed55ec1540420d48eb240a (pre-handoff baseline)
+- Source Commit: 14b099d116a196edde1d114901997b55e91adae5 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-18: Bediner Advisory LLC brand architecture on staging
@@ -15,7 +15,9 @@
 - Updated About, Services, and Connect metadata; added LLC Organization relationships to homepage, About, Services, and Connect structured data without replacing Roman as the primary person entity.
 - Added `QA/tests/test-llc-brand-architecture.js` and wired it into the Node contract suite. README and the live SEO Authority PRD were updated to record the brand hierarchy and scope.
 - Full CI-parity regression passed: Node contracts, 20 Jest suites / 73 tests, 44 Python tests, 10 Playwright tests, and all local release gates. Optional Pillow-based visual comparisons were skipped because Pillow is not installed.
-- Staging branch was pushed. Preview validation is the next operator step; no `prod` promotion was attempted.
+- Staging preview deployment completed successfully in GitHub Actions run `29661082653`; live validation passed 16 routes with homepage and sitemap HTTP 200. Review at `https://rbediner.github.io/romanbediner-preview/`.
+- GitHub Pages may serve cached HTML at the bare preview URL; use a cache-busted URL such as `https://rbediner.github.io/romanbediner-preview/?cb=20260718-2111` for the first review. The new LLC content was confirmed on `/`, `/about/`, `/services/`, and `/connect/` with that cache-buster.
+- No `prod` promotion was attempted.
 
 ## Latest — 2026-07-17: Six-mark experience row promoted to production
 
