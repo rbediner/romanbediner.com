@@ -1,10 +1,19 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 325
-- Updated At (UTC): 2026-07-18T21:47:37Z
+- Handoff Sequence: 326
+- Updated At (UTC): 2026-07-18T22:46:58Z
 - Source Branch: staging
-- Source Commit: 0932314ec471701710fc39d099e5fce554efdc77 (pre-handoff baseline)
+- Source Commit: fd23b01e19accf403f97537a6ffada23a2546e69 (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-18: NC Courage operating-experience copy promoted to production
+
+- Promoted the tested staging release `fd23b01e19accf403f97537a6ffada23a2546e69` to `prod` by fast-forward.
+- Updated the homepage's longer operating-experience paragraph to explicitly name NC Courage's Fractional Integration Officer leadership alongside LaserLight Communications and Agentic Society.
+- Added regression coverage in `QA/tests/test-llc-brand-architecture.js`, updated the root README, and recorded the public-safe copy decision in the live SEO Authority PRD.
+- Local full gate, staging CI (`29663540327`), staging deployment (`29663772117`), production CI (`29663791858`), Docs Sync (`29663791835`), and Deploy Pages with live smoke (`29663791863`) passed. Lighthouse required retries because the runner initially produced an 84 performance median; the final run passed the existing 85 threshold.
+- Production is live at `https://romanbediner.com`. The visible change is on the homepage's operating-experience narrative beneath the current-work callout and above the experience logo band.
+- Keep release watcher hygiene in place for this repo.
 
 ## Latest — 2026-07-18: Bediner Advisory LLC brand architecture on staging
 
