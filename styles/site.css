@@ -572,6 +572,30 @@ main li:last-child {
   color: var(--text-color, #111111);
 }
 
+/* Keep the legal entity subordinate to Roman Bediner in the shared footer identity. */
+.footer-identity {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-identity .footer-primary,
+.footer-identity .footer-entity {
+  margin-bottom: 0;
+}
+
+.footer-entity {
+  margin-top: 4px !important;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--muted-text, #6a6a6a);
+}
+
+/* Relationship copy stays quiet so the personal brand remains primary. */
+.entity-relationship-line {
+  color: var(--text-secondary, #6a6a6a);
+  font-size: 0.94em;
+}
+
 .footer-meta {
   font-size: 0.85rem;
   color: var(--muted-text, #6a6a6a);

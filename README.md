@@ -56,6 +56,7 @@
 - **Homepage operating-experience logos**: official color marks with generous column spacing and optical sizing by visible footprint. Logo cells never clip the artwork; the AWS source canvas is scaled so its visible mark remains legible beside Disney, Laser Light, Agentic Society, and the NC Courage crest.
 - **Dashboard resource page**: question grid changed to 3 columns (`repeat(3,1fr)`); box border-radius reduced to 6px to match mockup; `.resource-dashboard-quadrant h3` set to `font-weight: 600; font-size: 14px`; Core Dashboard Views `strong` color changed from `--accent-blue` to `--text-primary`.
 - `document.fonts.ready` added to `syncAboutTimelineOrbs()` to re-position timeline orbs after web font load.
+- **Bediner Advisory LLC brand architecture (staging):** Roman Bediner remains the primary public brand and global header identity. The full public-page footer now adds the restrained line `Advisory services delivered through Bediner Advisory LLC.`; About states the founder/principal relationship, Services identifies the delivery entity, and Connect presents the approved Roman Bediner / Bediner Advisory LLC endorsement. Homepage, About, Services, and Connect structured data identify the LLC without replacing Roman as author or publisher. Framework, Resources, dashboard, primary navigation, and redirect-only routes remain Roman-led and outside the visible LLC-content scope. The contract is enforced by `QA/tests/test-llc-brand-architecture.js`.
 
 ## Canonical Route Architecture
 Canonical public routes:

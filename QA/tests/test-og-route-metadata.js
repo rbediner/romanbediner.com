@@ -29,14 +29,14 @@ const expected = [
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
     ogTitle: 'About Roman Bediner | Fractional Integration Officer & AI Architect',
-    ogDescription: 'Operating background across Disney, AWS, Laser Light Communications, Agentic Society, and NC Courage, spanning fractional integration leadership, AI architecture, and execution systems.'
+    ogDescription: 'Operating background across Disney, AWS, Laser Light Communications, Agentic Society, and NC Courage, spanning fractional integration leadership, AI architecture, and execution systems delivered through Bediner Advisory LLC.'
   },
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
     title: 'Services | Fractional Integration Leadership & AI Architecture',
     ogTitle: 'Services | Fractional Integration Leadership & AI Architecture',
-    ogDescription: 'Fractional integration leadership, AI architecture, operating-model design, vendor evaluation, execution systems, and agentic workflows for organizations navigating growth and platform complexity.'
+    ogDescription: 'Fractional integration leadership, AI architecture, operating-model design, vendor evaluation, execution systems, and agentic workflows delivered through Bediner Advisory LLC.'
   },
   {
     file: 'framework/index.html',
@@ -61,7 +61,7 @@ const expected = [
     canonical: 'https://romanbediner.com/connect/',
     title: 'Connect | Fractional Integration Officer & AI Architect',
     ogTitle: 'Connect | Fractional Integration Officer & AI Architect',
-    ogDescription: 'Start a conversation about fractional integration leadership, AI architecture, operating-model design, vendor evaluation, and stronger execution systems for complex organizations.'
+    ogDescription: 'Start a conversation with Roman Bediner about fractional integration leadership, AI architecture, operating-model design, vendor evaluation, and stronger execution systems delivered through Bediner Advisory LLC.'
   },
   {
     file: 'resources/ai-enabled-operations-dashboard/index.html',
