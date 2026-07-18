@@ -1,12 +1,24 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 324
-- Updated At (UTC): 2026-07-18T21:11:11Z
+- Handoff Sequence: 325
+- Updated At (UTC): 2026-07-18T21:47:37Z
 - Source Branch: staging
-- Source Commit: 14b099d116a196edde1d114901997b55e91adae5 (pre-handoff baseline)
+- Source Commit: 0932314ec471701710fc39d099e5fce554efdc77 (pre-handoff baseline)
 - Active Agent: Claude
 
 ## Latest — 2026-07-18: Bediner Advisory LLC brand architecture on staging
+
+## Latest — 2026-07-18: Three-role SEO positioning promoted to production
+
+- Promoted the tested staging release `0932314ec471701710fc39d099e5fce554efdc77` to `prod` by fast-forward.
+- Updated homepage, About, Services, and Connect visible copy and metadata to consistently name Roman Bediner's current roles: Fractional COO for Agentic Society, Global Operations & Program Strategy Consultant for LaserLight Communications, and Fractional Integration Officer for NC Courage.
+- Strengthened homepage Person structured data with `hasOccupation` entries for all three roles, expanded `knowsAbout` terms, added a scoped Bediner Advisory LLC Organization entity, and added About ProfilePage markup while keeping Roman as the primary public person.
+- Refreshed title tags, descriptions, Open Graph/Twitter metadata, role vocabulary, sitemap `lastmod` values, README architecture notes, and the live SEO Authority PRD.
+- Added regression coverage for the role architecture, organization/profile entities, route metadata, and exact Connect/About role copy.
+- Local full regression passed: Node contract suite, 20 Jest suites / 73 tests, 44 Python tests, 10 Playwright tests, and all local release gates. Pillow-based visual comparisons remained skipped because Pillow is not installed.
+- Staging CI passed in GitHub Actions run `29661938684`; staging deployment passed in run `29662050442` for the exact release SHA.
+- Production CI passed in run `29662068040`; Deploy Pages, post-deploy live smoke, and release tagging passed in run `29662068046`. Explicit live verification passed 16 production route checks with homepage and sitemap HTTP 200.
+- Production is live at `https://romanbediner.com`. Handoff remains a docs-only follow-up and must preserve release watcher hygiene.
 
 - Implemented the targeted brand-architecture change on `staging` at product commit `0ebf120d8964d11289ed55ec1540420d48eb240a`.
 - Kept Roman Bediner as the visible global brand, header wordmark, author, publisher, primary navigation identity, and site name.
