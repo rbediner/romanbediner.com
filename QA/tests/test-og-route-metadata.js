@@ -22,21 +22,21 @@ const expected = [
   {
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
-    ogTitle: 'Roman Bediner | Fractional Integration Officer & AI Architect',
-    ogDescription: 'Fractional integration leadership and AI architecture for organizations connecting business priorities, systems, vendors, data, and execution. Current work spans NC Courage, Laser Light Communications, Agentic Society, Disney, and AWS.'
+    ogTitle: 'Roman Bediner | Fractional COO & AI Architect',
+    ogDescription: 'Roman Bediner is a Fractional COO and AI Architect delivering integration leadership, global operations, and program strategy through Bediner Advisory LLC.'
   },
   {
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
-    ogTitle: 'About Roman Bediner | Fractional Integration Officer & AI Architect',
-    ogDescription: 'Operating background across Disney, AWS, Laser Light Communications, Agentic Society, and NC Courage, spanning fractional integration leadership, AI architecture, and execution systems delivered through Bediner Advisory LLC.'
+    ogTitle: 'About Roman Bediner | Fractional COO & Operating Strategist',
+    ogDescription: 'Roman Bediner\'s current roles include Fractional COO for Agentic Society, global operations and program strategy for LaserLight Communications, and Fractional Integration Officer for NC Courage.'
   },
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
-    title: 'Services | Fractional Integration Leadership & AI Architecture',
-    ogTitle: 'Services | Fractional Integration Leadership & AI Architecture',
-    ogDescription: 'Fractional integration leadership, AI architecture, operating-model design, vendor evaluation, execution systems, and agentic workflows delivered through Bediner Advisory LLC.'
+    title: 'Services | Fractional COO, Operations & AI Architecture',
+    ogTitle: 'Services | Fractional COO, Operations & AI Architecture',
+    ogDescription: 'Fractional COO leadership, global operations and program strategy, integration leadership, AI architecture, and transformation delivery through Bediner Advisory LLC.'
   },
   {
     file: 'framework/index.html',
@@ -59,9 +59,9 @@ const expected = [
   {
     file: 'connect/index.html',
     canonical: 'https://romanbediner.com/connect/',
-    title: 'Connect | Fractional Integration Officer & AI Architect',
-    ogTitle: 'Connect | Fractional Integration Officer & AI Architect',
-    ogDescription: 'Start a conversation with Roman Bediner about fractional integration leadership, AI architecture, operating-model design, vendor evaluation, and stronger execution systems delivered through Bediner Advisory LLC.'
+    title: 'Connect | Fractional COO & Operating Strategy',
+    ogTitle: 'Connect | Fractional COO & Operating Strategy',
+    ogDescription: 'Start a conversation with Roman Bediner about Fractional COO leadership, global operations, program strategy, technology integration, and AI architecture.'
   },
   {
     file: 'resources/ai-enabled-operations-dashboard/index.html',

@@ -47,8 +47,8 @@ for (const subheading of requiredSubheadings) {
 }
 
 // Durable, non-time-sensitive construction for the Agentic Society chapter opener.
-if (!aboutHtml.includes('Operating Partner work with Agentic Society focuses on')) {
-  failures.push('About page must use the durable Operating Partner construction for Agentic Society.');
+if (!aboutHtml.includes('Fractional COO work with Agentic Society focuses on')) {
+  failures.push('About page must use the approved Fractional COO construction for Agentic Society.');
 }
 
 // The substantive claim about a coordinated fleet of agentic AI employees must remain.

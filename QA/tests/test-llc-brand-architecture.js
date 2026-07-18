@@ -43,9 +43,32 @@ for (const relativePath of fullPages) {
 const about = fs.readFileSync(path.join(root, 'about/index.html'), 'utf8');
 const services = fs.readFileSync(path.join(root, 'services/index.html'), 'utf8');
 const connect = fs.readFileSync(path.join(root, 'connect/index.html'), 'utf8');
+const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 if (!about.includes('Roman Bediner is the founder and principal of Bediner Advisory LLC')) failures += 1;
 if (!services.includes('Advisory services delivered through Bediner Advisory LLC.')) failures += 1;
 if (!connect.includes('Roman Bediner<br />Bediner Advisory LLC')) failures += 1;
+
+for (const [label, html] of [
+  ['homepage', homepage],
+  ['about', about],
+  ['services', services],
+  ['connect', connect]
+]) {
+  for (const phrase of [
+    'Fractional COO',
+    'Global Operations',
+    'Program Strategy',
+    'LaserLight Communications',
+    'Fractional Integration Officer',
+    'Agentic Society',
+    'NC Courage'
+  ]) {
+    if (!html.toLowerCase().includes(phrase.toLowerCase())) {
+      failures += 1;
+      console.error(`FAIL: ${label} is missing current-role SEO phrase "${phrase}".`);
+    }
+  }
+}
 
 for (const relativePath of ['index.html', 'about/index.html', 'services/index.html', 'connect/index.html']) {
   const html = fs.readFileSync(path.join(root, relativePath), 'utf8');
@@ -53,6 +76,15 @@ for (const relativePath of ['index.html', 'about/index.html', 'services/index.ht
     failures += 1;
     console.error(`FAIL: ${relativePath} is missing Bediner Advisory LLC structured data.`);
   }
+}
+
+if (!homepage.includes('"@type": "Organization"') || !homepage.includes('"@id": "https://romanbediner.com/#bediner-advisory"')) {
+  failures += 1;
+  console.error('FAIL: homepage must expose a canonical Bediner Advisory LLC Organization entity.');
+}
+if (!about.includes('"@type": "ProfilePage"') || !about.includes('"mainEntity"')) {
+  failures += 1;
+  console.error('FAIL: About page must expose a Person-focused ProfilePage entity.');
 }
 
 const redirects = fs.readFileSync(path.join(root, 'insights/index.html'), 'utf8');
