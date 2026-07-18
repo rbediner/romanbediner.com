@@ -1,10 +1,21 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 321
-- Updated At (UTC): 2026-07-17T11:34:28Z
+- Handoff Sequence: 323
+- Updated At (UTC): 2026-07-18T21:06:28Z
 - Source Branch: staging
-- Source Commit: 762fcf8735fbf618a896ff9a9e11dd2e5f18b35e (pre-handoff baseline)
+- Source Commit: 0ebf120d8964d11289ed55ec1540420d48eb240a (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-18: Bediner Advisory LLC brand architecture on staging
+
+- Implemented the targeted brand-architecture change on `staging` at product commit `0ebf120d8964d11289ed55ec1540420d48eb240a`.
+- Kept Roman Bediner as the visible global brand, header wordmark, author, publisher, primary navigation identity, and site name.
+- Added the approved `Advisory services delivered through Bediner Advisory LLC.` identity line to the footer of every full public page, including the six framework briefs and all public resource detail pages. Redirect-only `/insights/` remains unchanged.
+- Added the approved founder/principal relationship statement to About, delivery-entity language to Services, and the approved Roman Bediner / Bediner Advisory LLC endorsement to Connect.
+- Updated About, Services, and Connect metadata; added LLC Organization relationships to homepage, About, Services, and Connect structured data without replacing Roman as the primary person entity.
+- Added `QA/tests/test-llc-brand-architecture.js` and wired it into the Node contract suite. README and the live SEO Authority PRD were updated to record the brand hierarchy and scope.
+- Full CI-parity regression passed: Node contracts, 20 Jest suites / 73 tests, 44 Python tests, 10 Playwright tests, and all local release gates. Optional Pillow-based visual comparisons were skipped because Pillow is not installed.
+- Staging branch was pushed. Preview validation is the next operator step; no `prod` promotion was attempted.
 
 ## Latest — 2026-07-17: Six-mark experience row promoted to production
 
