@@ -45,10 +45,10 @@ for (let index = 1; index <= 8; index += 1) {
   'data-resource-location="agentic_fleet_page"',
   'data-track-pdf-download',
   `data-file-path="${artifactPath}"`,
-  'Download the Architecture PDF',
+  'Download the brief',
   'resources-analytics.js',
   'resource-collapsible-preview',
-  'Preview the architecture PDF',
+  'Preview the brief',
   'resources-carousel.js',
 ].forEach((needle) => {
   if (!aiPage.includes(needle)) fail(`AI Employees CTA contract is missing: ${needle}`);

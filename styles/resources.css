@@ -1972,9 +1972,79 @@ body.wireframe-modal-open {
   color: var(--text-secondary);
 }
 
-.resource-fleet-main .resource-fleet-artifact-cta .resource-primary-cta {
+.resource-fleet-main .resource-fleet-artifact-actions {
+  display: grid;
+  grid-template-columns: auto auto;
   grid-column: 2;
   grid-row: 1 / span 3;
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta:has(.resource-collapsible-preview[open]) {
+  grid-template-columns: 1fr;
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta:has(.resource-collapsible-preview[open]) .resource-fleet-artifact-actions {
+  grid-column: 1;
+  grid-row: auto;
+}
+
+.resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview {
+  grid-column: 1;
+  grid-row: 1;
+  width: auto;
+  margin: 0;
+  border: 0;
+}
+
+.resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid rgba(59, 108, 255, 0.32);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--accent-blue);
+  white-space: nowrap;
+}
+
+.resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview > summary:hover,
+.resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview > summary:focus-visible {
+  background: #ffffff;
+  border-color: rgba(59, 108, 255, 0.58);
+}
+
+.resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview > summary span {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  font-size: 18px;
+}
+
+.resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview[open] {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(59, 108, 255, 0.18);
+}
+
+.resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview[open] > summary {
+  margin-bottom: 18px;
+}
+
+.resource-fleet-main .resource-fleet-artifact-actions .resource-primary-cta {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta .resource-primary-cta {
   white-space: nowrap;
 }
 
@@ -3023,6 +3093,35 @@ body.wireframe-modal-open {
     grid-row: auto;
     justify-self: start;
     white-space: normal;
+  }
+  .resource-fleet-main .resource-fleet-artifact-actions {
+    grid-template-columns: minmax(0, 1fr);
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    min-width: 0;
+    justify-content: start;
+    justify-items: start;
+  }
+  .resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview,
+  .resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview[open] {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    min-width: 0;
+  }
+  .resource-fleet-main .resource-fleet-artifact-actions .resource-collapsible-preview-content,
+  .resource-fleet-main .resource-fleet-artifact-actions .resource-carousel-shell {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .resource-fleet-main .resource-fleet-artifact-actions .resource-primary-cta {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .resource-fleet-main .resource-collapsible-preview > summary {
     padding: 18px 0;
