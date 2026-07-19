@@ -47,6 +47,9 @@ for (let index = 1; index <= 8; index += 1) {
   `data-file-path="${artifactPath}"`,
   'Download the Architecture PDF',
   'resources-analytics.js',
+  'resource-collapsible-preview',
+  'Preview the architecture PDF',
+  'resources-carousel.js',
 ].forEach((needle) => {
   if (!aiPage.includes(needle)) fail(`AI Employees CTA contract is missing: ${needle}`);
 });
@@ -68,6 +71,10 @@ for (let index = 1; index <= 8; index += 1) {
 
 if ((hub.match(/data-carousel-slide/g) || []).length !== 8) {
   fail('Resources hub preview must contain exactly eight carousel slides');
+}
+
+if ((aiPage.match(/data-carousel-slide/g) || []).length !== 8) {
+  fail('Agentic AI Employees collapsible preview must contain exactly eight carousel slides');
 }
 
 console.log('PASS: Agentic Operations Architecture staging integration contract');

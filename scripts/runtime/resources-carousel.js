@@ -101,7 +101,8 @@
       modal.className = 'resource-preview-modal';
       modal.setAttribute('role', 'dialog');
       modal.setAttribute('aria-modal', 'true');
-      modal.setAttribute('aria-label', 'Framework summary slide preview');
+      const resourceContext = readResourceContext(carousel);
+      modal.setAttribute('aria-label', `${resourceContext.resource_title || 'Resource'} slide preview`);
       modal.setAttribute('tabindex', '-1');
 
       const inner = document.createElement('div');

@@ -1978,6 +1978,65 @@ body.wireframe-modal-open {
   white-space: nowrap;
 }
 
+.resource-fleet-main .resource-collapsible-preview {
+  margin-top: 28px;
+  border-top: 1px solid rgba(59, 108, 255, 0.22);
+  border-bottom: 1px solid rgba(59, 108, 255, 0.22);
+}
+
+.resource-fleet-main .resource-collapsible-preview > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 2px;
+  color: var(--accent-blue);
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  list-style: none;
+}
+
+.resource-fleet-main .resource-collapsible-preview > summary::-webkit-details-marker {
+  display: none;
+}
+
+.resource-fleet-main .resource-collapsible-preview > summary span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(59, 108, 255, 0.28);
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.resource-fleet-main .resource-collapsible-preview[open] > summary span {
+  transform: rotate(45deg);
+}
+
+.resource-fleet-main .resource-collapsible-preview-content {
+  padding: 0 0 28px;
+}
+
+.resource-fleet-main .resource-collapsible-preview-content h2 {
+  margin: 0 0 10px;
+  color: var(--text-primary);
+  font-size: clamp(26px, 3.4vw, 34px);
+}
+
+.resource-fleet-main .resource-collapsible-preview-content > p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.resource-fleet-main .resource-collapsible-preview .resource-carousel-shell {
+  margin-top: 22px;
+}
+
 .resource-fleet-main .resource-detail-prose-lede {
   max-width: 820px;
   font-size: clamp(18px, 2.2vw, 23px);
@@ -2964,6 +3023,9 @@ body.wireframe-modal-open {
     grid-row: auto;
     justify-self: start;
     white-space: normal;
+  }
+  .resource-fleet-main .resource-collapsible-preview > summary {
+    padding: 18px 0;
   }
   .fleet-split {
     grid-template-columns: 1fr;
