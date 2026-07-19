@@ -1,5 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Services reading hierarchy refinement — staging only
+
+- Refined the long-form Services offerings without adding more card chrome: each offering now opens with a slightly stronger thesis and closes, where applicable, with a quiet blue `Best suited for` reading landmark. This gives the page a more deliberate editorial scan path while preserving the approved copy and distinct service icons.
+- A new Playwright assertion protects that hierarchy at phone width: the thesis remains larger than ordinary service prose and the fit signal retains its slim blue rule. The existing mobile rule remains intact—long-form Services sections use divider-led editorial rhythm rather than oversized boxed cards.
+- Local focused Playwright (2/2), the full Node contract suite, `git diff --check`, and Google Drive drift cleanup passed. Hosted staging deployment `29703316019` passed for product SHA `c0fdfff2ddaf01b99af0b17cdf94c84908e10a65`.
+- Completed a fresh hosted audit across all 16 canonical routes at desktop and phone widths (32 renders). There was no horizontal overflow and no filtered-icon regression. Direct visual inspection confirmed the new Services composition, Dashboard, and PasteFlow at phone size and Services on desktop.
+- Updated the live `romanbediner.com PRD`. This remains staging-only; do not promote to `prod` or update the reusable page-building skill until Roman explicitly approves the final direction.
+
 ## Latest: 2026-07-19: Mobile editorial-rhythm refinement — staging only
 
 - A further visual EBI pass kept the compact reference-card anatomy on Dashboard and PasteFlow, but corrected the mobile behavior for truly long-form content. About professional chapters and Services offerings now shed their oversized outer card chrome below 640px and read as numbered editorial sequences with thin separators, comfortable 16px prose, and intact hierarchy.
@@ -142,10 +150,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 360
-- Updated At (UTC): 2026-07-19T20:42:32Z
+- Handoff Sequence: 361
+- Updated At (UTC): 2026-07-19T20:54:35Z
 - Source Branch: staging
-- Source Commit: f7a196b49fe1984d2acccfc8b3c889b005fbf3d3 (pre-handoff baseline)
+- Source Commit: c0fdfff2ddaf01b99af0b17cdf94c84908e10a65 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
