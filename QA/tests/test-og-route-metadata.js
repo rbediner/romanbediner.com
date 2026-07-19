@@ -29,7 +29,7 @@ const expected = [
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
     ogTitle: 'About Roman Bediner | Fractional COO & Operating Strategist',
-    ogDescription: 'Roman Bediner\'s current roles include Fractional COO for Agentic Society, global operations and program strategy for LaserLight Communications, and Fractional Integration Officer for NC Courage.'
+    ogDescription: 'Roman Bediner\'s current roles include Fractional COO for Agentic Society, global operations and program strategy for LaserLight Communications, and Chief Fractional Integration Officer for NC Courage.'
   },
   {
     file: 'services/index.html',
