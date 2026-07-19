@@ -76,10 +76,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 353
-- Updated At (UTC): 2026-07-19T18:31:32Z
+- Handoff Sequence: 354
+- Updated At (UTC): 2026-07-19T18:34:01Z
 - Source Branch: staging
-- Source Commit: 0b3b2ff6da93b7ea1e804591714b3424bb806115 (pre-handoff baseline)
+- Source Commit: a684008459af0e9050ed40b818fa450c485ed625 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
