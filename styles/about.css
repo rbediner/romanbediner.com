@@ -292,6 +292,31 @@
   }
 }
 
+@media (max-width: 640px) {
+  .arc-timeline-wrapper { gap: 0; }
+
+  .arc-item {
+    /* Long professional chapters should read like a composed narrative on a
+       phone, not one uninterrupted stack of oversized boxed résumé entries. */
+    padding: 30px 0 32px;
+    border: 0;
+    border-top: 1px solid rgba(15, 35, 76, 0.13);
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .arc-item:last-child { border-bottom: 1px solid rgba(15, 35, 76, 0.13); }
+
+  .arc-narrative { gap: 20px; }
+
+  .arc-narrative p,
+  .arc-narrative p:first-child {
+    font-size: 16px;
+    line-height: 1.68;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .arc-item,
   .about-chapter-nav a {

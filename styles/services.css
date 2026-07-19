@@ -214,14 +214,25 @@
 
 @media (max-width: 640px) {
   .svc-list {
+    gap: 0;
     margin-bottom: 40px;
   }
 
   .svc-entry {
+    /* A multi-paragraph service description is an editorial chapter, not a
+       compact card. Removing the enclosing chrome on phones gives the prose a
+       calm reading rhythm without sacrificing the icon, number, or hierarchy. */
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 22px 20px 24px;
+    padding: 30px 0 32px;
+    border: 0;
+    border-top: 1px solid rgba(15, 35, 76, 0.13);
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
   }
+
+  .svc-entry:last-child { border-bottom: 1px solid rgba(15, 35, 76, 0.13); }
 
   .svc-num {
     margin-bottom: 18px;
@@ -233,7 +244,11 @@
 
   .svc-icon-tile { width: 58px; height: 58px; border-radius: 18px; }
 
-  .svc-body > p:not(.svc-kicker) { grid-column: 1 / -1; }
+  .svc-body > p:not(.svc-kicker) {
+    grid-column: 1 / -1;
+    font-size: 16px;
+    line-height: 1.65;
+  }
 
   .services-capability-section,
   .services-application-section {

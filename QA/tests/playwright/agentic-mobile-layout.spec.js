@@ -263,3 +263,34 @@ test('every canonical route remains viewport-safe at desktop and phone widths', 
     }
   }
 });
+
+/**
+ * Invariant:
+ * - Long About and Services prose becomes a readable editorial sequence on a
+ *   phone instead of a stack of artificially boxed, oversized cards.
+ */
+test('long-form chapters use editorial mobile rhythm rather than oversized card chrome', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  await page.goto(`http://${host}:${port}/about/`, { waitUntil: 'domcontentloaded' });
+  const about = await page.evaluate(() => {
+    const chapter = document.querySelector('.arc-item');
+    const copy = document.querySelector('.arc-narrative p');
+    const styles = getComputedStyle(chapter);
+    return { borderTop: styles.borderTopWidth, boxShadow: styles.boxShadow, copySize: parseFloat(getComputedStyle(copy).fontSize) };
+  });
+  expect(about.borderTop).toBe('1px');
+  expect(about.boxShadow).toBe('none');
+  expect(about.copySize).toBeGreaterThanOrEqual(16);
+
+  await page.goto(`http://${host}:${port}/services/`, { waitUntil: 'domcontentloaded' });
+  const services = await page.evaluate(() => {
+    const chapter = document.querySelector('.svc-entry');
+    const copy = document.querySelector('.svc-body > p:not(.svc-kicker)');
+    const styles = getComputedStyle(chapter);
+    return { borderTop: styles.borderTopWidth, boxShadow: styles.boxShadow, copySize: parseFloat(getComputedStyle(copy).fontSize) };
+  });
+  expect(services.borderTop).toBe('1px');
+  expect(services.boxShadow).toBe('none');
+  expect(services.copySize).toBeGreaterThanOrEqual(16);
+});
