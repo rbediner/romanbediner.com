@@ -289,20 +289,25 @@ test('long-form chapters use editorial mobile rhythm rather than oversized card 
     const copy = document.querySelector('.svc-body > p:not(.svc-kicker):not(.svc-lede):not(.svc-best-fit)');
     const lead = document.querySelector('.svc-lede');
     const bestFit = document.querySelector('.svc-best-fit');
+    const paragraphs = [...document.querySelectorAll('.svc-body > p:not(.svc-kicker)')];
     const styles = getComputedStyle(chapter);
     return {
       borderTop: styles.borderTopWidth,
       boxShadow: styles.boxShadow,
       copySize: parseFloat(getComputedStyle(copy).fontSize),
       leadSize: parseFloat(getComputedStyle(lead).fontSize),
+      leadWeight: parseInt(getComputedStyle(lead).fontWeight, 10),
       bestFitRule: getComputedStyle(bestFit).borderLeftWidth,
+      paragraphGap: paragraphs[2].getBoundingClientRect().top - paragraphs[1].getBoundingClientRect().bottom,
     };
   });
   expect(services.borderTop).toBe('1px');
   expect(services.boxShadow).toBe('none');
   expect(services.copySize).toBeGreaterThanOrEqual(16);
   // The opening thesis and closing fit signal must remain visible landmarks,
-  // without turning the long-form section back into a heavy card on mobile.
-  expect(services.leadSize).toBeGreaterThan(services.copySize);
+  // without using an oversized phone type scale or heavy card treatment.
+  expect(services.leadSize).toBe(services.copySize);
+  expect(services.leadWeight).toBeGreaterThanOrEqual(600);
   expect(services.bestFitRule).toBe('2px');
+  expect(services.paragraphGap).toBeLessThanOrEqual(18);
 });

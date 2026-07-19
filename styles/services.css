@@ -242,7 +242,7 @@
        calm reading rhythm without sacrificing the icon, number, or hierarchy. */
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 30px 0 32px;
+    padding: 22px 0 24px;
     border: 0;
     border-top: 1px solid rgba(15, 35, 76, 0.13);
     border-radius: 0;
@@ -253,27 +253,70 @@
   .svc-entry:last-child { border-bottom: 1px solid rgba(15, 35, 76, 0.13); }
 
   .svc-num {
-    margin-bottom: 18px;
+    width: 34px;
+    height: 26px;
+    margin-bottom: 12px;
+    font-size: 10px;
   }
 
-  .svc-body { grid-template-columns: 70px minmax(0, 1fr); column-gap: 16px; }
+  /* Phone headers use a compact metadata row followed by a full-width title.
+     Keeping the title beside a large icon squeezed it into a needlessly narrow
+     column and made every service feel taller than the content warrants. */
+  .svc-body {
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-rows: 48px auto;
+    column-gap: 12px;
+  }
 
-  .svc-label-text { font-size: 33px; }
+  .svc-kicker {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    font-size: 10px;
+    line-height: 1.25;
+  }
 
-  .svc-icon-tile { width: 58px; height: 58px; border-radius: 18px; }
+  .svc-icon-tile {
+    grid-column: 1;
+    grid-row: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .svc-icon,
+  .svc-entry:first-child .svc-icon { width: 23px; height: 23px; }
+
+  .svc-label-text {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 14px;
+    font-size: 29px;
+    line-height: 1.03;
+  }
+
+  .svc-label-text::after { margin-top: 12px; }
 
   .svc-body > p:not(.svc-kicker) {
     grid-column: 1 / -1;
+    /* Grid-item margins do not collapse. Reset the desktop bottom margin here
+       so consecutive mobile paragraphs keep one deliberate 16px gap instead
+       of accumulating both top and bottom space. */
+    margin: 16px 0 0;
     font-size: 16px;
-    line-height: 1.65;
+    line-height: 1.55;
   }
 
-  .svc-body > p.svc-lede { font-size: 17px; }
+  .svc-body > p.svc-lede {
+    font-size: 16px;
+    font-weight: 600;
+  }
 
   .svc-body > p.svc-best-fit {
-    margin-top: 28px;
-    padding: 13px 14px;
-    font-size: 15px;
+    margin-top: 20px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .services-capability-section,
