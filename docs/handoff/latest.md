@@ -1,5 +1,28 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Agentic resource mobile and evidence-boundary correction
+
+- Removed the page-only multicolor underline and matched the shared solid blue resource accent used across the site.
+- Folded the duplicate introductory paragraph into the blue hero callout so the page reaches the architecture sooner and no longer repeats its thesis.
+- Changed the resource-hub pill to `AGENTIC AI EMPLOYEES`, with `REFERENCE ARCHITECTURE + BUILD REPORT` retained as supporting classification text.
+- Fixed the mobile org chart's intrinsic-width overflow, including the independent Staff Engineer gate, and added word wrapping safeguards for long role labels.
+- Kept the floating `On this page` control hidden over the opening content. It appears only after the inline orientation rail has passed, and is right-aligned on mobile.
+- Added `QA/tests/playwright/agentic-mobile-layout.spec.js`, covering 390px overflow, card containment, and orientation-control timing. Local full QA passed: 44 Python tests, 20 Jest suites / 73 tests, 11 Playwright tests, Node contracts, focused Agentic contracts, link validation, and live visual review at desktop and mobile widths.
+- Staging CI passed in run `29688336386`; staging deployment passed in run `29688439117`. Production CI passed in run `29688479677`; Deploy Pages and live smoke passed in run `29688479647`.
+- Production is live at `https://romanbediner.com/resources/agentic-ai-employees/` on product SHA `8c342fda2aa92c9795143277f7ddec2e7fa1640d`.
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
+- Handoff Sequence: 339
+- Updated At (UTC): 2026-07-19T13:19:36Z
+- Source Branch: staging
+- Source Commit: 8c342fda2aa92c9795143277f7ddec2e7fa1640d (pre-handoff baseline)
+- Active Agent: Codex
+
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
 
 - Reclassified `/resources/agentic-ai-employees/` as `REFERENCE ARCHITECTURE + BUILD REPORT`, because it documents a first-party system without a named external customer outcome. The resource hub card now uses the same evidence boundary and links to `Explore the Build Report`.
