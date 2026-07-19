@@ -2170,10 +2170,6 @@ body.wireframe-modal-open {
   filter: invert(32%) sepia(93%) saturate(1754%) hue-rotate(214deg) brightness(92%) contrast(88%);
 }
 
-.resource-dashboard-quadrant:first-child .resource-system-icon img {
-  filter: brightness(0) invert(1);
-}
-
 .resource-system-kicker {
   grid-column: 2;
   grid-row: 1;
