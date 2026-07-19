@@ -87,16 +87,25 @@ Validation:
 - Mobile acceptance is covered by the new 390px Playwright contract; a manual DevTools phone screenshot was not run in this session.
 - Production remains untouched and requires explicit Roman approval.
 
+## Latest: 2026-07-19: Editorial card-system reconstruction — staging only
+
+- Rebuilt the documented card categories as real editorial layouts rather than a superficial border-and-shadow pass. Compact dashboard prompts now use numbered scan markers; Dashboard quadrants and core views, Resources cards, and PasteFlow capabilities now use a marker, serif title, blue rule, explanatory copy, and soft Roman-blue edge wash.
+- Services and Framework preserve their distinct existing approved icon assets in compact blue-tinted tiles; no icon was added where there was no meaningful approved source set. About, Insights, and the Agentic resource preserve their established editorial hierarchy while receiving the shared contained-surface treatment. No teal/green palette, repeated icon, false click state, or consumer-app rounding was introduced.
+- Product commits: `3a329ad` and `edcdaf6` on `staging`. Hosted CI passed after the known Lighthouse retry; manual Deploy Staging run `29700627150` passed for exact SHA `edcdaf6afb58564662e45bfb8ffd188a73c4f77b`.
+- Local verification passed: preview smoke, `npm run test:jest` (20 suites / 73 tests), `npm run test:node`, and `npm run test:playwright` (14/14). The new 390px card-layout contract verifies editorial anatomy and zero page-level horizontal overflow for Dashboard and PasteFlow; Services verifies five unique icon tiles with no phone overflow.
+- Chrome visual inspection at desktop width passed for Dashboard, PasteFlow, Services, Framework, About, Agentic AI Employees, and Resources. Inspect `https://rbediner.github.io/romanbediner-preview/?cb=edcdaf6` plus the specific routes below before any production decision. Production remains untouched.
+- Updated the live SEO Authority PRD and shared `bediner-site` skill with the explicit card anatomy and icon discipline.
+
 ## Release Watcher Hygiene
 
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 355
-- Updated At (UTC): 2026-07-19T19:07:29Z
+- Handoff Sequence: 356
+- Updated At (UTC): 2026-07-19T19:34:09Z
 - Source Branch: staging
-- Source Commit: 80a8003a15ccf46bfa67c4bc71261aaaabefa255 (pre-handoff baseline)
+- Source Commit: edcdaf6afb58564662e45bfb8ffd188a73c4f77b (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
