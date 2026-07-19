@@ -1,5 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: About current-work hierarchy — staging only
+
+- Reframed the About hero’s current-responsibilities copy as a distinct label followed by three role/company reading units. This now has the same intentional rhythm at desktop and phone widths instead of wrapping as a dense all-caps sentence.
+- Added a clear 32px desktop / 34px phone pause before the Bediner Advisory relationship statement. The change remains editorial—no additional card or divider was introduced.
+- Added a focused About regression test asserting all three responsibility units. Node contracts, focused Playwright, and Python About tests passed.
+- Product commit `a3211357729ea31fca0d049df801ced5393357dc`; Deploy Staging run `29705398877` passed. Hosted screenshots at 1440px and 390px confirm three units, no horizontal overflow, and the intended separation.
+- Updated the live `romanbediner.com PRD`. This remains staging-only; production and the reusable page-building skill remain untouched pending Roman’s explicit approval.
+
 ## Latest: 2026-07-19: Compact Dashboard resource surfaces — staging only
 
 - Kept the approved PasteFlow capability-card treatment unchanged: compact two-column desktop cards, purpose-specific dark-outline icons in quiet blue tiles, blue labels/rules, serif titles, and copy-led height.
@@ -175,10 +183,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 364
-- Updated At (UTC): 2026-07-19T21:39:28Z
+- Handoff Sequence: 365
+- Updated At (UTC): 2026-07-19T22:04:05Z
 - Source Branch: staging
-- Source Commit: bf4be77ac38a16ebdca919d3cc1b3080110a11fe (pre-handoff baseline)
+- Source Commit: a3211357729ea31fca0d049df801ced5393357dc (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
