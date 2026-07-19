@@ -1,5 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: About Operating Philosophy rail alignment
+
+- Widened the About Operating Philosophy desktop paragraph measure from 780px to 1010px so its readable right edge aligns with the outer body rail used by the professional-background chapter narratives.
+- Preserved the existing mobile `max-width: 100%` fallback. Browser geometry checks at 1440px, 1024px, 768px, 430px, 390px, and 320px showed no horizontal overflow.
+- Local About and Operating Philosophy contracts passed. Hosted staging verification passed at 1440px and 390px with the expected paragraph/card alignment and no overflow.
+- The live SEO Authority PRD records this UX rule and the staging-to-production acceptance boundary.
+- Product commit: `f8d9250` (`Align About philosophy reading rail`), staging CI and Deploy Staging passed for the exact SHA.
+- About page production promotion is approved for this exact tested SHA; production CI, Deploy Pages, live smoke, and `release:verify-prod` remain the final release gates.
+
 ## Latest: 2026-07-19: About professional-background EBI pass — staging only
 
 - Applied the requested EBI/fresh-eyes pass to `/about/` only. The five professional-background chapters now render as restrained editorial panels with explicit `01`–`05` markers, attached role/company labels, a readable narrative measure, subtle shared-token borders, and a visual current-to-history sequence.
@@ -49,10 +58,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 348
-- Updated At (UTC): 2026-07-19T17:21:02Z
+- Handoff Sequence: 349
+- Updated At (UTC): 2026-07-19T17:40:27Z
 - Source Branch: staging
-- Source Commit: 5f83d39777cda07c81e2d8dbd950a8f8cd181dd4 (pre-handoff baseline)
+- Source Commit: f8d92507dc45d6291433548c1a5324cff7be1463 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
