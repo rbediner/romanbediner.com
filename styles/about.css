@@ -53,10 +53,14 @@
   scroll-margin-top: 96px;
 }
 
-/* Restrained editorial inset: a thin blue left rule sets the close apart without a heavy card. */
+/* Restrained editorial close: a thin blue rule, quiet wash, and readable full-width measure. */
 .about-philosophy-copy {
   border-left: 3px solid var(--accent-blue);
-  padding-left: 28px;
+  padding: 28px 30px 30px;
+  border-top: 1px solid var(--surface-border);
+  border-right: 1px solid var(--surface-border);
+  border-bottom: 1px solid var(--surface-border);
+  background: linear-gradient(135deg, #ffffff 0%, rgba(59, 108, 255, 0.055) 100%);
 }
 
 .about-philosophy-copy h2 {
@@ -271,7 +275,7 @@
   }
 
   .about-philosophy-copy {
-    padding-left: 16px;
+    padding: 22px 18px 24px;
   }
 
   .about-philosophy-copy p {

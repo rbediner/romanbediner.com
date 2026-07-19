@@ -1,3 +1,4 @@
+import re
 import unittest
 from pathlib import Path
 
@@ -12,7 +13,8 @@ class ServicesStackTest(unittest.TestCase):
     def test_five_service_entries_exist(self):
         # Attribute-tolerant: each .svc-entry now also carries an id for the
         # "On this page" section nav, so match the class rather than an exact tag.
-        self.assertEqual(self.services_html.count('class="svc-entry"'), 5)
+        # Service entries may carry shared contained-surface modifiers in addition to their stable hook.
+        self.assertEqual(len(re.findall(r'class="[^"]*\bsvc-entry\b[^"]*"', self.services_html)), 5)
         self.assertNotIn('Execution Leadership Coaching', self.services_html)
         self.assertNotIn('Productizing Operations for Modern AI-Enabled Work', self.services_html)
 

@@ -111,6 +111,32 @@ html {
   transform: translateX(6px);
 }
 
+/* The framework close is a synthesis callout, not another stage card. */
+.framework-application {
+  max-width: var(--framework-max-width);
+  margin: 52px auto 0;
+  padding: 30px 34px 32px;
+  border-color: var(--surface-border);
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.09), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.framework-application h2 {
+  margin-top: 0;
+}
+
+.framework-application p {
+  max-width: 780px;
+}
+
+@media (max-width: 640px) {
+  .framework-application {
+    margin-top: 36px;
+    padding: 24px 20px;
+  }
+}
+
 .framework-thesis-block p {
   margin: 0 0 8px;
 }
