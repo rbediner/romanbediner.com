@@ -54,7 +54,8 @@ for (let index = 1; index <= 10; index += 1) {
   'data-carousel-unit="Page"',
   'Page 1 of 10',
   'slide-10.png',
-  'resources-carousel.js',
+  // The version query prevents an older cached runtime from relabeling PDF pages as slides.
+  'resources-carousel.js?v=20260719',
 ].forEach((needle) => {
   if (!aiPage.includes(needle)) fail(`AI Employees CTA contract is missing: ${needle}`);
 });
@@ -71,7 +72,7 @@ for (let index = 1; index <= 10; index += 1) {
   'data-carousel-unit="Page"',
   'Page 1 of 10',
   `data-file-path="${artifactPath}"`,
-  'resources-carousel.js',
+  'resources-carousel.js?v=20260719',
 ].forEach((needle) => {
   if (!hub.includes(needle)) fail(`Resources hub preview contract is missing: ${needle}`);
 });
