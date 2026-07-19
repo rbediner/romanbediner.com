@@ -1,5 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: About professional-background EBI pass — staging only
+
+- Applied the requested EBI/fresh-eyes pass to `/about/` only. The five professional-background chapters now render as restrained editorial panels with explicit `01`–`05` markers, attached role/company labels, a readable narrative measure, subtle shared-token borders, and a visual current-to-history sequence.
+- Removed the obsolete vertical timeline rail, decorative timeline orbs, and the runtime code that positioned them. The approved chapter copy, stable anchor IDs, floating `On this page` source, Operating Philosophy copy/treatment, page metadata/schema/analytics, and Services transition remain intact.
+- Kept the narrative as prose; no bullets, fake links, footer CTA, invented facts, hover-only information, fixed heights, or long-heading nowrap rules were introduced. Added reduced-motion behavior and narrow-phone padding safeguards.
+- Added focused static assertions for panel structure, chapter markers, copy form, obsolete-orb removal, token usage, wrapping, reduced motion, and Operating Philosophy preservation in `QA/tests/test-about-redesign.js` and `QA/tests/test_about_redesign.py`.
+- Visual QA rendered and inspected the full page at 1440x1200, 1280x900, 1024x900, 768x1024, 430x932, 390x844, and 320x800. No horizontal overflow was found. Page heights changed from 4534→4242, 4534→4242, 4871→4439, 4545→4399, 6681→6794, 7237→7467, and 8718→8684 respectively; the mobile increase at 430/390 reflects the added contained panel boundaries while the narrowest 320px version remains slightly shorter.
+- Local validation passed: focused About Python tests (6/6), `npm run test:node`, `npm run test:playwright` (12/12), `npm run qa:prepush-gate`, and `npm run qa:ci-parity` (20 Jest suites/73 tests, 46 Python tests, 12 Playwright tests). Baseline image comparisons remain unavailable because Pillow is not installed in this repo environment.
+- Updated the live `SEO Authority PRD` with the About EBI decision and staging-only acceptance boundary.
+- Product commit: `5f83d39` on `staging`. This is intentionally not promoted to `prod`; staging preview deployment and browser review are the next steps.
+
 ## Latest: 2026-07-19: Staging Agentic Operations Architecture artifact integration
 
 - Created the downloadable artifact for `The Agentic Operations Architecture` at `assets/downloads/agentic-operations-architecture-roman-bediner.pdf`.
@@ -38,10 +49,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 347
-- Updated At (UTC): 2026-07-19T17:04:31Z
+- Handoff Sequence: 348
+- Updated At (UTC): 2026-07-19T17:21:02Z
 - Source Branch: staging
-- Source Commit: b266558e7ae502fb9b67d4ab5f7eb826033bb4d3 (pre-handoff baseline)
+- Source Commit: 5f83d39777cda07c81e2d8dbd950a8f8cd181dd4 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
