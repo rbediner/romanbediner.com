@@ -1,9 +1,21 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 336
-- Updated At (UTC): 2026-07-19T12:18:52Z
+## Latest: 2026-07-19: Agentic resource evidence positioning and production release
+
+- Reclassified `/resources/agentic-ai-employees/` as `REFERENCE ARCHITECTURE + BUILD REPORT`, because it documents a first-party system without a named external customer outcome. The resource hub card now uses the same evidence boundary and links to `Explore the Build Report`.
+- Preserved the complete public architecture narrative: five-agent organization, model router, code review, pull requests, merges, production shipping, reporting, Anthropic cost visibility, reliability, and self-engineering.
+- Added the shared resource banner and `Who This Is For` pattern, all-caps heading treatment, desktop and mobile `On this page` navigation, and a mobile-safe centered orientation control.
+- Scoped the mobile orientation rules to `styles/resources.css` so the homepage does not load page-specific navigation rules. Local Lighthouse measured 94 performance and 95 accessibility.
+- Updated the reusable `bediner-site` skill and its shared Drive references with the evidence-classification rule, language rules, and mobile guidance.
+- Staging CI passed in run `29687215949`; staging deployment passed in run `29687506913`.
+- Production CI passed in run `29687545907`; Deploy Pages and live smoke passed in run `29687545924`. Production is live at `https://romanbediner.com`.
+- Product release SHA: `c0e0a4dd2f4b54221a06233df8fd1415ecdfe35c`.
+- Keep release watcher hygiene in place for this repo.
+
+- Handoff Sequence: 337
+- Updated At (UTC): 2026-07-19T12:50:06Z
 - Source Branch: staging
-- Source Commit: f58416e279ff9466edfe8b13dcfc3fe76895b220 (pre-handoff baseline)
+- Source Commit: c0e0a4dd2f4b54221a06233df8fd1415ecdfe35c (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest — 2026-07-19: Agentic case study navigation and diagram consistency polish
