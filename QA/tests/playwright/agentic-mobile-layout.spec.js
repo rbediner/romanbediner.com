@@ -286,11 +286,23 @@ test('long-form chapters use editorial mobile rhythm rather than oversized card 
   await page.goto(`http://${host}:${port}/services/`, { waitUntil: 'domcontentloaded' });
   const services = await page.evaluate(() => {
     const chapter = document.querySelector('.svc-entry');
-    const copy = document.querySelector('.svc-body > p:not(.svc-kicker)');
+    const copy = document.querySelector('.svc-body > p:not(.svc-kicker):not(.svc-lede):not(.svc-best-fit)');
+    const lead = document.querySelector('.svc-lede');
+    const bestFit = document.querySelector('.svc-best-fit');
     const styles = getComputedStyle(chapter);
-    return { borderTop: styles.borderTopWidth, boxShadow: styles.boxShadow, copySize: parseFloat(getComputedStyle(copy).fontSize) };
+    return {
+      borderTop: styles.borderTopWidth,
+      boxShadow: styles.boxShadow,
+      copySize: parseFloat(getComputedStyle(copy).fontSize),
+      leadSize: parseFloat(getComputedStyle(lead).fontSize),
+      bestFitRule: getComputedStyle(bestFit).borderLeftWidth,
+    };
   });
   expect(services.borderTop).toBe('1px');
   expect(services.boxShadow).toBe('none');
   expect(services.copySize).toBeGreaterThanOrEqual(16);
+  // The opening thesis and closing fit signal must remain visible landmarks,
+  // without turning the long-form section back into a heavy card on mobile.
+  expect(services.leadSize).toBeGreaterThan(services.copySize);
+  expect(services.bestFitRule).toBe('2px');
 });
