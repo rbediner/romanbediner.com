@@ -1,5 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Mobile editorial-rhythm refinement — staging only
+
+- A further visual EBI pass kept the compact reference-card anatomy on Dashboard and PasteFlow, but corrected the mobile behavior for truly long-form content. About professional chapters and Services offerings now shed their oversized outer card chrome below 640px and read as numbered editorial sequences with thin separators, comfortable 16px prose, and intact hierarchy.
+- Services preserves its five existing unique approved service icons; About preserves its role/company sequence and Operating Philosophy callout. Desktop retains the composed editorial-panel treatment. This avoids making every page use the same generic card pattern.
+- Added a focused Playwright contract for this distinction: mobile About and Services chapters must use divider-led editorial rhythm, no box shadow, readable 16px-or-larger prose, and all canonical routes must remain viewport-safe at 1440px and 390px.
+- Local focused Playwright (3/3) and full Node contract validation passed. Hosted staging deployment `29702931748` passed for product SHA `f7a196b` and the 32-render hosted audit found no overflow or filtered resource icons.
+- Updated the live `romanbediner.com PRD`. This is staging-only; do not promote to `prod` until Roman explicitly approves the direction. Do not update the reusable page-building skill until that approval.
+
 ## Latest: 2026-07-19: Site-wide visual QA correction — staging only
 
 - Completed a hosted visual audit of every canonical public route at both 1440px and 390px: Home, About, Resources, all four resource detail pages, Services, Connect, the Framework hub, and all six framework briefs. All 32 rendered route/viewport combinations passed with no page-level horizontal overflow.
@@ -134,10 +142,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 359
-- Updated At (UTC): 2026-07-19T20:35:57Z
+- Handoff Sequence: 360
+- Updated At (UTC): 2026-07-19T20:42:32Z
 - Source Branch: staging
-- Source Commit: 755467b08926bfc7ae7d2e8513aa96f170c50470 (pre-handoff baseline)
+- Source Commit: f7a196b49fe1984d2acccfc8b3c889b005fbf3d3 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
