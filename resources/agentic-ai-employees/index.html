@@ -102,6 +102,16 @@
         <span class="fleet-pill">Code-to-production loop</span>
         <span class="fleet-pill">Governed autonomy</span>
       </div>
+      <nav class="fleet-section-nav" aria-label="Explore the architecture">
+        <span class="fleet-section-nav-label">Explore the system</span>
+        <a href="#fleet-architecture-thesis">Architecture</a>
+        <a href="#fleet-case-study-title">Proof</a>
+        <a href="#fleet-roster">Organization</a>
+        <a href="#fleet-router">Router</a>
+        <a href="#fleet-reliability">Reliability</a>
+        <a href="#fleet-engineering">Engineering loop</a>
+        <a href="#fleet-deploy">Production</a>
+      </nav>
     </section>
 
     <section class="resource-section fleet-architecture-hero" aria-labelledby="fleet-architecture-thesis">
@@ -393,7 +403,7 @@
     <section class="resource-section" aria-labelledby="fleet-run">
       <p class="fleet-kicker">Inside a run</p>
       <h2 id="fleet-run">How one scheduled run executes</h2>
-      <p class="resource-section-lede">A shared handler turns a job name into identity, authority, a skill, and a record. The same six steps run every time.</p>
+      <p class="resource-section-lede">A shared handler turns a job name into identity, authority, a skill, and a record. The same seven stages run every time.</p>
 
       <div class="fleet-diagram">
         <svg viewBox="0 0 720 186" role="img" aria-label="Scheduled run lifecycle: step 1 cron fires, 2 authenticate, 3 local-hour guard, 4 load skill from brain, 5 agent loop (cached), 6 act in workspace, 7 write heartbeat. On error, the agent loop still writes a heartbeat." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
@@ -492,7 +502,7 @@
 
     <section class="resource-section" aria-labelledby="fleet-principles">
       <p class="fleet-kicker">House rules</p>
-      <h2 id="fleet-principles">Operating principles</h2>
+      <h2 id="fleet-principles">What stays intentionally simple</h2>
       <ul class="fleet-principles">
         <li><b>Separate behavior from the body.</b> Most agent behavior lives in the cloud brain; runtime code, engineering workflows, and deployment safeguards live in Git.</li>
         <li><b>All infrastructure in one project.</b> Runtime, schedule, and every capability live together &mdash; not scattered across personal repos.</li>
@@ -505,14 +515,14 @@
 
     <section class="resource-section" aria-labelledby="fleet-install">
       <p class="fleet-kicker">Stand it up</p>
-      <h2 id="fleet-install">Install &amp; setup</h2>
-      <p class="resource-section-lede">From an empty project to a running fleet. The wiring is GitHub-to-Vercel plus a cloud brain, a set of integrations, and an authority model that keeps every employee accountable.</p>
+      <h2 id="fleet-install">A minimal recipe for building one</h2>
+      <p class="resource-section-lede">The implementation is deliberately ordinary: one shared runtime, a cloud brain for behavior, a model router for capability and cost, and independent gates around production.</p>
       <ol class="fleet-steps">
-        <li><h4>Connect GitHub to Vercel</h4><p>Install the Vercel GitHub App on the code org and link it to a Vercel project. A push to <code>main</code> now builds and promotes automatically.</p></li>
-        <li><h4>Create the brain in the cloud drive</h4><p>Author each agent&rsquo;s skill files &mdash; <code>skill.md</code>, <code>personality.md</code>, and per-job <code>cron/*.md</code>. Most behavior lives here; engineering and deployment controls remain in the repo.</p></li>
-        <li><h4>Set the secrets in Vercel</h4><p>Workspace token + signing secret, the cloud-drive service account, per-job skill file IDs, the cron bearer secret, and any CRM/community tokens. Secrets live only in Vercel env vars, never in the repo.</p></li>
-        <li><h4>Declare the schedule in <code>vercel.json</code></h4><p>Every job and its timing live there; each production deploy re-registers the schedule. The repo folder path maps one-to-one to the cron route.</p></li>
-        <li><h4>Push to <code>main</code> and verify</h4><p>Vercel builds and promotes to production; crons fire only there. Confirm the newest deployment matches your commit, then watch the heartbeat ledger fill in as jobs run.</p></li>
+        <li><h4>Give behavior a home</h4><p>Keep skills, memory, personalities, and operating rules in plain files that the runtime can load and update safely.</p></li>
+        <li><h4>Give the fleet one body</h4><p>Put schedules, event triggers, authentication, tools, and the shared agent loop in one serverless runtime.</p></li>
+        <li><h4>Make intelligence a policy</h4><p>Route bounded work, judgment-heavy work, and production-gate work to different capability tiers so cost and authority stay visible.</p></li>
+        <li><h4>Separate initiative from authority</h4><p>Let agents find and build work on branches, then make independent review, deployment verification, and rollback part of the path to production.</p></li>
+        <li><h4>Instrument the loop</h4><p>Write heartbeats, cost snapshots, cache savings, and deployment status so the system can explain what happened and recover when it needs to.</p></li>
       </ol>
     </section>
 
@@ -571,7 +581,7 @@
 
     <section class="resource-conversational-close" aria-label="Closing invitation">
       <div class="resource-conversation-card">
-        <p class="resource-family-copy resource-conversation-copy">If you&rsquo;re building toward AI that does real work &mdash; not just answers &mdash; this is the operating model: define the work, give it a brain, and run it like a team. If that&rsquo;s the problem you&rsquo;re sitting with, start a conversation.</p>
+        <p class="resource-family-copy resource-conversation-copy">If you&rsquo;re building toward AI that does real work &mdash; not just answers &mdash; this case study offers a starting point: define the work, give it a brain, route intelligence by risk, and make every production change recoverable. If that&rsquo;s the problem you&rsquo;re sitting with, start a conversation.</p>
         <a class="resource-primary-cta resource-conversation-cta" href="/connect/">Start the Conversation</a>
       </div>
     </section>

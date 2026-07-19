@@ -552,6 +552,20 @@
   }
 }
 
+/* Tablet widths need the same readable loop treatment as phones; three
+   narrative cards at 768px create horizontal overflow before the mobile
+   breakpoint is reached. */
+@media (min-width: 768px) and (max-width: 960px) {
+  .fleet-loop-grid,
+  .fleet-proof-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fleet-loop-card:last-child,
+  .fleet-proof-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 /* Utility line near download */
 .resource-utility-line {
   margin: 12px 0 0;
@@ -1916,10 +1930,54 @@ body.wireframe-modal-open {
   padding: 9px 14px;
 }
 
+/* A compact orientation rail keeps the long case study scannable without
+   turning the page into a duplicate sidebar or README table of contents. */
+.fleet-section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 2px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(16, 66, 117, 0.15);
+}
+
+.fleet-section-nav-label {
+  margin-right: 4px;
+  color: #5b6b7a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.fleet-section-nav a {
+  color: #104275;
+  border-bottom: 1px solid rgba(16, 66, 117, 0.28);
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 2px 0;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.fleet-section-nav a:hover,
+.fleet-section-nav a:focus-visible {
+  color: #ab1d37;
+  border-color: #ab1d37;
+}
+
 /* Even 2x3 grid on phones so all six properties read as a tidy block. */
 @media (max-width: 767px) {
   .fleet-pillrow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fleet-section-nav {
+    align-items: flex-start;
+    gap: 7px 12px;
+  }
+  .fleet-section-nav-label {
+    flex-basis: 100%;
   }
 }
 
