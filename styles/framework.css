@@ -310,24 +310,9 @@ html {
 
 .framework-card {
   scroll-margin-top: 160px;
-  counter-increment: framework-stage;
   background:
     radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.085), transparent 34%),
     linear-gradient(135deg, #ffffff 0%, #f9fbff 100%);
-}
-
-.framework-flow { counter-reset: framework-stage; }
-
-.framework-card::before {
-  content: "0" counter(framework-stage);
-  position: absolute;
-  top: 30px;
-  right: 32px;
-  color: rgba(59, 108, 255, 0.36);
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
 }
 
 .framework-flow > .framework-section:last-child {

@@ -44,7 +44,7 @@ const about = fs.readFileSync(path.join(root, 'about/index.html'), 'utf8');
 const services = fs.readFileSync(path.join(root, 'services/index.html'), 'utf8');
 const connect = fs.readFileSync(path.join(root, 'connect/index.html'), 'utf8');
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-if (!about.includes('Roman Bediner is the founder and principal of Bediner Advisory LLC')) failures += 1;
+if (!about.includes('Roman Bediner is the founder and principal of') || !about.includes('class="advisory-brand"')) failures += 1;
 if (!services.includes('Advisory services delivered through Bediner Advisory LLC.')) failures += 1;
 if (!connect.includes('Roman Bediner<br />Bediner Advisory LLC')) failures += 1;
 if (!homepage.includes('global operations and program strategy for LaserLight Communications; Chief Fractional Integration Officer leadership for NC Courage; and Fractional COO-level AI operating architecture for Agentic Society')) {

@@ -27,6 +27,15 @@
   color: var(--accent-blue);
 }
 
+/* The personal name stays ink-black while the advisory identity carries the
+   site-blue accent, echoing the approved Bediner Advisory wordmark logic. */
+.entity-relationship-line .advisory-brand {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.entity-relationship-line .advisory-accent { color: var(--accent-blue); }
+
 .about-hero-refactored .page-title {
   margin-bottom: 24px;
   /* Match the all-caps page-title treatment used on Services/Resources (rendering only; copy unchanged). */
@@ -165,16 +174,6 @@
   background: rgba(59, 108, 255, 0.62);
 }
 
-.arc-index {
-  display: block;
-  margin-bottom: 14px;
-  color: var(--accent-blue);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 1;
-}
-
 .era-header {
   display: flex;
   flex-direction: column;
@@ -293,6 +292,22 @@
 }
 
 @media (max-width: 640px) {
+  /* The responsibility line is supporting metadata. Keep it breathable and
+     legible without letting wide all-caps labels dominate the phone viewport. */
+  .about-hero-refactored .current-responsibility-line {
+    max-width: 44ch;
+    margin-top: 22px;
+    font-size: 11px;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
+  }
+
+  .about-hero-refactored .entity-relationship-line {
+    margin-top: 22px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
   .arc-timeline-wrapper { gap: 0; }
 
   .arc-item {

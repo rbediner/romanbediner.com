@@ -31,7 +31,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../../assets/favicon/apple-touch-icon.png" />
   <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" />
   <link rel="stylesheet" href="/styles/site.css?v=20260719r4" />
-  <link rel="stylesheet" href="/styles/resources.css?v=20260719r15" />
+  <link rel="stylesheet" href="/styles/resources.css?v=20260719r16" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet" />
   <meta name="ga4-measurement-id" content="G-DVHD0KL633" />
   <script src="/scripts/runtime/ga4-bootstrap.js" defer></script>
@@ -190,10 +190,10 @@
       <p class="resource-section-lede">The power is not in a giant platform. It comes from composing a few simple primitives into closed loops: behavior in plain language, a shared runtime, model-aware routing, durable state, ordinary APIs, and independent gates around production.</p>
 
       <div class="fleet-architecture-stack fleet-zoomable-diagram" role="img" aria-label="Four architecture layers: behavioral brain, shared runtime, control plane, and delivery body.">
-        <div class="fleet-architecture-layer fleet-layer-brain"><span>01</span><strong>Behavioral brain</strong><small>Skills, memory, personalities, and operating rules in plain files.</small></div>
-        <div class="fleet-architecture-layer fleet-layer-runtime"><span>02</span><strong>Shared runtime</strong><small>Serverless functions, schedules, event triggers, auth, and one agent loop.</small></div>
-        <div class="fleet-architecture-layer fleet-layer-control"><span>03</span><strong>Control plane</strong><small>Model router, heartbeats, handoffs, cost ledger, reporting, and recovery.</small></div>
-        <div class="fleet-architecture-layer fleet-layer-delivery"><span>04</span><strong>Delivery body</strong><small>APIs, GitHub, CI, pull requests, deployment verification, and rollback.</small></div>
+        <div class="fleet-architecture-layer fleet-layer-brain"><strong>Behavioral brain</strong><small>Skills, memory, personalities, and operating rules in plain files.</small></div>
+        <div class="fleet-architecture-layer fleet-layer-runtime"><strong>Shared runtime</strong><small>Serverless functions, schedules, event triggers, auth, and one agent loop.</small></div>
+        <div class="fleet-architecture-layer fleet-layer-control"><strong>Control plane</strong><small>Model router, heartbeats, handoffs, cost ledger, reporting, and recovery.</small></div>
+        <div class="fleet-architecture-layer fleet-layer-delivery"><strong>Delivery body</strong><small>APIs, GitHub, CI, pull requests, deployment verification, and rollback.</small></div>
       </div>
 
       <div class="fleet-loop-grid fleet-zoomable-diagram" role="img" aria-label="Three operating loops: work, engineering, and reliability.">
@@ -224,10 +224,10 @@
       <h2 id="fleet-case-study-title">What this architecture makes possible</h2>
       <p class="resource-section-lede">The point is not that five agents exist. The point is that a small team of specialized agents can form a dependable operating system when the boundaries, loops, and evidence are designed together.</p>
       <div class="fleet-proof-grid">
-        <article class="fleet-proof-card fleet-proof-blue"><span>01</span><strong>One shared runtime</strong><p>Schedules, event triggers, authentication, tool clients, and the agent loop live in one inexpensive serverless body.</p></article>
-        <article class="fleet-proof-card fleet-proof-gold"><span>02</span><strong>Behavior without redeploys</strong><p>Skills, memory, and personalities live in the cloud brain, so operating behavior can evolve like documentation.</p></article>
-        <article class="fleet-proof-card fleet-proof-purple"><span>03</span><strong>Model choice as policy</strong><p>The router sends routine work to fast models and reserves deeper reasoning for judgment and production gates.</p></article>
-        <article class="fleet-proof-card fleet-proof-green"><span>04</span><strong>Autonomous, recoverable change</strong><p>Improvement becomes a queue-to-PR-to-merge loop with independent review, deployment checks, and rollback.</p></article>
+        <article class="fleet-proof-card fleet-proof-blue"><strong>One shared runtime</strong><p>Schedules, event triggers, authentication, tool clients, and the agent loop live in one inexpensive serverless body.</p></article>
+        <article class="fleet-proof-card fleet-proof-gold"><strong>Behavior without redeploys</strong><p>Skills, memory, and personalities live in the cloud brain, so operating behavior can evolve like documentation.</p></article>
+        <article class="fleet-proof-card fleet-proof-purple"><strong>Model choice as policy</strong><p>The router sends routine work to fast models and reserves deeper reasoning for judgment and production gates.</p></article>
+        <article class="fleet-proof-card fleet-proof-green"><strong>Autonomous, recoverable change</strong><p>Improvement becomes a queue-to-PR-to-merge loop with independent review, deployment checks, and rollback.</p></article>
       </div>
     </section>
 
@@ -443,13 +443,13 @@
       <h2 id="fleet-reliability">Autonomy becomes trustworthy when it can report and recover</h2>
       <p class="resource-section-lede">The same simple runtime that runs the work also produces the evidence needed to govern it: heartbeats for execution, Anthropic cost snapshots for spend, cache savings for efficiency, and deployment checks for production health.</p>
       <div class="fleet-reliability-loop fleet-zoomable-diagram" role="img" aria-label="Reliability loop: agents write heartbeats and cost snapshots; the Director synthesizes health and Anthropic cost reporting; the system sends a digest or alert and routes failures into recovery.">
-        <div class="fleet-reliability-node fleet-reliability-input"><span>01</span><strong>Collect evidence</strong><small>Heartbeats, token usage, Anthropic cost snapshots, cache savings, and deployment status.</small></div>
+        <div class="fleet-reliability-node fleet-reliability-input"><strong>Collect evidence</strong><small>Heartbeats, token usage, Anthropic cost snapshots, cache savings, and deployment status.</small></div>
         <div class="fleet-reliability-arrow" aria-hidden="true">&rarr;</div>
-        <div class="fleet-reliability-node fleet-reliability-health"><span>02</span><strong>Synthesize health</strong><small>The Director compares activity against schedules, budgets, and expected production state.</small></div>
+        <div class="fleet-reliability-node fleet-reliability-health"><strong>Synthesize health</strong><small>The Director compares activity against schedules, budgets, and expected production state.</small></div>
         <div class="fleet-reliability-arrow" aria-hidden="true">&rarr;</div>
-        <div class="fleet-reliability-node fleet-reliability-report"><span>03</span><strong>Report clearly</strong><small>A digest explains what ran, what it cost, what changed, and what needs attention.</small></div>
+        <div class="fleet-reliability-node fleet-reliability-report"><strong>Report clearly</strong><small>A digest explains what ran, what it cost, what changed, and what needs attention.</small></div>
         <div class="fleet-reliability-arrow" aria-hidden="true">&rarr;</div>
-        <div class="fleet-reliability-node fleet-reliability-recover"><span>04</span><strong>Recover safely</strong><small>Failures become routed work; unhealthy releases revert instead of becoming silent damage.</small></div>
+        <div class="fleet-reliability-node fleet-reliability-recover"><strong>Recover safely</strong><small>Failures become routed work; unhealthy releases revert instead of becoming silent damage.</small></div>
       </div>
       <div class="fleet-reliability-caption"><strong>Key case-study insight:</strong> reporting is not a dashboard bolted on afterward. It is a control loop that closes the distance between autonomous action and accountable operations.</div>
     </section>
@@ -459,13 +459,13 @@
       <h2 id="fleet-engineering">From engineering queue to verified production</h2>
       <p class="resource-section-lede">The fleet can improve its own runtime without giving one agent unchecked authority. Discovery, implementation, review, deployment, and recovery are separate responsibilities.</p>
       <div class="fleet-engineering-flow fleet-zoomable-diagram" role="img" aria-label="Continuous Improvement Engineer ranks an engineering queue, the Director writes code and opens a pull request, the Staff Engineer reviews and merges eligible changes, Vercel deploys and verifies production, and failed deployments are automatically reverted.">
-        <div class="fleet-flow-card fleet-flow-ci"><span>01</span><strong>Find the work</strong><small>Continuous Improvement Engineer audits cost, health, caching, and recurring friction.</small></div>
+        <div class="fleet-flow-card fleet-flow-ci"><strong>Find the work</strong><small>Continuous Improvement Engineer audits cost, health, caching, and recurring friction.</small></div>
         <div class="fleet-flow-arrow" aria-hidden="true">&rarr;</div>
-        <div class="fleet-flow-card fleet-flow-director"><span>02</span><strong>Build the change</strong><small>Director selects the top ticket, writes the fix on a branch, and opens a pull request.</small></div>
+        <div class="fleet-flow-card fleet-flow-director"><strong>Build the change</strong><small>Director selects the top ticket, writes the fix on a branch, and opens a pull request.</small></div>
         <div class="fleet-flow-arrow" aria-hidden="true">&rarr;</div>
-        <div class="fleet-flow-card fleet-flow-review"><span>03</span><strong>Review independently</strong><small>Staff Engineer runs deterministic checks and adversarial code review.</small></div>
+        <div class="fleet-flow-card fleet-flow-review"><strong>Review independently</strong><small>Staff Engineer runs deterministic checks and adversarial code review.</small></div>
         <div class="fleet-flow-arrow" aria-hidden="true">&rarr;</div>
-        <div class="fleet-flow-card fleet-flow-ship"><span>04</span><strong>Ship safely</strong><small>Eligible work merges, Vercel deploys, production is checked, and unhealthy releases revert.</small></div>
+        <div class="fleet-flow-card fleet-flow-ship"><strong>Ship safely</strong><small>Eligible work merges, Vercel deploys, production is checked, and unhealthy releases revert.</small></div>
       </div>
       <div class="fleet-engineering-caption"><strong>What makes this autonomous:</strong> no single agent writes, approves, and ships its own change. The system separates initiative from authority and makes failure recoverable.</div>
     </section>

@@ -191,10 +191,11 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     expect(dashboard.questions).toBe(6);
     expect(dashboard.quadrants).toBe(4);
     expect(dashboard.views).toBe(3);
-    expect(dashboard.questionMarker).not.toBe('none');
-    // Mobile deliberately removes the decorative number chip so content can use
-    // the full line width; desktop retains it as a light orientation cue.
-    if (viewport.width > 767) expect(dashboard.quadrantMarker).not.toBe('none');
+    // Decorative number chips add no orientation value in these card families.
+    // They must stay removed at every viewport, leaving icons and labels to
+    // carry the hierarchy.
+    expect(dashboard.questionMarker).toBe('none');
+    expect(dashboard.quadrantMarker).toBe('none');
     // Reference-inspired desktop cards have room for hierarchy but must never
     // regress to the former 330px empty gallery panels.
     expect(Math.max(...dashboard.quadrantHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 300 : 260);
@@ -221,7 +222,7 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     }));
     expect(pasteflow.scrollWidth).toBeLessThanOrEqual(pasteflow.viewportWidth);
     expect(pasteflow.capabilities).toBe(6);
-    if (viewport.width > 767) expect(pasteflow.marker).not.toBe('none');
+    expect(pasteflow.marker).toBe('none');
     expect(pasteflow.titleFont).toContain('Cormorant Garamond');
     // Prevent a return to the empty fixed-height gallery panels that prompted
     // this card system correction.

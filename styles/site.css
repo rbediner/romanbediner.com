@@ -795,7 +795,6 @@ h1, h2 {
 /* Editorial display elements use serif per the 2026 design system. */
 .framework-section h3,
 .svc-h3,
-.svc-num,
 .brief-section h2,
 .brief-section .brief-section-heading {
   font-family: var(--font-serif);

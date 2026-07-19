@@ -13,7 +13,7 @@ This is the canonical system for every contained or card-like surface on romanbe
 | --- | --- | --- |
 | Compact Surface | Small facts, questions, or supporting units | 12–14px padding, 8px radius, quiet shadow |
 | Standard Content Card | Resource, feature, or linked content unit | 16–20px padding, 12px radius, standard shadow |
-| Editorial Feature Card | Primary narrative or chapter | 24–32px padding, 14px radius, feature shadow |
+| Editorial Feature Card | Primary narrative or chapter | 24–32px padding, 14px radius, feature shadow; no decorative number marker |
 | Static Callout Surface | Summary, philosophy, audience, or guidance | 16–24px padding, 12px radius, calm background; never a faux button |
 | Form / Input Surface | Contact and input grouping | 20–40px padding, 12px radius, standard shadow |
 
@@ -24,7 +24,7 @@ Interaction is a modifier, never a sixth card type. Valid modifiers are `is-stat
 - Use the `ui-surface` architecture and page-specific selectors when a markup rewrite would add risk. Base variants: `ui-surface--compact`, `--standard`, `--editorial`, `--callout`, and `--form`.
 - Shared tokens live in `styles/site.css`: blue `#3b6cff`, strong blue `#2457d6`, faint blue `rgba(59,108,255,.07)`, and the compact, standard, and feature shadow tiers.
 - Static surfaces have `cursor: default`, do not lift, and do not acquire button-like hover behavior. Linked and interactive surfaces may lift at most 2px on pointer devices.
-- Preserve semantic architecture colors, existing stage colors, approved service icons, copy, routes, and analytics. Never add a generic icon, emoji, Unicode symbol, or duplicate/reuse an icon merely to decorate a card.
+- Preserve semantic architecture colors, existing stage colors, approved service icons, copy, routes, and analytics. Decorative numeric chips/indexes are out of scope across card families; hierarchy comes from meaningful labels, titles, and icons. Never add a generic icon, emoji, Unicode symbol, or duplicate/reuse an icon merely to decorate a card.
 - Give keyboard focus a visible blue outline. Maintain 44px targets for interactive controls. At small widths, cards remain single-column with reduced padding and no horizontal clipping. Honor `prefers-reduced-motion`.
 - Do not create filler cards. If content has no functional or grouping purpose, let it stay in the page flow.
 

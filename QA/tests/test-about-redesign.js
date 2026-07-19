@@ -126,10 +126,12 @@ if ((aboutHtml.match(/class="arc-item-label"/g) || []).length !== 5) {
   failures.push('About page must attach a visible label block to each professional-background chapter.');
 }
 
-for (const index of ['01', '02', '03', '04', '05']) {
-  if (!aboutHtml.includes(`class="arc-index" aria-hidden="true">${index}</span>`)) {
-    failures.push(`About page is missing chapter index ${index}.`);
-  }
+if (aboutHtml.includes('class="arc-index"') || aboutCss.includes('.arc-index')) {
+  failures.push('About chapter panels must not render decorative numeric indexes.');
+}
+
+if (!aboutHtml.includes('class="advisory-brand"') || !aboutHtml.includes('class="advisory-accent"')) {
+  failures.push('About page must visually distinguish Bediner Advisory inside the relationship line.');
 }
 
 if (aboutHtml.includes('timeline-orb') || aboutCss.includes('timeline-orb')) {
