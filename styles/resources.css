@@ -1871,12 +1871,22 @@ body.wireframe-modal-open {
 
 .resource-fleet-main > h1 {
   max-width: 900px;
-  font-size: clamp(42px, 7vw, 76px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-  text-transform: none;
+  font-size: clamp(42px, 5vw, 54px);
+  line-height: 1;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
   text-wrap: balance;
-  margin-bottom: 18px;
+  margin-bottom: 6px;
+}
+
+.resource-fleet-main .fleet-title-deck {
+  margin: 0 0 18px;
+  color: var(--text-secondary);
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
 }
 
 .resource-fleet-main > .section-accent {
@@ -1893,6 +1903,14 @@ body.wireframe-modal-open {
   border-radius: 18px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(242, 246, 255, 0.86));
   box-shadow: 0 22px 50px rgba(15, 23, 42, 0.08);
+}
+
+.resource-fleet-main .resource-fleet-callout {
+  margin-bottom: 22px;
+}
+
+.resource-fleet-main .fleet-audience-card {
+  margin-top: 28px;
 }
 
 .resource-fleet-main .resource-detail-prose-lede {
@@ -2823,7 +2841,12 @@ body.wireframe-modal-open {
 
 @media (max-width: 767px) {
   .resource-fleet-main > h1 {
-    font-size: clamp(40px, 12vw, 58px);
+    font-size: clamp(34px, 10vw, 42px);
+    letter-spacing: 0.02em;
+  }
+  .resource-fleet-main .fleet-title-deck {
+    margin-bottom: 14px;
+    font-size: clamp(24px, 8vw, 32px);
   }
   .resource-fleet-main .resource-top-section {
     padding: 20px 18px 18px;

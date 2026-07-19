@@ -36,13 +36,15 @@ function mustNotInclude(label, needle) {
 }
 
 mustInclude('title', '<title>Agentic AI Employees: From Request to Production</title>');
-mustInclude('h1', 'Agentic AI Employees That Move Work from Request to Production');
+mustInclude('all-caps h1', '<h1>AGENTIC AI EMPLOYEES</h1>');
+mustInclude('title deck', 'From request to production');
+mustInclude('audience card', 'Who This Is For');
 mustInclude('SEO phrase', 'autonomous code review');
-mustInclude('Project Manager roster card', 'Agent &mdash; Project Manager');
-mustInclude('Chief of Staff roster card', 'Agent &mdash; Chief of Staff');
-mustInclude('Director roster card', 'Agent &mdash; Director of Fleet Orchestration &amp; Engineering');
-mustInclude('Continuous Improvement Engineer roster card', 'Agent &mdash; Continuous Improvement Engineer');
-mustInclude('Staff Engineer roster card', 'Agent &mdash; Staff Engineer');
+mustInclude('Project Manager roster card', 'Agent: Project Manager');
+mustInclude('Chief of Staff roster card', 'Agent: Chief of Staff');
+mustInclude('Director roster card', 'Agent: Director of Fleet Orchestration &amp; Engineering');
+mustInclude('Continuous Improvement Engineer roster card', 'Agent: Continuous Improvement Engineer');
+mustInclude('Staff Engineer roster card', 'Agent: Staff Engineer');
 mustInclude('org chart', 'fleet-org-chart');
 mustInclude('autonomy model', 'class="fleet-autonomy-grid"');
 mustInclude('engineering loop', 'fleet-engineering-flow');
@@ -53,7 +55,7 @@ mustInclude('case study proof panel', 'class="fleet-proof-grid"');
 mustInclude('reliability loop', 'fleet-reliability-loop');
 mustInclude('Anthropic cost reporting', 'Anthropic cost snapshots');
 mustInclude('router job examples', 'Typical jobs: Staff Engineer review, merge decision, production recovery.');
-mustInclude('case study framing', 'A working case study');
+mustInclude('build report framing', 'A working system');
 mustInclude('section orientation rail', 'class="fleet-section-nav"');
 mustInclude('persistent section navigation source', 'data-section-nav');
 mustInclude('persistent section navigation script', 'section-nav.js');
@@ -65,6 +67,8 @@ mustInclude('working-surface clarification', 'The architecture extends from huma
 
 mustNotInclude('retired roster headline', 'Two doers and an operator');
 mustNotInclude('overbroad human approval claim', 'Nothing consequential ships without a human');
+mustNotInclude('banned phrase', 'Why it matters');
+mustNotInclude('em dash entity', '&mdash;');
 
 if (failures > 0) {
   process.exit(1);

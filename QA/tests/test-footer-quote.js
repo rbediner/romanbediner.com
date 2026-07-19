@@ -22,7 +22,7 @@ const pages = [
 // Weight range expanded in redesign (0,400;0,500;0,600;1,500) to support H1/H2 at weight 400.
 const fontPattern = /fonts\.googleapis\.com\/css2\?family=Cormorant\+Garamond[^"]+display=swap/;
 const quoteText = '\u201cLaughter is timeless, imagination has no age, dreams are forever.\u201d';
-const authorText = '\u2014 Walt Disney';
+const authorText = 'Walt Disney';
 
 for (const relPath of pages) {
   const filePath = path.join(root, relPath);

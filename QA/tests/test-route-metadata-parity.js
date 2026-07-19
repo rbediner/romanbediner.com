@@ -66,11 +66,7 @@ for (const rel of pages) {
     failures += 1;
     console.error(`FAIL: metadata references /contact/ in ${rel}`);
   }
-  const htmlWithoutAllowedFooterDash = html.replace(
-    '<p class="footer-quote-author">— Walt Disney</p>',
-    ""
-  );
-  if (/–|—/.test(htmlWithoutAllowedFooterDash)) {
+  if (/–|—/.test(html)) {
     failures += 1;
     console.error(`FAIL: en dash or em dash found in ${rel}`);
   }

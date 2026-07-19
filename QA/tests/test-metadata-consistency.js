@@ -141,13 +141,9 @@ for (const rel of htmlPages) {
     console.error(`FAIL: expected exactly one canonical tag in ${rel}`);
   }
 
-  const htmlWithoutAllowedFooterDash = html.replace(
-    '<p class="footer-quote-author">— Walt Disney</p>',
-    ''
-  );
-  if (/—/.test(htmlWithoutAllowedFooterDash)) {
+  if (/–|—/.test(html)) {
     failures.count += 1;
-    console.error(`FAIL: em dash found in ${rel}`);
+    console.error(`FAIL: en dash or em dash found in ${rel}`);
   }
 }
 
