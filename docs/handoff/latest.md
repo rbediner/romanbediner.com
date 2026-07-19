@@ -11,6 +11,12 @@
 - Production is live at `https://romanbediner.com/about/` on `f8d9250`.
 - Documentation is aligned: `README.md` records the 1010px desktop rail and corrected editorial-panel model, and the shared `bediner-site` skill records the About rail/mobile rule and exact-SHA production verification requirement.
 
+## Latest: 2026-07-19: Chief Fractional Integration Officer title alignment
+
+- Updated the public current-role title from `Fractional Integration Officer` to `Chief Fractional Integration Officer` across homepage, About, Services, and Connect visible copy, metadata, and structured data.
+- Updated the matching role assertions in the focused LLC, Open Graph, and Connect QA contracts. The generic `Fractional Integration Leadership` service/category language remains unchanged.
+- This is a surgical copy and metadata change; no route, analytics, or layout behavior changed.
+
 ## Latest: 2026-07-19: About professional-background EBI pass — staging only
 
 - Applied the requested EBI/fresh-eyes pass to `/about/` only. The five professional-background chapters now render as restrained editorial panels with explicit `01`–`05` markers, attached role/company labels, a readable narrative measure, subtle shared-token borders, and a visual current-to-history sequence.
@@ -60,10 +66,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 351
-- Updated At (UTC): 2026-07-19T17:50:24Z
+- Handoff Sequence: 352
+- Updated At (UTC): 2026-07-19T17:59:42Z
 - Source Branch: staging
-- Source Commit: a837b24e2e2c8535b3570f8d08051bbd5f9ca599 (pre-handoff baseline)
+- Source Commit: 17d2cac7234729f587c9ac3a4a8c4b39c8786dda (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
