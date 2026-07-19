@@ -98,12 +98,23 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent-blue);
-  margin-bottom: 16px;
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  color: var(--text-primary);
+  margin-bottom: 22px;
+}
+
+.svc-label::after {
+  content: "";
+  position: absolute;
+  left: 112px;
+  top: 98px;
+  width: 42px;
+  height: 2px;
+  background: rgba(59, 108, 255, 0.62);
 }
 
 .svc-icon-tile {
@@ -163,6 +174,12 @@
   margin: 0 0 14px;
 }
 
+.svc-body > p:first-of-type {
+  margin-top: 30px;
+  color: var(--text-primary);
+  font-size: 17px;
+}
+
 @media (max-width: 640px) {
   .svc-list {
     margin-bottom: 40px;
@@ -177,6 +194,18 @@
   .svc-num {
     font-size: 28px;
     margin-bottom: 8px;
+  }
+
+  .svc-label {
+    font-size: 29px;
+  }
+
+  .svc-label::after {
+    position: static;
+    display: block;
+    flex: 0 0 34px;
+    width: 34px;
+    margin-left: auto;
   }
 
   .services-capability-section,

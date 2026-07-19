@@ -41,16 +41,50 @@
 
 /* Shared card architecture. Existing page selectors can opt in without a markup rewrite. */
 .ui-surface {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   background: var(--surface-card);
   border: 1px solid var(--surface-border);
   color: var(--text-primary);
 }
 
-.ui-surface--compact { border-radius: 8px; box-shadow: var(--surface-shadow-compact); }
-.ui-surface--standard { border-radius: 12px; box-shadow: var(--surface-shadow-standard); }
-.ui-surface--editorial { border-radius: 14px; box-shadow: var(--surface-shadow-feature); }
-.ui-surface--callout { border-radius: 12px; background: var(--surface-card-muted); }
-.ui-surface--form { border-radius: 12px; box-shadow: var(--surface-shadow-standard); }
+.ui-surface--compact {
+  border-radius: 8px;
+  box-shadow: var(--surface-shadow-compact);
+  background: linear-gradient(135deg, #ffffff 0%, #fbfcff 100%);
+}
+
+.ui-surface--standard {
+  border-radius: 12px;
+  box-shadow: var(--surface-shadow-standard);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.075), transparent 38%),
+    linear-gradient(135deg, #ffffff 0%, #fafcff 100%);
+}
+
+.ui-surface--editorial {
+  border-radius: 14px;
+  box-shadow: var(--surface-shadow-feature);
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.10), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #f9fbff 100%);
+}
+
+.ui-surface--callout {
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.085), transparent 38%),
+    var(--surface-card-muted);
+}
+
+.ui-surface--form {
+  border-radius: 12px;
+  box-shadow: var(--surface-shadow-standard);
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.075), transparent 36%),
+    #ffffff;
+}
 
 /* Static containment supports scanning; it must never imply a click target. */
 .ui-surface.is-static { cursor: default; }

@@ -310,6 +310,24 @@ html {
 
 .framework-card {
   scroll-margin-top: 160px;
+  counter-increment: framework-stage;
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.085), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #f9fbff 100%);
+}
+
+.framework-flow { counter-reset: framework-stage; }
+
+.framework-card::before {
+  content: "0" counter(framework-stage);
+  position: absolute;
+  top: 30px;
+  right: 32px;
+  color: rgba(59, 108, 255, 0.36);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .framework-flow > .framework-section:last-child {
@@ -333,8 +351,14 @@ html {
 }
 
 .framework-icon {
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
+  padding: 8px;
+  border: 1px solid rgba(59, 108, 255, 0.16);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(59, 108, 255, 0.10), rgba(255, 255, 255, 0.96));
+  box-shadow: var(--surface-shadow-compact);
+  box-sizing: border-box;
   flex-shrink: 0;
   /* Optical alignment: icon source art sits slightly low vs stage pill center. */
   position: relative;
@@ -431,14 +455,14 @@ html {
 }
 
 .framework-card-divider {
-  border-top: 1px solid #e5e7eb;
-  margin-top: 22px;
+  border-top: 1px solid rgba(59, 108, 255, 0.20);
+  margin-top: 28px;
 }
 
 .framework-brief-band {
   margin: 0 -32px -32px;
   padding: 16px 32px;
-  background: #f8fafc;
+  background: rgba(59, 108, 255, 0.045);
   border-radius: 0 0 12px 12px;
   display: flex;
   align-items: center;

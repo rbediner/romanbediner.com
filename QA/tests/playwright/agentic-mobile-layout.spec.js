@@ -151,3 +151,50 @@ test('services editorial panels preserve unique icon tiles without phone overflo
   expect(layout.tileWidths.every((width) => width >= 44)).toBe(true);
   expect(layout.tileRights.every((right) => right <= layout.viewportWidth)).toBe(true);
 });
+
+/**
+ * Invariant:
+ * - Dashboard and PasteFlow card groups must express the shared editorial
+ *   anatomy rather than degrade into flat bordered text boxes.
+ * Why this exists:
+ * - These two resource routes exercise the compact and standard static-card
+ *   categories at different content densities and phone widths.
+ */
+test('resource card categories keep editorial anatomy on desktop and phone widths', async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+
+    await page.goto(`http://${host}:${port}/resources/ai-enabled-operations-dashboard/`, { waitUntil: 'domcontentloaded' });
+    const dashboard = await page.evaluate(() => ({
+      viewportWidth: window.innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      questions: document.querySelectorAll('.resource-dashboard-question-item').length,
+      quadrants: document.querySelectorAll('.resource-dashboard-quadrant').length,
+      views: document.querySelectorAll('.resource-dashboard-view-block').length,
+      questionMarker: getComputedStyle(document.querySelector('.resource-dashboard-question-item'), '::before').content,
+      quadrantMarker: getComputedStyle(document.querySelector('.resource-dashboard-quadrant'), '::before').content,
+    }));
+    expect(dashboard.scrollWidth).toBeLessThanOrEqual(dashboard.viewportWidth);
+    expect(dashboard.questions).toBe(6);
+    expect(dashboard.quadrants).toBe(4);
+    expect(dashboard.views).toBe(3);
+    expect(dashboard.questionMarker).not.toBe('none');
+    expect(dashboard.quadrantMarker).not.toBe('none');
+
+    await page.goto(`http://${host}:${port}/resources/pasteflow/`, { waitUntil: 'domcontentloaded' });
+    const pasteflow = await page.evaluate(() => ({
+      viewportWidth: window.innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      capabilities: document.querySelectorAll('.resource-pasteflow-capability-item').length,
+      marker: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item'), '::before').content,
+      titleFont: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item h3')).fontFamily,
+    }));
+    expect(pasteflow.scrollWidth).toBeLessThanOrEqual(pasteflow.viewportWidth);
+    expect(pasteflow.capabilities).toBe(6);
+    expect(pasteflow.marker).not.toBe('none');
+    expect(pasteflow.titleFont).toContain('Cormorant Garamond');
+  }
+});

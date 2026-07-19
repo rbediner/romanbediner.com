@@ -94,7 +94,9 @@
   padding: 32px;
   border: 1px solid var(--surface-border, var(--border-color));
   border-radius: 12px;
-  background: #f8fafc;
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.11), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
   box-shadow: var(--surface-shadow-standard, 0 10px 30px rgba(15, 23, 42, 0.05));
   overflow: hidden;
 }
@@ -112,6 +114,11 @@
 .resource-card h2,
 .resource-card h3 {
   margin: 0 0 14px;
+  max-width: 720px;
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3.1vw, 40px);
+  font-weight: 400;
+  line-height: 0.98;
 }
 
 .resource-card p {
@@ -240,15 +247,29 @@
   margin-top: 24px;
   padding: 24px 26px 26px;
   border-radius: 12px;
-  background: #ffffff;
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.10), transparent 38%),
+    linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
   border: 1px solid var(--surface-border, var(--border-color));
   box-shadow: var(--surface-shadow-standard, 0 6px 18px rgba(0, 0, 0, 0.04));
 }
 
 .resource-blue-box h2 {
   margin: 0 0 12px;
-  font-size: 22px;
-  color: var(--accent-blue);
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.resource-blue-box h2::after {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 2px;
+  margin-top: 16px;
+  background: rgba(59, 108, 255, 0.62);
 }
 
 .resource-blue-box .service-list {
@@ -607,7 +628,9 @@
 
 .resource-conversation-card {
   padding: 34px 36px;
-  background: linear-gradient(180deg, rgba(248, 250, 254, 0.96) 0%, rgba(244, 247, 253, 0.96) 100%);
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.10), transparent 38%),
+    linear-gradient(180deg, rgba(248, 250, 254, 0.96) 0%, rgba(244, 247, 253, 0.96) 100%);
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 14px;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
@@ -618,6 +641,16 @@
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.72;
+}
+
+.resource-conversation-card::before {
+  content: "OPERATING CONVERSATION";
+  display: block;
+  margin-bottom: 16px;
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .resource-conversation-cta {
@@ -1259,40 +1292,90 @@
   margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 14px;
+  counter-reset: dashboard-question;
 }
 
 .resource-dashboard-question-item {
-  padding: 14px;
-  border-radius: 8px;
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  min-height: 112px;
+  padding: 20px 20px 18px;
+  border-radius: 12px;
   border: 1px solid var(--surface-border, var(--border-color, #e6e6e6));
-  box-shadow: var(--surface-shadow-compact, none);
-  background: #ffffff;
-  font-size: 13px;
-  line-height: 1.5;
+  box-shadow: var(--surface-shadow-standard, none);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.08), transparent 38%),
+    #ffffff;
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.04;
   color: var(--text-primary);
+  counter-increment: dashboard-question;
+}
+
+.resource-dashboard-question-item::before {
+  content: "0" counter(dashboard-question);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 16px;
+  color: var(--accent-blue);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .resource-dashboard-quadrants {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 18px;
   margin-top: 12px;
+  counter-reset: dashboard-quadrant;
 }
 
 .resource-dashboard-quadrant {
-  padding: 18px;
-  border-radius: 8px;
+  position: relative;
+  padding: 28px 28px 26px;
+  border-radius: 14px;
   border: 1px solid var(--surface-border, var(--border-color, #e6e6e6));
-  box-shadow: var(--surface-shadow-compact, none);
-  background: #ffffff;
+  box-shadow: var(--surface-shadow-standard, none);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.075), transparent 36%),
+    #ffffff;
+  counter-increment: dashboard-quadrant;
+}
+
+.resource-dashboard-quadrant::before {
+  content: "0" counter(dashboard-quadrant);
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .resource-dashboard-quadrant h3 {
-  margin: 0 0 6px;
-  font-size: 14px;
-  font-weight: 600;
+  margin: 0 0 16px;
+  font-family: var(--font-serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1;
   color: var(--text-primary);
+}
+
+.resource-dashboard-quadrant h3::after,
+.resource-pasteflow-capability-item h3::after {
+  content: "";
+  display: block;
+  width: 38px;
+  height: 2px;
+  margin-top: 16px;
+  background: rgba(59, 108, 255, 0.62);
 }
 
 .resource-dashboard-quadrant p {
@@ -1311,17 +1394,35 @@
 .resource-dashboard-views-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
   margin-top: 14px;
   align-items: stretch;
+  counter-reset: dashboard-view;
 }
 
 .resource-dashboard-view-block {
-  padding: 18px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color, #e6e6e6);
-  background: #ffffff;
-  display: flex;
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-height: 196px;
+  padding: 26px 24px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-border, var(--border-color, #e6e6e6));
+  box-shadow: var(--surface-shadow-standard, none);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.075), transparent 38%),
+    #ffffff;
+  counter-increment: dashboard-view;
+}
+
+.resource-dashboard-view-block::before {
+  content: "0" counter(dashboard-view);
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .resource-dashboard-view-block p {
@@ -1333,8 +1434,11 @@
 
 .resource-dashboard-view-block strong {
   display: block;
-  margin-bottom: 4px;
-  font-size: 14px;
+  margin-bottom: 14px;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
   color: var(--text-primary);
 }
 
@@ -1856,21 +1960,39 @@ body.wireframe-modal-open {
   margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 18px;
+  counter-reset: pasteflow-capability;
 }
 
 .resource-pasteflow-capability-item {
-  padding: 18px;
-  border-radius: 8px;
+  position: relative;
+  min-height: 222px;
+  padding: 26px 26px 24px;
+  border-radius: 14px;
   border: 1px solid var(--surface-border, var(--border-color, #e6e6e6));
-  box-shadow: var(--surface-shadow-compact, none);
-  background: #ffffff;
+  box-shadow: var(--surface-shadow-standard, none);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.075), transparent 38%),
+    #ffffff;
+  counter-increment: pasteflow-capability;
+}
+
+.resource-pasteflow-capability-item::before {
+  content: "0" counter(pasteflow-capability);
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .resource-pasteflow-capability-item h3 {
-  margin: 0 0 8px;
-  font-size: 16px;
-  font-weight: 600;
+  margin: 0 0 16px;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
   color: var(--text-primary);
 }
 
@@ -1886,12 +2008,16 @@ body.wireframe-modal-open {
   padding: 18px 20px;
   border-radius: 10px;
   border: 1px solid var(--surface-border, rgba(15, 23, 42, 0.1));
-  background: #f8fafc;
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.10), transparent 38%),
+    #f8fafc;
 }
 
 .resource-pasteflow-responsible-callout h2 {
   margin: 0 0 8px;
-  font-size: 18px;
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 400;
 }
 
 .resource-pasteflow-audience-card {
@@ -1928,6 +2054,19 @@ body.wireframe-modal-open {
 @media (max-width: 767px) {
   .resource-pasteflow-capabilities-grid {
     grid-template-columns: 1fr;
+  }
+
+  .resource-dashboard-question-item {
+    min-height: 0;
+    padding: 18px;
+    font-size: 19px;
+  }
+
+  .resource-dashboard-quadrant,
+  .resource-dashboard-view-block,
+  .resource-pasteflow-capability-item {
+    min-height: 0;
+    padding: 22px 20px;
   }
 }
 
