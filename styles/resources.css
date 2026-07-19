@@ -2515,6 +2515,19 @@ body.wireframe-modal-open {
   padding: 16px;
 }
 
+.fleet-lightbox-stage > .fleet-lightbox-clone {
+  flex: 0 1 auto;
+  width: min(100%, 1200px);
+  max-width: 100%;
+  margin: 0;
+}
+
+/* HTML/CSS diagrams keep their paper frame in the lightbox while allowing
+   the stage to scroll the full clone when zoomed on a phone. */
+.fleet-lightbox-stage > .fleet-lightbox-clone.fleet-zoomable-diagram {
+  overflow: visible;
+}
+
 .fleet-lightbox-stage.is-zoomed {
   align-items: flex-start;
   justify-content: flex-start;
@@ -2523,6 +2536,14 @@ body.wireframe-modal-open {
 .fleet-lightbox-stage.is-zoomed svg {
   max-width: none;
   max-height: none;
+  /* Prevent the flex stage from shrinking the explicitly zoomed SVG back to
+     the phone viewport width. The stage must scroll the diagram instead. */
+  flex: 0 0 auto;
+}
+
+.fleet-lightbox-stage.is-zoomed > .fleet-lightbox-clone {
+  max-width: none;
+  flex: 0 0 auto;
 }
 
 /* Stack / "how it's wired" two-column feature list */

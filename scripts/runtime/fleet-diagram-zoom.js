@@ -1,8 +1,8 @@
 /*
  * Purpose:
- * - Give each inline SVG architecture diagram (.fleet-diagram) a full-screen,
- *   zoomable lightbox so dense diagrams are legible on mobile where they would
- *   otherwise only scroll inside a small framed viewport.
+ * - Give each architecture diagram a full-screen, zoomable lightbox so dense
+ *   SVG and HTML/CSS diagrams are legible on mobile rather than trapped in a
+ *   small framed viewport.
  *
  * Architectural role:
  * - Progressive enhancement for /resources/agentic-ai-employees/. The diagrams
@@ -11,7 +11,7 @@
  *
  * Dependencies:
  * - Browser DOM APIs only (native <dialog>, no libraries, no inline handlers).
- *   Clones the live inline <svg> so it keeps DM Sans and the brand palette.
+ *   Clones the live diagram node so it keeps the site's structure and palette.
  * - Optional window.__rbAnalytics.trackEvent() (from ga4-bootstrap.js) for GA4
  *   telemetry; degrades to a no-op when analytics is absent.
  *
@@ -25,13 +25,13 @@
  *   innerHTML from untrusted input, no network calls.
  *
  * Migration considerations:
- * - Generic over any .fleet-diagram on the page; if the diagram container class
- *   changes, update DIAGRAM_SELECTOR. Safe no-op on pages without diagrams.
+ * - Generic over SVG and HTML/CSS diagram surfaces; if a selector changes,
+ *   update DIAGRAM_SELECTOR. Safe no-op on pages without diagrams.
  */
 (function () {
   'use strict';
 
-  var DIAGRAM_SELECTOR = '.fleet-diagram';
+  var DIAGRAM_SELECTOR = '.fleet-diagram, .fleet-zoomable-diagram';
 
   function trackEvent(eventName, params) {
     if (window.__rbAnalytics && typeof window.__rbAnalytics.trackEvent === 'function') {
@@ -39,8 +39,9 @@
     }
   }
 
-  function diagramLabel(svg, index) {
-    var label = svg.getAttribute('aria-label');
+  function diagramLabel(frame, index) {
+    var svg = frame.querySelector('svg');
+    var label = frame.getAttribute('aria-label') || (svg && svg.getAttribute('aria-label'));
     if (!label) {
       var title = svg.querySelector('title');
       label = title && title.textContent ? title.textContent.trim() : '';
@@ -80,6 +81,7 @@
 
     var zoomed = false;
     var currentCtx = {};
+    var currentTrigger = null;
 
     function setFit() {
       zoomed = false;
@@ -90,26 +92,30 @@
     }
 
     function setZoom() {
-      var svg = stage.querySelector('svg');
-      if (!svg) { return; }
+      var content = stage.querySelector('.fleet-lightbox-clone');
+      if (!content) { return; }
       zoomed = true;
       stage.classList.add('is-zoomed');
       zoomBtn.textContent = 'Fit';
-      var vbW = (svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width) || 760;
-      var target = Math.round(Math.max(window.innerWidth * 1.7, vbW));
-      svg.style.width = target + 'px';
+      var svg = content.querySelector('svg');
+      var vbW = svg && svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width;
+      var baseWidth = vbW || content.getBoundingClientRect().width || 760;
+      var target = Math.round(Math.max(window.innerWidth * 1.7, baseWidth));
+      content.style.width = target + 'px';
     }
 
-    function clearSvgInline() {
-      var svg = stage.querySelector('svg');
-      if (svg) { svg.style.width = ''; }
+    function clearContentInline() {
+      var content = stage.querySelector('.fleet-lightbox-clone');
+      if (content) { content.style.width = ''; }
     }
 
-    function open(sourceSvg, ctx) {
+    function open(sourceNode, ctx, trigger) {
       currentCtx = ctx || {};
+      currentTrigger = trigger || null;
       stage.textContent = '';
-      var clone = sourceSvg.cloneNode(true);
+      var clone = sourceNode.cloneNode(true);
       clone.removeAttribute('id');
+      clone.classList.add('fleet-lightbox-clone');
       stage.appendChild(clone);
       setFit();
       if (typeof dialog.showModal === 'function') {
@@ -120,24 +126,37 @@
     }
 
     function close() {
-      clearSvgInline();
+      clearContentInline();
       if (typeof dialog.close === 'function' && dialog.open) {
         dialog.close();
       } else {
         dialog.removeAttribute('open');
       }
       stage.textContent = '';
+      if (currentTrigger && typeof currentTrigger.focus === 'function') {
+        currentTrigger.focus();
+      }
+      currentTrigger = null;
     }
 
     zoomBtn.addEventListener('click', function () {
-      if (zoomed) { clearSvgInline(); setFit(); } else { setZoom(); trackEvent('fleet_diagram_zoom', currentCtx); }
+      if (zoomed) { clearContentInline(); setFit(); } else { setZoom(); trackEvent('fleet_diagram_zoom', currentCtx); }
     });
     closeBtn.addEventListener('click', close);
     // Click on the dim backdrop area (the dialog element itself) closes.
     dialog.addEventListener('click', function (e) {
       if (e.target === dialog) { close(); }
     });
-    dialog.addEventListener('close', function () { clearSvgInline(); stage.textContent = ''; });
+    dialog.addEventListener('close', function () {
+      clearContentInline();
+      stage.textContent = '';
+      // Native Escape closes the dialog without passing through close(), so
+      // restore focus here as well as in the explicit close-button path.
+      if (currentTrigger && typeof currentTrigger.focus === 'function') {
+        currentTrigger.focus();
+      }
+      currentTrigger = null;
+    });
 
     return { open: open };
   }
@@ -150,8 +169,7 @@
 
     diagrams.forEach(function (frame, i) {
       var svg = frame.querySelector('svg');
-      if (!svg) { return; }
-      var ctx = { diagram_index: i + 1, diagram_label: diagramLabel(svg, i + 1) };
+      var ctx = { diagram_index: i + 1, diagram_label: diagramLabel(frame, i + 1) };
       // Wrap the (horizontally scrolling) frame so the button can be pinned to
       // the corner without scrolling away with the diagram on mobile.
       var wrap = document.createElement('div');
@@ -166,7 +184,7 @@
       btn.textContent = '⛶ Full screen';
       btn.addEventListener('click', function () {
         trackEvent('fleet_diagram_fullscreen', ctx);
-        lightbox.open(svg, ctx);
+        lightbox.open(frame, ctx, btn);
       });
       wrap.appendChild(btn);
     });
