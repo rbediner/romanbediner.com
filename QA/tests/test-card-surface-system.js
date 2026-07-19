@@ -1,4 +1,11 @@
-/* Guards the canonical contained-surface contract without coupling pages to a markup rewrite. */
+/**
+ * Invariant:
+ * - The canonical contained-surface taxonomy, approved references, and accessibility affordances remain available.
+ * Why this exists:
+ * - Prevents a later page change from reintroducing ungoverned card patterns, duplicate icons, or false click affordances.
+ * What breaks if it fails:
+ * - CI blocks deployment before the site-wide surface system silently drifts.
+ */
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
