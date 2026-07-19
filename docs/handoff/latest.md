@@ -11,6 +11,7 @@
 - Visual QA rendered all eight pages with Poppler. The artifact contract passed. `git diff --check` is currently blocked by a pre-existing Google Drive Git index/object error (`missing blob cf11ec949caeb38e25fc95e8e86f9c5668773613`), unrelated to the artifact source.
 - Staged the artifact preview carousel on `/resources/` and a direct download CTA on `/resources/agentic-ai-employees/`; both use the unique `agentic-operations-architecture` resource context and canonical PDF path.
 - Added the agreed collapsed `Slide Preview` disclosure to `/resources/agentic-ai-employees/`, reusing the same eight-slide carousel and fullscreen preview interaction as the Resources hub.
+- Lazy-loaded slides 2–8 inside the collapsed preview so the closed-by-default component does not pull every slide into the initial page load; the first slide remains immediate and later slides load as needed.
 - Loaded the existing resource analytics runtime on the Agentic AI Employees page. Download links use `resource_pdf_download` with `resource_slug`, `resource_title`, `resource_type`, `resource_location`, and `file_path` context; preview expansion remains covered by the shared carousel runtime.
 - Targeted contracts and the full `npm run test:node` suite pass. Browser inspection of both staging pages shows no horizontal overflow at the available viewport, eight preview slides, and one tracked download CTA per surface.
 - Fixed a real phone-width regression exposed by Playwright: wide internal SVG diagrams remain scrollable within their frames while page-level overflow is clipped. The full 11-test Playwright suite now passes.
@@ -33,10 +34,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 341
-- Updated At (UTC): 2026-07-19T14:43:48Z
+- Handoff Sequence: 343
+- Updated At (UTC): 2026-07-19T14:51:23Z
 - Source Branch: staging
-- Source Commit: 49bfb3f3e8b603cdfa857c8d1d62f572d020580c (pre-handoff baseline)
+- Source Commit: 41698a941360800c329a00957f1792ba4457e346 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
