@@ -1,10 +1,21 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 332
-- Updated At (UTC): 2026-07-19T00:44:00Z
+- Handoff Sequence: 334
+- Updated At (UTC): 2026-07-19T00:59:57Z
 - Source Branch: staging
-- Source Commit: 54b9383c4b4f768242cccf3bd4d2bb3caf7a2e66 (pre-handoff baseline)
+- Source Commit: 3b522ac1c897f11cc5232fb66a1e7f1fd9eb75f1 (pre-handoff baseline)
 - Active Agent: Codex
+
+## Latest — 2026-07-19: All Agentic AI Employees diagrams made fullscreen-ready
+
+- Completed the mobile diagram quality gate after finding that the first lightbox only covered three inline SVGs and that zoomed SVGs could shrink back to phone width.
+- Upgraded the lightbox to cover all ten diagram surfaces: the four-layer architecture, three operating loops, brain/body split, org chart, model router, reliability loop, engineering loop, and three inline SVG diagrams.
+- Added real zoom sizing for phone/tablet viewports, touch-scrollable oversized clones, fit/zoom controls, Escape close, and focus restoration to the originating control.
+- Added `QA/tests/test-agentic-diagram-zoom.js` and wired it into the Node contract suite. Dynamic browser verification passed all ten diagrams at 390px, 768px, and 1440px with no horizontal page overflow.
+- `npm run test:node`, 20 Jest suites / 73 tests, and local Lighthouse passed (94 performance / 95 accessibility).
+- Product commit: `3b522ac` on `staging`; no production promotion attempted.
+- Staging deployment is pending GitHub Actions completion. Review with `https://rbediner.github.io/romanbediner-preview/resources/agentic-ai-employees/?cb=3b522ac` after the exact-SHA deploy is green.
+- Keep release watcher hygiene in place for this repo.
 
 ## Latest — 2026-07-19: Agentic AI Employees EBI structure and fresh-eyes pass
 
