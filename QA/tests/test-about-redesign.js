@@ -118,8 +118,38 @@ if (aboutHtml.includes('Systems Over Heroics') || aboutHtml.includes('Embedded O
   failures.push('About page must remove the old two-column philosophy card copy.');
 }
 
-if (!aboutCss.includes('.about-chapter-nav') || !aboutCss.includes('.timeline-orb.orb-4')) {
-  failures.push('About CSS must support the chapter nav and fourth timeline orb.');
+if (!aboutCss.includes('.about-chapter-nav') || !aboutCss.includes('.arc-item')) {
+  failures.push('About CSS must support the chapter nav and editorial chapter panels.');
+}
+
+if ((aboutHtml.match(/class="arc-item-label"/g) || []).length !== 5) {
+  failures.push('About page must attach a visible label block to each professional-background chapter.');
+}
+
+for (const index of ['01', '02', '03', '04', '05']) {
+  if (!aboutHtml.includes(`class="arc-index" aria-hidden="true">${index}</span>`)) {
+    failures.push(`About page is missing chapter index ${index}.`);
+  }
+}
+
+if (aboutHtml.includes('timeline-orb') || aboutCss.includes('timeline-orb')) {
+  failures.push('About page must not retain the obsolete decorative timeline orbs.');
+}
+
+if (aboutHtml.includes('<ul') || aboutHtml.includes('<ol')) {
+  failures.push('About professional-background narrative must remain prose, not bullets.');
+}
+
+if (aboutHtml.includes('class="arc-item"') && !aboutCss.includes('border: 1px solid var(--border-color)')) {
+  failures.push('About chapter panels must use the shared border token.');
+}
+
+if (!aboutCss.includes('@media (prefers-reduced-motion: reduce)')) {
+  failures.push('About chapter motion must include a reduced-motion treatment.');
+}
+
+if (!aboutCss.includes('overflow-wrap: break-word')) {
+  failures.push('About chapter headings must be allowed to wrap at narrow widths.');
 }
 
 if (failures.length > 0) {

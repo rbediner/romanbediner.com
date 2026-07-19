@@ -42,47 +42,10 @@
 }
 
 .arc-timeline-wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
+  gap: 18px;
 }
-
-.arc-timeline-wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--border-color);
-  opacity: 0.9;
-  z-index: 3;
-}
-
-.timeline-orb {
-  position: absolute;
-  left: -7px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #4f7cff, #1f3fa8);
-  opacity: 0.9;
-  z-index: 2;
-}
-
-.timeline-orb.orb-1,
-.timeline-orb.orb-2,
-.timeline-orb.orb-3,
-.timeline-orb.orb-4,
-.timeline-orb.orb-5 {
-  transform: translateY(-50%);
-}
-
-.timeline-orb.orb-1 { top: var(--orb1, 0px); }
-.timeline-orb.orb-2 { top: var(--orb2, 0px); }
-.timeline-orb.orb-3 { top: var(--orb3, 0px); }
-.timeline-orb.orb-4 { top: var(--orb4, 0px); }
-.timeline-orb.orb-5 { top: var(--orb5, 0px); }
 
 .about-philosophy {
   /* Modest separation from the timeline above. */
@@ -160,37 +123,49 @@
    ===================================================== */
 
 .arc-item {
+  position: relative;
   display: grid;
-  /* Narrow flexible label column + flexible narrative column. Left padding keeps
-     content clear of the vertical rail so headings never cross it. */
-  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
-  column-gap: 48px;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  column-gap: 34px;
   align-items: start;
-  padding: 48px 0 48px 32px;
+  padding: 28px 32px 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   /* Offset fixed header for same-page anchor jumps. */
   scroll-margin-top: 96px;
 }
 
-#fractional-integration-leadership {
-  padding-top: 32px;
-}
-
-/* Read the professional arc from current responsibility backward through the
-   operating history while keeping the section anchors stable. */
+/* Keep the approved current-to-history sequence while preserving stable anchors. */
 #ai-enabled-operating-systems { order: 1; }
 #fractional-integration-leadership { order: 2; }
 #global-infrastructure-advisory { order: 3; }
 #enterprise-scale { order: 4; }
 #global-delivery-leadership { order: 5; }
 
-/* Sidebar Era Header */
+.arc-item-label {
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.arc-index {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--accent-blue);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
 
 .era-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -225,7 +200,6 @@
   margin-top: 6px;
   /* Company line differentiated from the blue function label — muted gray for a two-tier header. */
   color: var(--text-secondary);
-  position: relative;
 }
 
 /* Narrative Column */
@@ -233,42 +207,46 @@
 .arc-narrative {
   display: flex;
   flex-direction: column;
-  gap: 22px;
-}
-
-.arc-item + .arc-item .arc-narrative {
-  border-top: 1px solid var(--border-color);
-  padding-top: 40px;
+  gap: 18px;
+  min-width: 0;
+  max-width: 760px;
 }
 
 .arc-narrative p {
-  max-width: 680px;
   font-size: 17px;
   line-height: 1.65;
   color: var(--text-secondary);
   margin: 0;
 }
 
+.arc-narrative p:first-child {
+  color: var(--text-primary);
+}
+
+@media (hover: hover) {
+  .arc-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59, 108, 255, 0.32);
+    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1);
+  }
+}
+
 /* Responsive Stack */
 
 @media (max-width: 900px) {
-  .arc-timeline-wrapper::before,
-  .timeline-orb {
-    display: none;
-  }
-
   .arc-item {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 36px 0;
+    gap: 14px;
+    padding: 21px 19px 23px;
+    border-radius: 10px;
   }
 
   .era-header {
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
 
   .era-title {
-    /* Smaller on mobile so the longest era heading stays on one line. */
+    /* Long chapter labels wrap naturally on narrow screens. */
     font-size: 16px;
   }
 
@@ -278,6 +256,10 @@
 
   .arc-narrative p {
     max-width: 100%;
+  }
+
+  .arc-narrative p:first-child {
+    font-size: 16px;
   }
 
   .about-chapter-nav {
@@ -300,5 +282,28 @@
 
   .about-philosophy-copy p {
     max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-item,
+  .about-chapter-nav a {
+    transition: none;
+  }
+
+  .arc-item:hover,
+  .about-chapter-nav a:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Preserve the panel boundary without stealing the narrowest reading measure. */
+  .arc-item {
+    padding: 18px 8px 20px;
+  }
+
+  .arc-narrative {
+    gap: 14px;
   }
 }

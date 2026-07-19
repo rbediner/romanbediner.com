@@ -33,7 +33,21 @@ class AboutRedesignTest(unittest.TestCase):
 
     def test_supporting_css_exists(self):
         self.assertIn(".about-chapter-nav", self.about_css)
-        self.assertIn(".timeline-orb.orb-4", self.about_css)
+        self.assertIn(".arc-item", self.about_css)
+        self.assertIn("border: 1px solid var(--border-color)", self.about_css)
+        self.assertIn("@media (prefers-reduced-motion: reduce)", self.about_css)
+
+    def test_editorial_chapter_panels_replace_timeline_decoration(self):
+        self.assertEqual(self.about_html.count('class="arc-item-label"'), 5)
+        self.assertEqual(self.about_html.count('class="arc-index" aria-hidden="true"'), 5)
+        self.assertNotIn("timeline-orb", self.about_html)
+        self.assertNotIn("timeline-orb", self.about_css)
+        self.assertNotIn("<ul", self.about_html)
+        self.assertNotIn("<ol", self.about_html)
+
+    def test_chapter_heading_wrap_is_safe(self):
+        self.assertIn("overflow-wrap: break-word", self.about_css)
+        self.assertNotIn("white-space: nowrap", self.about_css)
 
 
 if __name__ == "__main__":
