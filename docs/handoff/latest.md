@@ -2,9 +2,9 @@
 
 ## Latest: 2026-07-19: Homepage headline QA alignment — ready for production
 
-- Aligned the two browser spacing guards with the approved homepage layout: the long desktop value proposition wraps naturally inside its reading measure, preventing the earlier 42px viewport overflow.
-- The guards now permit the intentional two-line Cormorant heading while rejecting a third line. Desktop alignment, mobile overflow, and spacing assertions remain intact.
-- Focused Playwright-backed Python checks (5/5), `git diff --check`, and the Google Drive drift check passed. Product commit `575cba9` follows the visually approved staging state.
+- Aligned the duplicate Python, Playwright, Node browser, and release-smoke guards with the approved homepage layout: the long desktop value proposition wraps naturally inside its reading measure, preventing the earlier 42px viewport overflow.
+- The guards now permit the intentional two-line Cormorant heading while rejecting a third line. The Node guard also measures against the current `.master-head` boundary rather than the retired executive callout. Desktop alignment, mobile overflow, and spacing assertions remain intact.
+- Focused Playwright (2/2), Node browser alignment, release browser smoke, Python spacing checks (5/5), `git diff --check`, and the Google Drive drift check passed. Product commits `575cba9` and `6146748` follow the visually approved staging state.
 
 ## Latest: 2026-07-19: About current-work hierarchy — staging only
 
@@ -189,10 +189,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 366
-- Updated At (UTC): 2026-07-19T22:13:09Z
+- Handoff Sequence: 367
+- Updated At (UTC): 2026-07-19T22:27:52Z
 - Source Branch: staging
-- Source Commit: 575cba903aa9638da464fcc57790edc8cd80ae38 (pre-handoff baseline)
+- Source Commit: 61467482abbf39d932fe88dd7b5ff5c91ccf2d7d (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
