@@ -1,5 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Site-wide visual QA correction — staging only
+
+- Completed a hosted visual audit of every canonical public route at both 1440px and 390px: Home, About, Resources, all four resource detail pages, Services, Connect, the Framework hub, and all six framework briefs. All 32 rendered route/viewport combinations passed with no page-level horizontal overflow.
+- Corrected the Dashboard/PasteFlow resource regression reported in review: resource symbols now use the site’s established dark-outline linework with no CSS filter; Dashboard Core View icon tiles retain a 24px phone inset; the Dashboard closing invitation is two readable paragraphs at a restrained 16px phone scale. The browser QA contract now asserts all of those conditions as well as icon uniqueness and compact card heights.
+- The whole-site audit also found and fixed a real homepage defect: the desktop hero was forced onto one line and could exceed the viewport by 42px. Its approved headline now wraps naturally inside the reading container.
+- Added a canonical route viewport guard in `QA/tests/playwright/agentic-mobile-layout.spec.js`: every public route is tested at 1440px and 390px for no horizontal overflow. The focused Playwright suite and complete Node contract suite pass.
+- The review preserves the site’s deliberately different systems: Dashboard/PasteFlow use the compact reference-card anatomy; Services and About remain long-form editorial chapters; Framework retains semantic stages; Agentic retains its architecture diagrams; Resources remains an artifact hub; Connect remains a form surface. Do not flatten these into one generic card pattern.
+- Hosted staging deployment `29702737776` passed for product SHA `755467b08926bfc7ae7d2e8513aa96f170c50470`. The live PRD records the new visual QA rule. This remains staging-only; do not promote to `prod` without Roman’s explicit approval.
+- Review staging at:
+  - `https://rbediner.github.io/romanbediner-preview/?cb=755467b`
+  - `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/?cb=755467b#in-this-dashboard`
+  - `https://rbediner.github.io/romanbediner-preview/resources/pasteflow/?cb=755467b#pasteflow-capabilities`
+
 ## Latest: 2026-07-19: Reference-card composition correction — staging only
 
 - Corrected the rejected fixed-height gallery treatment on `/resources/ai-enabled-operations-dashboard/` and `/resources/pasteflow/`. The Dashboard operating areas and PasteFlow capabilities now follow the supplied reference composition: purpose-specific icon tile, numbered chip and eyebrow on one header line, serif title, short blue rule, and body copy in normal flow.
@@ -121,10 +134,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 358
-- Updated At (UTC): 2026-07-19T20:12:24Z
+- Handoff Sequence: 359
+- Updated At (UTC): 2026-07-19T20:35:57Z
 - Source Branch: staging
-- Source Commit: e0a3c324d88dd95ab43d934ed29fd4980185258f (pre-handoff baseline)
+- Source Commit: 755467b08926bfc7ae7d2e8513aa96f170c50470 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
