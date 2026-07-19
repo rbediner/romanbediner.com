@@ -177,7 +177,15 @@ test('resource card categories keep editorial anatomy on desktop and phone width
       questionMarker: getComputedStyle(document.querySelector('.resource-dashboard-question-item'), '::before').content,
       quadrantMarker: getComputedStyle(document.querySelector('.resource-dashboard-quadrant'), '::before').content,
       quadrantIcons: [...document.querySelectorAll('.resource-dashboard-quadrant .resource-system-icon img')].map((icon) => icon.getAttribute('src')),
+      quadrantIconFilters: [...document.querySelectorAll('.resource-dashboard-quadrant .resource-system-icon img')].map((icon) => getComputedStyle(icon).filter),
       quadrantHeights: [...document.querySelectorAll('.resource-dashboard-quadrant')].map((card) => card.getBoundingClientRect().height),
+      viewIconInsets: [...document.querySelectorAll('.resource-dashboard-view-block')].map((card) => {
+        const cardBounds = card.getBoundingClientRect();
+        const iconBounds = card.querySelector('.resource-system-icon').getBoundingClientRect();
+        return iconBounds.left - cardBounds.left;
+      }),
+      conversationParagraphs: document.querySelectorAll('.resource-conversation-copy').length,
+      conversationCopyFontSize: parseFloat(getComputedStyle(document.querySelector('.resource-conversation-copy')).fontSize),
     }));
     expect(dashboard.scrollWidth).toBeLessThanOrEqual(dashboard.viewportWidth);
     expect(dashboard.questions).toBe(6);
@@ -191,6 +199,14 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     // regress to the former 330px empty gallery panels.
     expect(Math.max(...dashboard.quadrantHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 300 : 260);
     expect(new Set(dashboard.quadrantIcons).size).toBe(4);
+    // Resource icons use the site's established dark-outline ink, not a blue
+    // filter that can make a mark disappear against a pale blue tile.
+    expect(dashboard.quadrantIconFilters.every((filter) => filter === 'none')).toBe(true);
+    // Dashboard-view tiles must keep the same comfortable inset as the primary
+    // cards; zero padding makes the icon visually cling to the card edge.
+    expect(dashboard.viewIconInsets.every((inset) => inset >= 20)).toBe(true);
+    expect(dashboard.conversationParagraphs).toBe(2);
+    if (viewport.width <= 767) expect(dashboard.conversationCopyFontSize).toBeLessThanOrEqual(16);
 
     await page.goto(`http://${host}:${port}/resources/pasteflow/`, { waitUntil: 'domcontentloaded' });
     const pasteflow = await page.evaluate(() => ({
@@ -200,6 +216,7 @@ test('resource card categories keep editorial anatomy on desktop and phone width
       marker: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item'), '::before').content,
       titleFont: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item h3')).fontFamily,
       icons: [...document.querySelectorAll('.resource-pasteflow-capability-item .resource-system-icon img')].map((icon) => icon.getAttribute('src')),
+      iconFilters: [...document.querySelectorAll('.resource-pasteflow-capability-item .resource-system-icon img')].map((icon) => getComputedStyle(icon).filter),
       cardHeights: [...document.querySelectorAll('.resource-pasteflow-capability-item')].map((card) => card.getBoundingClientRect().height),
     }));
     expect(pasteflow.scrollWidth).toBeLessThanOrEqual(pasteflow.viewportWidth);
@@ -211,5 +228,6 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     expect(Math.max(...pasteflow.cardHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 300 : 260);
     // Every capability receives a specific mnemonic, never a repeated filler icon.
     expect(new Set(pasteflow.icons).size).toBe(6);
+    expect(pasteflow.iconFilters.every((filter) => filter === 'none')).toBe(true);
   }
 });

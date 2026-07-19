@@ -1638,7 +1638,16 @@
 
   /* Conversation card stacks vertically on mobile */
   .resource-conversation-card {
-    padding: 26px 20px 28px;
+    padding: 24px 24px 26px;
+  }
+
+  .resource-conversation-card .resource-conversation-copy {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .resource-conversation-card .resource-conversation-copy + .resource-conversation-copy {
+    margin-top: 14px;
   }
 
   .resource-conversation-cta {
@@ -2165,9 +2174,8 @@ body.wireframe-modal-open {
   display: block;
   width: 38px;
   height: 38px;
-  /* External SVGs are intentionally single-ink assets; the filter applies the
-     site blue without duplicating color-specific icon files. */
-  filter: invert(32%) sepia(93%) saturate(1754%) hue-rotate(214deg) brightness(92%) contrast(88%);
+  /* Resource symbols follow the existing site icon language: restrained dark
+     linework inside a quiet blue-tinted tile, not a second blue accent. */
 }
 
 .resource-system-kicker {
@@ -2349,7 +2357,8 @@ body.wireframe-modal-open {
   .resource-dashboard-view-block {
     grid-template-columns: 62px minmax(0, 1fr);
     min-height: 0;
-    padding: 22px 0;
+    box-sizing: border-box;
+    padding: 22px 24px;
   }
 }
 
