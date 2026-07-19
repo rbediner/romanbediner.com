@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 335
-- Updated At (UTC): 2026-07-19T02:20:14Z
+- Handoff Sequence: 336
+- Updated At (UTC): 2026-07-19T12:18:52Z
 - Source Branch: staging
-- Source Commit: ea95d435540335c0beae5af50936e678ea778e71 (pre-handoff baseline)
+- Source Commit: f58416e279ff9466edfe8b13dcfc3fe76895b220 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest — 2026-07-19: Agentic case study navigation and diagram consistency polish
@@ -439,3 +439,25 @@ The experience marks continue to use shared centered grid cells at desktop and m
 
 - Homepage layout guardrail, services tests, visual regression, diff hygiene, and Google Drive drift checks pass locally.
 - Staging-only; no production promotion.
+## Latest — 2026-07-19: Agentic resource evidence framing and mobile hierarchy
+
+The Agentic AI Employees resource now uses the more accurate public classification `REFERENCE ARCHITECTURE + BUILD REPORT`. It is a first-party operating-system build, not a customer case study, because the page does not claim an external customer context or measured before-and-after outcome.
+
+- Updated the page label, supporting banner, metadata, JSON-LD date, resource taxonomy, hub card, and CTA to use build-report language.
+- Added the shared resource opening pattern: blue introductory banner and `Who This Is For` card.
+- Standardized the visible page heading to the site all-caps treatment with a supporting `FROM REQUEST TO PRODUCTION` deck; preserved the full SEO headline in metadata and structured data.
+- Kept `On this page` available at page load on desktop and mobile, with a centered mobile control and centered mobile navigation sheet.
+- Removed the banned phrase `why it matters` and long-dash punctuation from public HTML copy and updated the footer/metadata contracts accordingly.
+- Updated the shared `bediner-site` skill in the local callable install and Google Drive source, including the evidence-level rule for build reports versus customer case studies, language rules, and mobile heading/navigation guidance.
+- PRD updated with the classification and evidence boundary.
+
+Validation:
+- Focused agentic, diagram, footer, metadata, route parity, OG, Resources, and link checks passed.
+- Direct Playwright checks passed at 1440px, 768px, and 390px with zero horizontal overflow; mobile floating navigation opened and closed correctly.
+- Full visual suite remains blocked only by the pre-existing homepage baseline mismatch (`home--desktop-full.png`, changed ratio `0.054603` versus threshold `0.0016`); changed resource routes were isolated and visually inspected directly.
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
