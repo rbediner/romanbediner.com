@@ -1,5 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Remove decorative card numbering + About identity refinement — staging only
+
+- Removed decorative numeric markers from every card family: Services entries, About chapters, Framework stage cards, Dashboard questions/quadrants/views, PasteFlow capabilities, and Agentic explanatory cards. Purpose-specific icons, labels, semantic colors, and titles now carry hierarchy. Ordered process/diagram steps remain only where sequence has actual instructional meaning.
+- Reworked the About hero’s phone treatment after visual review: the current-responsibility metadata now has a calmer scale, line height, and separation from the relationship line. `Bediner Advisory` now follows the approved wordmark logic—ink-black `Bediner`, blue `Advisory`, restrained `LLC`.
+- Updated the card-surface source of truth and regression contracts: no source card-number classes/counters may return, while resource card anatomy continues to verify no pseudo number content at desktop or mobile widths.
+- Full Node contract validation and focused Playwright (3/3) passed. Hosted staging deployment `29704203735` passed for product SHA `f6003e43c6d3a71bdf62401775c724c65914418f`; a fresh 16-route desktop/mobile audit (32 renders) found no horizontal overflow or filtered-icon regressions. Hosted visual inspection covered About, Dashboard, PasteFlow, Framework, and Agentic.
+- Updated the live `romanbediner.com PRD`. This remains staging-only. Do not promote to `prod` or change the reusable page-building skill until Roman explicitly approves the direction.
+
 ## Latest: 2026-07-19: Services mobile density correction — staging only
 
 - Corrected the rejected oversized Services phone composition. Each service now uses a compact icon-and-label row followed by a full-width 29px title, instead of forcing a large title into the narrow space beside an oversized icon. The service number, icon tile, kicker, rule, and opening thesis remain legible without dominating the screen.
@@ -158,10 +166,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 362
-- Updated At (UTC): 2026-07-19T21:04:22Z
+- Handoff Sequence: 363
+- Updated At (UTC): 2026-07-19T21:23:27Z
 - Source Branch: staging
-- Source Commit: 920c9ec347d22ad12e47ba8e4a17dee9117ed829 (pre-handoff baseline)
+- Source Commit: f6003e43c6d3a71bdf62401775c724c65914418f (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
