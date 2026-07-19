@@ -86,6 +86,10 @@
     #ffffff;
 }
 
+/* Editorial card titles inherit the canonical serif from the shared system,
+   so route styles never compete for typography ownership. */
+.ui-surface-title { font-family: var(--font-serif); }
+
 /* Static containment supports scanning; it must never imply a click target. */
 .ui-surface.is-static { cursor: default; }
 .ui-surface.is-interactive,
