@@ -1,5 +1,15 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Canonical contained-surface system — staging only
+
+- Added `docs/design-system/card-surfaces/README.md` as the canonical source for the five surface types, approved visual references, shared tokens, modifier model, accessibility rules, route inventory, exceptions, and icon discipline. The two user-approved PNG references now live beside that guide with durable filenames.
+- Applied the system across the priority page families without changing public copy, routes, analytics, architecture semantics, or approved icon assets: About editorial chapters, Framework stage cards, Resources hub, Dashboard scan units, Agentic artifact/audience surfaces, PasteFlow capability and callout units, Insights, and Connect.
+- Static surfaces now use quiet containment with no false click affordance. Framework stages retain their existing semantic colors and distinct icons; no new or repeated icons were introduced. The Connect form no longer lifts on hover.
+- Added `QA/tests/test-card-surface-system.js` and updated the framework layout contracts so shared surface modifiers remain compatible with the six-stage architecture. Focused contracts, shared-ui gate, link validation, and the 12-test Playwright suite passed locally. The live PRD and shared `bediner-site` skill now record the system and verification rule.
+- Real-browser staging inspection was completed on the Dashboard resource at desktop width after the Mac was unlocked. The opening hierarchy, callout, audience surface, and embedded dashboard frame rendered cleanly with no overlap. Validate the full staging page matrix below before requesting any production promotion.
+- Product commits: `f25d389`, `cc65562`, and `0b3b2ff` on `staging`. The final replacement CI/deploy is queued at handoff time. An earlier CI caught and corrected an exact-class test regression; its independent Lighthouse job also measured a transient 84 performance median against an 85 threshold.
+- This work is staging-only. Do not promote to `prod` until the final staging CI/deploy is green and the named pages receive manual approval.
+
 ## Latest: 2026-07-19: About Operating Philosophy rail alignment
 
 - Widened the About Operating Philosophy desktop paragraph measure from 780px to 1010px so its readable right edge aligns with the outer body rail used by the professional-background chapter narratives.
@@ -66,10 +76,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 352
-- Updated At (UTC): 2026-07-19T17:59:42Z
+- Handoff Sequence: 353
+- Updated At (UTC): 2026-07-19T18:31:32Z
 - Source Branch: staging
-- Source Commit: 17d2cac7234729f587c9ac3a4a8c4b39c8786dda (pre-handoff baseline)
+- Source Commit: 0b3b2ff6da93b7ea1e804591714b3424bb806115 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
