@@ -86,39 +86,43 @@ async function run() {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await page.goto(`http://${HOST}:${PORT}/`, { waitUntil: "networkidle" });
 
-    // Measure right-edge alignment and one-line behavior directly from rendered layout.
+    // Measure right-edge alignment and approved two-line behavior directly from rendered layout.
     const result = await page.evaluate(() => {
       const h1 = document.querySelector(".hero-head h1, .master-head h1");
-      const tinted = document.querySelector(".executive-callout");
-      if (!h1 || !tinted) {
+      // The executive callout was retired. The hero container is now the stable
+      // alignment boundary for the approved homepage headline.
+      const heroContainer = document.querySelector(".master-head");
+      if (!h1 || !heroContainer) {
         throw new Error(
-          `Missing .hero-head h1/.master-head h1 or .executive-callout (url=${location.href}, hasH1=${Boolean(h1)}, hasCallout=${Boolean(tinted)})`
+          `Missing .hero-head h1/.master-head h1 or .master-head (url=${location.href}, hasH1=${Boolean(h1)}, hasHeroContainer=${Boolean(heroContainer)})`
         );
       }
       const h1Box = h1.getBoundingClientRect();
-      const tintBox = tinted.getBoundingClientRect();
+      const heroContainerBox = heroContainer.getBoundingClientRect();
       const h1Style = getComputedStyle(h1);
       const lineHeight = Number.parseFloat(h1Style.lineHeight) || Number.parseFloat(h1Style.fontSize) * 1.1;
-      const oneLine = h1Box.height <= lineHeight + 1;
+      // The approved value proposition wraps at desktop width to avoid horizontal overflow.
+      // A third line would mean its reading measure or typography has regressed.
+      const withinApprovedLineCount = h1Box.height <= lineHeight * 2 + 1;
       return {
         h1Right: h1Box.right,
-        tintedRight: tintBox.right,
-        delta: h1Box.right - tintBox.right,
-        oneLine,
+        heroContainerRight: heroContainerBox.right,
+        delta: h1Box.right - heroContainerBox.right,
+        withinApprovedLineCount,
       };
     });
 
     if (Math.abs(result.delta) > 1) {
       throw new Error(
-        `Homepage hero alignment failed: delta=${result.delta.toFixed(2)}px (h1Right=${result.h1Right}, tintedRight=${result.tintedRight})`
+        `Homepage hero alignment failed: delta=${result.delta.toFixed(2)}px (h1Right=${result.h1Right}, heroContainerRight=${result.heroContainerRight})`
       );
     }
-    if (!result.oneLine) {
-      throw new Error("Homepage hero alignment failed: H1 is not a single line at 1440x900.");
+    if (!result.withinApprovedLineCount) {
+      throw new Error("Homepage hero alignment failed: H1 exceeds its approved two-line measure at 1440x900.");
     }
 
     // Keep output concise for CI logs.
-    console.log(`PASS: Node Playwright hero alignment delta=${result.delta.toFixed(2)}px, oneLine=${result.oneLine}`);
+    console.log(`PASS: Node Playwright hero alignment delta=${result.delta.toFixed(2)}px, withinApprovedLineCount=${result.withinApprovedLineCount}`);
   } finally {
     if (browser) await browser.close();
     await new Promise((resolve) => server.close(resolve));

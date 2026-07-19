@@ -87,7 +87,9 @@ async function measureHome(page) {
     const lineHeight = Number.parseFloat(h1Style.lineHeight) || fontSize * 1.1;
     return {
       delta: h1Box.right - targetBox.right,
-      oneLine: h1Box.height <= lineHeight + 1,
+      // The long homepage value proposition is approved to use two lines at desktop
+      // width; a third line would signal that its reading measure has regressed.
+      withinApprovedLineCount: h1Box.height <= lineHeight * 2 + 1,
       fontSize: h1Style.fontSize,
     };
   }, { h1Sel: h1Selector, targetSel: targetSelector });
@@ -107,10 +109,10 @@ test.afterAll(async () => {
 
 test.use({ viewport: { width: 1440, height: 900 } });
 
-test("home H1 renders on a single line at desktop viewport", async ({ page }) => {
-  // executive-callout removed in 2026 redesign; only verify H1 does not wrap
+test("home H1 stays within its approved two-line desktop measure", async ({ page }) => {
+  // Prevent a third line without reintroducing the rejected forced-nowrap overflow.
   const home = await measureHome(page);
-  expect(home.oneLine).toBeTruthy();
+  expect(home.withinApprovedLineCount).toBeTruthy();
 });
 
 test("connect page H1 inherits same computed size as home H1", async ({ page }) => {

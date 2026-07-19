@@ -334,7 +334,8 @@ async function assertHomeContract(page) {
       missing: false,
       naturalWidth: image.naturalWidth,
       naturalHeight: image.naturalHeight,
-      oneLine: h1Box.height <= lineHeight + 1
+      // A two-line desktop homepage title is intentional; reject only a third line.
+      withinApprovedLineCount: h1Box.height <= lineHeight * 2 + 1
     };
   });
 
@@ -344,8 +345,8 @@ async function assertHomeContract(page) {
   if (result.naturalWidth < 500 || result.naturalHeight < 700) {
     throw new Error(`home: hero image dimensions look wrong (${result.naturalWidth}x${result.naturalHeight})`);
   }
-  if (!result.oneLine) {
-    throw new Error('home: hero H1 wrapped unexpectedly');
+  if (!result.withinApprovedLineCount) {
+    throw new Error('home: hero H1 exceeds its approved two-line measure');
   }
 }
 
