@@ -1,5 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Reference-card composition correction — staging only
+
+- Corrected the rejected fixed-height gallery treatment on `/resources/ai-enabled-operations-dashboard/` and `/resources/pasteflow/`. The Dashboard operating areas and PasteFlow capabilities now follow the supplied reference composition: purpose-specific icon tile, numbered chip and eyebrow on one header line, serif title, short blue rule, and body copy in normal flow.
+- Dashboard prompts are intentionally a compact numbered scan list rather than oversized cards. Core Dashboard Views remain compact informational cards. The card family uses the existing Roman-blue edge wash only; no teal/green, duplicate icon, filler icon, hover affordance, or production promotion was introduced.
+- Added a browser QA density guard so desktop resource cards cannot regress into the rejected 330px empty panels. The targeted Playwright test and the full Node contract suite pass.
+- Hosted staging deployment `29701977367` passed for product commit `e0a3c324d88dd95ab43d934ed29fd4980185258f`. Hosted visual verification confirmed the `resources.css?v=20260719r13` asset at 1440px and 390px: no horizontal overflow; Dashboard cards are 287px desktop / 229px phone; PasteFlow cards are 253–277px desktop / 229px phone.
+- Updated the live `romanbediner.com PRD` with the reference-card correction and staging-only boundary. Do not update the reusable page-building skill until Roman explicitly approves this direction.
+- Review only these staging routes before any production decision:
+  - `https://rbediner.github.io/romanbediner-preview/resources/ai-enabled-operations-dashboard/?cb=e0a3c32#in-this-dashboard`
+  - `https://rbediner.github.io/romanbediner-preview/resources/pasteflow/?cb=e0a3c32#pasteflow-capabilities`
+
 ## Latest: 2026-07-19: Canonical contained-surface system — staging only
 
 - Added `docs/design-system/card-surfaces/README.md` as the canonical source for the five surface types, approved visual references, shared tokens, modifier model, accessibility rules, route inventory, exceptions, and icon discipline. The two user-approved PNG references now live beside that guide with durable filenames.
@@ -110,10 +121,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 357
-- Updated At (UTC): 2026-07-19T19:59:21Z
+- Handoff Sequence: 358
+- Updated At (UTC): 2026-07-19T20:12:24Z
 - Source Branch: staging
-- Source Commit: bb126be607cee7bf19f1fd73a4806c96c7460383 (pre-handoff baseline)
+- Source Commit: e0a3c324d88dd95ab43d934ed29fd4980185258f (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
