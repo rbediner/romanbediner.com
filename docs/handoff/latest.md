@@ -14,10 +14,12 @@
 - Lazy-loaded slides 2–8 inside the collapsed preview so the closed-by-default component does not pull every slide into the initial page load; the first slide remains immediate and later slides load as needed.
 - Unified the Portable Architecture Brief card and preview disclosure: the closed card now presents `Preview the brief` first and `Download the brief` second, while the opened carousel expands inside the same card and remains responsive on phone widths.
 - Updated the shared `bediner-site` skill with the reusable unified artifact-card pattern: preview first, download second, closed by default, full-width expansion inside the same card, and explicit phone-width overflow checks while preserving the existing analytics contract.
+- Rewrote the Agentic AI Employees `Who This Is For` card as four practical bullets for founders, CEOs, business owners, operators, AI builders, and implementation partners. The copy emphasizes moving beyond experiments, improving real company work, building useful and bounded agents, and reusing proven workflows.
 - Loaded the existing resource analytics runtime on the Agentic AI Employees page. Download links use `resource_pdf_download` with `resource_slug`, `resource_title`, `resource_type`, `resource_location`, and `file_path` context; preview expansion remains covered by the shared carousel runtime.
 - Targeted contracts and the full `npm run test:node` suite pass. Browser inspection of both staging pages shows no horizontal overflow at the available viewport, eight preview slides, and one tracked download CTA per surface.
 - Fixed a real phone-width regression exposed by Playwright: wide internal SVG diagrams remain scrollable within their frames while page-level overflow is clipped. The full 11-test Playwright suite now passes.
 - Updated the live `romanbediner.com PRD` with the artifact, preview, resource slug, analytics event contract, and staging acceptance rule. Live GA4 confirmation should happen after the staging preview is deployed and is the final analytics verification step before production promotion.
+- Updated the live PRD with the audience-copy decision. Staging CI passed after one transient Lighthouse performance retry; staging deployment and live preview validation passed for product commit `2e3a732b34a0f358900597cc95b60112038d5a85`. The exact commit was promoted to production; production CI passed in run `29694816334`, Deploy Pages and post-deploy validation passed in run `29694816316`, and `npm run release:verify-prod` passed live smoke checks across 16 routes.
 
 ## Latest: 2026-07-19: Agentic resource mobile and evidence-boundary correction
 
@@ -36,10 +38,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 345
-- Updated At (UTC): 2026-07-19T15:23:49Z
+- Handoff Sequence: 346
+- Updated At (UTC): 2026-07-19T16:31:39Z
 - Source Branch: staging
-- Source Commit: c6f594230efb3dbe66100a1be6712e81de0a82a5 (pre-handoff baseline)
+- Source Commit: 2e3a732b34a0f358900597cc95b60112038d5a85 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
