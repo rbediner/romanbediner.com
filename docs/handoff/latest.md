@@ -1,5 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Compact Dashboard resource surfaces — staging only
+
+- Kept the approved PasteFlow capability-card treatment unchanged: compact two-column desktop cards, purpose-specific dark-outline icons in quiet blue tiles, blue labels/rules, serif titles, and copy-led height.
+- Reduced the Dashboard quadrant and Core Dashboard View cards to the same content-sized density. Core-view icon tiles retain a 20px inset so the smaller treatment does not cling to the rail.
+- Replaced the bare Dashboard question rows with six restrained prompt surfaces: enough containment to scan, without restoring decorative numbers or turning the section into a wall of oversized cards.
+- Corrected two stale Python QA contracts that were still requiring the decorative About and Services number markers. They now enforce the approved no-number rule instead.
+- Product commit `bf4be77ac38a16ebdca919d3cc1b3080110a11fe`; Deploy Staging run `29704689867` passed. A hosted audit rendered all 16 canonical routes at 1440px and 390px (32 renders): no horizontal overflow or filtered resource-icon failures. Direct screenshot review covered Dashboard and PasteFlow at both sizes.
+- Updated the live `romanbediner.com PRD`. This remains staging-only: production and the reusable page-building skill are untouched pending Roman’s explicit approval.
+
 ## Latest: 2026-07-19: Remove decorative card numbering + About identity refinement — staging only
 
 - Removed decorative numeric markers from every card family: Services entries, About chapters, Framework stage cards, Dashboard questions/quadrants/views, PasteFlow capabilities, and Agentic explanatory cards. Purpose-specific icons, labels, semantic colors, and titles now carry hierarchy. Ordered process/diagram steps remain only where sequence has actual instructional meaning.
@@ -166,10 +175,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 363
-- Updated At (UTC): 2026-07-19T21:23:27Z
+- Handoff Sequence: 364
+- Updated At (UTC): 2026-07-19T21:39:28Z
 - Source Branch: staging
-- Source Commit: f6003e43c6d3a71bdf62401775c724c65914418f (pre-handoff baseline)
+- Source Commit: bf4be77ac38a16ebdca919d3cc1b3080110a11fe (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
