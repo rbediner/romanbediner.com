@@ -1,5 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Architecture artifact documentation and reusable-skill alignment — staging docs only
+
+- Codified the approved downloadable-artifact pattern in the repository README, canonical card-surface guide, and shared `bediner-site` skill. A substantial architecture, reference implementation, or case-study follow-along must use a truthful content-led name rather than defaulting to `brief`.
+- The documented resource pattern is one unified artifact surface: `Preview` precedes `Download`; the preview remains closed until requested, expands inside the same surface, and renders pages from the exact canonical PDF. Use `Page` for a document and `Slide` only for a presentation deck.
+- The contract preserves the existing resource slug, file path, analytics event names/parameters, `data-track-pdf-download`, and `data-file-path` attributes. Required QA is now explicit: at 1440px and 390px, open the preview, advance one page, verify the page label/count and canonical download target, and confirm no horizontal overflow.
+- The card-system guidance also confirms that decorative numeric markers are not a default. Icons remain selective: they must be distinct, approved, and meaningful rather than repeated filler.
+- No public page behavior or production artifact changed in this documentation session. The already-live Agentic Operations Architecture release remains product SHA `fa8856895c267883241f5329170914fee4fb6b0b`. Documentation source commit on `staging`: `ddaa6aa`.
+
 ## Latest: 2026-07-19: Agentic Operations Architecture artifact replacement — production release
 
 - Replaced the downloadable and previewed artifact on `/resources/agentic-ai-employees/` with the supplied ten-page `Agentic Operations Architecture` PDF. The downloadable canonical file is `assets/downloads/agentic-operations-architecture-roman-bediner.pdf`; preview images live under `assets/resources/agentic-operations-architecture/slides/`.
@@ -205,10 +213,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 370
-- Updated At (UTC): 2026-07-19T23:25:56Z
+- Handoff Sequence: 371
+- Updated At (UTC): 2026-07-19T23:29:10Z
 - Source Branch: staging
-- Source Commit: fa8856895c267883241f5329170914fee4fb6b0b (pre-handoff baseline)
+- Source Commit: ddaa6aa1ad42cc22993d6579977cd25ecec3a4d1 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
