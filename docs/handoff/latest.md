@@ -38,10 +38,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 346
-- Updated At (UTC): 2026-07-19T16:31:39Z
+- Handoff Sequence: 347
+- Updated At (UTC): 2026-07-19T17:04:31Z
 - Source Branch: staging
-- Source Commit: 2e3a732b34a0f358900597cc95b60112038d5a85 (pre-handoff baseline)
+- Source Commit: b266558e7ae502fb9b67d4ab5f7eb826033bb4d3 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
@@ -444,7 +444,7 @@ Supporting:
 3. **Known CI nuisance:** pre-push visual gate can fail on the `home--mobile-full` phantom — just `git push` again. For a *different* baseline failing repeatably, verify with a direct `test:visual` run before refreshing (see Environment notes).
 4. Possible polish follow-ups (Roman's call): a visible chip nav on Services (currently the nav source is visually hidden — only the floating control shows); tuning the FAB position/label.
 5. Backlog (copy-sensitive, Roman supplies copy): About-timeline mobile progressive disclosure; metric proof points; FAQ/Q&A block; richer OG image. Do not revive `/insights/`.
-6. PRD: this was visual/interaction polish (no behavior/IA/metadata/analytics change), so no `SEO Authority PRD` update required.
+6. PRD: current release notes are recorded in the live `SEO Authority PRD`, covering the navigation, About hierarchy, and resource visual-family decisions.
 7. **OG hygiene C + D — ✅ DONE** (`fdc466a`): insights now `summary_large_image` + card; dashboard app page + 404 fully carded. Optional real-X confirmation: drop `https://romanbediner.com/` into a tweet/DM (prod is robots-allowed, unlike the noindex preview).
 8. **⚠️ DAILY EMAIL — needs Roman's one OAuth click (blocked for the agent).** GA4 has **no native scheduled-email**; the only path is **Looker Studio**, which on first use shows an "Authorize Data Studio API to access your account" consent. Granting OAuth is outside the agent's autonomous authority, so it was **not** clicked. To finish: open https://lookerstudio.google.com → click **Continue/Authorize** → Create report → add a **Google Analytics** data source (property `romanbediner.com`, a384780622p524954289) → build charts (suggested: Events by event name + count; resource_card_click by `Resource Title`; `scroll_depth` by `Scroll Percent` + page path; sessions by source/medium; engagement time by page) → **Share ▸ Schedule email delivery** → daily → `roman@romanbediner.com`. The custom dimensions registered tonight make all those breakdowns available in Looker.
 9. **⚠️ GA4 KEY EVENTS mismatch (recommend reconciling).** The property's Key events are placeholder lead-funnel names (`close_convert_lead`, `qualify_lead`, `purchase`) that the site does **not** emit (all "No stream data"). The site's real high-intent signal is **`connect_intent`** (Connect CTA). Recommend: Admin → Events → mark `connect_intent` (and optionally `resource_card_click`) as a key event once it appears under Recent events, or create a "Create event" rule mapping it to a lead key event. This makes the Key events / conversions reports meaningful.
@@ -511,6 +511,20 @@ Validation:
 - Focused agentic, diagram, footer, metadata, route parity, OG, Resources, and link checks passed.
 - Direct Playwright checks passed at 1440px, 768px, and 390px with zero horizontal overflow; mobile floating navigation opened and closed correctly.
 - Full visual suite remains blocked only by the pre-existing homepage baseline mismatch (`home--desktop-full.png`, changed ratio `0.054603` versus threshold `0.0016`); changed resource routes were isolated and visually inspected directly.
+
+## Latest — 2026-07-19: Shared resource polish, About hierarchy, and immediate section navigation
+
+- The floating `On this page` control is now available at page load across About, Services, and Agentic AI Employees on desktop and mobile. The inline anchor sources remain available for progressive enhancement.
+- The About Operating Philosophy close now uses a wider 780px desktop reading measure and a full-width mobile rule so the text aligns more closely with the main body rail without creating phone overflow.
+- Current responsibility lines on About and Services now use dark ink for the label and company names, with blue role titles, preserving the existing compact uppercase treatment while improving scanning.
+- Dashboard and PasteFlow now share the Agentic AI Employees resource opening treatment: quiet radial field, balanced title scale, gradient introduction surface, and larger editorial lede. Their iframe, product image, CTA, analytics, and mobile fallback behaviors remain route-specific.
+
+Validation:
+- `npm run test:node` passed.
+- `npm run test:playwright` passed 12/12, including mobile/desktop section navigation, GA runtime, CSP, and Agentic mobile layout.
+- Direct desktop and phone screenshots were reviewed for About, Dashboard, and PasteFlow; no clipping or horizontal overflow observed.
+- Live `SEO Authority PRD` updated with this release's product and design decisions.
+- Staging only until exact-SHA deployment verification completes; production promotion is the next release step.
 
 ## Release Watcher Hygiene
 
