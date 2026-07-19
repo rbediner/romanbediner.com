@@ -96,11 +96,20 @@
 }
 
 .current-responsibility-line {
-  color: var(--accent-blue);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* Match About: role titles are blue while the label and organizations use dark ink. */
+.current-responsibility-line .responsibility-label,
+.current-responsibility-line .responsibility-company {
+  color: var(--text-primary);
+}
+
+.current-responsibility-line .responsibility-role {
+  color: var(--accent-blue);
 }
 
 .svc-h3 {

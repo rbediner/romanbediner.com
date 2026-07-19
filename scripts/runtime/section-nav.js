@@ -1,9 +1,8 @@
 /*
  * Purpose:
- * - Keep a page's in-page section anchors reachable after the reader scrolls
- *   past the inline chip list. Surfaces a floating "On this page" control that
- *   appears once the source nav leaves the viewport, opening a sheet of the
- *   same section links with live active-section highlighting.
+ * - Keep a page's in-page section anchors reachable from the first viewport.
+ *   Surfaces a floating "On this page" control at page load, opening a sheet
+ *   of the same section links with live active-section highlighting.
  *
  * Architectural role:
  * - Progressive enhancement for long editorial pages (About, Services). The
@@ -107,14 +106,12 @@
       if (open && (e.key === 'Escape' || e.key === 'Esc')) { closeSheet(); fab.focus(); }
     });
 
-    // --- Reveal after the inline source nav has been passed ---------------
-    // Keep the control from covering the thesis or hero callout on phones.
-    function updateFabVisibility() {
-      var sourceBottom = source.getBoundingClientRect().bottom;
-      fab.classList.toggle('is-visible', sourceBottom < 0);
-    }
-    window.addEventListener('scroll', updateFabVisibility, { passive: true });
-    updateFabVisibility();
+    // --- Reveal immediately -----------------------------------------------
+    // The control is intentionally available from page load on every viewport.
+    // The source nav remains available in the document for progressive
+    // enhancement and screen-reader navigation, while the floating control
+    // gives readers an immediate orientation path.
+    fab.classList.add('is-visible');
 
     // --- Active-section highlighting ------------------------------------
     var activeId = null;

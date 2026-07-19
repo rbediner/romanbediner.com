@@ -753,8 +753,8 @@ body {
 
 /* ===========================================================================
    Floating "On this page" section nav (progressive enhancement, section-nav.js)
-   Appears once the inline chip nav scrolls out of view; opens a sheet of the
-   same anchors with active-section highlighting. Used on About + Services.
+   Appears at page load; opens a sheet of the same anchors with active-section
+   highlighting. Used on About, Services, and long resource pages.
    =========================================================================== */
 .section-nav-fab {
   position: fixed;
@@ -775,7 +775,7 @@ body {
   padding: 11px 18px;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(13, 21, 48, 0.22);
-  /* Hidden until the inline nav scrolls away. */
+  /* Starts hidden only long enough for the initial reveal transition. */
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;

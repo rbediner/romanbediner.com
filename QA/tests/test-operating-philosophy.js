@@ -34,6 +34,20 @@ if (!aboutCss.includes('.about-philosophy-copy h2')) {
   failures.push('About CSS must style the new Operating Philosophy heading.');
 }
 
+for (const selector of [
+  '.current-responsibility-line .responsibility-label',
+  '.current-responsibility-line .responsibility-role',
+  '.current-responsibility-line .responsibility-company'
+]) {
+  if (!aboutCss.includes(selector)) {
+    failures.push(`About CSS must preserve responsibility color hierarchy: ${selector}`);
+  }
+}
+
+if (!aboutCss.includes('max-width: 780px')) {
+  failures.push('About CSS must keep the Operating Philosophy close aligned to the wider reading rail.');
+}
+
 if (failures.length > 0) {
   failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);

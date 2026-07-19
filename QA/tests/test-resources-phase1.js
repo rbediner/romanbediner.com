@@ -37,6 +37,19 @@ const resourcesCss = fs.readFileSync(path.join(root, 'styles', 'resources.css'),
 const carouselJs = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-carousel.js'), 'utf8');
 const analyticsJs = fs.readFileSync(path.join(root, 'scripts', 'runtime', 'resources-analytics.js'), 'utf8');
 
+// The detail resource pages share the same visual family as the reference
+// architecture page while retaining their route-specific interactions.
+for (const selector of [
+  '.resource-dashboard-main::before',
+  '.resource-pasteflow-main::before',
+  '.resource-dashboard-main > h1',
+  '.resource-pasteflow-main > h1',
+  '.resource-dashboard-main .resource-top-section',
+  '.resource-pasteflow-main .resource-top-section'
+]) {
+  mustInclude('reference-resource visual system', resourcesCss, selector);
+}
+
 const requiredFiles = [
   'assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf',
   'assets/resources/framework-summary/slides/slide-01.png',

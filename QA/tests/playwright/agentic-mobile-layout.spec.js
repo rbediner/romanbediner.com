@@ -74,7 +74,7 @@ test('agentic resource fits a phone viewport and keeps the org chart legible', a
   await page.evaluate(async () => {
     if (document.fonts?.ready) await document.fonts.ready;
   });
-  expect(await page.locator('.section-nav-fab').evaluate((node) => node.classList.contains('is-visible'))).toBe(false);
+  expect(await page.locator('.section-nav-fab').evaluate((node) => node.classList.contains('is-visible'))).toBe(true);
 
   const layout = await page.evaluate(() => {
     const chart = document.querySelector('.fleet-org-chart');
@@ -100,10 +100,17 @@ test('agentic resource fits a phone viewport and keeps the org chart legible', a
   expect(layout.fabBottom).toBeLessThanOrEqual(844);
   expect(layout.headingTop).toBeGreaterThan(0);
 
-  await page.evaluate(() => {
-    const source = document.querySelector('[data-section-nav]');
-    window.scrollTo(0, source.getBoundingClientRect().bottom + window.scrollY + 10);
-  });
-  await page.waitForTimeout(50);
-  expect(await page.locator('.section-nav-fab').evaluate((node) => node.classList.contains('is-visible'))).toBe(true);
+});
+
+test('section navigation is available immediately across supported pages and viewports', async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    for (const route of ['/about/', '/services/', '/resources/agentic-ai-employees/']) {
+      await page.goto(`http://${host}:${port}${route}`, { waitUntil: 'domcontentloaded' });
+      await expect(page.locator('.section-nav-fab')).toHaveClass(/is-visible/);
+    }
+  }
 });

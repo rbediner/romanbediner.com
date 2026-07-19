@@ -11,11 +11,20 @@
 }
 
 .current-responsibility-line {
-  color: var(--accent-blue);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* Separate roles from organizations without changing the compact line scale. */
+.current-responsibility-line .responsibility-label,
+.current-responsibility-line .responsibility-company {
+  color: var(--text-primary);
+}
+
+.current-responsibility-line .responsibility-role {
+  color: var(--accent-blue);
 }
 
 .about-hero-refactored .page-title {
@@ -92,7 +101,7 @@
 }
 
 .about-philosophy-copy p {
-  max-width: 680px;
+  max-width: 780px;
   margin: 0 0 14px;
   color: var(--text-secondary);
 }
@@ -287,5 +296,9 @@
 
   .about-philosophy-copy {
     padding-left: 16px;
+  }
+
+  .about-philosophy-copy p {
+    max-width: 100%;
   }
 }
