@@ -1,5 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Services mobile density correction — staging only
+
+- Corrected the rejected oversized Services phone composition. Each service now uses a compact icon-and-label row followed by a full-width 29px title, instead of forcing a large title into the narrow space beside an oversized icon. The service number, icon tile, kicker, rule, and opening thesis remain legible without dominating the screen.
+- Removed a real grid-spacing defect: desktop top and bottom paragraph margins were accumulating on mobile. Consecutive mobile paragraphs now use one controlled 16px gap, substantially shortening every offering without changing copy.
+- Extended the Playwright guard to prevent a return of either issue: the thesis must use normal readable scale with stronger weight, and service body paragraph gaps must remain at or below 18px on a 390px viewport.
+- Visually inspected the corrected first offering at 320px, 390px, 768px, and 1440px before release. Hosted staging deployment `29703629350` passed for product SHA `920c9ec347d22ad12e47ba8e4a17dee9117ed829`; the full hosted 32-render route audit again found no horizontal overflow or filtered-icon regressions.
+- Updated the live `romanbediner.com PRD`. This remains staging-only. Do not promote to `prod` or update the reusable page-building skill until Roman explicitly approves the final direction.
+
 ## Latest: 2026-07-19: Services reading hierarchy refinement — staging only
 
 - Refined the long-form Services offerings without adding more card chrome: each offering now opens with a slightly stronger thesis and closes, where applicable, with a quiet blue `Best suited for` reading landmark. This gives the page a more deliberate editorial scan path while preserving the approved copy and distinct service icons.
@@ -150,10 +158,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 361
-- Updated At (UTC): 2026-07-19T20:54:35Z
+- Handoff Sequence: 362
+- Updated At (UTC): 2026-07-19T21:04:22Z
 - Source Branch: staging
-- Source Commit: c0fdfff2ddaf01b99af0b17cdf94c84908e10a65 (pre-handoff baseline)
+- Source Commit: 920c9ec347d22ad12e47ba8e4a17dee9117ed829 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
