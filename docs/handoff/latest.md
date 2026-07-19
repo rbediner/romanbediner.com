@@ -1,5 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Agentic architecture stamp spacing correction
+
+- Added mobile-only separation between the closing architecture caption and the `ARCHITECTURE CASE STUDY` stamp. Desktop placement is unchanged.
+- Added a focused contract so the mobile stamp spacing cannot regress silently.
+- Local focused QA passed. Full local CI parity passed except the pre-existing homepage visual baseline mismatch for `home--desktop-full.png`; all functional contracts, 44 Python tests, 20 Jest suites / 73 tests, 11 Playwright tests, and live staging CSS verification passed.
+- Staging CI passed in run `29688945022`; staging deployment passed in run `29689056000`.
+- Production CI passed after managed Lighthouse retries in run `29689107406`; Deploy Pages and live smoke passed in run `29689107397`.
+- Production is live at `https://romanbediner.com/resources/agentic-ai-employees/` on product SHA `b5449956433c9db0fec937550fa19106178fbac5`.
+
 ## Latest: 2026-07-19: Agentic resource mobile and evidence-boundary correction
 
 - Removed the page-only multicolor underline and matched the shared solid blue resource accent used across the site.
@@ -17,10 +26,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 339
-- Updated At (UTC): 2026-07-19T13:19:36Z
+- Handoff Sequence: 340
+- Updated At (UTC): 2026-07-19T13:44:04Z
 - Source Branch: staging
-- Source Commit: 8c342fda2aa92c9795143277f7ddec2e7fa1640d (pre-handoff baseline)
+- Source Commit: b5449956433c9db0fec937550fa19106178fbac5 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
