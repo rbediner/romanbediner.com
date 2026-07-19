@@ -355,16 +355,11 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-@media (min-width: 900px) {
-  main .master-head h1 {
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 900px) {
-  main .master-head h1 {
-    white-space: normal;
-  }
+/* The approved headline is intentionally allowed to wrap. Forcing one line
+   makes the desktop hero wider than its reading container and creates a
+   horizontal page scroll at common laptop widths. */
+main .master-head h1 {
+  white-space: normal;
 }
 
 @media (max-width: 768px) {

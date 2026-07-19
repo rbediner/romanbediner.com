@@ -231,3 +231,35 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     expect(pasteflow.iconFilters.every((filter) => filter === 'none')).toBe(true);
   }
 });
+
+/**
+ * Invariant:
+ * - A shared surface or navigation change must not introduce horizontal drift
+ *   on an unrelated canonical page.
+ * Why this exists:
+ * - The site deliberately has several visual systems (editorial chapters,
+ *   framework stages, architecture diagrams, artifacts, and compact cards),
+ *   so card refinements need a whole-site viewport safety net.
+ */
+test('every canonical route remains viewport-safe at desktop and phone widths', async ({ page }) => {
+  const routes = [
+    '/', '/about/', '/resources/', '/resources/agentic-ai-employees/',
+    '/resources/ai-enabled-operations-framework-summary/', '/resources/ai-enabled-operations-dashboard/',
+    '/resources/pasteflow/', '/services/', '/connect/', '/framework/',
+    '/framework/opportunity/productizing-operations/', '/framework/design/operations-as-product/',
+    '/framework/integration/ai-operating-layer/', '/framework/execution/operational-lanes/',
+    '/framework/signals/operational-signals/', '/framework/evolution/agentic-guardrails/',
+  ];
+
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    for (const route of routes) {
+      await page.goto(`http://${host}:${port}${route}`, { waitUntil: 'domcontentloaded' });
+      const dimensions = await page.evaluate(() => ({
+        viewportWidth: window.innerWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+      }));
+      expect(dimensions.scrollWidth, `${route} at ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewportWidth);
+    }
+  }
+});
