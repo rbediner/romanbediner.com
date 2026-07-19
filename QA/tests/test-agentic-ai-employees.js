@@ -46,9 +46,17 @@ mustInclude('Staff Engineer roster card', 'Agent &mdash; Staff Engineer');
 mustInclude('org chart', 'class="fleet-org-chart"');
 mustInclude('autonomy model', 'class="fleet-autonomy-grid"');
 mustInclude('engineering loop', 'class="fleet-engineering-flow"');
+mustInclude('model router section', 'id="fleet-router"');
+mustInclude('model routing tiers', 'class="fleet-router-map"');
+mustInclude('model routing explanation', 'model choice becomes an operational policy');
+mustInclude('case study proof panel', 'class="fleet-proof-grid"');
+mustInclude('reliability loop', 'class="fleet-reliability-loop"');
+mustInclude('Anthropic cost reporting', 'Anthropic cost snapshots');
+mustInclude('router job examples', 'Typical jobs: Staff Engineer review, merge decision, production recovery.');
+mustInclude('case study framing', 'A working case study');
 mustInclude('independent review boundary', 'no single agent writes, approves, and ships its own change');
 mustInclude('production recovery', 'automatically reverted');
-mustInclude('Slack is a surface clarification', 'Slack is where people can reach the fleet; it is not where the architecture ends.');
+mustInclude('working-surface clarification', 'The architecture extends from human-facing work surfaces all the way to verified production.');
 
 mustNotInclude('retired roster headline', 'Two doers and an operator');
 mustNotInclude('overbroad human approval claim', 'Nothing consequential ships without a human');

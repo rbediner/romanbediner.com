@@ -6,7 +6,7 @@
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Agentic AI Employees: From Request to Production" />
-  <meta property="og:description" content="A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely." />
+  <meta property="og:description" content="A case study in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely." />
   <meta property="og:url" content="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta property="og:site_name" content="Roman Bediner" />
   <meta property="og:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
@@ -14,13 +14,13 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
-  <meta name="description" content="A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely." />
+  <meta name="description" content="A case study in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely." />
   <link rel="canonical" href="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta name="geo.region" content="US-NC" />
   <meta name="geo.placename" content="Raleigh-Durham-Chapel Hill" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Agentic AI Employees: From Request to Production" />
-  <meta name="twitter:description" content="A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely." />
+  <meta name="twitter:description" content="A case study in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely." />
   <meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
   <meta name="twitter:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
   <title>Agentic AI Employees: From Request to Production</title>
@@ -31,7 +31,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../../assets/favicon/apple-touch-icon.png" />
   <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" />
   <link rel="stylesheet" href="/styles/site.css?v=20260628r3" />
-  <link rel="stylesheet" href="/styles/resources.css?v=20260628r7" />
+  <link rel="stylesheet" href="/styles/resources.css?v=20260718r8" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet" />
   <meta name="ga4-measurement-id" content="G-DVHD0KL633" />
   <script src="/scripts/runtime/ga4-bootstrap.js" defer></script>
@@ -41,11 +41,11 @@
       "@type": "TechArticle",
       "name": "Agentic AI Employees: From Request to Production",
       "headline": "Agentic AI Employees That Move Work from Request to Production",
-      "description": "A practical reference architecture for governed AI employees that manage work, write and review code, merge pull requests, deploy to production, and recover safely.",
+      "description": "A case study in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely.",
       "url": "https://romanbediner.com/resources/agentic-ai-employees/",
       "dateModified": "2026-07-18",
       "mainEntityOfPage": "https://romanbediner.com/resources/agentic-ai-employees/",
-      "keywords": "agentic AI employees, AI agent fleet, autonomous code review, multi-agent orchestration, AI agents that deploy to production",
+      "keywords": "agentic AI employees, AI agent fleet, autonomous AI software engineering, AI agents that merge pull requests, autonomous code review, multi-agent orchestration, model routing, Anthropic cost reporting, AI agents that deploy to production",
       "about": [
         "Agentic AI employees",
         "Autonomous AI agent fleets",
@@ -56,7 +56,11 @@
         "AI software engineering agents",
         "Autonomous code review",
         "Production deployment verification",
-        "Human approval boundaries"
+        "Human approval boundaries",
+        "Model routing",
+        "Anthropic cost reporting",
+        "AI agents that merge pull requests",
+        "Autonomous AI software engineering"
       ],
       "author": { "@type": "Person", "name": "Roman Bediner" },
       "publisher": { "@type": "Person", "name": "Roman Bediner" }
@@ -100,10 +104,57 @@
       </div>
     </section>
 
+    <section class="resource-section fleet-architecture-hero" aria-labelledby="fleet-architecture-thesis">
+      <p class="fleet-kicker">The architecture</p>
+      <h2 id="fleet-architecture-thesis">A small, inexpensive stack can run a real autonomous organization</h2>
+      <p class="resource-section-lede">The power is not in a giant platform. It comes from composing a few simple primitives into closed loops: behavior in plain language, a shared runtime, model-aware routing, durable state, ordinary APIs, and independent gates around production.</p>
+
+      <div class="fleet-architecture-stack" aria-label="The four layers of the architecture">
+        <div class="fleet-architecture-layer fleet-layer-brain"><span>01</span><strong>Behavioral brain</strong><small>Skills, memory, personalities, and operating rules in plain files.</small></div>
+        <div class="fleet-architecture-layer fleet-layer-runtime"><span>02</span><strong>Shared runtime</strong><small>Serverless functions, schedules, event triggers, auth, and one agent loop.</small></div>
+        <div class="fleet-architecture-layer fleet-layer-control"><span>03</span><strong>Control plane</strong><small>Model router, heartbeats, handoffs, cost ledger, reporting, and recovery.</small></div>
+        <div class="fleet-architecture-layer fleet-layer-delivery"><span>04</span><strong>Delivery body</strong><small>APIs, GitHub, CI, pull requests, deployment verification, and rollback.</small></div>
+      </div>
+
+      <div class="fleet-loop-grid" aria-label="The three operating loops">
+        <article class="fleet-loop-card">
+          <span class="fleet-loop-number">WORK LOOP</span>
+          <h3>Discover, act, remember</h3>
+          <p>Agents find work, load the right behavior, choose the right capability, act through tools, and leave a durable record.</p>
+          <div class="fleet-loop-sequence">trigger <b>&rarr;</b> skill <b>&rarr;</b> model <b>&rarr;</b> tools <b>&rarr;</b> memory</div>
+        </article>
+        <article class="fleet-loop-card">
+          <span class="fleet-loop-number">ENGINEERING LOOP</span>
+          <h3>Improve, review, ship</h3>
+          <p>The improvement engineer finds friction; the Director builds the fix; the independent Staff Engineer reviews it before production.</p>
+          <div class="fleet-loop-sequence">queue <b>&rarr;</b> branch <b>&rarr;</b> PR <b>&rarr;</b> review <b>&rarr;</b> deploy</div>
+        </article>
+        <article class="fleet-loop-card">
+          <span class="fleet-loop-number">RELIABILITY LOOP</span>
+          <h3>Measure, report, recover</h3>
+          <p>Heartbeats, cost snapshots, caching data, deployment checks, and recovery signals turn autonomous activity into accountable operations.</p>
+          <div class="fleet-loop-sequence">heartbeat <b>&rarr;</b> digest <b>&rarr;</b> alert <b>&rarr;</b> recover</div>
+        </article>
+      </div>
+      <p class="fleet-architecture-caption"><strong>The design principle:</strong> keep the infrastructure simple, then make the loops explicit. The result is an organization that can do more than a single chatbot without requiring a massive platform.</p>
+    </section>
+
+    <section class="resource-section fleet-case-study" aria-labelledby="fleet-case-study-title">
+      <p class="fleet-kicker">A working case study</p>
+      <h2 id="fleet-case-study-title">What this architecture makes possible</h2>
+      <p class="resource-section-lede">The point is not that five agents exist. The point is that a small team of specialized agents can form a dependable operating system when the boundaries, loops, and evidence are designed together.</p>
+      <div class="fleet-proof-grid">
+        <article class="fleet-proof-card fleet-proof-blue"><span>01</span><strong>One shared runtime</strong><p>Schedules, event triggers, authentication, tool clients, and the agent loop live in one inexpensive serverless body.</p></article>
+        <article class="fleet-proof-card fleet-proof-gold"><span>02</span><strong>Behavior without redeploys</strong><p>Skills, memory, and personalities live in the cloud brain, so operating behavior can evolve like documentation.</p></article>
+        <article class="fleet-proof-card fleet-proof-purple"><span>03</span><strong>Model choice as policy</strong><p>The router sends routine work to fast models and reserves deeper reasoning for judgment and production gates.</p></article>
+        <article class="fleet-proof-card fleet-proof-green"><span>04</span><strong>Autonomous, recoverable change</strong><p>Improvement becomes a queue-to-PR-to-merge loop with independent review, deployment checks, and rollback.</p></article>
+      </div>
+    </section>
+
     <section class="resource-section" aria-labelledby="fleet-roster">
       <p class="fleet-kicker">The roster</p>
       <h2 id="fleet-roster">An autonomous organization, not a chatbot collection</h2>
-      <p class="resource-section-lede">Each employee has a lane, a memory, a manager, and a controlled path to action. Slack is one surface; the agents operate across the workspace, cloud brain, GitHub, CI, and production runtime.</p>
+      <p class="resource-section-lede">Each employee has a lane, a memory, a manager, and a controlled path to action. The agents operate across working surfaces, the cloud brain, GitHub, CI, and the production runtime.</p>
       <div class="fleet-grid">
         <article class="fleet-agent fleet-agent-pm">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
@@ -146,8 +197,8 @@
       <p class="fleet-kicker">The organization</p>
       <h2 id="fleet-org-chart">A company-shaped system with clear accountability</h2>
       <p class="resource-section-lede">The org chart is not decoration. It defines who owns a lane, who coordinates the lanes, who reviews the code, and where human authority remains absolute.</p>
-      <div class="fleet-org-chart" role="img" aria-label="Roman Bediner leads the agent organization. The Director manages the Project Manager, Chief of Staff, and Continuous Improvement Engineer. The Staff Engineer is an independent code review and merge gate connected to the Director's pull requests.">
-        <div class="fleet-org-human"><span class="fleet-org-symbol">R</span><div><strong>Roman Bediner</strong><span>Founder &middot; owner of direction, spend, and protected decisions</span></div></div>
+      <div class="fleet-org-chart" role="img" aria-label="A human owner leads the agent organization. The Director manages the Project Manager, Chief of Staff, and Continuous Improvement Engineer. The Staff Engineer is an independent code review and merge gate connected to the Director's pull requests.">
+        <div class="fleet-org-human"><span class="fleet-org-symbol">H</span><div><strong>Human Owner</strong><span>Founder role &middot; owner of direction, spend, and protected decisions</span></div></div>
         <div class="fleet-org-connector" aria-hidden="true"></div>
         <div class="fleet-org-director"><span class="fleet-org-symbol">D</span><div><strong>Director of Fleet Orchestration &amp; Engineering</strong><span>Operating manager &middot; front door &middot; fleet memory &middot; change management</span></div></div>
         <div class="fleet-org-branches">
@@ -168,7 +219,7 @@
           <div><strong>Autonomous</strong><span>Read, monitor, summarize, classify, coordinate, create issues, and maintain durable records.</span></div>
           <div><strong>Branch-only</strong><span>Write code, open pull requests, and propose changes without writing directly to <code>main</code>.</span></div>
           <div><strong>Automated gate</strong><span>Run deterministic checks, adversarial review, eligible merges, deployment verification, and automatic rollback.</span></div>
-          <div><strong>Human-controlled</strong><span>Protected paths, credentials, spend, outbound commitments, and high-risk changes remain Roman&rsquo;s call.</span></div>
+          <div><strong>Human-controlled</strong><span>Protected paths, credentials, spend, outbound commitments, and high-risk changes remain the human owner&rsquo;s call.</span></div>
         </div>
       </div>
     </section>
@@ -203,7 +254,7 @@
     <section class="resource-section" aria-labelledby="fleet-wired">
       <p class="fleet-kicker">How it's wired</p>
       <h2 id="fleet-wired">The stack, end to end</h2>
-      <p class="resource-section-lede">A multi-agent runtime across the cloud brain, working surfaces, GitHub, CI, deployment, and production systems. Slack is where people can reach the fleet; it is not where the architecture ends.</p>
+      <p class="resource-section-lede">A multi-agent runtime across the cloud brain, working surfaces, GitHub, CI, deployment, and production systems. The architecture extends from human-facing work surfaces all the way to verified production.</p>
 
       <div class="fleet-diagram">
         <svg viewBox="0 0 760 492" role="img" aria-label="Agentic organization architecture: scheduled and event triggers drive a Vercel runtime that loads behavior from the Company Brain, routes work through integration clients, records heartbeats, and connects the operating fleet to workspace, GitHub, deployment, and external data systems." xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', system-ui, -apple-system, sans-serif">
@@ -280,6 +331,10 @@
           <h4>The agent loop (JavaScript)</h4>
           <p>A shared handler injects a runtime preamble (identity, voice, rules), appends the skill from the brain, then runs a tool-use loop. The system prefix is cached so each round after the first is fast.</p>
         </div>
+        <div class="fleet-stack-item fleet-stack-router">
+          <h4>Model router</h4>
+          <p>A shared routing layer chooses the right intelligence for each job: fast models for mechanical work, stronger reasoning for judgment-heavy operations, and the highest-review tier for the independent production merge gate.</p>
+        </div>
         <div class="fleet-stack-item">
           <h4>Integration clients</h4>
           <p>Typed clients for the workspace, the structured tracker, the CRM, and the community — each called only by the jobs that need it, so no agent carries authority it doesn&rsquo;t use.</p>
@@ -289,6 +344,34 @@
           <p>Data fetches try a cheap request first and fall back to an in-stack headless browser that clears bot challenges itself &mdash; no third party, no manual token grab. Tokens rotate from a brain file with an env-var fallback.</p>
         </div>
       </div>
+    </section>
+
+    <section class="resource-section fleet-router-section" aria-labelledby="fleet-router">
+      <p class="fleet-kicker">Intelligence routing</p>
+      <h2 id="fleet-router">The fleet does not use one model for every job</h2>
+      <p class="resource-section-lede">The model router is part of the operating architecture. It matches model capability to task risk, keeps routine work economical, and reserves the strongest review for the decisions that can change production.</p>
+      <div class="fleet-router-map">
+        <div class="fleet-router-card fleet-router-mechanical"><span class="fleet-router-tier">Mechanical tier</span><strong>Fast model</strong><small>Housekeeping, deterministic syncs, bounded data work, and repeatable reporting transforms.</small><em>Typical jobs: health snapshots, data pulls, cache-safe updates.</em></div>
+        <div class="fleet-router-card fleet-router-judgment"><span class="fleet-router-tier">Judgment tier</span><strong>Reasoning model</strong><small>Standups, scans, digests, orchestration, improvement planning, and human-facing work.</small><em>Typical jobs: Chief of Staff digest, Director health pass, improvement plan.</em></div>
+        <div class="fleet-router-card fleet-router-gate"><span class="fleet-router-tier">Merge-gate tier</span><strong>Strongest independent reviewer</strong><small>Adversarial code review, protected production decisions, deployment verification, and rollback judgment.</small><em>Typical jobs: Staff Engineer review, merge decision, production recovery.</em></div>
+      </div>
+      <div class="fleet-router-note"><strong>Why it matters:</strong> model choice becomes an operational policy—not a hidden implementation detail. The fleet spends reasoning where reasoning matters and keeps the cost, latency, and authority of each job visible.</div>
+    </section>
+
+    <section class="resource-section fleet-reliability-section" aria-labelledby="fleet-reliability">
+      <p class="fleet-kicker">The reliability loop</p>
+      <h2 id="fleet-reliability">Autonomy becomes trustworthy when it can report and recover</h2>
+      <p class="resource-section-lede">The same simple runtime that runs the work also produces the evidence needed to govern it: heartbeats for execution, Anthropic cost snapshots for spend, cache savings for efficiency, and deployment checks for production health.</p>
+      <div class="fleet-reliability-loop" role="img" aria-label="Reliability loop: agents write heartbeats and cost snapshots; the Director synthesizes health and Anthropic cost reporting; the system sends a digest or alert and routes failures into recovery.">
+        <div class="fleet-reliability-node fleet-reliability-input"><span>01</span><strong>Collect evidence</strong><small>Heartbeats, token usage, Anthropic cost snapshots, cache savings, and deployment status.</small></div>
+        <div class="fleet-reliability-arrow" aria-hidden="true">&rarr;</div>
+        <div class="fleet-reliability-node fleet-reliability-health"><span>02</span><strong>Synthesize health</strong><small>The Director compares activity against schedules, budgets, and expected production state.</small></div>
+        <div class="fleet-reliability-arrow" aria-hidden="true">&rarr;</div>
+        <div class="fleet-reliability-node fleet-reliability-report"><span>03</span><strong>Report clearly</strong><small>A digest explains what ran, what it cost, what changed, and what needs attention.</small></div>
+        <div class="fleet-reliability-arrow" aria-hidden="true">&rarr;</div>
+        <div class="fleet-reliability-node fleet-reliability-recover"><span>04</span><strong>Recover safely</strong><small>Failures become routed work; unhealthy releases revert instead of becoming silent damage.</small></div>
+      </div>
+      <div class="fleet-reliability-caption"><strong>Key case-study insight:</strong> reporting is not a dashboard bolted on afterward. It is a control loop that closes the distance between autonomous action and accountable operations.</div>
     </section>
 
     <section class="resource-section fleet-engineering-section" aria-labelledby="fleet-engineering">
@@ -364,7 +447,7 @@
         <li><h4>Authenticate</h4><p>The handler rejects anything without the correct token, so jobs can&rsquo;t be triggered by a random request.</p></li>
         <li><h4>Local-hour guard</h4><p>The trigger fires on both standard- and daylight-time candidates; the job proceeds only at the correct local hour, so it lands on time year-round.</p></li>
         <li><h4>Load the skill from the brain</h4><p>The handler maps the job to its skill file and reads that behavior live &mdash; the latest edit, every run.</p></li>
-        <li><h4>Run the agent loop</h4><p>A runtime preamble sets identity, voice, and rules; the skill is appended. The shared prefix is cached, so each round after the first is fast and lightweight.</p></li>
+        <li><h4>Route the job and run the loop</h4><p>The model router selects the job&rsquo;s capability tier, then a runtime preamble sets identity, voice, and rules. The skill is appended and the shared prefix is cached, so each round after the first is fast and lightweight.</p></li>
         <li><h4>Act, then leave a heartbeat</h4><p>The agent acts in the workspace, then writes a per-job heartbeat &mdash; durable proof it ran. On error it records the failure instead of paging anyone; the Director&rsquo;s health pass is the single alerting layer, so a crashed job is never silent.</p></li>
       </ol>
     </section>
