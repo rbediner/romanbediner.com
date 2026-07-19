@@ -1,10 +1,23 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 330
-- Updated At (UTC): 2026-07-19T00:29:54Z
+- Handoff Sequence: 332
+- Updated At (UTC): 2026-07-19T00:44:00Z
 - Source Branch: staging
-- Source Commit: b3e1057de80f881c30af892203d9461718d98428 (pre-handoff baseline)
+- Source Commit: 54b9383c4b4f768242cccf3bd4d2bb3caf7a2e66 (pre-handoff baseline)
 - Active Agent: Codex
+
+## Latest — 2026-07-19: Agentic AI Employees EBI structure and fresh-eyes pass
+
+- Completed EBI Round 2 (Structure) and a fresh-eyes responsive pass after the ten-item EBI implementation.
+- Added a compact “Explore the system” orientation rail linking architecture, proof, organization, router, reliability, engineering loop, and production.
+- Reframed the setup section as “A minimal recipe for building one” so the public page explains the transferable architecture without becoming an installation manual.
+- Tightened the closing invitation around the case-study insight and corrected the lifecycle copy to describe all seven visible run stages.
+- Added a tablet breakpoint for 768–960px widths so loop and proof cards reflow without horizontal page overflow. Verified at 1440px, 1024px, 768px, and 390px.
+- Updated the shared `bediner-site` skill in Drive with orientation-rail and tablet-responsive diagram guidance.
+- Focused QA, `npm run test:node`, 20 Jest suites / 73 tests, and local Lighthouse passed; current page word count is 5,332 words.
+- Product commit: `54b9383` on `staging`; no production promotion attempted.
+- Staging deployment is pending GitHub Actions completion. Review with `https://rbediner.github.io/romanbediner-preview/resources/agentic-ai-employees/?cb=54b9383` after the exact-SHA deploy is green.
+- Keep release watcher hygiene in place for this repo.
 
 ## Latest — 2026-07-19: Agentic AI Employees EBI case-study pass on staging
 
