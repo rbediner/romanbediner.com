@@ -1369,7 +1369,9 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin-top: 14px;
-  align-items: stretch;
+  /* Let each concise view end with its content instead of inheriting the
+     tallest neighbor's empty space. */
+  align-items: start;
 }
 
 .resource-dashboard-view-block {
@@ -1756,7 +1758,7 @@
 .resource-dashboard-wireframe-tile-preview {
   position: relative;
   background: #f8fafc;
-  padding: 16px;
+  padding: 14px;
 }
 
 .resource-dashboard-wireframe-preview-image {
@@ -2034,21 +2036,20 @@ body.wireframe-modal-open {
 .resource-dashboard-questions-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 28px;
-  margin-top: 4px;
-  border-top: 1px solid rgba(15, 35, 76, 0.14);
-  border-bottom: 1px solid rgba(15, 35, 76, 0.14);
+  gap: 10px;
+  margin-top: 8px;
+  border: 0;
 }
 
 .resource-dashboard-question-item {
-  display: block;
+  display: flex;
   align-items: center;
-  min-height: 64px;
-  padding: 12px 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
+  min-height: 58px;
+  padding: 12px 15px;
+  border: 1px solid rgba(15, 35, 76, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 7px 18px rgba(15, 35, 76, 0.035);
+  background: linear-gradient(135deg, #ffffff 0%, rgba(59, 108, 255, 0.045) 100%);
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 500;
@@ -2069,15 +2070,15 @@ body.wireframe-modal-open {
 
 .resource-dashboard-quadrant,
 .resource-pasteflow-capability-item {
-  /* Mirrors the reference composition: tile / header / title / rule / copy.
-     The body remains in normal flow, so the generous card never becomes empty. */
+  /* Compact information cards: the icon, label, title, rule, and copy share
+     one reading column so short content never sits inside a gallery-sized box. */
   display: grid;
-  grid-template-columns: 94px minmax(0, 1fr);
+  grid-template-columns: 64px minmax(0, 1fr);
   grid-template-rows: auto auto auto;
-  column-gap: 20px;
+  column-gap: 14px;
   box-sizing: border-box;
-  min-height: 246px;
-  padding: 32px;
+  min-height: 0;
+  padding: 20px 22px;
   border: 1px solid rgba(15, 35, 76, 0.13);
   border-radius: 14px;
   box-shadow: 0 10px 24px rgba(15, 35, 76, 0.055);
@@ -2090,11 +2091,11 @@ body.wireframe-modal-open {
   display: grid;
   grid-column: 1;
   grid-row: 1 / span 3;
-  width: 82px;
-  height: 82px;
+  width: 54px;
+  height: 54px;
   place-items: center;
   align-self: start;
-  border-radius: 22px;
+  border-radius: 16px;
   color: #2457d6;
   border: 1px solid rgba(59, 108, 255, 0.08);
   background: linear-gradient(145deg, rgba(59, 108, 255, 0.12), rgba(255, 255, 255, 0.92));
@@ -2102,8 +2103,8 @@ body.wireframe-modal-open {
 
 .resource-system-icon img {
   display: block;
-  width: 38px;
-  height: 38px;
+  width: 27px;
+  height: 27px;
   /* Resource symbols follow the existing site icon language: restrained dark
      linework inside a quiet blue-tinted tile, not a second blue accent. */
 }
@@ -2126,15 +2127,15 @@ body.wireframe-modal-open {
   grid-column: 2;
   grid-row: 2;
   max-width: none;
-  margin: 2px 0 0;
-  font-size: clamp(29px, 2.35vw, 36px);
-  line-height: 1;
+  margin: 3px 0 0;
+  font-size: clamp(26px, 2vw, 30px);
+  line-height: 1.02;
 }
 
 .resource-dashboard-quadrant h3::after,
 .resource-pasteflow-capability-item h3::after {
-  width: 38px;
-  margin-top: 16px;
+  width: 32px;
+  margin-top: 10px;
 }
 
 .resource-dashboard-quadrant p,
@@ -2143,16 +2144,18 @@ body.wireframe-modal-open {
   grid-row: 3;
   align-self: start;
   max-width: 46ch;
-  margin-top: 16px;
-  font-size: 15px;
-  line-height: 1.58;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.52;
 }
 
 .resource-dashboard-view-block {
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
-  column-gap: 16px;
+  grid-template-columns: 46px minmax(0, 1fr);
+  column-gap: 14px;
   min-height: 0;
+  /* Match the primary-card inset so the smaller icon tile still has a calm
+     margin from the card rail. */
   padding: 20px;
   border: 1px solid rgba(15, 35, 76, 0.13);
   border-radius: 14px;
@@ -2165,12 +2168,12 @@ body.wireframe-modal-open {
 .resource-dashboard-view-block .resource-system-icon {
   grid-column: 1;
   grid-row: 1;
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
 }
 
-.resource-dashboard-view-block .resource-system-icon img { width: 24px; height: 24px; }
+.resource-dashboard-view-block .resource-system-icon img { width: 20px; height: 20px; }
 
 .resource-dashboard-view-block::before {
   display: none;
@@ -2181,12 +2184,12 @@ body.wireframe-modal-open {
   grid-row: 1;
   margin: 0;
   color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 .resource-dashboard-view-block strong {
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1.05;
   color: var(--text-primary);
 }
@@ -2196,7 +2199,7 @@ body.wireframe-modal-open {
   display: block;
   width: 30px;
   height: 2px;
-  margin: 10px 0 14px;
+  margin: 6px 0 7px;
   background: rgba(59, 108, 255, 0.62);
 }
 
@@ -2209,12 +2212,12 @@ body.wireframe-modal-open {
 
   .resource-dashboard-question-item {
     min-height: 0;
-    padding: 13px 0;
+    padding: 13px 14px;
     font-size: 15px;
   }
 
   .resource-dashboard-question-item + .resource-dashboard-question-item {
-    border-top: 1px solid rgba(15, 35, 76, 0.1);
+    border-top: 1px solid rgba(15, 35, 76, 0.12);
   }
 
   .resource-dashboard-quadrants,

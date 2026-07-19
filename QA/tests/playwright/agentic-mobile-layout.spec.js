@@ -179,6 +179,7 @@ test('resource card categories keep editorial anatomy on desktop and phone width
       quadrantIcons: [...document.querySelectorAll('.resource-dashboard-quadrant .resource-system-icon img')].map((icon) => icon.getAttribute('src')),
       quadrantIconFilters: [...document.querySelectorAll('.resource-dashboard-quadrant .resource-system-icon img')].map((icon) => getComputedStyle(icon).filter),
       quadrantHeights: [...document.querySelectorAll('.resource-dashboard-quadrant')].map((card) => card.getBoundingClientRect().height),
+      viewHeights: [...document.querySelectorAll('.resource-dashboard-view-block')].map((card) => card.getBoundingClientRect().height),
       viewIconInsets: [...document.querySelectorAll('.resource-dashboard-view-block')].map((card) => {
         const cardBounds = card.getBoundingClientRect();
         const iconBounds = card.querySelector('.resource-system-icon').getBoundingClientRect();
@@ -196,9 +197,11 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     // carry the hierarchy.
     expect(dashboard.questionMarker).toBe('none');
     expect(dashboard.quadrantMarker).toBe('none');
-    // Reference-inspired desktop cards have room for hierarchy but must never
-    // regress to the former 330px empty gallery panels.
-    expect(Math.max(...dashboard.quadrantHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 300 : 260);
+    // Short information must not occupy gallery-sized cards on desktop.
+    expect(Math.max(...dashboard.quadrantHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 190 : 260);
+    // These views remain content-sized. The longest explanatory unit is still
+    // compact without compressing its copy into an unreadable text block.
+    expect(Math.max(...dashboard.viewHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 180 : 260);
     expect(new Set(dashboard.quadrantIcons).size).toBe(4);
     // Resource icons use the site's established dark-outline ink, not a blue
     // filter that can make a mark disappear against a pale blue tile.
@@ -224,9 +227,9 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     expect(pasteflow.capabilities).toBe(6);
     expect(pasteflow.marker).toBe('none');
     expect(pasteflow.titleFont).toContain('Cormorant Garamond');
-    // Prevent a return to the empty fixed-height gallery panels that prompted
-    // this card system correction.
-    expect(Math.max(...pasteflow.cardHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 300 : 260);
+    // Keep the capability grid compact on desktop while allowing phone copy
+    // to use normal reading height.
+    expect(Math.max(...pasteflow.cardHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 210 : 260);
     // Every capability receives a specific mnemonic, never a repeated filler icon.
     expect(new Set(pasteflow.icons).size).toBe(6);
     expect(pasteflow.iconFilters.every((filter) => filter === 'none')).toBe(true);

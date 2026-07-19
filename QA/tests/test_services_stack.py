@@ -38,10 +38,11 @@ class ServicesStackTest(unittest.TestCase):
         self.assertIn('href="/framework/"', self.services_html)
         self.assertIn('href="/connect/"', self.services_html)
 
-    def test_css_keeps_numbered_layout(self):
+    def test_css_keeps_icon_led_layout_without_decorative_numbers(self):
         self.assertIn('.svc-entry', self.services_css)
-        self.assertIn('.svc-num', self.services_css)
         self.assertIn('.svc-icon', self.services_css)
+        self.assertNotIn('.svc-num', self.services_css)
+        self.assertNotIn('svc-num', self.services_html)
 
     def test_service_icons_are_distinct(self):
         # Each service entry needs its own visual cue; repeated icons make

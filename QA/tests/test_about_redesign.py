@@ -39,7 +39,10 @@ class AboutRedesignTest(unittest.TestCase):
 
     def test_editorial_chapter_panels_replace_timeline_decoration(self):
         self.assertEqual(self.about_html.count('class="arc-item-label"'), 5)
-        self.assertEqual(self.about_html.count('class="arc-index" aria-hidden="true"'), 5)
+        # Labels and role/company context carry chapter orientation. Decorative
+        # numbers were retired across the site and must not reappear here.
+        self.assertNotIn('class="arc-index"', self.about_html)
+        self.assertNotIn('.arc-index', self.about_css)
         self.assertNotIn("timeline-orb", self.about_html)
         self.assertNotIn("timeline-orb", self.about_css)
         self.assertNotIn("<ul", self.about_html)
