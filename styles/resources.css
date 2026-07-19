@@ -2003,6 +2003,27 @@ body.wireframe-modal-open {
   .fleet-section-nav-label {
     flex-basis: 100%;
   }
+
+  /* Center the agentic page's long-page orientation control on narrow screens. */
+  .section-nav-fab {
+    right: auto;
+    left: 50%;
+    bottom: 18px;
+  }
+
+  .section-nav-fab.is-visible {
+    transform: translate(-50%, 0);
+  }
+
+  .section-nav-sheet {
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, 10px);
+  }
+
+  .section-nav-sheet.is-open {
+    transform: translate(-50%, 0);
+  }
 }
 
 /* Brain / body split diagram */

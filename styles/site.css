@@ -863,27 +863,3 @@ body {
     transition: none;
   }
 }
-
-/* Keep long-page orientation discoverable on phones without competing with
-   the browser edge or the content cards. */
-@media (max-width: 767px) {
-  .section-nav-fab {
-    right: auto;
-    left: 50%;
-    bottom: 18px;
-  }
-
-  .section-nav-fab.is-visible {
-    transform: translate(-50%, 0);
-  }
-
-  .section-nav-sheet {
-    right: auto;
-    left: 50%;
-    transform: translate(-50%, 10px);
-  }
-
-  .section-nav-sheet.is-open {
-    transform: translate(-50%, 0);
-  }
-}
