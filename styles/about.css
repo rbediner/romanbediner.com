@@ -64,7 +64,8 @@
 }
 
 .about-philosophy-copy p {
-  max-width: 780px;
+  /* Match the readable outer body rail used by the chapter-card narratives. */
+  max-width: 1010px;
   margin: 0 0 14px;
   color: var(--text-secondary);
 }

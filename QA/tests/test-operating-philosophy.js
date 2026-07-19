@@ -44,8 +44,8 @@ for (const selector of [
   }
 }
 
-if (!aboutCss.includes('max-width: 780px')) {
-  failures.push('About CSS must keep the Operating Philosophy close aligned to the wider reading rail.');
+if (!aboutCss.includes('max-width: 1010px')) {
+  failures.push('About CSS must keep the Operating Philosophy close aligned to the chapter-card body rail.');
 }
 
 if (failures.length > 0) {
