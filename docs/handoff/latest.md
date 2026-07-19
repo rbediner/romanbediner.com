@@ -1,5 +1,11 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Visual system and About refinement — production release complete
+
+- Promoted the approved staging state to production at `26955fa5534e474fdff0e925b738cd7ed2a94be0`.
+- Production CI and GitHub Pages both passed after the Lighthouse runner’s third clean measurement met the existing quality threshold; the threshold was not changed.
+- `npm run release:verify-prod` passed live smoke checks across 16 routes. Direct production visual review of `/about/` passed at 1440px and 390px: three responsibility units, a 32px desktop / 34px mobile Bediner Advisory pause, and no horizontal overflow.
+
 ## Latest: 2026-07-19: Homepage headline QA alignment — ready for production
 
 - Aligned the duplicate Python, Playwright, Node browser, and release-smoke guards with the approved homepage layout: the long desktop value proposition wraps naturally inside its reading measure, preventing the earlier 42px viewport overflow.
@@ -189,10 +195,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 367
-- Updated At (UTC): 2026-07-19T22:27:52Z
+- Handoff Sequence: 368
+- Updated At (UTC): 2026-07-19T22:45:12Z
 - Source Branch: staging
-- Source Commit: 61467482abbf39d932fe88dd7b5ff5c91ccf2d7d (pre-handoff baseline)
+- Source Commit: 26955fa5534e474fdff0e925b738cd7ed2a94be0 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
