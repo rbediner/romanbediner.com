@@ -96,16 +96,24 @@ Validation:
 - Chrome visual inspection at desktop width passed for Dashboard, PasteFlow, Services, Framework, About, Agentic AI Employees, and Resources. Inspect `https://rbediner.github.io/romanbediner-preview/?cb=edcdaf6` plus the specific routes below before any production decision. Production remains untouched.
 - Updated the live SEO Authority PRD and shared `bediner-site` skill with the explicit card anatomy and icon discipline.
 
+## Latest: 2026-07-19: Reference-card reconstruction with unique iconography — staging only
+
+- Replaced the rejected generic contained-surface treatment on Dashboard, PasteFlow, and Services with the supplied reference-card anatomy: icon tile, numbered chip, uppercase category label, serif title, accent rule, and readable body copy. This is a composition change, not a border/shadow refresh.
+- Added thirteen original, purpose-specific resource line icons under `assets/icons/resources/`: six PasteFlow capabilities, four Dashboard operating areas, and three Dashboard lenses. The five Services panels keep their existing unique approved service icons. Browser QA asserts four unique Dashboard operating-area sources and six unique PasteFlow capability sources; no repeated or filler icon is permitted.
+- Revised mobile layout preserves the complete card composition at 390px without horizontal overflow. Local visual review captured PasteFlow, Dashboard, and Services at phone width; Chrome hosted staging review confirmed PasteFlow’s deployed desktop render. Local Jest (20/20), Node contracts, and Playwright (14/14) passed.
+- Product commit: `bb126be607cee7bf19f1fd73a4806c96c7460383` on `staging`. Hosted CI run `29701492301` and manual Deploy Staging run `29701608416` passed for that exact SHA. Production is untouched pending Roman’s visual approval.
+- Updated the live SEO Authority PRD and README. Do not update the reusable page-building skill until this staging direction is explicitly approved as the settled standard.
+
 ## Release Watcher Hygiene
 
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 356
-- Updated At (UTC): 2026-07-19T19:34:09Z
+- Handoff Sequence: 357
+- Updated At (UTC): 2026-07-19T19:59:21Z
 - Source Branch: staging
-- Source Commit: edcdaf6afb58564662e45bfb8ffd188a73c4f77b (pre-handoff baseline)
+- Source Commit: bb126be607cee7bf19f1fd73a4806c96c7460383 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
