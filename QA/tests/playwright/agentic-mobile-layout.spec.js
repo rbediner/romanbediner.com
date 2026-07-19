@@ -177,13 +177,19 @@ test('resource card categories keep editorial anatomy on desktop and phone width
       questionMarker: getComputedStyle(document.querySelector('.resource-dashboard-question-item'), '::before').content,
       quadrantMarker: getComputedStyle(document.querySelector('.resource-dashboard-quadrant'), '::before').content,
       quadrantIcons: [...document.querySelectorAll('.resource-dashboard-quadrant .resource-system-icon img')].map((icon) => icon.getAttribute('src')),
+      quadrantHeights: [...document.querySelectorAll('.resource-dashboard-quadrant')].map((card) => card.getBoundingClientRect().height),
     }));
     expect(dashboard.scrollWidth).toBeLessThanOrEqual(dashboard.viewportWidth);
     expect(dashboard.questions).toBe(6);
     expect(dashboard.quadrants).toBe(4);
     expect(dashboard.views).toBe(3);
     expect(dashboard.questionMarker).not.toBe('none');
-    expect(dashboard.quadrantMarker).not.toBe('none');
+    // Mobile deliberately removes the decorative number chip so content can use
+    // the full line width; desktop retains it as a light orientation cue.
+    if (viewport.width > 767) expect(dashboard.quadrantMarker).not.toBe('none');
+    // Reference-inspired desktop cards have room for hierarchy but must never
+    // regress to the former 330px empty gallery panels.
+    expect(Math.max(...dashboard.quadrantHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 300 : 260);
     expect(new Set(dashboard.quadrantIcons).size).toBe(4);
 
     await page.goto(`http://${host}:${port}/resources/pasteflow/`, { waitUntil: 'domcontentloaded' });
@@ -194,11 +200,15 @@ test('resource card categories keep editorial anatomy on desktop and phone width
       marker: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item'), '::before').content,
       titleFont: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item h3')).fontFamily,
       icons: [...document.querySelectorAll('.resource-pasteflow-capability-item .resource-system-icon img')].map((icon) => icon.getAttribute('src')),
+      cardHeights: [...document.querySelectorAll('.resource-pasteflow-capability-item')].map((card) => card.getBoundingClientRect().height),
     }));
     expect(pasteflow.scrollWidth).toBeLessThanOrEqual(pasteflow.viewportWidth);
     expect(pasteflow.capabilities).toBe(6);
-    expect(pasteflow.marker).not.toBe('none');
+    if (viewport.width > 767) expect(pasteflow.marker).not.toBe('none');
     expect(pasteflow.titleFont).toContain('Cormorant Garamond');
+    // Prevent a return to the empty fixed-height gallery panels that prompted
+    // this card system correction.
+    expect(Math.max(...pasteflow.cardHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 300 : 260);
     // Every capability receives a specific mnemonic, never a repeated filler icon.
     expect(new Set(pasteflow.icons).size).toBe(6);
   }

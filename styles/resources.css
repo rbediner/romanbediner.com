@@ -2070,25 +2070,60 @@ body.wireframe-modal-open {
   }
 }
 
-/* Reference-card reconstruction: each module has a specific icon, a numbered
-   category chip, a clear label, and a single editorial reading path. This is
-   intentionally distinct from the site’s compact utility surfaces. */
+/* Reference-card reconstruction: the visual reference informs the hierarchy,
+   not a fixed-size template. Short content stays compact; no card reserves
+   empty gallery space simply to make a grid look uniform. */
+.resource-dashboard-questions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 28px;
+  margin-top: 4px;
+  border-top: 1px solid rgba(15, 35, 76, 0.14);
+  border-bottom: 1px solid rgba(15, 35, 76, 0.14);
+}
+
+.resource-dashboard-question-item {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  min-height: 64px;
+  padding: 12px 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.38;
+}
+
+.resource-dashboard-question-item::before {
+  align-self: start;
+  margin: 4px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
 .resource-dashboard-quadrants,
 .resource-pasteflow-capabilities-grid {
-  gap: 28px;
+  gap: 18px;
 }
 
 .resource-dashboard-quadrant,
 .resource-pasteflow-capability-item {
+  /* Mirrors the reference composition: tile / header / title / rule / copy.
+     The body remains in normal flow, so the generous card never becomes empty. */
   display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
-  grid-template-rows: auto auto 1fr;
-  column-gap: 26px;
-  min-height: 300px;
-  padding: 34px;
-  border: 1px solid rgba(15, 35, 76, 0.12);
-  border-radius: 18px;
-  box-shadow: 0 16px 34px rgba(15, 35, 76, 0.07);
+  grid-template-columns: 94px minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: 20px;
+  box-sizing: border-box;
+  min-height: 246px;
+  padding: 32px;
+  border: 1px solid rgba(15, 35, 76, 0.13);
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(15, 35, 76, 0.055);
   background:
     radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.11), transparent 34%),
     linear-gradient(145deg, #ffffff 0%, #fbfcff 100%);
@@ -2101,8 +2136,8 @@ body.wireframe-modal-open {
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  min-height: 31px;
-  margin: 0 0 10px;
+  min-height: 32px;
+  margin: 0 0 12px;
   padding: 0 10px;
   border: 1px solid rgba(59, 108, 255, 0.26);
   border-radius: 8px;
@@ -2116,8 +2151,8 @@ body.wireframe-modal-open {
   display: grid;
   grid-column: 1;
   grid-row: 1 / span 3;
-  width: 76px;
-  height: 76px;
+  width: 82px;
+  height: 82px;
   place-items: center;
   align-self: start;
   border-radius: 22px;
@@ -2143,7 +2178,7 @@ body.wireframe-modal-open {
   grid-column: 2;
   grid-row: 1;
   align-self: center;
-  margin-left: 76px;
+  margin-left: 66px;
   color: #2457d6;
   font-size: 11px;
   font-weight: 700;
@@ -2157,72 +2192,97 @@ body.wireframe-modal-open {
   grid-column: 2;
   grid-row: 2;
   max-width: none;
-  margin: 4px 0 0;
-  font-size: clamp(30px, 2.5vw, 40px);
-  line-height: 0.98;
+  margin: 2px 0 0;
+  font-size: clamp(29px, 2.35vw, 36px);
+  line-height: 1;
 }
 
 .resource-dashboard-quadrant h3::after,
 .resource-pasteflow-capability-item h3::after {
-  width: 42px;
-  margin-top: 18px;
+  width: 38px;
+  margin-top: 16px;
 }
 
 .resource-dashboard-quadrant p,
 .resource-pasteflow-capability-item p {
   grid-column: 2;
   grid-row: 3;
-  align-self: end;
+  align-self: start;
   max-width: 46ch;
-  margin-top: 24px;
+  margin-top: 16px;
   font-size: 15px;
   line-height: 1.58;
 }
 
 .resource-dashboard-view-block {
   display: grid;
-  grid-template-columns: 66px minmax(0, 1fr);
-  column-gap: 18px;
-  min-height: 174px;
-  padding: 24px 0 0;
-  border: 0;
-  border-top: 1px solid rgba(15, 35, 76, 0.12);
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
+  grid-template-columns: 52px minmax(0, 1fr);
+  column-gap: 16px;
+  min-height: 0;
+  padding: 20px;
+  border: 1px solid rgba(15, 35, 76, 0.13);
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(15, 35, 76, 0.05);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.1), transparent 42%),
+    #ffffff;
 }
 
 .resource-dashboard-view-block .resource-system-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
+  grid-column: 1;
+  grid-row: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
 }
 
-.resource-dashboard-view-block .resource-system-icon img { width: 27px; height: 27px; }
+.resource-dashboard-view-block .resource-system-icon img { width: 24px; height: 24px; }
 
 .resource-dashboard-view-block::before {
-  grid-column: 2;
-  margin: 0 0 10px;
-  color: rgba(59, 108, 255, 0.7);
+  display: none;
 }
 
-.resource-dashboard-view-block p { grid-column: 2; }
+.resource-dashboard-view-block p {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.55;
+}
 
 .resource-dashboard-view-block strong {
   font-size: 30px;
-  line-height: 1;
+  line-height: 1.05;
+  color: var(--text-primary);
 }
 
 .resource-dashboard-view-block strong::after {
   content: "";
   display: block;
-  width: 34px;
+  width: 30px;
   height: 2px;
-  margin-top: 13px;
+  margin: 10px 0 14px;
   background: rgba(59, 108, 255, 0.62);
 }
 
 @media (max-width: 767px) {
+  /* Questions are a scan list on a phone, never a squeezed desktop grid. */
+  .resource-dashboard-questions-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .resource-dashboard-question-item {
+    min-height: 0;
+    padding: 13px 0;
+    font-size: 15px;
+  }
+
+  .resource-dashboard-question-item + .resource-dashboard-question-item {
+    border-top: 1px solid rgba(15, 35, 76, 0.1);
+  }
+
   .resource-dashboard-quadrants,
   .resource-pasteflow-capabilities-grid {
     gap: 16px;
@@ -2230,10 +2290,10 @@ body.wireframe-modal-open {
 
   .resource-dashboard-quadrant,
   .resource-pasteflow-capability-item {
-    grid-template-columns: 72px minmax(0, 1fr);
+    grid-template-columns: 64px minmax(0, 1fr);
     min-height: 0;
-    padding: 26px;
-    column-gap: 18px;
+    padding: 18px 20px 20px;
+    column-gap: 14px;
     border-radius: 16px;
   }
 
@@ -2241,27 +2301,53 @@ body.wireframe-modal-open {
     width: 58px;
     height: 58px;
     border-radius: 18px;
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .resource-system-icon img { width: 30px; height: 30px; }
 
   .resource-system-kicker {
-    margin-left: 66px;
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: 0;
     font-size: 10px;
+  }
+
+  /* On a narrow screen, the editorial reading order becomes one clear column:
+     icon, index, and label first, then the title and explanation at full width. */
+  .resource-dashboard-quadrant::before,
+  .resource-pasteflow-capability-item::before {
+    display: inline-flex;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    min-height: 28px;
+    margin: 0;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+
+  .resource-dashboard-quadrant .resource-system-kicker,
+  .resource-pasteflow-capability-item .resource-system-kicker {
+    margin-left: 48px;
   }
 
   .resource-dashboard-quadrant h3,
   .resource-pasteflow-capability-item h3 {
-    margin-top: 6px;
-    font-size: 32px;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 10px;
+    font-size: 28px;
   }
 
   .resource-dashboard-quadrant p,
   .resource-pasteflow-capability-item p {
     grid-column: 1 / -1;
     grid-row: 3;
-    margin-top: 22px;
-    font-size: 15px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .resource-dashboard-view-block {
