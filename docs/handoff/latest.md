@@ -1,10 +1,20 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 334
-- Updated At (UTC): 2026-07-19T00:59:57Z
+- Handoff Sequence: 335
+- Updated At (UTC): 2026-07-19T02:20:14Z
 - Source Branch: staging
-- Source Commit: 3b522ac1c897f11cc5232fb66a1e7f1fd9eb75f1 (pre-handoff baseline)
+- Source Commit: ea95d435540335c0beae5af50936e678ea778e71 (pre-handoff baseline)
 - Active Agent: Codex
+
+## Latest — 2026-07-19: Agentic case study navigation and diagram consistency polish
+
+- Fixed the mobile long-page failure identified in visual review: in-page targets now reserve space below the sticky header, so anchor jumps no longer hide headings or diagram context beneath the mobile header.
+- Promoted the Agentic page's inline architecture rail into the shared persistent `On this page` control, with chapter links for Architecture, Proof, People, Router, Reliability, Engineering loop, and Production. This gives the long case study a navigable structure without deleting its depth.
+- Added the shared whiteboard frame to the operating-loop diagram and aligned organization-branch accents with the page's semantic behavior/control/authority color language.
+- Local mobile and desktop visual checks passed at 390px and 1440px: no horizontal overflow, org-chart content remains inside the phone frame, anchor target lands at 92px below the viewport top, persistent navigation loads, and browser console errors remain at zero.
+- Focused Agentic contracts, `npm run test:node`, `npm run test:jest`, Python QA, Playwright runtime QA, and staging push completed. The optional full visual-baseline gate remains blocked by the pre-existing homepage baseline mismatch (`home--desktop-full.png`); the changed files do not load on the homepage.
+- Product commit: `ea95d43` on `staging`; no production promotion attempted.
+- Keep release watcher hygiene in place for this repo.
 
 ## Latest — 2026-07-19: All Agentic AI Employees diagrams made fullscreen-ready
 
