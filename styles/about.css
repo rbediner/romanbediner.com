@@ -11,8 +11,12 @@
 }
 
 .current-responsibility-line {
+  display: grid;
+  gap: 6px;
+  margin-top: 28px;
   font-size: 13px;
   font-weight: 600;
+  line-height: 1.55;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -27,6 +31,15 @@
   color: var(--accent-blue);
 }
 
+.current-responsibility-line .responsibility-label {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.current-responsibility-line .responsibility-entry {
+  display: block;
+}
+
 /* The personal name stays ink-black while the advisory identity carries the
    site-blue accent, echoing the approved Bediner Advisory wordmark logic. */
 .entity-relationship-line .advisory-brand {
@@ -35,6 +48,12 @@
 }
 
 .entity-relationship-line .advisory-accent { color: var(--accent-blue); }
+
+/* Let the advisory relationship begin as its own thought after the current
+   responsibility list rather than reading as a fourth item in that list. */
+.about-hero-refactored .entity-relationship-line {
+  margin-top: 32px;
+}
 
 .about-hero-refactored .page-title {
   margin-bottom: 24px;
@@ -295,15 +314,28 @@
   /* The responsibility line is supporting metadata. Keep it breathable and
      legible without letting wide all-caps labels dominate the phone viewport. */
   .about-hero-refactored .current-responsibility-line {
-    max-width: 44ch;
-    margin-top: 22px;
+    max-width: 38ch;
+    margin-top: 26px;
     font-size: 11px;
     line-height: 1.7;
     letter-spacing: 0.08em;
   }
 
+  /* The responsibilities are a distinct current-work block, not a dense
+     all-caps paragraph. Separate its label and three relationships so each
+     role/company pairing can be scanned without adding a heavy card. */
+  .about-hero-refactored .current-responsibility-line {
+    gap: 9px;
+  }
+
+  .about-hero-refactored .responsibility-label {
+    display: block;
+    margin-bottom: 4px;
+  }
+
   .about-hero-refactored .entity-relationship-line {
-    margin-top: 22px;
+    /* A noticeably separate paragraph starts the personal advisory statement. */
+    margin-top: 34px;
     font-size: 16px;
     line-height: 1.55;
   }

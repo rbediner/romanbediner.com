@@ -18,6 +18,12 @@ class AboutRedesignTest(unittest.TestCase):
         ]:
             self.assertIn(phrase, self.about_html)
 
+    def test_current_responsibilities_have_separate_reading_units(self):
+        # Phone layouts stack these units to make the current role/company
+        # relationships legible without turning the hero into a card wall.
+        self.assertEqual(self.about_html.count('class="responsibility-entry"'), 3)
+        self.assertIn('.responsibility-entry', self.about_css)
+
     def test_five_chapter_structure_exists(self):
         self.assertEqual(self.about_html.count('class="era-header"'), 5)
         self.assertIn('id="enterprise-scale"', self.about_html)
