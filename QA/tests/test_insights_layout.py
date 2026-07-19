@@ -75,7 +75,7 @@ class FrameworkLayoutTest(unittest.TestCase):
 
     def test_framework_cards_remain_vertical_with_links(self):
         blocks = re.findall(
-            r'<section id="([a-z-]+)" data-stage="([a-z-]+)" class="framework-section framework-card insight-card">([\s\S]*?)</section>',
+            r'<section id="([a-z-]+)" data-stage="([a-z-]+)" class="(?=[^"]*\bframework-section\b)(?=[^"]*\bframework-card\b)(?=[^"]*\binsight-card\b)[^"]*">([\s\S]*?)</section>',
             self.framework_html,
         )
         self.assertEqual(len(blocks), 6)

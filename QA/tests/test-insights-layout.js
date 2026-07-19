@@ -91,7 +91,8 @@ if (!/<ul class="service-list">\s*<li>Design operations as a system<\/li>\s*<li>
   console.error('FAIL: framework thesis must use orb service-list bullets with exact three statements.');
 }
 
-const sectionBlocks = [...frameworkHtml.matchAll(/<section id="([a-z-]+)" data-stage="([a-z-]+)" class="framework-section framework-card insight-card">([\s\S]*?)<\/section>/g)];
+// Framework stages retain their stable core classes while allowing shared surface modifiers.
+const sectionBlocks = [...frameworkHtml.matchAll(/<section id="([a-z-]+)" data-stage="([a-z-]+)" class="(?=[^"]*\bframework-section\b)(?=[^"]*\bframework-card\b)(?=[^"]*\binsight-card\b)[^"]*">([\s\S]*?)<\/section>/g)];
 if (sectionBlocks.length !== 6) {
   failures += 1;
   console.error('FAIL: expected exactly 6 framework sections.');
