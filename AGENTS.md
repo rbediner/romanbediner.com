@@ -5,6 +5,7 @@
 - Immediately after reading `/README.md`, read `/docs/handoff/latest.md`.
 - Treat `/docs/handoff/latest.md` as the live source of truth for current repo state, branch alignment, and operator notes.
 - If `/docs/handoff/latest.md` conflicts with older docs or release notes, follow `/docs/handoff/latest.md`.
+- Before adding or changing a card-like or contained surface, read `docs/design-system/card-surfaces/README.md`. It is the canonical five-type surface taxonomy; preserve existing approved icons, semantic colors, routes, copy, and analytics.
 
 ## Handoff Rule
 - After any session that changes code, scripts, QA behavior, or release flow, update `/docs/handoff/latest.md` before ending work.

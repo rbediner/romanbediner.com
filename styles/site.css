@@ -24,6 +24,52 @@
   --border-color: #e6e8ec;
   --text-primary: #111111;
   --text-secondary: #555555;
+  /* Canonical contained-surface tokens. Keep the system editorial, not app-like. */
+  --surface-card: #ffffff;
+  --surface-card-muted: #f8fafc;
+  --surface-border: rgba(43, 72, 122, 0.14);
+  --surface-border-hover: rgba(59, 108, 255, 0.48);
+  --surface-accent: #3b6cff;
+  --surface-accent-strong: #2457d6;
+  --surface-accent-soft: rgba(59, 108, 255, 0.07);
+  --surface-shadow-compact: 0 1px 2px rgba(15, 35, 70, 0.04), 0 3px 12px rgba(15, 35, 70, 0.05);
+  --surface-shadow-standard: 0 1px 2px rgba(15, 35, 70, 0.05), 0 10px 28px rgba(15, 35, 70, 0.07);
+  --surface-shadow-feature: 0 2px 4px rgba(15, 35, 70, 0.04), 0 16px 42px rgba(15, 35, 70, 0.09);
+  --surface-shadow-hover: 0 4px 8px rgba(15, 35, 70, 0.06), 0 22px 52px rgba(15, 35, 70, 0.12);
+  --surface-transition: 180ms ease;
+}
+
+/* Shared card architecture. Existing page selectors can opt in without a markup rewrite. */
+.ui-surface {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  color: var(--text-primary);
+}
+
+.ui-surface--compact { border-radius: 8px; box-shadow: var(--surface-shadow-compact); }
+.ui-surface--standard { border-radius: 12px; box-shadow: var(--surface-shadow-standard); }
+.ui-surface--editorial { border-radius: 14px; box-shadow: var(--surface-shadow-feature); }
+.ui-surface--callout { border-radius: 12px; background: var(--surface-card-muted); }
+.ui-surface--form { border-radius: 12px; box-shadow: var(--surface-shadow-standard); }
+
+/* Static containment supports scanning; it must never imply a click target. */
+.ui-surface.is-static { cursor: default; }
+.ui-surface.is-interactive,
+.ui-surface.is-linked { transition: transform var(--surface-transition), box-shadow var(--surface-transition), border-color var(--surface-transition); }
+
+@media (hover: hover) {
+  .ui-surface.is-interactive:hover,
+  .ui-surface.is-linked:hover {
+    transform: translateY(-2px);
+    border-color: var(--surface-border-hover);
+    box-shadow: var(--surface-shadow-hover);
+  }
+}
+
+.ui-surface:focus-visible,
+.ui-surface.is-linked:focus-visible {
+  outline: 3px solid rgba(59, 108, 255, 0.35);
+  outline-offset: 3px;
 }
 
 /* Keep semantic nav copy in the DOM for SEO and screen readers without rendering it visually. */
@@ -859,7 +905,11 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .section-nav-fab,
-  .section-nav-sheet {
+  .section-nav-sheet,
+  .ui-surface.is-interactive,
+  .ui-surface.is-linked,
+  .insight-card,
+  .insight-brief {
     transition: none;
   }
 }

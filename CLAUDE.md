@@ -23,6 +23,7 @@ These rules apply to all sessions working in this repository.
 ## Session Start
 - Always run `npm run session:ready` before making any changes.
 - Read `README.md` and `docs/handoff/latest.md` before starting work.
+- For any card-like or contained UI, read `docs/design-system/card-surfaces/README.md`. Do not invent a sixth surface type, duplicate an icon, or give static surfaces a click affordance.
 ## Google Drive drift (ALL agents & tools — read this)
 
 This repo is checked out inside Google Drive and synced across machines, which can corrupt `.git`. Full explanation and install kit: **`docs/runbooks/google-drive-drift.md`**. Before starting work, and before committing:

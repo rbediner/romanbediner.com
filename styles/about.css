@@ -131,10 +131,11 @@
   align-items: start;
   padding: 28px 32px 30px;
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-color: var(--surface-border, var(--border-color));
+  border-radius: 14px;
   background: #ffffff;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  box-shadow: var(--surface-shadow-feature, 0 10px 28px rgba(15, 23, 42, 0.055));
+  cursor: default;
   /* Offset fixed header for same-page anchor jumps. */
   scroll-margin-top: 96px;
 }
@@ -222,14 +223,6 @@
 
 .arc-narrative p:first-child {
   color: var(--text-primary);
-}
-
-@media (hover: hover) {
-  .arc-item:hover {
-    transform: translateY(-2px);
-    border-color: rgba(59, 108, 255, 0.32);
-    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1);
-  }
 }
 
 /* Responsive Stack */

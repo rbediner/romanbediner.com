@@ -25,6 +25,7 @@
 - Footer includes a responsive literary quote rendered with Cormorant Garamond, centered as a block with left-aligned text lines; desktop typography is tuned for a wider single-line presentation with stronger contrast, and attribution uses an em dash (`— Walt Disney`) under footer-aware QA guardrails.
 
 ## Typography & Design System (2026 Redesign)
+- **Contained surfaces**: `docs/design-system/card-surfaces/README.md` is the canonical taxonomy for card-like UI, its approved visual references, shared tokens, interaction rules, route inventory, accessibility, and intentional exceptions. Read it before adding or changing a contained surface. The system has five base types only: Compact, Standard Content, Editorial Feature, Static Callout, and Form/Input. Interaction is a modifier. Static surfaces do not lift or use a pointer cursor; existing approved icons and semantic colors are preserved without adding decorative duplicates.
 - **H1**: 54px desktop / 34px mobile, Cormorant Garamond 400 weight, sentence case. Token: `--h1-size-desktop`.
 - **H2**: 32px Cormorant Garamond 400 weight site-wide. Guardrail: `h1, h2 { font-family: var(--font-serif) !important }`.
 - **Editorial H3s** (framework stage card titles, `.brief-section h2/h3` brief section headings): Cormorant Garamond 400 weight. Font ownership declared in `styles/site.css` under the editorial display selector group. `.svc-h3` service entry headings have been removed; the `.svc-label` (icon + mixed-case text) is the sole heading for each service entry.
