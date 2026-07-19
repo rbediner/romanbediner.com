@@ -21,6 +21,7 @@ const page = fs.readFileSync(
   'utf8'
 );
 const hubPage = fs.readFileSync(path.join(root, 'resources', 'index.html'), 'utf8');
+const resourceStyles = fs.readFileSync(path.join(root, 'styles', 'resources.css'), 'utf8');
 
 let failures = 0;
 function mustInclude(label, needle) {
@@ -74,6 +75,10 @@ mustInclude('minimal recipe framing', 'A minimal recipe for building one');
 mustInclude('independent review boundary', 'no single agent writes, approves, and ships its own change');
 mustInclude('production recovery', 'automatically reverted');
 mustInclude('working-surface clarification', 'The architecture extends from human-facing work surfaces all the way to verified production.');
+if (!resourceStyles.includes('margin: 24px 0 2px;')) {
+  failures += 1;
+  console.error('FAIL: mobile architecture case-study stamp needs separation from the caption.');
+}
 
 mustNotInclude('retired roster headline', 'Two doers and an operator');
 mustNotInclude('overbroad human approval claim', 'Nothing consequential ships without a human');

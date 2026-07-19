@@ -2975,7 +2975,7 @@ body.wireframe-modal-open {
   .fleet-architecture-hero::after {
     position: static;
     display: block;
-    margin: -4px 0 18px;
+    margin: 24px 0 2px;
   }
   .fleet-architecture-layer {
     grid-template-columns: 34px 1fr;
