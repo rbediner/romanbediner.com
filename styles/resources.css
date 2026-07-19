@@ -65,6 +65,30 @@
   margin-top: 8px;
 }
 
+.resource-artifact-preview {
+  margin-top: 56px;
+  padding-top: 38px;
+  border-top: 1px solid rgba(59, 108, 255, 0.22);
+}
+
+.resource-artifact-preview h2 {
+  margin: 0 0 10px;
+  color: var(--text-primary);
+  font-size: clamp(28px, 4vw, 38px);
+}
+
+.resource-artifact-preview .resources-label {
+  margin-bottom: 12px;
+}
+
+.resource-artifact-preview .resource-carousel-shell {
+  margin-top: 24px;
+}
+
+.resource-artifact-preview .resource-link-row {
+  align-items: center;
+}
+
 .resource-card {
   position: relative;
   padding: 32px;
@@ -847,6 +871,11 @@
 }
 
 @media (max-width: 767px) {
+  .resource-artifact-preview {
+    margin-top: 40px;
+    padding-top: 28px;
+  }
+
   .resources-main {
     padding-left: 20px;
     padding-right: 20px;
@@ -1848,6 +1877,9 @@ body.wireframe-modal-open {
    depth keep the page feeling like an operating system rather than a dashboard. */
 .resource-fleet-main {
   position: relative;
+  /* Keep intentionally wide, internally scrollable diagrams from widening the
+     document itself on narrow phones. The diagram frame remains scrollable. */
+  overflow-x: clip;
 }
 
 /* Keep every in-page jump clear of the sticky site header. This matters most
@@ -1911,6 +1943,39 @@ body.wireframe-modal-open {
 
 .resource-fleet-main .fleet-audience-card {
   margin-top: 28px;
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 28px;
+  margin-top: 22px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(237, 244, 255, 0.98), rgba(249, 251, 255, 0.96));
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta .fleet-note-tag,
+.resource-fleet-main .resource-fleet-artifact-cta h2,
+.resource-fleet-main .resource-fleet-artifact-cta p {
+  grid-column: 1;
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 22px;
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta p:not(.fleet-note-tag) {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.resource-fleet-main .resource-fleet-artifact-cta .resource-primary-cta {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  white-space: nowrap;
 }
 
 .resource-fleet-main .resource-detail-prose-lede {
@@ -2888,6 +2953,17 @@ body.wireframe-modal-open {
   .resource-fleet-main .resource-top-section {
     padding: 20px 18px 18px;
     border-radius: 14px;
+  }
+  .resource-fleet-main .resource-fleet-artifact-cta {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 18px;
+  }
+  .resource-fleet-main .resource-fleet-artifact-cta .resource-primary-cta {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    white-space: normal;
   }
   .fleet-split {
     grid-template-columns: 1fr;

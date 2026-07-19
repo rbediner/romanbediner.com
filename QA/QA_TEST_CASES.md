@@ -26,17 +26,21 @@ This repository enforces static-site architecture through automated Node, Python
 - Files: `QA/tests/test-home-hero-layout.js`, `QA/tests/test-home-spacing-contract.js`, `QA/tests/test-about-redesign.js`, `QA/tests/test-about-hero-contract.js`, `QA/tests/test-operating-philosophy.js`, `QA/tests/test-connect-page.js`, `QA/tests/test_contact_form.py`, `QA/tests/test-insights-layout.js`, `QA/tests/test_insights_layout.py`, `QA/tests/test-insights-system.js`
 - Validates route-specific DOM, copy structure, visual guardrails, connect form hooks, and insights toggle/card behavior.
 
-6. Repository hygiene and automation guardrails
+6. Agentic Operations Architecture artifact and staging integration
+- Files: `QA/tests/test-agentic-operations-architecture-artifact.js`, `QA/tests/test-agentic-operations-architecture-integration.js`, `scripts/asset-generation/agentic-operations-architecture/generate_agentic_operations_architecture.py`
+- Validates the eight-page downloadable case-study artifact, its eight visual preview slides, the direct resource CTA, the resource hub carousel, and the shared `resource_pdf_download` Google Analytics attributes.
+
+7. Repository hygiene and automation guardrails
 - Files: `QA/tests/test-no-legacy-references.js`, `QA/tests/test-js-header-comments.js`, `QA/tests/test-repo-hygiene.js`, `QA/tests/test-readme-drift.js`, `QA/tests/test-qa-runner-script.js`, `QA/tests/test-release-sop-automation.js`, `QA/tests/jest/readme_structure.test.js`, `QA/tests/jest/readme_integrity.test.js`, `QA/tests/jest/scripts_comment_headers.test.js`
 - Validates documentation drift, script header coverage, release automation invariants, and repo cleanliness expectations.
 
 ## Browser and Visual Regression Suites
 
-7. Runtime browser checks
+8. Runtime browser checks
 - Files: `QA/tests/playwright/csp-ga-runtime.spec.js`, `QA/tests/playwright/h1-alignment.spec.js`, `QA/tests/test_nav_runtime_playwright.py`, `QA/tests/test_home_nav_consistency_playwright.py`, `QA/tests/test_home_layout_spacing_playwright.py`, `QA/tests/test_home_spacing_playwright.py`
 - Validates runtime CSP behavior, GA requests, nav interactions, geometry, and mobile overflow constraints.
 
-8. Visual baselines
+9. Visual baselines
 - File: `QA/tests/test_visual_regression_playwright.py`
 - Compares committed baselines in `QA/tests/visual-baselines/` against current desktop/mobile renders for Home, About, Services, Insights, and Connect.
 

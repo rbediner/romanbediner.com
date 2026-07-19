@@ -296,12 +296,17 @@ This section documents what's *built on top of* the raw GA4 events above, not th
 - Resource assets:
 - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
 - `/assets/resources/framework-summary/slides/`
+- `/assets/downloads/agentic-operations-architecture-roman-bediner.pdf`
+- `/assets/resources/agentic-operations-architecture/slides/`
+- `/scripts/asset-generation/agentic-operations-architecture/generate_agentic_operations_architecture.py`
 - `/assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png`
 - `/assets/resources/pasteflow/`
 - Dashboard source-of-truth folder:
   - `/ai-enabled-operations-dashboard/` (React/Vite source + committed `dist/` build output for release artifacts)
 - Resources presentation contract:
   - `/resources/` opens with the shared shelf-callout family treatment (vertical blue rule, blue-tinted bg) and closes with a forward-only site-family nav block (`.next-page-nav resources-forward-nav`) to `/framework/`. The inset companion panel (`resources-inset-cta`) no longer exists on this page.
+  - `/resources/` includes the complete eight-slide preview and download CTA for `The Agentic Operations Architecture`; the preview uses the latest generated PDF slides and carries the `agentic-operations-architecture` GA4 resource context.
+  - `/resources/agentic-ai-employees/` includes a compact direct-download CTA for the same canonical architecture PDF. Both CTAs use the shared `resource_pdf_download` event contract with `file_path` set to `/assets/downloads/agentic-operations-architecture-roman-bediner.pdf`.
   - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family, keeps `Who This Is For` as a restrained non-interactive companion card (`.resource-blue-box`), and moves the locked conversational paragraph into a `.resource-conversation-card` (card surface, no vertical blue rule) below the preview/CTA cluster.
   - `/resources/ai-enabled-operations-dashboard/` renders the live same-origin dashboard iframe at `src="/ai-enabled-operations-dashboard/"` on desktop/tablet and uses an inline static screenshot fallback on mobile.
   - `/resources/pasteflow/` follows the same detail-page family with a shelf-callout opening, a clickable artifact hero rectangle to the Chrome Web Store, a lower-page 16:9 YouTube no-cookie overview embed, and a back-only site-family nav to `/resources/`.
