@@ -1,5 +1,11 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Homepage headline QA alignment — ready for production
+
+- Aligned the two browser spacing guards with the approved homepage layout: the long desktop value proposition wraps naturally inside its reading measure, preventing the earlier 42px viewport overflow.
+- The guards now permit the intentional two-line Cormorant heading while rejecting a third line. Desktop alignment, mobile overflow, and spacing assertions remain intact.
+- Focused Playwright-backed Python checks (5/5), `git diff --check`, and the Google Drive drift check passed. Product commit `575cba9` follows the visually approved staging state.
+
 ## Latest: 2026-07-19: About current-work hierarchy — staging only
 
 - Reframed the About hero’s current-responsibilities copy as a distinct label followed by three role/company reading units. This now has the same intentional rhythm at desktop and phone widths instead of wrapping as a dense all-caps sentence.
@@ -183,10 +189,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 365
-- Updated At (UTC): 2026-07-19T22:04:05Z
+- Handoff Sequence: 366
+- Updated At (UTC): 2026-07-19T22:13:09Z
 - Source Branch: staging
-- Source Commit: a3211357729ea31fca0d049df801ced5393357dc (pre-handoff baseline)
+- Source Commit: 575cba903aa9638da464fcc57790edc8cd80ae38 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
