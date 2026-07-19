@@ -70,16 +70,33 @@
 - Staging CI passed in run `29688336386`; staging deployment passed in run `29688439117`. Production CI passed in run `29688479677`; Deploy Pages and live smoke passed in run `29688479647`.
 - Production is live at `https://romanbediner.com/resources/agentic-ai-employees/` on product SHA `8c342fda2aa92c9795143277f7ddec2e7fa1640d`.
 
+## Latest — 2026-07-19: Editorial surface elevation, staging only
+
+- Applied the approved reference direction as an adaptation, not a copy: Roman-blue soft edge washes, serif hierarchy, compact markers, restrained borders, and generous whitespace. Teal/green, loud gradients, heavy shadows, new decorative icons, repeated icons, carousel behavior, and dense SaaS-card walls remain out of scope.
+- Services now uses five static editorial panels. Each keeps its distinct approved service icon in a compact blue-tinted tile, has a compact numeric marker, and retains the default cursor and no-lift behavior. The AI-Enabled Operating Systems and Applying the Work sections are quiet synthesis surfaces.
+- About’s five professional-background panels remain editorial; Operating Philosophy now uses one wider blue-washed callout aligned with the chapter content rail. Framework’s Applying the Framework close uses the matching restrained callout treatment.
+- The homepage was intentionally left open and editorial. The Agentic, Dashboard, and PasteFlow resource pages retain their existing distinct resource treatments and pass visual consistency review without copying the Services pattern.
+- The shared `bediner-site` skill now includes the editorial-elevation rule: use a limited number of synthesis surfaces, preserve distinct existing icons, remain blue-only, and avoid over-carding the homepage.
+- The live `SEO Authority PRD` includes the staging-only visual-direction refinement and its mobile/desktop acceptance criteria.
+
+Validation:
+- Local `npm run test:node` passed.
+- Local `npm run test:playwright` passed 13/13, including the new 390px Services contract for five icon tiles, default cursors, and zero horizontal overflow.
+- Hosted CI for `80a8003a15ccf46bfa67c4bc71261aaaabefa255` passed after a single rerun of the known Lighthouse median flake (first median 84 vs required 85; rerun passed). Hosted Python, browser, unit, link, workflow, and contract checks passed.
+- Manual Deploy Staging run `29699816928` succeeded for the exact SHA. Live Chrome visual inspection completed on the staging preview for Home, Services (top and service-panel sections), About (top and Operating Philosophy), Framework close, Agentic AI Employees, AI-Enabled Operations Dashboard, and PasteFlow. No visual clipping, duplicate icons, false-click static panels, or teal/green drift was observed in the inspected desktop surface.
+- Mobile acceptance is covered by the new 390px Playwright contract; a manual DevTools phone screenshot was not run in this session.
+- Production remains untouched and requires explicit Roman approval.
+
 ## Release Watcher Hygiene
 
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 354
-- Updated At (UTC): 2026-07-19T18:34:01Z
+- Handoff Sequence: 355
+- Updated At (UTC): 2026-07-19T19:07:29Z
 - Source Branch: staging
-- Source Commit: a684008459af0e9050ed40b818fa450c485ed625 (pre-handoff baseline)
+- Source Commit: 80a8003a15ccf46bfa67c4bc71261aaaabefa255 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
