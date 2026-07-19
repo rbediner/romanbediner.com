@@ -9,6 +9,7 @@
 - Product commit: `f8d9250` (`Align About philosophy reading rail`), staging CI and Deploy Staging passed for the exact SHA.
 - About page production promotion completed for this exact tested SHA: production CI, Deploy Pages, post-deploy smoke, and `release:verify-prod` all passed.
 - Production is live at `https://romanbediner.com/about/` on `f8d9250`.
+- Documentation is aligned: `README.md` records the 1010px desktop rail and corrected editorial-panel model, and the shared `bediner-site` skill records the About rail/mobile rule and exact-SHA production verification requirement.
 
 ## Latest: 2026-07-19: About professional-background EBI pass — staging only
 
@@ -59,10 +60,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 350
-- Updated At (UTC): 2026-07-19T17:47:25Z
+- Handoff Sequence: 351
+- Updated At (UTC): 2026-07-19T17:50:24Z
 - Source Branch: staging
-- Source Commit: 39d03b587f099e6c5aac3334ace87f59c8fa3f8b (pre-handoff baseline)
+- Source Commit: a837b24e2e2c8535b3570f8d08051bbd5f9ca599 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
