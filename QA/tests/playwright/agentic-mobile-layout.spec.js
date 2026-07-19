@@ -102,6 +102,37 @@ test('agentic resource fits a phone viewport and keeps the org chart legible', a
 
 });
 
+/**
+ * Invariant:
+ * - The downloadable Agentic Operations Architecture must expose its approved
+ *   ten-page replacement through a usable, non-overflowing mobile preview.
+ * Why this exists:
+ * - The preview is the visitor's fastest way to assess the PDF before download;
+ *   stale counts or a clipped disclosure make the artifact feel unreliable.
+ */
+test('agentic architecture preview opens and advances through ten pages on a phone', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`http://${host}:${port}/resources/agentic-ai-employees/`, { waitUntil: 'networkidle' });
+
+  await page.getByText('Preview the architecture', { exact: false }).click();
+  await expect(page.getByRole('heading', { name: 'Architecture Preview' })).toBeVisible();
+  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 1 of 10');
+  await page.getByRole('button', { name: 'Next architecture page' }).click();
+  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 2 of 10');
+
+  const preview = await page.evaluate(() => ({
+    scrollWidth: document.documentElement.scrollWidth,
+    viewportWidth: window.innerWidth,
+    pageCount: document.querySelectorAll('[data-carousel-slide]').length,
+    downloadedPath: document.querySelector('[data-track-pdf-download]')?.getAttribute('href'),
+    secondPreview: document.querySelector('img[src$="slide-02.png"]')?.getBoundingClientRect().width,
+  }));
+  expect(preview.scrollWidth).toBeLessThanOrEqual(preview.viewportWidth);
+  expect(preview.pageCount).toBe(10);
+  expect(preview.downloadedPath).toBe('/assets/downloads/agentic-operations-architecture-roman-bediner.pdf');
+  expect(preview.secondPreview).toBeGreaterThan(0);
+});
+
 test('section navigation is available immediately across supported pages and viewports', async ({ page }) => {
   for (const viewport of [
     { width: 1440, height: 900 },

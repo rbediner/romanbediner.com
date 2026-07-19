@@ -55,6 +55,8 @@
     const nextButton = carousel.querySelector('[data-carousel-next]');
     const expandButton = carousel.querySelector('[data-carousel-expand]');
     const counter = carousel.querySelector('[data-carousel-count]');
+    // PDF artifacts opt into page language without changing existing slide decks.
+    const itemLabel = carousel.dataset.carouselUnit || 'Slide';
     let activeIndex = 0;
 
     if (!track || slides.length < 2 || !previousButton || !nextButton || !counter) {
@@ -65,7 +67,7 @@
       track.style.transform = `translateX(-${activeIndex * 100}%)`;
       previousButton.disabled = activeIndex === 0;
       nextButton.disabled = activeIndex === slides.length - 1;
-      counter.textContent = `Slide ${activeIndex + 1} of ${slides.length}`;
+      counter.textContent = `${itemLabel} ${activeIndex + 1} of ${slides.length}`;
       if (modal && modal.classList.contains('is-open')) {
         updateModalSlide();
       }
@@ -173,7 +175,7 @@
         modalImg.alt = img.alt;
       }
       if (modalCaption) {
-        modalCaption.textContent = `Slide ${activeIndex + 1} of ${slides.length}`;
+        modalCaption.textContent = `${itemLabel} ${activeIndex + 1} of ${slides.length}`;
       }
       if (modalPrev) {
         modalPrev.disabled = activeIndex === 0;

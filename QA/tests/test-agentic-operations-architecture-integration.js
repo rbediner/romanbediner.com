@@ -31,7 +31,7 @@ function fail(message) {
 }
 
 if (!fs.existsSync(pdfPath)) fail('canonical artifact PDF is missing');
-for (let index = 1; index <= 8; index += 1) {
+for (let index = 1; index <= 10; index += 1) {
   const filename = `slide-${String(index).padStart(2, '0')}.png`;
   if (!fs.existsSync(path.join(slidesDir, filename))) {
     fail(`preview slide is missing: ${filename}`);
@@ -45,10 +45,15 @@ for (let index = 1; index <= 8; index += 1) {
   'data-resource-location="agentic_fleet_page"',
   'data-track-pdf-download',
   `data-file-path="${artifactPath}"`,
-  'Download the brief',
+  'Agentic Operations Architecture',
+  'Take the architecture with you.',
+  'Preview the architecture',
+  'Download the architecture',
   'resources-analytics.js',
   'resource-collapsible-preview',
-  'Preview the brief',
+  'data-carousel-unit="Page"',
+  'Page 1 of 10',
+  'slide-10.png',
   'resources-carousel.js',
 ].forEach((needle) => {
   if (!aiPage.includes(needle)) fail(`AI Employees CTA contract is missing: ${needle}`);
@@ -62,19 +67,21 @@ for (let index = 1; index <= 8; index += 1) {
   'data-resource-carousel',
   'data-carousel-expand',
   'slide-01.png',
-  'slide-08.png',
+  'slide-10.png',
+  'data-carousel-unit="Page"',
+  'Page 1 of 10',
   `data-file-path="${artifactPath}"`,
   'resources-carousel.js',
 ].forEach((needle) => {
   if (!hub.includes(needle)) fail(`Resources hub preview contract is missing: ${needle}`);
 });
 
-if ((hub.match(/data-carousel-slide/g) || []).length !== 8) {
-  fail('Resources hub preview must contain exactly eight carousel slides');
+if ((hub.match(/data-carousel-slide/g) || []).length !== 10) {
+  fail('Resources hub preview must contain exactly ten carousel pages');
 }
 
-if ((aiPage.match(/data-carousel-slide/g) || []).length !== 8) {
-  fail('Agentic AI Employees collapsible preview must contain exactly eight carousel slides');
+if ((aiPage.match(/data-carousel-slide/g) || []).length !== 10) {
+  fail('Agentic AI Employees collapsible preview must contain exactly ten carousel pages');
 }
 
 console.log('PASS: Agentic Operations Architecture staging integration contract');

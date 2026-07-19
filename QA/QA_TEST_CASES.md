@@ -28,7 +28,7 @@ This repository enforces static-site architecture through automated Node, Python
 
 6. Agentic Operations Architecture artifact and staging integration
 - Files: `QA/tests/test-agentic-operations-architecture-artifact.js`, `QA/tests/test-agentic-operations-architecture-integration.js`, `scripts/asset-generation/agentic-operations-architecture/generate_agentic_operations_architecture.py`
-- Validates the eight-page downloadable case-study artifact, its eight visual preview slides, the direct resource CTA, the resource hub carousel, and the shared `resource_pdf_download` Google Analytics attributes.
+- Validates the ten-page downloadable reference architecture, its ten visual preview pages, the direct resource CTA, the resource hub carousel, and the shared `resource_pdf_download` Google Analytics attributes.
 
 7. Repository hygiene and automation guardrails
 - Files: `QA/tests/test-no-legacy-references.js`, `QA/tests/test-js-header-comments.js`, `QA/tests/test-repo-hygiene.js`, `QA/tests/test-readme-drift.js`, `QA/tests/test-qa-runner-script.js`, `QA/tests/test-release-sop-automation.js`, `QA/tests/jest/readme_structure.test.js`, `QA/tests/jest/readme_integrity.test.js`, `QA/tests/jest/scripts_comment_headers.test.js`
