@@ -55,6 +55,8 @@ mustInclude('Anthropic cost reporting', 'Anthropic cost snapshots');
 mustInclude('router job examples', 'Typical jobs: Staff Engineer review, merge decision, production recovery.');
 mustInclude('case study framing', 'A working case study');
 mustInclude('section orientation rail', 'class="fleet-section-nav"');
+mustInclude('persistent section navigation source', 'data-section-nav');
+mustInclude('persistent section navigation script', 'section-nav.js');
 mustInclude('seven-stage lifecycle copy', 'The same seven stages run every time.');
 mustInclude('minimal recipe framing', 'A minimal recipe for building one');
 mustInclude('independent review boundary', 'no single agent writes, approves, and ships its own change');
