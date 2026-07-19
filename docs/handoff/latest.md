@@ -1,10 +1,22 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 326
-- Updated At (UTC): 2026-07-18T22:46:58Z
+- Handoff Sequence: 328
+- Updated At (UTC): 2026-07-19T00:01:21Z
 - Source Branch: staging
-- Source Commit: fd23b01e19accf403f97537a6ffada23a2546e69 (pre-handoff baseline)
+- Source Commit: b89cdbf7c268b81d8be77c493bbf14b249d01823 (pre-handoff baseline)
 - Active Agent: Claude
+
+## Latest — 2026-07-18: Agentic AI Employees flagship resource rebuilt on staging
+
+- Reframed `/resources/agentic-ai-employees/` as a flagship autonomous-organization page rather than a Slack-centered resource.
+- Expanded the public roster to five employees: Project Manager, Chief of Staff, Director of Fleet Orchestration & Engineering, Continuous Improvement Engineer, and independent Staff Engineer.
+- Added a premium dark org chart, explicit autonomy matrix, and a self-engineering flow from engineering queue to independently reviewed, verified production.
+- Updated the brain/body narrative to distinguish editable cloud behavior from runtime engineering and deployment controls.
+- Updated the architecture narrative, operating layer, setup/deploy language, title, meta descriptions, Open Graph/Twitter copy, TechArticle keywords, and `dateModified` for agentic AI employees, autonomous code review, multi-agent orchestration, and production deployment verification.
+- Added `QA/tests/test-agentic-ai-employees.js` and wired it into the Node contract suite.
+- Product commit: `b89cdbf` on `staging`; no production promotion attempted.
+- Preview deployment is pending GitHub Actions completion. Review the staging preview at `https://rbediner.github.io/romanbediner-preview/resources/agentic-ai-employees/` once the deployment is green; use a cache-buster if the bare URL is stale.
+- Keep release watcher hygiene in place for this repo.
 
 ## Latest — 2026-07-18: NC Courage operating-experience copy promoted to production
 
