@@ -1,10 +1,24 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 328
-- Updated At (UTC): 2026-07-19T00:01:21Z
+- Handoff Sequence: 330
+- Updated At (UTC): 2026-07-19T00:29:54Z
 - Source Branch: staging
-- Source Commit: b89cdbf7c268b81d8be77c493bbf14b249d01823 (pre-handoff baseline)
-- Active Agent: Claude
+- Source Commit: b3e1057de80f881c30af892203d9461718d98428 (pre-handoff baseline)
+- Active Agent: Codex
+
+## Latest — 2026-07-19: Agentic AI Employees EBI case-study pass on staging
+
+- Implemented all ten approved EBI improvements for `/resources/agentic-ai-employees/`.
+- Reframed the page as an architecture-first case study with a four-layer stack, three closed loops, and a concise proof panel explaining what the inexpensive architecture makes possible.
+- Applied the reusable whiteboard treatment across the architecture stack, org chart, router map, engineering loop, reliability loop, and inline SVG diagrams: paper grid, inset frame, blue/red/gold/green semantics, captions, and responsive layouts.
+- Made the model router concrete with representative jobs for the mechanical, judgment, and independent merge-gate tiers.
+- Added the reliability/reporting loop covering heartbeats, Anthropic cost snapshots, cache savings, deployment status, Director health synthesis, digest/alert, and recovery.
+- Tightened repeated working-surface/Slack language, added stronger public-safe autonomy language, and expanded SEO/schema terms for autonomous AI software engineering, AI agents that merge pull requests, model routing, Anthropic cost reporting, and production deployment.
+- Added/updated focused QA contracts. `npm run test:node` passed; Jest passed 20 suites / 73 tests; desktop/mobile rendered screenshots passed the no-overflow check at 1440px and 390px.
+- Product commit: `b3e1057` on `staging`; no production promotion attempted.
+- Reusable `bediner-site` skill created and uploaded to the shared Drive library: `https://drive.google.com/drive/folders/1l6O3RgCX5E3yTTfVLrSS23rka5_A8maJ`.
+- Staging preview deployment is pending GitHub Actions completion. Review the route at `https://rbediner.github.io/romanbediner-preview/resources/agentic-ai-employees/?cb=b3e1057` after the exact-SHA deploy is green.
+- Keep release watcher hygiene in place for this repo.
 
 ## Latest — 2026-07-18: Agentic AI Employees flagship resource rebuilt on staging
 
