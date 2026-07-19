@@ -20,6 +20,7 @@ const page = fs.readFileSync(
   path.join(root, 'resources', 'agentic-ai-employees', 'index.html'),
   'utf8'
 );
+const hubPage = fs.readFileSync(path.join(root, 'resources', 'index.html'), 'utf8');
 
 let failures = 0;
 function mustInclude(label, needle) {
@@ -34,11 +35,20 @@ function mustNotInclude(label, needle) {
     console.error(`FAIL: ${label} unexpectedly present: ${JSON.stringify(needle)}`);
   }
 }
+function hubMustInclude(label, needle) {
+  if (!hubPage.includes(needle)) {
+    failures += 1;
+    console.error(`FAIL: ${label} missing from resource hub: ${JSON.stringify(needle)}`);
+  }
+}
 
 mustInclude('title', '<title>Agentic AI Employees: From Request to Production</title>');
 mustInclude('all-caps h1', '<h1>AGENTIC AI EMPLOYEES</h1>');
 mustInclude('title deck', 'From request to production');
 mustInclude('audience card', 'Who This Is For');
+mustInclude('condensed hero callout', 'Agents preserve memory, review code, merge safely, deploy, and report results.');
+mustNotInclude('duplicated hero lede', 'A fleet of autonomous AI employees that observe work');
+hubMustInclude('hub classification support', 'Reference architecture + build report.');
 mustInclude('SEO phrase', 'autonomous code review');
 mustInclude('Project Manager roster card', 'Agent: Project Manager');
 mustInclude('Chief of Staff roster card', 'Agent: Chief of Staff');

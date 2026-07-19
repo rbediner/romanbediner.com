@@ -1890,11 +1890,11 @@ body.wireframe-modal-open {
 }
 
 .resource-fleet-main > .section-accent {
-  width: 92px;
-  height: 4px;
-  margin-bottom: 28px;
+  width: 56px;
+  height: 3px;
+  margin: 12px 0 28px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent-blue), #9a6b1f);
+  background: rgba(59, 108, 255, 0.62);
 }
 
 .resource-fleet-main .resource-top-section {
@@ -1919,6 +1919,14 @@ body.wireframe-modal-open {
   line-height: 1.48;
   color: var(--text-primary);
   letter-spacing: -0.01em;
+}
+
+.resource-card-classification {
+  color: var(--accent-blue);
+  font-size: 0.82em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .fleet-kicker {
@@ -2004,25 +2012,25 @@ body.wireframe-modal-open {
     flex-basis: 100%;
   }
 
-  /* Center the agentic page's long-page orientation control on narrow screens. */
+  /* Keep the agentic page's long-page orientation control clear of the reading column. */
   .section-nav-fab {
-    right: auto;
-    left: 50%;
+    right: 18px;
+    left: auto;
     bottom: 18px;
   }
 
   .section-nav-fab.is-visible {
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
 
   .section-nav-sheet {
-    right: auto;
-    left: 50%;
-    transform: translate(-50%, 10px);
+    right: 18px;
+    left: auto;
+    transform: translateY(10px);
   }
 
   .section-nav-sheet.is-open {
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
 }
 
@@ -2209,6 +2217,7 @@ body.wireframe-modal-open {
   position: relative;
   z-index: 1;
   display: flex;
+  box-sizing: border-box;
   align-items: center;
   gap: 14px;
   width: min(560px, 100%);
@@ -2218,6 +2227,12 @@ body.wireframe-modal-open {
   border-radius: 13px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+}
+
+.fleet-org-human > div,
+.fleet-org-director > div,
+.fleet-org-independent > div {
+  min-width: 0;
 }
 
 .fleet-org-human { border-color: rgba(203, 163, 90, 0.48); background: rgba(203, 163, 90, 0.14); }
@@ -2267,6 +2282,7 @@ body.wireframe-modal-open {
 
 .fleet-org-branch {
   position: relative;
+  box-sizing: border-box;
   padding: 16px 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
@@ -2924,8 +2940,28 @@ body.wireframe-modal-open {
   .fleet-org-independent::before {
     position: static;
     display: block;
-    margin: 0 0 8px;
+    grid-column: 1 / -1;
+    margin: 0 0 4px;
     transform: none;
+  }
+  .fleet-org-independent {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: center;
+  }
+  .fleet-org-independent .fleet-org-symbol {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .fleet-org-independent > div {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+  }
+  .fleet-org-chart strong,
+  .fleet-org-chart span:not(.fleet-org-symbol) {
+    overflow-wrap: anywhere;
   }
   .fleet-autonomy-grid {
     grid-template-columns: 1fr 1fr;

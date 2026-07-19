@@ -107,8 +107,14 @@
       if (open && (e.key === 'Escape' || e.key === 'Esc')) { closeSheet(); fab.focus(); }
     });
 
-    // --- Always visible (from page load, before any scroll) --------------
-    fab.classList.add('is-visible');
+    // --- Reveal after the inline source nav has been passed ---------------
+    // Keep the control from covering the thesis or hero callout on phones.
+    function updateFabVisibility() {
+      var sourceBottom = source.getBoundingClientRect().bottom;
+      fab.classList.toggle('is-visible', sourceBottom < 0);
+    }
+    window.addEventListener('scroll', updateFabVisibility, { passive: true });
+    updateFabVisibility();
 
     // --- Active-section highlighting ------------------------------------
     var activeId = null;
