@@ -114,3 +114,40 @@ test('section navigation is available immediately across supported pages and vie
     }
   }
 });
+
+/**
+ * Invariant:
+ * - The elevated Services panels must remain genuinely static editorial content
+ *   and fit on a narrow phone viewport.
+ * Why this exists:
+ * - A visual card treatment can accidentally create horizontal overflow or a
+ *   pointer affordance that incorrectly suggests a service panel is clickable.
+ */
+test('services editorial panels preserve unique icon tiles without phone overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`http://${host}:${port}/services/`, { waitUntil: 'domcontentloaded' });
+  await page.evaluate(async () => {
+    if (document.fonts?.ready) await document.fonts.ready;
+  });
+
+  const layout = await page.evaluate(() => {
+    const panels = [...document.querySelectorAll('.svc-entry')];
+    const tiles = [...document.querySelectorAll('.svc-icon-tile')];
+    return {
+      viewportWidth: window.innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      panelCount: panels.length,
+      panelCursors: panels.map((panel) => getComputedStyle(panel).cursor),
+      tileCount: tiles.length,
+      tileWidths: tiles.map((tile) => tile.getBoundingClientRect().width),
+      tileRights: tiles.map((tile) => tile.getBoundingClientRect().right),
+    };
+  });
+
+  expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
+  expect(layout.panelCount).toBe(5);
+  expect(layout.tileCount).toBe(5);
+  expect(layout.panelCursors.every((cursor) => cursor === 'default')).toBe(true);
+  expect(layout.tileWidths.every((width) => width >= 44)).toBe(true);
+  expect(layout.tileRights.every((right) => right <= layout.viewportWidth)).toBe(true);
+});
