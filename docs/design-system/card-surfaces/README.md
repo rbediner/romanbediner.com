@@ -44,6 +44,18 @@ Interaction is a modifier, never a sixth card type. Valid modifiers are `is-stat
 | `/services/` | Deliberate static editorial entries | Preserve the five distinct approved service icons and their order. |
 | `/connect/` | Form / Linked | The form is static containment; LinkedIn and action routes remain linked. |
 
+## Downloadable architecture artifacts
+
+Use an `is-artifact` Static Callout or Standard Content Card only when a reader can take away a real, durable resource. Name the resource for what it is. Do not call a substantial architecture, case-study follow-along, or reference implementation a “brief” merely because it is downloadable.
+
+- Keep the artifact description, preview, and download actions inside one unified surface. The action order is **Preview** first, then **Download**. Do not create a detached second preview card.
+- The preview is closed by default, expands within the same surface, and uses images rendered from the exact canonical PDF. Use content-aware vocabulary: `Page` for a PDF document and `Slide` for a presentation deck.
+- Keep the action row horizontal when space permits and stack it cleanly on narrow screens. Controls must retain visible focus, 44px targets, `min-width: 0`, and no page-level horizontal overflow.
+- Preserve the established analytics DOM contract: artifact context on the containing resource surface, `data-track-pdf-download` and `data-file-path` on every download link, and the shared preview runtime/events. Presentation changes must never silently change the resource slug, file path, event names, or event parameters.
+- Required visual QA: at 1440px and 390px, open the preview, advance at least one page, confirm the correct page count and no clipping or horizontal overflow, then confirm the download target remains the canonical file.
+
+Current exemplar: `/resources/agentic-ai-employees/` uses the ten-page **Agentic Operations Architecture** PDF as one unified preview-and-download artifact surface.
+
 ## QA and release
 
 Validate at 1440, 1280, 1024, 768, 430, 390, and 320px. Check that static surfaces do not imply clickability, keyboard focus is visible, accordions still work, and no new or repeated icons appear. Refresh visual baselines only after manual approval of the staging result.
