@@ -1,5 +1,15 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Agentic Operations Architecture artifact replacement — production release
+
+- Replaced the downloadable and previewed artifact on `/resources/agentic-ai-employees/` with the supplied ten-page `Agentic Operations Architecture` PDF. The downloadable canonical file is `assets/downloads/agentic-operations-architecture-roman-bediner.pdf`; preview images live under `assets/resources/agentic-operations-architecture/slides/`.
+- Retired the inaccurate "brief" language. The resource card now reads `AGENTIC OPERATIONS ARCHITECTURE`, `Take the architecture with you.`, and uses `Preview the architecture` then `Download the architecture` as the two actions.
+- Preserved the existing GA download contract and canonical `data-file-path`; the new artifact continues to emit the established resource PDF-download event with its resource context.
+- Fixed a real runtime-cache issue by versioning the shared carousel script. Both the direct resource page and Resources hub now show `Page 1 of 10` rather than stale `Slide` copy when fresh artifact markup is deployed.
+- Validation passed locally: full CI-parity and Playwright. Staging CI run `29707394188` passed after the permitted single Lighthouse retry; staging deploy `29707541618` passed. Production CI run `29707728558` passed for `fa8856895c267883241f5329170914fee4fb6b0b`; Deploy Pages run `29707728560` is the matching production deployment.
+- Direct live production validation at 390 x 844 confirmed the collapsed preview opens, advances from `Page 1 of 10` to `Page 2 of 10`, uses `translateX(-100%)`, and has no horizontal overflow. Desktop and staging checks also found no horizontal overflow.
+- Product release SHA: `fa8856895c267883241f5329170914fee4fb6b0b`.
+
 ## Latest: 2026-07-19: Visual system and About refinement — production release complete
 
 - Promoted the approved staging state to production at `26955fa5534e474fdff0e925b738cd7ed2a94be0`.
@@ -195,10 +205,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 368
-- Updated At (UTC): 2026-07-19T22:45:12Z
+- Handoff Sequence: 370
+- Updated At (UTC): 2026-07-19T23:25:56Z
 - Source Branch: staging
-- Source Commit: 26955fa5534e474fdff0e925b738cd7ed2a94be0 (pre-handoff baseline)
+- Source Commit: fa8856895c267883241f5329170914fee4fb6b0b (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
