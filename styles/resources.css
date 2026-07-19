@@ -2070,6 +2070,207 @@ body.wireframe-modal-open {
   }
 }
 
+/* Reference-card reconstruction: each module has a specific icon, a numbered
+   category chip, a clear label, and a single editorial reading path. This is
+   intentionally distinct from the site’s compact utility surfaces. */
+.resource-dashboard-quadrants,
+.resource-pasteflow-capabilities-grid {
+  gap: 28px;
+}
+
+.resource-dashboard-quadrant,
+.resource-pasteflow-capability-item {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  column-gap: 26px;
+  min-height: 300px;
+  padding: 34px;
+  border: 1px solid rgba(15, 35, 76, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 16px 34px rgba(15, 35, 76, 0.07);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(59, 108, 255, 0.11), transparent 34%),
+    linear-gradient(145deg, #ffffff 0%, #fbfcff 100%);
+}
+
+.resource-dashboard-quadrant::before,
+.resource-pasteflow-capability-item::before {
+  grid-column: 2;
+  grid-row: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 31px;
+  margin: 0 0 10px;
+  padding: 0 10px;
+  border: 1px solid rgba(59, 108, 255, 0.26);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--accent-blue);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.resource-system-icon {
+  display: grid;
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  align-self: start;
+  border-radius: 22px;
+  color: #2457d6;
+  border: 1px solid rgba(59, 108, 255, 0.08);
+  background: linear-gradient(145deg, rgba(59, 108, 255, 0.12), rgba(255, 255, 255, 0.92));
+}
+
+.resource-system-icon img {
+  display: block;
+  width: 38px;
+  height: 38px;
+  /* External SVGs are intentionally single-ink assets; the filter applies the
+     site blue without duplicating color-specific icon files. */
+  filter: invert(32%) sepia(93%) saturate(1754%) hue-rotate(214deg) brightness(92%) contrast(88%);
+}
+
+.resource-dashboard-quadrant:first-child .resource-system-icon img {
+  filter: brightness(0) invert(1);
+}
+
+.resource-system-kicker {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  margin-left: 76px;
+  color: #2457d6;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.resource-dashboard-quadrant h3,
+.resource-pasteflow-capability-item h3 {
+  grid-column: 2;
+  grid-row: 2;
+  max-width: none;
+  margin: 4px 0 0;
+  font-size: clamp(30px, 2.5vw, 40px);
+  line-height: 0.98;
+}
+
+.resource-dashboard-quadrant h3::after,
+.resource-pasteflow-capability-item h3::after {
+  width: 42px;
+  margin-top: 18px;
+}
+
+.resource-dashboard-quadrant p,
+.resource-pasteflow-capability-item p {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: end;
+  max-width: 46ch;
+  margin-top: 24px;
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.resource-dashboard-view-block {
+  display: grid;
+  grid-template-columns: 66px minmax(0, 1fr);
+  column-gap: 18px;
+  min-height: 174px;
+  padding: 24px 0 0;
+  border: 0;
+  border-top: 1px solid rgba(15, 35, 76, 0.12);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.resource-dashboard-view-block .resource-system-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+}
+
+.resource-dashboard-view-block .resource-system-icon img { width: 27px; height: 27px; }
+
+.resource-dashboard-view-block::before {
+  grid-column: 2;
+  margin: 0 0 10px;
+  color: rgba(59, 108, 255, 0.7);
+}
+
+.resource-dashboard-view-block p { grid-column: 2; }
+
+.resource-dashboard-view-block strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.resource-dashboard-view-block strong::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 2px;
+  margin-top: 13px;
+  background: rgba(59, 108, 255, 0.62);
+}
+
+@media (max-width: 767px) {
+  .resource-dashboard-quadrants,
+  .resource-pasteflow-capabilities-grid {
+    gap: 16px;
+  }
+
+  .resource-dashboard-quadrant,
+  .resource-pasteflow-capability-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+    min-height: 0;
+    padding: 26px;
+    column-gap: 18px;
+    border-radius: 16px;
+  }
+
+  .resource-system-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+  }
+
+  .resource-system-icon img { width: 30px; height: 30px; }
+
+  .resource-system-kicker {
+    margin-left: 66px;
+    font-size: 10px;
+  }
+
+  .resource-dashboard-quadrant h3,
+  .resource-pasteflow-capability-item h3 {
+    margin-top: 6px;
+    font-size: 32px;
+  }
+
+  .resource-dashboard-quadrant p,
+  .resource-pasteflow-capability-item p {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: 22px;
+    font-size: 15px;
+  }
+
+  .resource-dashboard-view-block {
+    grid-template-columns: 62px minmax(0, 1fr);
+    min-height: 0;
+    padding: 22px 0;
+  }
+}
+
 /* =====================================================
    AGENTIC AI EMPLOYEES — reference architecture resource
    Scoped under .resource-fleet-main. No root tokens, no !important.

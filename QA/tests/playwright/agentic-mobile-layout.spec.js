@@ -176,6 +176,7 @@ test('resource card categories keep editorial anatomy on desktop and phone width
       views: document.querySelectorAll('.resource-dashboard-view-block').length,
       questionMarker: getComputedStyle(document.querySelector('.resource-dashboard-question-item'), '::before').content,
       quadrantMarker: getComputedStyle(document.querySelector('.resource-dashboard-quadrant'), '::before').content,
+      quadrantIcons: [...document.querySelectorAll('.resource-dashboard-quadrant .resource-system-icon img')].map((icon) => icon.getAttribute('src')),
     }));
     expect(dashboard.scrollWidth).toBeLessThanOrEqual(dashboard.viewportWidth);
     expect(dashboard.questions).toBe(6);
@@ -183,6 +184,7 @@ test('resource card categories keep editorial anatomy on desktop and phone width
     expect(dashboard.views).toBe(3);
     expect(dashboard.questionMarker).not.toBe('none');
     expect(dashboard.quadrantMarker).not.toBe('none');
+    expect(new Set(dashboard.quadrantIcons).size).toBe(4);
 
     await page.goto(`http://${host}:${port}/resources/pasteflow/`, { waitUntil: 'domcontentloaded' });
     const pasteflow = await page.evaluate(() => ({
@@ -191,10 +193,13 @@ test('resource card categories keep editorial anatomy on desktop and phone width
       capabilities: document.querySelectorAll('.resource-pasteflow-capability-item').length,
       marker: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item'), '::before').content,
       titleFont: getComputedStyle(document.querySelector('.resource-pasteflow-capability-item h3')).fontFamily,
+      icons: [...document.querySelectorAll('.resource-pasteflow-capability-item .resource-system-icon img')].map((icon) => icon.getAttribute('src')),
     }));
     expect(pasteflow.scrollWidth).toBeLessThanOrEqual(pasteflow.viewportWidth);
     expect(pasteflow.capabilities).toBe(6);
     expect(pasteflow.marker).not.toBe('none');
     expect(pasteflow.titleFont).toContain('Cormorant Garamond');
+    // Every capability receives a specific mnemonic, never a repeated filler icon.
+    expect(new Set(pasteflow.icons).size).toBe(6);
   }
 });
