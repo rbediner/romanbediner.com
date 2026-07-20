@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Canonical pages include the shared footer quote block and Cormorant Garamond font link.
+ * - Canonical pages include the shared footer quote block and local Cormorant Garamond support.
  * Why this exists:
  * - Protects the responsive footer quote contract across all top-level routes.
  * What breaks if it fails:
@@ -19,8 +19,8 @@ const pages = [
   "connect/index.html"
 ];
 
-// Weight range expanded in redesign (0,400;0,500;0,600;1,500) to support H1/H2 at weight 400.
-const fontPattern = /fonts\.googleapis\.com\/css2\?family=Cormorant\+Garamond[^"]+display=swap/;
+// Cormorant is self-hosted from styles/site.css to remove a third-party critical-path request.
+const externalFontPattern = /fonts\.(googleapis|gstatic)\.com/;
 const quoteText = '\u201cLaughter is timeless, imagination has no age, dreams are forever.\u201d';
 const authorText = 'Walt Disney';
 
@@ -28,8 +28,8 @@ for (const relPath of pages) {
   const filePath = path.join(root, relPath);
   const html = fs.readFileSync(filePath, "utf8");
 
-  if (!fontPattern.test(html)) {
-    console.error(`FAIL: Missing Cormorant Garamond font link in ${relPath}`);
+  if (externalFontPattern.test(html)) {
+    console.error(`FAIL: External Google Font dependency remains in ${relPath}`);
     process.exit(1);
   }
 
