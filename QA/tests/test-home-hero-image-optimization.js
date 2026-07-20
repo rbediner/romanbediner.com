@@ -74,6 +74,11 @@ if (!/<link rel="preload" as="image" href="assets\/images\/website-photo\.jpg" f
   failures.push('Homepage must preload the hero image for more stable LCP behavior.');
 }
 
+// The contact illustration is below the fold; preloading it competes with the hero image on slow connections.
+if (/<link rel="preload" as="image" href="assets\/icons\/home\/contact\.png">/i.test(html)) {
+  failures.push('Homepage must not preload the below-the-fold contact illustration.');
+}
+
 if (failures.length > 0) {
   failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);
