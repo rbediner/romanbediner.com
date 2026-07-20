@@ -1,5 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-20: Production audit remediation and local-font performance hardening — production release
+
+- Promoted the audited staging build to production at `472c4764e58c9b6151b106908216d88f69ba0e7a`. The production CI run `29741556287` and matching GitHub Pages deployment `29741556339` both passed, including the existing Lighthouse gate. The gate was not weakened.
+- Browser telemetry now has explicit CSP permission for the GA4 transport and Cloudflare Web Analytics beacon. The browser smoke contract treats CSP errors as release blockers rather than suppressing them.
+- Replaced the third-party Google Fonts path with two self-hosted editorial font assets in `assets/fonts/`, declared in shared CSS. Canonical pages no longer load Google Fonts CSS, `@import`s, or font preconnects. The unused below-fold home contact image was removed so it cannot compete with the hero for early bandwidth.
+- Added production-audit regression coverage for CSP telemetry, actual GA request behavior, local font delivery, the absence of Google Fonts dependencies, contrast tokens, and home-image loading behavior. Full local CI parity passed before promotion.
+- Shared `bediner-site` guidance and the root README now make self-hosted fonts, unchanged Lighthouse thresholds, clean browser consoles, and local rendering-path discipline durable release rules.
+- Remaining production configuration is outside this repository: Cloudflare still needs an authenticated owner to disable its managed AI-crawler block and set HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, and clickjacking protection at the edge. The repo `robots.txt` itself permits crawling.
+
 ## Latest: 2026-07-19: Agentic architecture artifact integrity and card consistency — production candidate
 
 - Moved the Resources hub's architecture preview back inside the Agentic AI Employees card. It is closed by default, appears before the canonical download, uses the card's existing analytics context, and no detached preview section remains.
@@ -236,10 +245,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 374
-- Updated At (UTC): 2026-07-20T00:35:51Z
+- Handoff Sequence: 375
+- Updated At (UTC): 2026-07-20T12:23:16Z
 - Source Branch: staging
-- Source Commit: 2281dc787b48a4a7f6ef2d9a9ccf4e6e82b19c89 (pre-handoff baseline)
+- Source Commit: f769491194d3070173184f5d1cf8cb92b162456f (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
