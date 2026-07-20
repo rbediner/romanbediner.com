@@ -35,7 +35,12 @@ Interaction is a modifier, never a sixth card type. Valid modifiers are `is-stat
 | `/` | Exception | Logo-experience cells retain their custom treatment; no new chrome or icons. |
 | `/about/` | Editorial Feature + Static Callout | Career chapters are quiet editorial surfaces; Operating Philosophy is a static callout. |
 | `/framework/` and deep dives | Editorial / Standard / Static Callout | Stage cards remain linked and semantic; their labeled stage pills carry hierarchy without decorative icon tiles. |
-| `/resources/` | Standard + Linked / Artifact | One flagship Agentic architecture card carries its inline preview and download. Supporting resources use compact horizontal editorial rows on desktop and clean single-column stacks on phone, rather than repeating the flagship's large vertical-card weight. Resource metadata pills retain one shared 34px height, radius, typography, and padding; label length may change width, never component geometry. |
+| `/resources/` | Standard + Linked / Artifact | One flagship Agentic architecture card carries its inline preview and download. Supporting resources use compact horizontal editorial rows on desktop and clean single-column stacks on phone, rather than repeating the flagship's large vertical-card weight. Resource metadata pills retain one shared 34px height, radius, typography, and padding; label length may change width, never component geometry. A metadata pill needs a distinct gap before its serif title. Primary blue CTA pills retain one shared 48px height and padding, while their widths follow their labels. |
+
+## Brand lockup and CTA rules
+
+- Render visible `Bediner Advisory LLC` as one lockup: ink-black `Bediner`, site-blue `Advisory`, and a small ink-black superscript `LLC` immediately after the `y`. Do not use this visual treatment in metadata, JSON-LD, or legal descriptions where the plain legal name must remain machine-readable.
+- Keep primary blue CTA pills visually consistent by sharing height, radius, typography, and horizontal padding. Do not force equal widths: a CTA should grow only enough to fit its own label.
 | `/resources/ai-enabled-operations-dashboard/` | Compact + Standard Static | Questions, quadrants, and core views are scan-friendly static units. |
 | `/resources/agentic-ai-employees/` | Standard / Semantic Stage | Preserve architecture colors and diagrams; no icon additions. |
 | `/resources/ai-enabled-operations-framework-summary/` | Static Callout + Artifact | Audience and conversation blocks are static; the brief is a linked artifact surface. |

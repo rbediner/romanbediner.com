@@ -694,6 +694,32 @@ main li:last-child {
   font-size: 0.94em;
 }
 
+/* Approved legal-entity lockup: preserve Roman's personal brand hierarchy
+   while making the advisory brand instantly recognizable wherever it appears. */
+.advisory-brand {
+  color: var(--text-primary, #111111);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.advisory-ink,
+.advisory-llc {
+  color: var(--text-primary, #111111);
+}
+
+.advisory-accent {
+  color: var(--accent-blue);
+}
+
+.advisory-llc {
+  display: inline-block;
+  margin-left: 0.14em;
+  font-size: 0.42em;
+  font-weight: 500;
+  line-height: 1;
+  vertical-align: super;
+}
+
 .footer-meta {
   font-size: 0.85rem;
   color: var(--muted-text, #6a6a6a);

@@ -232,6 +232,23 @@ function bindGlobalLinkTracking() {
   });
 }
 
+// Apply the approved Bediner Advisory LLC wordmark treatment wherever the
+// legal entity is presented as visible brand language. Keeping this one small
+// DOM transform in the shared runtime prevents each page footer from drifting
+// into a differently styled version of the same legal identity.
+function applyAdvisoryBrandLockups() {
+  const plainEntity = "Bediner Advisory LLC";
+  const wordmark = '<span class="advisory-brand"><span class="advisory-ink">Bediner</span> <span class="advisory-accent">Advisory</span><sup class="advisory-llc">LLC</sup></span>';
+
+  document.querySelectorAll(".footer-entity, .entity-relationship-line").forEach((element) => {
+    if (element.querySelector(".advisory-brand") || !element.textContent.includes(plainEntity)) {
+      return;
+    }
+
+    element.innerHTML = element.innerHTML.replace(plainEntity, wordmark);
+  });
+}
+
 // Apply active styling to whichever link matches the current route.
 function applyActiveNavState(navElement, activePath) {
   if (!navElement) {
@@ -259,6 +276,7 @@ function applyActiveNavState(navElement, activePath) {
 
   renderSharedNav(desktopNav);
   renderSharedNav(mobileNav);
+  applyAdvisoryBrandLockups();
   bindGlobalLinkTracking();
   trackConnectIntentNavigation();
 

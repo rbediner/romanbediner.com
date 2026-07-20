@@ -182,6 +182,8 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
           borderRadius: style.borderRadius,
         };
       }),
+      compactPillTitleGap: [...document.querySelectorAll('.resource-card--compact .resource-card-heading .resource-meta')].map((pill) => getComputedStyle(pill).marginBottom),
+      primaryCtaHeights: [...document.querySelectorAll('.resource-primary-cta')].map((cta) => cta.getBoundingClientRect().height),
     }));
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
     expect(layout.standalonePreview).toBe(false);
@@ -195,6 +197,9 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
     expect(layout.resourcePills.every((pill) => pill.minHeight === '34px')).toBe(true);
     expect(layout.resourcePills.every((pill) => pill.lineHeight === '12px')).toBe(true);
     expect(layout.resourcePills.every((pill) => pill.borderRadius === '999px')).toBe(true);
+    expect(layout.compactPillTitleGap).toHaveLength(3);
+    expect(layout.compactPillTitleGap.every((gap) => gap === '12px')).toBe(true);
+    expect(layout.primaryCtaHeights.every((height) => height === 48)).toBe(true);
     // The supporting resources should scan as compact editorial rows, not
     // repeat the flagship artifact card's oversized vertical treatment.
     expect(Math.max(...layout.compactHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 260 : 440);
