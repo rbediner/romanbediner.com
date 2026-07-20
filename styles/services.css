@@ -159,6 +159,10 @@
 }
 
 .current-responsibility-line {
+  /* Same grouped, three-line relationship treatment used by the About hero. */
+  display: grid;
+  gap: 6px;
+  margin-top: 28px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -173,6 +177,15 @@
 
 .current-responsibility-line .responsibility-role {
   color: var(--accent-blue);
+}
+
+.current-responsibility-line .responsibility-label {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.current-responsibility-line .responsibility-entry {
+  display: block;
 }
 
 .svc-h3 {
@@ -214,6 +227,20 @@
 }
 
 @media (max-width: 640px) {
+  /* Match About's readable, line-separated current-work metadata on phones. */
+  .services-main .current-responsibility-line {
+    max-width: 38ch;
+    margin-top: 26px;
+    gap: 9px;
+    font-size: 11px;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
+  }
+
+  .services-main .current-responsibility-line .responsibility-label {
+    margin-bottom: 4px;
+  }
+
   .svc-list {
     gap: 0;
     margin-bottom: 40px;
