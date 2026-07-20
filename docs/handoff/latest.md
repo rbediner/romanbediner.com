@@ -1,5 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-20: Resource label rhythm and Advisory brand lockup — production release
+
+- Promoted product commit `48b712a9ecce48ca342c4a867450db7f07633b15` to production. Production CI run `29750069893` and GitHub Pages deployment `29750070186` both passed, including post-deploy live smoke validation and release tagging.
+- Resource supporting-card metadata now has an intentional 12px pause between the `AVAILABLE NOW` label and serif title. All filled primary resource actions use one 48px height, radius, and horizontal-padding geometry; labels remain naturally sized rather than being forced to equal widths.
+- Standardized the visible `Bediner Advisory LLC` treatment across page content and shared runtime-rendered entities: `Bediner` is ink, `Advisory` is site blue, and `LLC` is a small ink superscript immediately after the final y. Structured data and legal metadata retain the plain legal entity string.
+- Updated resource Playwright checks, the Advisory lockup contract, README, card-surface design guide, shared `bediner-site` skill, and live SEO Authority PRD. Local validation passed: Jest (20 suites / 73 tests), Playwright (18/18), and the full Node contract suite. Live browser checks confirmed 48px CTA heights, 12px label/title spacing, no horizontal overflow, and no console errors on Resources and About.
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
 ## Latest: 2026-07-20: Resources hub hierarchy — production release
 
 - Promoted `f7420f6c59fbb69f83818d8c70fec7186d532c9b` to production. CI run `29743204513` and GitHub Pages deployment `29743204509` both passed, followed by the release script's live smoke validation.
@@ -252,10 +265,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 376
-- Updated At (UTC): 2026-07-20T12:48:19Z
+- Handoff Sequence: 377
+- Updated At (UTC): 2026-07-20T14:27:16Z
 - Source Branch: staging
-- Source Commit: f7420f6c59fbb69f83818d8c70fec7186d532c9b (pre-handoff baseline)
+- Source Commit: 48b712a058cd6b9a38bef62158cdf760d334bbb1 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
