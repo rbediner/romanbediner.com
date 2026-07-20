@@ -35,7 +35,7 @@ Interaction is a modifier, never a sixth card type. Valid modifiers are `is-stat
 | `/` | Exception | Logo-experience cells retain their custom treatment; no new chrome or icons. |
 | `/about/` | Editorial Feature + Static Callout | Career chapters are quiet editorial surfaces; Operating Philosophy is a static callout. |
 | `/framework/` and deep dives | Editorial / Standard / Static Callout | Stage cards remain linked and semantic; their labeled stage pills carry hierarchy without decorative icon tiles. |
-| `/resources/` | Standard + Linked / Artifact | Resource entries remain clearly navigable; the Agentic artifact preview and canonical download stay inside the Agentic AI Employees card. |
+| `/resources/` | Standard + Linked / Artifact | One flagship Agentic architecture card carries its inline preview and download. Supporting resources use compact horizontal editorial rows on desktop and clean single-column stacks on phone, rather than repeating the flagship's large vertical-card weight. |
 | `/resources/ai-enabled-operations-dashboard/` | Compact + Standard Static | Questions, quadrants, and core views are scan-friendly static units. |
 | `/resources/agentic-ai-employees/` | Standard / Semantic Stage | Preserve architecture colors and diagrams; no icon additions. |
 | `/resources/ai-enabled-operations-framework-summary/` | Static Callout + Artifact | Audience and conversation blocks are static; the brief is a linked artifact surface. |

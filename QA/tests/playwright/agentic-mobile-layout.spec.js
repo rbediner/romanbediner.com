@@ -171,11 +171,15 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
       standalonePreview: Boolean(document.querySelector('.resource-artifact-preview')),
       pageCount: document.querySelectorAll('[data-resource-card="agentic-ai-employees"] [data-carousel-slide]').length,
       downloadedPath: document.querySelector('[data-resource-card="agentic-ai-employees"] [data-track-pdf-download]')?.getAttribute('href'),
+      compactHeights: [...document.querySelectorAll('.resource-card--compact')].map((card) => card.getBoundingClientRect().height),
     }));
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
     expect(layout.standalonePreview).toBe(false);
     expect(layout.pageCount).toBe(10);
     expect(layout.downloadedPath).toBe('/assets/downloads/agentic-operations-architecture-roman-bediner.pdf');
+    // The supporting resources should scan as compact editorial rows, not
+    // repeat the flagship artifact card's oversized vertical treatment.
+    expect(Math.max(...layout.compactHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 260 : 440);
   }
 });
 

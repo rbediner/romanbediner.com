@@ -61,6 +61,7 @@
 
 .resources-grid {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 24px;
   margin-top: 8px;
 }
@@ -101,6 +102,34 @@
   overflow: hidden;
 }
 
+/* The flagship architecture needs room for the integrated preview. The other
+   resources remain compact, comparable choices rather than a long card stack. */
+.resource-card--flagship {
+  grid-column: 1 / -1;
+}
+
+.resource-card--compact {
+  padding: 24px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(59, 108, 255, 0.075), transparent 36%),
+    #ffffff;
+}
+
+.resource-card--compact .resource-card-row {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.72fr) minmax(0, 1.28fr);
+  gap: 18px 36px;
+  width: 100%;
+}
+
+.resource-card--compact .resource-card-copy {
+  min-width: 0;
+}
+
+.resource-card--compact .resource-card-copy > p {
+  margin-bottom: 0;
+}
+
 .resource-card::before {
   content: "";
   display: block;
@@ -119,6 +148,12 @@
   font-size: clamp(30px, 3.1vw, 40px);
   font-weight: 400;
   line-height: 0.98;
+}
+
+.resource-card--compact h2 {
+  margin-bottom: 12px;
+  font-size: clamp(28px, 2.6vw, 34px);
+  line-height: 1.04;
 }
 
 .resource-card p {
@@ -145,6 +180,10 @@
   flex-wrap: wrap;
   gap: 16px 22px;
   margin-top: 24px;
+}
+
+.resource-card--compact .resource-card-actions {
+  margin-top: 18px;
 }
 
 /* The architecture is part of the Agentic AI Employees resource, not a detached hub feature. */
@@ -1002,6 +1041,24 @@
   .resource-blue-box,
   .resource-carousel-shell {
     padding: 24px;
+  }
+
+  .resource-card--compact {
+    padding: 20px;
+  }
+
+  .resource-card--compact .resource-card-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .resource-card--compact .resource-card-copy > p {
+    font-size: 16px;
+    line-height: 1.52;
+  }
+
+  .resource-card--compact .resource-card-actions {
+    margin-top: 14px;
   }
 
   .resource-family-callout .shelf-content,

@@ -103,6 +103,19 @@ mustInclude('P1-RH-01 locked intro', resourcesHtml,
 mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
 mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
 
+// Hub hierarchy: one flagship architecture carries the integrated artifact,
+// while the three supporting resources stay compact scan-friendly choices.
+mustInclude('flagship architecture card', resourcesHtml, 'resource-card--flagship');
+if ((resourcesHtml.match(/resource-card--compact/g) || []).length !== 3) {
+  fail('Resources hub must keep exactly three compact supporting resource cards.');
+}
+mustInclude('resource stream stays single-column', resourcesCss, '.resources-grid {\n  display: grid;\n  grid-template-columns: 1fr;');
+mustInclude('flagship card spans desktop grid', resourcesCss, '.resource-card--flagship');
+mustInclude('compact card treatment', resourcesCss, '.resource-card--compact');
+mustInclude('compact resource editorial split', resourcesHtml, 'class="resource-card-copy"');
+mustInclude('compact resource desktop split layout', resourcesCss, 'grid-template-columns: minmax(230px, 0.72fr) minmax(0, 1.28fr);');
+mustInclude('mobile resource grid fallback', resourcesCss, '@media (max-width: 767px)');
+
 // PRD-locked copy: P1-RH-03 (Dashboard card — title + body + launched state)
 mustInclude('P1-RH-03 locked title', resourcesHtml, 'AI-Enabled Operations Dashboard');
 mustInclude('P1-RH-03 locked body', resourcesHtml,
