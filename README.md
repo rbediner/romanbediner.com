@@ -87,6 +87,8 @@ Routing requirements:
 - No server-side includes or server-rendered composition.
 - CSP is enforced in HTML via `<meta http-equiv="Content-Security-Policy">`.
 - Browser telemetry is explicitly CSP-compatible: GA4 transport permits `stats.g.doubleclick.net`, while Cloudflare Web Analytics permits its injected script and beacon endpoint. Browser smoke treats any CSP violation as release-blocking; only headless DNS-resolution noise is narrowly ignored.
+- Editorial typography is self-hosted in `assets/fonts/` and declared in shared CSS. Canonical pages must not add Google Fonts CSS, `@import`s, or font preconnects: font delivery stays local so a third party cannot delay first render.
+- The existing Lighthouse quality threshold is a release gate. Improve page weight or render behavior when needed; never lower the threshold to ship a regression.
 - GitHub Pages cannot set response headers itself. Cloudflare owns production HSTS, frame/type/referrer/permissions headers and managed AI-crawler policy. Keep the Cloudflare AI Content policy permissive for search and AI reference discovery unless a deliberate legal/privacy decision says otherwise.
 - Production publish flow uses GitHub Actions deployment on `push` to `prod`, with an explicit in-workflow wait for successful `CI` on the exact prod SHA (`.github/workflows/deploy-pages.yml`). The `Deploy to GitHub Pages` step uses a 30-minute confirmation `timeout` so a slow-but-successful Pages confirmation does not report a false failure. If a run ever times out, trigger a fresh run via `workflow_dispatch` — do **not** re-run the failed run, which uploads a second `github-pages` artifact and hard-fails.
 - Staging preview flow uses isolated preview publication (`.github/workflows/deploy-staging.yml`) with:
