@@ -1,5 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Agentic architecture artifact integrity and card consistency — production candidate
+
+- Moved the Resources hub's architecture preview back inside the Agentic AI Employees card. It is closed by default, appears before the canonical download, uses the card's existing analytics context, and no detached preview section remains.
+- Re-rendered all ten preview images directly from `assets/downloads/agentic-operations-architecture-roman-bediner.pdf` and added `assets/resources/agentic-operations-architecture/preview-manifest.json`. The manifest locks the canonical PDF hash and every preview-image hash, so download and preview cannot silently drift apart.
+- Standardized resource language on `architecture`: the hub uses `Reference architecture`, `Preview the architecture`, `Download the architecture`, and `Explore the Architecture`. The direct artifact heading now uses the shared Cormorant serif scale rather than its smaller local override.
+- Removed the recently added Framework stage icon tiles. Labeled stage pills are the approved hierarchy; the six retired production icon copies were deleted while source-library assets remain intact.
+- Aligned About and Services responsibility rows with pipe separators, and aligned Connect's Bediner Advisory treatment with About: black `Bediner`, blue `Advisory`, neutral `LLC`.
+- Repository `robots.txt` permits crawling. Live AI-crawler blocks are injected by Cloudflare Managed Content, not the repository. Disable that Cloudflare policy before describing AI-search discovery as enabled.
+- Updated README, the card-surface design system, shared `bediner-site` skill, and the live `romanbediner.com PRD`. Local QA passed: `npm run test:node`, `npm run test:playwright` (18/18), diff hygiene, and Drive-drift check.
+- Product commit on `staging`: `2281dc7`.
+
 ## Latest: 2026-07-19: Services integration-model completion — staging
 
 - Added the missing `Best suited for` close to Fractional Integration Leadership so all five Services models end with the same scannable fit signal.
@@ -225,10 +236,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 373
-- Updated At (UTC): 2026-07-20T00:15:20Z
+- Handoff Sequence: 374
+- Updated At (UTC): 2026-07-20T00:35:51Z
 - Source Branch: staging
-- Source Commit: 7a289e2fc6850e738cd076c9ab81dfc0966a067b (pre-handoff baseline)
+- Source Commit: 2281dc787b48a4a7f6ef2d9a9ccf4e6e82b19c89 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
