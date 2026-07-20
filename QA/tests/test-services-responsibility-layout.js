@@ -14,6 +14,10 @@ if (html.match(/class="responsibility-entry"/g)?.length !== 3) {
   throw new Error('Services must render three separately scannable responsibility entries.');
 }
 
+if (html.match(/class="svc-best-fit"/g)?.length !== 5) {
+  throw new Error('Every service model must end with a Best suited for statement.');
+}
+
 for (const selector of [
   '.current-responsibility-line {',
   '.current-responsibility-line .responsibility-entry',
