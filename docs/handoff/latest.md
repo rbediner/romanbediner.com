@@ -1,5 +1,11 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Services current-work hierarchy alignment — staging
+
+- Matched the Services hero's current-responsibilities treatment to the approved About pattern: one label followed by three separately scannable role/company lines, rather than a dense single all-caps paragraph.
+- Preserved the existing public copy, blue role emphasis, dark company names, and Bediner Advisory statement. Added the same compact 640px mobile rhythm used on About.
+- Added `QA/tests/test-services-responsibility-layout.js`; focused validation, `npm run test:node`, and `npm run test:playwright` (17/17) pass. Product commit: `24ecb54` on `staging`.
+
 ## Latest: 2026-07-19: Architecture artifact documentation and reusable-skill alignment — staging docs only
 
 - Codified the approved downloadable-artifact pattern in the repository README, canonical card-surface guide, and shared `bediner-site` skill. A substantial architecture, reference implementation, or case-study follow-along must use a truthful content-led name rather than defaulting to `brief`.
@@ -213,10 +219,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 371
-- Updated At (UTC): 2026-07-19T23:29:10Z
+- Handoff Sequence: 372
+- Updated At (UTC): 2026-07-20T00:12:17Z
 - Source Branch: staging
-- Source Commit: ddaa6aa1ad42cc22993d6579977cd25ecec3a4d1 (pre-handoff baseline)
+- Source Commit: 24ecb54827bbeb59134322a61f3640fb4a3ee405 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
