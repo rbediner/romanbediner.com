@@ -26,11 +26,13 @@ for (const relativePath of htmlFiles) {
   for (const endpoint of ['https://stats.g.doubleclick.net', 'https://static.cloudflareinsights.com', 'https://cloudflareinsights.com']) {
     if (!html.includes(endpoint)) failures.push(`${relativePath} is missing CSP endpoint ${endpoint}.`);
   }
-  if (!html.includes('family=DM+Sans')) failures.push(`${relativePath} must directly load DM Sans with the document font request.`);
+  if (html.includes('fonts.googleapis.com') || html.includes('fonts.gstatic.com')) failures.push(`${relativePath} must not keep Google Fonts on the critical path.`);
 }
 
 const siteCss = fs.readFileSync(path.join(root, 'styles', 'site.css'), 'utf8');
 if (siteCss.includes('@import url("https://fonts.googleapis.com')) failures.push('site.css must not delay DM Sans with a nested CSS font import.');
+if (!siteCss.includes('url("/assets/fonts/dm-sans-latin.woff2")')) failures.push('site.css must load self-hosted DM Sans.');
+if (!siteCss.includes('url("/assets/fonts/cormorant-garamond-latin.woff2")')) failures.push('site.css must load self-hosted Cormorant Garamond.');
 if (!siteCss.includes('--accent-blue: #2457d6;')) failures.push('site.css must keep the accessible blue text token.');
 if (!siteCss.includes('color: #666666;')) failures.push('site.css must keep the accessible footer attribution color.');
 

@@ -62,12 +62,8 @@ if (!heroImageMatch) {
   }
 }
 
-if (!/<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/i.test(html)) {
-  failures.push('Homepage must preconnect to fonts.googleapis.com to reduce font startup latency.');
-}
-
-if (!/<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/i.test(html)) {
-  failures.push('Homepage must preconnect to fonts.gstatic.com with crossorigin.');
+if (!/url\("\/assets\/fonts\/dm-sans-latin\.woff2"\)/i.test(fs.readFileSync(path.join(root, 'styles', 'site.css'), 'utf8'))) {
+  failures.push('Homepage must use the self-hosted DM Sans asset so typography does not delay first paint.');
 }
 
 if (!/<link rel="preload" as="image" href="assets\/images\/website-photo\.jpg" fetchpriority="high">/i.test(html)) {

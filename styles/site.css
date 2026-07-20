@@ -1,7 +1,22 @@
 /* Shared site architecture styles.
    This file normalizes header and navigation behavior across canonical routes. */
 
-/* DM Sans is linked directly from page heads so it establishes in parallel with CSS. */
+/* Local type keeps the editorial system stable without a third-party render-path request. */
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/dm-sans-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("/assets/fonts/cormorant-garamond-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+}
 
 :root {
   --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
