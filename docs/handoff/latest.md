@@ -1,5 +1,12 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-20: Resources hub hierarchy — production release
+
+- Promoted `f7420f6c59fbb69f83818d8c70fec7186d532c9b` to production. CI run `29743204513` and GitHub Pages deployment `29743204509` both passed, followed by the release script's live smoke validation.
+- The live `/resources/` hub now gives Agentic AI Employees the single flagship artifact card with its existing inline preview and download. Framework Summary, Dashboard, and PasteFlow use compact horizontal editorial rows on desktop and single-column phone stacks.
+- Preview count, canonical PDF target, existing analytics attributes, visual hierarchy, and no-horizontal-overflow behavior are covered by Node and Playwright checks. The supporting-card height contract prevents a return to oversized vertical cards.
+- Updated the canonical card-surface guide, README, shared `bediner-site` skill, and live SEO Authority PRD to make the hierarchy durable.
+
 ## Latest: 2026-07-20: Production audit remediation and local-font performance hardening — production release
 
 - Promoted the audited staging build to production at `472c4764e58c9b6151b106908216d88f69ba0e7a`. The production CI run `29741556287` and matching GitHub Pages deployment `29741556339` both passed, including the existing Lighthouse gate. The gate was not weakened.
@@ -245,10 +252,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 375
-- Updated At (UTC): 2026-07-20T12:23:16Z
+- Handoff Sequence: 376
+- Updated At (UTC): 2026-07-20T12:48:19Z
 - Source Branch: staging
-- Source Commit: f769491194d3070173184f5d1cf8cb92b162456f (pre-handoff baseline)
+- Source Commit: f7420f6c59fbb69f83818d8c70fec7186d532c9b (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
