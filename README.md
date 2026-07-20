@@ -86,6 +86,8 @@ Routing requirements:
 - Runtime model: static-only delivery.
 - No server-side includes or server-rendered composition.
 - CSP is enforced in HTML via `<meta http-equiv="Content-Security-Policy">`.
+- Browser telemetry is explicitly CSP-compatible: GA4 transport permits `stats.g.doubleclick.net`, while Cloudflare Web Analytics permits its injected script and beacon endpoint. Browser smoke treats any CSP violation as release-blocking; only headless DNS-resolution noise is narrowly ignored.
+- GitHub Pages cannot set response headers itself. Cloudflare owns production HSTS, frame/type/referrer/permissions headers and managed AI-crawler policy. Keep the Cloudflare AI Content policy permissive for search and AI reference discovery unless a deliberate legal/privacy decision says otherwise.
 - Production publish flow uses GitHub Actions deployment on `push` to `prod`, with an explicit in-workflow wait for successful `CI` on the exact prod SHA (`.github/workflows/deploy-pages.yml`). The `Deploy to GitHub Pages` step uses a 30-minute confirmation `timeout` so a slow-but-successful Pages confirmation does not report a false failure. If a run ever times out, trigger a fresh run via `workflow_dispatch` — do **not** re-run the failed run, which uploads a second `github-pages` artifact and hard-fails.
 - Staging preview flow uses isolated preview publication (`.github/workflows/deploy-staging.yml`) with:
   - trigger on `push` to `staging` (plus CI `workflow_run` + manual dispatch)
@@ -523,7 +525,7 @@ nvm install
 - Downstream deploy jobs (`post-deploy-validation`, `release-tag`) are guarded on successful deploy result.
 - Post-deploy production validation runs as a dependent job against `https://romanbediner.com`.
 - Post-deploy production validation must run `npm ci` before browser smoke so the Node `playwright` package exists in the runner workspace; browser-binary installation alone is not enough.
-- Post-deploy browser smoke now ignores the known `static.cloudflareinsights.com` CSP-block console noise, `ERR_NAME_NOT_RESOLVED` failures for third-party analytics endpoints, and optional `stats.g.doubleclick.net/g/collect` CSP-block noise in headless smoke environments. Real application runtime errors still fail the release.
+- Post-deploy browser smoke treats all CSP violations as release-blocking. It only ignores `ERR_NAME_NOT_RESOLVED` third-party analytics failures in headless environments, where the request was initiated but the runner cannot resolve the telemetry host.
 - Lighthouse validation uses a median-of-3-attempts gate with retry delay to reduce one-off runner noise while preserving thresholds (`performance >= 85`, `accessibility >= 90`).
 - Post-deploy production validation includes propagation-aware retries before failing release flow.
 - Post-deploy production validation checks canonical route reachability directly (`/about/`, `/services/`, `/framework/`, `/connect/`) instead of assuming every route appears in homepage navigation HTML.
@@ -889,6 +891,8 @@ flowchart LR
     "required_connect_src": [
       "https://www.google-analytics.com",
       "https://analytics.google.com",
+      "https://stats.g.doubleclick.net",
+      "https://cloudflareinsights.com",
       "https://www.google.com"
     ]
   },

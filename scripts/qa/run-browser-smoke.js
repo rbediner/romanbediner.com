@@ -179,25 +179,12 @@ function recordFailures(page, runtimeIssues) {
 function shouldIgnoreRuntimeIssue(issue) {
   const normalized = String(issue || '');
 
-  // Cloudflare beacon blocked by CSP — external script, correctly blocked, not an app error.
-  if (
-    normalized.includes('static.cloudflareinsights.com') &&
-    normalized.includes('violates the following Content Security Policy directive')
-  ) return true;
-
   // GA collect endpoint DNS failure in headless Playwright environments — the analytics
   // request fires correctly but the local resolver can't reach google-analytics.com.
   // The live site functions correctly; this is an environment-level DNS gap, not an app error.
   if (
     normalized.includes('ERR_NAME_NOT_RESOLVED') &&
     normalized.includes('Failed to load resource')
-  ) return true;
-
-  // GA optional transport endpoint can be blocked by CSP in smoke environments
-  // without impacting core site functionality or primary GA request paths.
-  if (
-    normalized.includes('stats.g.doubleclick.net/g/collect') &&
-    normalized.includes('violates the following Content Security Policy directive')
   ) return true;
 
   return false;

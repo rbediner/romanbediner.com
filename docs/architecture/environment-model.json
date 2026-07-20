@@ -47,6 +47,8 @@
       "required_connect_src": [
         "https://www.google-analytics.com",
         "https://analytics.google.com",
+        "https://stats.g.doubleclick.net",
+        "https://cloudflareinsights.com",
         "https://www.google.com"
       ]
     },

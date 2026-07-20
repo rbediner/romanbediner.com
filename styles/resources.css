@@ -1364,7 +1364,7 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(59, 108, 255, 0.88);
+  color: #2457d6;
   background: rgba(59, 108, 255, 0.04);
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 10px;
@@ -1798,7 +1798,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent, #3b6cff);
+  color: var(--color-accent, #2457d6);
   margin: 0 0 8px;
 }
 
@@ -1884,7 +1884,7 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(59, 108, 255, 0.88);
+  color: #2457d6;
   background: rgba(59, 108, 255, 0.04);
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 10px;

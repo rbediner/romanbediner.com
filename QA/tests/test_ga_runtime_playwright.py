@@ -70,24 +70,20 @@ class GARuntimePlaywrightTest(unittest.TestCase):
                 u for u in requests
                 if "google-analytics.com/g/collect" in u or "stats.g.doubleclick.net/g/collect" in u
             ]
-            blocked_collect_errors = [
-                e for e in console_errors
-                if "stats.g.doubleclick.net/g/collect" in e.lower()
-            ]
-
             self.assertGreaterEqual(
                 len(gtag_loader_hits),
                 1,
                 f"GA gtag.js loader was not requested on route {route}",
             )
-            self.assertTrue(
-                len(collect_hits) >= 1 or len(blocked_collect_errors) >= 1,
-                f"GA collect request (or blocked collect evidence) was not observed on route {route}",
+            self.assertGreaterEqual(
+                len(collect_hits),
+                1,
+                f"GA collect request was not observed on route {route}",
             )
 
             csp_errors = [
                 e for e in console_errors
-                if "content security policy" in e.lower() and "stats.g.doubleclick.net/g/collect" not in e.lower()
+                if "content security policy" in e.lower()
             ]
             self.assertEqual(
                 csp_errors,
@@ -124,13 +120,10 @@ class GARuntimePlaywrightTest(unittest.TestCase):
             u for u in requests
             if "google-analytics.com/g/collect" in u or "stats.g.doubleclick.net/g/collect" in u
         ]
-        blocked_collect_errors = [
-            e for e in console_errors
-            if "stats.g.doubleclick.net/g/collect" in e.lower()
-        ]
-        self.assertTrue(
-            len(collect_requests) >= 1 or len(blocked_collect_errors) >= 1,
-            "Framework stage navigation should still retain GA collect activity on page.",
+        self.assertGreaterEqual(
+            len(collect_requests),
+            1,
+            "Framework stage navigation should retain GA collect activity on page.",
         )
 
         context.close()

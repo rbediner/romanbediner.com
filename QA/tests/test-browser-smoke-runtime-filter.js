@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Browser smoke must ignore only the known third-party CSP-blocked beacon noise.
+ * - Browser smoke must ignore only environment-level DNS noise, never CSP violations.
  * Why this exists:
- * - Prevents live smoke from failing on a non-app script that CSP is already
- *   blocking, while keeping real runtime errors release-blocking.
+ * - Prevents CI DNS flakiness from hiding real application or policy regressions.
  * What breaks if it fails:
  * - Production deploy smoke becomes noisy or dangerously permissive.
  */
@@ -29,11 +28,19 @@ function assert(condition, message) {
 const cspBlockedCloudflareIssue =
   "console:error: Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516' violates the following Content Security Policy directive: \"script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com https://www.googletagmanager.com\".";
 
+const dnsResolutionIssue =
+  'console:error: Failed to load resource: net::ERR_NAME_NOT_RESOLVED https://www.google-analytics.com/g/collect';
+
 const realAppIssue = 'console:error: Uncaught ReferenceError: frameworkStageState is not defined';
 
 assert(
-  shouldIgnoreRuntimeIssue(cspBlockedCloudflareIssue) === true,
-  'browser smoke must ignore the known Cloudflare CSP-blocked beacon error'
+  shouldIgnoreRuntimeIssue(cspBlockedCloudflareIssue) === false,
+  'browser smoke must fail closed for Cloudflare CSP violations'
+);
+
+assert(
+  shouldIgnoreRuntimeIssue(dnsResolutionIssue) === true,
+  'browser smoke may ignore only known headless DNS-resolution noise'
 );
 
 assert(
