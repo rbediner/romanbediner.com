@@ -1,5 +1,11 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-07-19: Services integration-model completion — staging
+
+- Added the missing `Best suited for` close to Fractional Integration Leadership so all five Services models end with the same scannable fit signal.
+- The new line targets organizations with cross-functional complexity, fragmented systems or vendors, unclear ownership, or an integration decision that needs operating leadership before further technology investment.
+- The Services regression test now requires exactly five best-fit statements. Focused validation, `npm run test:node`, and `npm run test:playwright` (17/17) pass. Product commit: `7a289e2` on `staging`.
+
 ## Latest: 2026-07-19: Services current-work hierarchy alignment — staging
 
 - Matched the Services hero's current-responsibilities treatment to the approved About pattern: one label followed by three separately scannable role/company lines, rather than a dense single all-caps paragraph.
@@ -219,10 +225,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 372
-- Updated At (UTC): 2026-07-20T00:12:17Z
+- Handoff Sequence: 373
+- Updated At (UTC): 2026-07-20T00:15:20Z
 - Source Branch: staging
-- Source Commit: 24ecb54827bbeb59134322a61f3640fb4a3ee405 (pre-handoff baseline)
+- Source Commit: 7a289e2fc6850e738cd076c9ab81dfc0966a067b (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
