@@ -172,11 +172,29 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
       pageCount: document.querySelectorAll('[data-resource-card="agentic-ai-employees"] [data-carousel-slide]').length,
       downloadedPath: document.querySelector('[data-resource-card="agentic-ai-employees"] [data-track-pdf-download]')?.getAttribute('href'),
       compactHeights: [...document.querySelectorAll('.resource-card--compact')].map((card) => card.getBoundingClientRect().height),
+      resourcePills: [...document.querySelectorAll('.resource-meta')].map((pill) => {
+        const box = pill.getBoundingClientRect();
+        const style = getComputedStyle(pill);
+        return {
+          height: box.height,
+          minHeight: style.minHeight,
+          lineHeight: style.lineHeight,
+          borderRadius: style.borderRadius,
+        };
+      }),
     }));
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
     expect(layout.standalonePreview).toBe(false);
     expect(layout.pageCount).toBe(10);
     expect(layout.downloadedPath).toBe('/assets/downloads/agentic-operations-architecture-roman-bediner.pdf');
+    // Resource metadata must read as one component across the flagship and
+    // supporting rows. Labels may vary in width with their real copy, but the
+    // shared pill geometry may not vary by card context.
+    expect(layout.resourcePills).toHaveLength(4);
+    expect(layout.resourcePills.every((pill) => pill.height === 34)).toBe(true);
+    expect(layout.resourcePills.every((pill) => pill.minHeight === '34px')).toBe(true);
+    expect(layout.resourcePills.every((pill) => pill.lineHeight === '12px')).toBe(true);
+    expect(layout.resourcePills.every((pill) => pill.borderRadius === '999px')).toBe(true);
     // The supporting resources should scan as compact editorial rows, not
     // repeat the flagship artifact card's oversized vertical treatment.
     expect(Math.max(...layout.compactHeights)).toBeLessThanOrEqual(viewport.width > 767 ? 260 : 440);

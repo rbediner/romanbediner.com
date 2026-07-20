@@ -338,12 +338,16 @@
 .resource-meta {
   display: inline-flex;
   align-items: center;
-  padding: 7px 12px;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 34px;
+  padding: 0 14px;
   border-radius: 999px;
   background: rgba(59, 108, 255, 0.08);
   color: var(--accent-blue);
   font-size: 12px;
   font-weight: 700;
+  line-height: 1;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
