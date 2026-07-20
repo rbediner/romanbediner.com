@@ -335,7 +335,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
                 context.close()
 
     def test_03_framework_page_section_integrity(self):
-        """Part 3: validate framework sections, icon/pill contracts, and hover style hook."""
+        """Part 3: validate framework sections, pill hierarchy, and hover style hook."""
         context, page = self._new_page(1440, 1800)
         try:
             self._goto(page, "/framework/")
@@ -348,7 +348,7 @@ class VisualRegressionPlaywrightTest(unittest.TestCase):
             for index in range(card_count):
                 card = cards.nth(index)
                 self.assertEqual(card.locator(".framework-pill").count(), 1, f"Section {index} is missing stage pill")
-                self.assertEqual(card.locator("img.framework-icon").count(), 1, f"Section {index} is missing icon")
+                self.assertEqual(card.locator("img.framework-icon").count(), 0, f"Section {index} must not add a decorative icon beside its stage pill")
                 self.assertEqual(card.locator("h2").count(), 0, f"Section {index} must not render duplicate stage heading h2")
                 self.assertEqual(card.locator("h3").count(), 1, f"Section {index} must include title heading h3")
                 self.assertEqual(card.locator("ul.service-list li").count(), 5, f"Section {index} must include five bullets")

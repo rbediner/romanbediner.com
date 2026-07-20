@@ -74,6 +74,17 @@
   max-width: none;
 }
 
+/* Match the About relationship treatment: Roman stays ink-black while the
+   Advisory name carries the restrained site-blue brand accent. */
+.connect-main .entity-relationship-line .advisory-brand {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.connect-main .entity-relationship-line .advisory-accent {
+  color: var(--accent-blue);
+}
+
 .hero-title {
   display: flex;
   align-items: baseline;

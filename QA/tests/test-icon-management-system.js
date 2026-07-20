@@ -14,15 +14,7 @@ const root = path.resolve(__dirname, '..', '..');
 const productionIconsRoot = path.join(root, 'assets', 'icons');
 const designLibraryRoot = path.join(root, 'assets', 'asset-library', 'icons');
 
-const expectedPageFolders = ['home', 'about', 'framework', 'services', 'connect'];
-const expectedFrameworkIcons = [
-  'opportunity-network.png',
-  'design-blueprint.png',
-  'integration-merger.png',
-  'execution-workflow.png',
-  'signals-telemetry.png',
-  'evolution-feedback.png'
-];
+const expectedPageFolders = ['home', 'about', 'services', 'connect', 'resources'];
 const expectedLibraryGridIcons = [
   'opportunity-network.png',
   'design-blueprint.png',
@@ -99,25 +91,6 @@ const legacyDesignLibraryRoot = path.join(root, 'Codex', 'art', 'icons');
 if (fs.existsSync(legacyDesignLibraryRoot)) {
   failures += 1;
   console.error('FAIL: legacy design library path Codex/art/icons must not exist.');
-}
-
-for (const filename of expectedFrameworkIcons) {
-  const iconPath = path.join(productionIconsRoot, 'framework', filename);
-  if (!fs.existsSync(iconPath)) {
-    failures += 1;
-    console.error(`FAIL: missing framework icon assets/icons/framework/${filename}`);
-  }
-}
-
-const frameworkIcons = fs
-  .readdirSync(path.join(productionIconsRoot, 'framework'), { withFileTypes: true })
-  .filter((entry) => entry.isFile() && entry.name.endsWith('.png'))
-  .map((entry) => entry.name)
-  .sort();
-const expectedFrameworkSorted = [...expectedFrameworkIcons].sort();
-if (JSON.stringify(frameworkIcons) !== JSON.stringify(expectedFrameworkSorted)) {
-  failures += 1;
-  console.error(`FAIL: assets/icons/framework must contain exactly 6 production PNG icons. Found: ${frameworkIcons.join(', ')}`);
 }
 
 for (const { file, folder } of pageFiles) {

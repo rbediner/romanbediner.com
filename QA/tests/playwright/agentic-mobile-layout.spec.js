@@ -133,6 +133,52 @@ test('agentic architecture preview opens and advances through ten pages on a pho
   expect(preview.secondPreview).toBeGreaterThan(0);
 });
 
+/**
+ * Invariant:
+ * - The Resources hub keeps the downloadable architecture inside the Agentic
+ *   AI Employees card and renders pages from the current canonical PDF.
+ * Why this exists:
+ * - A detached or stale preview makes the hub contradict the actual download
+ *   and hides the artifact relationship a visitor needs to understand.
+ * What breaks if it fails:
+ * - The hub can regress to an always-open old deck or overflow when its
+ *   disclosure opens on a phone.
+ */
+test('resources hub keeps the current architecture preview inside the Agentic AI Employees card', async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto(`http://${host}:${port}/resources/`, { waitUntil: 'networkidle' });
+
+    const card = page.locator('[data-resource-card="agentic-ai-employees"]');
+    const preview = card.locator('.resource-card-artifact-preview');
+    await expect(preview).not.toHaveAttribute('open', '');
+    await expect(card.getByText('Reference architecture.', { exact: true })).toBeVisible();
+    await expect(card.getByRole('link', { name: 'Explore the Architecture' })).toBeVisible();
+
+    await preview.getByText('Preview the architecture', { exact: false }).click();
+    await expect(preview).toHaveAttribute('open', '');
+    await expect(preview.getByRole('heading', { name: 'Architecture Preview' })).toBeVisible();
+    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 1 of 10');
+    await preview.getByRole('button', { name: 'Next architecture page' }).click();
+    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 2 of 10');
+
+    const layout = await page.evaluate(() => ({
+      viewportWidth: window.innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      standalonePreview: Boolean(document.querySelector('.resource-artifact-preview')),
+      pageCount: document.querySelectorAll('[data-resource-card="agentic-ai-employees"] [data-carousel-slide]').length,
+      downloadedPath: document.querySelector('[data-resource-card="agentic-ai-employees"] [data-track-pdf-download]')?.getAttribute('href'),
+    }));
+    expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
+    expect(layout.standalonePreview).toBe(false);
+    expect(layout.pageCount).toBe(10);
+    expect(layout.downloadedPath).toBe('/assets/downloads/agentic-operations-architecture-roman-bediner.pdf');
+  }
+});
+
 test('section navigation is available immediately across supported pages and viewports', async ({ page }) => {
   for (const viewport of [
     { width: 1440, height: 900 },

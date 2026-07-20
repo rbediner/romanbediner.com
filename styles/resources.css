@@ -147,6 +147,80 @@
   margin-top: 24px;
 }
 
+/* The architecture is part of the Agentic AI Employees resource, not a detached hub feature. */
+.resource-card-artifact-preview {
+  flex: 0 0 auto;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.resource-card-artifact-preview > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid rgba(59, 108, 255, 0.32);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--accent-blue);
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.resource-card-artifact-preview > summary::-webkit-details-marker {
+  display: none;
+}
+
+.resource-card-artifact-preview > summary span {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.resource-card-artifact-preview > summary:hover,
+.resource-card-artifact-preview > summary:focus-visible {
+  background: #ffffff;
+  border-color: rgba(59, 108, 255, 0.58);
+}
+
+.resource-card-artifact-preview[open] {
+  flex-basis: 100%;
+  order: -1;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(59, 108, 255, 0.18);
+}
+
+.resource-card-artifact-preview[open] > summary {
+  margin-bottom: 18px;
+}
+
+.resource-card-artifact-preview[open] > summary span {
+  transform: rotate(45deg);
+}
+
+.resource-card-artifact-preview .resource-collapsible-preview-content h3 {
+  margin: 0 0 10px;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.4vw, 34px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.resource-card-artifact-preview .resource-collapsible-preview-content > p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.resource-card-artifact-preview .resource-carousel-shell {
+  margin-top: 22px;
+}
+
 .resource-primary-cta {
   display: inline-flex;
   align-items: center;
@@ -1034,6 +1108,24 @@
 
   .resource-card-actions {
     margin-top: 18px;
+  }
+
+  .resource-card-artifact-preview,
+  .resource-card-artifact-preview[open] {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .resource-card-artifact-preview > summary {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .resource-card-artifact-preview .resource-collapsible-preview-content,
+  .resource-card-artifact-preview .resource-carousel-shell {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .resources-forward-nav {
@@ -2385,7 +2477,12 @@ body.wireframe-modal-open {
 .resource-fleet-main .resource-fleet-artifact-cta h2 {
   margin: 0;
   color: var(--text-primary);
-  font-size: 22px;
+  /* Match the surrounding editorial section headings; the prior compact
+     override made this one serif heading appear to use another typeface. */
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
 }
 
 .resource-fleet-main .resource-fleet-artifact-cta p:not(.fleet-note-tag) {

@@ -335,41 +335,6 @@ html {
   margin-bottom: 0;
 }
 
-.framework-icon {
-  width: 46px;
-  height: 46px;
-  padding: 8px;
-  border: 1px solid rgba(59, 108, 255, 0.16);
-  border-radius: 12px;
-  background: linear-gradient(145deg, rgba(59, 108, 255, 0.10), rgba(255, 255, 255, 0.96));
-  box-shadow: var(--surface-shadow-compact);
-  box-sizing: border-box;
-  flex-shrink: 0;
-  /* Optical alignment: icon source art sits slightly low vs stage pill center. */
-  position: relative;
-  top: -8px;
-}
-
-/* Stage-specific icon refinements for visual optical balance. */
-#design .framework-icon {
-  width: 37px;
-  height: 37px;
-}
-
-#integration .framework-icon {
-  width: 35px;
-  height: 35px;
-  top: -10px;
-}
-
-#execution .framework-icon {
-  top: -9px;
-}
-
-#signals .framework-icon {
-  top: -6px;
-}
-
 .framework-pill {
   margin-bottom: 4px;
   font-weight: 600;
@@ -377,7 +342,7 @@ html {
   text-transform: uppercase;
 }
 
-/* Stage spacing controls keep icon/pill/heading rhythm consistent. */
+/* Stage spacing controls keep the pill and editorial heading rhythm consistent. */
 .stage-title {
   margin-top: 2px;
 }

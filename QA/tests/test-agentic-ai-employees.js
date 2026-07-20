@@ -49,7 +49,10 @@ mustInclude('title deck', 'From request to production');
 mustInclude('audience card', 'Who This Is For');
 mustInclude('condensed hero callout', 'Agents preserve memory, review code, merge safely, deploy, and report results.');
 mustNotInclude('duplicated hero lede', 'A fleet of autonomous AI employees that observe work');
-hubMustInclude('hub classification support', 'Reference architecture + build report.');
+// The hub names the downloadable artifact for what it is; “build report” was
+// ambiguous once the preview and the canonical PDF became one architecture.
+hubMustInclude('hub classification support', 'Reference architecture.');
+hubMustInclude('hub architecture action', 'Explore the Architecture');
 mustInclude('SEO phrase', 'autonomous code review');
 mustInclude('Project Manager roster card', 'Agent: Project Manager');
 mustInclude('Chief of Staff roster card', 'Agent: Chief of Staff');

@@ -14,16 +14,24 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const root = path.resolve(__dirname, '..', '..');
 const aiPagePath = path.join(root, 'resources', 'agentic-ai-employees', 'index.html');
 const hubPath = path.join(root, 'resources', 'index.html');
+const resourcesCssPath = path.join(root, 'styles', 'resources.css');
 const pdfPath = path.join(root, 'assets', 'downloads', 'agentic-operations-architecture-roman-bediner.pdf');
 const slidesDir = path.join(root, 'assets', 'resources', 'agentic-operations-architecture', 'slides');
+const previewManifestPath = path.join(root, 'assets', 'resources', 'agentic-operations-architecture', 'preview-manifest.json');
 
 const aiPage = fs.readFileSync(aiPagePath, 'utf8');
 const hub = fs.readFileSync(hubPath, 'utf8');
+const resourcesCss = fs.readFileSync(resourcesCssPath, 'utf8');
 const artifactPath = '/assets/downloads/agentic-operations-architecture-roman-bediner.pdf';
+
+function sha256(filePath) {
+  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+}
 
 function fail(message) {
   console.error(`FAIL: ${message}`);
@@ -31,10 +39,19 @@ function fail(message) {
 }
 
 if (!fs.existsSync(pdfPath)) fail('canonical artifact PDF is missing');
+if (!fs.existsSync(previewManifestPath)) fail('preview manifest is missing');
+const previewManifest = JSON.parse(fs.readFileSync(previewManifestPath, 'utf8'));
+if (previewManifest.artifact !== artifactPath || previewManifest.artifactSha256 !== sha256(pdfPath)) {
+  fail('preview manifest must identify the exact canonical architecture PDF');
+}
 for (let index = 1; index <= 10; index += 1) {
   const filename = `slide-${String(index).padStart(2, '0')}.png`;
-  if (!fs.existsSync(path.join(slidesDir, filename))) {
+  const slidePath = path.join(slidesDir, filename);
+  if (!fs.existsSync(slidePath)) {
     fail(`preview slide is missing: ${filename}`);
+  }
+  if (previewManifest.pages?.[filename] !== sha256(slidePath)) {
+    fail(`preview slide is not rendered from the locked canonical artifact: ${filename}`);
   }
 }
 
@@ -61,10 +78,16 @@ for (let index = 1; index <= 10; index += 1) {
 });
 
 [
-  'data-resource-slug="agentic-operations-architecture"',
-  'data-resource-title="The Agentic Operations Architecture"',
-  'data-resource-type="pdf_architecture_case_study"',
-  'data-resource-location="resources_hub_preview"',
+  'data-resource-card="agentic-ai-employees"',
+  'data-resource-slug="agentic-ai-employees"',
+  'data-resource-title="Agentic AI Employees"',
+  'data-resource-type="reference_architecture_build_report"',
+  'data-resource-location="resources_hub"',
+  'resource-card-artifact-preview',
+  'Preview the architecture',
+  'Download the architecture',
+  'Explore the Architecture',
+  'Reference architecture.',
   'data-resource-carousel',
   'data-carousel-expand',
   'slide-01.png',
@@ -78,11 +101,25 @@ for (let index = 1; index <= 10; index += 1) {
 });
 
 if ((hub.match(/data-carousel-slide/g) || []).length !== 10) {
-  fail('Resources hub preview must contain exactly ten carousel pages');
+  fail('Agentic AI Employees card preview must contain exactly ten carousel pages');
+}
+
+// The portable PDF belongs inside the Agentic AI Employees card. A detached
+// hub section breaks the agreed preview-before-download artifact hierarchy.
+const cardStart = hub.indexOf('data-resource-card="agentic-ai-employees"');
+const previewStart = hub.indexOf('resource-card-artifact-preview');
+const detachedPreviewStart = hub.indexOf('class="resource-artifact-preview"');
+if (cardStart < 0 || previewStart < cardStart || detachedPreviewStart >= 0) {
+  fail('Resources hub must keep the architecture disclosure inside the Agentic AI Employees card');
 }
 
 if ((aiPage.match(/data-carousel-slide/g) || []).length !== 10) {
   fail('Agentic AI Employees collapsible preview must contain exactly ten carousel pages');
+}
+
+// The artifact title is a peer editorial heading, not compact utility copy.
+if (!resourcesCss.includes('font-family: var(--font-serif);') || !resourcesCss.includes('font-size: 30px;')) {
+  fail('Agentic architecture artifact title must retain the shared serif heading treatment');
 }
 
 console.log('PASS: Agentic Operations Architecture staging integration contract');
