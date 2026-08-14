@@ -2,6 +2,10 @@
 
 ## Latest: 2026-08-14: AI Project Manager resource — staging candidate
 
+- Corrected the resource's delivery layer: readers can now download first-party `skill.md` and setup-checklist Markdown templates and copy both starter files directly from the page. The copy controls progressively enhance visible static content; downloads work without JavaScript.
+- Simplified the operating-loop diagram to the intentional conversation → AI Project Manager → shared tracker path, with human judgment and escalation explained in the surrounding guide instead of through a broken return connector.
+- Updated the live SEO Authority PRD to record the downloadable-resource and copy-control requirement. Focused resource, script-header, and Playwright QA passed locally; the next step is staging CI and deployed-preview verification before production promotion.
+
 - Added `/resources/ai-project-manager/` and its compact supporting row on `/resources/`. The first-party guide covers scope, a shared tracker, operating rhythm, and a controlled pilot without assigning ownership or decisions to AI.
 - Rebuilt the operating-loop diagram with the same whiteboard frame, node, connector, semantic-color, and full-screen affordance system used by `/resources/agentic-ai-employees/`.
 - Added focused route, metadata, accessibility, and browser coverage. The Resources-hub geometry contract now expects one flagship and four compact supporting resources.
@@ -271,10 +275,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 380
-- Updated At (UTC): 2026-08-14T16:07:25Z
+- Handoff Sequence: 381
+- Updated At (UTC): 2026-08-14T16:12:09Z
 - Source Branch: staging
-- Source Commit: bf7a5a833da29e2951b21a15ea2bba90111f6c33 (pre-handoff baseline)
+- Source Commit: 65a5c8f399c161a135451c85ccdc24cc797e1ce9 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
