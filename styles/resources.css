@@ -3711,7 +3711,7 @@ body.wireframe-modal-open {
 .fleet-cap { padding: 6px 8px 8px; }
 
 @media (max-width: 767px) {
-  .resource-meta { white-space: normal; text-align: center; line-height: 1.2; }
+  .resource-meta { white-space: normal; text-align: center; line-height: 12px; }
   .pm-rules div { grid-template-columns: 1fr; gap: 8px; padding: 16px 0; }
   .pm-build-grid { grid-template-columns: 1fr; }
   .pm-code-card::after { left: 12px; right: auto; }
