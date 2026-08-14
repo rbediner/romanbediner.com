@@ -381,6 +381,9 @@
 
 .pm-diagram svg { display: block; min-width: 720px; width: 100%; height: auto; }
 .pm-diagram figcaption { margin-top: 14px; color: var(--text-secondary); font-size: 14px; }
+/* Keep the operating loop linear. Ownership and escalation are explained in the
+   surrounding guide, avoiding the overlapping return path seen in the first draft. */
+.pm-diagram svg g path:nth-child(3), .pm-diagram svg > text { display: none; }
 
 .pm-build-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 22px; }
 .pm-build-step { padding: 22px; border: 1px solid var(--surface-border, var(--border-color)); border-radius: 12px; background: #fff; box-shadow: var(--surface-shadow-standard, 0 6px 18px rgba(0, 0, 0, .04)); }

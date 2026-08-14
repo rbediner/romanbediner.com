@@ -53,8 +53,8 @@ const expected = [
   {
     file: 'resources/ai-project-manager/index.html',
     canonical: 'https://romanbediner.com/resources/ai-project-manager/',
-    ogTitle: 'AI Project Manager | A Practical Operating Guide',
-    ogDescription: 'A practical guide to designing an AI project manager that captures commitments, keeps a shared tracker current, surfaces blockers, and protects human ownership.'
+    ogTitle: 'AI Project Manager Skill Template | Practical AI Operations Guide',
+    ogDescription: 'Download a practical AI Project Manager skill template and learn how to create a shared tracker, daily standup, scheduled scans, blocker escalation, and human-led operating rhythm.'
   },
   {
     file: 'resources/ai-enabled-operations-framework-summary/index.html',
