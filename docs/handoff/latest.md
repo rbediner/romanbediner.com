@@ -2,6 +2,7 @@
 
 ## Latest: 2026-08-14: AI Project Manager resource — staging candidate
 
+- Removed the obsolete three-box Project Manager diagram from the HTML entirely. The page now contains only the four-stage operating map; the focused contract asserts that no old-diagram classes or SVG identifiers remain.
 - Replaced the weak three-box loop with a full whiteboard operating map: team signals enter the AI Project Manager, become visible in the shared tracker, move to human judgment for decisions and ownership, and return as confirmed context. The new map keeps the established full-screen diagram affordance.
 - Restored the visible return connector between the shared tracker and the AI Project Manager. The diagram's red escalation label now has its matching path and arrow, making the closed human-judgment loop legible.
 - Corrected the guide hierarchy after review: context and operating guidance render before the copy/download handoff, which now sits at the end of the guide. The Resources hub marks this card `Downloadable Templates` and names the included editable files. Fixed the diagram regression that hid all SVG labels; only the intended return connector remains hidden.
@@ -278,10 +279,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 383
-- Updated At (UTC): 2026-08-14T16:32:04Z
+- Handoff Sequence: 384
+- Updated At (UTC): 2026-08-14T16:40:39Z
 - Source Branch: staging
-- Source Commit: 4b54daf84f463c0d7e4a3c6d3e67b5ef6184edca (pre-handoff baseline)
+- Source Commit: e8b019d61861b61917cbf0fbda837486c089b0bb (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
