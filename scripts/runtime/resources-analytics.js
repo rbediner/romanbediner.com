@@ -70,6 +70,15 @@
       });
     });
 
+    document.querySelectorAll('[data-track-resource-download]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const ctx = readResourceContext(link);
+        window.__rbAnalytics.trackEvent('resource_download', Object.assign({}, ctx, {
+          file_path: link.getAttribute('data-file-path') || link.getAttribute('href') || ''
+        }));
+      });
+    });
+
     document.querySelectorAll('[data-resource-card]').forEach((card) => {
       const primaryLink = card.querySelector('a.resource-primary-cta');
       if (!primaryLink) {
