@@ -1,5 +1,11 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-14: AI Project Manager resource — staging candidate
+
+- Added `/resources/ai-project-manager/` and its compact supporting row on `/resources/`. The first-party guide covers scope, a shared tracker, operating rhythm, and a controlled pilot without assigning ownership or decisions to AI.
+- Rebuilt the operating-loop diagram with the same whiteboard frame, node, connector, semantic-color, and full-screen affordance system used by `/resources/agentic-ai-employees/`.
+- Added focused route, metadata, accessibility, and browser coverage. The Resources-hub geometry contract now expects one flagship and four compact supporting resources.
+
 ## Latest: 2026-07-20: Resource label rhythm and Advisory brand lockup — production release
 
 - Promoted product commit `48b712a9ecce48ca342c4a867450db7f07633b15` to production. Production CI run `29750069893` and GitHub Pages deployment `29750070186` both passed, including post-deploy live smoke validation and release tagging.
@@ -265,10 +271,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 377
-- Updated At (UTC): 2026-07-20T14:27:16Z
+- Handoff Sequence: 378
+- Updated At (UTC): 2026-08-14T15:24:04Z
 - Source Branch: staging
-- Source Commit: 48b712a058cd6b9a38bef62158cdf760d334bbb1 (pre-handoff baseline)
+- Source Commit: c7f10811a2654249351185a40b02555febb2024e (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
