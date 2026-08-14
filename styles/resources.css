@@ -1832,7 +1832,12 @@
   }
 
   .resource-conversation-cta {
-    width: auto;
+    width: 100%;
+    height: auto;
+    min-height: 58px;
+    padding: 12px 22px;
+    white-space: normal;
+    text-align: center;
   }
 
   /* Locked mobile previous/next row with shortened labels. */
