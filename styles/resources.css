@@ -383,7 +383,15 @@
 .pm-diagram figcaption { margin-top: 14px; color: var(--text-secondary); font-size: 14px; }
 /* Keep the operating loop linear. Ownership and escalation are explained in the
    surrounding guide, avoiding the overlapping return path seen in the first draft. */
-.pm-diagram svg g path:nth-child(3), .pm-diagram svg > text { display: none; }
+.pm-diagram svg g path:nth-child(3) { display: none; }
+
+/* Keep the explanatory guide in reading order on screen, then present the
+   editable files as the final practical handoff before the conversation CTA. */
+.ai-project-manager-main { display: flex; flex-direction: column; }
+.ai-project-manager-main > .pm-download-section { order: 70; }
+.ai-project-manager-main > section[aria-labelledby="pm-copy"] { order: 71; }
+.ai-project-manager-main > .resource-conversational-close { order: 80; }
+.ai-project-manager-main > .resource-page-nav { order: 90; }
 
 .pm-build-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 22px; }
 .pm-build-step { padding: 22px; border: 1px solid var(--surface-border, var(--border-color)); border-radius: 12px; background: #fff; box-shadow: var(--surface-shadow-standard, 0 6px 18px rgba(0, 0, 0, .04)); }
