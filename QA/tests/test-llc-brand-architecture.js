@@ -15,6 +15,7 @@ const root = path.resolve(__dirname, '..', '..');
 const fullPages = [
   'index.html', 'about/index.html', 'services/index.html', 'connect/index.html',
   'framework/index.html', 'resources/index.html',
+  'resources/ai-project-manager/index.html',
   'resources/agentic-ai-employees/index.html',
   'resources/ai-enabled-operations-dashboard/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html',

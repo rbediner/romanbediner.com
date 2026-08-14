@@ -192,12 +192,13 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
     // Resource metadata must read as one component across the flagship and
     // supporting rows. Labels may vary in width with their real copy, but the
     // shared pill geometry may not vary by card context.
-    expect(layout.resourcePills).toHaveLength(4);
+    // The hub has one flagship plus four compact supporting resources.
+    expect(layout.resourcePills).toHaveLength(5);
     expect(layout.resourcePills.every((pill) => pill.height === 34)).toBe(true);
     expect(layout.resourcePills.every((pill) => pill.minHeight === '34px')).toBe(true);
     expect(layout.resourcePills.every((pill) => pill.lineHeight === '12px')).toBe(true);
     expect(layout.resourcePills.every((pill) => pill.borderRadius === '999px')).toBe(true);
-    expect(layout.compactPillTitleGap).toHaveLength(3);
+    expect(layout.compactPillTitleGap).toHaveLength(4);
     expect(layout.compactPillTitleGap.every((gap) => gap === '12px')).toBe(true);
     expect(layout.primaryCtaHeights.every((height) => height === 48)).toBe(true);
     // The supporting resources should scan as compact editorial rows, not
@@ -351,7 +352,7 @@ test('resource card categories keep editorial anatomy on desktop and phone width
  */
 test('every canonical route remains viewport-safe at desktop and phone widths', async ({ page }) => {
   const routes = [
-    '/', '/about/', '/resources/', '/resources/agentic-ai-employees/',
+    '/', '/about/', '/resources/', '/resources/ai-project-manager/', '/resources/agentic-ai-employees/',
     '/resources/ai-enabled-operations-framework-summary/', '/resources/ai-enabled-operations-dashboard/',
     '/resources/pasteflow/', '/services/', '/connect/', '/framework/',
     '/framework/opportunity/productizing-operations/', '/framework/design/operations-as-product/',

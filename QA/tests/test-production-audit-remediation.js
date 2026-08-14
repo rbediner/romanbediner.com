@@ -16,7 +16,7 @@ const htmlFiles = [
   'framework/index.html', 'framework/design/operations-as-product/index.html', 'framework/evolution/agentic-guardrails/index.html',
   'framework/execution/operational-lanes/index.html', 'framework/integration/ai-operating-layer/index.html',
   'framework/opportunity/productizing-operations/index.html', 'framework/signals/operational-signals/index.html',
-  'resources/index.html', 'resources/agentic-ai-employees/index.html', 'resources/ai-enabled-operations-dashboard/index.html',
+  'resources/index.html', 'resources/ai-project-manager/index.html', 'resources/agentic-ai-employees/index.html', 'resources/ai-enabled-operations-dashboard/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html', 'resources/pasteflow/index.html'
 ];
 

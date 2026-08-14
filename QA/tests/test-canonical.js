@@ -20,6 +20,7 @@ const checks = [
   { file: 'connect/index.html', canonical: 'https://romanbediner.com/connect/' },
   { file: 'framework/index.html', canonical: 'https://romanbediner.com/framework/' },
   { file: 'resources/index.html', canonical: 'https://romanbediner.com/resources/' },
+  { file: 'resources/ai-project-manager/index.html', canonical: 'https://romanbediner.com/resources/ai-project-manager/' },
   { file: 'resources/ai-enabled-operations-framework-summary/index.html', canonical: 'https://romanbediner.com/resources/ai-enabled-operations-framework-summary/' },
   { file: 'resources/ai-enabled-operations-dashboard/index.html', canonical: 'https://romanbediner.com/resources/ai-enabled-operations-dashboard/' },
   { file: 'resources/pasteflow/index.html', canonical: 'https://romanbediner.com/resources/pasteflow/' }

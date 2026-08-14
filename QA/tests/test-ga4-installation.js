@@ -28,6 +28,7 @@ const PAGES = [
   'connect/index.html',
   'framework/index.html',
   'resources/index.html',
+  'resources/ai-project-manager/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html',
   'resources/pasteflow/index.html',
   'framework/opportunity/productizing-operations/index.html',

@@ -22,6 +22,7 @@ const canonicalPages = [
   'connect/index.html',
   'framework/index.html',
   'resources/index.html',
+  'resources/ai-project-manager/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html',
   'resources/pasteflow/index.html',
   'framework/opportunity/productizing-operations/index.html',
@@ -74,6 +75,10 @@ if (!fs.existsSync(path.join(root, 'framework', 'index.html'))) {
 if (!fs.existsSync(path.join(root, 'resources', 'index.html'))) {
   failures += 1;
   console.error('FAIL: /resources/ page is missing.');
+}
+if (!fs.existsSync(path.join(root, 'resources', 'ai-project-manager', 'index.html'))) {
+  failures += 1;
+  console.error('FAIL: /resources/ai-project-manager/ page is missing.');
 }
 if (!fs.existsSync(path.join(root, 'resources', 'ai-enabled-operations-framework-summary', 'index.html'))) {
   failures += 1;

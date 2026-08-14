@@ -22,6 +22,7 @@ const PAGES = [
   'framework/index.html',
   'connect/index.html',
   'resources/index.html',
+  'resources/ai-project-manager/index.html',
   'resources/ai-enabled-operations-framework-summary/index.html',
   'resources/pasteflow/index.html'
 ];

@@ -321,6 +321,7 @@ This section documents what's *built on top of* the raw GA4 events above, not th
   - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family, keeps `Who This Is For` as a restrained non-interactive companion card (`.resource-blue-box`), and moves the locked conversational paragraph into a `.resource-conversation-card` (card surface, no vertical blue rule) below the preview/CTA cluster.
   - `/resources/ai-enabled-operations-dashboard/` renders the live same-origin dashboard iframe at `src="/ai-enabled-operations-dashboard/"` on desktop/tablet and uses an inline static screenshot fallback on mobile.
   - `/resources/pasteflow/` follows the same detail-page family with a shelf-callout opening, a clickable artifact hero rectangle to the Chrome Web Store, a lower-page 16:9 YouTube no-cookie overview embed, and a back-only site-family nav to `/resources/`.
+  - `/resources/ai-project-manager/` is a first-party practical operating guide. Its whiteboard operating-loop diagram uses the same reusable full-screen diagram treatment as Agentic AI Employees, while its copy keeps ownership, decisions, and escalations with people.
   - Summary-page action hierarchy is intentionally ordered: download primary CTA → companion CTA → conversational card → site-family page nav.
     - `Download Framework Summary PDF` remains the dominant primary CTA.
     - `Explore the Full Framework` uses the shared companion CTA treatment.

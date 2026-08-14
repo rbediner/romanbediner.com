@@ -51,6 +51,12 @@ const expected = [
     ogDescription: 'Explore practical work across AI-enabled operations, technology integration, AI architecture, executive visibility, and operating systems through frameworks, dashboards, and product proof points.'
   },
   {
+    file: 'resources/ai-project-manager/index.html',
+    canonical: 'https://romanbediner.com/resources/ai-project-manager/',
+    ogTitle: 'AI Project Manager | A Practical Operating Guide',
+    ogDescription: 'A practical guide to designing an AI project manager that captures commitments, keeps a shared tracker current, surfaces blockers, and protects human ownership.'
+  },
+  {
     file: 'resources/ai-enabled-operations-framework-summary/index.html',
     canonical: 'https://romanbediner.com/resources/ai-enabled-operations-framework-summary/',
     ogTitle: 'AI-Enabled Operations Framework Summary | Executive Guide to Productizing Operations',

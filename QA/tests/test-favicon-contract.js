@@ -28,6 +28,7 @@ const pageChecks = [
   { file: 'connect/index.html', base: '../assets/favicon/' },
   { file: 'framework/index.html', base: '../assets/favicon/' },
   { file: 'resources/index.html', base: '../assets/favicon/' },
+  { file: 'resources/ai-project-manager/index.html', base: '../../assets/favicon/' },
   { file: 'resources/ai-enabled-operations-framework-summary/index.html', base: '../../assets/favicon/' },
   { file: 'resources/pasteflow/index.html', base: '../../assets/favicon/' }
 ];
