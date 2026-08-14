@@ -2,6 +2,8 @@
 
 ## Latest: 2026-08-14: AI Project Manager resource — staging candidate
 
+- Replaced the weak three-box loop with a full whiteboard operating map: team signals enter the AI Project Manager, become visible in the shared tracker, move to human judgment for decisions and ownership, and return as confirmed context. The new map keeps the established full-screen diagram affordance.
+- Restored the visible return connector between the shared tracker and the AI Project Manager. The diagram's red escalation label now has its matching path and arrow, making the closed human-judgment loop legible.
 - Corrected the guide hierarchy after review: context and operating guidance render before the copy/download handoff, which now sits at the end of the guide. The Resources hub marks this card `Downloadable Templates` and names the included editable files. Fixed the diagram regression that hid all SVG labels; only the intended return connector remains hidden.
 - Corrected the resource's delivery layer: readers can now download first-party `skill.md` and setup-checklist Markdown templates and copy both starter files directly from the page. The copy controls progressively enhance visible static content; downloads work without JavaScript.
 - Simplified the operating-loop diagram to the intentional conversation → AI Project Manager → shared tracker path, with human judgment and escalation explained in the surrounding guide instead of through a broken return connector.
@@ -276,10 +278,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 382
-- Updated At (UTC): 2026-08-14T16:22:47Z
+- Handoff Sequence: 383
+- Updated At (UTC): 2026-08-14T16:32:04Z
 - Source Branch: staging
-- Source Commit: f213a1ef3b62a2078a9b86b216996d70f0036cb4 (pre-handoff baseline)
+- Source Commit: 4b54daf84f463c0d7e4a3c6d3e67b5ef6184edca (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
