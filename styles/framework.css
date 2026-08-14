@@ -306,6 +306,9 @@ html {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
   position: relative;
   z-index: 1;
+  /* Stage shadows must remain visible on narrow screens; clipping is handled
+     by the page rail rather than the card surface. */
+  overflow: visible;
 }
 
 .framework-card {
