@@ -379,10 +379,6 @@
   box-shadow: inset 0 0 0 6px #fff, 0 14px 30px rgba(15, 23, 42, .05);
 }
 
-/* Superseded by the four-stage operating map below; retained in the markup so
-   existing fullscreen and resource contracts remain backwards-compatible. */
-.pm-diagram { display: none; }
-
 .pm-operating-map { margin: 28px 0 0; padding: 20px; overflow-x: auto; border: 1px solid #e8e2d4; border-radius: 18px; background-color: #fbfaf4; background-image: linear-gradient(#efede2 1px, transparent 1px), linear-gradient(90deg, #efede2 1px, transparent 1px); background-size: 22px 22px; box-shadow: inset 0 0 0 6px #fff, 0 14px 30px rgba(15, 23, 42, .05); }
 .pm-operating-map svg { display: block; min-width: 860px; width: 100%; height: auto; }
 .pm-operating-map figcaption { margin-top: 14px; color: var(--text-secondary); font-size: 14px; }

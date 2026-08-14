@@ -13,7 +13,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const page = fs.readFileSync(path.join(root, 'resources', 'ai-project-manager', 'index.html'), 'utf8');
 const hub = fs.readFileSync(path.join(root, 'resources', 'index.html'), 'utf8');
-const required = ['data-resource-slug="ai-project-manager"', 'Download the Skill Template', 'Download the Setup Checklist', 'data-copy-template="pm-skill-copy"', 'data-copy-template="pm-checklist-copy"', 'project-manager-resource.js', 'What the Agent Does Each Day', 'class="fleet-diagram fleet-zoomable-diagram pm-diagram"', 'pm-operating-map', 'Never invent an owner or decision', 'Escalate ambiguity'];
+const required = ['data-resource-slug="ai-project-manager"', 'Download the Skill Template', 'Download the Setup Checklist', 'data-copy-template="pm-skill-copy"', 'data-copy-template="pm-checklist-copy"', 'project-manager-resource.js', 'What the Agent Does Each Day', 'pm-operating-map', 'Never invent an owner or decision', 'Escalate ambiguity'];
 const missing = required.filter((value) => !page.includes(value));
 if (!hub.includes('data-resource-card="ai-project-manager"') || !hub.includes('href="/resources/ai-project-manager/"') || !hub.includes('Downloadable Templates') || !hub.includes('Explore the Guide + Templates')) missing.push('Resources hub download entry');
 if (missing.length) { console.error(`FAIL: missing Project Manager resource contract: ${missing.join(', ')}`); process.exit(1); }
