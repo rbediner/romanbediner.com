@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 /**
- * Focused contract: the Project Manager resource remains a first-party page
- * with its operating loop, ownership boundary, and hub entry intact.
+ * Invariant:
+ * - The Project Manager resource remains a first-party page with its operating
+ *   loop, ownership boundary, and hub entry intact.
+ * Why this exists:
+ * - The guide must not regress into an unlinked or authority-unsafe resource.
+ * What breaks if it fails:
+ * - CI blocks publication before the resource can misstate AI responsibility.
  */
 const fs = require('fs');
 const path = require('path');

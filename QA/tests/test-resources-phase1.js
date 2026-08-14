@@ -96,18 +96,18 @@ mustInclude('resources hub', resourcesHtml, 'href="/resources/pasteflow/"');
 mustInclude('summary page', summaryHtml, 'href="/framework/"');
 mustInclude('summary page', summaryHtml, 'href="/connect/"');
 
-// PRD-locked copy: P1-RH-01 (Resources hub intro — two sentences, verbatim)
+// Resource-hub intro includes the first-party Project Manager operating guide.
 mustInclude('P1-RH-01 locked intro', resourcesHtml,
-  'These resources show the operating model in four forms: a reference architecture for agentic AI employees, a framework summary, an executive dashboard prototype, and a real product built from workflow friction.'
+  'These resources show the operating model in five forms: a reference architecture for agentic AI employees, a practical project-manager guide, a framework summary, an executive dashboard prototype, and a real product built from workflow friction.'
 );
 mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
 mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
 
 // Hub hierarchy: one flagship architecture carries the integrated artifact,
-// while the three supporting resources stay compact scan-friendly choices.
+// while the four supporting resources stay compact scan-friendly choices.
 mustInclude('flagship architecture card', resourcesHtml, 'resource-card--flagship');
-if ((resourcesHtml.match(/resource-card--compact/g) || []).length !== 3) {
-  fail('Resources hub must keep exactly three compact supporting resource cards.');
+if ((resourcesHtml.match(/resource-card--compact/g) || []).length !== 4) {
+  fail('Resources hub must keep exactly four compact supporting resource cards.');
 }
 mustInclude('resource stream stays single-column', resourcesCss, '.resources-grid {\n  display: grid;\n  grid-template-columns: 1fr;');
 mustInclude('flagship card spans desktop grid', resourcesCss, '.resource-card--flagship');
