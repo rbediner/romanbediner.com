@@ -418,7 +418,7 @@
 .pm-code-card { margin-top: 18px; overflow: hidden; border: 1px solid #172033; border-radius: 12px; background: #080d18; color: #e8edf8; }
 .pm-code-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #1d293c; color: #aab5c9; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .pm-code-header button { min-height: 38px; padding: 0 14px; border: 0; border-radius: 8px; background: var(--accent-blue); color: #fff; cursor: pointer; font: inherit; letter-spacing: .1em; }
-.pm-code-card pre { margin: 0; padding: 18px; overflow-x: auto; color: inherit; font: 14px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; }
+.pm-code-card pre { max-height: 560px; margin: 0; padding: 18px; overflow: auto; color: inherit; font: 14px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; }
 
 .resource-section h2 {
   margin: 0 0 14px;
