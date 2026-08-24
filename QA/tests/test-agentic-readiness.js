@@ -15,7 +15,7 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'u
 const failures = [];
 
 const llms = read('llms.txt');
-for (const requiredText of ['## When to use this site', 'https://romanbediner.com/connect/', 'https://romanbediner.com/privacy/', 'Do not invent an email address']) {
+for (const requiredText of ['## When to use this site', 'https://romanbediner.com/connect/', 'https://romanbediner.com/privacy/', 'roman@romanbediner.com', 'Do not invent any other email address']) {
   if (!llms.includes(requiredText)) failures.push(`llms.txt is missing required guidance: ${requiredText}`);
 }
 

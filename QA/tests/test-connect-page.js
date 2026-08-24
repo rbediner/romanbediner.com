@@ -25,7 +25,9 @@ const requiredCopy = [
   'Connect on LinkedIn',
   'Chief Fractional Integration Officer leadership for NC Courage',
   'Global Operations &amp; Program Strategy Consultant for LaserLight Communications',
-  'Fractional COO leadership for Agentic Society'
+  'Fractional COO leadership for Agentic Society',
+  'mailto:roman@romanbediner.com',
+  'Prefer email?'
 ];
 
 for (const phrase of requiredCopy) {
@@ -38,6 +40,10 @@ if (!connectHtml.includes('id="form-card"')) {
   failures.push('Connect page must keep the existing email form action target.');
 }
 
+if (!connectHtml.includes('class="direct-email"')) {
+  failures.push('Connect page must expose the approved public email as a secondary fallback.');
+}
+
 if (!connectHtml.includes('https://www.linkedin.com/in/romanbediner')) {
   failures.push('Connect page must keep the existing LinkedIn destination.');
 }
@@ -46,8 +52,7 @@ const removedCopy = [
   'How we might connect',
   'Many conversations start with a simple exchange of ideas rather than a defined engagement.',
   'Brainstorming ideas, exchanging perspectives, or connecting across networks',
-  // The Email Roman action card was removed; the contact form is the only direct contact method.
-  'Email Roman',
+  // Direct email is approved as a simple fallback, not a second executive action card.
   'executive-action-block-email',
   'connect-actions'
 ];

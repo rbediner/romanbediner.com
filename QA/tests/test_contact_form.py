@@ -48,7 +48,7 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn('["bold", "italic"]', self.js)
         self.assertIn('[{ list: "bullet" }]', self.js)
 
-    def test_uses_emailjs_not_mailto(self):
+    def test_uses_emailjs_with_approved_mailto_fallback(self):
         self.assertIn("https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js", self.html)
         self.assertRegex(self.js, r'const SERVICE_ID = "service_[A-Za-z0-9]+";')
         self.assertRegex(self.js, r'const TEMPLATE_ID = "template_[A-Za-z0-9]+";')
@@ -59,7 +59,8 @@ class ContactPageQATest(unittest.TestCase):
         self.assertIn("recipient_email: recipient,", self.js)
         self.assertIn("recipient: recipient,", self.js)
         self.assertIn('subject: "Website contact"', self.js)
-        self.assertNotIn("mailto:", self.html)
+        # The form remains the primary, anti-abuse-protected path; Roman approved this direct fallback for people and agents.
+        self.assertIn('href="mailto:roman@romanbediner.com"', self.html)
 
     def test_submit_button_and_feedback_states(self):
         self.assertIn('id="submit-btn" type="submit">Send message</button>', self.html)
@@ -86,6 +87,7 @@ class ContactPageQATest(unittest.TestCase):
     def test_hides_direct_recipient_address(self):
         self.assertNotIn("rbediner+website@gmail.com", self.html)
         self.assertNotIn("connect@romanbediner.com", self.html)
+        self.assertIn("roman@romanbediner.com", self.html)
         self.assertRegex(self.js, r"const recipient = \[\s*99,\s*111,\s*110,\s*110,\s*101,\s*99,\s*116,\s*64")
 
     def test_linkedin_uses_executive_action_block(self):

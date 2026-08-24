@@ -81,6 +81,11 @@ if (organizationSchema.contactPoint?.['@type'] !== 'ContactPoint' || organizatio
   console.error('FAIL: Organization schema must point business inquiries to the canonical Connect contact point.');
   process.exit(1);
 }
+// Roman explicitly approved this public inbox. Keep the Organization and contact point aligned for people and agents.
+if (organizationSchema.email !== 'roman@romanbediner.com' || organizationSchema.contactPoint?.email !== 'roman@romanbediner.com') {
+  console.error('FAIL: Organization schema must expose the approved public business email.');
+  process.exit(1);
+}
 if (organizationSchema.address?.['@type'] !== 'PostalAddress' || organizationSchema.address?.addressLocality !== 'Raleigh' || organizationSchema.address?.addressRegion !== 'NC' || organizationSchema.address?.addressCountry !== 'US') {
   console.error('FAIL: Organization schema must include the approved Raleigh, NC PostalAddress.');
   process.exit(1);

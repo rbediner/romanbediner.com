@@ -117,6 +117,19 @@
   margin: 0;
 }
 
+/* Keep the approved public email secondary to the form while making its direct-contact option clearly discoverable. */
+.direct-email {
+  margin: 16px 0 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+  text-align: center;
+}
+
+.direct-email a {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
 .field {
   margin-top: 20px;
 }
