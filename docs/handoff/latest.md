@@ -2,7 +2,7 @@
 
 ## Latest: 2026-08-24: Agent-readiness remediation — staging candidate
 
-- Product commit `26765117ab9840fa890f156c71e39fd3b37a6b00` on `staging` implements the five findings from the Is Agentic report for `https://romanbediner.com` (79/100, scanned 2026-08-24).
+- Product commit `26765117ab9840fa890f156c71e39fd3b37a6b00` and packaging fix `891e20b3440164616d4869e738ec41d159a70cb3` on `staging` implement the five findings from the Is Agentic report for `https://romanbediner.com` (79/100, scanned 2026-08-24).
 - Added public `/llms.txt` guidance and linked it from `robots.txt`; it explains when agents should use the site, canonical routes, the `/connect/` contact workflow, and public-safety boundaries.
 - Added substantive `/privacy/` content, sitemap coverage, `ContactPage` structured data for `/connect/`, an approved ContactPoint URL, and a regional Raleigh, NC, US PostalAddress. No email address, telephone number, or street address was invented or published.
 - Improved the real 404 recovery page with direct sitemap and agent-guide links. The shared runtime appends the Privacy trust-anchor link to all public footers.
@@ -10,6 +10,7 @@
 - Production route configuration for `romanbediner.com/*` is committed but deliberately not deployed. Do not deploy `agent-access` production or promote the static-site SHA until Roman explicitly approves production release.
 - Created repository tickets: #1 agent guidance, #2 404 recovery, #3 Organization schema, #4 privacy and contact semantics, #5 Cloudflare Markdown negotiation. Add the product SHA and staging verification to each before closing; leave #3 open until Roman approves any public email, telephone number, or street address if scanner-specific credit is desired.
 - Local validation passed: `npm run test:node`, `npm run test:playwright` (18/18), `npx wrangler deploy --config agent-access/wrangler.jsonc --env staging --dry-run`, direct staging Worker curl verification, `git diff --check`, and Drive-drift fix/check.
+- Corrected a deployment-packaging omission discovered during hosted staging verification: the explicit static artifact allowlist had omitted `llms.txt` and `privacy`. `scripts/build/create-artifact.js` now packages both paths, and an artifact-integrity regression test protects them. A direct artifact build and the full Node QA suite passed. Wait for Deploy Staging run `32740990422` to finish, then verify `/llms.txt` and `/privacy/` return 200 before closing the related tickets.
 - Required PRD update is pending: the self-hosted Google Workspace MCP tool (`get_drive_file_content` with `user_google_email`) was not callable in this Codex session. Do not use the local Drive mount or the stock Google Drive connector to update the PRD; restore the self-hosted MCP first, then record the agent-readiness product decision in `SEO Authority PRD`.
 
 ## Release Watcher Hygiene
@@ -298,10 +299,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 386
-- Updated At (UTC): 2026-08-24T14:42:08Z
+- Handoff Sequence: 387
+- Updated At (UTC): 2026-08-24T14:49:43Z
 - Source Branch: staging
-- Source Commit: 26765117ab9840fa890f156c71e39fd3b37a6b00 (pre-handoff baseline)
+- Source Commit: 891e20b3440164616d4869e738ec41d159a70cb3 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
