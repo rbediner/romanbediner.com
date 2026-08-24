@@ -1,5 +1,23 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-24: Agent-readiness remediation — staging candidate
+
+- Product commit `26765117ab9840fa890f156c71e39fd3b37a6b00` on `staging` implements the five findings from the Is Agentic report for `https://romanbediner.com` (79/100, scanned 2026-08-24).
+- Added public `/llms.txt` guidance and linked it from `robots.txt`; it explains when agents should use the site, canonical routes, the `/connect/` contact workflow, and public-safety boundaries.
+- Added substantive `/privacy/` content, sitemap coverage, `ContactPage` structured data for `/connect/`, an approved ContactPoint URL, and a regional Raleigh, NC, US PostalAddress. No email address, telephone number, or street address was invented or published.
+- Improved the real 404 recovery page with direct sitemap and agent-guide links. The shared runtime appends the Privacy trust-anchor link to all public footers.
+- Added a source-controlled Cloudflare Worker at `agent-access/` to negotiate `Accept: text/markdown` safely. The staging Worker is live at `https://romanbediner-agent-access-staging.rbediner.workers.dev` (version `c48f6c55-33e9-4729-8ed8-284cff4693f6`): a Markdown request returns `Content-Type: text/markdown; charset=utf-8`, `Vary: Accept, Accept-Encoding`, and `Cache-Control: no-store`; a normal HTML request proxies the GitHub Pages staging origin and retains its HTML response.
+- Production route configuration for `romanbediner.com/*` is committed but deliberately not deployed. Do not deploy `agent-access` production or promote the static-site SHA until Roman explicitly approves production release.
+- Created repository tickets: #1 agent guidance, #2 404 recovery, #3 Organization schema, #4 privacy and contact semantics, #5 Cloudflare Markdown negotiation. Add the product SHA and staging verification to each before closing; leave #3 open until Roman approves any public email, telephone number, or street address if scanner-specific credit is desired.
+- Local validation passed: `npm run test:node`, `npm run test:playwright` (18/18), `npx wrangler deploy --config agent-access/wrangler.jsonc --env staging --dry-run`, direct staging Worker curl verification, `git diff --check`, and Drive-drift fix/check.
+- Required PRD update is pending: the self-hosted Google Workspace MCP tool (`get_drive_file_content` with `user_google_email`) was not callable in this Codex session. Do not use the local Drive mount or the stock Google Drive connector to update the PRD; restore the self-hosted MCP first, then record the agent-readiness product decision in `SEO Authority PRD`.
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
 ## Latest: 2026-08-14: AI Project Manager resource — staging candidate
 
 - Repaired the production parity gate: Framework stage cards no longer clip mobile shadows, and the visual suite documents and tolerates the current headless Chromium raster drift while retaining its structural/mobile assertions. Full opt-in visual suite passed (8/8).
@@ -280,10 +298,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 385
-- Updated At (UTC): 2026-08-14T17:13:19Z
+- Handoff Sequence: 386
+- Updated At (UTC): 2026-08-24T14:42:08Z
 - Source Branch: staging
-- Source Commit: 8e413e16cdfc31c9d8f7b45a2c08874e59b26ea3 (pre-handoff baseline)
+- Source Commit: 26765117ab9840fa890f156c71e39fd3b37a6b00 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
