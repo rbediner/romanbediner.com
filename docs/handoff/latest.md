@@ -6,7 +6,8 @@
 - Replaced the retired ten-page Agentic Operations Architecture with the six-page `Agentic Fleet Control Plane` field guide. The canonical download is `assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf`; the preview images are rendered directly from it and locked in `assets/resources/agentic-fleet-control-plane/preview-manifest.json`. Both the flagship page and `/resources/` use the same closed-by-default carousel and canonical download target.
 - Added Hivemind as the fleet's public shared coordination layer: shared memory, relevant-context retrieval, and reviewed evidence. The flagship page links to the public Hivemind Playbook at `https://swarmsystem.ai/playbook/hive-mind/`; the field guide visualizes Hivemind beside the runtime without exposing implementation details.
 - Kept global navigation unchanged. Instead, Home, About, Services, and Framework contextually link to the flagship resource, preserving the deliberate five-link navigation while creating crawlable internal paths to the proof page. Updated resource metadata, TechArticle JSON-LD, sitemap dates, README, card-surface guidance, and the focused QA contracts.
-- Local validation passed after the final Hivemind update: `npm run test:node`; `npm run test:playwright` (18/18); artifact metadata/hash checks; `git diff --check`; and `scripts/clean-drive-drift.sh --fix` plus `--check`. Product commit on `staging`: `52d8142` before rebase.
+- Rebased the feature safely on the newer agent-readiness staging work, preserving its Worker, public-email, and Markdown-negotiation changes. The rebased flagship product commit is `998fdce`; follow-up commit `0092828` restores the upstream live-deploy automation contract through `posttest:node`.
+- Local validation passed after the final Hivemind update and rebase: `npm run test:node`; `npm run test:playwright` (18/18); artifact metadata/hash checks; `git diff --check`; and `scripts/clean-drive-drift.sh --fix` plus `--check`.
 - The required live `SEO Authority PRD` Google Doc update is blocked because the self-hosted Google Workspace MCP refresh token returns `invalid_grant`. Reauthorize that connection before the next PRD update; no stock-connector fallback was used.
 
 ## Latest: 2026-08-24: Verified 100/100 AI-readiness production release
@@ -325,10 +326,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 391
-- Updated At (UTC): 2026-08-24T18:13:29Z
+- Handoff Sequence: 392
+- Updated At (UTC): 2026-08-24T19:46:36Z
 - Source Branch: staging
-- Source Commit: fd79fce0aa0ee20190450ebb2ed794649d51c9b2 (pre-handoff baseline)
+- Source Commit: 0092828203c2535ac310c4e46d70f329b9fe54c1 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
