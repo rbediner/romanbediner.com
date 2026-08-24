@@ -1,5 +1,12 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-24: Approved public business email — staging candidate
+
+- Roman explicitly approved `roman@romanbediner.com` for public website use. Product commit `2636273dafb4358d6f0cd49d7120a274ee27224c` on `staging` publishes it as a quiet direct-email fallback below the protected `/connect/` form, not as a competing action card.
+- Homepage Organization JSON-LD and the `/connect/` ContactPoint JSON-LD now expose the same approved email. `llms.txt` explicitly names it while prohibiting invented alternative contact details, so people and agents receive one consistent contact contract.
+- Updated focused Node and Python regression coverage for the visible fallback, structured data, and agent guide. Local validation passed: focused contracts, `npm run test:node`, `npm run test:playwright` (18/18), `git diff --check`, and Drive-drift fix/check.
+- Updated the live `romanbediner.com — Product Requirements & Production Baseline` Google Doc through the self-hosted Google Workspace MCP as `roman@romanbediner.com`: the form remains primary, this email is the approved fallback, and a public telephone number remains unapproved. This is staging-only. Do not promote to `prod` without Roman's explicit production approval.
+
 ## Latest: 2026-08-24: Agent-readiness remediation — staging candidate
 
 - Product commit `26765117ab9840fa890f156c71e39fd3b37a6b00` and packaging fix `891e20b3440164616d4869e738ec41d159a70cb3` on `staging` implement the five findings from the Is Agentic report for `https://romanbediner.com` (79/100, scanned 2026-08-24).
@@ -299,10 +306,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 388
-- Updated At (UTC): 2026-08-24T14:55:03Z
+- Handoff Sequence: 389
+- Updated At (UTC): 2026-08-24T15:26:41Z
 - Source Branch: staging
-- Source Commit: 820b63eac84025104d17bee33dad2370b7650400 (pre-handoff baseline)
+- Source Commit: 2636273dafb4358d6f0cd49d7120a274ee27224c (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
