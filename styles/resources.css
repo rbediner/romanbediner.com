@@ -770,6 +770,18 @@ body:has(.resource-collapsible-preview[open]) .section-nav-sheet {
   pointer-events: none;
 }
 
+/* The phone-only visibility class is supplied by section-nav.js when a page
+   marks a primary artifact action as protected. This preserves the helpful
+   global orientation control without letting it sit over a download or copy
+   button on the flagship build guide. */
+@media (max-width: 767px) {
+  .section-nav-fab.is-contextually-hidden,
+  .section-nav-sheet.is-contextually-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 @media (max-width: 767px) {
   .resource-preview-modal {
     padding: 16px;

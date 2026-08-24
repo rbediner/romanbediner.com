@@ -160,6 +160,12 @@ test('agent builder starter prompt downloads and copies from the flagship and hu
     await page.goto(`http://${host}:${port}${route}`, { waitUntil: 'networkidle' });
     const download = page.getByRole('link', { name: 'Download the starter prompt' });
     await expect(download).toHaveAttribute('href', '/assets/downloads/agent-builder-starter-prompt.md');
+    if (route === '/resources/agentic-ai-employees/') {
+      await download.scrollIntoViewIfNeeded();
+      // The floating page nav is useful outside the artifact panels, but it
+      // must yield whenever it would overlap the primary build action.
+      await expect(page.locator('.section-nav-fab')).toHaveClass(/is-contextually-hidden/);
+    }
     await page.getByRole('button', { name: 'Copy the starter prompt' }).click();
     await expect(page.getByRole('button', { name: 'Copied the starter prompt' })).toBeVisible();
     const copied = await page.evaluate(() => window.__copiedAgentBuilderStarter || '');
@@ -192,7 +198,7 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
     const card = page.locator('[data-resource-card="agentic-ai-employees"]');
     const preview = card.locator('.resource-card-artifact-preview');
     await expect(preview).not.toHaveAttribute('open', '');
-    await expect(card.getByText('Flagship build guide.', { exact: true })).toBeVisible();
+    await expect(card.getByText('Flagship first-agent build kit.', { exact: true })).toBeVisible();
     await expect(card.getByRole('link', { name: 'Explore the build guide' })).toBeVisible();
 
     await preview.getByText('Preview the build guide', { exact: false }).click();

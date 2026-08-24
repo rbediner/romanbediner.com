@@ -50,7 +50,7 @@ mustInclude('audience card', 'Who This Is For');
 mustInclude('condensed hero callout', 'I built and operate an eight-employee AI fleet for Agentic Society.');
 mustNotInclude('duplicated hero lede', 'A fleet of autonomous AI employees that observe work');
 // The hub names the downloadable artifact for its practical, implementation-first purpose.
-hubMustInclude('hub classification support', 'Flagship build guide.');
+hubMustInclude('hub classification support', 'Flagship first-agent build kit.');
 hubMustInclude('hub fleet action', 'Explore the build guide');
 mustInclude('SEO phrase', 'autonomous code review');
 mustInclude('Project Manager roster card', 'Agent | Project Manager');

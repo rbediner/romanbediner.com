@@ -17,7 +17,16 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 const pdfPath = path.join(root, 'assets', 'downloads', 'agentic-fleet-build-guide-roman-bediner.pdf');
 const slidesDir = path.join(root, 'assets', 'resources', 'agentic-fleet-build-guide', 'slides');
-const generatorPath = path.join(root, 'scripts', 'asset-generation', 'agentic-fleet-build-guide', 'generate_agentic_fleet_build_guide.py');
+const generatorDir = path.join(root, 'scripts', 'asset-generation', 'agentic-fleet-build-guide');
+const previewRenderer = path.join(generatorDir, 'render_preview.py');
+// Page content lives across the entry point plus its page modules, so the
+// content contract must read all of them or it silently protects nothing.
+const generatorSources = [
+  'generate_agentic_fleet_build_guide.py',
+  'kit.py',
+  'pages_b.py',
+  'pages_c.py',
+].map((name) => path.join(generatorDir, name));
 
 function fail(message) {
   console.error(`FAIL: ${message}`);
@@ -25,6 +34,7 @@ function fail(message) {
 }
 
 if (!fs.existsSync(pdfPath)) fail('canonical PDF is missing');
+if (!fs.existsSync(previewRenderer)) fail('build-guide preview renderer is missing');
 
 const pdf = fs.readFileSync(pdfPath);
 const header = pdf.subarray(0, 5).toString('ascii');
@@ -40,7 +50,14 @@ for (let index = 1; index <= 24; index += 1) {
 // The generated PDF stores its Info dictionary and Page tree uncompressed, so
 // validate those durable PDF structures directly without an OS-level tool.
 const pdfText = pdf.toString('latin1');
-const generator = fs.readFileSync(generatorPath, 'utf8');
+const rendererSource = fs.readFileSync(previewRenderer, 'utf8');
+if (!rendererSource.includes('pdftoppm') || !rendererSource.includes('artifactSha256')) {
+  fail('preview renderer must lock carousel images to the canonical PDF');
+}
+generatorSources.forEach((file) => {
+  if (!fs.existsSync(file)) fail(`build-guide generator source is missing: ${path.basename(file)}`);
+});
+const generator = generatorSources.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 if (!/\/Title \(Agentic Fleet Build Guide\)/.test(pdfText)) {
   fail('PDF metadata is missing the approved artifact title');
 }
@@ -48,15 +65,32 @@ if (!/\/Count 24\s+\/Kids \[/.test(pdfText)) fail('PDF does not report twenty-fo
 
 // The guide must stay practical. These anchors protect the first-agent
 // construction contract rather than allowing a return to high-level philosophy.
+// The guide must stay a step-by-step build, in plain language, covering how an
+// agent is actually made to run by itself. These anchors exist because the
+// previous edition was a topic-ordered reference that never mentioned cron.
 [
-  'Morning Market Brief',
+  // it is a sequence of sessions, not a list of topics
+  'SESSION',
+  'DO THIS',
+  'YOU SHOULD SEE',
+  'SAY THIS',
+  // autonomy, which the previous edition omitted entirely
+  'Cron',
+  'cron expression',
+  'day of week',
+  'UTC',
+  'daylight',
+  'stop button',
+  'PARKED',
+  // the controls
+  'Inbound Inquiry',
   'docs/PRD.md',
   '.agent/personality.md',
-  'idempotency',
+  'run record',
+  'run twice',
   'Model routing',
   'Caching',
   'Hivemind',
-  'Slack review surface',
   'Observability',
   'Bounded self-healing',
   'Evaluation and QA',

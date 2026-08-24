@@ -113,6 +113,26 @@
     // gives readers an immediate orientation path.
     fab.classList.add('is-visible');
 
+    // Some long-form resource pages intentionally put a primary download or
+    // copy action in a contained artifact panel. On a phone, the fixed control
+    // can otherwise cover that action at the exact moment a visitor is ready
+    // to use it. A page can opt a panel into this protection without changing
+    // the default behavior of the shared navigation elsewhere.
+    var protectedRegions = Array.prototype.slice.call(document.querySelectorAll('[data-section-nav-protected]'));
+    if (protectedRegions.length) {
+      var protectedVisibility = new Map();
+      var protectedObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          protectedVisibility.set(entry.target, entry.isIntersecting);
+        });
+        var shouldProtectActions = Array.from(protectedVisibility.values()).some(Boolean);
+        fab.classList.toggle('is-contextually-hidden', shouldProtectActions);
+        sheet.classList.toggle('is-contextually-hidden', shouldProtectActions);
+        if (shouldProtectActions && open) { closeSheet(); }
+      }, { threshold: 0.12 });
+      protectedRegions.forEach(function (region) { protectedObserver.observe(region); });
+    }
+
     // --- Active-section highlighting ------------------------------------
     var activeId = null;
     function setActive(id) {
