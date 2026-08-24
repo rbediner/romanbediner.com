@@ -1,12 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
-## Latest: 2026-08-24: Production-safe agent-access Worker release
+## Latest: 2026-08-24: Verified 100/100 AI-readiness production release
 
-- Product commit `8687d51347255ff53a943bb0219404d9392e3418` is live on `prod`. Production CI run `32757858163` and Deploy Pages run `32757858389` both passed; `npm run release:verify-prod -- --sha 8687d51347255ff53a943bb0219404d9392e3418` passed the 17-route live smoke suite.
+- Product commit `fd79fce0aa0ee20190450ebb2ed794649d51c9b2` is live on `prod`. Production CI run `32760209536` and Deploy Pages run `32760209462` both passed; `npm run release:verify-prod -- --sha fd79fce0aa0ee20190450ebb2ed794649d51c9b2` passed the 17-route live smoke suite.
+- The final hardening change makes an unavailable route requested with `Accept: text/markdown` return HTTP 404 (rather than 200) while retaining the concise sitemap and agent-guide recovery links. `QA/tests/test-agent-content-edge.js` protects this contract. Staging CI run `32759506979` and Deploy Staging run `32759867082` passed; the staging Worker version was `5f5b145e-d7e9-4a9c-8c86-c7018f4cee7a`.
+- Production Worker version `11dccd7d-0d35-4fda-b649-ae8e5a019303` is attached to `romanbediner.com/*`. Live checks confirm normal homepage HTML is 200 with `Vary: Accept-Encoding, Accept`; homepage Markdown is 200 with `Content-Type: text/markdown; charset=utf-8`, `Vary: Accept, Accept-Encoding`, and `Cache-Control: no-store`; and the Markdown 404 is HTTP 404 with the same variant-safety headers plus both recovery links. `/llms.txt`, `/privacy/`, and `/connect/` are 200; the homepage title, canonical URL, H1, and desktop overflow smoke all passed in a real browser.
+- A fresh Is Agentic rescan completed after this production release: **100/100**, all 7 essential checks pass, and the five originally ticketed gaps are resolved. Ticket #4 intentionally preserves `/connect/` as the canonical contact route rather than reviving duplicate `/contact/` content; the scanner may still display that optional generic recommendation despite the 100/100 score.
 - The initial production Worker deployment exposed a redirect loop: fetching GitHub Pages' public URL follows the repository's canonical-domain redirect back through `romanbediner.com/*`. It was detected by an immediate live browser-path curl test and the Worker was deleted at once, restoring direct GitHub Pages traffic before any source change.
 - The corrected Worker uses `fetch(request)` only in production (`USE_ZONE_ORIGIN=true`), which Cloudflare routes to the configured origin without re-entering the same route. Staging retains its explicit preview-origin proxy. `QA/tests/test-agent-content-edge.js` now protects this boundary by rejecting any production URL rewrite.
-- Staging Worker version `fd702d66-fa1d-4ecd-acd3-5211292e44ad`, staging CI run `32757196245`, and staging deployment `32757533352` passed. It returned normal HTML with `Vary: Accept-Encoding, Accept` and the requested Markdown response with `Content-Type: text/markdown; charset=utf-8`, `Vary: Accept, Accept-Encoding`, and `Cache-Control: no-store`.
-- Production Worker version `7ad60b9c-746c-450e-8e1a-21db4385d77b` is attached to `romanbediner.com/*`. Live verification confirms normal homepage HTML is HTTP 200 with no redirect and `Vary: Accept-Encoding, Accept`; Markdown requests are HTTP 200 with the expected Markdown content type, `Vary: Accept, Accept-Encoding`, and `Cache-Control: no-store`. `/llms.txt`, `/privacy/`, `/connect/`, and real 404 recovery remain healthy. Browser smoke found the homepage title, canonical URL, and H1 intact, no viewport overflow, and zero console errors.
 - Future production Worker changes must preserve this origin rule. Do not restore `ORIGIN_BASE_URL=https://rbediner.github.io/romanbediner.com/` for production; it loops through the custom-domain route. Run the focused Worker contract, both Wrangler dry-runs, staging Worker curl checks, full `npm run qa:ci-parity`, production release verification, and live normal/Markdown curl checks before describing any change as complete.
 
 ## Latest: 2026-08-24: Approved public business email — staging candidate
@@ -315,10 +316,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 390
-- Updated At (UTC): 2026-08-24T17:48:25Z
+- Handoff Sequence: 391
+- Updated At (UTC): 2026-08-24T18:13:29Z
 - Source Branch: staging
-- Source Commit: 8687d51347255ff53a943bb0219404d9392e3418 (pre-handoff baseline)
+- Source Commit: fd79fce0aa0ee20190450ebb2ed794649d51c9b2 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
