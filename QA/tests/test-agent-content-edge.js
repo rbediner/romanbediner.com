@@ -20,6 +20,14 @@ async function run() {
   if (markdownResponse.headers.get('Cache-Control') !== 'no-store') throw new Error('Markdown response must avoid unreviewed cache mixing.');
   if (!(await markdownResponse.text()).includes('# Roman Bediner')) throw new Error('Homepage Markdown response must describe the site.');
 
+  const missingMarkdownResponse = await worker.handleRequest(
+    new Request('https://romanbediner.com/this-route-does-not-exist/', { headers: { Accept: 'text/markdown' } }),
+    { ORIGIN_BASE_URL: 'https://example.com/site/' }
+  );
+  if (missingMarkdownResponse.status !== 404) throw new Error('Unavailable Markdown routes must retain HTTP 404 semantics.');
+  const missingMarkdownBody = await missingMarkdownResponse.text();
+  if (!missingMarkdownBody.includes('[Agent guide]') || !missingMarkdownBody.includes('[Sitemap]')) throw new Error('Markdown 404 responses must provide agent recovery links.');
+
   if (worker.wantsMarkdown(new Request('https://romanbediner.com/', { headers: { Accept: 'text/html' } }))) throw new Error('HTML-only requests must not negotiate Markdown.');
   if (worker.mergeVary('Accept-Encoding', 'Accept') !== 'Accept-Encoding, Accept') throw new Error('Vary values must merge without replacing origin behavior.');
   if (worker.mergeVary('Accept, Accept-Encoding', 'Accept') !== 'Accept, Accept-Encoding') throw new Error('Vary values must not duplicate Accept.');

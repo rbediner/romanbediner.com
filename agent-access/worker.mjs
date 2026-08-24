@@ -46,7 +46,9 @@ export function markdownForPath(pathname) {
 
 export function markdownResponse(pathname) {
   return new Response(markdownForPath(pathname), {
-    status: 200,
+    // Preserve 404 semantics for an unavailable route while still providing
+    // agents with the recovery links they need to find a canonical page.
+    status: Object.hasOwn(MARKDOWN_PAGES, pathname) ? 200 : 404,
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
       'Vary': 'Accept, Accept-Encoding',
