@@ -1,7 +1,7 @@
 /**
  * Invariant:
- * - The canonical Agentic Operations Architecture PDF must remain a ten-page,
- *   self-contained reference architecture with a matching visual preview.
+ * - The canonical Agentic Fleet Control Plane PDF must remain a six-page,
+ *   self-contained field guide with a matching visual preview.
  *
  * Why this exists:
  * - Protects the downloadable artifact from losing its narrative structure or
@@ -16,8 +16,8 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..', '..');
-const pdfPath = path.join(root, 'assets', 'downloads', 'agentic-operations-architecture-roman-bediner.pdf');
-const slidesDir = path.join(root, 'assets', 'resources', 'agentic-operations-architecture', 'slides');
+const pdfPath = path.join(root, 'assets', 'downloads', 'agentic-fleet-control-plane-roman-bediner.pdf');
+const slidesDir = path.join(root, 'assets', 'resources', 'agentic-fleet-control-plane', 'slides');
 
 function fail(message) {
   console.error(`FAIL: ${message}`);
@@ -29,7 +29,7 @@ if (!fs.existsSync(pdfPath)) fail('canonical PDF is missing');
 const pdf = fs.readFileSync(pdfPath);
 const header = pdf.subarray(0, 5).toString('ascii');
 if (header !== '%PDF-') fail('artifact is not a PDF');
-for (let index = 1; index <= 10; index += 1) {
+for (let index = 1; index <= 6; index += 1) {
   const filename = `slide-${String(index).padStart(2, '0')}.png`;
   const previewPath = path.join(slidesDir, filename);
   if (!fs.existsSync(previewPath)) fail(`preview page is missing: ${filename}`);
@@ -40,9 +40,9 @@ for (let index = 1; index <= 10; index += 1) {
 // metadata instead of coupling the site to an obsolete local generator.
 const pdfInfo = spawnSync('pdfinfo', [pdfPath], { encoding: 'utf8' });
 if (pdfInfo.error || pdfInfo.status !== 0) fail('pdfinfo could not inspect the canonical PDF');
-if (!/^Title:\s+Agentic Operations Architecture$/m.test(pdfInfo.stdout)) {
+if (!/^Title:\s+The Agentic Fleet Control Plane$/m.test(pdfInfo.stdout)) {
   fail('PDF metadata is missing the approved artifact title');
 }
-if (!/^Pages:\s+10$/m.test(pdfInfo.stdout)) fail('PDF does not report ten pages');
+if (!/^Pages:\s+6$/m.test(pdfInfo.stdout)) fail('PDF does not report six pages');
 
-console.log('PASS: Agentic Operations Architecture artifact contract');
+console.log('PASS: Agentic Fleet Control Plane artifact contract');

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Agentic AI Employees: From Request to Production" />
-  <meta property="og:description" content="A first-party build report in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely." />
+  <meta property="og:title" content="Agentic AI Employees: Fleet Control Plane Build Report" />
+  <meta property="og:description" content="A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production." />
   <meta property="og:url" content="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta property="og:site_name" content="Roman Bediner" />
   <meta property="og:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
@@ -14,16 +14,16 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
-  <meta name="description" content="A first-party build report in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely." />
+  <meta name="description" content="A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production." />
   <link rel="canonical" href="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta name="geo.region" content="US-NC" />
   <meta name="geo.placename" content="Raleigh-Durham-Chapel Hill" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Agentic AI Employees: From Request to Production" />
-  <meta name="twitter:description" content="A first-party build report in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely." />
+  <meta name="twitter:title" content="Agentic AI Employees: Fleet Control Plane Build Report" />
+  <meta name="twitter:description" content="A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production." />
   <meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
   <meta name="twitter:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
-  <title>Agentic AI Employees: From Request to Production</title>
+  <title>Agentic AI Employees: Fleet Control Plane Build Report</title>
   <!-- CSP architecture: inline scripts are forbidden (no 'unsafe-inline' in script-src); CI fails on CSP runtime violations. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://www.googletagmanager.com; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com; font-src 'self' data:; connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://www.google.com;">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon/favicon-32x32.png" />
@@ -38,11 +38,12 @@
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "name": "Agentic AI Employees: From Request to Production",
-      "headline": "Agentic AI Employees That Move Work from Request to Production",
-      "description": "A first-party build report in autonomous AI software engineering: governed AI employees route work across models, review and merge pull requests, deploy to production, report Anthropic costs, and recover safely.",
+      "name": "Agentic AI Employees: Fleet Control Plane Build Report",
+      "headline": "Agentic AI Employees: A Fleet Control Plane Build Report",
+      "description": "A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production.",
       "url": "https://romanbediner.com/resources/agentic-ai-employees/",
-      "dateModified": "2026-07-19",
+      "datePublished": "2026-08-24",
+      "dateModified": "2026-08-24",
       "mainEntityOfPage": "https://romanbediner.com/resources/agentic-ai-employees/",
       "keywords": "agentic AI employees, AI agent fleet, autonomous AI software engineering, AI agents that merge pull requests, autonomous code review, multi-agent orchestration, model routing, Anthropic cost reporting, AI agents that deploy to production",
       "about": [
@@ -87,16 +88,16 @@
         data-resource-title="Agentic AI Employees"
         data-resource-type="reference_architecture_build_report"
         data-resource-location="agentic_fleet_page">
-    <p class="resources-label">REFERENCE ARCHITECTURE + BUILD REPORT</p>
+    <p class="resources-label">FLAGSHIP BUILD REPORT + REFERENCE ARCHITECTURE</p>
     <h1>AGENTIC AI EMPLOYEES</h1>
-    <p class="fleet-title-deck">From request to production</p>
+    <p class="fleet-title-deck">The fleet control plane</p>
     <div class="section-accent" aria-hidden="true"></div>
 
     <section class="resource-top-section" aria-label="Overview">
       <div class="shelf-callout resource-family-callout resource-fleet-callout">
         <div class="shelf-border" aria-hidden="true"></div>
         <div class="shelf-content">
-          <p class="resource-family-copy">How a small, inexpensive stack routes autonomous software work by risk, separates writing from approval, and carries eligible changes to verified production. Agents preserve memory, review code, merge safely, deploy, and report results.</p>
+          <p class="resource-family-copy">I built and operate an eight-employee AI fleet for Agentic Society. This public build report shows the control plane: how named agents route work by risk, preserve memory, review code, merge safely, deploy, and report results.</p>
         </div>
       </div>
       <div class="fleet-pillrow" aria-label="Architecture properties">
@@ -130,58 +131,54 @@
     </aside>
 
     <section class="resource-blue-box ui-surface ui-surface--standard is-static is-artifact resource-fleet-artifact-cta" aria-labelledby="fleet-artifact-download-title">
-      <p class="fleet-note-tag">Agentic Operations Architecture</p>
-      <h2 id="fleet-artifact-download-title">Take the architecture with you.</h2>
-      <p>A portable reference architecture for building autonomy with clear authority, evidence, and recovery.</p>
-      <div class="resource-fleet-artifact-actions" aria-label="Agentic Operations Architecture actions">
+      <p class="fleet-note-tag">The Agentic Fleet Control Plane</p>
+      <h2 id="fleet-artifact-download-title">Take the field guide with you.</h2>
+      <p>A six-page public companion: named AI employees, the control plane, model routing, and the review loop that keeps autonomy accountable.</p>
+      <div class="resource-fleet-artifact-actions" aria-label="Agentic Fleet Control Plane actions">
         <details class="resource-collapsible-preview"
-             data-resource-slug="agentic-operations-architecture"
-             data-resource-title="The Agentic Operations Architecture"
-             data-resource-type="pdf_architecture_case_study"
+             data-resource-slug="agentic-fleet-control-plane"
+             data-resource-title="The Agentic Fleet Control Plane"
+             data-resource-type="pdf_field_guide"
              data-resource-location="agentic_fleet_page_preview">
-      <summary>Preview the architecture <span aria-hidden="true">+</span></summary>
+      <summary>Preview the field guide <span aria-hidden="true">+</span></summary>
       <div class="resource-collapsible-preview-content">
-        <h2>Architecture Preview</h2>
-        <p>Review the reference architecture page by page, or download the complete PDF for offline use or sharing.</p>
+        <h2>Fleet Control Plane Preview</h2>
+        <p>Review the six-page field guide, then download it to share with a founder, operator, or AI builder.</p>
 
         <div class="resource-carousel-shell" data-resource-carousel data-carousel-unit="Page">
           <div class="resource-carousel-header">
-            <p class="resource-carousel-count" data-carousel-count>Page 1 of 10</p>
+            <p class="resource-carousel-count" data-carousel-count>Page 1 of 6</p>
             <div class="resource-carousel-toolbar">
-              <div class="resource-carousel-controls" aria-label="Architecture page navigation">
-                <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous architecture page">&larr;</button>
-                <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next architecture page">&rarr;</button>
+              <div class="resource-carousel-controls" aria-label="Field guide page navigation">
+                <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous field guide page">&larr;</button>
+                <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next field guide page">&rarr;</button>
               </div>
-              <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand architecture page preview">
+              <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand field guide page preview">
                 <svg class="resource-expand-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
                 </svg>
-                <span class="sr-only">Expand architecture page preview</span>
+                <span class="sr-only">Expand field guide page preview</span>
               </button>
             </div>
           </div>
           <div class="resource-carousel-viewport">
             <div class="resource-carousel-track" data-carousel-track>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" src="/assets/resources/agentic-operations-architecture/slides/slide-01.png" alt="Agentic Operations Architecture cover page preview" /><figcaption>Page 1 - Reference architecture</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-02.png" alt="Agentic Operations Architecture three operating lanes page preview" /><figcaption>Page 2 - How to read the system</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-03.png" alt="Agentic Operations Architecture operating problem page preview" /><figcaption>Page 3 - The operating problem</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-04.png" alt="Agentic Operations Architecture six-layer reference architecture page preview" /><figcaption>Page 4 - The reference architecture</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-05.png" alt="Agentic Operations Architecture roles and authority page preview" /><figcaption>Page 5 - Operating roles and authority</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-06.png" alt="Agentic Operations Architecture runtime and skills implementation page preview" /><figcaption>Page 6 - An implementation pattern</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-07.png" alt="Agentic Operations Architecture intelligence routing page preview" /><figcaption>Page 7 - Intelligence routing</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-08.png" alt="Agentic Operations Architecture controlled change and recovery page preview" /><figcaption>Page 8 - Controlled change and recovery</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-09.png" alt="Agentic Operations Architecture implementation example page preview" /><figcaption>Page 9 - One implementation of the reference architecture</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-operations-architecture/slides/slide-10.png" alt="Agentic Operations Architecture stand it up page preview" /><figcaption>Page 10 - Stand it up</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" src="/assets/resources/agentic-fleet-control-plane/slides/slide-01.png" alt="Agentic Fleet Control Plane cover page preview" /><figcaption>Page 1 - The public field guide</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-02.png" alt="Agentic Fleet Control Plane operating spine page preview" /><figcaption>Page 2 - The control plane</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-03.png" alt="Agentic Fleet Control Plane employee roster page preview" /><figcaption>Page 3 - The eight AI employees</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-04.png" alt="Agentic Fleet Control Plane model router page preview" /><figcaption>Page 4 - Model routing as policy</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-05.png" alt="Agentic Fleet Control Plane engineering loop page preview" /><figcaption>Page 5 - Independent review and recovery</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-06.png" alt="Agentic Fleet Control Plane implementation recipe page preview" /><figcaption>Page 6 - A practical build recipe</figcaption></figure>
             </div>
           </div>
         </div>
       </div>
         </details>
         <a class="resource-primary-cta resource-primary-cta-featured"
-           href="/assets/downloads/agentic-operations-architecture-roman-bediner.pdf"
-           download="The-Agentic-Operations-Architecture-Roman-Bediner.pdf"
+           href="/assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf"
+           download="The-Agentic-Fleet-Control-Plane-Roman-Bediner.pdf"
            data-track-pdf-download
-           data-file-path="/assets/downloads/agentic-operations-architecture-roman-bediner.pdf">Download the architecture</a>
+           data-file-path="/assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf">Download the field guide</a>
       </div>
     </section>
 
@@ -218,12 +215,17 @@
         </article>
       </div>
       <p class="fleet-architecture-caption"><strong>The design principle:</strong> keep the infrastructure simple, then make the loops explicit. The result is an organization that can do more than a single chatbot without requiring a massive platform.</p>
+      <aside class="resource-blue-box fleet-note fleet-hivemind-note" aria-labelledby="fleet-hivemind-title">
+        <span class="fleet-note-tag">The coordination layer</span>
+        <h3 id="fleet-hivemind-title">Hivemind gives the fleet shared context</h3>
+        <p>Hivemind is the shared memory and learning loop behind the fleet. It preserves useful context, makes relevant knowledge retrievable at the moment of work, and turns completed work into reviewed evidence for the next run. <a href="https://swarmsystem.ai/playbook/hive-mind/" target="_blank" rel="noopener noreferrer">Read the public Hivemind playbook</a>.</p>
+      </aside>
     </section>
 
     <section class="resource-section fleet-case-study" aria-labelledby="fleet-case-study-title">
       <p class="fleet-kicker">A working system</p>
       <h2 id="fleet-case-study-title">What this architecture makes possible</h2>
-      <p class="resource-section-lede">The point is not that five agents exist. The point is that a small team of specialized agents can form a dependable operating system when the boundaries, loops, and evidence are designed together.</p>
+      <p class="resource-section-lede">The point is not that eight agents exist. The point is that a small team of specialized agents can form a dependable operating system when the boundaries, loops, and evidence are designed together.</p>
       <div class="fleet-proof-grid">
         <article class="fleet-proof-card fleet-proof-blue"><strong>One shared runtime</strong><p>Schedules, event triggers, authentication, tool clients, and the agent loop live in one inexpensive serverless body.</p></article>
         <article class="fleet-proof-card fleet-proof-gold"><strong>Behavior without redeploys</strong><p>Skills, memory, and personalities live in the cloud brain, so operating behavior can evolve like documentation.</p></article>
@@ -240,37 +242,55 @@
         <article class="fleet-agent fleet-agent-pm">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
           <p class="fleet-agent-role">Operating employee</p>
-          <h3>Agent: Project Manager</h3>
+          <h3>Agent | Project Manager</h3>
           <p class="fleet-agent-body">Project intelligence: action items, open loops, decisions, blockers, daily standups, and a structured tracker the whole team can read.</p>
         </article>
         <article class="fleet-agent fleet-agent-cof">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
           <p class="fleet-agent-role">Operating employee</p>
-          <h3>Agent: Chief of Staff</h3>
+          <h3>Agent | Chief of Staff</h3>
           <p class="fleet-agent-body">Knowledge work: turning meetings and signals into durable documents, profiles, briefs, and weekly digests that keep the organization aligned.</p>
         </article>
         <article class="fleet-agent fleet-agent-dir">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
           <p class="fleet-agent-role">Control-plane employee</p>
-          <h3>Agent: Director of Fleet Orchestration &amp; Engineering</h3>
+          <h3>Agent | Director of Fleet Orchestration &amp; Engineering</h3>
           <p class="fleet-agent-body">Runs and engineers the fleet: health, alerting, hand-offs, memory, cost discipline, change management, and the engineering queue.</p>
         </article>
         <article class="fleet-agent fleet-agent-cie">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
           <p class="fleet-agent-role">Engineering employee</p>
-          <h3>Agent: Continuous Improvement Engineer</h3>
+          <h3>Agent | Continuous Improvement Engineer</h3>
           <p class="fleet-agent-body">Audits cost, caching, health, and recurring friction; ranks the engineering backlog and turns improvement opportunities into actionable work.</p>
         </article>
         <article class="fleet-agent fleet-agent-staff">
           <span class="fleet-agent-bar" aria-hidden="true"></span>
           <p class="fleet-agent-role">Independent merge gate</p>
-          <h3>Agent: Staff Engineer</h3>
+          <h3>Agent | Staff Engineer</h3>
           <p class="fleet-agent-body">Runs autonomous code review against every eligible pull request, rejects unsafe changes, merges approved work, verifies production, and automatically reverts an unhealthy deployment.</p>
+        </article>
+        <article class="fleet-agent fleet-agent-revops">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Operating employee</p>
+          <h3>Agent | RevOps Engineer</h3>
+          <p class="fleet-agent-body">Turns revenue signals into clear operating intelligence, with a dedicated dashboard surface for pacing, scenarios, and decision support.</p>
+        </article>
+        <article class="fleet-agent fleet-agent-correspondent">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Operating employee</p>
+          <h3>Agent | AI Correspondent</h3>
+          <p class="fleet-agent-body">Runs the internal AI news desk, curating first-party changes and builder-relevant intelligence into timely editorial briefings.</p>
+        </article>
+        <article class="fleet-agent fleet-agent-solution">
+          <span class="fleet-agent-bar" aria-hidden="true"></span>
+          <p class="fleet-agent-role">Operating employee</p>
+          <h3>Agent | Solution Architect</h3>
+          <p class="fleet-agent-body">Drafts a grounded proposal before each Hot Seat, then learns from the room&rsquo;s verdict through a reviewed improvement loop. The room is not tested by the AI. The AI is sharpened by the room.</p>
         </article>
       </div>
       <div class="resource-blue-box fleet-note">
         <span class="fleet-note-tag">How they relate</span>
-        <p>PM and Chief of Staff are peers in their lanes. The Director is the operating manager and human-facing front door. The Continuous Improvement Engineer supplies the ranked engineering queue. The Staff Engineer stays independent of the code author, creating a second set of eyes before eligible work reaches production.</p>
+        <p>The specialist employees stay in their lanes. The Director is the operating manager and human-facing front door. The Continuous Improvement Engineer supplies the ranked engineering queue. The Staff Engineer stays independent of the code author, creating a second set of eyes before eligible work reaches production.</p>
       </div>
     </section>
 
@@ -278,14 +298,17 @@
       <p class="fleet-kicker">The organization</p>
       <h2 id="fleet-org-chart">A company-shaped system with clear accountability</h2>
       <p class="resource-section-lede">The org chart is not decoration. It defines who owns a lane, who coordinates the lanes, who reviews the code, and where human authority remains absolute.</p>
-      <div class="fleet-org-chart fleet-zoomable-diagram" role="img" aria-label="A human owner leads the agent organization. The Director manages the Project Manager, Chief of Staff, and Continuous Improvement Engineer. The Staff Engineer is an independent code review and merge gate connected to the Director's pull requests.">
+      <div class="fleet-org-chart fleet-zoomable-diagram" role="img" aria-label="A human owner leads the agent organization. The Director manages the Project Manager, Chief of Staff, RevOps Engineer, Continuous Improvement Engineer, AI Correspondent, and Solution Architect. The Staff Engineer is an independent code review and merge gate connected to the Director's pull requests.">
         <div class="fleet-org-human"><span class="fleet-org-symbol">H</span><div><strong>Human Owner</strong><span>Founder role &middot; owner of direction, spend, and protected decisions</span></div></div>
         <div class="fleet-org-connector" aria-hidden="true"></div>
         <div class="fleet-org-director"><span class="fleet-org-symbol">D</span><div><strong>Director of Fleet Orchestration &amp; Engineering</strong><span>Operating manager &middot; front door &middot; fleet memory &middot; change management</span></div></div>
         <div class="fleet-org-branches">
           <div class="fleet-org-branch"><span class="fleet-org-symbol">PM</span><strong>Project Manager</strong><span>Execution intelligence</span></div>
           <div class="fleet-org-branch"><span class="fleet-org-symbol">CoS</span><strong>Chief of Staff</strong><span>Knowledge intelligence</span></div>
+          <div class="fleet-org-branch"><span class="fleet-org-symbol">RO</span><strong>RevOps Engineer</strong><span>Revenue intelligence</span></div>
           <div class="fleet-org-branch"><span class="fleet-org-symbol">CI</span><strong>Continuous Improvement Engineer</strong><span>Backlog intelligence</span></div>
+          <div class="fleet-org-branch"><span class="fleet-org-symbol">AI</span><strong>AI Correspondent</strong><span>Editorial intelligence</span></div>
+          <div class="fleet-org-branch"><span class="fleet-org-symbol">SA</span><strong>Solution Architect</strong><span>Proposal intelligence</span></div>
         </div>
         <div class="fleet-org-independent"><span class="fleet-org-symbol">SE</span><div><strong>Staff Engineer</strong><span>Independent code review, merge, deployment verification, and rollback safety net</span></div></div>
       </div>

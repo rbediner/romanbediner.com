@@ -7,8 +7,8 @@
  * Why this exists:
  * - Prevents partial launches where nav changes land without the summary page,
  *   PDF asset, slide preview system, or locked PRD copy.
- * - Protects PRD-locked strings (sections 15.18 P1-RH-01..04, P1-FS-01..03,
- *   P1-FW-01) from accidental rewrites during visual polish.
+ * - Protects approved hub copy and PRD strings (sections 15.18 P1-RH-01..04,
+ *   P1-FS-01..03, P1-FW-01) from accidental rewrites during visual polish.
  * - Protects the PRD-locked GA4 contract (P3-AD-01) data attributes so
  *   analytics cannot silently lose required parameters.
  *
@@ -96,9 +96,10 @@ mustInclude('resources hub', resourcesHtml, 'href="/resources/pasteflow/"');
 mustInclude('summary page', summaryHtml, 'href="/framework/"');
 mustInclude('summary page', summaryHtml, 'href="/connect/"');
 
-// Resource-hub intro includes the first-party Project Manager operating guide.
-mustInclude('P1-RH-01 locked intro', resourcesHtml,
-  'These resources show the operating model in five forms: a reference architecture for agentic AI employees, a practical project-manager guide, a framework summary, an executive dashboard prototype, and a real product built from workflow friction.'
+// The approved flagship language pairs a public fleet build report with the
+// first-party Project Manager operating guide and the four established resources.
+mustInclude('P1-RH-01 flagship intro', resourcesHtml,
+  'These resources show the operating model in five forms: a flagship build report for a real AI employee fleet, a practical project-manager guide, a framework summary, an executive dashboard prototype, and a product built from workflow friction.'
 );
 mustInclude('P1-RH-01 family shelf callout', resourcesHtml, 'class="shelf-callout resource-family-callout"');
 mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"');
@@ -106,6 +107,7 @@ mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"'
 // Hub hierarchy: one flagship architecture carries the integrated artifact,
 // while the four supporting resources stay compact scan-friendly choices.
 mustInclude('flagship architecture card', resourcesHtml, 'resource-card--flagship');
+mustInclude('flagship Hivemind context', resourcesHtml, 'Hivemind coordination layer');
 if ((resourcesHtml.match(/resource-card--compact/g) || []).length !== 4) {
   fail('Resources hub must keep exactly four compact supporting resource cards.');
 }

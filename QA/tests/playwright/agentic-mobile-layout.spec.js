@@ -104,21 +104,21 @@ test('agentic resource fits a phone viewport and keeps the org chart legible', a
 
 /**
  * Invariant:
- * - The downloadable Agentic Operations Architecture must expose its approved
- *   ten-page replacement through a usable, non-overflowing mobile preview.
+ * - The downloadable Agentic Fleet Control Plane must expose its approved
+ *   six-page field guide through a usable, non-overflowing mobile preview.
  * Why this exists:
  * - The preview is the visitor's fastest way to assess the PDF before download;
  *   stale counts or a clipped disclosure make the artifact feel unreliable.
  */
-test('agentic architecture preview opens and advances through ten pages on a phone', async ({ page }) => {
+test('agentic fleet control plane preview opens and advances through six pages on a phone', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`http://${host}:${port}/resources/agentic-ai-employees/`, { waitUntil: 'networkidle' });
 
-  await page.getByText('Preview the architecture', { exact: false }).click();
-  await expect(page.getByRole('heading', { name: 'Architecture Preview' })).toBeVisible();
-  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 1 of 10');
-  await page.getByRole('button', { name: 'Next architecture page' }).click();
-  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 2 of 10');
+  await page.getByText('Preview the field guide', { exact: false }).click();
+  await expect(page.getByRole('heading', { name: 'Fleet Control Plane Preview' })).toBeVisible();
+  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 1 of 6');
+  await page.getByRole('button', { name: 'Next field guide page' }).click();
+  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 2 of 6');
 
   const preview = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -128,8 +128,8 @@ test('agentic architecture preview opens and advances through ten pages on a pho
     secondPreview: document.querySelector('img[src$="slide-02.png"]')?.getBoundingClientRect().width,
   }));
   expect(preview.scrollWidth).toBeLessThanOrEqual(preview.viewportWidth);
-  expect(preview.pageCount).toBe(10);
-  expect(preview.downloadedPath).toBe('/assets/downloads/agentic-operations-architecture-roman-bediner.pdf');
+  expect(preview.pageCount).toBe(6);
+  expect(preview.downloadedPath).toBe('/assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf');
   expect(preview.secondPreview).toBeGreaterThan(0);
 });
 
@@ -155,15 +155,15 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
     const card = page.locator('[data-resource-card="agentic-ai-employees"]');
     const preview = card.locator('.resource-card-artifact-preview');
     await expect(preview).not.toHaveAttribute('open', '');
-    await expect(card.getByText('Reference architecture.', { exact: true })).toBeVisible();
-    await expect(card.getByRole('link', { name: 'Explore the Architecture' })).toBeVisible();
+    await expect(card.getByText('Flagship build report.', { exact: true })).toBeVisible();
+    await expect(card.getByRole('link', { name: 'Explore the fleet' })).toBeVisible();
 
-    await preview.getByText('Preview the architecture', { exact: false }).click();
+    await preview.getByText('Preview the field guide', { exact: false }).click();
     await expect(preview).toHaveAttribute('open', '');
-    await expect(preview.getByRole('heading', { name: 'Architecture Preview' })).toBeVisible();
-    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 1 of 10');
-    await preview.getByRole('button', { name: 'Next architecture page' }).click();
-    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 2 of 10');
+    await expect(preview.getByRole('heading', { name: 'Fleet Control Plane Preview' })).toBeVisible();
+    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 1 of 6');
+    await preview.getByRole('button', { name: 'Next field guide page' }).click();
+    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 2 of 6');
 
     const layout = await page.evaluate(() => ({
       viewportWidth: window.innerWidth,
@@ -187,8 +187,8 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
     }));
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
     expect(layout.standalonePreview).toBe(false);
-    expect(layout.pageCount).toBe(10);
-    expect(layout.downloadedPath).toBe('/assets/downloads/agentic-operations-architecture-roman-bediner.pdf');
+    expect(layout.pageCount).toBe(6);
+    expect(layout.downloadedPath).toBe('/assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf');
     // Resource metadata must read as one component across the flagship and
     // supporting rows. Labels may vary in width with their real copy, but the
     // shared pill geometry may not vary by card context.

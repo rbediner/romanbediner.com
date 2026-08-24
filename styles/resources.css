@@ -2963,13 +2963,11 @@ body.wireframe-modal-open {
 /* Roster cards */
 .fleet-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  /* Eight named employees should scan as an intentional 4-by-2 roster. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   margin: 18px 0 0;
 }
-
-.fleet-agent:nth-child(-n + 3) { grid-column: span 2; }
-.fleet-agent:nth-child(n + 4) { grid-column: span 3; }
 
 .fleet-agent {
   position: relative;
@@ -3015,6 +3013,12 @@ body.wireframe-modal-open {
 .fleet-agent-cie .fleet-agent-role { color: #7543b1; }
 .fleet-agent-staff .fleet-agent-bar { background: #cba35a; }
 .fleet-agent-staff .fleet-agent-role { color: #9a6b1f; }
+.fleet-agent-revops .fleet-agent-bar { background: #c64c73; }
+.fleet-agent-revops .fleet-agent-role { color: #ad365c; }
+.fleet-agent-correspondent .fleet-agent-bar { background: #16829f; }
+.fleet-agent-correspondent .fleet-agent-role { color: #126a82; }
+.fleet-agent-solution .fleet-agent-bar { background: #d87800; }
+.fleet-agent-solution .fleet-agent-role { color: #ad5d00; }
 
 .fleet-agent h3 {
   margin: 0 0 8px;
@@ -3791,10 +3795,6 @@ body.wireframe-modal-open {
   .fleet-principles,
   .fleet-stack {
     grid-template-columns: 1fr;
-  }
-  .fleet-agent:nth-child(-n + 3),
-  .fleet-agent:nth-child(n + 4) {
-    grid-column: auto;
   }
   .fleet-org-chart {
     padding: 18px 14px;

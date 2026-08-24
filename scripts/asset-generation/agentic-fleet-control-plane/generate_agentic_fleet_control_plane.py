@@ -1,9 +1,9 @@
-"""Generate The Agentic Operations Architecture PDF.
+"""Generate The Agentic Fleet Control Plane PDF.
 
 This source intentionally uses vector typography, rules, cards, and diagrams so
 the downloadable artifact remains sharp, selectable, and easy to revise.
 Run with the bundled workspace Python runtime:
-  <bundled-python> scripts/asset-generation/agentic-operations-architecture/generate_agentic_operations_architecture.py
+  <bundled-python> scripts/asset-generation/agentic-fleet-control-plane/generate_agentic_fleet_control_plane.py
 """
 
 from pathlib import Path
@@ -14,8 +14,9 @@ from reportlab.pdfgen.canvas import Canvas
 
 
 # Keep all generated output in the canonical public download location.
-ROOT = Path(__file__).resolve().parents[2]
-OUTPUT = ROOT / "assets" / "downloads" / "agentic-operations-architecture-roman-bediner.pdf"
+# The generator sits three directories below the repository root.
+ROOT = Path(__file__).resolve().parents[3]
+OUTPUT = ROOT / "assets" / "downloads" / "agentic-fleet-control-plane-roman-bediner.pdf"
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 
 PAGE_W, PAGE_H = 720, 405
@@ -108,13 +109,13 @@ def rule(canvas, x1, y1, x2, y2, color=RULE, width=0.7):
     canvas.line(x1, y1, x2, y2)
 
 
-def footer(canvas, page_number, section="agentic operations architecture"):
+def footer(canvas, page_number, section="agentic fleet control plane"):
     """Match the reference's low-contrast footer treatment."""
     text(canvas, f"Roman Bediner   romanbediner.com/{section}", PAGE_W - MARGIN, 18, 7.5, HexColor("#61758E"), align="right")
     text(canvas, f"{page_number:02d}", MARGIN, 18, 7.5, HexColor("#61758E"))
 
 
-def base(canvas, page_number, section="agentic operations architecture"):
+def base(canvas, page_number, section="agentic fleet control plane"):
     """Paint the shared dark page and footer."""
     set_fill(canvas, NAVY)
     canvas.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
@@ -151,17 +152,17 @@ def card(canvas, x, y, w, h, label, heading, body, accent=BLUE):
 def cover(canvas):
     """Create a balanced editorial title page, not a centered poster lockup."""
     base(canvas, 1)
-    kicker(canvas, "The AI-enabled operations", 54, 315)
-    title(canvas, "AGENTIC OPERATIONS ARCHITECTURE", 54, 255, 31, 360)
+    kicker(canvas, "First-party build report", 54, 315)
+    title(canvas, "AGENTIC FLEET CONTROL PLANE", 54, 255, 31, 360)
     rule(canvas, 54, 128, 408, 128, BLUE, 1.2)
-    text(canvas, "Build autonomy that stays accountable.", 54, 103, 15, white, FONT_REGULAR)
-    text(canvas, "A reference architecture and first-party build report", 54, 80, 9.5, MUTED)
+    text(canvas, "Eight AI employees. One accountable operating system.", 54, 103, 15, white, FONT_REGULAR)
+    text(canvas, "A public field guide from Roman Bediner's Fractional COO work", 54, 80, 9.5, MUTED)
     rule(canvas, 480, 115, 480, 294, BLUE, 1.5)
-    text(canvas, "REFERENCE ARCHITECTURE", 502, 274, 8, BLUE, FONT_BOLD)
-    text(canvas, "01  THE STAKES", 502, 238, 10, white, FONT_BOLD)
-    text(canvas, "02  THE SYSTEM", 502, 210, 10, white, FONT_BOLD)
-    text(canvas, "03  THE ORGANIZATION", 502, 182, 10, white, FONT_BOLD)
-    text(canvas, "04  THE OPERATING LOOP", 502, 154, 10, white, FONT_BOLD)
+    text(canvas, "PUBLIC FIELD GUIDE", 502, 274, 8, BLUE, FONT_BOLD)
+    text(canvas, "01  THE CONTROL PLANE", 502, 238, 10, white, FONT_BOLD)
+    text(canvas, "02  THE EMPLOYEES", 502, 210, 10, white, FONT_BOLD)
+    text(canvas, "03  THE ROUTER", 502, 182, 10, white, FONT_BOLD)
+    text(canvas, "04  THE RELEASE LOOP", 502, 154, 10, white, FONT_BOLD)
     text(canvas, "romanbediner.com/resources/agentic-ai-employees", PAGE_W / 2, 32, 8.5, BLUE, FONT_REGULAR, "center")
 
 
@@ -183,10 +184,10 @@ def page_problem(canvas):
 
 def page_layers(canvas):
     """Show the actual end-to-end architecture from the AI Employees page."""
-    base(canvas, 3)
+    base(canvas, 2)
     kicker(canvas, "The architecture", MARGIN, 365)
     title(canvas, "The stack, end to end", MARGIN, 330, 23)
-    paragraph(canvas, "The repo is the body. The cloud brain holds behavior. Each run loads its skill, acts through clients, leaves a heartbeat, and carries work to the surfaces the organization can verify.", MARGIN, 294, 640, 10, 13, MUTED, 108)
+    paragraph(canvas, "The repo is the body. Hivemind holds shared memory and operating behavior. Each run retrieves the relevant context, acts through clients, leaves a heartbeat, and carries work to surfaces the organization can verify.", MARGIN, 294, 640, 10, 13, MUTED, 108)
 
     # Three clear lanes replace the previous collection of small floating
     # cards: trigger and behavior, execution and evidence, then surfaces.
@@ -199,9 +200,9 @@ def page_layers(canvas):
     text(canvas, "Vercel runtime", 242, 178, 16, white, FONT_BOLD)
     text(canvas, "scheduling  /  auth  /  agent loop", 242, 162, 8.5, MUTED)
     rect(canvas, 520, 163, 152, 45, CARD_ALT, PURPLE)
-    text(canvas, "THE BRAIN", 534, 190, 7.5, HexColor("#C18BFF"), FONT_BOLD)
-    text(canvas, "skill files", 534, 175, 10, white, FONT_BOLD)
-    text(canvas, "loaded at run time", 534, 164, 7.5, MUTED)
+    text(canvas, "HIVEMIND", 534, 190, 7.5, HexColor("#C18BFF"), FONT_BOLD)
+    text(canvas, "shared memory + skills", 534, 175, 8.7, white, FONT_BOLD)
+    text(canvas, "retrieved at run time", 534, 164, 7.5, MUTED)
     rule(canvas, 498, 185, 520, 185, HexColor("#C18BFF"), 1.2)
     rect(canvas, 48, 163, 142, 45, CARD_ALT, GREEN)
     text(canvas, "PROOF", 62, 190, 7.5, HexColor("#49D3C0"), FONT_BOLD)
@@ -221,29 +222,33 @@ def page_layers(canvas):
 
 
 def page_org(canvas):
-    """Describe roles, independence, and decision rights."""
-    base(canvas, 4)
-    kicker(canvas, "The organization", MARGIN, 365)
-    title(canvas, "A company-shaped system with clear accountability", MARGIN, 330, 21, 430)
-    paragraph(canvas, "Each employee has a lane, a memory, a manager, and a controlled path to action. The org chart defines who owns a lane and where human authority remains absolute.", MARGIN, 268, 640, 10, 13, MUTED, 106)
-    rect(canvas, 230, 200, 260, 34, HexColor("#142849"), BLUE)
-    text(canvas, "HUMAN OWNER", 360, 219, 10.5, white, FONT_BOLD, "center")
-    text(canvas, "direction / spend / protected decisions", 360, 207, 7.8, MUTED, FONT_REGULAR, "center")
-    rule(canvas, 360, 200, 360, 174, BLUE, 1.2)
-    rect(canvas, 190, 128, 340, 46, CARD)
-    text(canvas, "DIRECTOR OF FLEET ORCHESTRATION & ENGINEERING", 360, 150, 9.2, white, FONT_BOLD, "center")
-    text(canvas, "operating manager / front door / change management", 360, 136, 8.2, MUTED, FONT_REGULAR, "center")
-    rule(canvas, 360, 128, 360, 109, RULE)
-    for x, label, sub in [(72, "PROJECT MANAGER", "execution intelligence"), (270, "CHIEF OF STAFF", "knowledge intelligence"), (468, "CONTINUOUS IMPROVEMENT", "backlog intelligence")]:
-        rect(canvas, x, 48, 152, 54, CARD_ALT, RULE)
-        text(canvas, label, x + 76, 77, 7.6, white, FONT_BOLD, "center")
-        text(canvas, sub, x + 76, 63, 7.3, MUTED, FONT_REGULAR, "center")
-        rule(canvas, 360, 109, x + 76, 102, RULE)
-    rect(canvas, 553, 128, 131, 46, CARD, RED)
-    text(canvas, "INDEPENDENT", 618, 155, 7.5, RED, FONT_BOLD, "center")
-    text(canvas, "STAFF ENGINEER", 618, 141, 9.2, white, FONT_BOLD, "center")
-    text(canvas, "review / merge / verify / rollback", 618, 130, 6.8, MUTED, FONT_REGULAR, "center")
-    text(canvas, "A human is always in charge.", 360, 30, 11, BLUE_SOFT, FONT_BOLD, "center")
+    """Name the public fleet roles without exposing private operating details."""
+    base(canvas, 3)
+    kicker(canvas, "The employees", MARGIN, 365)
+    title(canvas, "Eight named agents. Clear jobs. One human authority boundary.", MARGIN, 330, 21, 610)
+    paragraph(canvas, "The names are public. The private channels, records, and operating instructions are not. Each role has a lane, a memory, and a controlled route to action.", MARGIN, 272, 640, 10, 13, MUTED, 108)
+    rect(canvas, 155, 224, 410, 36, HexColor("#142849"), BLUE)
+    text(canvas, "HUMAN OWNER  >  DIRECTOR OF FLEET ORCHESTRATION & ENGINEERING", 360, 240, 9.2, white, FONT_BOLD, "center")
+    text(canvas, "direction, protected decisions, and accountable operation", 360, 228, 7.5, MUTED, FONT_REGULAR, "center")
+    roles = [
+        ("PROJECT MANAGER", "work and commitments", BLUE),
+        ("CHIEF OF STAFF", "knowledge and briefs", PURPLE),
+        ("REVOPS ENGINEER", "revenue intelligence", GREEN),
+        ("IMPROVEMENT ENGINEER", "learning and backlog", ORANGE),
+        ("AI CORRESPONDENT", "editorial intelligence", BLUE),
+        ("SOLUTION ARCHITECT", "member proposals", PURPLE),
+    ]
+    positions = [(48, 162), (286, 162), (524, 162), (48, 92), (286, 92), (524, 92)]
+    for (label, sub, accent), (x, y) in zip(roles, positions):
+        rect(canvas, x, y, 148, 50, CARD_ALT, RULE)
+        canvas.setFillColor(accent)
+        canvas.rect(x, y + 47, 148, 3, fill=1, stroke=0)
+        text(canvas, label, x + 10, y + 28, 7.4, white, FONT_BOLD)
+        text(canvas, sub, x + 10, y + 14, 7.2, MUTED)
+    rect(canvas, 518, 224, 166, 36, CARD, RED)
+    text(canvas, "STAFF ENGINEER", 601, 242, 9, white, FONT_BOLD, "center")
+    text(canvas, "independent review gate", 601, 230, 7.2, RED, FONT_REGULAR, "center")
+    text(canvas, "No single agent writes, approves, and ships its own change.", 360, 42, 10.5, BLUE_SOFT, FONT_BOLD, "center")
 
 
 def page_brain_body(canvas):
@@ -267,7 +272,7 @@ def page_brain_body(canvas):
 
 def page_routing(canvas):
     """Make model choice and reliability legible as operating policy."""
-    base(canvas, 6)
+    base(canvas, 4)
     kicker(canvas, "Intelligence routing", MARGIN, 365)
     title(canvas, "The fleet does not use one model for every job", MARGIN, 330, 21, 430)
     paragraph(canvas, "Model choice becomes an operational policy. Routine work gets speed; judgment and production gates get deeper reasoning. The authority of each job stays visible.", MARGIN, 270, 430, 10.5, 14, MUTED, 64)
@@ -298,7 +303,7 @@ def page_routing(canvas):
 
 def page_run(canvas):
     """Turn the operating lifecycle into a portable build sequence."""
-    base(canvas, 7)
+    base(canvas, 5)
     kicker(canvas, "Inside a run", MARGIN, 365)
     title(canvas, "From engineering queue to verified production", MARGIN, 330, 21, 500)
     paragraph(canvas, "No single agent writes, approves, and ships its own change. The system separates initiative from authority and makes failure recoverable.", MARGIN, 272, 560, 10.5, 14, MUTED, 80)
@@ -323,7 +328,7 @@ def page_run(canvas):
 
 def page_recipe(canvas):
     """Close with a balanced two-column implementation recipe."""
-    base(canvas, 8)
+    base(canvas, 6)
     kicker(canvas, "Stand it up", MARGIN, 342)
     title(canvas, "Build autonomy that stays accountable.", 54, 286, 25, 285)
     paragraph(canvas, "A portable operating model for teams that want more autonomy without losing evidence, ownership, or recovery.", 54, 182, 260, 11, 15, MUTED, 42)
@@ -348,13 +353,13 @@ def page_recipe(canvas):
 
 
 def build():
-    """Generate the complete eight-page artifact."""
+    """Generate the complete six-page public field guide."""
     canvas = Canvas(str(OUTPUT), pagesize=(PAGE_W, PAGE_H), pageCompression=1)
-    canvas.setTitle("The Agentic Operations Architecture")
+    canvas.setTitle("The Agentic Fleet Control Plane")
     canvas.setAuthor("Roman Bediner")
-    canvas.setSubject("A practical architecture for designing accountable multi-agent work through explicit operating loops, bounded authority, independent review, operational signals, and recoverable execution.")
-    canvas.setKeywords("agentic operations, multi-agent architecture, AI operating model, operational governance, AI-enabled execution, autonomous workflows")
-    for page in [cover, page_problem, page_layers, page_org, page_brain_body, page_routing, page_run, page_recipe]:
+    canvas.setSubject("A public field guide to an accountable AI employee fleet with named roles, model routing, independent review, and recoverable execution.")
+    canvas.setKeywords("agentic AI employees, AI agent fleet, multi-agent orchestration, model routing, autonomous code review, AI operating model")
+    for page in [cover, page_layers, page_org, page_routing, page_run, page_recipe]:
         page(canvas)
         canvas.showPage()
     canvas.save()

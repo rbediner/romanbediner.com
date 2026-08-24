@@ -43,22 +43,28 @@ function hubMustInclude(label, needle) {
   }
 }
 
-mustInclude('title', '<title>Agentic AI Employees: From Request to Production</title>');
+mustInclude('title', '<title>Agentic AI Employees: Fleet Control Plane Build Report</title>');
 mustInclude('all-caps h1', '<h1>AGENTIC AI EMPLOYEES</h1>');
-mustInclude('title deck', 'From request to production');
+mustInclude('title deck', 'The fleet control plane');
 mustInclude('audience card', 'Who This Is For');
-mustInclude('condensed hero callout', 'Agents preserve memory, review code, merge safely, deploy, and report results.');
+mustInclude('condensed hero callout', 'I built and operate an eight-employee AI fleet for Agentic Society.');
 mustNotInclude('duplicated hero lede', 'A fleet of autonomous AI employees that observe work');
 // The hub names the downloadable artifact for what it is; “build report” was
 // ambiguous once the preview and the canonical PDF became one architecture.
-hubMustInclude('hub classification support', 'Reference architecture.');
-hubMustInclude('hub architecture action', 'Explore the Architecture');
+hubMustInclude('hub classification support', 'Flagship build report.');
+hubMustInclude('hub fleet action', 'Explore the fleet');
 mustInclude('SEO phrase', 'autonomous code review');
-mustInclude('Project Manager roster card', 'Agent: Project Manager');
-mustInclude('Chief of Staff roster card', 'Agent: Chief of Staff');
-mustInclude('Director roster card', 'Agent: Director of Fleet Orchestration &amp; Engineering');
-mustInclude('Continuous Improvement Engineer roster card', 'Agent: Continuous Improvement Engineer');
-mustInclude('Staff Engineer roster card', 'Agent: Staff Engineer');
+mustInclude('Project Manager roster card', 'Agent | Project Manager');
+mustInclude('Chief of Staff roster card', 'Agent | Chief of Staff');
+mustInclude('Director roster card', 'Agent | Director of Fleet Orchestration &amp; Engineering');
+mustInclude('Continuous Improvement Engineer roster card', 'Agent | Continuous Improvement Engineer');
+mustInclude('Staff Engineer roster card', 'Agent | Staff Engineer');
+mustInclude('RevOps Engineer roster card', 'Agent | RevOps Engineer');
+mustInclude('AI Correspondent roster card', 'Agent | AI Correspondent');
+mustInclude('Solution Architect roster card', 'Agent | Solution Architect');
+mustInclude('field guide title', 'The Agentic Fleet Control Plane');
+mustInclude('Hivemind coordination layer', 'Hivemind gives the fleet shared context');
+mustInclude('public Hivemind playbook', 'https://swarmsystem.ai/playbook/hive-mind/');
 mustInclude('org chart', 'fleet-org-chart');
 mustInclude('autonomy model', 'class="fleet-autonomy-grid"');
 mustInclude('engineering loop', 'fleet-engineering-flow');

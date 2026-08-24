@@ -26,9 +26,9 @@ This repository enforces static-site architecture through automated Node, Python
 - Files: `QA/tests/test-home-hero-layout.js`, `QA/tests/test-home-spacing-contract.js`, `QA/tests/test-about-redesign.js`, `QA/tests/test-about-hero-contract.js`, `QA/tests/test-operating-philosophy.js`, `QA/tests/test-connect-page.js`, `QA/tests/test_contact_form.py`, `QA/tests/test-insights-layout.js`, `QA/tests/test_insights_layout.py`, `QA/tests/test-insights-system.js`
 - Validates route-specific DOM, copy structure, visual guardrails, connect form hooks, and insights toggle/card behavior.
 
-6. Agentic Operations Architecture artifact and staging integration
-- Files: `QA/tests/test-agentic-operations-architecture-artifact.js`, `QA/tests/test-agentic-operations-architecture-integration.js`, `scripts/asset-generation/agentic-operations-architecture/generate_agentic_operations_architecture.py`
-- Validates the ten-page downloadable reference architecture, its ten visual preview pages, the direct resource CTA, the resource hub carousel, and the shared `resource_pdf_download` Google Analytics attributes.
+6. Agentic Fleet Control Plane artifact and staging integration
+- Files: `QA/tests/test-agentic-fleet-control-plane-artifact.js`, `QA/tests/test-agentic-fleet-control-plane-integration.js`, `scripts/asset-generation/agentic-fleet-control-plane/generate_agentic_fleet_control_plane.py`
+- Validates the six-page downloadable field guide, its six visual preview pages, the direct resource CTA, the resource hub carousel, and the shared `resource_pdf_download` Google Analytics attributes.
 
 7. Repository hygiene and automation guardrails
 - Files: `QA/tests/test-no-legacy-references.js`, `QA/tests/test-js-header-comments.js`, `QA/tests/test-repo-hygiene.js`, `QA/tests/test-readme-drift.js`, `QA/tests/test-qa-runner-script.js`, `QA/tests/test-release-sop-automation.js`, `QA/tests/jest/readme_structure.test.js`, `QA/tests/jest/readme_integrity.test.js`, `QA/tests/jest/scripts_comment_headers.test.js`
