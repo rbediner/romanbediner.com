@@ -1,5 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-24: Deep Agent Builder Starter Prompt — staging candidate
+
+- Product commit `4e3ebb3` replaces the former 2,364-word starter with the exact 10,132-word `Agent Builder Starter Prompt v2` supplied by Roman. It remains the canonical first-party Markdown download at `assets/downloads/agent-builder-starter-prompt.md`; no page routes, copy controls, analytics attributes, or external links changed.
+- The artifact is now a beginner-led implementation guide. Its Section 12 opens with an interview that asks one plain-language question at a time, then builds in nine deliberate stages with explicit owner check-ins. The companion sections establish the actual controls a cloud-run agent needs: durable period claims before side effects, declared audience and action limits, per-agent stop button, run record and separate monitoring job, loud failure, DST-aware scheduling, least-privilege identity, stable-prefix prompt caching, canary promotion, bounded self-healing, shared-memory review, and a CI-enforced launch gate.
+- Public-safety validation confirms the replacement has no external URLs, no embedded executable content, no secrets, and no links to private Agentic Society/Hivemind properties. The existing public contract test covers the canonical download, both Resources-surface copy/download affordances, same-origin fetch behavior, essential practical sections, and the no-external-link boundary.
+- Focused validation passed: `node QA/tests/test-agent-builder-starter-prompt.js`, `git diff --check`, Drive-drift fix/check, and release-watcher status. This is staging-only. Do not promote it to `prod` until Roman reviews the deployed prompt; do not modify the separate PDF candidate, which remains on hold at Roman's direction.
+- The required `SEO Authority PRD` update remains blocked because the self-hosted Google Workspace MCP refresh token for `roman@romanbediner.com` returns `invalid_grant: refresh token does not exist`. Do not use the stock connector or local Drive mount; reauthorize first, then record the expanded starter-prompt implementation-guide decision.
+
 ## Latest: 2026-08-24: Agentic Fleet Build Guide deep rebuild — staging candidate
 
 - Product commit `da79b2e` replaces the thin twelve-page PDF with a 24-page **Agentic Fleet Build Guide**. It is now a true construction manual, not a philosophical companion: job canvas, fully worked Morning Market Brief, acceptance criteria, living PRD, repository and personality/skill/eval files, managed-cloud layers, trigger/idempotent state, least-privilege identity, model routing, stable-prefix caching, Hivemind memory lifecycle, Slack review, observability, loud failure matrix, bounded self-healing, independent engineering loop, QA matrix, pilot scorecard, public roster, scaling contract, and direct Starter Prompt handoff.
@@ -351,10 +359,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 400
-- Updated At (UTC): 2026-08-24T22:52:17Z
+- Handoff Sequence: 401
+- Updated At (UTC): 2026-08-24T23:10:37Z
 - Source Branch: staging
-- Source Commit: da79b2e1aeb20074b51492ab1af1dcdc36dce53d (pre-handoff baseline)
+- Source Commit: 4e3ebb328388f47dc37915f81b7119cf1d20ec95 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
