@@ -1,5 +1,15 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-24: Agent Builder Starter Prompt added to the agentic flagship resource
+
+- Product commit `9b834a6f87414993d5afb29da23cba200191c129` on `staging` adds the downloadable, copy-ready Markdown artifact `assets/downloads/agent-builder-starter-prompt.md`. It is a 2,364-word construction contract for one cloud-run AI employee, not another PDF summary.
+- The artifact begins with a one-job, one-source, one-output, one-approver contract and includes bracketed placeholders; a completed Morning Market Brief example; the required PRD, architecture, runbook, personality, skills, and eval files; cloud routine; least-privilege and durable-state rules; model routing and safe caching; run evidence; loud failure; bounded self-healing; human-controlled PR delivery; and a first-production-run scorecard with failure tests.
+- `/resources/agentic-ai-employees/` presents the artifact as a calm paired action beneath the existing build-guide surface. `/resources/` keeps it inside the established Agentic AI Employees flagship card. Both pages provide canonical Markdown download and progressive copy actions. The current twelve-page PDF remains live and unchanged for now.
+- `scripts/runtime/agent-builder-starter-prompt.js` fetches only the same-origin Markdown asset and copies plain text. Non-PDF downloads use the existing `resource_download` runtime event with the same resource context and `file_path` payload as the resource contract. The event is now documented in `README.md`.
+- Validation passed locally: `node QA/tests/test-agent-builder-starter-prompt.js`; focused Playwright `agentic-mobile-layout.spec.js` (9/9), including actual copy behavior and phone overflow checks; `npm run test:node`; `npm run test:jest` (20 suites, 73 tests); direct Chromium visual inspection of the new flagship card and Resources-hub prompt action at 390px; `git diff --check`; and Drive-drift fix/check.
+- The required `SEO Authority PRD` update remains blocked. The self-hosted Google Workspace MCP call as `roman@romanbediner.com` returns `invalid_grant: refresh token does not exist`; do not use the stock Drive connector or local Drive mount as a fallback. Reauthorize the connection, then record the starter-prompt artifact, Markdown-copy UX, and `resource_download` measurement decision.
+- No production promotion was attempted. Push the product commit to `staging`, wait for the matching green CI and Deploy Staging run, verify `/resources/agentic-ai-employees/` and `/resources/` on the preview, then seek Roman’s visual approval before considering the deeper PDF rebuild or any production promotion.
+
 ## Latest: 2026-08-24: Agentic Fleet Build Guide flagship resource — staging candidate
 
 - Replaced the lazy six-page control-plane summary with the twelve-page `Agentic Fleet Build Guide`, a public implementation artifact at `assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`. It teaches the first useful agent, managed cloud layers, shared memory, model routing, caching, integrations, reliability, independent engineering review, economics, the PRD contract, a first-ten-moves sequence, and release readiness. The canonical preview images are rendered directly from that PDF and hash-locked in `assets/resources/agentic-fleet-build-guide/preview-manifest.json`.
@@ -325,10 +335,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 395
-- Updated At (UTC): 2026-08-24T20:52:36Z
+- Handoff Sequence: 397
+- Updated At (UTC): 2026-08-24T21:39:14Z
 - Source Branch: staging
-- Source Commit: e3d5dc8e58441045311936e0976b8364dc00c051 (pre-handoff baseline)
+- Source Commit: 9b834a6f87414993d5afb29da23cba200191c129 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
