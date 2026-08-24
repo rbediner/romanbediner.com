@@ -139,6 +139,39 @@ test('agentic fleet build guide preview opens, advances, and closes on a phone',
 
 /**
  * Invariant:
+ * - The first-agent Markdown construction contract is reachable and copyable
+ *   from both existing agentic resource surfaces.
+ * Why this exists:
+ * - A real build artifact must survive without the PDF preview and cannot be
+ *   hidden behind a new route or a JavaScript-only download flow.
+ */
+test('agent builder starter prompt downloads and copies from the flagship and hub', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async (value) => { window.__copiedAgentBuilderStarter = value; },
+      },
+    });
+  });
+
+  for (const route of ['/resources/agentic-ai-employees/', '/resources/']) {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`http://${host}:${port}${route}`, { waitUntil: 'networkidle' });
+    const download = page.getByRole('link', { name: 'Download the starter prompt' });
+    await expect(download).toHaveAttribute('href', '/assets/downloads/agent-builder-starter-prompt.md');
+    await page.getByRole('button', { name: 'Copy the starter prompt' }).click();
+    await expect(page.getByRole('button', { name: 'Copied the starter prompt' })).toBeVisible();
+    const copied = await page.evaluate(() => window.__copiedAgentBuilderStarter || '');
+    expect(copied).toContain('# Agent Builder Starter Prompt');
+    expect(copied).toContain('Nothing fails silently.');
+    const width = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, viewportWidth: window.innerWidth }));
+    expect(width.scrollWidth).toBeLessThanOrEqual(width.viewportWidth);
+  }
+});
+
+/**
+ * Invariant:
  * - The Resources hub keeps the downloadable architecture inside the Agentic
  *   AI Employees card and renders pages from the current canonical PDF.
  * Why this exists:

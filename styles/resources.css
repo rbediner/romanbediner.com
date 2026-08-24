@@ -2721,6 +2721,70 @@ body.wireframe-modal-open {
   white-space: nowrap;
 }
 
+/* The starter prompt is a second artifact inside the same flagship narrative.
+   It is intentionally lighter than the PDF preview so the guide remains the
+   page's principal visual surface while the practical first step stays clear. */
+.resource-fleet-main .agent-builder-starter-cta {
+  margin-top: 22px;
+  padding: 24px 28px;
+  border-color: rgba(59, 108, 255, 0.22);
+  background: #ffffff;
+}
+
+.resource-fleet-main .agent-builder-starter-cta h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.resource-fleet-main .agent-builder-starter-cta > p:not(.fleet-note-tag) {
+  margin: 12px 0 0;
+  color: var(--text-secondary);
+}
+
+.agent-builder-starter-actions,
+.resource-starter-prompt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.agent-builder-starter-actions .resource-companion-cta,
+.resource-starter-prompt-actions .resource-companion-cta {
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+.agent-builder-starter-note {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Keep the starter prompt inside the existing flagship resource card. It is
+   a functional artifact handoff, not a new competing feature card. */
+.resource-starter-prompt-inline {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(59, 108, 255, 0.18);
+}
+
+.resource-starter-prompt-inline p {
+  max-width: 720px;
+  margin: 0;
+}
+
+.resource-starter-prompt-actions .resource-text-cta {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
 .resource-fleet-main .resource-collapsible-preview {
   margin-top: 28px;
   border-top: 1px solid rgba(59, 108, 255, 0.22);
@@ -3770,6 +3834,22 @@ body.wireframe-modal-open {
     grid-row: auto;
     justify-self: start;
     white-space: normal;
+  }
+  .resource-fleet-main .agent-builder-starter-cta {
+    padding: 22px 18px;
+  }
+  .resource-fleet-main .agent-builder-starter-cta h2 {
+    font-size: 28px;
+  }
+  .agent-builder-starter-actions,
+  .resource-starter-prompt-actions {
+    align-items: stretch;
+  }
+  .agent-builder-starter-actions .resource-primary-cta,
+  .agent-builder-starter-actions .resource-companion-cta,
+  .resource-starter-prompt-actions .resource-companion-cta {
+    width: 100%;
+    justify-content: center;
   }
   .resource-fleet-main .resource-fleet-artifact-actions {
     grid-template-columns: minmax(0, 1fr);

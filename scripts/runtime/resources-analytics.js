@@ -5,6 +5,7 @@
  * - Events (locked in PRD P3-AD-01 + source telemetry extension):
  *     resource_card_click
  *     resource_pdf_download
+ *     resource_download
  *     resource_source_code_click
  *     resource_external_cta_click
  *   (resource_preview_expand is emitted by resources-carousel.js on modal open.)
@@ -17,6 +18,7 @@
  * Event parameter contract (PRD P3-AD-01):
  *   resource_card_click:     resource_slug, resource_title, resource_type, resource_location
  *   resource_pdf_download:   resource_slug, resource_title, resource_type, resource_location, file_path
+ *   resource_download:       resource_slug, resource_title, resource_type, resource_location, file_path
  *   resource_source_code_click: resource_slug, resource_title, resource_type, resource_location, destination, cta_label
  *   resource_external_cta_click: resource_slug, resource_title, resource_type, resource_location, destination, cta_label, external_url_type
  *   resource_preview_expand: resource_slug, resource_title, resource_type, resource_location, slide_index
@@ -30,7 +32,8 @@
  *
  * Migration considerations:
  * - Any resource card must carry the four data-resource-* attributes listed below.
- * - Any downloadable resource link must carry data-track-pdf-download and data-file-path.
+ * - PDF links carry data-track-pdf-download; other downloadable resources
+ *   carry data-track-resource-download. Both require data-file-path.
  * - Source-code links must carry data-track-dashboard-source-code.
  */
 (function initResourcesAnalytics() {

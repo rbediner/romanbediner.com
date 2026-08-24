@@ -242,6 +242,7 @@ Required handoff content for cross-machine continuity:
 - Resources telemetry in `/scripts/runtime/resources-analytics.js` and `/scripts/runtime/resources-carousel.js` emits the locked PRD P3-AD-01 contract:
   - `resource_card_click` — fires on a resource card's primary CTA click; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`
   - `resource_pdf_download` — fires on click of any `[data-track-pdf-download]` download link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `file_path`
+  - `resource_download` — fires on click of any `[data-track-resource-download]` non-PDF artifact link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `file_path`
   - `resource_source_code_click` — fires on click of any `[data-track-dashboard-source-code]` link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `destination`, `cta_label`
   - `resource_external_cta_click` — fires on click of any `[data-track-resource-external-cta]` link; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `destination`, `cta_label`, `external_url_type`
   - `resource_preview_expand` — fires from `resources-carousel.js` on Expand Preview modal open; required params: `resource_slug`, `resource_title`, `resource_type`, `resource_location`, `slide_index`
@@ -257,6 +258,9 @@ Required handoff content for cross-machine continuity:
   - `framework_nav_click`
   - `scroll_depth`
   - `connect_intent`
+  - `resource_card_click`
+  - `resource_pdf_download`
+  - `resource_download`
   - `resource_source_code_click`
   - `resource_external_cta_click`
   - `fleet_diagram_fullscreen`
@@ -313,7 +317,8 @@ This section documents what's *built on top of* the raw GA4 events above, not th
 - Resource assets:
 - `/assets/resources/framework-summary/ai-enabled-operations-framework-summary.pdf`
 - `/assets/resources/framework-summary/slides/`
-- `/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`
+  - `/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`
+  - `/assets/downloads/agent-builder-starter-prompt.md`
 - `/assets/resources/agentic-fleet-build-guide/slides/`
 - `/scripts/asset-generation/agentic-fleet-build-guide/generate_agentic_fleet_build_guide.py`
 - `/assets/resources/ai-enabled-operations-dashboard/dashboard-home-mobile-preview.png`
@@ -324,6 +329,7 @@ This section documents what's *built on top of* the raw GA4 events above, not th
   - `/resources/` opens with the shared shelf-callout family treatment (vertical blue rule, blue-tinted bg) and closes with a forward-only site-family nav block (`.next-page-nav resources-forward-nav`) to `/framework/`. The inset companion panel (`resources-inset-cta`) no longer exists on this page.
   - `/resources/` includes the complete twelve-page preview and download CTA for `Agentic Fleet Build Guide`; the preview is rendered from the approved canonical PDF and carries the `agentic-ai-employees` GA4 resource context.
   - `/resources/agentic-ai-employees/` includes one unified Agentic Fleet Build Guide card with a collapsed reusable twelve-page preview, a visible full-screen `Close preview` action, and a primary Download the build guide pill. Both CTAs use the shared `resource_pdf_download` event contract with `file_path` set to `/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`.
+  - The same flagship page and its Resources-hub card expose the downloadable **Agent Builder Starter Prompt** as a paired practical first step. The canonical Markdown file is copyable on-page when JavaScript is available and still downloadable without JavaScript. It requires a one-job, one-source, one-output, one-approver MVP; a worked Morning Market Brief example; a practical file package; cloud routine; scoped credential, routing, caching, observability, and self-healing limits; and a first-production-run scorecard. The artifact is public-safe and does not expose internal fleet routes, credentials, or operating instructions.
   - Artifact naming is content-led: reserve `brief` and `field guide` for truthful scopes. This substantive, practical implementation artifact is named `Agentic Fleet Build Guide`.
   - Its shared carousel runtime uses `resources-carousel.js?v=20260824a`, so a browser receives the correct `Page 1 of 12` language, visible close control, and PDF-preview navigation. Artifact QA opens the collapsed preview, advances one page, confirms the full-screen exit, verifies the canonical download target, and checks no horizontal overflow at desktop and 390px phone width.
   - `/resources/ai-enabled-operations-framework-summary/` opens with the same shelf-callout family, keeps `Who This Is For` as a restrained non-interactive companion card (`.resource-blue-box`), and moves the locked conversational paragraph into a `.resource-conversation-card` (card surface, no vertical blue rule) below the preview/CTA cluster.
