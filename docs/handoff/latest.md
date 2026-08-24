@@ -1,5 +1,14 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-24: Agentic Fleet Control Plane flagship resource — staging candidate
+
+- Repositioned `/resources/agentic-ai-employees/` as the flagship first-person build report for Roman Bediner's Fractional COO work with Agentic Society. The page now names all eight public roles: Project Manager, Chief of Staff, Director of Fleet Orchestration & Engineering, Continuous Improvement Engineer, Staff Engineer, RevOps Engineer, AI Correspondent, and Solution Architect. It intentionally excludes internal routes, IDs, schedules, contacts, and operational instructions.
+- Replaced the retired ten-page Agentic Operations Architecture with the six-page `Agentic Fleet Control Plane` field guide. The canonical download is `assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf`; the preview images are rendered directly from it and locked in `assets/resources/agentic-fleet-control-plane/preview-manifest.json`. Both the flagship page and `/resources/` use the same closed-by-default carousel and canonical download target.
+- Added Hivemind as the fleet's public shared coordination layer: shared memory, relevant-context retrieval, and reviewed evidence. The flagship page links to the public Hivemind Playbook at `https://swarmsystem.ai/playbook/hive-mind/`; the field guide visualizes Hivemind beside the runtime without exposing implementation details.
+- Kept global navigation unchanged. Instead, Home, About, Services, and Framework contextually link to the flagship resource, preserving the deliberate five-link navigation while creating crawlable internal paths to the proof page. Updated resource metadata, TechArticle JSON-LD, sitemap dates, README, card-surface guidance, and the focused QA contracts.
+- Local validation passed after the final Hivemind update: `npm run test:node`; `npm run test:playwright` (18/18); artifact metadata/hash checks; `git diff --check`; and `scripts/clean-drive-drift.sh --fix` plus `--check`. Product commit on `staging`: `52d8142` before rebase.
+- The required live `SEO Authority PRD` Google Doc update is blocked because the self-hosted Google Workspace MCP refresh token returns `invalid_grant`. Reauthorize that connection before the next PRD update; no stock-connector fallback was used.
+
 ## Latest: 2026-08-24: Verified 100/100 AI-readiness production release
 
 - Product commit `fd79fce0aa0ee20190450ebb2ed794649d51c9b2` is live on `prod`. Production CI run `32760209536` and Deploy Pages run `32760209462` both passed; `npm run release:verify-prod -- --sha fd79fce0aa0ee20190450ebb2ed794649d51c9b2` passed the 17-route live smoke suite.
