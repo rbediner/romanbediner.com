@@ -1,5 +1,20 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-24: Agentic Fleet Build Guide deep rebuild — staging candidate
+
+- Product commit `da79b2e` replaces the thin twelve-page PDF with a 24-page **Agentic Fleet Build Guide**. It is now a true construction manual, not a philosophical companion: job canvas, fully worked Morning Market Brief, acceptance criteria, living PRD, repository and personality/skill/eval files, managed-cloud layers, trigger/idempotent state, least-privilege identity, model routing, stable-prefix caching, Hivemind memory lifecycle, Slack review, observability, loud failure matrix, bounded self-healing, independent engineering loop, QA matrix, pilot scorecard, public roster, scaling contract, and direct Starter Prompt handoff.
+- The canonical PDF remains `assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`. All 24 preview images were regenerated directly from that file at 150 DPI and are hash-locked in `assets/resources/agentic-fleet-build-guide/preview-manifest.json`. Both flagship surfaces now state `Page 1 of 24` and retain the same analytics, canonical file path, in-card preview, keyboard/full-screen exit behavior, and Starter Prompt actions.
+- The public roster names the Human Owner, Director of Fleet Orchestration and Engineering, Staff Engineer, Project Manager, Chief of Staff, RevOps Engineer, Improvement Engineer, AI Correspondent, and Solution Architect while preserving private channels, records, routes, schedules, credentials, and operating details.
+- Fixed the Resources metadata-pill phone regression uncovered by the 24-page carousel regression pass. Pill text now stays on one line at phone widths, preserving the approved 34px shared metadata rhythm without overflow.
+- Validation passed locally: PDF metadata confirms 24 pages; page renders visually inspected at cover, project anatomy, Hivemind, Slack review, public roster, and Starter Prompt handoff; focused artifact and integration contracts; `npm run test:node`; `npm run test:jest` (20 suites, 73 tests); mobile Playwright `agentic-mobile-layout.spec.js` (9/9); `git diff --check`; and Drive-drift fix/check. The PDF is staging-only until Roman reviews it.
+- The required `SEO Authority PRD` update remains blocked: the self-hosted Google Workspace MCP refresh token for `roman@romanbediner.com` returns `invalid_grant: refresh token does not exist`. Do not use the stock connector or local Drive mount; reauthorize first, then record the build-guide depth, preview count, and starter-prompt relationship.
+
+## Latest: 2026-08-24: Approved Agentic AI Employees and Starter Prompt production release
+
+- Roman approved the web-and-Starter-Prompt phase. Exact staging-tested commit `f0d1fe883d898a6914539d24e46a391ba02e369d` is live on `prod`.
+- Production CI run `32785123912` and Deploy Pages run `32785123759` succeeded. `npm run release:verify-prod -- --sha f0d1fe883d898a6914539d24e46a391ba02e369d` passed the 17-route live smoke suite; direct production checks confirmed the Agentic AI Employees page and `/assets/downloads/agent-builder-starter-prompt.md` return 200, and the live page exposes the download and copy controls.
+- Production still intentionally serves the prior 12-page guide. Do not treat that PDF as final. The deep 24-page replacement above is the new separate staging candidate and needs Roman's visual review before promotion.
+
 ## Latest: 2026-08-24: Agent Builder Starter Prompt added to the agentic flagship resource
 
 - Product commit `9b834a6f87414993d5afb29da23cba200191c129` on `staging` adds the downloadable, copy-ready Markdown artifact `assets/downloads/agent-builder-starter-prompt.md`. It is a 2,364-word construction contract for one cloud-run AI employee, not another PDF summary.
@@ -336,10 +351,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 399
-- Updated At (UTC): 2026-08-24T21:45:46Z
+- Handoff Sequence: 400
+- Updated At (UTC): 2026-08-24T22:52:17Z
 - Source Branch: staging
-- Source Commit: f0d1fe883d898a6914539d24e46a391ba02e369d (pre-handoff baseline)
+- Source Commit: da79b2e1aeb20074b51492ab1af1dcdc36dce53d (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
