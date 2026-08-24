@@ -32,6 +32,7 @@ try {
 
 const personSchema = homepageSchemas.find((schema) => schema['@type'] === 'Person');
 const websiteSchema = homepageSchemas.find((schema) => schema['@type'] === 'WebSite');
+const organizationSchema = homepageSchemas.find((schema) => schema['@type'] === 'Organization');
 
 if (!personSchema) {
   console.error('FAIL: homepage must include a Person JSON-LD block.');
@@ -39,6 +40,10 @@ if (!personSchema) {
 }
 if (!websiteSchema) {
   console.error('FAIL: homepage must include a WebSite JSON-LD block.');
+  process.exit(1);
+}
+if (!organizationSchema) {
+  console.error('FAIL: homepage must include an Organization JSON-LD block.');
   process.exit(1);
 }
 
@@ -71,6 +76,17 @@ if (!Array.isArray(websiteSchema.about) || websiteSchema.about.length < 4) {
 }
 
 console.log('PASS: homepage Person and WebSite schema are present and complete.');
+
+if (organizationSchema.contactPoint?.['@type'] !== 'ContactPoint' || organizationSchema.contactPoint?.url !== 'https://romanbediner.com/connect/') {
+  console.error('FAIL: Organization schema must point business inquiries to the canonical Connect contact point.');
+  process.exit(1);
+}
+if (organizationSchema.address?.['@type'] !== 'PostalAddress' || organizationSchema.address?.addressLocality !== 'Raleigh' || organizationSchema.address?.addressRegion !== 'NC' || organizationSchema.address?.addressCountry !== 'US') {
+  console.error('FAIL: Organization schema must include the approved Raleigh, NC PostalAddress.');
+  process.exit(1);
+}
+
+console.log('PASS: Organization schema exposes an approved contact point and regional address.');
 
 const insightsPath = path.resolve(__dirname, '..', '..', 'framework', 'index.html');
 const insightsHtml = fs.readFileSync(insightsPath, 'utf8');

@@ -20,6 +20,7 @@ const canonicalPages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
+  'privacy/index.html',
   'framework/index.html',
   'resources/index.html',
   'resources/ai-project-manager/index.html',
@@ -87,6 +88,10 @@ if (!fs.existsSync(path.join(root, 'resources', 'ai-enabled-operations-framework
 if (!fs.existsSync(path.join(root, 'resources', 'pasteflow', 'index.html'))) {
   failures += 1;
   console.error('FAIL: /resources/pasteflow/ page is missing.');
+}
+if (!fs.existsSync(path.join(root, 'privacy', 'index.html'))) {
+  failures += 1;
+  console.error('FAIL: /privacy/ trust-anchor page is missing.');
 }
 if (!fs.existsSync(path.join(root, 'insights', 'index.html'))) {
   failures += 1;

@@ -354,7 +354,7 @@ test('every canonical route remains viewport-safe at desktop and phone widths', 
   const routes = [
     '/', '/about/', '/resources/', '/resources/ai-project-manager/', '/resources/agentic-ai-employees/',
     '/resources/ai-enabled-operations-framework-summary/', '/resources/ai-enabled-operations-dashboard/',
-    '/resources/pasteflow/', '/services/', '/connect/', '/framework/',
+    '/resources/pasteflow/', '/services/', '/connect/', '/privacy/', '/framework/',
     '/framework/opportunity/productizing-operations/', '/framework/design/operations-as-product/',
     '/framework/integration/ai-operating-layer/', '/framework/execution/operational-lanes/',
     '/framework/signals/operational-signals/', '/framework/evolution/agentic-guardrails/',

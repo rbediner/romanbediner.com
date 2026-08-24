@@ -46,6 +46,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://romanbediner.com/privacy/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://romanbediner.com/framework/</loc>
     <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>

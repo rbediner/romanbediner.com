@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://romanbediner.com/sitemap.xml
+
+# Public guide for AI agents and other machine readers.
+Agent-guide: https://romanbediner.com/llms.txt

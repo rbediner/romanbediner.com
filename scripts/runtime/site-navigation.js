@@ -25,6 +25,11 @@ const NAV_LINKS = [
   { label: "Connect", href: "/connect/", cta: true }
 ];
 
+// Footer privacy is injected from the shared runtime so every public page exposes the same trust-anchor route.
+const FOOTER_LINKS = [
+  { label: "Privacy", href: "/privacy/" }
+];
+
 // Normalize paths so active-state matching is stable with or without trailing slashes.
 function normalizePath(pathname) {
   if (pathname === "/") {
@@ -70,6 +75,21 @@ function renderSharedNav(navElement) {
     }
     return `<a href="${resolvedHref}">${link.label}</a>`;
   }).join("");
+}
+
+// Preserve page-specific footer ordering while adding the shared privacy destination once.
+function renderSharedFooterLinks() {
+  const basePath = resolveBasePath();
+  document.querySelectorAll(".footer-nav").forEach((footerNav) => {
+    FOOTER_LINKS.forEach((link) => {
+      const resolvedHref = resolveNavHref(link.href, basePath);
+      if (footerNav.querySelector(`a[href="${link.href}"], a[href="${resolvedHref}"]`)) return;
+      const anchor = document.createElement("a");
+      anchor.href = resolvedHref;
+      anchor.textContent = link.label;
+      footerNav.appendChild(anchor);
+    });
+  });
 }
 
 // Resolve the canonical nav destination that should be marked active for a route.
@@ -276,6 +296,7 @@ function applyActiveNavState(navElement, activePath) {
 
   renderSharedNav(desktopNav);
   renderSharedNav(mobileNav);
+  renderSharedFooterLinks();
   applyAdvisoryBrandLockups();
   bindGlobalLinkTracking();
   trackConnectIntentNavigation();

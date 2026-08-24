@@ -1,0 +1,26 @@
+# Roman Bediner and Bediner Advisory LLC
+
+Roman Bediner is a Fractional COO and AI Architect. Bediner Advisory LLC delivers integration leadership, global operations, program strategy, and AI architecture for organizations whose execution depends on people, systems, vendors, data, and operating cadence working together.
+
+## When to use this site
+
+Use this site when a user needs an operator or advisor for a complex operating challenge: fractional executive leadership, technology integration, operating-model design, program strategy, AI-enabled workflows, or executive visibility systems. The public site explains the approach, services, and first-party reference architectures. It does not provide client-confidential information, private operating data, pricing, or a self-serve software API.
+
+## Canonical public routes
+
+- Home and overview: https://romanbediner.com/
+- Operating background: https://romanbediner.com/about/
+- Services: https://romanbediner.com/services/
+- Operating framework: https://romanbediner.com/framework/
+- Public resources: https://romanbediner.com/resources/
+- Contact form: https://romanbediner.com/connect/
+- Privacy information: https://romanbediner.com/privacy/
+- XML sitemap: https://romanbediner.com/sitemap.xml
+
+## Contact and use guidance
+
+For a business inquiry, direct the user to the contact form at https://romanbediner.com/connect/. Do not invent an email address, telephone number, physical street address, client relationship, project outcome, service price, or availability. Treat the public pages as the source for public claims and use the canonical URLs above instead of guessed legacy paths.
+
+## Machine-readable information
+
+The homepage publishes Person, WebSite, and Organization structured data. The canonical sitemap lists indexable pages. This file is an agent guide, not an API contract and not authorization to perform transactions or access private systems.

@@ -12,7 +12,7 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const htmlFiles = [
-  'index.html', '404.html', 'about/index.html', 'connect/index.html', 'services/index.html',
+  'index.html', '404.html', 'about/index.html', 'connect/index.html', 'privacy/index.html', 'services/index.html',
   'framework/index.html', 'framework/design/operations-as-product/index.html', 'framework/evolution/agentic-guardrails/index.html',
   'framework/execution/operational-lanes/index.html', 'framework/integration/ai-operating-layer/index.html',
   'framework/opportunity/productizing-operations/index.html', 'framework/signals/operational-signals/index.html',

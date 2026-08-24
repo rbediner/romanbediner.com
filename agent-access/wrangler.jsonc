@@ -1,0 +1,33 @@
+{
+  // Worker configuration is source-controlled so future route changes cannot drift in the dashboard.
+  "name": "romanbediner-agent-access",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-08-24",
+  "account_id": "a00e5c592f3d32a0258528122cecde89",
+  "workers_dev": false,
+  "vars": {
+    "ORIGIN_BASE_URL": "https://rbediner.github.io/romanbediner.com/"
+  },
+  "env": {
+    "staging": {
+      "name": "romanbediner-agent-access-staging",
+      "workers_dev": true,
+      "vars": {
+        "ORIGIN_BASE_URL": "https://rbediner.github.io/romanbediner-preview/"
+      }
+    },
+    "production": {
+      "name": "romanbediner-agent-access-production",
+      "workers_dev": false,
+      "routes": [
+        {
+          "pattern": "romanbediner.com/*",
+          "zone_name": "romanbediner.com"
+        }
+      ],
+      "vars": {
+        "ORIGIN_BASE_URL": "https://rbediner.github.io/romanbediner.com/"
+      }
+    }
+  }
+}

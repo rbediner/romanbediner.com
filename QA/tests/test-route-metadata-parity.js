@@ -18,6 +18,7 @@ const pages = [
   'about/index.html',
   'services/index.html',
   'connect/index.html',
+  'privacy/index.html',
   'framework/index.html',
   'resources/index.html',
   'resources/ai-project-manager/index.html',
