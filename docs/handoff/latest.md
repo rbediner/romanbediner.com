@@ -7,6 +7,7 @@
 - Added Hivemind as the fleet's public shared coordination layer: shared memory, relevant-context retrieval, and reviewed evidence. The flagship page links to the public Hivemind Playbook at `https://swarmsystem.ai/playbook/hive-mind/`; the field guide visualizes Hivemind beside the runtime without exposing implementation details.
 - Kept global navigation unchanged. Instead, Home, About, Services, and Framework contextually link to the flagship resource, preserving the deliberate five-link navigation while creating crawlable internal paths to the proof page. Updated resource metadata, TechArticle JSON-LD, sitemap dates, README, card-surface guidance, and the focused QA contracts.
 - Rebased the feature safely on the newer agent-readiness staging work, preserving its Worker, public-email, and Markdown-negotiation changes. The rebased flagship product commit is `998fdce`; follow-up commit `0092828` restores the upstream live-deploy automation contract through `posttest:node`.
+- Replaced the fleet PDF contract's local-only `pdfinfo` dependency with direct validation of the PDF's uncompressed Info dictionary and Page tree. This preserves the approved title and six-page invariant on GitHub-hosted CI, where Poppler is not installed. The portable QA fix is `aaaaeef4`; rerun staging CI and Deploy Staging before reviewing the preview.
 - Local validation passed after the final Hivemind update and rebase: `npm run test:node`; `npm run test:playwright` (18/18); artifact metadata/hash checks; `git diff --check`; and `scripts/clean-drive-drift.sh --fix` plus `--check`.
 - The required live `SEO Authority PRD` Google Doc update is blocked because the self-hosted Google Workspace MCP refresh token returns `invalid_grant`. Reauthorize that connection before the next PRD update; no stock-connector fallback was used.
 
@@ -326,10 +327,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 392
-- Updated At (UTC): 2026-08-24T19:46:36Z
+- Handoff Sequence: 393
+- Updated At (UTC): 2026-08-24T19:51:08Z
 - Source Branch: staging
-- Source Commit: 0092828203c2535ac310c4e46d70f329b9fe54c1 (pre-handoff baseline)
+- Source Commit: aaaeef4e7f7e71d280050f3fc21254e40037e0cf (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
