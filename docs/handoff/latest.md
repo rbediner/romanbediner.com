@@ -1,15 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
-## Latest: 2026-08-24: Agentic Fleet Control Plane flagship resource — staging candidate
+## Latest: 2026-08-24: Agentic Fleet Build Guide flagship resource — staging candidate
 
-- Repositioned `/resources/agentic-ai-employees/` as the flagship first-person build report for Roman Bediner's Fractional COO work with Agentic Society. The page now names all eight public roles: Project Manager, Chief of Staff, Director of Fleet Orchestration & Engineering, Continuous Improvement Engineer, Staff Engineer, RevOps Engineer, AI Correspondent, and Solution Architect. It intentionally excludes internal routes, IDs, schedules, contacts, and operational instructions.
-- Replaced the retired ten-page Agentic Operations Architecture with the six-page `Agentic Fleet Control Plane` field guide. The canonical download is `assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf`; the preview images are rendered directly from it and locked in `assets/resources/agentic-fleet-control-plane/preview-manifest.json`. Both the flagship page and `/resources/` use the same closed-by-default carousel and canonical download target.
-- Added Hivemind as the fleet's public shared coordination layer: shared memory, relevant-context retrieval, and reviewed evidence. The flagship page links to the public Hivemind Playbook at `https://swarmsystem.ai/playbook/hive-mind/`; the field guide visualizes Hivemind beside the runtime without exposing implementation details.
-- Kept global navigation unchanged. Instead, Home, About, Services, and Framework contextually link to the flagship resource, preserving the deliberate five-link navigation while creating crawlable internal paths to the proof page. Updated resource metadata, TechArticle JSON-LD, sitemap dates, README, card-surface guidance, and the focused QA contracts.
-- Rebased the feature safely on the newer agent-readiness staging work, preserving its Worker, public-email, and Markdown-negotiation changes. The rebased flagship product commit is `998fdce`; follow-up commit `0092828` restores the upstream live-deploy automation contract through `posttest:node`.
-- Replaced the fleet PDF contract's local-only `pdfinfo` dependency with direct validation of the PDF's uncompressed Info dictionary and Page tree. This preserves the approved title and six-page invariant on GitHub-hosted CI, where Poppler is not installed. The portable QA fix is `aaaaeef4`; staging CI `32770530971` and Deploy Staging `32770531006` both passed for the final source commit `920295a`.
-- Local validation passed after the final Hivemind update and rebase: `npm run test:node`; `npm run test:playwright` (18/18); artifact metadata/hash checks; `git diff --check`; and `scripts/clean-drive-drift.sh --fix` plus `--check`.
-- The required live `SEO Authority PRD` Google Doc update is blocked because the self-hosted Google Workspace MCP refresh token returns `invalid_grant`. Reauthorize that connection before the next PRD update; no stock-connector fallback was used.
+- Replaced the lazy six-page control-plane summary with the twelve-page `Agentic Fleet Build Guide`, a public implementation artifact at `assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`. It teaches the first useful agent, managed cloud layers, shared memory, model routing, caching, integrations, reliability, independent engineering review, economics, the PRD contract, a first-ten-moves sequence, and release readiness. The canonical preview images are rendered directly from that PDF and hash-locked in `assets/resources/agentic-fleet-build-guide/preview-manifest.json`.
+- The flagship page keeps the eight public role names but strengthens the beginner path and SEO copy around cloud-first architecture, Hivemind shared-memory pattern, prompt caching, model routing, human review, run evidence, and recovery. It removes the external Hivemind link; public credit remains without sending visitors to an external property. Home, About, Services, and Framework now link to the guide by its correct title.
+- The carousel has a visible `Close preview` button in a named top bar, keyboard and outside-click exits, and in-panel previous/next controls. Opening a collapsed preview temporarily suppresses the floating section-navigation widget so it cannot cover mobile toolbar controls. Focused mobile Playwright coverage verifies open, advance, expand, named close, and no horizontal overflow.
+- EBI rebuild: surface defects fixed title and exit behavior; structural defect replaced the PDF summary with a build contract; craft added actionable templates and diagrams; first-time-builder resonance is now anchored by “Build one useful agent before you build a fleet.” Public boundaries preserve internal routes, identifiers, schedules, contacts, credentials, and operating instructions.
+- Local validation passed: `npm run test:node`; `RB_LOCAL_MIRROR_ACTIVE=1 bash scripts/qa/run-local-playwright-suite.sh QA/tests/playwright/agentic-mobile-layout.spec.js --workers=1 --reporter=line` (8/8); PDF metadata/page/hash checks; visual inspection of PDF pages; `git diff --check`; and Drive-drift fix/check.
+- The required live `SEO Authority PRD` Google Doc update remains blocked because the self-hosted Google Workspace MCP refresh token returns `invalid_grant`. Reauthorize that connection before the PRD update; no stock-connector fallback was used.
 
 ## Latest: 2026-08-24: Verified 100/100 AI-readiness production release
 
@@ -327,10 +325,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 394
-- Updated At (UTC): 2026-08-24T20:02:36Z
+- Handoff Sequence: 395
+- Updated At (UTC): 2026-08-24T20:52:36Z
 - Source Branch: staging
-- Source Commit: 920295a5d0109bdc8b1885fef1ebfdbae1220f67 (pre-handoff baseline)
+- Source Commit: e3d5dc8e58441045311936e0976b8364dc00c051 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
