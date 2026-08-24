@@ -1,5 +1,20 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-08-24: Agentic Fleet Build Kit pairing — staging candidate
+
+- The supplied 24-page `Agentic Fleet Build Guide` is now the canonical PDF at `assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`. It is a follow-along implementation path, not a second high-level artifact: pages 1–4 orient a beginner and hand off to Session Zero; the remaining sessions cover a contract, project files, cloud runtime, cron, durable claims, action ceilings, observability, loud failure, bounded self-healing, CI gating, promotion, and Hivemind/memory/routing/caching.
+- `/resources/agentic-ai-employees/` and its single flagship card on `/resources/` now communicate one intentional sequence instead of presenting unrelated downloads: **Step 1** is “Agentic Fleet Build Guide”; **Step 2** is the existing downloadable/copyable `Agent Builder Starter Prompt`, framed as the plain-English Session Zero interview. The Guide remains the lead artifact; no redundant hub card or external Hivemind/Swarm links were added.
+- Carousel captions, preview images, and `preview-manifest.json` are synchronized to the new 24-page PDF. A visible page-14 table collision was corrected in the reproducible guide generator; `render_preview.py` renders all previews with Poppler at 150 DPI and writes hashes that lock each carousel page to the exact downloadable PDF.
+- Phone QA found and fixed a real CTA obstruction: the floating `On this page` widget now yields only while a page-marked artifact action panel is visible on a phone, and resumes outside it. This protects both guide and starter-prompt actions without removing the orientation control elsewhere.
+- Validation passed: focused artifact, integration, prompt, and narrative Node contracts; `npm run qa:gate:localized-page`; mobile Playwright `agentic-mobile-layout.spec.js` (9/9); direct phone visual inspection; `git diff --check`; and Drive-drift check. This remains staging-only pending Roman’s review; do not promote to `prod` without explicit approval.
+- The required `SEO Authority PRD` update remains blocked because the self-hosted Google Workspace MCP refresh token for `roman@romanbediner.com` returns `invalid_grant: refresh token does not exist`. Do not use the stock connector or local Drive mount; reauthorize first, then record the build-kit pairing, mobile CTA protection, and updated guide scope.
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
 ## Latest: 2026-08-24: Deep Agent Builder Starter Prompt — staging candidate
 
 - Product commit `4e3ebb3` replaces the former 2,364-word starter with the exact 10,132-word `Agent Builder Starter Prompt v2` supplied by Roman. It remains the canonical first-party Markdown download at `assets/downloads/agent-builder-starter-prompt.md`; no page routes, copy controls, analytics attributes, or external links changed.
@@ -359,10 +374,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 401
-- Updated At (UTC): 2026-08-24T23:10:37Z
+- Handoff Sequence: 402
+- Updated At (UTC): 2026-08-24T23:58:47Z
 - Source Branch: staging
-- Source Commit: 4e3ebb328388f47dc37915f81b7119cf1d20ec95 (pre-handoff baseline)
+- Source Commit: 755c7848c90bfac281c034538076ca3400350e00 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
