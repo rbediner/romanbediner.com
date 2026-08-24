@@ -59,7 +59,7 @@ Use an `is-artifact` Static Callout or Standard Content Card only when a reader 
 - Preserve the established analytics DOM contract: artifact context on the containing resource surface, `data-track-pdf-download` and `data-file-path` on every download link, and the shared preview runtime/events. Presentation changes must never silently change the resource slug, file path, event names, or event parameters.
 - Required visual QA: at 1440px and 390px, open the preview, advance at least one page, confirm the correct page count and no clipping or horizontal overflow, then confirm the download target remains the canonical file.
 
-Current exemplar: `/resources/agentic-ai-employees/` uses the six-page **Agentic Fleet Control Plane** PDF as one unified preview-and-download artifact surface.
+Current exemplar: `/resources/agentic-ai-employees/` uses the twelve-page **Agentic Fleet Build Guide** PDF as one unified preview-and-download artifact surface.
 
 ## QA and release
 

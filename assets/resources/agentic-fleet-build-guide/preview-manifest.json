@@ -1,0 +1,19 @@
+{
+  "artifact": "/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf",
+  "artifactSha256": "8367e3b3191a460fbd6a87e0f75c1fc263c27325fed9607340132382d43941f2",
+  "rendering": "pdftoppm -png -r 150",
+  "pages": {
+    "slide-01.png": "edd1952dabcc8cd481d6acefcd38de591a7f507f87680b07a5931a8eb75f8567",
+    "slide-02.png": "6a462874354f8cc6c2d8e3b02b245a0ca086419b8a71eb7da47acfc58851c216",
+    "slide-03.png": "d0b08f5c32f6d6da823a543036d2d49de661699932a9a0644c66d2d21e204bf0",
+    "slide-04.png": "8b5cb8936b93f86bc76d13ef099317f6b59ae68aad08da235903784c1055aff7",
+    "slide-05.png": "b5b811cbad9cb5974efbe573e65ff1bd7a1b5a536588f68ee9d0cb9bc7166be0",
+    "slide-06.png": "789f54c30431f79167d01558ee5e49e4f708ac6cea8b3f55aa020ea2bdfffcef",
+    "slide-07.png": "adc601fa0295e5cdadd26ca04dd362f76cc2986cb7a313a78306a8df03221e17",
+    "slide-08.png": "4e3561fbbf37e0ac24765ddc01901ddff32172900680e15cdf316441bc6109e8",
+    "slide-09.png": "ee2ea32094f09cf187ce8a07f468257dd55997dc74a3dd724d0e98543546a4aa",
+    "slide-10.png": "7f72435966943fae351664abc1fb11f6112708499bfb23201d2a8308a545a25d",
+    "slide-11.png": "fe34ffacfb3a9d228cb7f59218b4bbbb36b42062065f070ba1e51f386b5ed356",
+    "slide-12.png": "13e47e1c3c4ed006253e96d43b6872b72647cc5041a9de30774d2599247b2529"
+  }
+}

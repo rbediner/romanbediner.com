@@ -640,7 +640,7 @@
   max-height: calc(100vh - 64px);
   background: #ffffff;
   border-radius: 16px;
-  padding: 28px 32px 24px;
+  padding: 20px 24px 24px;
   box-shadow: 0 40px 80px rgba(10, 15, 30, 0.35);
   transform: translateY(8px);
   transition: transform 0.2s ease;
@@ -655,12 +655,12 @@
 }
 
 .resource-preview-modal-stage {
-  position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
   align-items: center;
   justify-content: center;
-  gap: 0;
-  padding: 0 52px;
+  gap: 12px;
+  padding: 0;
   min-height: 0;
 }
 
@@ -676,16 +676,14 @@
 }
 
 .resource-preview-modal-close {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  width: 40px;
-  height: 40px;
+  min-height: 42px;
+  padding: 0 14px;
   border-radius: 999px;
   border: 1px solid rgba(17, 17, 17, 0.14);
   background: #ffffff;
   color: var(--text-primary);
-  font-size: 22px;
+  font-size: 14px;
+  font-weight: 700;
   line-height: 1;
   cursor: pointer;
   display: flex;
@@ -693,7 +691,22 @@
   justify-content: center;
   box-shadow: 0 4px 12px rgba(10, 15, 30, 0.12);
   transition: box-shadow 0.15s ease, transform 0.12s ease;
-  z-index: 2;
+  gap: 8px;
+}
+
+.resource-preview-modal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 2px;
+}
+
+.resource-preview-modal-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .resource-preview-modal-close:hover,
@@ -704,9 +717,6 @@
 }
 
 .resource-preview-modal-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   width: 44px;
   height: 44px;
   border-radius: 999px;
@@ -724,11 +734,11 @@
 }
 
 .resource-preview-modal-prev {
-  left: max(10px, env(safe-area-inset-left));
+  grid-column: 1;
 }
 
 .resource-preview-modal-next {
-  right: max(10px, env(safe-area-inset-right));
+  grid-column: 3;
 }
 
 .resource-preview-modal-nav:hover:not([disabled]),
@@ -752,6 +762,14 @@
   letter-spacing: 0.02em;
 }
 
+/* A compact resource preview needs its own controls to remain clickable. Hide
+   the floating page-orientation widget while a disclosure is actively open. */
+body:has(.resource-collapsible-preview[open]) .section-nav-fab,
+body:has(.resource-collapsible-preview[open]) .section-nav-sheet {
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (max-width: 767px) {
   .resource-preview-modal {
     padding: 16px;
@@ -761,18 +779,24 @@
     padding: 16px 12px 12px;
   }
   .resource-preview-modal-stage {
-    padding: 0 36px;
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    gap: 7px;
   }
   .resource-preview-modal-nav {
     width: 32px;
     height: 32px;
     font-size: 16px;
   }
-  .resource-preview-modal-prev {
-    left: max(6px, env(safe-area-inset-left));
+  .resource-preview-modal-topbar {
+    gap: 10px;
   }
-  .resource-preview-modal-next {
-    right: max(6px, env(safe-area-inset-right));
+  .resource-preview-modal-title {
+    font-size: 13px;
+  }
+  .resource-preview-modal-close {
+    min-height: 38px;
+    padding: 0 10px;
+    font-size: 12px;
   }
   .resource-preview-modal-img {
     max-height: calc(100vh - 220px);

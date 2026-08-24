@@ -107,7 +107,7 @@ mustInclude('P1-RH-01 vertical blue rule', resourcesHtml, 'class="shelf-border"'
 // Hub hierarchy: one flagship architecture carries the integrated artifact,
 // while the four supporting resources stay compact scan-friendly choices.
 mustInclude('flagship architecture card', resourcesHtml, 'resource-card--flagship');
-mustInclude('flagship Hivemind context', resourcesHtml, 'Hivemind coordination layer');
+mustInclude('flagship Hivemind context', resourcesHtml, 'Hivemind shared memory');
 if ((resourcesHtml.match(/resource-card--compact/g) || []).length !== 4) {
   fail('Resources hub must keep exactly four compact supporting resource cards.');
 }
@@ -259,7 +259,8 @@ const modalChecks = [
   ['focus trap via Tab', "'Tab'"],
   ['outside click closes', 'e.target === modal'],
   ['focus return on close', 'lastFocusedTrigger'],
-  ['visible close button aria', 'Close slide preview'],
+  ['visible close button aria', 'Close preview'],
+  ['named preview top bar', 'resource-preview-modal-topbar'],
   ['modal prev/next controls', 'resource-preview-modal-nav']
 ];
 modalChecks.forEach(([label, needle]) => mustInclude(`modal contract: ${label}`, carouselJs, needle));

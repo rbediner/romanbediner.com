@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Agentic AI Employees: Fleet Control Plane Build Report" />
-  <meta property="og:description" content="A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production." />
+  <meta property="og:title" content="Agentic AI Employees: Agentic Fleet Build Guide" />
+  <meta property="og:description" content="A practical build guide from Roman Bediner for cloud-first AI employees with shared memory, model routing, caching, human review, and reliable recovery." />
   <meta property="og:url" content="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta property="og:site_name" content="Roman Bediner" />
   <meta property="og:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
@@ -14,16 +14,16 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
-  <meta name="description" content="A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production." />
+  <meta name="description" content="A practical build guide from Roman Bediner for cloud-first AI employees with shared memory, model routing, caching, human review, and reliable recovery." />
   <link rel="canonical" href="https://romanbediner.com/resources/agentic-ai-employees/" />
   <meta name="geo.region" content="US-NC" />
   <meta name="geo.placename" content="Raleigh-Durham-Chapel Hill" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Agentic AI Employees: Fleet Control Plane Build Report" />
-  <meta name="twitter:description" content="A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production." />
+  <meta name="twitter:title" content="Agentic AI Employees: Agentic Fleet Build Guide" />
+  <meta name="twitter:description" content="A practical build guide from Roman Bediner for cloud-first AI employees with shared memory, model routing, caching, human review, and reliable recovery." />
   <meta name="twitter:image" content="https://romanbediner.com/assets/og-logo/og-final.png?v=5" />
   <meta name="twitter:image:alt" content="Roman Bediner brand card with the headline Productizing Operations for Modern, AI-Enabled Work on a deep navy background" />
-  <title>Agentic AI Employees: Fleet Control Plane Build Report</title>
+  <title>Agentic AI Employees: Agentic Fleet Build Guide</title>
   <!-- CSP architecture: inline scripts are forbidden (no 'unsafe-inline' in script-src); CI fails on CSP runtime violations. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://www.googletagmanager.com; script-src 'self' https://cdn.jsdelivr.net https://cdn.quilljs.com https://www.emailjs.com https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdn.quilljs.com; font-src 'self' data:; connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://www.google.com;">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon/favicon-32x32.png" />
@@ -38,14 +38,14 @@
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "name": "Agentic AI Employees: Fleet Control Plane Build Report",
-      "headline": "Agentic AI Employees: A Fleet Control Plane Build Report",
-      "description": "A first-person build report from Roman Bediner: eight named AI employees, a control plane that routes work by risk, and independent gates from pull request to verified production.",
+      "name": "Agentic AI Employees: Agentic Fleet Build Guide",
+      "headline": "Agentic AI Employees: A Practical Agentic Fleet Build Guide",
+      "description": "A practical build guide from Roman Bediner for cloud-first AI employees with shared memory, model routing, caching, human review, and reliable recovery.",
       "url": "https://romanbediner.com/resources/agentic-ai-employees/",
       "datePublished": "2026-08-24",
       "dateModified": "2026-08-24",
       "mainEntityOfPage": "https://romanbediner.com/resources/agentic-ai-employees/",
-      "keywords": "agentic AI employees, AI agent fleet, autonomous AI software engineering, AI agents that merge pull requests, autonomous code review, multi-agent orchestration, model routing, Anthropic cost reporting, AI agents that deploy to production",
+      "keywords": "agentic AI employees, agentic fleet build guide, AI agent fleet, cloud-first AI agents, shared memory, model routing, prompt caching, autonomous code review, multi-agent orchestration",
       "about": [
         "Agentic AI employees",
         "Autonomous AI agent fleets",
@@ -58,7 +58,7 @@
         "Production deployment verification",
         "Human approval boundaries",
         "Model routing",
-        "Anthropic cost reporting",
+        "Prompt caching",
         "AI agents that merge pull requests",
         "Autonomous AI software engineering"
       ],
@@ -90,14 +90,14 @@
         data-resource-location="agentic_fleet_page">
     <p class="resources-label">FLAGSHIP BUILD REPORT + REFERENCE ARCHITECTURE</p>
     <h1>AGENTIC AI EMPLOYEES</h1>
-    <p class="fleet-title-deck">The fleet control plane</p>
+    <p class="fleet-title-deck">The agentic fleet build guide</p>
     <div class="section-accent" aria-hidden="true"></div>
 
     <section class="resource-top-section" aria-label="Overview">
       <div class="shelf-callout resource-family-callout resource-fleet-callout">
         <div class="shelf-border" aria-hidden="true"></div>
         <div class="shelf-content">
-          <p class="resource-family-copy">I built and operate an eight-employee AI fleet for Agentic Society. This public build report shows the control plane: how named agents route work by risk, preserve memory, review code, merge safely, deploy, and report results.</p>
+          <p class="resource-family-copy">I built and operate an eight-employee AI fleet for Agentic Society. This public build guide shows the durable patterns behind it: cloud-first infrastructure, shared memory, model routing, caching, human review, and recovery when work does not go as planned.</p>
         </div>
       </div>
       <div class="fleet-pillrow" aria-label="Architecture properties">
@@ -110,7 +110,9 @@
       </div>
       <nav class="fleet-section-nav" data-section-nav aria-label="Explore the architecture">
         <span class="fleet-section-nav-label">Explore the system</span>
+        <a href="#fleet-build-start">Start here</a>
         <a href="#fleet-architecture-thesis">Architecture</a>
+        <a href="#fleet-hivemind-title">Shared memory</a>
         <a href="#fleet-case-study-title">Proof</a>
         <a href="#fleet-roster">Organization</a>
         <a href="#fleet-router">Router</a>
@@ -131,55 +133,74 @@
     </aside>
 
     <section class="resource-blue-box ui-surface ui-surface--standard is-static is-artifact resource-fleet-artifact-cta" aria-labelledby="fleet-artifact-download-title">
-      <p class="fleet-note-tag">The Agentic Fleet Control Plane</p>
-      <h2 id="fleet-artifact-download-title">Take the field guide with you.</h2>
-      <p>A six-page public companion: named AI employees, the control plane, model routing, and the review loop that keeps autonomy accountable.</p>
-      <div class="resource-fleet-artifact-actions" aria-label="Agentic Fleet Control Plane actions">
+      <p class="fleet-note-tag">Agentic Fleet Build Guide</p>
+      <h2 id="fleet-artifact-download-title">Take the build guide with you.</h2>
+      <p>A 12-page practical companion for building one useful AI employee, then growing a reliable fleet with cloud infrastructure, shared context, caching, routing, review, and recovery.</p>
+      <div class="resource-fleet-artifact-actions" aria-label="Agentic Fleet Build Guide actions">
         <details class="resource-collapsible-preview"
-             data-resource-slug="agentic-fleet-control-plane"
-             data-resource-title="The Agentic Fleet Control Plane"
-             data-resource-type="pdf_field_guide"
+             data-resource-slug="agentic-fleet-build-guide"
+             data-resource-title="Agentic Fleet Build Guide"
+             data-resource-type="pdf_build_guide"
              data-resource-location="agentic_fleet_page_preview">
-      <summary>Preview the field guide <span aria-hidden="true">+</span></summary>
+      <summary>Preview the build guide <span aria-hidden="true">+</span></summary>
       <div class="resource-collapsible-preview-content">
-        <h2>Fleet Control Plane Preview</h2>
-        <p>Review the six-page field guide, then download it to share with a founder, operator, or AI builder.</p>
+        <h2>Agentic Fleet Build Guide Preview</h2>
+        <p>Review the 12-page guide, then download the complete build artifact for a founder, operator, or AI builder.</p>
 
         <div class="resource-carousel-shell" data-resource-carousel data-carousel-unit="Page">
           <div class="resource-carousel-header">
-            <p class="resource-carousel-count" data-carousel-count>Page 1 of 6</p>
+            <p class="resource-carousel-count" data-carousel-count>Page 1 of 12</p>
             <div class="resource-carousel-toolbar">
-              <div class="resource-carousel-controls" aria-label="Field guide page navigation">
-                <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous field guide page">&larr;</button>
-                <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next field guide page">&rarr;</button>
+              <div class="resource-carousel-controls" aria-label="Build guide page navigation">
+                <button class="resource-carousel-button" type="button" data-carousel-previous aria-label="Previous build guide page">&larr;</button>
+                <button class="resource-carousel-button" type="button" data-carousel-next aria-label="Next build guide page">&rarr;</button>
               </div>
-              <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand field guide page preview">
+              <button class="resource-expand-preview" type="button" data-carousel-expand aria-label="Expand build guide page preview">
                 <svg class="resource-expand-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
                 </svg>
-                <span class="sr-only">Expand field guide page preview</span>
+                <span class="sr-only">Expand build guide page preview</span>
               </button>
             </div>
           </div>
           <div class="resource-carousel-viewport">
             <div class="resource-carousel-track" data-carousel-track>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" src="/assets/resources/agentic-fleet-control-plane/slides/slide-01.png" alt="Agentic Fleet Control Plane cover page preview" /><figcaption>Page 1 - The public field guide</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-02.png" alt="Agentic Fleet Control Plane operating spine page preview" /><figcaption>Page 2 - The control plane</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-03.png" alt="Agentic Fleet Control Plane employee roster page preview" /><figcaption>Page 3 - The eight AI employees</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-04.png" alt="Agentic Fleet Control Plane model router page preview" /><figcaption>Page 4 - Model routing as policy</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-05.png" alt="Agentic Fleet Control Plane engineering loop page preview" /><figcaption>Page 5 - Independent review and recovery</figcaption></figure>
-              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-control-plane/slides/slide-06.png" alt="Agentic Fleet Control Plane implementation recipe page preview" /><figcaption>Page 6 - A practical build recipe</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" src="/assets/resources/agentic-fleet-build-guide/slides/slide-01.png" alt="Agentic Fleet Build Guide cover page preview" /><figcaption>Page 1 - Agentic Fleet Build Guide</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-02.png" alt="Start with one useful AI employee page preview" /><figcaption>Page 2 - Start with one useful AI employee</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-03.png" alt="Cloud-first architecture page preview" /><figcaption>Page 3 - Cloud-first architecture</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-04.png" alt="Hivemind shared-memory pattern page preview" /><figcaption>Page 4 - Shared memory with Hivemind</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-05.png" alt="Model routing and caching page preview" /><figcaption>Page 5 - Model routing and caching</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-06.png" alt="Integrations and human review page preview" /><figcaption>Page 6 - Integrations and review</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-07.png" alt="Reliability and recovery page preview" /><figcaption>Page 7 - Reliability and recovery</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-08.png" alt="Safe improvement loop page preview" /><figcaption>Page 8 - Safe improvement</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-09.png" alt="Quality and economics page preview" /><figcaption>Page 9 - Quality and economics</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-10.png" alt="PRD build contract page preview" /><figcaption>Page 10 - The build contract</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-11.png" alt="First ten implementation moves page preview" /><figcaption>Page 11 - First ten moves</figcaption></figure>
+              <figure class="resource-slide" data-carousel-slide><img class="resource-slide-image" loading="lazy" decoding="async" src="/assets/resources/agentic-fleet-build-guide/slides/slide-12.png" alt="Release checklist page preview" /><figcaption>Page 12 - Release checklist</figcaption></figure>
             </div>
           </div>
         </div>
       </div>
         </details>
         <a class="resource-primary-cta resource-primary-cta-featured"
-           href="/assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf"
-           download="The-Agentic-Fleet-Control-Plane-Roman-Bediner.pdf"
+           href="/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf"
+           download="Agentic-Fleet-Build-Guide-Roman-Bediner.pdf"
            data-track-pdf-download
-           data-file-path="/assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf">Download the field guide</a>
+           data-file-path="/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf">Download the build guide</a>
       </div>
+    </section>
+
+    <section class="resource-section fleet-build-start" aria-labelledby="fleet-build-start">
+      <p class="fleet-kicker">For first-time builders</p>
+      <h2 id="fleet-build-start">If you are new to agents, start with one useful job.</h2>
+      <p class="resource-section-lede">Do not begin by inventing an entire org chart. Choose one repeated outcome, run it in the cloud, put a human approval moment around it, and make the result and failure visible. The fleet earns its next role through evidence.</p>
+      <div class="fleet-proof-grid fleet-build-start-grid">
+        <article class="fleet-proof-card fleet-proof-blue"><strong>Define the job</strong><p>Write a short PRD: the input, the useful output, the receiver, boundaries, and what success looks like before you add a model.</p></article>
+        <article class="fleet-proof-card fleet-proof-purple"><strong>Build a cloud path</strong><p>Use a managed runtime, durable source record, and a narrow integration. A laptop can support development, but it cannot be the only place the agent runs or remembers.</p></article>
+        <article class="fleet-proof-card fleet-proof-green"><strong>Design the review</strong><p>Send an early result to Slack or email with clear approve, reject, or revise actions. Human correction is a product signal, not a hidden exception.</p></article>
+        <article class="fleet-proof-card fleet-proof-gold"><strong>Prove recovery</strong><p>Give every run an ID, heartbeat, completion record, safe retry path, and one useful escalation when the system cannot finish correctly.</p></article>
+      </div>
+      <p class="fleet-architecture-caption"><strong>The build rule:</strong> no work is truly autonomous until it has a clear job, a visible human boundary, durable evidence, and a known recovery path.</p>
     </section>
 
     <section class="resource-section fleet-architecture-hero" aria-labelledby="fleet-architecture-thesis">
@@ -217,8 +238,8 @@
       <p class="fleet-architecture-caption"><strong>The design principle:</strong> keep the infrastructure simple, then make the loops explicit. The result is an organization that can do more than a single chatbot without requiring a massive platform.</p>
       <aside class="resource-blue-box fleet-note fleet-hivemind-note" aria-labelledby="fleet-hivemind-title">
         <span class="fleet-note-tag">The coordination layer</span>
-        <h3 id="fleet-hivemind-title">Hivemind gives the fleet shared context</h3>
-        <p>Hivemind is the shared memory and learning loop behind the fleet. It preserves useful context, makes relevant knowledge retrievable at the moment of work, and turns completed work into reviewed evidence for the next run. <a href="https://swarmsystem.ai/playbook/hive-mind/" target="_blank" rel="noopener noreferrer">Read the public Hivemind playbook</a>.</p>
+        <h3 id="fleet-hivemind-title">Hivemind turns shared context into a working loop</h3>
+        <p>Hivemind is the shared-memory pattern behind the fleet. Each run retrieves only the context that fits its role and task, does the bounded work, then captures a compact lesson only after review or measurable confirmation. Scoped memories, source evidence, corrections, and fading stale context keep shared knowledge useful instead of letting an old instruction silently govern new work.</p>
       </aside>
     </section>
 
@@ -723,8 +744,8 @@
 
   <script src="../../scripts/runtime/site-navigation.js?v=20260720b"></script>
   <script src="../../scripts/runtime/resources-analytics.js" defer></script>
-  <!-- Cache-bust the shared carousel after the architecture preview moved from slides to PDF pages. -->
-  <script src="../../scripts/runtime/resources-carousel.js?v=20260719" defer></script>
+  <!-- Cache-bust the shared carousel after adding the named full-screen exit control. -->
+  <script src="../../scripts/runtime/resources-carousel.js?v=20260824a" defer></script>
   <script src="../../scripts/runtime/section-nav.js?v=20260719a" defer></script>
   <script src="../../scripts/runtime/fleet-diagram-zoom.js?v=20260629a" defer></script>
 </body>

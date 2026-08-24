@@ -20,14 +20,14 @@ const root = path.resolve(__dirname, '..', '..');
 const aiPagePath = path.join(root, 'resources', 'agentic-ai-employees', 'index.html');
 const hubPath = path.join(root, 'resources', 'index.html');
 const resourcesCssPath = path.join(root, 'styles', 'resources.css');
-const pdfPath = path.join(root, 'assets', 'downloads', 'agentic-fleet-control-plane-roman-bediner.pdf');
-const slidesDir = path.join(root, 'assets', 'resources', 'agentic-fleet-control-plane', 'slides');
-const previewManifestPath = path.join(root, 'assets', 'resources', 'agentic-fleet-control-plane', 'preview-manifest.json');
+const pdfPath = path.join(root, 'assets', 'downloads', 'agentic-fleet-build-guide-roman-bediner.pdf');
+const slidesDir = path.join(root, 'assets', 'resources', 'agentic-fleet-build-guide', 'slides');
+const previewManifestPath = path.join(root, 'assets', 'resources', 'agentic-fleet-build-guide', 'preview-manifest.json');
 
 const aiPage = fs.readFileSync(aiPagePath, 'utf8');
 const hub = fs.readFileSync(hubPath, 'utf8');
 const resourcesCss = fs.readFileSync(resourcesCssPath, 'utf8');
-const artifactPath = '/assets/downloads/agentic-fleet-control-plane-roman-bediner.pdf';
+const artifactPath = '/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf';
 
 function sha256(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
@@ -42,9 +42,9 @@ if (!fs.existsSync(pdfPath)) fail('canonical artifact PDF is missing');
 if (!fs.existsSync(previewManifestPath)) fail('preview manifest is missing');
 const previewManifest = JSON.parse(fs.readFileSync(previewManifestPath, 'utf8'));
 if (previewManifest.artifact !== artifactPath || previewManifest.artifactSha256 !== sha256(pdfPath)) {
-  fail('preview manifest must identify the exact canonical field guide PDF');
+  fail('preview manifest must identify the exact canonical build-guide PDF');
 }
-for (let index = 1; index <= 6; index += 1) {
+for (let index = 1; index <= 12; index += 1) {
   const filename = `slide-${String(index).padStart(2, '0')}.png`;
   const slidePath = path.join(slidesDir, filename);
   if (!fs.existsSync(slidePath)) {
@@ -62,17 +62,17 @@ for (let index = 1; index <= 6; index += 1) {
   'data-resource-location="agentic_fleet_page"',
   'data-track-pdf-download',
   `data-file-path="${artifactPath}"`,
-  'The Agentic Fleet Control Plane',
-  'Take the field guide with you.',
-  'Preview the field guide',
-  'Download the field guide',
+  'Agentic Fleet Build Guide',
+  'Take the build guide with you.',
+  'Preview the build guide',
+  'Download the build guide',
   'resources-analytics.js',
   'resource-collapsible-preview',
   'data-carousel-unit="Page"',
-  'Page 1 of 6',
-  'slide-06.png',
+  'Page 1 of 12',
+  'slide-12.png',
   // The version query prevents an older cached runtime from relabeling PDF pages as slides.
-  'resources-carousel.js?v=20260719',
+  'resources-carousel.js?v=20260824a',
 ].forEach((needle) => {
   if (!aiPage.includes(needle)) fail(`AI Employees CTA contract is missing: ${needle}`);
 });
@@ -84,24 +84,24 @@ for (let index = 1; index <= 6; index += 1) {
   'data-resource-type="reference_architecture_build_report"',
   'data-resource-location="resources_hub"',
   'resource-card-artifact-preview',
-  'Preview the field guide',
-  'Download the field guide',
-  'Explore the fleet',
-  'Flagship build report.',
+  'Preview the build guide',
+  'Download the build guide',
+  'Explore the build guide',
+  'Flagship build guide.',
   'data-resource-carousel',
   'data-carousel-expand',
   'slide-01.png',
-  'slide-06.png',
+  'slide-12.png',
   'data-carousel-unit="Page"',
-  'Page 1 of 6',
+  'Page 1 of 12',
   `data-file-path="${artifactPath}"`,
-  'resources-carousel.js?v=20260719',
+  'resources-carousel.js?v=20260824a',
 ].forEach((needle) => {
   if (!hub.includes(needle)) fail(`Resources hub preview contract is missing: ${needle}`);
 });
 
-if ((hub.match(/data-carousel-slide/g) || []).length !== 6) {
-  fail('Agentic AI Employees card preview must contain exactly six carousel pages');
+if ((hub.match(/data-carousel-slide/g) || []).length !== 12) {
+  fail('Agentic AI Employees card preview must contain exactly twelve carousel pages');
 }
 
 // The portable PDF belongs inside the Agentic AI Employees card. A detached
@@ -110,11 +110,11 @@ const cardStart = hub.indexOf('data-resource-card="agentic-ai-employees"');
 const previewStart = hub.indexOf('resource-card-artifact-preview');
 const detachedPreviewStart = hub.indexOf('class="resource-artifact-preview"');
 if (cardStart < 0 || previewStart < cardStart || detachedPreviewStart >= 0) {
-  fail('Resources hub must keep the field-guide disclosure inside the Agentic AI Employees card');
+  fail('Resources hub must keep the build-guide disclosure inside the Agentic AI Employees card');
 }
 
-if ((aiPage.match(/data-carousel-slide/g) || []).length !== 6) {
-  fail('Agentic AI Employees collapsible preview must contain exactly six carousel pages');
+if ((aiPage.match(/data-carousel-slide/g) || []).length !== 12) {
+  fail('Agentic AI Employees collapsible preview must contain exactly twelve carousel pages');
 }
 
 // The artifact title is a peer editorial heading, not compact utility copy.
@@ -122,4 +122,4 @@ if (!resourcesCss.includes('font-family: var(--font-serif);') || !resourcesCss.i
   fail('Agentic architecture artifact title must retain the shared serif heading treatment');
 }
 
-console.log('PASS: Agentic Fleet Control Plane staging integration contract');
+console.log('PASS: Agentic Fleet Build Guide staging integration contract');

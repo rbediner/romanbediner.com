@@ -104,18 +104,29 @@
       modal.setAttribute('role', 'dialog');
       modal.setAttribute('aria-modal', 'true');
       const resourceContext = readResourceContext(carousel);
-      modal.setAttribute('aria-label', `${resourceContext.resource_title || 'Resource'} slide preview`);
+      modal.setAttribute('aria-label', `${resourceContext.resource_title || 'Resource'} preview`);
       modal.setAttribute('tabindex', '-1');
 
       const inner = document.createElement('div');
       inner.className = 'resource-preview-modal-inner';
 
+      // A named top bar makes the exit visible. The old icon-only control was
+      // technically accessible but too easy to miss in a full-screen preview.
+      const topbar = document.createElement('div');
+      topbar.className = 'resource-preview-modal-topbar';
+      const modalTitle = document.createElement('p');
+      modalTitle.className = 'resource-preview-modal-title';
+      modalTitle.textContent = resourceContext.resource_title || 'Resource preview';
+
       modalClose = document.createElement('button');
       modalClose.type = 'button';
       modalClose.className = 'resource-preview-modal-close';
-      modalClose.setAttribute('aria-label', 'Close slide preview');
-      modalClose.innerHTML = '<span aria-hidden="true">&times;</span>';
+      modalClose.setAttribute('aria-label', 'Close preview');
+      modalClose.setAttribute('data-carousel-close', '');
+      modalClose.innerHTML = 'Close preview <span aria-hidden="true">&times;</span>';
       modalClose.addEventListener('click', closeModal);
+      topbar.appendChild(modalTitle);
+      topbar.appendChild(modalClose);
 
       const stage = document.createElement('div');
       stage.className = 'resource-preview-modal-stage';
@@ -123,7 +134,7 @@
       modalPrev = document.createElement('button');
       modalPrev.type = 'button';
       modalPrev.className = 'resource-preview-modal-nav resource-preview-modal-prev';
-      modalPrev.setAttribute('aria-label', 'Previous slide');
+      modalPrev.setAttribute('aria-label', `Previous ${itemLabel.toLowerCase()}`);
       modalPrev.innerHTML = '<span aria-hidden="true">&larr;</span>';
       modalPrev.addEventListener('click', () => {
         if (activeIndex > 0) {
@@ -135,7 +146,7 @@
       modalNext = document.createElement('button');
       modalNext.type = 'button';
       modalNext.className = 'resource-preview-modal-nav resource-preview-modal-next';
-      modalNext.setAttribute('aria-label', 'Next slide');
+      modalNext.setAttribute('aria-label', `Next ${itemLabel.toLowerCase()}`);
       modalNext.innerHTML = '<span aria-hidden="true">&rarr;</span>';
       modalNext.addEventListener('click', () => {
         if (activeIndex < slides.length - 1) {
@@ -154,7 +165,7 @@
       modalCaption = document.createElement('p');
       modalCaption.className = 'resource-preview-modal-caption';
 
-      inner.appendChild(modalClose);
+      inner.appendChild(topbar);
       inner.appendChild(stage);
       inner.appendChild(modalCaption);
       modal.appendChild(inner);
