@@ -10,7 +10,7 @@
 - Production route configuration for `romanbediner.com/*` is committed but deliberately not deployed. Do not deploy `agent-access` production or promote the static-site SHA until Roman explicitly approves production release.
 - Created repository tickets: #1 agent guidance, #2 404 recovery, #3 Organization schema, #4 privacy and contact semantics, #5 Cloudflare Markdown negotiation. Add the product SHA and staging verification to each before closing; leave #3 open until Roman approves any public email, telephone number, or street address if scanner-specific credit is desired.
 - Local validation passed: `npm run test:node`, `npm run test:playwright` (18/18), `npx wrangler deploy --config agent-access/wrangler.jsonc --env staging --dry-run`, direct staging Worker curl verification, `git diff --check`, and Drive-drift fix/check.
-- Corrected a deployment-packaging omission discovered during hosted staging verification: the explicit static artifact allowlist had omitted `llms.txt` and `privacy`. `scripts/build/create-artifact.js` now packages both paths, and an artifact-integrity regression test protects them. A direct artifact build and the full Node QA suite passed. Wait for Deploy Staging run `32740990422` to finish, then verify `/llms.txt` and `/privacy/` return 200 before closing the related tickets.
+- Corrected a deployment-packaging omission discovered during hosted staging verification: the explicit static artifact allowlist had omitted `llms.txt` and `privacy`. `scripts/build/create-artifact.js` now packages both paths, and an artifact-integrity regression test protects them. A direct artifact build and the full Node QA suite passed. Staging CI run `32740990414` and replacement Deploy Staging run `32741361468` are green; direct staging checks confirm `/llms.txt` and `/privacy/` both return 200. Evidence comments are posted on repository tickets #1 through #5. Keep the tickets open until production promotion; keep #3 open until Roman approves any real public email, telephone number, or street address.
 - Required PRD update is pending: the self-hosted Google Workspace MCP tool (`get_drive_file_content` with `user_google_email`) was not callable in this Codex session. Do not use the local Drive mount or the stock Google Drive connector to update the PRD; restore the self-hosted MCP first, then record the agent-readiness product decision in `SEO Authority PRD`.
 
 ## Release Watcher Hygiene
@@ -299,10 +299,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 387
-- Updated At (UTC): 2026-08-24T14:49:43Z
+- Handoff Sequence: 388
+- Updated At (UTC): 2026-08-24T14:55:03Z
 - Source Branch: staging
-- Source Commit: 891e20b3440164616d4869e738ec41d159a70cb3 (pre-handoff baseline)
+- Source Commit: 820b63eac84025104d17bee33dad2370b7650400 (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
