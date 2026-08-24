@@ -13,7 +13,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..', '..');
 const pdfPath = path.join(root, 'assets', 'downloads', 'agentic-fleet-control-plane-roman-bediner.pdf');
@@ -36,13 +35,13 @@ for (let index = 1; index <= 6; index += 1) {
   if (fs.statSync(previewPath).size < 10_000) fail(`preview page is unexpectedly small: ${filename}`);
 }
 
-// The artifact is supplied as the approved source PDF, so inspect its visible
-// metadata instead of coupling the site to an obsolete local generator.
-const pdfInfo = spawnSync('pdfinfo', [pdfPath], { encoding: 'utf8' });
-if (pdfInfo.error || pdfInfo.status !== 0) fail('pdfinfo could not inspect the canonical PDF');
-if (!/^Title:\s+The Agentic Fleet Control Plane$/m.test(pdfInfo.stdout)) {
+// Keep this contract portable: GitHub's runner does not ship Poppler/pdfinfo.
+// The generated PDF stores its Info dictionary and Page tree uncompressed, so
+// validate those durable PDF structures directly without an OS-level tool.
+const pdfText = pdf.toString('latin1');
+if (!/\/Title \(The Agentic Fleet Control Plane\)/.test(pdfText)) {
   fail('PDF metadata is missing the approved artifact title');
 }
-if (!/^Pages:\s+6$/m.test(pdfInfo.stdout)) fail('PDF does not report six pages');
+if (!/\/Count 6\s+\/Kids \[/.test(pdfText)) fail('PDF does not report six pages');
 
 console.log('PASS: Agentic Fleet Control Plane artifact contract');
