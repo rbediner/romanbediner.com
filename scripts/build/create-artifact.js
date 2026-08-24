@@ -24,6 +24,8 @@ const INCLUDE_PATHS = [
   'CNAME',
   '404.html',
   'index.html',
+  // Machine-readable guidance is a public root-level route, not a runtime asset.
+  'llms.txt',
   'robots.txt',
   'sitemap.xml',
   'about',
@@ -32,6 +34,8 @@ const INCLUDE_PATHS = [
   'resources',
   'insights',
   'connect',
+  // Privacy is a canonical public route and must ship with every artifact.
+  'privacy',
   'assets',
   'styles',
   path.join('scripts', 'runtime'),

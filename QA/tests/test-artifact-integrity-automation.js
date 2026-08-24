@@ -35,6 +35,8 @@ const verifyPreviewText = fs.readFileSync(VERIFY_PREVIEW_SCRIPT, 'utf8');
 
 assert(createText.includes('artifact-manifest.json'), 'artifact builder must emit artifact-manifest.json');
 assert(createText.includes('checksum'), 'artifact builder must generate checksum metadata');
+assert(createText.includes("'llms.txt'"), 'artifact builder must package the public /llms.txt agent guide.');
+assert(createText.includes("'privacy'"), 'artifact builder must package the public /privacy/ trust-anchor route.');
 assert(createPreviewText.includes('CNAME'), 'preview artifact builder must manage CNAME behavior');
 assert(createPreviewText.includes('Disallow: /'), 'preview artifact builder must enforce no-index robots policy');
 assert(verifyText.includes('Checksum mismatch'), 'artifact verifier must fail on checksum mismatch');
