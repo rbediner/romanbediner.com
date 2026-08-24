@@ -8,7 +8,8 @@
 - `scripts/runtime/agent-builder-starter-prompt.js` fetches only the same-origin Markdown asset and copies plain text. Non-PDF downloads use the existing `resource_download` runtime event with the same resource context and `file_path` payload as the resource contract. The event is now documented in `README.md`.
 - Validation passed locally: `node QA/tests/test-agent-builder-starter-prompt.js`; focused Playwright `agentic-mobile-layout.spec.js` (9/9), including actual copy behavior and phone overflow checks; `npm run test:node`; `npm run test:jest` (20 suites, 73 tests); direct Chromium visual inspection of the new flagship card and Resources-hub prompt action at 390px; `git diff --check`; and Drive-drift fix/check.
 - The required `SEO Authority PRD` update remains blocked. The self-hosted Google Workspace MCP call as `roman@romanbediner.com` returns `invalid_grant: refresh token does not exist`; do not use the stock Drive connector or local Drive mount as a fallback. Reauthorize the connection, then record the starter-prompt artifact, Markdown-copy UX, and `resource_download` measurement decision.
-- No production promotion was attempted. Push the product commit to `staging`, wait for the matching green CI and Deploy Staging run, verify `/resources/agentic-ai-employees/` and `/resources/` on the preview, then seek Roman’s visual approval before considering the deeper PDF rebuild or any production promotion.
+- Staging CI run `32780647206` passed. The first Deploy Staging wait was correctly canceled by the staging-preview concurrency guard, then replacement Deploy Staging run `32780956811` passed for head `f0d1fe8`. `RB_PREVIEW_URL=https://rbediner.github.io/romanbediner-preview/ RB_PREVIEW_MAX_ATTEMPTS=1 npm run qa:smoke:preview` passed all 17 routes. Live Chromium checks confirmed both preview copy actions retrieve the full Markdown prompt, preserve a 390px phone viewport without horizontal overflow, and emit no console errors.
+- No production promotion was attempted. The staging review URL is `https://rbediner.github.io/romanbediner-preview/resources/agentic-ai-employees/?cb=f0d1fe8`. Seek Roman’s visual approval before any PDF rebuild or production promotion.
 
 ## Latest: 2026-08-24: Agentic Fleet Build Guide flagship resource — staging candidate
 
@@ -335,10 +336,10 @@ Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
 
-- Handoff Sequence: 397
-- Updated At (UTC): 2026-08-24T21:39:14Z
+- Handoff Sequence: 399
+- Updated At (UTC): 2026-08-24T21:45:46Z
 - Source Branch: staging
-- Source Commit: 9b834a6f87414993d5afb29da23cba200191c129 (pre-handoff baseline)
+- Source Commit: f0d1fe883d898a6914539d24e46a391ba02e369d (pre-handoff baseline)
 - Active Agent: Codex
 
 ## Latest: 2026-07-19: Agentic resource evidence positioning and production release
