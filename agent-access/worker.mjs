@@ -4,8 +4,8 @@
  *
  * Architectural role:
  * - This Cloudflare Worker sits in front of the static GitHub Pages origin only when
- *   the approved production route is deployed. Normal browser requests proxy to the
- *   existing origin unchanged; Markdown-capable agents receive a compact site guide.
+ *   the approved production route is deployed. Production browser requests pass to
+ *   Cloudflare's configured origin unchanged; Markdown-capable agents receive a compact site guide.
  *
  * Security and cache considerations:
  * - Markdown responses are intentionally not cached, preventing a Markdown variant
@@ -65,11 +65,18 @@ export function originUrlFor(requestUrl, originBaseUrl) {
   return target;
 }
 
+// Production must use Cloudflare's configured origin. Fetching GitHub Pages' public URL
+// follows its canonical-domain redirect back through this route and would create a loop.
+export function normalOriginRequest(request, env) {
+  if (env.USE_ZONE_ORIGIN === 'true') return request;
+  return new Request(originUrlFor(request.url, env.ORIGIN_BASE_URL), request);
+}
+
 export async function handleRequest(request, env, fetchImpl = fetch) {
   const incoming = new URL(request.url);
   if (wantsMarkdown(request)) return markdownResponse(incoming.pathname);
 
-  const upstream = await fetchImpl(new Request(originUrlFor(request.url, env.ORIGIN_BASE_URL), request));
+  const upstream = await fetchImpl(normalOriginRequest(request, env));
   const headers = new Headers(upstream.headers);
   headers.set('Vary', mergeVary(headers.get('Vary'), 'Accept'));
   return new Response(upstream.body, { status: upstream.status, statusText: upstream.statusText, headers });

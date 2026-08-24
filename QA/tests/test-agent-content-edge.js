@@ -34,6 +34,17 @@ async function run() {
   if (proxiedResponse.headers.get('Vary') !== 'Accept-Encoding, Accept') throw new Error('Normal responses must vary by Accept without dropping origin Vary values.');
   if ((await proxiedResponse.text()) !== 'origin HTML') throw new Error('Normal responses must preserve origin bodies.');
 
+  // A routed production Worker must fetch the configured zone origin, not GitHub Pages'
+  // public URL. The latter redirects to the canonical domain and would loop back here.
+  let productionRequest = null;
+  const productionResponse = await worker.handleRequest(proxiedRequest, { USE_ZONE_ORIGIN: 'true' }, async (request) => {
+    productionRequest = request;
+    return new Response('production HTML', { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  });
+  if (productionRequest !== proxiedRequest) throw new Error('Production requests must pass through to Cloudflare\'s configured origin without rewriting the public URL.');
+  if (productionResponse.headers.get('Vary') !== 'Accept') throw new Error('Production origin responses must still vary by Accept.');
+  if ((await productionResponse.text()) !== 'production HTML') throw new Error('Production origin responses must preserve origin bodies.');
+
   console.log('PASS: agent-access edge worker negotiation and origin proxy contracts passed.');
 }
 

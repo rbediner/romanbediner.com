@@ -5,9 +5,6 @@
   "compatibility_date": "2026-08-24",
   "account_id": "a00e5c592f3d32a0258528122cecde89",
   "workers_dev": false,
-  "vars": {
-    "ORIGIN_BASE_URL": "https://rbediner.github.io/romanbediner.com/"
-  },
   "env": {
     "staging": {
       "name": "romanbediner-agent-access-staging",
@@ -26,7 +23,7 @@
         }
       ],
       "vars": {
-        "ORIGIN_BASE_URL": "https://rbediner.github.io/romanbediner.com/"
+        "USE_ZONE_ORIGIN": "true"
       }
     }
   }
