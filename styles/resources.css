@@ -3808,7 +3808,10 @@ body.wireframe-modal-open {
 .fleet-cap { padding: 6px 8px 8px; }
 
 @media (max-width: 767px) {
-  .resource-meta { white-space: normal; text-align: center; line-height: 12px; }
+  /* Keep this shared metadata primitive at its approved 34px rhythm on phone.
+     The labels fit inside the resource card, so wrapping would create a false
+     second pill height and break the card hierarchy. */
+  .resource-meta { white-space: nowrap; text-align: center; line-height: 12px; }
   .pm-rules div { grid-template-columns: 1fr; gap: 8px; padding: 16px 0; }
   .pm-build-grid { grid-template-columns: 1fr; }
   .pm-code-card::after { left: 12px; right: auto; }

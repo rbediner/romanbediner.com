@@ -105,7 +105,7 @@ test('agentic resource fits a phone viewport and keeps the org chart legible', a
 /**
  * Invariant:
  * - The downloadable Agentic Fleet Build Guide must expose its approved
- *   twelve-page implementation artifact through a usable, non-overflowing mobile preview.
+ *   twenty-four-page implementation artifact through a usable, non-overflowing mobile preview.
  * Why this exists:
  * - The preview is the visitor's fastest way to assess the PDF before download;
  *   stale counts or a clipped disclosure make the artifact feel unreliable.
@@ -116,9 +116,9 @@ test('agentic fleet build guide preview opens, advances, and closes on a phone',
 
   await page.getByText('Preview the build guide', { exact: false }).click();
   await expect(page.getByRole('heading', { name: 'Agentic Fleet Build Guide Preview' })).toBeVisible();
-  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 1 of 12');
+  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 1 of 24');
   await page.getByRole('button', { name: 'Next build guide page' }).click();
-  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 2 of 12');
+  await expect(page.locator('[data-carousel-count]')).toHaveText('Page 2 of 24');
   await page.getByRole('button', { name: 'Expand build guide page preview' }).click();
   await expect(page.getByRole('button', { name: 'Close preview' })).toBeVisible();
   await page.getByRole('button', { name: 'Close preview' }).click();
@@ -132,7 +132,7 @@ test('agentic fleet build guide preview opens, advances, and closes on a phone',
     secondPreview: document.querySelector('img[src$="slide-02.png"]')?.getBoundingClientRect().width,
   }));
   expect(preview.scrollWidth).toBeLessThanOrEqual(preview.viewportWidth);
-  expect(preview.pageCount).toBe(12);
+  expect(preview.pageCount).toBe(24);
   expect(preview.downloadedPath).toBe('/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf');
   expect(preview.secondPreview).toBeGreaterThan(0);
 });
@@ -198,9 +198,9 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
     await preview.getByText('Preview the build guide', { exact: false }).click();
     await expect(preview).toHaveAttribute('open', '');
     await expect(preview.getByRole('heading', { name: 'Agentic Fleet Build Guide Preview' })).toBeVisible();
-    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 1 of 12');
+    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 1 of 24');
     await preview.getByRole('button', { name: 'Next build guide page' }).click();
-    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 2 of 12');
+    await expect(preview.locator('[data-carousel-count]')).toHaveText('Page 2 of 24');
 
     const layout = await page.evaluate(() => ({
       viewportWidth: window.innerWidth,
@@ -224,7 +224,7 @@ test('resources hub keeps the current architecture preview inside the Agentic AI
     }));
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
     expect(layout.standalonePreview).toBe(false);
-    expect(layout.pageCount).toBe(12);
+    expect(layout.pageCount).toBe(24);
     expect(layout.downloadedPath).toBe('/assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf');
     // Resource metadata must read as one component across the flagship and
     // supporting rows. Labels may vary in width with their real copy, but the

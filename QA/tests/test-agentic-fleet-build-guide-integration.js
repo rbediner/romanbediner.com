@@ -44,7 +44,7 @@ const previewManifest = JSON.parse(fs.readFileSync(previewManifestPath, 'utf8'))
 if (previewManifest.artifact !== artifactPath || previewManifest.artifactSha256 !== sha256(pdfPath)) {
   fail('preview manifest must identify the exact canonical build-guide PDF');
 }
-for (let index = 1; index <= 12; index += 1) {
+for (let index = 1; index <= 24; index += 1) {
   const filename = `slide-${String(index).padStart(2, '0')}.png`;
   const slidePath = path.join(slidesDir, filename);
   if (!fs.existsSync(slidePath)) {
@@ -69,8 +69,8 @@ for (let index = 1; index <= 12; index += 1) {
   'resources-analytics.js',
   'resource-collapsible-preview',
   'data-carousel-unit="Page"',
-  'Page 1 of 12',
-  'slide-12.png',
+  'Page 1 of 24',
+  'slide-24.png',
   // The version query prevents an older cached runtime from relabeling PDF pages as slides.
   'resources-carousel.js?v=20260824a',
 ].forEach((needle) => {
@@ -91,17 +91,17 @@ for (let index = 1; index <= 12; index += 1) {
   'data-resource-carousel',
   'data-carousel-expand',
   'slide-01.png',
-  'slide-12.png',
+  'slide-24.png',
   'data-carousel-unit="Page"',
-  'Page 1 of 12',
+  'Page 1 of 24',
   `data-file-path="${artifactPath}"`,
   'resources-carousel.js?v=20260824a',
 ].forEach((needle) => {
   if (!hub.includes(needle)) fail(`Resources hub preview contract is missing: ${needle}`);
 });
 
-if ((hub.match(/data-carousel-slide/g) || []).length !== 12) {
-  fail('Agentic AI Employees card preview must contain exactly twelve carousel pages');
+if ((hub.match(/data-carousel-slide/g) || []).length !== 24) {
+  fail('Agentic AI Employees card preview must contain exactly twenty-four carousel pages');
 }
 
 // The portable PDF belongs inside the Agentic AI Employees card. A detached
@@ -113,8 +113,8 @@ if (cardStart < 0 || previewStart < cardStart || detachedPreviewStart >= 0) {
   fail('Resources hub must keep the build-guide disclosure inside the Agentic AI Employees card');
 }
 
-if ((aiPage.match(/data-carousel-slide/g) || []).length !== 12) {
-  fail('Agentic AI Employees collapsible preview must contain exactly twelve carousel pages');
+if ((aiPage.match(/data-carousel-slide/g) || []).length !== 24) {
+  fail('Agentic AI Employees collapsible preview must contain exactly twenty-four carousel pages');
 }
 
 // The artifact title is a peer editorial heading, not compact utility copy.

@@ -28,7 +28,7 @@ This repository enforces static-site architecture through automated Node, Python
 
 6. Agentic Fleet Build Guide artifact and staging integration
 - Files: `QA/tests/test-agentic-fleet-build-guide-artifact.js`, `QA/tests/test-agentic-fleet-build-guide-integration.js`, `scripts/asset-generation/agentic-fleet-build-guide/generate_agentic_fleet_build_guide.py`
-- Validates the twelve-page downloadable build guide, its twelve visual preview pages, the direct resource CTA, the resource hub carousel, visible preview exit behavior, and the shared `resource_pdf_download` Google Analytics attributes.
+- Validates the 24-page downloadable build guide, its 24 visual preview pages, the direct resource CTA, the resource hub carousel, visible preview exit behavior, and the shared `resource_pdf_download` Google Analytics attributes.
 
 7. Repository hygiene and automation guardrails
 - Files: `QA/tests/test-no-legacy-references.js`, `QA/tests/test-js-header-comments.js`, `QA/tests/test-repo-hygiene.js`, `QA/tests/test-readme-drift.js`, `QA/tests/test-qa-runner-script.js`, `QA/tests/test-release-sop-automation.js`, `QA/tests/jest/readme_structure.test.js`, `QA/tests/jest/readme_integrity.test.js`, `QA/tests/jest/scripts_comment_headers.test.js`
