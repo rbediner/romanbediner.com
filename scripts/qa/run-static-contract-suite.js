@@ -29,6 +29,7 @@ const CANONICAL_SCOPES = ['home', 'about', 'services', 'framework', 'connect'];
 const LOCALIZED_NODE_BASE = [
   'QA/tests/test-route-metadata-parity.js',
   'QA/tests/test-metadata-consistency.js',
+  'QA/tests/test-fractional-cto-positioning.js',
   'QA/tests/test-ga4-installation.js',
   'QA/tests/test-header-nav.js',
   'QA/tests/test-page-top-spacing.js',
@@ -78,6 +79,7 @@ const SHARED_UI_NODE_TESTS = [
   'QA/tests/test-canonical.js',
   'QA/tests/test-route-metadata-parity.js',
   'QA/tests/test-metadata-consistency.js',
+  'QA/tests/test-fractional-cto-positioning.js',
   'QA/tests/test-ga4-installation.js',
   'QA/tests/test-header-nav.js',
   'QA/tests/test-home-hero-layout.js',

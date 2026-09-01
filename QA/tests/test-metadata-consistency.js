@@ -16,7 +16,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 
 const expectedHomepageTitle = 'Roman Bediner | Fractional COO & AI Architect';
-const expectedHomepageDescription = 'Roman Bediner is a Fractional COO and AI Architect delivering integration leadership, global operations, and program strategy through Bediner Advisory LLC.';
+const expectedHomepageDescription = 'Roman Bediner is a Fractional COO and AI Architect delivering Fractional CTO leadership, global operations, and program strategy through Bediner Advisory LLC.';
 const expectedHomepageH1 = 'Productizing Operations for Modern, AI-Enabled Work';
 const expectedFrameworkTitle = 'AI-Enabled Operations Framework | Integration Leadership & AI Architecture';
 const expectedFrameworkDescription = 'A six-stage operating model for connecting business priorities, systems, vendors, data, and execution through integration leadership, AI architecture, measurable signals, and practical evolution.';

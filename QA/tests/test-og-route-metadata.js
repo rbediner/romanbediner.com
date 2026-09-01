@@ -23,20 +23,20 @@ const expected = [
     file: 'index.html',
     canonical: 'https://romanbediner.com/',
     ogTitle: 'Roman Bediner | Fractional COO & AI Architect',
-    ogDescription: 'Roman Bediner is a Fractional COO and AI Architect delivering integration leadership, global operations, and program strategy through Bediner Advisory LLC.'
+    ogDescription: 'Roman Bediner is a Fractional COO and AI Architect delivering Fractional CTO leadership, global operations, and program strategy through Bediner Advisory LLC.'
   },
   {
     file: 'about/index.html',
     canonical: 'https://romanbediner.com/about/',
     ogTitle: 'About Roman Bediner | Fractional COO & Operating Strategist',
-    ogDescription: 'Roman Bediner\'s current roles include Fractional COO for Agentic Society, global operations and program strategy for LaserLight Communications, and Chief Fractional Integration Officer for NC Courage.'
+    ogDescription: 'Roman Bediner\'s current roles include Fractional COO for Agentic Society, global operations and program strategy for LaserLight Communications, and Fractional CTO for NC Courage.'
   },
   {
     file: 'services/index.html',
     canonical: 'https://romanbediner.com/services/',
     title: 'Services | Fractional COO, Operations & AI Architecture',
     ogTitle: 'Services | Fractional COO, Operations & AI Architecture',
-    ogDescription: 'Fractional COO leadership, global operations and program strategy, integration leadership, AI architecture, and transformation delivery through Bediner Advisory LLC.'
+    ogDescription: 'Fractional COO leadership, Fractional CTO leadership, global operations and program strategy, AI architecture, and transformation delivery through Bediner Advisory LLC.'
   },
   {
     file: 'framework/index.html',

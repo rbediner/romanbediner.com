@@ -48,7 +48,7 @@ const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 if (!about.includes('Roman Bediner is the founder and principal of') || !about.includes('class="advisory-brand"') || !about.includes('class="advisory-llc"')) failures += 1;
 if (!services.includes('Advisory services delivered through <span class="advisory-brand">') || !services.includes('class="advisory-llc"')) failures += 1;
 if (!connect.includes('class="advisory-brand"') || !connect.includes('class="advisory-accent"') || !connect.includes('class="advisory-llc"')) failures += 1;
-if (!homepage.includes('global operations and program strategy for LaserLight Communications; Chief Fractional Integration Officer leadership for NC Courage; and Fractional COO-level AI operating architecture for Agentic Society')) {
+if (!homepage.includes('global operations and program strategy for LaserLight Communications; Fractional CTO leadership for NC Courage; and Fractional COO-level AI operating architecture for Agentic Society')) {
   failures += 1;
   console.error('FAIL: homepage operating-experience paragraph must name the three current operating roles.');
 }
@@ -64,7 +64,7 @@ for (const [label, html] of [
     'Global Operations',
     'Program Strategy',
     'LaserLight Communications',
-    'Chief Fractional Integration Officer',
+    'Fractional CTO',
     'Agentic Society',
     'NC Courage'
   ]) {
