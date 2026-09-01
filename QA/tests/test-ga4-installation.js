@@ -142,6 +142,11 @@ if (!gaBootstrapRuntime.includes('debug_mode')) {
   console.error('FAIL: GA bootstrap must configure debug_mode for non-production environments.');
 }
 
+if (!gaBootstrapRuntime.includes('allow_google_signals: false')) {
+  failures += 1;
+  console.error('FAIL: GA bootstrap must disable Google Signals for aggregate-only analytics.');
+}
+
 if (failures > 0) {
   process.exit(1);
 }

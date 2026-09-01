@@ -219,6 +219,7 @@ Required handoff content for cross-machine continuity:
 - `/scripts/runtime/ga4-bootstrap.js` is the single analytics bootstrap point.
 - Inline GA bootstrap is forbidden.
 - External bootstrap keeps analytics compatible with strict CSP and avoids `unsafe-inline` dependency.
+- Google Signals is disabled: the site measures aggregate use without Google Ads audience features or their additional third-party image requests.
 - CSP `connect-src` explicitly allows `https://www.googletagmanager.com` in addition to GA/Google domains so GA transport calls do not generate runtime CSP violations during smoke checks.
 - Runtime analytics context now standardizes environment tagging:
   - `production` for `romanbediner.com`

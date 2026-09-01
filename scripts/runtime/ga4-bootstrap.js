@@ -71,6 +71,9 @@
     window.gtag('js', new Date());
     window.gtag('config', measurementId, {
       anonymize_ip: true,
+      // This public site measures aggregate usage; it does not use Google Ads Signals.
+      // Keeping signals off also avoids third-party audience-image requests outside the CSP allowlist.
+      allow_google_signals: false,
       debug_mode: environment !== 'production'
     });
   };
