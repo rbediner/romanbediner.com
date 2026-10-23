@@ -1,5 +1,12 @@
 # Cross-Machine Handoff (Latest)
 
+## Latest: 2026-10-23: CI/CD standard installed
+
+- The estate CI/CD standard is now in this repository: `CI-STANDARD.md` at the root, the lint and config under `.github/ci-standard/`, a required-check workflow `.github/workflows/ci-standard.yml` (job `ci-standard`, name frozen), and a binding section in `AGENTS.md` with an `@AGENTS.md` import in `CLAUDE.md`. Nothing existing was removed.
+- The check lints only the workflow files a pull request changes, reading the checker from the base branch, so the existing workflows here do not block unrelated work. Their violations print as warnings; fixing them is separate work.
+- Before pushing a workflow change run `python3 .github/ci-standard/ci-cost-lint.py --changed`. Never `gh pr merge --admin` a workflow change.
+- No site, deploy or content behaviour changed. Canonical copies live in `rbediner/automation-estate`; do not edit the vendored files here.
+
 ## Latest: 2026-08-24: Agentic Fleet Build Kit pairing — staging candidate
 
 - The supplied 24-page `Agentic Fleet Build Guide` is now the canonical PDF at `assets/downloads/agentic-fleet-build-guide-roman-bediner.pdf`. It is a follow-along implementation path, not a second high-level artifact: pages 1–4 orient a beginner and hand off to Session Zero; the remaining sessions cover a contract, project files, cloud runtime, cron, durable claims, action ceilings, observability, loud failure, bounded self-healing, CI gating, promotion, and Hivemind/memory/routing/caching.
