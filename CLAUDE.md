@@ -34,3 +34,6 @@ scripts/clean-drive-drift.sh --check    # report only (exit 1 if any found)
 ```
 
 This also runs automatically via git hooks, on every `npm install`, and at Claude session start. Never commit a file whose name ends in ` 2` / ` 3` — it is Drive junk, not a real file.
+
+Also read and follow this repository's AGENTS.md, the rules every agent shares:
+@AGENTS.md
