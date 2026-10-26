@@ -1,5 +1,46 @@
 # Cross-Machine Handoff (Latest)
 
+- Handoff Sequence: 403
+- Updated At (UTC): 2026-10-26T23:19:34Z
+- Source Branch: staging
+- Source Commit: 2de55f1aec408c99b67acd20666df85ecff2ca7d (pre-handoff baseline)
+
+## Latest: 2026-10-26: Blog hub and Agentic Society article verified on staging
+
+The recovered blog work is integrated and deployed for Roman's review. Product SHA `2de55f1aec408c99b67acd20666df85ecff2ca7d` passed [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40418183689) and [Deploy Staging](https://github.com/rbediner/romanbediner.com/actions/runs/40418544549). Real desktop/phone browser checks and exact deployed content/SVG byte parity passed. **Production is not approved and was not changed.**
+
+- [Blog hub](https://rbediner.github.io/romanbediner-preview/blog/?cb=2de55f1aec40): an explicit Blog landing page with linked article cards, following Resources' featured/supporting hierarchy. Only the real first article is listed; later ready articles use compact cards.
+- [Agentic Society article](https://rbediner.github.io/romanbediner-preview/blog/agentic-society/?cb=2de55f1aec40): develops Roman's original LinkedIn/carousel thesis about AI investment, employee capacity and business growth. Company Brain, Project Manager and Chief of Staff lead the examples; Director, RevOps, improvement, independent engineering review and solution preparation remain distinct supporting roles. The news desk is secondary. Existing fleet and PM guides are linked, not duplicated.
+- Source: `content/blog/agentic-society.json` and `.html.txt`; generate with `npm run blog:build`, verify with `npm run blog:check`. Static hub/article, RSS, sitemap, metadata, schema, shared navigation, three expandable workflow diagrams and public artwork are committed.
+- Opening/closing referral actions preserve `https://agenticsociety.com?ref=roman-967464`, sponsored semantics and adjacent Fractional COO/commission disclosure. `/connect/` is the conversation path. Production-only events measure intent, not paid membership or revenue.
+- Preview packaging includes the new routes and artwork, excludes editorial source/research, rewrites base paths, removes CNAME, blocks crawling and now adds explicit noindex page directives. Production HTML is unchanged by that preview-only transformation.
+- Read the owner's supplied PDF, both original HTML guides, the resolved LinkedIn post, the current official site/program and selected current implementation evidence. Source files and private implementation snapshots remain outside the public repository. No private member/client records or invented outcomes are published. `docs/blog/article-positioning.md` records search intent, source boundaries and conversion decisions.
+
+## Owner decisions and remaining work
+
+1. Roman reviews the staged hub and article. Any production promotion requires his separate explicit approval of the exact tested revision.
+2. **Weekly automation is deferred.** Discuss the complete research/draft/review/delivery workflow, document its approved PRD, then decide whether to schedule a routine. The recovered brief utility remains preparation only. No schedule, automatic publication, Remy handoff or external delivery was enabled.
+3. The current live PRD is [Product Requirements & Production Baseline](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit). Its October 26 staging addendum was saved and read back as `roman@romanbediner.com`. The older `15WTg...` document explicitly points to this replacement and remains archived.
+
+## Verification and operator notes
+
+- Normal Husky hooks restored (`core.hooksPath=.husky/_`), origin reconciled to `rbediner/romanbediner.com`, staging based on observed remote `c7bf4ab3ca1e0a20d06d9ce4bcfc70e59dda26f4`; all recovered changes retained/evaluated. Use this isolated Documents checkout, not the stalled old task or its source.
+- Node 20.20.1; Python 3.11.15 with CI-pinned Playwright 1.58.0/Pillow 11.3.0 in the private sibling `qa-runtime`. Preserve inherited PATH when selecting them. JavaScript browser package remains the repo's Playwright version.
+- Focused checks: deterministic generation, actual draft retirement from pages/feed/sitemap, bad-section refusal, production telemetry fence, private brief replay, seven widths (320 through 1440), dialog keyboard focus/FAQ/overflow/runtime checks, and actual SVG panel bounds. Eight focused browser tests passed.
+- Normal full-regression pre-push gate: Node contracts, 20 Jest suites/73 checks, Python 47 tests (8 opt-in visual skips), 27 Playwright checks, and all 8 opt-in visual checks passed. Total gate duration 132.382 seconds. No gate or hook was bypassed.
+- Deployed 1440px/390px checks confirmed the exact release token, correct hub/article, disclosure/referral, noindex, expanded diagrams, focus restoration, FAQ, zero overflow and no CSP/runtime errors. The deployed hub/article main content matches expected artifact bytes; all three workflow SVG hashes match source bytes.
+- `git fsck --full`, diff hygiene and Drive-drift checks passed. Remote prod stayed `3d51e669f9af7315530ab07d2fe2c7a6db01fad0`. No paid media generation, model API calls or new credentials. One product push; actual Actions billed minutes are not exposed here.
+- Browser/test work stayed local and serial around the required gate. Resource telemetry showed 16 GiB and warning memory pressure; no helpers were started. The single Chrome local-review tab became unresponsive to control after initial inspection; no additional tab was opened, and its local server was stopped. Headless QA browsers closed on completion. Release watchers were collected to terminal completion.
+- Detailed recovery receipt: `../HANDOFF.md`; private continuation evidence under `../evidence/` includes upload hashes, claim ledger, browser logs, deployed parity and CI/deploy watch logs. UI screenshots are in ignored `QA/results/staging-blog-*.png`. Private files are not in the deployment artifact.
+
+## Release Watcher Hygiene
+
+Keep release watcher hygiene in place for this repo.
+- Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
+- Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
+## Historical handoff entries (superseded by the current status above)
+
 ## Latest: 2026-10-23: CI/CD standard installed
 
 - The estate CI/CD standard is now in this repository: `CI-STANDARD.md` at the root, the lint and config under `.github/ci-standard/`, a required-check workflow `.github/workflows/ci-standard.yml` (job `ci-standard`, name frozen), and a binding section in `AGENTS.md` with an `@AGENTS.md` import in `CLAUDE.md`. Nothing existing was removed.
