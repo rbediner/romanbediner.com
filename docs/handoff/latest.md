@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 403
-- Updated At (UTC): 2026-10-26T23:19:34Z
+- Handoff Sequence: 404
+- Updated At (UTC): 2026-10-26T23:21:55Z
 - Source Branch: staging
-- Source Commit: 2de55f1aec408c99b67acd20666df85ecff2ca7d (pre-handoff baseline)
+- Source Commit: f109e8a4891d5856ac8619cc9632ee0ccb83c1d6 (pre-handoff baseline)
 
 ## Latest: 2026-10-26: Blog hub and Agentic Society article verified on staging
 
@@ -27,10 +27,10 @@ The recovered blog work is integrated and deployed for Roman's review. Product S
 - Normal Husky hooks restored (`core.hooksPath=.husky/_`), origin reconciled to `rbediner/romanbediner.com`, staging based on observed remote `c7bf4ab3ca1e0a20d06d9ce4bcfc70e59dda26f4`; all recovered changes retained/evaluated. Use this isolated Documents checkout, not the stalled old task or its source.
 - Node 20.20.1; Python 3.11.15 with CI-pinned Playwright 1.58.0/Pillow 11.3.0 in the private sibling `qa-runtime`. Preserve inherited PATH when selecting them. JavaScript browser package remains the repo's Playwright version.
 - Focused checks: deterministic generation, actual draft retirement from pages/feed/sitemap, bad-section refusal, production telemetry fence, private brief replay, seven widths (320 through 1440), dialog keyboard focus/FAQ/overflow/runtime checks, and actual SVG panel bounds. Eight focused browser tests passed.
-- Normal full-regression pre-push gate: Node contracts, 20 Jest suites/73 checks, Python 47 tests (8 opt-in visual skips), 27 Playwright checks, and all 8 opt-in visual checks passed. Total gate duration 132.382 seconds. No gate or hook was bypassed.
+- Normal full-regression pre-push gate: Node contracts, 20 Jest suites/73 checks, Python 47 tests (8 opt-in visual skips), 27 Playwright checks, and all 8 opt-in visual checks passed. Total gate duration 132.382 seconds. All local QA gates and hooks ran normally. GitHub reported its existing owner bypass for the expected `ci-standard` status on the staging pushes; no branch rules or workflow settings were changed. The product CI and staging deployment passed independently.
 - Deployed 1440px/390px checks confirmed the exact release token, correct hub/article, disclosure/referral, noindex, expanded diagrams, focus restoration, FAQ, zero overflow and no CSP/runtime errors. The deployed hub/article main content matches expected artifact bytes; all three workflow SVG hashes match source bytes.
 - `git fsck --full`, diff hygiene and Drive-drift checks passed. Remote prod stayed `3d51e669f9af7315530ab07d2fe2c7a6db01fad0`. No paid media generation, model API calls or new credentials. One product push; actual Actions billed minutes are not exposed here.
-- Browser/test work stayed local and serial around the required gate. Resource telemetry showed 16 GiB and warning memory pressure; no helpers were started. The single Chrome local-review tab became unresponsive to control after initial inspection; no additional tab was opened, and its local server was stopped. Headless QA browsers closed on completion. Release watchers were collected to terminal completion.
+- Browser/test work stayed local and serial around the required gate. Resource telemetry showed 16 GiB and warning memory pressure; no helpers were started. The single Chrome local-review tab became unresponsive to extension control after initial inspection. Native UI recovered it; its address was pointed to the verified staging article for owner review, while the old document remained visible during navigation. No additional review tab was opened, and its local server was stopped. Use the verified review links above if the old tab remains stale. Headless QA browsers closed on completion. Release watchers were collected to terminal completion.
 - Detailed recovery receipt: `../HANDOFF.md`; private continuation evidence under `../evidence/` includes upload hashes, claim ledger, browser logs, deployed parity and CI/deploy watch logs. UI screenshots are in ignored `QA/results/staging-blog-*.png`. Private files are not in the deployment artifact.
 
 ## Release Watcher Hygiene
