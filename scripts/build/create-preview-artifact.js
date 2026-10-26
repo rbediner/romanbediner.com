@@ -59,6 +59,18 @@ function ensurePreviewRobots(siteDir) {
   const robotsPath = path.join(siteDir, 'robots.txt');
   const required = ['User-agent: *', 'Disallow: /', ''];
   fs.writeFileSync(robotsPath, required.join('\n'));
+  // robots.txt blocks crawling; explicit page directives also prevent indexing
+  // when a preview URL is discovered through an outside link. Production bytes
+  // remain untouched because this runs only on the isolated preview artifact.
+  for (const file of listFilesRecursive(siteDir).filter(file => file.endsWith('.html'))) {
+    const target = path.join(siteDir, file);
+    const html = fs.readFileSync(target, 'utf8');
+    const tag = '<meta name="robots" content="noindex, nofollow" />';
+    const updated = /<meta\b[^>]*\bname=["']robots["'][^>]*>/i.test(html)
+      ? html.replace(/<meta\b[^>]*\bname=["']robots["'][^>]*>/ig, tag)
+      : html.replace(/<\/head>/i, `${tag}\n</head>`);
+    fs.writeFileSync(target, updated);
+  }
 }
 
 function normalizeBasePath(input) {

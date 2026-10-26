@@ -44,8 +44,8 @@ class NavRuntimePlaywrightTest(unittest.TestCase):
 
     def test_nav_links_and_snapshot_stability(self):
         # Home removed from nav in 2026 redesign; Connect renders as "Connect →" (CTA button).
-        expected_labels = ["About", "Framework", "Resources", "Services", "Connect \u2192"]
-        expected_hrefs = ["/about/", "/framework/", "/resources/", "/services/", "/connect/"]
+        expected_labels = ["About", "Framework", "Resources", "Blog", "Services", "Connect \u2192"]
+        expected_hrefs = ["/about/", "/framework/", "/resources/", "/blog/", "/services/", "/connect/"]
         routes = ["/", "/about/", "/services/", "/framework/", "/resources/", "/resources/ai-enabled-operations-framework-summary/", "/resources/pasteflow/", "/connect/"]
 
         baseline_header = None

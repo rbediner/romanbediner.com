@@ -9,6 +9,25 @@
  */
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
+
+// Exercise real preview output, including an existing permissive robots tag.
+// The function receives a disposable artifact directory, never the source tree.
+const previewRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'rb-preview-robots-'));
+try {
+  const {ensurePreviewRobots} = require('../../scripts/build/create-preview-artifact.js');
+  fs.mkdirSync(path.join(previewRoot, 'blog'));
+  fs.writeFileSync(path.join(previewRoot, 'index.html'), '<html><head><title>Preview</title></head><body>Home</body></html>');
+  fs.writeFileSync(path.join(previewRoot, 'blog/index.html'), '<html><head><meta name="robots" content="index, follow"></head><body>Blog</body></html>');
+  ensurePreviewRobots(previewRoot);
+  for (const file of ['index.html','blog/index.html']) {
+    const text=fs.readFileSync(path.join(previewRoot,file),'utf8');
+    if(!text.includes('content="noindex, nofollow"') || text.includes('content="index, follow"')) throw new Error(`Preview indexing remains enabled: ${file}`);
+  }
+  const first=fs.readFileSync(path.join(previewRoot,'index.html'),'utf8');
+  ensurePreviewRobots(previewRoot);
+  if(first!==fs.readFileSync(path.join(previewRoot,'index.html'),'utf8')) throw new Error('Preview robots rewrite is not idempotent');
+} finally { fs.rmSync(previewRoot,{recursive:true,force:true}); }
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const STAGING_WORKFLOW = path.join(ROOT, '.github', 'workflows', 'deploy-staging.yml');

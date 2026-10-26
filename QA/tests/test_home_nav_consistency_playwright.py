@@ -44,8 +44,8 @@ class HomeNavConsistencyPlaywrightTest(unittest.TestCase):
 
     def test_header_nav_consistent_across_canonical_routes(self):
         # Home removed from nav in 2026 redesign; Connect renders as "Connect →" (CTA button).
-        expected_labels = ["About", "Framework", "Resources", "Services", "Connect \u2192"]
-        expected_hrefs = ["/about/", "/framework/", "/resources/", "/services/", "/connect/"]
+        expected_labels = ["About", "Framework", "Resources", "Blog", "Services", "Connect \u2192"]
+        expected_hrefs = ["/about/", "/framework/", "/resources/", "/blog/", "/services/", "/connect/"]
         # None = homepage has no matching nav link (Home removed from NAV_LINKS).
         route_expectations = {
             "/": None,

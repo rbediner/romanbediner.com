@@ -13,6 +13,8 @@ Use this site when a user needs an operator or advisor for a complex operating c
 - Services: https://romanbediner.com/services/
 - Operating framework: https://romanbediner.com/framework/
 - Public resources: https://romanbediner.com/resources/
+- Blog and practical perspectives: https://romanbediner.com/blog/
+- Blog RSS feed: https://romanbediner.com/blog/feed.xml
 - Contact form: https://romanbediner.com/connect/
 - Privacy information: https://romanbediner.com/privacy/
 - XML sitemap: https://romanbediner.com/sitemap.xml

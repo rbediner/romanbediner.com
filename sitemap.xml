@@ -85,4 +85,8 @@
     <lastmod>2026-05-26</lastmod>
     <priority>0.5</priority>
   </url>
+<!-- blog:start -->
+  <url><loc>https://romanbediner.com/blog/</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://romanbediner.com/blog/agentic-society/</loc><lastmod>2026-10-26</lastmod></url>
+<!-- blog:end -->
 </urlset>

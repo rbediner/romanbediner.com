@@ -1,5 +1,18 @@
 # RomanBediner.com
 
+## Blog and weekly editorial workflow
+
+The `/blog/` hub is an editorial companion to `/resources/`. The first article, `/blog/agentic-society/`, explains community participation through the Company Brain, Project Manager and Chief of Staff, links to existing fleet and PM guides, and offers a disclosed referral or a conversation with Roman. Shared navigation includes Blog. Production promotion remains subject to Roman reviewing the staging revision.
+
+- `npm run blog:build` renders trusted `content/blog/<slug>.json` metadata plus `<slug>.html.txt` editorial source into static HTML, RSS and the sitemap. Generated output is committed; deployments need no new service or framework.
+- `npm run blog:check` verifies deterministic output and the blog contract. `draft` records are excluded, while `ready` records are staging candidates and `published` records remain included. Status never authorizes production. The generated-file manifest removes stale article pages when a record returns to draft.
+- Weekly automation is deferred by Roman: finish and review the first article, then agree the full pipeline and PRD before scheduling. The recovered brief generator is preparation only, not complete article automation.
+- `npm run blog:brief -- --week 2026-11-02 --output ../blog-work --write` creates a private, review-only brief outside the repository. It does not generate an article or publish. See [weekly publishing](docs/blog/weekly-publishing.md) and the evidence-gated [editorial backlog](docs/blog/editorial-backlog.json).
+- New metadata needs a permanent slug, title, SEO title, description, deck, category, ISO dates, image and alt text, and an ordered `toc` of heading IDs/labels. Optional `cover` and `series` support editorial artwork. Article HTML is reviewed repository code, never untrusted user input. Custom shortcode additions belong in the generator with tests.
+- The first article uses `https://agenticsociety.com?ref=roman-967464` with visible commission disclosure and `rel="sponsored noopener"`. `partner_click` and `blog_contact_intent` measure production-only intent. They do not claim signups or revenue; partner-confirmed results are a separate measurement.
+- Staging inherits noindex and base-path rewriting. Only generated `/blog/` pages, shared runtime/CSS and public artwork enter deployment; research, briefs and editorial source do not. The source repository is public, so committed editorial materials must also be public-safe.
+
+
 ## Architecture
 - **What it is**: The executive operating website for Roman Bediner (`romanbediner.com`) — a static, content-first marketing/portfolio site plus an embedded React "AI-Enabled Operations Dashboard" resource.
 - **Tech stack**: Hand-authored static HTML, CSS, and vanilla JavaScript for the main site (no build step, no framework, no bundler). The embedded dashboard is React + Vite. Tooling is Node 20 (`.nvmrc`) with npm; QA uses Jest, Playwright, and Python `unittest`.
@@ -170,7 +183,7 @@ Rules:
 
 ## Cross-Machine Handoff Protocol
 - Canonical handoff file: `/docs/handoff/latest.md`.
-- Live PRD: `SEO Authority PRD` (`https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`).
+- Live PRD: `SEO Authority PRD` (`https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit`).
 - PRD simplification baseline for this phase:
   - Measurement scope is limited to observable actions:
     - page views

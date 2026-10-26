@@ -14,6 +14,8 @@ const fs = require('fs');
 const path = require('path');
 
 const pages = [
+  'blog/index.html',
+  'blog/agentic-society/index.html',
   'index.html',
   'about/index.html',
   'services/index.html',
@@ -27,6 +29,7 @@ const pages = [
 
 // Home removed from nav (logo serves as home link); Connect is a CTA button (cta:true).
 const navModel = [
+  { label: 'Blog', href: '/blog/' },
   { label: 'About', href: '/about/' },
   { label: 'Framework', href: '/framework/' },
   { label: 'Resources', href: '/resources/' },

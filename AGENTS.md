@@ -23,7 +23,7 @@
   - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
   - Do not use ad-hoc shell polling loops for CI or preview monitoring.
   ```
-- After any meaningful product change, also update the live PRD in Google Docs: `SEO Authority PRD` (`https://docs.google.com/document/d/15WTgARcQl8jlKuqYtQdxBucWjEsXvrxnGNqbB0xTbE8/edit`).
+- After any meaningful product change, also update the live PRD in Google Docs: `SEO Authority PRD` (`https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit`).
 - Treat the PRD update as required when a session adds or changes a feature, deploy-worthy behavior, UX rule, analytics rule, metadata rule, information architecture decision, content-system rule, or any other product-level decision that changes how the site works or what it promises.
 
 ## Dashboard Sub-Project Rule
@@ -78,3 +78,6 @@ Read `CI-STANDARD.md` at the repository root before you add or change anything u
 - `CI-STANDARD.md` and the files under `.github/ci-standard/` (except `config.json`) are byte copies from `rbediner/automation-estate`.
   Do not edit them here; change the canonical copy there and the installer opens the pull requests.
 <!-- ci-standard:end -->
+
+<!-- editorial-source-and-first-delivery-20261026 -->
+Before proposing recurring automation, finish the owner-visible first deliverable and agree the full workflow. For editorial work, read owner-supplied source artifacts before preserving a recovered draft, and keep the owner-selected examples and conversion purpose consistent across copy, diagrams, metadata and the hub.

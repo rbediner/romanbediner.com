@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 1,
+  "notes": "Editorial hypotheses, not verified claims or a complete agent inventory. Sources must be rechecked during drafting. Order defines selection; in-progress and hold topics are skipped. Public-safe descriptions only.",
+  "topics": [
+    {
+      "slug": "agentic-society",
+      "title": "Why building with other operators changes AI implementation",
+      "status": "in-progress",
+      "pillar": "Implementation community",
+      "audience": "Business owners moving beyond experiments",
+      "primaryQuery": "agentic society",
+      "searchIntent": "Evaluate fit before joining",
+      "thesis": "Connect the gap between access to tools and actually changing how work gets done.",
+      "originalInsight": "Roman explains what operator accountability contributes beyond a tool subscription.",
+      "evidenceNeeded": [
+        "Verify current public offer and referral destination.",
+        "Distinguish internal agents from member benefits."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "affiliate",
+        "intent": "Invite readers with a relevant implementation need to evaluate Agentic Society, with relationship and commission disclosure."
+      }
+    },
+    {
+      "slug": "choose-first-ai-workflow",
+      "title": "How to choose the first AI workflow worth building",
+      "status": "planned",
+      "pillar": "Operator decisions",
+      "audience": "Founders with many possible automations",
+      "primaryQuery": "first AI workflow for business",
+      "searchIntent": "Choose a bounded workflow with accountable ownership",
+      "thesis": "Start with a recurring business decision and a measurable baseline, then select tools.",
+      "originalInsight": "Describe one decision Roman made about what not to automate and why.",
+      "evidenceNeeded": [
+        "Get one public-safe first-person example from Roman.",
+        "Define baseline and owner without claiming measured savings."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "affiliate",
+        "intent": "Invite readers with a relevant implementation need to evaluate Agentic Society, with relationship and commission disclosure."
+      }
+    },
+    {
+      "slug": "ai-news-to-business-decisions",
+      "title": "An AI news filter for operators who still have a business to run",
+      "status": "planned",
+      "pillar": "Operator decisions",
+      "audience": "Operators overwhelmed by AI announcements",
+      "primaryQuery": "AI news for business owners",
+      "searchIntent": "Turn announcements into a decision to act, test or ignore",
+      "thesis": "Separate product eligibility, business usefulness and evidence of adoption.",
+      "originalInsight": "Use the distinction between attention and actual adoption to show a practical decision filter.",
+      "evidenceNeeded": [
+        "Verify a current announcement using its primary source at drafting time.",
+        "Confirm which lessons can be shared from the internal news workflow."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "affiliate",
+        "intent": "Invite readers with a relevant implementation need to evaluate Agentic Society, with relationship and commission disclosure."
+      }
+    },
+    {
+      "slug": "company-brain-before-more-agents",
+      "title": "Before another agent, give your company a usable memory",
+      "status": "planned",
+      "pillar": "Company knowledge",
+      "audience": "Owners whose team repeatedly recreates context",
+      "primaryQuery": "company brain AI",
+      "searchIntent": "Understand what useful operational memory needs",
+      "thesis": "Ownership, provenance and correction matter as much as putting documents in one place.",
+      "originalInsight": "Explain a documented lesson about recall versus stale or conflicting instructions.",
+      "evidenceNeeded": [
+        "Confirm the public Company Brain offer.",
+        "Use a synthetic example of a decision record, not internal memory contents."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "affiliate",
+        "intent": "Invite readers with a relevant implementation need to evaluate Agentic Society, with relationship and commission disclosure."
+      }
+    },
+    {
+      "slug": "human-review-ai-business-decisions",
+      "title": "Where human review belongs in an AI operating system",
+      "status": "planned",
+      "pillar": "Human accountability",
+      "audience": "Leaders designing AI-assisted operations",
+      "primaryQuery": "human review AI business workflows",
+      "searchIntent": "Decide when an agent should propose and when a person should act",
+      "thesis": "Review works best when it is attached to specific decisions and consequences.",
+      "originalInsight": "Explain the Hot Seat pattern of proposed advice, room judgment and retained learning without exposing member conversations.",
+      "evidenceNeeded": [
+        "Confirm the workflow with its owner.",
+        "Create a synthetic example and label it clearly.",
+        "Avoid presenting internal implementation as a standard included member service."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "affiliate",
+        "intent": "Invite readers with a relevant implementation need to evaluate Agentic Society, with relationship and commission disclosure."
+      }
+    },
+    {
+      "slug": "agent-roster-business-responsibilities",
+      "title": "Build your agent roster around responsibilities, not job titles",
+      "status": "planned",
+      "pillar": "Agent operations",
+      "audience": "Founders hiring or building AI assistants",
+      "primaryQuery": "AI agents for business operations",
+      "searchIntent": "Map agent responsibilities and handoffs",
+      "thesis": "A useful roster names the input, decision, owner and handoff for every agent.",
+      "originalInsight": "Show the difference between a deployed agent, a configured tool and a planned workflow from Roman’s verified inventory.",
+      "evidenceNeeded": [
+        "Reconcile the full inventory across repositories and approved project records.",
+        "Verify status and ownership of every named example.",
+        "Do not imply the Slack-Agents repository contains all of Roman’s work."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "advisory",
+        "intent": "Invite readers to discuss their operating problem with Roman through the existing site contact path."
+      }
+    },
+    {
+      "slug": "ai-project-management-follow-through",
+      "title": "What an AI project manager needs to make follow-through easier",
+      "status": "planned",
+      "pillar": "Agent operations",
+      "audience": "Teams losing commitments between meetings",
+      "primaryQuery": "AI project management workflows",
+      "searchIntent": "Evaluate a workflow for turning commitments into reviewed next actions",
+      "thesis": "An extracted task is useful only when ownership and status remain trustworthy.",
+      "originalInsight": "Describe an approved lesson from Roman’s task and follow-up workflows, including a failure mode.",
+      "evidenceNeeded": [
+        "Verify a relevant project in the broader agent inventory.",
+        "Use fictional names and tasks in examples.",
+        "Do not claim tasks were completed from extraction alone."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "advisory",
+        "intent": "Invite readers to discuss their operating problem with Roman through the existing site contact path."
+      }
+    },
+    {
+      "slug": "reliable-agent-handoffs",
+      "title": "The handoff is where useful agents become reliable operations",
+      "status": "planned",
+      "pillar": "Agent operations",
+      "audience": "Operators coordinating multiple automations",
+      "primaryQuery": "reliable AI agent workflows",
+      "searchIntent": "Understand retries, escalation and human ownership",
+      "thesis": "Delivery, idempotency and clear failure ownership are operational design choices.",
+      "originalInsight": "Explain one sanitized reliability tradeoff with a useful checklist.",
+      "evidenceNeeded": [
+        "Verify an implementation and its current status.",
+        "Do not expose infrastructure identifiers or undocumented security details.",
+        "Report failure behavior instead of invented uptime or savings."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "resource",
+        "intent": "Send readers to the existing public Framework for a practical next step."
+      }
+    },
+    {
+      "slug": "ai-revenue-operations-questions",
+      "title": "What to ask before putting an agent in revenue operations",
+      "status": "planned",
+      "pillar": "Business operations",
+      "audience": "Founders evaluating revenue operations automation",
+      "primaryQuery": "AI revenue operations",
+      "searchIntent": "Assess useful automation without handing over financial judgment",
+      "thesis": "Data quality, permissions and reconciliation define the boundary of a useful finance-adjacent agent.",
+      "originalInsight": "Use an approved design lesson about deciding what an agent may summarize versus change.",
+      "evidenceNeeded": [
+        "Verify the relevant agent and business responsibility.",
+        "Exclude customer records, commissions, payout data and financial identifiers.",
+        "Avoid claiming financial returns or giving individualized financial advice."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "advisory",
+        "intent": "Invite readers to discuss their operating problem with Roman through the existing site contact path."
+      }
+    },
+    {
+      "slug": "marketing-agents-that-earn-trust",
+      "title": "Marketing agents should help you earn attention before they automate outreach",
+      "status": "hold",
+      "pillar": "Marketing operations",
+      "audience": "Founders building distribution systems",
+      "primaryQuery": "AI marketing agents",
+      "searchIntent": "Build evidence-led marketing without fabricated personalization",
+      "thesis": "Useful content and reviewable evidence should precede automated distribution.",
+      "originalInsight": "Use Roman’s broader marketing-agent work only after inventory verification.",
+      "evidenceNeeded": [
+        "Find the actual project beyond Slack-Agents.",
+        "Confirm public-safe functionality and ownership.",
+        "No unsolicited outreach activation or invented campaign results."
+      ],
+      "sources": [
+        {
+          "url": "https://agenticsociety.com/",
+          "visibility": "public",
+          "purpose": "Verify the current public offer and fit; features and terms are not assumed."
+        }
+      ],
+      "cta": {
+        "type": "affiliate",
+        "intent": "Invite readers with a relevant implementation need to evaluate Agentic Society, with relationship and commission disclosure."
+      }
+    },
+    {
+      "slug": "weekly-build-notes-to-useful-articles",
+      "title": "Turn weekly build notes into useful articles, not a content treadmill",
+      "status": "planned",
+      "pillar": "Publishing operations",
+      "audience": "Operators who build more than they publish",
+      "primaryQuery": "AI blog content workflow",
+      "searchIntent": "Create a source-backed publishing routine",
+      "thesis": "A small verified lesson is more valuable than a generic weekly recap.",
+      "originalInsight": "Explain this pipeline’s source, claim and review gates as a practical operating example.",
+      "evidenceNeeded": [
+        "Use only this repository’s reviewable implementation as evidence.",
+        "Recheck current Google guidance on helpful content and scaled content abuse."
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/rbediner/romanbediner.com",
+          "visibility": "public",
+          "purpose": "Verify the implemented editorial workflow."
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "visibility": "public",
+          "purpose": "Verify people-first content guidance at drafting time."
+        },
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "visibility": "public",
+          "purpose": "Verify scaled content abuse and link spam guidance at drafting time."
+        }
+      ],
+      "cta": {
+        "type": "resource",
+        "intent": "Send readers to the existing public Framework for a practical next step."
+      }
+    }
+  ]
+}

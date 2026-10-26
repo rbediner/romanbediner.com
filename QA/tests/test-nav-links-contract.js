@@ -16,6 +16,8 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const PAGES = [
+  'blog/index.html',
+  'blog/agentic-society/index.html',
   'index.html',
   'about/index.html',
   'services/index.html',
@@ -27,7 +29,7 @@ const PAGES = [
   'resources/pasteflow/index.html'
 ];
 // Home (/) removed from nav (logo serves as home link); Connect remains as CTA button.
-const REQUIRED_HREFS = ['/about/', '/framework/', '/resources/', '/services/', '/connect/'];
+const REQUIRED_HREFS = ['/about/', '/framework/', '/resources/', '/blog/', '/services/', '/connect/'];
 
 function parseNavLinks(navScript) {
   const links = [];

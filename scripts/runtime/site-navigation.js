@@ -21,12 +21,14 @@ const NAV_LINKS = [
   { label: "About", href: "/about/" },
   { label: "Framework", href: "/framework/" },
   { label: "Resources", href: "/resources/" },
+  { label: "Blog", href: "/blog/" },
   { label: "Services", href: "/services/" },
   { label: "Connect", href: "/connect/", cta: true }
 ];
 
 // Footer privacy is injected from the shared runtime so every public page exposes the same trust-anchor route.
 const FOOTER_LINKS = [
+  { label: "Blog", href: "/blog/" },
   { label: "Privacy", href: "/privacy/" }
 ];
 
@@ -277,7 +279,7 @@ function applyActiveNavState(navElement, activePath) {
   const activeHref = resolveActiveNavHref(activePath);
   navElement.querySelectorAll("a").forEach((link) => {
     const href = link.getAttribute("href");
-    if (href && normalizePath(href) === activeHref) {
+    if (href && normalizePath(href) === resolveNavHref(activeHref, resolveBasePath())) {
       link.classList.add("active");
       link.setAttribute("aria-current", "page");
     } else {
@@ -317,7 +319,8 @@ function applyActiveNavState(navElement, activePath) {
     });
   });
 
-  const activePath = normalizePath(window.location.pathname);
+  const basePath = resolveBasePath();
+  const activePath = normalizePath(basePath ? window.location.pathname.slice(basePath.length) || "/" : window.location.pathname);
   applyActiveNavState(desktopNav, activePath);
   applyActiveNavState(mobileNav, activePath);
 })();
