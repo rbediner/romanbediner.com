@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Roman sets priorities. The Director coordinates six specialist agents, while the Staff Engineer independently reviews code. A shared Company Brain connects their work.">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850" role="img" aria-label="Roman sets priorities. The Director coordinates six specialist agents, while the Staff Engineer independently reviews code. All eight agents read and write shared Company Brain context.">
 <title>People lead. The fleet works together.</title>
-<desc>Roman provides human direction. The Director of Fleet Orchestration and Engineering coordinates the Project Manager, Chief of Staff, RevOps Engineer, Continuous Improvement Engineer, AI Correspondent and Solution Architect. The Staff Engineer provides independent code review. Project Manager and Chief of Staff share handoffs; revenue facts feed the Company Brain. This is one operating example, not a standard membership deliverable.</desc>
+<desc>Roman provides human direction. The Director of Fleet Orchestration and Engineering coordinates the Project Manager, Chief of Staff, RevOps Engineer, Continuous Improvement Engineer, AI Correspondent and Solution Architect. The Staff Engineer provides independent code review. All eight agents read from and write to the shared Company Brain. Project Manager and Chief of Staff share peer handoffs. This is one operating example, not a standard membership deliverable.</desc>
 <!-- Human authority, orchestration and independent review remain distinct. Site fonts are applied by the blog generator. -->
 <defs>
 <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#eef1e6"/></pattern>
 <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="#104275" stroke-width="1.5"/></marker>
 <marker id="review-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L8 5L1 9" fill="none" stroke="#ab1d37" stroke-width="1.5"/></marker>
 </defs>
-<rect width="1200" height="800" fill="#fcfbf3"/><rect x="10" y="10" width="1180" height="780" fill="url(#grid)"/>
+<rect width="1200" height="850" fill="#fcfbf3"/><rect x="10" y="10" width="1180" height="830" fill="url(#grid)"/>
 <text x="40" y="54" font-family="Georgia,serif" fill="#16222e" font-size="34">People lead. The fleet works together.</text>
 <g text-anchor="middle">
 <rect x="350" y="83" width="500" height="96" rx="10" fill="#fff" stroke="#b7a369" stroke-width="1.5"/>
@@ -15,78 +15,79 @@
 <text x="600" y="146" font-family="Georgia,serif" fill="#16222e" font-size="30">Roman</text>
 <text x="600" y="167" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="15">Sets priorities. Owns decisions.</text>
 </g>
-<path d="M600 179V235" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M600 179V305" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- The enclosing area is shared memory for all eight roles, not one agent's downstream output. -->
+<g data-company-brain="shared-context">
+<rect data-brain-boundary="" x="24" y="220" width="1152" height="580" rx="12" fill="#fff" fill-opacity=".45" stroke="#a4bdd3"/>
+<text x="50" y="258" font-family="Georgia,serif" fill="#16222e" font-size="30">Company Brain</text>
+<text x="50" y="286" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="16">All eight agents read and write shared context.</text>
 <g data-role="director" text-anchor="middle">
-<rect x="350" y="245" width="500" height="112" rx="10" fill="#fff" stroke="#104275" stroke-width="1.5"/>
-<text x="600" y="286" font-family="Georgia,serif" fill="#16222e" font-size="29">Director of Fleet Orchestration</text>
-<text x="600" y="306" font-family="Georgia,serif" fill="#16222e" font-size="27">and Engineering</text>
-<text x="600" y="337" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="16">Coordinates the agents and their work</text>
+<rect x="350" y="315" width="500" height="144" rx="10" fill="#fff" stroke="#104275" stroke-width="1.5"/>
+<text x="600" y="356" font-family="Georgia,serif" fill="#16222e" font-size="29">Director of Fleet Orchestration</text>
+<text x="600" y="398" font-family="Georgia,serif" fill="#16222e" font-size="27">and Engineering</text>
+<text x="600" y="438" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="16">Coordinates the agents and their work</text>
 </g>
 <g data-role="staff-engineer" text-anchor="middle">
-<rect x="940" y="245" width="220" height="112" rx="10" fill="#fff" stroke="#ab1d37"/>
-<text x="1050" y="278" font-family="Georgia,serif" fill="#16222e" font-size="27">Staff Engineer</text>
-<text x="1050" y="308" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="16">Independent code review</text>
-<text x="1050" y="337" font-family="Arial,sans-serif" fill="#ab1d37" font-size="12" letter-spacing="1.5">SEPARATE FROM AUTHOR</text>
+<rect x="940" y="315" width="220" height="144" rx="10" fill="#fff" stroke="#ab1d37"/>
+<text x="1050" y="348" font-family="Georgia,serif" fill="#16222e" font-size="27">Staff Engineer</text>
+<text x="1050" y="378" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="16">Independent code review</text>
+<text x="1050" y="407" font-family="Arial,sans-serif" fill="#ab1d37" font-size="12" letter-spacing="1.5">SEPARATE FROM AUTHOR</text>
 </g>
 <!-- Opposing review paths avoid implying that the author approves its own code. -->
-<g fill="none" stroke="#ab1d37" stroke-width="1.4" marker-end="url(#review-arrow)"><path d="M850 277H932"/><path d="M940 326H858"/></g>
-<g font-family="Arial,sans-serif" fill="#ab1d37" font-size="12" text-anchor="middle"><text x="895" y="264">Propose</text><text x="895" y="348">Review</text></g>
-<path d="M600 357V368M600 398V405M125 405H1075" fill="none" stroke="#104275" stroke-width="1.5"/>
-<text x="600" y="390" font-family="Arial,sans-serif" fill="#104275" font-size="13" text-anchor="middle" letter-spacing="1.5">SIX SPECIALIST RESPONSIBILITIES</text>
-<path d="M125 405V437" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g fill="none" stroke="#ab1d37" stroke-width="1.4" marker-end="url(#review-arrow)"><path d="M850 347H932"/><path d="M940 396H858"/></g>
+<g font-family="Arial,sans-serif" fill="#ab1d37" font-size="12" text-anchor="middle"><text x="895" y="334">Propose</text><text x="895" y="418">Review</text></g>
+<path d="M600 459V478M600 508V515M125 515H1075" fill="none" stroke="#104275" stroke-width="1.5"/>
+<text x="600" y="500" font-family="Arial,sans-serif" fill="#104275" font-size="13" text-anchor="middle" letter-spacing="1.5">SIX SPECIALIST RESPONSIBILITIES</text>
+<path d="M125 515V547" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
 <g data-role="project-manager" text-anchor="middle">
-<rect x="40" y="447" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
-<text x="125" y="479" font-family="Georgia,serif" fill="#16222e" font-size="25">Project</text>
-<text x="125" y="507" font-family="Georgia,serif" fill="#16222e" font-size="25">Manager</text>
-<text x="125" y="543" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Commitments and</text>
-<text x="125" y="565" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">follow-through</text>
+<rect x="40" y="557" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
+<text x="125" y="589" font-family="Georgia,serif" fill="#16222e" font-size="25">Project</text>
+<text x="125" y="617" font-family="Georgia,serif" fill="#16222e" font-size="25">Manager</text>
+<text x="125" y="653" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Commitments and</text>
+<text x="125" y="675" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">follow-through</text>
 </g>
-<path d="M315 405V437" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M315 515V547" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
 <g data-role="chief-of-staff" text-anchor="middle">
-<rect x="230" y="447" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
-<text x="315" y="479" font-family="Georgia,serif" fill="#16222e" font-size="25">Chief of</text>
-<text x="315" y="507" font-family="Georgia,serif" fill="#16222e" font-size="25">Staff</text>
-<text x="315" y="543" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Knowledge and</text>
-<text x="315" y="565" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">team memory</text>
+<rect x="230" y="557" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
+<text x="315" y="589" font-family="Georgia,serif" fill="#16222e" font-size="25">Chief of</text>
+<text x="315" y="617" font-family="Georgia,serif" fill="#16222e" font-size="25">Staff</text>
+<text x="315" y="653" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Knowledge and</text>
+<text x="315" y="675" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">team memory</text>
 </g>
-<path d="M505 405V437" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M505 515V547" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
 <g data-role="revops-engineer" text-anchor="middle">
-<rect x="420" y="447" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
-<text x="505" y="479" font-family="Georgia,serif" fill="#16222e" font-size="25">RevOps</text>
-<text x="505" y="507" font-family="Georgia,serif" fill="#16222e" font-size="25">Engineer</text>
-<text x="505" y="543" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Revenue and</text>
-<text x="505" y="565" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">pipeline questions</text>
+<rect x="420" y="557" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
+<text x="505" y="589" font-family="Georgia,serif" fill="#16222e" font-size="25">RevOps</text>
+<text x="505" y="617" font-family="Georgia,serif" fill="#16222e" font-size="25">Engineer</text>
+<text x="505" y="653" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Revenue and</text>
+<text x="505" y="675" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">pipeline questions</text>
 </g>
-<path d="M695 405V437" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M695 515V547" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
 <g data-role="improvement-engineer" text-anchor="middle">
-<rect x="610" y="447" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
-<text x="695" y="479" font-family="Georgia,serif" fill="#16222e" font-size="25">Improvement</text>
-<text x="695" y="507" font-family="Georgia,serif" fill="#16222e" font-size="25">Engineer</text>
-<text x="695" y="543" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Reliability and</text>
-<text x="695" y="565" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">efficiency</text>
+<rect x="610" y="557" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
+<text x="695" y="589" font-family="Georgia,serif" fill="#16222e" font-size="25">Improvement</text>
+<text x="695" y="617" font-family="Georgia,serif" fill="#16222e" font-size="25">Engineer</text>
+<text x="695" y="653" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Reliability and</text>
+<text x="695" y="675" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">efficiency</text>
 </g>
-<path d="M885 405V437" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M885 515V547" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
 <g data-role="ai-correspondent" text-anchor="middle">
-<rect x="800" y="447" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
-<text x="885" y="479" font-family="Georgia,serif" fill="#16222e" font-size="25">AI</text>
-<text x="885" y="507" font-family="Georgia,serif" fill="#16222e" font-size="25">Correspondent</text>
-<text x="885" y="543" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Developments worth</text>
-<text x="885" y="565" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">considering</text>
+<rect x="800" y="557" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
+<text x="885" y="589" font-family="Georgia,serif" fill="#16222e" font-size="25">AI</text>
+<text x="885" y="617" font-family="Georgia,serif" fill="#16222e" font-size="25">Correspondent</text>
+<text x="885" y="653" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Developments worth</text>
+<text x="885" y="675" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">considering</text>
 </g>
-<path d="M1075 405V437" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M1075 515V547" fill="none" stroke="#104275" stroke-width="1.5" marker-end="url(#arrow)"/>
 <g data-role="solution-architect" text-anchor="middle">
-<rect x="990" y="447" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
-<text x="1075" y="479" font-family="Georgia,serif" fill="#16222e" font-size="25">Solution</text>
-<text x="1075" y="507" font-family="Georgia,serif" fill="#16222e" font-size="25">Architect</text>
-<text x="1075" y="543" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Proposals for</text>
-<text x="1075" y="565" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">business problems</text>
+<rect x="990" y="557" width="170" height="143" rx="8" fill="#fff" stroke="#bacbdc"/>
+<text x="1075" y="589" font-family="Georgia,serif" fill="#16222e" font-size="25">Solution</text>
+<text x="1075" y="617" font-family="Georgia,serif" fill="#16222e" font-size="25">Architect</text>
+<text x="1075" y="653" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">Proposals for</text>
+<text x="1075" y="675" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="14">business problems</text>
 </g>
-<!-- Dotted paths distinguish peer handoff and retained knowledge from reporting lines. -->
-<path d="M125 590V615H315V590" fill="none" stroke="#104275" stroke-width="1.3" stroke-dasharray="4 4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-<text x="220" y="638" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="13" text-anchor="middle">Peer handoffs</text>
-<path d="M505 590V663" fill="none" stroke="#104275" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
-<text x="522" y="634" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="13">Retain revenue facts</text>
-<rect x="230" y="675" width="740" height="88" rx="10" fill="#fff" stroke="#a4bdd3"/>
-<text x="600" y="709" font-family="Georgia,serif" fill="#16222e" font-size="29" text-anchor="middle">Company Brain</text>
-<text x="600" y="740" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="17" text-anchor="middle">Shared knowledge, decisions and business context across the team</text>
+<!-- Peer handoffs remain distinct from reporting lines and shared memory access. -->
+<path d="M125 700V725H315V700" fill="none" stroke="#104275" stroke-width="1.3" stroke-dasharray="4 4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="220" y="748" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="13" text-anchor="middle">Peer handoffs</text>
+</g>
 </svg>

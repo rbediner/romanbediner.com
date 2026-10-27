@@ -139,6 +139,19 @@ test('Community and full-fleet diagrams have readable, contained labels', async(
   }));
   expect(roles.map(r=>r.role).sort()).toEqual(['director','staff-engineer','project-manager','chief-of-staff','revops-engineer','improvement-engineer','ai-correspondent','solution-architect'].sort());
   roles.forEach(r=>expect(r.outside,r.role).toEqual([]));
+  // Shared memory contains every role; a single specialist must not own its only path.
+  const brain=page.locator('.blog-diagram').nth(1).locator('[data-company-brain]');
+  await expect(brain.locator('[data-role]')).toHaveCount(8);
+  await expect(brain).toContainText('All eight agents read and write shared context.');
+  const structure=await brain.evaluate(g=>{
+    const boundary=g.querySelector('[data-brain-boundary]').getBBox();
+    const panels=[...g.querySelectorAll('[data-role] > rect')].map(n=>n.getBBox());
+    const titles=[...g.querySelector('[data-role="director"]').querySelectorAll('text')].slice(0,2).map(n=>n.getBBox());
+    return {contained:panels.every(b=>b.x>boundary.x && b.y>boundary.y && b.x+b.width<boundary.x+boundary.width && b.y+b.height<boundary.y+boundary.height),titleGap:titles[1].y-(titles[0].y+titles[0].height)};
+  });
+  expect(structure.contained).toBe(true);
+  expect(structure.titleGap).toBeGreaterThanOrEqual(8);
+
   await expect(page.locator('.blog-contents')).toBeHidden();
 });
 
