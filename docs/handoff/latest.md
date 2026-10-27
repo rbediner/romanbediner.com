@@ -1,32 +1,32 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 409
-- Updated At (UTC): 2026-10-27T13:51:08Z
+- Handoff Sequence: 410
+- Updated At (UTC): 2026-10-27T14:32:45Z
 - Source Branch: staging
-- Source Commit: 9e257cbcf75c4de5372f929f6aec343bc96ec535 (pre-handoff baseline)
+- Source Commit: 812315b8e6d8bc72131058aa600dc46c61736b30 (pre-handoff baseline)
 
-## Latest: 2026-10-27: Mobile diagram hotfix verified in production
+## Latest: 2026-10-27: Fleet hierarchy replacement verified in production
 
-Roman explicitly requested a fast-forward production fix for the mobile diagram's internal horizontal scroll. Final production SHA `9e257cbcf75c4de5372f929f6aec343bc96ec535` passed [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40514636863), [Deploy Pages](https://github.com/rbediner/romanbediner.com/actions/runs/40514638212) including hosted browser smoke, and `npm run release:verify-prod -- --sha 9e257cbcf75c4de5372f929f6aec343bc96ec535 --interval 30`. Both deployed preview and production passed the new actual-touch acceptance before completion was reported.
+Roman requested rebuilding the supplied org-chart reference in the existing website style and fast-forwarding it to production. Production source `812315b8e6d8bc72131058aa600dc46c61736b30` passed [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40521107670), [Deploy Pages](https://github.com/rbediner/romanbediner.com/actions/runs/40521107238) and the normal production release verifier. Exact-source staging CI/deployment and live acceptance passed before promotion.
 
-- [Live Agentic Society article](https://romanbediner.com/blog/agentic-society/?cb=9e257cbcf75c): both existing SVG diagrams now fit the article width without internal scrolling. Removed the 640px minimum; no artwork or article prose was rebuilt.
-- Each diagram has a visible site-style `Expand to full screen` button. The dialog fills the available viewport, including mobile dynamic height/safe areas. A stable toolbar provides Close, Zoom in/out and Fit; two-finger pinch zooms 1–5x, one-finger drag pans when zoomed, and keyboard controls provide equivalent access. Close/Escape restores focus and page scrolling. Diagram transforms do not move the toolbar.
-- Shared blog CSS/runtime use cache token `20261027a`; article modified metadata/sitemap now reflect October27. Canonicals, GA4, disclosed referral links, publishing boundary, all eight roles and existing resources remain intact. The Blog hub remains at https://romanbediner.com/blog/.
+- [Live article](https://romanbediner.com/blog/agentic-society/?cb=812315b8e6d8): the fleet diagram now shows Roman's human authority above the Director, six specialists below, independent Staff Engineer review beside the Director, and shared Company Brain context. All eight roles remain represented. Peer handoffs and retained revenue facts use dotted paths, separate from reporting and review.
+- Rebuilt the SVG with site serif/sans typography, paper/grid, blue structure, gold human authority and red independent review. Reference-only model labels, timing and private operational claims were not imported. Article community narrative, referral disclosure, existing resource links and the community diagram remain intact.
+- Both diagrams retain inline mobile fit, the visible Expand to full screen button, two-finger pinch, pan, Zoom in/out, Fit, keyboard equivalents, focus return and scrolling restoration. Shared runtime/CSS cache token remains20261027a; no runtime behavior changed in this release.
 
 ## Verification and retained evidence
 
-- Focused browser suite initially passed12 checks, including seven widths320–1440. Final toolbar/touch checks passed trusted two-finger pinch in/out, drag, buttons, keyboard, focus return and overflow at320/390/430. Screenshots `QA/results/blog-mobile-inline-390.png` and `blog-mobile-fullscreen-390.png` were inspected. Generator/contracts and relevant static checks pass.
-- Normal full local pre-push gate passed in133.056s, including the expanded browser suite. No hooks or release checks were bypassed. Work stayed serial under warning memory pressure; no subagents or additional Chrome UI tabs were created.
-- Exact-source staging CI/deployment passed before production fast-forward. Private live proofs `../evidence/preview-mobile-diagram-acceptance.json` and `production-mobile-diagram-acceptance.json` cover both diagrams at1440/390, frame-level overflow, full viewport sizing, real touch pinch/pan, visible controls, Fit, focus, console/runtime errors and release token. Deployed inline/zoom screenshots are adjacent. Full production route verification is `../evidence/blog-mobile-production-release-verification.log`.
-- The missed earlier check tested page-level overflow while allowing a640px inner scroller. Global/project AGENTS and the [existing shared register comment](https://github.com/alliance-properties/sunset-grove-social-engine/issues/338#issuecomment-6430414244) now require frame-level fit and actual expanded touch gestures; saves/readback verified and issue338 remains OPEN.
+- Generator/contracts passed. Desktop and phone screenshots inspected. Browser checks assert all eight semantic role panels and actual loaded-font label bounds against each panel and SVG viewBox, including the new1200x800 layout.
+- Focused fit/touch checks pass at320/390/430 and desktop widths. The first normal gate caught a close-event timing race in an immediate test assertion (32 browser checks passed, one failed; push stopped). Replaced that assertion with a retrying observable check, preserving production runtime behavior. Focused three-phone replay passed, then the unchanged normal full gate passed in128601ms. All failed evidence is retained under `../evidence/blog-hierarchy-*`.
+- Native dialog cleanup lesson saved/read back in global/project AGENTS and [shared register338](https://github.com/alliance-properties/sunset-grove-social-engine/issues/338#issuecomment-6430414244), which remains OPEN.
+- Exact-source preview and production proofs: `../evidence/preview-mobile-diagram-acceptance.json`, `production-mobile-diagram-acceptance.json`, `production-blog-http-acceptance.json`, and `blog-hierarchy-production-release-verification.log`. Both diagrams tested at1440/390 with frame-level overflow, fullscreen sizing, trusted pinch in/out/pan, buttons/Fit/focus, runtime errors and release token. HTTP proof checks deployed bytes and metadata/GA4. Previous9e proofs preserved with9e257cb suffixes.
 
 ## Operator notes
 
-- This supersedes production baseline `c5649b9434f496b3e1a1a262c24febc79dc0faf3` only for diagram presentation/runtime, generated cache references and modified metadata. Earlier community/article approval and recovery evidence remain valid. All recovered modifications remain preserved.
-- Current [Product Requirements & Production Baseline](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit) includes the new fit/fullscreen/touch contract, saved/read back as roman@romanbediner.com through self-hosted Workspace MCP. Old15WTg is an archived pointer; never edit it as current production.
-- Weekly automation remains OFF/deferred until Roman agrees the full pipeline and PRD. No schedules, new credentials, automatic publication or external messages were enabled.
-- Continue only in this isolated Documents checkout, not the original Drive checkout/task-2/old stuck chat. Recovery receipt/archive: `../HANDOFF.md`. Node20.20.1, sibling Python3.11.15 qa-runtime, normal `.husky/_` hooks and origin rbediner/romanbediner.com. Dashboard unchanged; no dashboard-public sync required.
-- Prod is `9e257cbcf75c4de5372f929f6aec343bc96ec535`; staging adds only this required isolated handoff. Use `npm run handoff:push` on staging. No new Chrome UI tabs were opened for this hotfix; headless QA browsers close in finally. Preserve owner review tabs. Release accounting: one source push, one production promotion and the isolated handoff push; billed Actions minutes not measured.
+- This supersedes diagram baseline9e257cbcf75c4de5372f929f6aec343bc96ec535; the earlier community/article approval and all recovered modifications remain preserved. No dashboard changes; public dashboard sync not applicable.
+- Current [Product Requirements & Production Baseline](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit) includes the hierarchy/authority diagram contract and source baseline, saved/read back as roman@romanbediner.com via self-hosted Workspace MCP. The old15WTg document is an archived pointer.
+- Weekly automation stays OFF/deferred until Roman agrees a full pipeline and PRD. No schedules, credentials, automatic publication or external messages enabled.
+- Work only in this isolated Documents checkout; never original Drive checkout/task-2/stuck chat. Recovery receipt/archive: `../HANDOFF.md`. Node20.20.1, sibling Python3.11.15 qa-runtime, normal `.husky/_` hooks and origin rbediner/romanbediner.com.
+- Production is `812315b8e6d8bc72131058aa600dc46c61736b30`; staging adds this required isolated handoff. Use `npm run handoff:push` on staging. No new Chrome UI tabs opened; automated browser contexts close in finally. Preserve owner review tabs. Release accounting: one successful source push, one promotion, one isolated handoff push; first source push was blocked locally. Billed Actions minutes unmeasured.
 
 ## Release Watcher Hygiene
 
