@@ -55,8 +55,15 @@ for(const width of [1440,1280,1024,768,430,390,320])test(`Blog conversion and di
     await expect(link).toHaveAttribute('rel',/sponsored/);
   }
   for(const button of await page.locator('[data-expand-diagram]').all()) {
+    // Page-level overflow alone missed a scrolling diagram inside its own frame.
+    const frame=button.locator('..').locator('..').locator('.blog-diagram-scroll');
+    expect(await frame.evaluate(n=>n.scrollWidth<=n.clientWidth)).toBe(true);
+    await expect(button).toContainText('Expand to full screen');
     await button.click();await expect(page.locator('dialog')).toBeVisible();
     await expect(page.locator('dialog svg')).toBeVisible();
+    const size=await page.locator('dialog').boundingBox();
+    expect(Math.round(size.width)).toBe(width);
+    expect(Math.round(size.height)).toBe(900);
     expect(await page.locator('[id]').evaluateAll(nodes=>nodes.length===new Set(nodes.map(n=>n.id)).size)).toBe(true);
     await page.keyboard.press('Escape');await expect(button).toBeFocused();
   }
@@ -64,6 +71,50 @@ for(const width of [1440,1280,1024,768,430,390,320])test(`Blog conversion and di
   await expect(page.locator('details[open]')).toContainText('virtual component');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect(errors).toEqual([]);
+});
+
+for (const width of [320,390,430]) test(`Phone fullscreen diagram supports real pinch, pan, Fit and close at ${width}px`,async({browser})=>{
+  const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true});
+  try {
+    const page=await context.newPage();
+    await page.goto(`${base}/blog/agentic-society/`);
+    const opener=page.locator('[data-expand-diagram]').nth(1);
+    await opener.tap();
+    const viewport=page.locator('.blog-diagram-expanded');
+    const box=await viewport.boundingBox(), cx=box.x+box.width/2, cy=box.y+box.height/2;
+    const client=await context.newCDPSession(page);
+    // Chromium generates trusted touch/pointer events, exercising the actual gesture caller.
+    const pinch=async(from,to)=>{
+      const points=d=>[{x:cx-d,y:cy,id:1},{x:cx+d,y:cy,id:2}];
+      await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points(from)});
+      await client.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:points(to)});
+      await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    };
+    await pinch(30,80);
+    expect(parseInt(await page.locator('dialog output').innerText())).toBeGreaterThan(200);
+    const before=await viewport.locator('svg').getAttribute('style');
+    await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:cx,y:cy,id:1}]});
+    await client.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:cx+35,y:cy+25,id:1}]});
+    await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    expect(await viewport.locator('svg').getAttribute('style')).not.toBe(before);
+    await pinch(80,30);
+    await expect(page.locator('dialog output')).toHaveText('100%');
+    await page.getByRole('button',{name:'Zoom in',exact:true}).tap();
+    await expect(page.locator('dialog output')).toHaveText('150%');
+    await page.getByRole('button',{name:'Zoom out',exact:true}).tap();
+    await expect(page.locator('dialog output')).toHaveText('100%');
+    await viewport.focus();await page.keyboard.press('+');
+    await expect(page.locator('dialog output')).toHaveText('150%');
+    await page.getByRole('button',{name:'Fit',exact:true}).tap();
+    await expect(page.locator('dialog output')).toHaveText('100%');
+    expect(await page.locator('dialog').evaluate(n=>n.scrollWidth<=n.clientWidth)).toBe(true);
+    await page.screenshot({path:path.join(root,`QA/results/blog-mobile-fullscreen-${width}.png`)});
+    await page.getByRole('button',{name:'Close diagram',exact:true}).tap();
+    await expect(page.locator('dialog')).toBeHidden();await expect(opener).toBeFocused();
+    expect(await page.locator('body').evaluate(n=>n.style.overflow)).toBe('');
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await page.locator('.blog-diagram').nth(1).screenshot({path:path.join(root,`QA/results/blog-mobile-inline-${width}.png`)});
+  } finally {await context.close();}
 });
 
 test('Community and full-fleet diagrams have readable, contained labels', async({page})=>{

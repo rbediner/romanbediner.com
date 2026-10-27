@@ -12,7 +12,91 @@
  */
 (function () {
   const dialog = document.querySelector('.blog-diagram-dialog');
+  const viewport = dialog && dialog.querySelector('.blog-diagram-expanded');
+  const pointers = new Map();
+  let scale = 1, x = 0, y = 0, previousGesture, bodyOverflow;
   let opener;
+
+  // Keep zoom anchored beneath the fingers and constrain panning to the viewer.
+  function render() {
+    if (!viewport || !viewport.firstElementChild) return;
+    const bounds = viewport.getBoundingClientRect();
+    const maxX = bounds.width * (scale - 1) / 2;
+    const maxY = bounds.height * (scale - 1) / 2;
+    x = Math.max(-maxX, Math.min(maxX, x));
+    y = Math.max(-maxY, Math.min(maxY, y));
+    viewport.firstElementChild.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+    dialog.querySelector('output').textContent = `${Math.round(scale * 100)}%`;
+  }
+  function zoom(next, anchor = { x: 0, y: 0 }) {
+    const clamped = Math.max(1, Math.min(5, next));
+    const ratio = clamped / scale;
+    x = anchor.x - (anchor.x - x) * ratio;
+    y = anchor.y - (anchor.y - y) * ratio;
+    scale = clamped;
+    render();
+  }
+  function gesture() {
+    const points = Array.from(pointers.values());
+    if (!points.length) return null;
+    if (points.length === 1) return { ...points[0], distance: 0 };
+    return {
+      x: (points[0].x + points[1].x) / 2,
+      y: (points[0].y + points[1].y) / 2,
+      distance: Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y)
+    };
+  }
+  if (viewport) {
+    // Pointer capture keeps a two-finger pinch stable at the viewport edges.
+    viewport.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      viewport.setPointerCapture(event.pointerId);
+      previousGesture = gesture();
+    });
+    viewport.addEventListener('pointermove', event => {
+      if (!pointers.has(event.pointerId)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      const current = gesture();
+      if (previousGesture && current) {
+        if (current.distance && previousGesture.distance) {
+          const bounds = viewport.getBoundingClientRect();
+          zoom(scale * current.distance / previousGesture.distance, {
+            x: previousGesture.x - bounds.left - bounds.width / 2,
+            y: previousGesture.y - bounds.top - bounds.height / 2
+          });
+        }
+        x += current.x - previousGesture.x;
+        y += current.y - previousGesture.y;
+        render();
+      }
+      previousGesture = current;
+    });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => {
+      viewport.addEventListener(type, event => {
+        pointers.delete(event.pointerId);
+        previousGesture = gesture();
+      });
+    });
+    // Equivalent keyboard controls keep touch gestures optional.
+    viewport.addEventListener('keydown', event => {
+      if (['+', '=', '-', '0', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+        event.preventDefault();
+        if (event.key === '+' || event.key === '=') zoom(scale * 1.5);
+        else if (event.key === '-') zoom(scale / 1.5);
+        else if (event.key === '0') zoom(1);
+        else {
+          x += event.key === 'ArrowLeft' ? 40 : event.key === 'ArrowRight' ? -40 : 0;
+          y += event.key === 'ArrowUp' ? 40 : event.key === 'ArrowDown' ? -40 : 0;
+          render();
+        }
+      }
+    });
+    dialog.querySelectorAll('[data-diagram-zoom]').forEach(button => {
+      button.addEventListener('click', () => zoom(button.dataset.diagramZoom === 'fit' ? 1 : scale * (button.dataset.diagramZoom === 'in' ? 1.5 : 1 / 1.5)));
+    });
+    window.addEventListener('resize', render);
+  }
   document.querySelectorAll('[data-expand-diagram]').forEach(button => {
     button.addEventListener('click', () => {
       const source = button.closest('figure').querySelector('svg, img');
@@ -31,10 +115,19 @@
       });
       target.replaceChildren(expanded);
       opener = button;
+      pointers.clear(); previousGesture = null;
+      scale = 1; x = 0; y = 0;
+      bodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
       dialog.showModal();
+      render();
     });
   });
-  if (dialog) dialog.addEventListener('close', () => { if (opener) opener.focus(); });
+  if (dialog) dialog.addEventListener('close', () => {
+    pointers.clear(); previousGesture = null;
+    document.body.style.overflow = bodyOverflow;
+    if (opener) opener.focus();
+  });
   document.querySelectorAll('[data-partner-cta], [data-blog-contact]').forEach(link => {
     link.addEventListener('click', () => {
       const analytics = window.__rbAnalytics;

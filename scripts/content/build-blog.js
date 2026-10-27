@@ -63,7 +63,7 @@ ${article ? `<meta property="article:published_time" content="${article.date}T12
 <!-- CSP architecture: external runtime only; no inline executable scripts. -->
 ${csp}
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png" /><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png" /><link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" /><link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
-<link rel="stylesheet" href="/styles/site.css?v=20260720r5" /><link rel="stylesheet" href="/styles/resources.css?v=20260720r19" /><link rel="stylesheet" href="/styles/blog.css?v=20261026c" />
+<link rel="stylesheet" href="/styles/site.css?v=20260720r5" /><link rel="stylesheet" href="/styles/resources.css?v=20260720r19" /><link rel="stylesheet" href="/styles/blog.css?v=20261027a" />
 <link rel="alternate" type="application/rss+xml" title="Roman Bediner Blog" href="/blog/feed.xml" />
 <meta name="ga4-measurement-id" content="G-DVHD0KL633" /><script src="/scripts/runtime/ga4-bootstrap.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>
@@ -71,8 +71,8 @@ ${csp}
 ${header}
 ${body}
 ${footer}
-<dialog class="blog-diagram-dialog" aria-label="Expanded workflow diagram"><form method="dialog"><button class="resource-primary-cta" autofocus>Close diagram</button></form><div class="blog-diagram-expanded"></div></dialog>
-<script src="${article ? '../../' : '../'}scripts/runtime/site-navigation.js?v=20261026"></script><script src="/scripts/runtime/blog.js?v=20261026c" defer></script>
+<dialog class="blog-diagram-dialog" aria-label="Full screen diagram"><div class="blog-diagram-toolbar"><div class="diagram-zoom-controls" role="group" aria-label="Diagram zoom"><button type="button" data-diagram-zoom="out">Zoom out</button><output aria-label="Zoom level">100%</output><button type="button" data-diagram-zoom="in">Zoom in</button><button type="button" data-diagram-zoom="fit">Fit</button></div><form method="dialog"><button class="resource-primary-cta" autofocus>Close diagram</button></form></div><p class="diagram-zoom-help" id="diagram-zoom-help">Pinch to zoom in or out. Drag to move when zoomed. Use Fit to see the whole diagram.</p><div class="blog-diagram-expanded" tabindex="0" aria-label="Zoomable diagram" aria-describedby="diagram-zoom-help"></div></dialog>
+<script src="${article ? '../../' : '../'}scripts/runtime/site-navigation.js?v=20261026"></script><script src="/scripts/runtime/blog.js?v=20261027a" defer></script>
 ${article ? '<script src="/scripts/runtime/section-nav.js?v=20260824a" defer></script>' : ''}
 </body></html>\n`;
 }
@@ -88,7 +88,7 @@ function diagram(file, label, caption, eyebrow) {
     .replace(/font-family="Georgia,serif"/g, 'class="diagram-serif"')
     .replace(/font-family="Arial,sans-serif"/g, 'class="diagram-sans"')
     .replace(/aria-label="[^"]*"/, `aria-label="${escape(label)}"`);
-  return `<figure class="blog-diagram"><div class="blog-diagram-top"><span class="section-eyebrow">${escape(eyebrow)}</span><button type="button" class="resource-text-cta diagram-expand" data-expand-diagram data-diagram-src="/assets/blog/${file}.svg" aria-label="Expand ${escape(label)}">Expand diagram <span aria-hidden="true">&rarr;</span></button></div><div class="blog-diagram-scroll">${art}</div><figcaption>${caption}</figcaption></figure>`;
+  return `<figure class="blog-diagram"><div class="blog-diagram-top"><span class="section-eyebrow">${escape(eyebrow)}</span><button type="button" class="resource-primary-cta diagram-expand" data-expand-diagram data-diagram-src="/assets/blog/${file}.svg" aria-label="Expand to full screen: ${escape(label)}">Expand to full screen <span aria-hidden="true">&rarr;</span></button></div><div class="blog-diagram-scroll">${art}</div><figcaption>${caption}</figcaption></figure>`;
 }
 // Reuse Resources' exact opening and compact-card components, rather than a parallel design.
 function intro(copy, label) {
