@@ -1,32 +1,31 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 410
-- Updated At (UTC): 2026-10-27T14:32:45Z
+- Handoff Sequence: 411
+- Updated At (UTC): 2026-10-27T14:59:49Z
 - Source Branch: staging
-- Source Commit: 812315b8e6d8bc72131058aa600dc46c61736b30 (pre-handoff baseline)
+- Source Commit: cd62064644809c2bd259bdca7f9cffa6f81d59e8 (pre-handoff baseline)
 
-## Latest: 2026-10-27: Fleet hierarchy replacement verified in production
+## Latest: 2026-10-27: Shared Company Brain and Director spacing verified in production
 
-Roman requested rebuilding the supplied org-chart reference in the existing website style and fast-forwarding it to production. Production source `812315b8e6d8bc72131058aa600dc46c61736b30` passed [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40521107670), [Deploy Pages](https://github.com/rbediner/romanbediner.com/actions/runs/40521107238) and the normal production release verifier. Exact-source staging CI/deployment and live acceptance passed before promotion.
+Roman requested correcting the fleet diagram's shared-memory semantics and crowded Director title, then fast-forwarding the tested result to production. Source `cd62064644809c2bd259bdca7f9cffa6f81d59e8` passed [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40525510957), [Deploy Pages](https://github.com/rbediner/romanbediner.com/actions/runs/40525510884), hosted smoke and the normal production release verifier. Exact-source staging CI/deploy and live mobile acceptance passed before promotion.
 
-- [Live article](https://romanbediner.com/blog/agentic-society/?cb=812315b8e6d8): the fleet diagram now shows Roman's human authority above the Director, six specialists below, independent Staff Engineer review beside the Director, and shared Company Brain context. All eight roles remain represented. Peer handoffs and retained revenue facts use dotted paths, separate from reporting and review.
-- Rebuilt the SVG with site serif/sans typography, paper/grid, blue structure, gold human authority and red independent review. Reference-only model labels, timing and private operational claims were not imported. Article community narrative, referral disclosure, existing resource links and the community diagram remain intact.
-- Both diagrams retain inline mobile fit, the visible Expand to full screen button, two-finger pinch, pan, Zoom in/out, Fit, keyboard equivalents, focus return and scrolling restoration. Shared runtime/CSS cache token remains20261027a; no runtime behavior changed in this release.
+- [Live article](https://romanbediner.com/blog/agentic-society/): the Company Brain is now one labeled enclosure around all eight agents: “All eight agents read and write shared context.” The RevOps-only arrow is removed. Human authority stays above/outside the shared layer; reporting and independent review remain separate. This avoids an eight-arrow web and follows the fleet guide's common shared-memory concept.
+- Increased Director/Staff panel height and Director title-line spacing. Real-font browser checks require at least8px between the Director title bounds, every label inside its panel, and all eight role panels within the Company Brain boundary.
+- Article caption/accessibility text and README match the shared layer. Community narrative, other diagram, public-safe eight-role claims, referral disclosure, metadata/GA4, resource links and publishing boundaries remain intact. Runtime/CSS unchanged: both diagrams retain mobile inline fit, visible fullscreen expansion, trusted pinch/pan, Zoom/Fit, keyboard controls and focus/scroll return.
 
-## Verification and retained evidence
+## Verification and evidence
 
-- Generator/contracts passed. Desktop and phone screenshots inspected. Browser checks assert all eight semantic role panels and actual loaded-font label bounds against each panel and SVG viewBox, including the new1200x800 layout.
-- Focused fit/touch checks pass at320/390/430 and desktop widths. The first normal gate caught a close-event timing race in an immediate test assertion (32 browser checks passed, one failed; push stopped). Replaced that assertion with a retrying observable check, preserving production runtime behavior. Focused three-phone replay passed, then the unchanged normal full gate passed in128601ms. All failed evidence is retained under `../evidence/blog-hierarchy-*`.
-- Native dialog cleanup lesson saved/read back in global/project AGENTS and [shared register338](https://github.com/alliance-properties/sunset-grove-social-engine/issues/338#issuecomment-6430414244), which remains OPEN.
-- Exact-source preview and production proofs: `../evidence/preview-mobile-diagram-acceptance.json`, `production-mobile-diagram-acceptance.json`, `production-blog-http-acceptance.json`, and `blog-hierarchy-production-release-verification.log`. Both diagrams tested at1440/390 with frame-level overflow, fullscreen sizing, trusted pinch in/out/pan, buttons/Fit/focus, runtime errors and release token. HTTP proof checks deployed bytes and metadata/GA4. Previous9e proofs preserved with9e257cb suffixes.
+- Generator/contracts and all14 focused browser checks passed; desktop/phone screenshots inspected. Normal full local pre-push gate passed in135018ms; evidence `../evidence/blog-brain-staging-push.log`. No hook bypass, new dependency, workflow change or subagent.
+- Exact preview/production receipts: `../evidence/preview-mobile-diagram-acceptance.json`, `production-mobile-diagram-acceptance.json`, `production-blog-http-acceptance.json`, and `blog-brain-production-release-verification.log`. Both diagrams checked at1440/390, trusted mobile pinch in/out/pan, viewport/frame overflow, controls, focus/scroll restoration and runtime errors. HTTP proof verifies nine surfaces, exact source/release token, indexability, canonicals, GA4, JSON-LD, RSS and sitemap. Prior812315b receipts preserved separately.
+- Semantic coverage and line-spacing lesson saved/read back in global/project AGENTS and the [existing shared338 comment](https://github.com/alliance-properties/sunset-grove-social-engine/issues/338#issuecomment-6430414244); issue remains OPEN. Panel containment alone had missed the original crowding and narrow memory arrow.
+- [Current PRD](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit) updated/read back as roman@romanbediner.com through self-hosted Workspace MCP. Old15WTg is an archived pointer.
 
 ## Operator notes
 
-- This supersedes diagram baseline9e257cbcf75c4de5372f929f6aec343bc96ec535; the earlier community/article approval and all recovered modifications remain preserved. No dashboard changes; public dashboard sync not applicable.
-- Current [Product Requirements & Production Baseline](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit) includes the hierarchy/authority diagram contract and source baseline, saved/read back as roman@romanbediner.com via self-hosted Workspace MCP. The old15WTg document is an archived pointer.
-- Weekly automation stays OFF/deferred until Roman agrees a full pipeline and PRD. No schedules, credentials, automatic publication or external messages enabled.
-- Work only in this isolated Documents checkout; never original Drive checkout/task-2/stuck chat. Recovery receipt/archive: `../HANDOFF.md`. Node20.20.1, sibling Python3.11.15 qa-runtime, normal `.husky/_` hooks and origin rbediner/romanbediner.com.
-- Production is `812315b8e6d8bc72131058aa600dc46c61736b30`; staging adds this required isolated handoff. Use `npm run handoff:push` on staging. No new Chrome UI tabs opened; automated browser contexts close in finally. Preserve owner review tabs. Release accounting: one successful source push, one promotion, one isolated handoff push; first source push was blocked locally. Billed Actions minutes unmeasured.
+- Production `cd62064644809c2bd259bdca7f9cffa6f81d59e8` supersedes diagram baseline812315b8e6d8bc72131058aa600dc46c61736b30. Staging adds only this required isolated handoff; run `npm run handoff:push` on staging. All recovered work preserved. Dashboard unchanged; sync not applicable.
+- Weekly automation remains OFF/deferred until Roman agrees the full pipeline/PRD. No schedules, new credentials, automatic publication or external messages enabled.
+- Use this isolated Documents checkout only; never original Drive checkout, task-2 or old stuck chat. Recovery: `../HANDOFF.md`. Node20.20.1, sibling Python3.11.15 qa-runtime, normal `.husky/_` hooks and origin rbediner/romanbediner.com.
+- No new Chrome UI tabs opened; automated browser contexts close in finally. Preserve owner review tabs. Release accounting: one source push, one promotion and one isolated handoff push; billed Actions minutes unmeasured.
 
 ## Release Watcher Hygiene
 
