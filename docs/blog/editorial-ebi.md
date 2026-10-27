@@ -54,10 +54,10 @@ Fresh-eyes perspective: an interested but skeptical owner who wants to know who 
 | Reconcile claims across artifacts | High | Moderate | Source contract, metadata, generated pages/feed and README agree |
 | Make review limitations explicit | Medium | Quick | Public attribution; no private proof, invented outcomes or ranking claims |
 
-Verification: responsive Resources styles, screenshots and article order reviewed; focused browser checks and normal release gates apply. The strong shareable line is “The build gives you something useful. The relationships give you people to keep building with.” A fourth editorial pass found no new medium/high change worth expanding this batch; no new scope added.
+Verification: responsive Resources styles, screenshots and article order reviewed; focused browser checks and normal release gates apply. The strong shareable line is “The build gives you something useful. The relationships give you people to keep building with.” The final deployed verification exposed a closed-menu overlay left rendered by the shared flex style. A blog-scoped hidden-state rule and seven-width regression correct that interaction without changing other pages. Failed live/local close-state evidence is retained separately.
 
 ## Result and release boundary
 
 Key insight: community is not a preparation step for an agent demonstration. The agent build is one way the relationships become useful to a member's business. The rewrite carries that idea through the opening, participation, examples, diagrams and invitation.
 
-Three rounds, 23 implemented improvements. Weekly automation remains deferred. This is a staging candidate until exact-SHA CI/deployment/readback; Roman separately approves production. Current release proof is recorded in docs/handoff/latest.md.
+Three rounds, 23 editorial/visual improvements plus one interaction correction found during deployed QA. Weekly automation remains deferred. This is a staging candidate until exact-SHA CI/deployment/readback; Roman separately approves production. Current release proof is recorded in docs/handoff/latest.md.

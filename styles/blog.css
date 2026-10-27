@@ -83,3 +83,7 @@ body:has(.section-nav-fab) .blog-contents { display: none; }
 .blog-related-intro { font-size: 17px; line-height: 1.65; margin: -8px 0 24px; }
 
 .blog-contents .fleet-section-nav a { display: inline-flex; align-items: center; font-size: 16px; min-height: 44px; }
+
+/* Respect the shared navigation's native hidden state. Its flex rule otherwise
+   keeps a closed panel rendered, including during the open/close animation. */
+.blog-page .section-nav-sheet[hidden] { display: none; }
