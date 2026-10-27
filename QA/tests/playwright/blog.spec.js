@@ -65,26 +65,35 @@ for(const width of [1440,1280,1024,768,430,390,320])test(`Blog conversion and di
   expect(errors).toEqual([]);
 });
 
-test('Workflow labels fit their actual SVG panels', async({page})=>{
-  // Measure rendered font geometry, reproducing the owner-reported clipped label.
-  for(const name of ['community-loop','solution-workflow']) {
-    await page.goto(`${base}/assets/blog/${name}.svg`);
-    const bounds=await page.locator('text[y="199"]').evaluateAll(nodes=>nodes.map(node=>{
-      const box=node.getBBox();return {x:box.x,right:box.x+box.width};
-    }));
-    expect(bounds).toHaveLength(3);
-    bounds.forEach((box,index)=>{
-      expect(box.x).toBeGreaterThanOrEqual(48+304*index+16);
-      expect(box.right).toBeLessThanOrEqual(48+304*index+256-12);
-    });
-    if(process.env.RB_BLOG_CAPTURE) await page.locator('svg').screenshot({path:path.join(root,`QA/results/${name}.png`)});
+test('Community and full-fleet diagrams have readable, contained labels', async({page})=>{
+  await page.goto(`${base}/blog/agentic-society/`);
+  await page.evaluate(()=>document.fonts.ready);
+  await expect(page.locator('.blog-diagram')).toHaveCount(2);
+  for (const figure of await page.locator('.blog-diagram').all()) {
+    const outside=await figure.locator('svg text').evaluateAll(nodes=>nodes.filter(n=>{
+      const b=n.getBBox();return b.x<20 || b.x+b.width>940;
+    }).map(n=>n.textContent));
+    expect(outside).toEqual([]);
   }
-  await page.goto(`${base}/assets/blog/company-brain-team.svg`);
-  const outside=await page.locator('text').evaluateAll(nodes=>nodes.filter(node=>{
-    const b=node.getBBox();return b.x<0 || b.x+b.width>960;
-  }).map(node=>node.textContent));
-  expect(outside).toEqual([]);
-  if(process.env.RB_BLOG_CAPTURE) await page.locator('svg').screenshot({path:path.join(root,'QA/results/company-brain-team.png')});
+  // Every role must fit its actual panel using the loaded site font.
+  const roles=await page.locator('.blog-diagram').nth(1).locator('svg text').evaluateAll(nodes=>nodes.filter(n=>[270,422,429,450,308,335,476,503].includes(Number(n.getAttribute('y')))).map(n=>{
+    const b=n.getBBox(), x=Number(n.getAttribute('x'));
+    return {text:n.textContent,left:b.x,right:b.x+b.width,center:x};
+  }));
+  expect(roles.length).toBeGreaterThan(20);
+  roles.forEach(b=>{expect(b.left, b.text).toBeGreaterThanOrEqual(b.center-94);expect(b.right,b.text).toBeLessThanOrEqual(b.center+94);});
+  await expect(page.locator('.blog-contents')).toBeHidden();
+});
+
+test('Article orientation remains usable without JavaScript', async({browser})=>{
+  const context=await browser.newContext({javaScriptEnabled:false});
+  const page=await context.newPage();
+  await page.goto(`${base}/blog/agentic-society/`);
+  await expect(page.locator('.blog-contents')).toBeVisible();
+  await page.locator('.blog-contents summary').click();
+  await expect(page.locator('.blog-contents nav a').first()).toBeVisible();
+  await expect(page.locator('.blog-contents nav a').first()).toHaveCSS('font-size','16px');
+  await context.close();
 });
 
 // Compare the live computed styles, not a second hand-maintained approximation.
@@ -112,6 +121,7 @@ for (const width of [1440,390]) test(`Resources component parity at ${width}px`,
     expect(bad).toEqual([]);
   }
   if (process.env.RB_BLOG_CAPTURE && width===1440) {
+    await page.locator('.blog-diagram').first().screenshot({path:path.join(root,'QA/results/blog-inline-community.png')});
     await page.locator('.blog-diagram').nth(1).screenshot({path:path.join(root,'QA/results/blog-inline-team.png')});
     await page.locator('.blog-reading').screenshot({path:path.join(root,'QA/results/blog-reading.png')});
   }

@@ -30,14 +30,15 @@ assert.equal(ctas.length,2,'Opening and closing referral links');
 ctas.forEach(m=>assert(m[0].includes('rel="sponsored noopener"'),'Sponsored referral relationship'));
 assert(article.indexOf('I may earn a commission')<article.indexOf('data-partner-cta'),'Disclosure before referral CTA');
 assert(article.includes('Fractional COO') && !article.includes('Fractional CEO'));
-assert.equal((article.match(/data-expand-diagram/g)||[]).length,3);
+assert.equal((article.match(/data-expand-diagram/g)||[]).length,2);
 assert(article.includes('/resources/agentic-ai-employees/') && article.includes('/resources/ai-project-manager/'));
 assert(hub.includes('/blog/agentic-society/'));
 for(const route of ['/blog/','/blog/agentic-society/']) assert(read('sitemap.xml').includes(`https://romanbediner.com${route}</loc>`));
 assert(read('blog/feed.xml').includes('https://romanbediner.com/blog/agentic-society/'));
 assert(read('scripts/build/create-artifact.js').includes("'blog',"),'Deployment includes blog');
 assert(read('scripts/runtime/blog.js').includes("analytics.environment !== 'production'"),'No preview partner telemetry');
-for(const name of ['community-cover.svg','community-loop.svg','company-brain-team.svg','solution-workflow.svg','agentic-society-cover.png']) assert(fs.existsSync(path.join(root,'assets/blog',name)),`Missing ${name}`);
+for(const name of ['community-cover.svg','community-loop.svg','company-brain-team.svg','agentic-society-cover.png']) assert(fs.existsSync(path.join(root,'assets/blog',name)),`Missing ${name}`);
+assert(fs.existsSync(path.join(root,'assets/asset-library/blog/solution-preparation-reference.svg')), 'Retired diagram retained in reference library');
 const records=fs.readdirSync(path.join(root,'content/blog')).filter(f=>f.endsWith('.json')).map(f=>JSON.parse(read(`content/blog/${f}`)));
 records.filter(p=>p.status==='draft').forEach(p=>{
   assert(!hub.includes(`/blog/${p.slug}/`),'Draft excluded from hub');
@@ -45,10 +46,18 @@ records.filter(p=>p.status==='draft').forEach(p=>{
 });
 console.log('PASS: blog discovery, editorial metadata, attribution, diagrams and draft boundary.');
 
-// Keep Roman's selected business examples ahead of supporting tools.
-assert(article.indexOf('A Company Brain the work can build on.') < article.indexOf('A project manager that keeps commitments visible.'));
-assert(article.indexOf('A project manager that keeps commitments visible.') < article.indexOf('A Chief of Staff that connects the knowledge.'));
-assert(article.indexOf('A Chief of Staff that connects the knowledge.') < article.indexOf('AI news desk'));
+// Keep community participation ahead of the supporting implementation example.
+const source=read('content/blog/agentic-society.html.txt');
+assert(source.indexOf('id="community"') < source.indexOf('id="participation"'));
+assert(source.indexOf('id="participation"') < source.indexOf('id="examples"'));
+for (const role of ['Project Manager','Chief of Staff','RevOps Engineer','AI Correspondent','Director of Fleet Orchestration and Engineering','Continuous Improvement Engineer','Staff Engineer','Solution Architect']) assert(source.includes(`<strong>${role}</strong>`), `Missing real fleet role ${role}`);
+const words=html=>html.replace(/<[^>]*>/g,' ').split(/\s+/).filter(Boolean).length;
+const example=source.match(/<section id="examples">([\s\S]*?)<\/section>/)[1];
+assert(words(example)/words(source)<0.35, 'The fleet supports the community story');
+assert(!source.includes('starting point for the room') && !source.includes('{{workDiagram}}'), 'Retired solution-preparation detour');
+assert(source.includes('Bring your business. Build with people who understand the work.'), 'Preserve owner-selected closing invitation');
+assert(source.includes('AZ Moyer') && source.includes('Adelle Archer'), 'Attributed public examples');
+assert(article.includes('blog-contents') && article.includes('section-nav.js'), 'Compact progressive navigation');
 assert(hub.includes('<h1>Blog</h1>') && hub.includes('resource-card resource-card--compact'), 'Blog uses the Resources landing and compact card components');
 // Assert the actual shared component contract and crawlable search metadata.
 for (const html of [hub, article]) {
@@ -62,7 +71,7 @@ assert(!hub.includes('RSS feed →') && !hub.includes('blog-feature-art'), 'No v
 assert(!article.includes('article-rail') && article.includes('data-section-nav'), 'Shared article navigation');
 assert(article.includes('class="fleet-title-deck"') && article.includes('<h1>Agentic Society</h1>'), 'Resource article opening');
 const articleSchema = JSON.parse(article.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0];
-assert(articleSchema.keywords.includes('Company Brain') && articleSchema.keywords.includes('Chief of Staff'), 'Specific search topics');
+assert(articleSchema.keywords.includes('Company Brain') && articleSchema.keywords.includes('AI community for business owners'), 'Specific search topics');
 assert.equal(articleSchema.isPartOf['@id'], 'https://romanbediner.com/blog/#blog');
 assert.equal(articleSchema.isAccessibleForFree, true);
 

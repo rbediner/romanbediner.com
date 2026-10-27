@@ -72,3 +72,14 @@
  .blog-reading > h2 { font-size: 30px; }
 }
 @media (prefers-reduced-motion: reduce) { .blog-page *, .blog-page *::before, .blog-page *::after { scroll-behavior: auto !important; transition: none !important; } }
+
+/* The shared floating navigation owns the enhanced view; keep a native fallback
+   without a ribbon of small links interrupting the article opening. */
+.blog-contents { margin: 24px 0; padding: 16px 0; border-block: 1px solid var(--border-color); }
+.blog-contents summary { font-size: 16px; cursor: pointer; }
+body:has(.section-nav-fab) .blog-contents { display: none; }
+.article-body .article-pullquote { font-family: var(--font-serif); font-size: 32px; line-height: 1.2; border-left: 3px solid var(--accent-blue); padding-left: 24px; margin: 32px 0; }
+
+.blog-related-intro { font-size: 17px; line-height: 1.65; margin: -8px 0 24px; }
+
+.blog-contents .fleet-section-nav a { display: inline-flex; align-items: center; font-size: 16px; min-height: 44px; }

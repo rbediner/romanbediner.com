@@ -1,10 +1,10 @@
 {
   "slug": "agentic-society",
   "status": "ready",
-  "title": "Agentic Society: Build a smarter business with AI",
-  "seoTitle": "Agentic Society: AI Employees for Business Owners | Roman Bediner",
-  "description": "Build a Company Brain and useful AI employees with Agentic Society. Roman Bediner explains the operating approach, online community, and how to get involved.",
-  "deck": "Company knowledge. AI employees. Human leadership. How Agentic Society connects practical implementation with a community of owners building better businesses.",
+  "title": "Agentic Society: Why business owners should build together",
+  "seoTitle": "Agentic Society: An AI Community for CEOs & Business Owners",
+  "description": "An inside perspective on Agentic Society: CEOs, business owners, and builders learning together, creating AI teams, and putting ideas to work online and in Austin.",
+  "deck": "AI keeps changing. Your business still has to grow. How Agentic Society connects CEOs, business owners, builders, and advisors to learn, build, and move forward together.",
   "category": "AI & business",
   "date": "2026-10-26",
   "updated": "2026-10-26",
@@ -14,19 +14,23 @@
   "toc": [
     [
       "community",
-      "What is Agentic Society?"
-    ],
-    [
-      "examples",
-      "Company Brain & AI employees"
+      "People to build with"
     ],
     [
       "participation",
       "Online and in Austin"
     ],
     [
+      "possibilities",
+      "What could you build?"
+    ],
+    [
+      "examples",
+      "An AI team in practice"
+    ],
+    [
       "business",
-      "Capacity & business growth"
+      "Make the capacity count"
     ],
     [
       "fit",
@@ -39,14 +43,15 @@
   ],
   "cover": "/assets/blog/community-cover.svg",
   "series": "Agentic Society",
-  "cardTitle": "Build a smarter business with AI",
+  "cardTitle": "Why business owners should build together",
   "topics": [
     "Agentic Society",
+    "AI community for business owners",
+    "AI for CEOs",
     "Company Brain",
-    "AI employees for business owners",
-    "AI project manager",
-    "Chief of Staff agent"
+    "AI employees",
+    "Business growth"
   ],
   "displayTitle": "Agentic Society",
-  "subtitle": "Build a smarter business with AI"
+  "subtitle": "The business case for building together"
 }

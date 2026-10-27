@@ -1,42 +1,35 @@
 # First article: editorial and search contract
 
-The first article helps a business owner evaluate Agentic Society and choose either its membership application path or a conversation with Roman. It is an openly disclosed first-person perspective from the Fractional COO, not an independent membership review.
+The first article introduces Agentic Society to CEOs and business owners and helps them choose membership exploration or a conversation with Roman. It is a disclosed first-person perspective from its Fractional COO.
 
-## Search intent and reader promise
+## Audience, thesis and flow
 
-- Primary: **Agentic Society**, with commercial evaluation intent. Explain what it is, who it serves, online/Austin participation, and how to explore membership.
-- Supporting: **Company Brain**, **AI employees for business owners**, **AI project manager**, and **Chief of Staff agent**. Explain their business jobs in the community story; link to the existing guides for implementation depth.
-- Original angle: connect AI investment to employee capacity and business growth. The opening develops Roman's LinkedIn/carousel thesis; examples distinguish shared knowledge, project follow-through and organizational memory.
-- Search phrases are topic choices, not verified search-volume estimates. Frequency alone does not establish SEO value, and rankings are not promised.
+The community is the subject. AI builds demonstrate what people can work on together. Lead with the owner's decisions and business priorities, then relationships, participation online/in Austin, attributed public examples, a supporting fleet example, business application, fit and the invitation. Preserve the original money opening and the closing “Bring your business. Build with people who understand the work.”
 
-The permanent article route, descriptive search title, summary, visible headings, author, BlogPosting/Breadcrumb schema, social image, RSS and sitemap must agree. The Blog landing page supplies internal discovery through linked article cards. Preview stays noindex; production indexing begins only after explicit approval and promotion.
+Company Brain is the foundation for the eight-role example: Project Manager, Chief of Staff, RevOps Engineer, AI Correspondent, Director, Continuous Improvement Engineer, Staff Engineer and Solution Architect. Explain business jobs in three short groups and link to existing fleet/PM implementation guides. Keep the fleet below 35% of article words; do not make the blog another operating manual. Remove the solution-preparation detour and its diagram from the article. Its original SVG is retained unchanged at `assets/asset-library/blog/solution-preparation-reference.svg`.
 
-## Sources and evidence boundaries
+## Evidence
 
-Roman supplied the six-page carousel, PM how-to and Fleet Control Plane. They inform the explanation; do not publish their raw internal details or treat historical schedules/counts as current universal facts. Current implementation was checked separately. One repository is not a complete inventory of Roman's work.
+Owner sources: original LinkedIn post/carousel and supplied Fleet Control Plane/PM guides, retained privately. Official site, membership and event pages checked October 26, 2026. Public member examples are attributed to AZ Moyer and Adelle Archer and linked to the official site's accounts. Do not invent outcomes, imply personal observation, use private member/client evidence, or present this fleet as a complete inventory or membership entitlement. Do not copy financial or time-saving claims into guarantees.
 
-Public sources checked October 26, 2026:
+Public references:
+- https://agenticsociety.com/
+- https://agenticsociety.com/apply
+- https://agenticsociety.com/events
+- https://www.linkedin.com/posts/romanbediner_agentic-society-ai-keeps-changing-join-ugcPost-7519155978337128448-7nv5/
 
-- [Roman's original LinkedIn post](https://www.linkedin.com/posts/romanbediner_agentic-society-ai-keeps-changing-join-ugcPost-7519155978337128448-7nv5/).
-- [Agentic Society](https://agenticsociety.com/) and its [current membership program](https://agenticsociety.com/apply).
-- [AI Employee Builder](https://github.com/Agentic-Society-LLC/ai-employee-builder) and [Dashboard Builder](https://github.com/Agentic-Society-LLC/agentic-dashboard-builder).
+## Layout and conversion
 
-No private member/client record, testimonial or financial outcome is used as public proof. Illustrative business scenarios are labeled. Features and prices require a new official-source check when changing the article.
+Reuse actual Resources components and the fleet-guide title treatment. Use shared floating navigation, a native collapsed no-JavaScript contents fallback, a full portrait, two readable expandable community/full-fleet diagrams, and clearly labeled Related guides. Supporting guides sit below the blog inventory to give interested readers implementation depth; their labels/actions identify them as guides.
 
-## Conversion and measurement
+Preserve the exact referral URL, adjacent role/commission disclosure, sponsored semantics, and secondary /connect/ path. Production-only partner_click/blog_contact_intent measure intent. No claim of paid attribution or live GA4 ingestion follows from installation tests.
 
-Opening and closing actions use Roman's exact referral URL, with role/commission disclosure next to each action and `rel="sponsored noopener"`. The secondary path is `/connect/`; readers are also asked to mention Roman when speaking with the team. Avoid fake urgency, guaranteed results and unsupported offers.
+## Search and verification
 
-`partner_click` and `blog_contact_intent` are production-only intent events. They do not establish membership applications, paid conversions, attribution acceptance or revenue. Those require partner-confirmed evidence. Improve the article using actual reader questions and, once available, Search Console queries and verified conversion evidence.
+Primary intent: Agentic Society and AI community for business owners/CEOs. Secondary: Company Brain, AI employees and business growth. Align article, hub card, descriptive search/social metadata, schema, feed and sitemap. No ranking or search-volume claims. Keep preview noindex and production canonicals.
 
-This approach follows Google's [people-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) and [spam policies](https://developers.google.com/search/docs/essentials/spam-policies), with clear relationship disclosure informed by the [FTC guidance](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers).
+Verify deterministic generation, narrative order and breadth, source boundary, navigation with/without JavaScript, loaded-font diagram geometry, responsive Resources parity, keyboard controls, referrals and production telemetry isolation. Exact-SHA CI, Deploy Staging and deployed verification precede a review link. Production requires Roman's explicit approval.
 
 ## Deferred work
 
-Roman deferred weekly automation until the first article is reviewed. Discuss the complete research, evidence, drafting, visual QA, owner review and delivery pipeline; document the agreed PRD before scheduling. The recovered brief utility remains preparation only. No routine or publication automation is active.
-
-## Shared layout and search metadata
-
-The hub reuses Resources' page title, intro shelf, metadata pill, compact card and primary action. The article opens with the existing fleet guide's eyebrow, uppercase serif title, gray subtitle and accent, then a full uncropped portrait. Shared section navigation replaces the custom rail. Related guides use full-sized resource cards; RSS remains machine-discoverable in the head without a visible feed action.
-
-Search metadata retains the descriptive SEO title independently of the short display title and card title. BlogPosting topics, keywords, free-access status and parent Blog identity match the visible Company Brain, Project Manager and Chief of Staff narrative. Production canonicals and social previews remain intact; staging is noindex. The existing GA4 property G-DVHD0KL633 loads once. Automated intent-event tests cover production and preview isolation; they do not prove live GA4 ingestion or paid attribution.
+Weekly automation remains off. Discuss and document the full pipeline after this first article is reviewed; the brief utility is preparation only. No automatic publication, external delivery or Remy handoff.
