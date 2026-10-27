@@ -2,7 +2,7 @@
 
 ## Blog and weekly editorial workflow
 
-CI browser jobs use Ubuntu 24.04, matching the pinned Playwright 1.58 runtime; Ubuntu latest may select an unsupported newer image. CI push triggers are restricted to staging/prod, PR checks remain available, push runs retain their artifact work, and each job has a 15-minute ceiling.
+CI browser jobs and production post-deploy browser smoke use Ubuntu 24.04, matching the pinned Playwright 1.58 runtime; Ubuntu latest may select an unsupported newer image. CI push triggers are restricted to staging/prod, PR checks remain available, push runs retain their artifact work, and each job has a 15-minute ceiling. Production deploys retain their deployment and post-deploy proof under one uncancelled release, with 15-minute job ceilings.
 
 The blog is editorial writing for CEOs and business owners. The first article leads with Agentic Society, recurring relationships, participation and public examples; the eight-role fleet supports that community story. The blog uses the actual Resources intro, pills, compact cards and actions. Article openings reuse the fleet guide title treatment. Shared floating section navigation replaces the inline ribbon, with a native collapsed contents fallback when JavaScript is unavailable. Closed navigation panels leave layout and hit testing, including during transitions. Two diagrams connect community learning to the business and show the full eight-role example; they inherit site fonts. Desktop/phone browser checks compare computed styles directly against Resources. Metadata supports a short `displayTitle`, `subtitle`, `cardTitle` and search `topics` independently of `title`/`seoTitle`.
 
