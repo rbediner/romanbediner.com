@@ -2,6 +2,8 @@
 
 ## Blog and weekly editorial workflow
 
+The blog uses the actual Resources intro, pills, compact cards and actions. Article openings reuse the fleet guide title treatment and shared section navigation; diagrams inherit site fonts. Desktop/phone browser checks compare computed styles directly against Resources. Metadata supports a short `displayTitle`, `subtitle`, `cardTitle` and search `topics` independently of `title`/`seoTitle`.
+
 The `/blog/` hub is an editorial companion to `/resources/`. The first article, `/blog/agentic-society/`, explains community participation through the Company Brain, Project Manager and Chief of Staff, links to existing fleet and PM guides, and offers a disclosed referral or a conversation with Roman. Shared navigation includes Blog. Production promotion remains subject to Roman reviewing the staging revision.
 
 - `npm run blog:build` renders trusted `content/blog/<slug>.json` metadata plus `<slug>.html.txt` editorial source into static HTML, RSS and the sitemap. Generated output is committed; deployments need no new service or framework.

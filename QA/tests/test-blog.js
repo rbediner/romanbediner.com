@@ -49,7 +49,22 @@ console.log('PASS: blog discovery, editorial metadata, attribution, diagrams and
 assert(article.indexOf('A Company Brain the work can build on.') < article.indexOf('A project manager that keeps commitments visible.'));
 assert(article.indexOf('A project manager that keeps commitments visible.') < article.indexOf('A Chief of Staff that connects the knowledge.'));
 assert(article.indexOf('A Chief of Staff that connects the knowledge.') < article.indexOf('AI news desk'));
-assert(hub.includes('<h1>BLOG</h1>') && hub.includes('blog-feature ui-surface'), 'Blog is a landing page with article cards');
+assert(hub.includes('<h1>Blog</h1>') && hub.includes('resource-card resource-card--compact'), 'Blog uses the Resources landing and compact card components');
+// Assert the actual shared component contract and crawlable search metadata.
+for (const html of [hub, article]) {
+  assert(html.includes('/styles/resources.css?'), 'Shared Resources stylesheet');
+  assert(html.includes('shelf-callout resource-family-callout'), 'Shared introduction shelf');
+  assert(html.includes('class="resource-meta"'), 'Shared metadata pills');
+  assert.equal((html.match(/src="[^\"]*ga4-bootstrap.js"/g) || []).length, 1, 'One GA4 bootstrap');
+  assert(html.includes('content="G-DVHD0KL633"'), 'Existing GA4 property');
+}
+assert(!hub.includes('RSS feed →') && !hub.includes('blog-feature-art'), 'No visible feed action or oversized cover card');
+assert(!article.includes('article-rail') && article.includes('data-section-nav'), 'Shared article navigation');
+assert(article.includes('class="fleet-title-deck"') && article.includes('<h1>Agentic Society</h1>'), 'Resource article opening');
+const articleSchema = JSON.parse(article.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0];
+assert(articleSchema.keywords.includes('Company Brain') && articleSchema.keywords.includes('Chief of Staff'), 'Specific search topics');
+assert.equal(articleSchema.isPartOf['@id'], 'https://romanbediner.com/blog/#blog');
+assert.equal(articleSchema.isAccessibleForFree, true);
 
 // Exercise the real generator in disposable state; never mutate reviewed sources.
 const os = require('os');

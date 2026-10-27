@@ -1,4 +1,5 @@
-<p class="article-opening">AI enablement is a business decision: where should you invest so your people can accomplish more?</p>
+<p class="article-opening">AI keeps changing. Your business still has to make money.</p>
+<p>AI enablement is a business decision: where should you invest so your people can accomplish more?</p>
 <p>More time for customers. Better follow-through. Less work spent finding information the company already knows. Those are useful starting points. The next question is what your business will do with that capacity: improve delivery, serve more customers, strengthen sales, or give a specialist room to do harder work.</p>
 <p>Following every AI release will not answer that for you. You need your business context, a practical way to build, and people who can help you work through the decisions.</p>
 <p>That is the connection I want to make between <strong>Agentic Society</strong> and the systems I help build as its Fractional COO: a Company Brain, AI employees with defined jobs, connected workflows, and human leadership. The technology matters because of the work it makes possible.</p>

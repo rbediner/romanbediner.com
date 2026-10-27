@@ -1,7 +1,7 @@
 {
   "slug": "agentic-society",
   "status": "ready",
-  "title": "AI keeps changing. Your business still has to make money.",
+  "title": "Agentic Society: Build a smarter business with AI",
   "seoTitle": "Agentic Society: AI Employees for Business Owners | Roman Bediner",
   "description": "Build a Company Brain and useful AI employees with Agentic Society. Roman Bediner explains the operating approach, online community, and how to get involved.",
   "deck": "Company knowledge. AI employees. Human leadership. How Agentic Society connects practical implementation with a community of owners building better businesses.",
@@ -38,5 +38,15 @@
     ]
   ],
   "cover": "/assets/blog/community-cover.svg",
-  "series": "Agentic Society"
+  "series": "Agentic Society",
+  "cardTitle": "Build a smarter business with AI",
+  "topics": [
+    "Agentic Society",
+    "Company Brain",
+    "AI employees for business owners",
+    "AI project manager",
+    "Chief of Staff agent"
+  ],
+  "displayTitle": "Agentic Society",
+  "subtitle": "Build a smarter business with AI"
 }

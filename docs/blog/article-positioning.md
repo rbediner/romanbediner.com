@@ -34,3 +34,9 @@ This approach follows Google's [people-first content guidance](https://developer
 ## Deferred work
 
 Roman deferred weekly automation until the first article is reviewed. Discuss the complete research, evidence, drafting, visual QA, owner review and delivery pipeline; document the agreed PRD before scheduling. The recovered brief utility remains preparation only. No routine or publication automation is active.
+
+## Shared layout and search metadata
+
+The hub reuses Resources' page title, intro shelf, metadata pill, compact card and primary action. The article opens with the existing fleet guide's eyebrow, uppercase serif title, gray subtitle and accent, then a full uncropped portrait. Shared section navigation replaces the custom rail. Related guides use full-sized resource cards; RSS remains machine-discoverable in the head without a visible feed action.
+
+Search metadata retains the descriptive SEO title independently of the short display title and card title. BlogPosting topics, keywords, free-access status and parent Blog identity match the visible Company Brain, Project Manager and Chief of Staff narrative. Production canonicals and social previews remain intact; staging is noindex. The existing GA4 property G-DVHD0KL633 loads once. Automated intent-event tests cover production and preview isolation; they do not prove live GA4 ingestion or paid attribution.

@@ -15,10 +15,21 @@
   let opener;
   document.querySelectorAll('[data-expand-diagram]').forEach(button => {
     button.addEventListener('click', () => {
-      const source = button.closest('figure').querySelector('img');
-      if (!dialog || typeof dialog.showModal !== 'function') { window.open(source.src, '_blank', 'noopener'); return; }
+      const source = button.closest('figure').querySelector('svg, img');
+      if (!dialog || typeof dialog.showModal !== 'function') { window.open(button.dataset.diagramSrc || source.src, '_blank', 'noopener'); return; }
       const target = dialog.querySelector('.blog-diagram-expanded');
-      target.replaceChildren(source.cloneNode(true));
+      const expanded = source.cloneNode(true);
+      // Keep document IDs unique while the original and expanded SVG coexist.
+      expanded.querySelectorAll('[id]').forEach(node => {
+        const id = node.id;
+        node.id = `${id}-expanded`;
+        expanded.querySelectorAll('*').forEach(element => {
+          for (const attribute of Array.from(element.attributes)) {
+            if (attribute.value.includes(`url(#${id})`)) element.setAttribute(attribute.name, attribute.value.replaceAll(`url(#${id})`, `url(#${id}-expanded)`));
+          }
+        });
+      });
+      target.replaceChildren(expanded);
       opener = button;
       dialog.showModal();
     });
