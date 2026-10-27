@@ -1,6 +1,8 @@
 {
   "default_branch": "staging",
-  "release_branches": [],
+  "release_branches": [
+    "prod"
+  ],
   "deploy_workflows": [],
   "weekly_minute_budget": 300,
   "exceptions": []
