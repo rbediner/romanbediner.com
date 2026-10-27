@@ -104,4 +104,13 @@ assert(
   'deploy-pages.yml must use modern Pages action runtimes'
 );
 
+assert(ciText.includes('branches: [staging, prod]'), 'CI preserves both exact-SHA release lanes and leaves feature work to PR checks');
+assert(ciText.includes("cancel-in-progress: ${{ github.event_name == 'pull_request' }}"), 'Push release work is not cancelled');
+
+// The real CI installer failed on Ubuntu 26.04 before any browser test ran.
+for (const job of ['qa-tests', 'browser-tests']) {
+  const block = ciText.split(`  ${job}:`)[1].split(/\n  [a-z][a-z-]*:/)[0];
+  assert(block.includes('runs-on: ubuntu-24.04'), `${job} must use the OS supported by pinned Playwright 1.58`);
+}
+
 console.log('PASS: CI gate profile automation checks passed.');

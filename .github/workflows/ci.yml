@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    # Release lanes only; feature work is checked through pull requests.
+    branches: [staging, prod]
     paths-ignore:
       - 'docs/**'
       - 'README.md'
@@ -18,11 +20,13 @@ permissions:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # Preserve push-run artifact/release work; superseded PR checks may cancel.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   handoff-sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -54,6 +58,7 @@ jobs:
 
   session-ready:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: handoff-sync
     steps:
       - name: Checkout
@@ -78,6 +83,7 @@ jobs:
 
   gate-profile:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: session-ready
     outputs:
       profile: ${{ steps.profile.outputs.profile }}
@@ -149,6 +155,7 @@ jobs:
 
   repo-contract:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - session-ready
       - gate-profile
@@ -170,6 +177,7 @@ jobs:
 
   workflow-integrity:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - session-ready
       - gate-profile
@@ -192,6 +200,7 @@ jobs:
   unit-tests:
     if: needs.gate-profile.outputs.run_unit_tests == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - gate-profile
       - repo-contract
@@ -214,7 +223,9 @@ jobs:
 
   qa-tests:
     if: needs.gate-profile.outputs.run_qa_tests == 'true'
-    runs-on: ubuntu-latest
+    # Playwright 1.58 supports Ubuntu 24.04; ubuntu-latest can select 26.04.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     needs:
       - gate-profile
       - repo-contract
@@ -251,6 +262,7 @@ jobs:
   regression-tests:
     if: needs.gate-profile.outputs.run_regression_tests == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - gate-profile
       - repo-contract
@@ -273,7 +285,9 @@ jobs:
 
   browser-tests:
     if: needs.gate-profile.outputs.run_browser_tests == 'true'
-    runs-on: ubuntu-latest
+    # Playwright 1.58 supports Ubuntu 24.04; ubuntu-latest can select 26.04.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     needs:
       - gate-profile
       - repo-contract
@@ -300,6 +314,7 @@ jobs:
   lighthouse-validation:
     if: needs.gate-profile.outputs.run_lighthouse_validation == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - gate-profile
       - repo-contract
@@ -346,6 +361,7 @@ jobs:
   link-validation:
     if: needs.gate-profile.outputs.run_link_validation == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - gate-profile
       - repo-contract
@@ -392,6 +408,7 @@ jobs:
       (needs.lighthouse-validation.result == 'success' || needs.lighthouse-validation.result == 'skipped') &&
       (needs.link-validation.result == 'success' || needs.link-validation.result == 'skipped')
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - gate-profile
       - repo-contract
