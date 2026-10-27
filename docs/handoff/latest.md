@@ -1,13 +1,21 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 406
-- Updated At (UTC): 2026-10-27T01:54:07Z
+- Handoff Sequence: 407
+- Updated At (UTC): 2026-10-27T10:22:34Z
 - Source Branch: staging
-- Source Commit: 98f415aecbd5e70e618097124dbe80cb25ff8dcb (pre-handoff baseline)
+- Source Commit: 9d2957288e671aa0dc70b8a94af80c20a4668ee7 (pre-handoff baseline)
 
-## Latest: 2026-10-26: Community-first article EBI verified on staging
+## Latest: 2026-10-27: Owner-approved production release verification repair
 
-Roman rejected the earlier technical emphasis and requested autonomous EBI. The revised article and final interaction/CI repairs are at product SHA `98f415aecbd5e70e618097124dbe80cb25ff8dcb`. [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40434039607), [CI standard](https://github.com/rbediner/romanbediner.com/actions/runs/40434039351), and [Deploy Staging](https://github.com/rbediner/romanbediner.com/actions/runs/40434829476) passed for that exact SHA, followed by deployed desktop/phone acceptance. Production remains `3d51e669f9af7315530ab07d2fe2c7a6db01fad0`. Roman must review and explicitly approve any production promotion.
+Roman approved the reviewed article and asked to push to production. Approved content SHA `98f415aecbd5e70e618097124dbe80cb25ff8dcb` was fast-forward promoted with normal hooks (128.332s full gate). Production CI 40486597698 passed. Deploy Pages 40486597607 published the site, then failed before browser smoke because pinned Playwright 1.58.2 does not support the new ubuntu-latest Ubuntu 26.04 image. Do not call release verification complete yet.
+
+[PR 17](https://github.com/rbediner/romanbediner.com/pull/17) pins the actual production browser caller to Ubuntu 24.04, protects deployment/validation from cancellation and bounds all three jobs to 15 minutes under existing CI policy. Focused release/SOP/live-deploy tests and CI-cost lint pass; normal feature push full gate passed in 131.355s. No article or site bytes changed. This interim handoff is an isolated docs commit created locally on staging and delivered through the required workflow PR; final handoff will use the normal staging handoff push after production acceptance.
+
+Read-only live HTTP proof already verified nine surfaces, exact approved source bytes/release token, canonical/indexability, GA4 bootstrap, JSON-LD, feed and sitemap. Existing owner review tab 337360568 now displays the production article; desktop render inspected. No new browser opened under warning memory pressure (16 GiB, 41% free reported, pressure 2); keep work serial. Prior 1440/390 staging visual proof remains valid for unchanged source. Remaining: PR check/merge, exact corrected staging CI/deploy, production fast-forward, green Deploy Pages/browser smoke and release:verify-prod, final live exact-source checks and PRD/lesson/handoff receipts. Weekly automation stays off.
+
+## Reviewed article and retained staging evidence
+
+Roman rejected the earlier technical emphasis and requested autonomous EBI. The revised article and final interaction/CI repairs are at product SHA `98f415aecbd5e70e618097124dbe80cb25ff8dcb`. [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40434039607), [CI standard](https://github.com/rbediner/romanbediner.com/actions/runs/40434039351), and [Deploy Staging](https://github.com/rbediner/romanbediner.com/actions/runs/40434829476) passed for that exact SHA, followed by deployed desktop/phone acceptance. Roman approved this revision on October 27; the current production verification status is recorded above.
 
 - [Article](https://rbediner.github.io/romanbediner-preview/blog/agentic-society/?cb=98f415aecbd5): CEOs/owners, relationships, ongoing community participation online/in Austin, attributed public examples, then the supporting Company Brain/eight-role fleet and business application. The original money opening and owner-selected Bring your business closing invitation remain.
 - [Blog hub](https://rbediner.github.io/romanbediner-preview/blog/?cb=98f415aecbd5): real Resources typography, shelf, compact article card, pills and actions. Clearly labeled Related guides provide optional implementation depth below the article inventory.
