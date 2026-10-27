@@ -49,6 +49,13 @@ assert(
   'deploy-pages.yml post-deploy validation must install Node dependencies before browser smoke runs'
 );
 
+// Regress the real production failure: pinned Playwright cannot install on Ubuntu 26.04.
+const liveSmokeJob = deployWorkflow.split('\n  post-deploy-validation:')[1].split('\n  release-tag:')[0];
+assert(liveSmokeJob.includes('runs-on: ubuntu-24.04'), 'production browser smoke must use the supported Ubuntu runtime');
+assert(liveSmokeJob.includes('timeout-minutes: 15'), 'production browser smoke must have a bounded job time');
+assert(deployWorkflow.includes('cancel-in-progress: false'), 'production deployment and its verification must not be cancelled');
+assert((deployWorkflow.match(/timeout-minutes: 15/g) || []).length === 3, 'all three production release jobs must be bounded');
+
 const validHomepage = {
   response: { ok: true, status: 200 },
   text: [

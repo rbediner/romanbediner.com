@@ -17,11 +17,13 @@ permissions:
 
 concurrency:
   group: pages-${{ github.sha }}
-  cancel-in-progress: true
+  # A release must finish its deployment and post-deploy proof together.
+  cancel-in-progress: false
 
 jobs:
   deploy-pages:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
     outputs:
@@ -90,7 +92,9 @@ jobs:
           timeout: 1800000
 
   post-deploy-validation:
-    runs-on: ubuntu-latest
+    # Match the OS supported by the pinned Playwright browser smoke runtime.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     needs: deploy-pages
     if: ${{ needs.deploy-pages.result == 'success' }}
     steps:
@@ -130,6 +134,7 @@ jobs:
 
   release-tag:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       - deploy-pages
       - post-deploy-validation
