@@ -111,7 +111,8 @@ for (const width of [320,390,430]) test(`Phone fullscreen diagram supports real 
     await page.screenshot({path:path.join(root,`QA/results/blog-mobile-fullscreen-${width}.png`)});
     await page.getByRole('button',{name:'Close diagram',exact:true}).tap();
     await expect(page.locator('dialog')).toBeHidden();await expect(opener).toBeFocused();
-    expect(await page.locator('body').evaluate(n=>n.style.overflow)).toBe('');
+    // The native close event restores scroll asynchronously after dialog visibility changes.
+    await expect.poll(()=>page.locator('body').evaluate(n=>n.style.overflow)).toBe('');
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
     await page.locator('.blog-diagram').nth(1).screenshot({path:path.join(root,`QA/results/blog-mobile-inline-${width}.png`)});
   } finally {await context.close();}
@@ -123,17 +124,21 @@ test('Community and full-fleet diagrams have readable, contained labels', async(
   await expect(page.locator('.blog-diagram')).toHaveCount(2);
   for (const figure of await page.locator('.blog-diagram').all()) {
     const outside=await figure.locator('svg text').evaluateAll(nodes=>nodes.filter(n=>{
-      const b=n.getBBox();return b.x<20 || b.x+b.width>940;
+      const b=n.getBBox(), bounds=n.ownerSVGElement.viewBox.baseVal;
+      return b.x<20 || b.x+b.width>bounds.width-20 || b.y<10 || b.y+b.height>bounds.height-10;
     }).map(n=>n.textContent));
     expect(outside).toEqual([]);
   }
-  // Every role must fit its actual panel using the loaded site font.
-  const roles=await page.locator('.blog-diagram').nth(1).locator('svg text').evaluateAll(nodes=>nodes.filter(n=>[270,422,429,450,308,335,476,503].includes(Number(n.getAttribute('y')))).map(n=>{
-    const b=n.getBBox(), x=Number(n.getAttribute('x'));
-    return {text:n.textContent,left:b.x,right:b.x+b.width,center:x};
+  // Check each actual role panel, independent of its position in the hierarchy.
+  const roles=await page.locator('.blog-diagram').nth(1).locator('svg [data-role]').evaluateAll(groups=>groups.map(g=>{
+    const panel=g.querySelector('rect').getBBox();
+    const outside=[...g.querySelectorAll('text')].filter(n=>{
+      const b=n.getBBox();return b.x<panel.x+8 || b.x+b.width>panel.x+panel.width-8 || b.y<panel.y+8 || b.y+b.height>panel.y+panel.height-8;
+    }).map(n=>n.textContent);
+    return {role:g.dataset.role,outside};
   }));
-  expect(roles.length).toBeGreaterThan(20);
-  roles.forEach(b=>{expect(b.left, b.text).toBeGreaterThanOrEqual(b.center-94);expect(b.right,b.text).toBeLessThanOrEqual(b.center+94);});
+  expect(roles.map(r=>r.role).sort()).toEqual(['director','staff-engineer','project-manager','chief-of-staff','revops-engineer','improvement-engineer','ai-correspondent','solution-architect'].sort());
+  roles.forEach(r=>expect(r.outside,r.role).toEqual([]));
   await expect(page.locator('.blog-contents')).toBeHidden();
 });
 
@@ -169,7 +174,7 @@ for (const width of [1440,390]) test(`Resources component parity at ${width}px`,
   expect(await page.locator('.blog-diagram .diagram-serif').first().evaluate(el=>getComputedStyle(el).fontFamily)).toContain('Cormorant Garamond');
   expect(await page.locator('.blog-diagram .diagram-sans').first().evaluate(el=>getComputedStyle(el).fontFamily)).toContain('DM Sans');
   for (const figure of await page.locator('.blog-diagram').all()) {
-    const bad=await figure.locator('svg text').evaluateAll(nodes=>nodes.filter(n=>{const b=n.getBBox();return b.x<0 || b.x+b.width>960;}).map(n=>n.textContent));
+    const bad=await figure.locator('svg text').evaluateAll(nodes=>nodes.filter(n=>{const b=n.getBBox();return b.x<0 || b.x+b.width>n.ownerSVGElement.viewBox.baseVal.width;}).map(n=>n.textContent));
     expect(bad).toEqual([]);
   }
   if (process.env.RB_BLOG_CAPTURE && width===1440) {
