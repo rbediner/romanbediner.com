@@ -10,7 +10,7 @@ name: CI standard
 on:
   pull_request:
   push:
-    branches: [staging]
+    branches: [staging, prod]
     paths:
       - '.github/workflows/**'
       - '.github/ci-standard/**'
@@ -57,7 +57,7 @@ jobs:
             echo "ci-standard: this change touches no workflow or standard file, nothing to check"
           fi
       - if: steps.changed.outputs.relevant == 'true'
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           fetch-depth: 1
           sparse-checkout: .github
