@@ -13,7 +13,7 @@ const gate=require('../../scripts/release/publish-reviewed-blog');
 const source='2'.repeat(40),base='1'.repeat(40),file='content/blog/example.json';
 function fixture(){
  const bytes=Buffer.from(JSON.stringify({slug:'example',status:'ready',image:'/assets/blog/example.png'}));
- const packet={schemaVersion:1,articleId:'example',revision:1,sourceSha:source,baseSha:base,kind:'article',producerRun:'producer-native-run',reviewerRun:'separate-native-reviewer',reviewerVerdict:'PASS',reviewReceipt:{pullRequest:42,reviewId:77},files:[{path:file,sha256:gate.hash(bytes)}]};
+ const packet={schemaVersion:1,articleId:'example',revision:1,sourceSha:source,baseSha:base,kind:'article',producerRun:'producer-native-run',reviewerRun:'separate-native-reviewer',reviewerVerdict:'PASS',reviewReceipt:{pullRequest:42,summaryCommentId:88},files:[{path:file,sha256:gate.hash(bytes)}]};
  const proof={post:JSON.parse(bytes),bytes:{[file]:bytes},prodSha:base,sourceOnStaging:true,fastForward:true,changes:[{status:'M',path:file}],previewHtml:`noindex site-navigation.js?v=${source.slice(0,12)}`,runs:[{id:1,name:'CI',head_sha:source,head_branch:'staging',status:'completed',conclusion:'success'},{id:2,name:'Deploy Staging',head_sha:source,head_branch:'staging',status:'completed',conclusion:'success'}]};
  return {packet,proof};
 }
@@ -40,7 +40,7 @@ test('only actual owner approval of the protected environment counts',()=>{
 });
 
 // Run the real CLI entrypoint with bounded fake transports; no live state is reachable.
-async function caller({reject=false,unknownRef=false,alreadyPublished=false,attempt=1,state={intents:new Map()},unknownDispatch=false,moveBeforeDispatch=false,forgedReview=false,failFence=false,phase='publish',staleEvidence=false,advanceBeforeCAS=false}={}){
+async function caller({reject=false,unknownRef=false,alreadyPublished=false,attempt=1,state={intents:new Map()},unknownDispatch=false,moveBeforeDispatch=false,forgedReview=false,failFence=false,phase='publish',staleEvidence=false,advanceBeforeCAS=false,cachedLive=false,redirectedLive=false}={}){
  const {packet,proof}=fixture(),raw=JSON.stringify(packet),writes=[],receipts={};let prod=alreadyPublished?source:base;
  const fakeFs={writeFileSync:(name,body)=>receipts[name]=JSON.parse(body),appendFileSync:()=>{}};
  const fakeGit=(_command,args,options)=>{
@@ -50,6 +50,10 @@ async function caller({reject=false,unknownRef=false,alreadyPublished=false,atte
   throw new Error(`Unexpected Git call: ${args[0]}`);
  };
  const fetch=async(url,options={})=>{
+  if(url.startsWith('https://romanbediner.com/blog/')){
+   const response=new Response(`<link rel="canonical" href="https://romanbediner.com/blog/example/"> site-navigation.js?v=${(cachedLive?base:source).slice(0,12)}`);
+   Object.defineProperty(response,'url',{value:redirectedLive?'https://romanbediner.com/blog/':url});return response;
+  }
   if(url.startsWith('https://rbediner.github.io/')){if(staleEvidence)throw new Error('preview moved');return new Response(proof.previewHtml);}
   if(url==='https://api.github.com/repos/rbediner/romanbediner.com')return Response.json({node_id:'repository-id'});
   if(url==='https://api.github.com/graphql'){
@@ -73,7 +77,8 @@ async function caller({reject=false,unknownRef=false,alreadyPublished=false,atte
   }
   if(method==='POST'){writes.push({route,body:JSON.parse(options.body)});if(unknownDispatch)throw new Error('accepted but response lost');return new Response(null,{status:204});}
   if(route==='pulls/42')return Response.json({head:{sha:source}});
-  if(route==='pulls/42/reviews?per_page=100')return Response.json([{id:77,user:{id:forgedReview?123:199175422,type:'Bot'},commit_id:source,state:'COMMENTED',submitted_at:'2026-10-29T22:00:00Z',body:`BLOG_REVIEW_PASS ${source} ${gate.manifestDigest(packet)}`}]);
+  if(route==='pulls/42/reviews?per_page=100')return Response.json([]);
+  if(route==='issues/42/comments?per_page=100')return Response.json([nativeSummary(source,{forged:forgedReview})]);
   if(route==='git/ref/heads/prod')return Response.json({object:{sha:moveBeforeDispatch&&state.intents.size?'3'.repeat(40):prod}});
   if(route.startsWith('actions/runs?'))return Response.json({total_count:2,workflow_runs:proof.runs});
   if(route.startsWith('environments/'))return Response.json({can_admins_bypass:false,protection_rules:[{type:'required_reviewers',reviewers:[{reviewer:{login:'rbediner'}}]}]});
@@ -81,7 +86,7 @@ async function caller({reject=false,unknownRef=false,alreadyPublished=false,atte
   throw new Error(`Unexpected HTTP read: ${route}`);
  };
  const module={exports:{}};const requireFake=name=>name==='fs'?fakeFs:name==='child_process'?{execFileSync:fakeGit}:require(name);
- const sandbox={module,require:requireFake,Buffer,fetch,console:{log:()=>{},error:()=>{}},process:{argv:['node','gate',phase],env:{GITHUB_REPOSITORY:'rbediner/romanbediner.com',GITHUB_REF:'refs/heads/staging',GITHUB_TOKEN:'test-token',GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:String(attempt),BLOG_REVIEW_PACKET:raw,BLOG_EXPECTED_DIGEST:gate.hash(raw)}}};
+ const sandbox={module,require:requireFake,Buffer,URL,fetch,console:{log:()=>{},error:()=>{}},process:{argv:['node','gate',phase],env:{GITHUB_REPOSITORY:'rbediner/romanbediner.com',GITHUB_REF:'refs/heads/staging',GITHUB_TOKEN:'test-token',GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:String(attempt),BLOG_REVIEW_PACKET:raw,BLOG_EXPECTED_DIGEST:gate.hash(raw)}}};
  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../../scripts/release/publish-reviewed-blog.js'),'utf8'),sandbox);
  try{await module.exports.main();return {writes,receipts};}catch(error){return {writes,receipts,error};}
 }
@@ -105,15 +110,18 @@ test('concurrent intent creation permits only one dispatch for a workflow',async
 test('failed durable fence prevents every workflow dispatch',async()=>{const r=await caller({failFence:true});assert(r.error);assert.equal(r.writes.filter(w=>w.route.includes('/dispatches')).length,0);});
 test('production movement refuses dispatch',async()=>{const r=await caller({moveBeforeDispatch:true});assert(r.error);assert.equal(r.writes.filter(w=>w.route.includes('/dispatches')).length,0);});
 test('forged native review refuses promotion before writes',async()=>{const r=await caller({forgedReview:true});assert(r.error);assert.equal(r.writes.length,0);});
-test('native reviewer must attest current source, digest and latest submitted verdict',()=>{
- const {packet}=fixture(),pr={head:{sha:source}},review={id:77,user:{id:199175422,type:'Bot'},commit_id:source,state:'COMMENTED',submitted_at:'2026-10-29T22:00:00Z',body:`BLOG_REVIEW_PASS ${source} ${gate.manifestDigest(packet)}`};
- gate.assertNativeReview(packet,pr,[review]);
- for(const patch of [{user:{id:1,type:'Bot'}},{commit_id:base},{state:'DISMISSED'},{body:'PASS'}])assert.throws(()=>gate.assertNativeReview(packet,pr,[{...review,...patch}]));
- assert.throws(()=>gate.assertNativeReview(packet,pr,[review,{...review,id:78,state:'CHANGES_REQUESTED',body:'needs correction'}]));
- assert.throws(()=>gate.assertNativeReview(packet,{head:{sha:base}},[review]));
- const mergedReview={...review,commit_id:base,body:`BLOG_REVIEW_PASS ${base} ${gate.manifestDigest(packet)}`};
- gate.assertNativeReview(packet,{head:{sha:base}},[mergedReview],{source:'4'.repeat(40),review:'4'.repeat(40)});
- assert.throws(()=>gate.assertNativeReview(packet,{head:{sha:base}},[mergedReview],{source:'4'.repeat(40),review:'5'.repeat(40)}));
+function nativeSummary(commit=source,{forged=false,app=1144995,status='completed',findings=false,unresolved=false}={}){
+ return {id:88,user:{id:forged?123:199175422,type:'Bot'},performed_via_github_app:{id:app},body:'<!-- codex-pull-request-review-summary -->\n<!-- codex-review-state:v1 '+JSON.stringify({code_review:{commit_sha:commit,status,has_any_findings:findings,has_unresolved_findings:unresolved}})+' -->'};
+}
+test('actual native receipt must attest current source with no pending or unresolved findings',()=>{
+ const {packet}=fixture(),pr={head:{sha:source}},summary=nativeSummary();
+ gate.assertNativeReview(packet,pr,[summary]);
+ for(const change of [{forged:true},{app:1},{status:'running'},{findings:true},{unresolved:true},{findings:null}])assert.throws(()=>gate.assertNativeReview(packet,pr,[nativeSummary(source,change)]));
+ assert.throws(()=>gate.assertNativeReview(packet,pr,[summary,{...summary,id:89}]));
+ assert.throws(()=>gate.assertNativeReview(packet,pr,[summary],[{id:77,user:{id:199175422},commit_id:source,state:'DISMISSED',submitted_at:'2026-10-29T22:00:00Z'}]));
+ assert.throws(()=>gate.assertNativeReview(packet,{head:{sha:base}},[summary]));
+ gate.assertNativeReview(packet,{head:{sha:base}},[nativeSummary(base)],[],{source:'4'.repeat(40),review:'4'.repeat(40)});
+ assert.throws(()=>gate.assertNativeReview(packet,{head:{sha:base}},[nativeSummary(base)],[],{source:'4'.repeat(40),review:'5'.repeat(40)}));
 });
 test('receiving CI and deployment workflows reject mutable-ref drift and gate every prod deployment',()=>{
  const {execFileSync}=require('child_process');
@@ -134,4 +142,29 @@ test('read-only reconciliation survives moved preview, production and stale revi
 });
 test('atomic old-ref guard refuses a concurrent ancestor advance',async()=>{
  const r=await caller({advanceBeforeCAS:true});assert(r.error);assert.equal(r.writes.filter(w=>w.route.includes('/dispatches')).length,0);assert.equal(r.writes.filter(w=>w.route==='graphql').length,1);
+});
+
+test('canonical manifest ordering is bytewise, independent of locale and fixture producer',()=>{
+ const files=[{path:'README.md',sha256:'a'.repeat(64)},{path:'QA/check.js',sha256:'b'.repeat(64)},{path:'.agents/skill.md',sha256:'c'.repeat(64)},{path:'assets/x.svg',sha256:'d'.repeat(64)}];
+ const expected='[{"path":".agents/skill.md","sha256":"'+ 'c'.repeat(64)+'"},{"path":"QA/check.js","sha256":"'+ 'b'.repeat(64)+'"},{"path":"README.md","sha256":"'+ 'a'.repeat(64)+'"},{"path":"assets/x.svg","sha256":"'+ 'd'.repeat(64)+'"}]';
+ assert.equal(gate.manifestDigest({files}),gate.hash(expected));
+});
+test('live article verification rejects cached releases, omitted article identity and noindex',()=>{
+ const {packet}=fixture(),html=`<link rel="canonical" href="https://romanbediner.com/blog/example/"> site-navigation.js?v=${source.slice(0,12)}`;
+ gate.assertLiveArticle(packet,html);
+ assert.throws(()=>gate.assertLiveArticle(packet,html.replace(source.slice(0,12),base.slice(0,12))));
+ assert.throws(()=>gate.assertLiveArticle(packet,'generic homepage passes HTTP smoke'));
+ assert.throws(()=>gate.assertLiveArticle(packet,html.replace('<link rel="canonical"','<a')));
+ assert.throws(()=>gate.assertLiveArticle(packet,html+'<meta name="robots" content="noindex">'));
+});
+test('actual post-deploy caller records the approved live article and refuses an older cached article',async()=>{
+ const live=await caller({phase:'verify-live',alreadyPublished:true});assert.ifError(live.error);assert.equal(live.receipts['live-blog-receipt.json'].sourceSha,source);assert.equal(live.writes.length,0);
+ const stale=await caller({phase:'verify-live',alreadyPublished:true,cachedLive:true});assert(stale.error);assert(!stale.receipts['live-blog-receipt.json']);
+ const redirected=await caller({phase:'verify-live',alreadyPublished:true,redirectedLive:true});assert(redirected.error);assert(!redirected.receipts['live-blog-receipt.json']);
+});
+
+test('the actual first native-review manifest retains its independent frozen digest',()=>{
+ const frozen=JSON.parse(fs.readFileSync(path.join(__dirname,'reviewed-blog-manifest.json'),'utf8'));
+ assert.equal(frozen.sourceSha,'b49764ea6171337efbfabf121adcaf429cc5b7e6');
+ assert.equal(gate.manifestDigest(frozen),'345139328209826ce05c4deb3db688549f090290cec4cbb235c8c3f1840368ea');
 });

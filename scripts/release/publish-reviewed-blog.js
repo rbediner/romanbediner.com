@@ -10,7 +10,7 @@ const fs=require('fs'),crypto=require('crypto'),{execFileSync}=require('child_pr
 const REPO='rbediner/romanbediner.com',ENVIRONMENT='blog-production-review',OWNER='rbediner';
 const PREVIEW='https://rbediner.github.io/romanbediner-preview';
 // Observed native GitHub App account, not a caller-supplied reviewer identity.
-const REVIEWER_ID=199175422,STATE_BRANCH='blog-publication-state';
+const REVIEWER_ID=199175422,REVIEWER_APP_ID=1144995,STATE_BRANCH='blog-publication-state';
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
 const requireThat=(ok,message)=>{if(!ok)throw new Error(message);};
 
@@ -22,7 +22,7 @@ function validatePacket(p){
  for(const field of ['sourceSha','baseSha'])requireThat(/^[a-f0-9]{40}$/.test(p[field]),`Invalid ${field}`);
  requireThat(['article','maintenance'].includes(p.kind),'Invalid release kind');
  requireThat(p.reviewerVerdict==='PASS'&&typeof p.producerRun==='string'&&typeof p.reviewerRun==='string'&&p.producerRun.trim()&&p.reviewerRun.trim()&&p.producerRun!==p.reviewerRun,'Independent review required');
- requireThat(Number.isSafeInteger(p.reviewReceipt?.pullRequest)&&p.reviewReceipt.pullRequest>0&&Number.isSafeInteger(p.reviewReceipt.reviewId)&&p.reviewReceipt.reviewId>0,'Authenticated native review receipt required');
+ requireThat(Number.isSafeInteger(p.reviewReceipt?.pullRequest)&&p.reviewReceipt.pullRequest>0&&Number.isSafeInteger(p.reviewReceipt.summaryCommentId)&&p.reviewReceipt.summaryCommentId>0,'Authenticated native review receipt required');
  requireThat(Array.isArray(p.files)&&p.files.length>0&&p.files.length<=80,'Missing or oversized reviewed file set');
  const names=new Set();
  for(const row of p.files){
@@ -33,15 +33,25 @@ function validatePacket(p){
 }
 
 // The actual provider review must attest the frozen candidate and its complete file manifest.
-function manifestDigest(p){return hash(JSON.stringify([...p.files].sort((a,b)=>a.path.localeCompare(b.path))));}
-function assertNativeReview(p,pr,reviews,trees={}){
- const native=reviews.filter(r=>r.user?.id===REVIEWER_ID&&r.user?.type==='Bot').sort((a,b)=>b.id-a.id);
- const review=native.find(r=>r.id===p.reviewReceipt.reviewId);
- requireThat(review&&pr.head?.sha===review.commit_id&&['COMMENTED','APPROVED'].includes(review.state)&&review.submitted_at,'Missing, dismissed or stale native review');
+function manifestDigest(p){return hash(JSON.stringify([...p.files].sort((a,b)=>a.path<b.path?-1:a.path>b.path?1:0)));}
+function nativeReviewState(p,comments){
+ // This is the actual provider-managed receipt observed in the live pilot, not a requested PASS string.
+ const native=comments.filter(r=>r.user?.id===REVIEWER_ID&&r.user?.type==='Bot'&&r.performed_via_github_app?.id===REVIEWER_APP_ID&&r.body?.includes('<!-- codex-pull-request-review-summary -->')).sort((a,b)=>b.id-a.id);
+ const summary=native[0];requireThat(summary?.id===p.reviewReceipt.summaryCommentId,'Native review receipt is missing or superseded');
+ const marker=summary.body.match(/<!-- codex-review-state:v1 (\{[^\n]+\}) -->/);
+ requireThat(marker,'Native review state unavailable');
+ const state=JSON.parse(marker[1]).code_review;
+ requireThat(state?.status==='completed'&&state.has_any_findings===false&&state.has_unresolved_findings===false&&/^[a-f0-9]{40}$/.test(state.commit_sha),'Native review is pending, negative or incomplete');
+ return state;
+}
+function assertNativeReview(p,pr,comments,reviews=[],trees={}){
+ const state=nativeReviewState(p,comments),reviewCommit=state.commit_sha;
+ requireThat(pr.head?.sha===reviewCommit,'Review candidate changed');
+ const latest=reviews.filter(r=>r.user?.id===REVIEWER_ID&&r.commit_id===reviewCommit).sort((a,b)=>b.id-a.id)[0];
+ requireThat(!latest||(['COMMENTED','APPROVED'].includes(latest.state)&&latest.submitted_at),'Native submitted review is dismissed or negative');
  // A native PR merge can change commit identity while retaining the complete reviewed tree.
- requireThat(review.commit_id===p.sourceSha||(/^[a-f0-9]{40}$/.test(trees.source)&&trees.source===trees.review),'Native review does not cover this complete source tree');
- const marker=`BLOG_REVIEW_PASS ${review.commit_id} ${manifestDigest(p)}`;
- requireThat(review.body?.includes(marker)&&native[0]?.id===review.id,'Native review is negative or superseded');
+ requireThat(reviewCommit===p.sourceSha||(/^[a-f0-9]{40}$/.test(trees.source)&&trees.source===trees.review),'Native review does not cover this complete source tree');
+ return reviewCommit;
 }
 
 // Scope comes from the actual source metadata, never from an input allowlist.
@@ -79,6 +89,13 @@ function assertOwnerApproval(history){
  const relevant=history.filter(r=>r.environments?.some(e=>e.name===ENVIRONMENT));
  requireThat(relevant.some(r=>r.state==='approved'&&r.user?.login===OWNER)&&!relevant.some(r=>r.state==='rejected'),'Native owner approval is missing or rejected');
 }
+function assertLiveArticle(p,html){
+ requireThat(html.includes(`site-navigation.js?v=${p.sourceSha.slice(0,12)}`),'Live article serves a different release');
+ const canonicalTags=(html.match(/<link\b[^>]*>/gi)||[]).filter(tag=>/\brel\s*=\s*(["'])canonical\1/i.test(tag));
+ const hrefs=canonicalTags.length===1?[...canonicalTags[0].matchAll(/\bhref\s*=\s*(["'])([^"']*)\1/gi)]:[];
+ requireThat(hrefs.length===1&&hrefs[0][2]===`https://romanbediner.com/blog/${p.articleId}/`,'Live canonical article identity is missing');
+ requireThat(!/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html),'Live article is not indexable');
+}
 function git(args,raw=false){return execFileSync('git',args,{encoding:raw?null:'utf8',stdio:['ignore','pipe','pipe'],maxBuffer:8*1024*1024});}
 function ancestor(base,head){try{git(['merge-base','--is-ancestor',base,head]);return true;}catch{return false;}}
 async function api(route,method='GET',body){
@@ -104,16 +121,16 @@ async function inspect(p){
  const bytes=Object.fromEntries(p.files.map(row=>[row.path,git(['show',`${p.sourceSha}:${row.path}`],true)]));
  const post=JSON.parse(git(['show',`${p.sourceSha}:content/blog/${p.articleId}.json`]));
  const runs=await api(`actions/runs?head_sha=${p.sourceSha}&per_page=50`);requireThat(runs.total_count<=50,'Ambiguous run inventory');
- const pr=await api(`pulls/${p.reviewReceipt.pullRequest}`),reviews=await api(`pulls/${p.reviewReceipt.pullRequest}/reviews?per_page=100`);
- requireThat(reviews.length<100,'Review inventory requires reconciliation');
- const selected=reviews.find(r=>r.id===p.reviewReceipt.reviewId),trees={};
- if(selected&&selected.commit_id!==p.sourceSha){
+ const pr=await api(`pulls/${p.reviewReceipt.pullRequest}`),reviews=await api(`pulls/${p.reviewReceipt.pullRequest}/reviews?per_page=100`),comments=await api(`issues/${p.reviewReceipt.pullRequest}/comments?per_page=100`);
+ requireThat(reviews.length<100&&comments.length<100,'Review inventory requires reconciliation');
+ const reviewed=nativeReviewState(p,comments).commit_sha,trees={};
+ if(reviewed!==p.sourceSha){
   trees.source=(await api(`git/commits/${p.sourceSha}`)).tree.sha;
-  trees.review=(await api(`git/commits/${selected.commit_id}`)).tree.sha;
+  trees.review=(await api(`git/commits/${reviewed}`)).tree.sha;
  }
- assertNativeReview(p,pr,reviews,trees);
+ assertNativeReview(p,pr,comments,reviews,trees);
  const response=await fetch(`${PREVIEW}/blog/${p.articleId}/?release=${p.sourceSha.slice(0,12)}`);requireThat(response.ok,'Staging article unavailable');
- return {nativeReview:{reviewId:selected.id,reviewCommit:selected.commit_id,sourceCommit:p.sourceSha,...trees},prodSha:prod.object.sha,changes,bytes,post,runs:runs.workflow_runs,previewHtml:await response.text(),sourceOnStaging:ancestor(p.sourceSha,'origin/staging'),fastForward:ancestor(p.baseSha,p.sourceSha)};
+ return {nativeReview:{summaryCommentId:p.reviewReceipt.summaryCommentId,reviewerId:REVIEWER_ID,appId:REVIEWER_APP_ID,manifestDigest:manifestDigest(p),reviewCommit:reviewed,sourceCommit:p.sourceSha,...trees},prodSha:prod.object.sha,changes,bytes,post,runs:runs.workflow_runs,previewHtml:await response.text(),sourceOnStaging:ancestor(p.sourceSha,'origin/staging'),fastForward:ancestor(p.baseSha,p.sourceSha)};
 }
 
 async function optionalRead(route){try{return await api(route);}catch(error){if(error.status===404)return null;throw error;}}
@@ -154,6 +171,16 @@ async function main(){
  const p=validatePacket(JSON.parse(raw)),digest=hash(raw),phase=process.argv[2]||'prepare';
  requireThat(process.env.GITHUB_REPOSITORY===REPO&&process.env.GITHUB_REF==='refs/heads/staging','Run the trusted staging workflow');
  if(p.kind==='maintenance')requireThat(process.env.GITHUB_ACTOR===OWNER,'Maintenance needs direct owner dispatch');
+ if(phase==='verify-live'){
+  requireThat((await api('git/ref/heads/prod')).object.sha===p.sourceSha,'Another production release superseded this revision');
+  const url=`https://romanbediner.com/blog/${p.articleId}/?release=${p.sourceSha.slice(0,12)}`;
+  const response=await fetch(url,{headers:{'Cache-Control':'no-cache'}});requireThat(response.ok,'Approved live article unavailable');
+  const finalUrl=new URL(response.url);
+  requireThat(finalUrl.origin==='https://romanbediner.com'&&finalUrl.pathname===`/blog/${p.articleId}/`,'Live request redirected away from the approved article');
+  assertLiveArticle(p,await response.text());
+  fs.writeFileSync('live-blog-receipt.json',JSON.stringify({articleId:p.articleId,revision:p.revision,sourceSha:p.sourceSha,url,verifiedAt:new Date().toISOString()},null,2)+'\n');
+  return;
+ }
  if(phase==='reconcile'){
   // Recovery reads original custody even after preview, production or review has advanced.
   const runs=await api(`actions/runs?head_sha=${p.sourceSha}&per_page=50`);
@@ -193,5 +220,5 @@ async function main(){
  }else throw new Error('Unknown publication phase');
  console.log(JSON.stringify({...result,phase,packetDigest:digest}));
 }
-module.exports={validatePacket,allowedFiles,assertEligible,assertNativeReview,manifestDigest,assertOwnerApproval,hash,main};
+module.exports={validatePacket,allowedFiles,assertEligible,nativeReviewState,assertNativeReview,manifestDigest,assertOwnerApproval,assertLiveArticle,hash,main};
 if(require.main===module)main().catch(error=>{console.error(`FAIL: ${error.message}`);process.exitCode=1;});

@@ -75,10 +75,14 @@ jobs:
         run: |
           SOURCE_SHA=$(node -e 'process.stdout.write(JSON.parse(process.env.BLOG_REVIEW_PACKET).sourceSha)')
           node scripts/release/verify-prod-release.js --branch prod --sha "$SOURCE_SHA" --interval 30 --timeout 780
+          # Generic site smoke cannot establish that this approved article is actually served.
+          node scripts/release/publish-reviewed-blog.js verify-live
       - uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: blog-promotion-${{ github.run_id }}-${{ github.run_attempt }}
-          path: promotion-receipt.json
+          path: |
+            promotion-receipt.json
+            live-blog-receipt.json
           if-no-files-found: ignore
           retention-days: 90
