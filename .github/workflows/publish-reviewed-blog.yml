@@ -12,6 +12,8 @@ on:
 permissions:
   contents: read
   actions: read
+  pull-requests: read
+  issues: read
 
 concurrency:
   group: reviewed-blog-production
@@ -55,6 +57,8 @@ jobs:
     permissions:
       contents: write
       actions: write
+      pull-requests: read
+      issues: read
     steps:
       - uses: actions/checkout@v6
         with:

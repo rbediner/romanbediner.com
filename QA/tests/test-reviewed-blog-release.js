@@ -168,3 +168,7 @@ test('the actual first native-review manifest retains its independent frozen dig
  assert.equal(frozen.sourceSha,'b49764ea6171337efbfabf121adcaf429cc5b7e6');
  assert.equal(gate.manifestDigest(frozen),'345139328209826ce05c4deb3db688549f090290cec4cbb235c8c3f1840368ea');
 });
+test('both native publication token scopes can read the actual PR and issue receipt',()=>{
+ const workflow=fs.readFileSync(path.join(__dirname,'../../.github/workflows/publish-reviewed-blog.yml'),'utf8');
+ for(const scope of ['pull-requests: read','issues: read'])assert.equal(workflow.split(scope).length-1,2,`${scope} must survive the publish job override`);
+});
