@@ -26,20 +26,64 @@ test.beforeAll(async()=>{
   base=`http://127.0.0.1:${server.address().port}`;
 });
 test.afterAll(async()=>{if(server)await new Promise(resolve=>server.close(resolve));});
+// A second genuine article exercises the reusable builder, its chart and hub discovery.
+for (const width of [1440,390]) test(`Attention-budget article and site-style chart at ${width}px`, async({page})=>{
+  await page.setViewportSize({width,height:900});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(`${base}/blog/ai-agent-attention-budget/`);await page.evaluate(()=>document.fonts.ready);
+  await expect(page.locator('h1')).toHaveCount(1);
+  await expect(page.locator('h1')).toHaveText('AI agents need an attention budget');
+  await expect(page.locator('meta[name="ga4-measurement-id"]')).toHaveAttribute('content','G-DVHD0KL633');
+  await expect(page.locator('script[src*="ga4-bootstrap"]')).toHaveCount(1);
+  await expect(page.locator('#sources')).toHaveText('Sources and context');
+  expect(await page.locator('.article-body a[href^="https:"]').count()).toBeGreaterThanOrEqual(6);
+  const figure=page.locator('.blog-diagram');await expect(figure).toHaveCount(1);
+  expect(await figure.locator('.blog-diagram-scroll').evaluate(n=>n.scrollWidth<=n.clientWidth)).toBe(true);
+  const chart=await figure.locator('svg').evaluate(svg=>{
+    const before=svg.querySelector('[data-time-row="before"] rect').getBBox();
+    const parts=[...svg.querySelectorAll('.attention-segment')];const potential=svg.querySelector('[data-time-row="potential"] rect').getBBox();
+    const badLabels=[...svg.querySelectorAll('text')].filter(n=>{const b=n.getBBox();return b.x<20||b.x+b.width>1060||b.y<10||b.y+b.height>750;}).map(n=>n.textContent);
+    const badPanels=[...svg.querySelectorAll('[data-diagram-panel]')].flatMap(g=>{const p=g.querySelector('rect').getBBox();return [...g.querySelectorAll('text')].filter(n=>{const b=n.getBBox();return b.x<p.x+8||b.x+b.width>p.x+p.width-8||b.y<p.y+8||b.y+b.height>p.y+p.height-8;}).map(n=>n.textContent);});
+    return {start:parts[0].getBBox().x,beforeX:before.x,beforeWidth:before.width,afterWidth:parts.reduce((n,p)=>n+p.getBBox().width,0),minutes:parts.reduce((n,p)=>n+Number(p.dataset.minutes),0),potentialWidth:potential.width,badLabels,badPanels};
+  });
+  expect(chart.start).toBe(chart.beforeX);expect(chart.minutes).toBe(300);
+  expect(chart.afterWidth/chart.beforeWidth).toBeCloseTo(5/8);expect(chart.potentialWidth/chart.beforeWidth).toBeCloseTo(3/8);
+  expect(chart.badLabels).toEqual([]);expect(chart.badPanels).toEqual([]);
+  expect(await figure.locator('.diagram-serif').first().evaluate(n=>getComputedStyle(n).fontFamily)).toContain('Cormorant Garamond');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  if(process.env.RB_BLOG_CAPTURE){await page.screenshot({path:path.join(root,`QA/results/attention-article-hero-${width}.png`)});await figure.screenshot({path:path.join(root,`QA/results/attention-diagram-${width}.png`)});}
+  await page.goto(`${base}/blog/`);await expect(page.locator('a[href="/blog/ai-agent-attention-budget/"]').first()).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('Attention-budget diagram supports trusted phone pinch and restores review context',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  try{const page=await context.newPage();await page.goto(`${base}/blog/ai-agent-attention-budget/`);const opener=page.locator('[data-expand-diagram]');await opener.tap();
+    const dialog=page.locator('dialog');await expect(dialog).toBeVisible();expect(Math.round((await dialog.boundingBox()).width)).toBe(390);
+    const viewport=page.locator('.blog-diagram-expanded'),box=await viewport.boundingBox(),cx=box.x+box.width/2,cy=box.y+box.height/2;
+    const cdp=await context.newCDPSession(page);const points=d=>[{x:cx-d,y:cy,id:1},{x:cx+d,y:cy,id:2}];
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points(30)});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:points(80)});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    await expect.poll(async()=>parseInt(await dialog.locator('output').innerText(),10)).toBeGreaterThan(200);
+    await page.getByRole('button',{name:'Fit',exact:true}).tap();await expect(dialog.locator('output')).toHaveText('100%');
+    await page.getByRole('button',{name:'Close diagram',exact:true}).tap();await expect(dialog).toBeHidden();await expect(opener).toBeFocused();
+    await expect.poll(()=>page.locator('body').evaluate(n=>n.style.overflow)).toBe('');
+  }finally{await context.close();}
+});
 for(const width of [1440,1280,1024,768,430,390,320])test(`Blog conversion and diagrams at ${width}px`,async({page})=>{
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.setViewportSize({width,height:900});
   await page.goto(`${base}/blog/`);
   await expect(page.getByRole('heading',{level:1})).toHaveText('Blog');
-  await expect(page.locator('.blog-feature')).toHaveCount(1);
+  const originalCard=page.locator('article').filter({has:page.locator('h2 a[href="/blog/agentic-society/"]')});
+  await expect(originalCard).toHaveCount(1);
   // Use the same compact component as Resources, with a linked article heading.
-  await expect(page.locator('.blog-feature')).toHaveClass(/resource-card--compact/);
-  await expect(page.locator('.blog-feature h2 a')).toHaveAttribute('href','/blog/agentic-society/');
+  await expect(originalCard).toHaveClass(/resource-card--compact/);
+  await expect(originalCard.locator('h2 a')).toHaveAttribute('href','/blog/agentic-society/');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   if (process.env.RB_BLOG_CAPTURE && [1440,390].includes(width)) {
     await page.screenshot({path:path.join(root,`QA/results/blog-hub-${width}.png`)});
   }
-  await page.getByRole('link',{name:'Read the article'}).click();
+  await originalCard.getByRole('link',{name:'Read the article'}).click();
   await expect(page).toHaveURL(/\/blog\/agentic-society\/$/);
   if (process.env.RB_BLOG_CAPTURE && [1440,390].includes(width)) {
     await page.screenshot({path:path.join(root,`QA/results/blog-article-${width}.png`)});

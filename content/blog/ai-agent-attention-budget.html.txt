@@ -1,0 +1,63 @@
+<p>An AI agent can produce more work than your team has time to review. That changes the buying decision. A low subscription price may be attractive, but the larger constraint can be the manager who has to check the output, explain the same exception again, and decide which notifications deserve attention.</p>
+  <p>For a business owner, the useful question is how much dependable capacity the system adds after those demands are counted. A faster first draft helps. A completed customer handoff helps more. The difference is the human work required to get from one to the other.</p>
+  <p>Give that work a budget. Decide how much attention your team can spend supervising one recurring responsibility, then test whether the agent can deliver within it. This provides a practical basis for deciding what to expand, what to redesign, and what to stop.</p>
+
+  <section aria-labelledby="the-cost-beyond-the-subscription">
+    <h2 id="the-cost-beyond-the-subscription">The cost beyond the subscription</h2>
+    <p>The AI Daily Brief's October 22 through 28 editions put a useful tension in view: increasingly capable systems are competing for more responsibility while their business value still depends on what happens around them. Its Sunday episode included the host's own mixed experience with proactive assistance. That is one person's account, not a test of what your company will gain.</p>
+    <p>The underlying product direction is concrete. In its <a href="https://claude.com/resources/articles/claude-duet">October 21 announcement of Claude Duet</a>, Anthropic describes an agent that monitors connected apps, prepares work, and brings decisions to the user. It also warns that the research preview can misread threads or misjudge urgency. Background checks share the customer's plan limits. Both machine usage and human attention belong in the operating plan.</p>
+    <p>Those demands can grow differently. A service can become cheaper to run while generating more material for an employee to inspect. A team can also spend more on a capable system and still gain capacity because fewer corrections are needed. Compare the complete workflow before choosing on price.</p>
+    <p>Anthropic's <a href="https://www.anthropic.com/research/building-effective-agents">agent-design guidance</a> recommends starting with the simplest workable solution and adding complexity when it is justified. For an owner, that means a fixed workflow or a good drafting assistant may be enough for the responsibility you are trying to improve.</p>
+  </section>
+
+  <section aria-labelledby="choose-one-finished-outcome">
+    <h2 id="choose-one-finished-outcome">Choose one finished outcome</h2>
+    <p>Start where the business can recognize a useful result. Consider a service firm preparing new-customer handoffs. This is an illustrative example, not a client case. Each handoff needs an agreed scope, a responsible delivery lead, a start date, and a record of unresolved questions.</p>
+    <p>The agent's job could be to assemble that packet from the approved proposal and current customer record. A delivery manager checks it before work begins. Completion means the manager accepts the packet and the delivery team can use it. A document appearing in a folder is only an intermediate step.</p>
+    <p>Define the boundary at the same time. The agent can flag conflicting dates. It cannot promise a new date to the customer. It can identify a missing scope item. It cannot quietly add that item to the commercial agreement. A clear boundary makes exceptions easier to review and the pilot easier to evaluate.</p>
+    <p>Write down what the handoff currently takes, who does it, and where it fails. Keep the acceptance standard consistent when you introduce AI. Otherwise, a faster process may simply be handing unfinished work to the next person.</p>
+  </section>
+
+  <section aria-labelledby="count-the-human-work">
+    <h2 id="count-the-human-work">Count the human work</h2>
+    <p>Track the time people spend briefing the agent, reviewing results, correcting errors, recovering failed attempts, and maintaining the workflow. Record interruptions separately from planned review. Ten minutes at an agreed review time creates a different demand on a manager than ten messages arriving throughout the day.</p>
+    <p>Include every case the pilot takes on. A difficult handoff that falls back to a person still consumes capacity. If you count only the easy completions, the result will make the system look better precisely where the team needs the clearest picture.</p>
+    <p>For illustration, suppose forty handoffs previously required eight hours of staff time. With AI, reviewing those same forty takes two hours and forty minutes. Corrections take another hour, interruptions forty minutes, and maintenance forty minutes. The total is five hours. That leaves three hours of potential capacity, assuming every handoff eventually meets the original standard. These figures are hypothetical; they show the accounting your own pilot needs.</p>
+    <p>Three hours returned to the team does not automatically become a payroll saving. It might support faster onboarding, a shorter backlog, or more time with customers. Decide where that capacity will go and check whether it actually becomes available.</p>
+    <p>Measurement also protects against a convincing impression. <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR's July 2025 study</a> found that a small group of experienced open-source developers took longer with the tested AI tools even though they believed they were faster. That finding applies to its specific tasks and older tools. In a <a href="https://metr.org/blog/2026-02-24-uplift-update/">February 2026 update</a>, METR explained that selection and measurement problems made newer results difficult to interpret. Neither gives you an October 2026 productivity estimate for your business. They give you a reason to measure your own work carefully.</p>
+  </section>
+
+  <section aria-labelledby="set-the-exception-budget">
+    <h2 id="set-the-exception-budget">Set the exception budget</h2>
+    <p>An attention budget turns those observations into a limit your team can use. Agree how much weekly review capacity the responsible manager has, what can wait for a scheduled review, and which exceptions require an immediate decision. Reserve time for maintenance and difficult cases before assigning the rest to routine approvals.</p>
+    <p>If routine review takes three minutes per accepted handoff and the manager has ninety minutes available after that reserve, thirty handoffs is a starting estimate of weekly review capacity. It is a planning assumption to test, not a productivity promise. The system producing sixty drafts does not create another ninety minutes in that person's calendar.</p>
+    <p>For the service-firm example, a missing internal label might wait for the next review. A conflict between the signed scope and the proposed start date should reach the delivery manager before a commitment is made. Repeated alerts about a known, unchanged issue should be consolidated. The person receiving an exception needs the relevant record, the decision required, and the deadline.</p>
+    <p>A quiet agent also needs scrutiny. Fewer alerts can mean better judgment, or it can mean that monitoring stopped. Review a sample of routine cases, check missed deadlines, and verify that the expected customer records were examined. Attention saved counts only alongside dependable coverage and acceptable results.</p>
+    {{diagram:attention-budget}}
+  </section>
+
+  <section aria-labelledby="earn-the-next-responsibility">
+    <h2 id="earn-the-next-responsibility">Earn the next responsibility</h2>
+    <p>Run a short pilot with one accountable owner and a fixed review date. Two weeks may be enough to expose recurring friction in a frequent task; a monthly process needs a longer observation window. Record setup time separately so a promising recurring workflow is not dismissed because its first week involved configuration.</p>
+    <p>At the review, consider three things together: accepted outcomes delivered on time, total human attention consumed, and exceptions or failures that reached the next person. A system that reduces preparation time but increases delivery errors has moved the cost. A system that improves accuracy without saving time may still be worth keeping if accuracy was the business objective.</p>
+    <p>When results are useful, expand one dimension at a time. Increase volume, add another document source, or permit a narrowly defined action. Choose one so you can understand what changed. Keep an easy route back to the previous process and name the person who can stop the workflow.</p>
+    <p>When the pilot misses its budget, inspect the pattern. Repeated corrections may call for a better source record or a narrower task. Too many approvals may mean the decision boundary is unclear. A workflow with little recurring value may deserve retirement. More model capacity is only one possible remedy.</p>
+  </section>
+
+  <section aria-labelledby="make-the-next-decision">
+    <h2 id="make-the-next-decision">Make the next decision</h2>
+    <p>Your next AI investment can begin with a page of practical questions: what finished outcome needs improving, who accepts it, how much attention can they provide, and what evidence would justify expanding the responsibility? Answer those before adding another agent to the team.</p>
+    <p>The <a href="/framework/">AI-Enabled Operations Framework</a> provides the broader approach to ownership, execution, and operating signals. When you are ready to build, the <a href="/resources/agentic-ai-employees/">Agentic Fleet Build Guide</a> covers the implementation and controls. Use those resources rather than starting the operating design from scratch.</p>
+    <p>If you are deciding where to begin, <a href="/connect/">bring one recurring workflow to a conversation</a>. Start with what your people need to complete and the attention they can realistically give it. That is a useful constraint for turning an impressive capability into dependable business capacity.</p>
+  </section>
+
+  <section aria-labelledby="sources">
+    <h2 id="sources">Sources and context</h2>
+    <p>This article's research began with Nathaniel Whittemore's <a href="https://aidailybrief.ai/">The AI Daily Brief</a>. The October 22 through 28, 2026 editions informed the research, including <a href="https://aidailybrief.ai/e/2026-10-25">Sunday's account of his AI workflow</a>. The operating recommendation and hypothetical service-firm example are developed here; they are not reported findings or Roman Bediner client results.</p>
+    <ul>
+      <li>Anthropic, <a href="https://claude.com/resources/articles/claude-duet">Introducing Claude Duet</a>, October 21, 2026. Product description and preview limitations; vendor claims are not independent outcome evidence.</li>
+      <li>Anthropic, <a href="https://www.anthropic.com/research/building-effective-agents">Building effective agents</a>, December 19, 2024. General design guidance; the page notes that tooling has changed.</li>
+      <li>METR, <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Early-2025 developer productivity study</a>, July 10, 2025, and <a href="https://metr.org/blog/2026-02-24-uplift-update/">experiment-design update</a>, February 24, 2026. Narrow research settings and explicit measurement limitations.</li>
+    </ul>
+    <p>Underlying sources were independently located and checked October 29, 2026. The inspected AIDB companion records supplied no original-source links.</p>
+  </section>

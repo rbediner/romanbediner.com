@@ -79,7 +79,8 @@ assert.equal(articleSchema.isAccessibleForFree, true);
 const os = require('os');
 const temp = fs.mkdtempSync(path.join(os.tmpdir(),'rb-blog-contract-'));
 try {
-  for (const file of ['index.html','sitemap.xml','scripts/content/build-blog.js','content/blog']) {
+  // A multi-article fixture needs the actual diagram inputs for other ready posts.
+  for (const file of ['index.html','sitemap.xml','scripts/content/build-blog.js','content/blog','assets/blog']) {
     const target=path.join(temp,file);
     fs.mkdirSync(path.dirname(target),{recursive:true});
     fs.cpSync(path.join(root,file),target,{recursive:true});
@@ -95,6 +96,20 @@ try {
   post.status='ready';post.toc.push(['missing-section','Missing section']);
   fs.writeFileSync(record,JSON.stringify(post));
   assert.throws(generate,/Missing article section/, 'Bad section navigation fails before output');
+  // Exercise article-specific artwork through the real generator and its failure paths.
+  post.toc=[['community','Fixture']];post.eyebrow='AI & OPS';
+  post.diagrams={'test-diagram':{label:'Test shared scale',caption:'A < B',eyebrow:'Human attention'}};
+  fs.writeFileSync(record,JSON.stringify(post));
+  fs.writeFileSync(path.join(temp,'content/blog/agentic-society.html.txt'),'<section id="community">{{diagram:test-diagram}}</section>');
+  fs.writeFileSync(path.join(temp,'assets/blog/test-diagram.svg'),'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" role="img" aria-label="Test"><title>Test</title><text x="10" y="30" font-family="Georgia,serif">Scale</text></svg>');
+  generate();
+  const custom=fs.readFileSync(path.join(temp,'blog/agentic-society/index.html'),'utf8');
+  assert(custom.includes('AI &amp; OPS') && custom.includes('A &lt; B'),'Article labels and captions are escaped');
+  assert(custom.includes('class="diagram-serif"') && custom.includes('aria-label="Test shared scale"'),'Custom diagram inherits site fonts and accessible description');
+  delete post.diagrams['test-diagram'].label;fs.writeFileSync(record,JSON.stringify(post));
+  assert.throws(generate,/Missing diagram description/,'Undescribed artwork is refused');
+  fs.writeFileSync(path.join(temp,'content/blog/agentic-society.html.txt'),'<section id="community">{{diagram:../../private}}</section>');
+  assert.throws(generate,/Unresolved template/,'Diagram tokens cannot read arbitrary paths');
 } finally { fs.rmSync(temp,{recursive:true,force:true}); }
 
 // Conversion is intent only, with an explicit production hostname/environment fence.

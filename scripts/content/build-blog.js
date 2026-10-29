@@ -81,6 +81,8 @@ function cta(p, position) {
 }
 // Inline trusted, source-controlled SVG so diagram text uses the site's real fonts.
 function diagram(file, label, caption, eyebrow) {
+  // Source-controlled diagram names are filenames, never arbitrary read paths.
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(file)) throw new Error(`Invalid diagram name: ${file}`);
   const art = read(`assets/blog/${file}.svg`)
     // Each inline diagram owns its paint-server IDs across the whole document.
     .replace(/id="([^"]+)"/g, (_, id) => `id="${file}-${id}"`)
@@ -106,12 +108,20 @@ for (const p of posts) {
   let content = p.body.replace(/\{\{cta:(\w+)\}\}/g, (_,position) => cta(p, position));
   content = content.replace('{{communityDiagram}}', diagram('community-loop', 'Owners and CEOs learn and build with peers, builders and AI advisors, then bring practical learning back to their businesses.', 'Your business gives the shared work a purpose. Relationships carry the learning from one build to the next.', 'People, learning and your business'));
   content = content.replace('{{teamDiagram}}', diagram('company-brain-team', 'Roman sets priorities. All eight agents read and write shared Company Brain context. The Director coordinates six specialists, and the Staff Engineer independently reviews code.', 'One example from my work: eight distinct roles share one Company Brain. People set direction; coordination and independent review have separate responsibilities.', 'What the work can make possible'));
+  // Each article declares its own accessible artwork instead of inheriting fleet diagrams.
+  content = content.replace(/\{\{diagram:([a-z0-9-]+)\}\}/g, (_, name) => {
+    const spec = p.diagrams && p.diagrams[name];
+    if (!spec || ['label','caption','eyebrow'].some(key => typeof spec[key] !== 'string' || !spec[key].trim())) {
+      throw new Error(`Missing diagram description: ${p.slug}/${name}`);
+    }
+    return diagram(name, spec.label, escape(spec.caption), spec.eyebrow);
+  });
   if (/\{\{/.test(content)) throw new Error(`Unresolved template in ${p.slug}`);
   const schema = {'@context':'https://schema.org','@graph':[
     {'@type':'BlogPosting','@id':`${BASE}${route}#article`,headline:p.title,description:p.description,datePublished:`${p.date}T12:00:00Z`,dateModified:`${p.updated}T12:00:00Z`,image:`${BASE}${p.image}`,mainEntityOfPage:`${BASE}${route}`,author:{'@type':'Person',name:'Roman Bediner',url:`${BASE}/about/`,jobTitle:'Fractional COO and AI Architect'},publisher:{'@type':'Organization',name:'Bediner Advisory LLC',url:BASE},articleSection:p.category,inLanguage:'en-US',isAccessibleForFree:true,keywords:(p.topics || []).join(', '),about:(p.topics || []).map(name=>({'@type':'Thing',name})),isPartOf:{'@type':'Blog','@id':`${BASE}/blog/#blog`,url:`${BASE}/blog/`}},
     {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Blog',item:`${BASE}/blog/`},{'@type':'ListItem',position:2,name:p.title,item:`${BASE}${route}`}]}]};
   outputs[`blog/${p.slug}/index.html`] = shell({title:p.seoTitle,description:p.description,route,image:p.image,imageAlt:p.imageAlt,schema,article:p,body:`<main id="main" class="page-main resources-main resource-fleet-main blog-main blog-article">
-<p class="resources-label">BUSINESS OWNERS + AI COMMUNITY</p><h1>${escape(p.displayTitle || p.title)}</h1><p class="fleet-title-deck">${escape(p.subtitle || '')}</p><div class="section-accent" aria-hidden="true"></div>${intro(escape(p.deck), 'Article introduction')}<div class="blog-pills"><span class="resource-meta">${escape(p.category)}</span>${p.series ? `<span class="resource-meta">${escape(p.series)}</span>` : ''}</div><div class="article-byline"><img src="/assets/images/website-photo.jpg" width="72" height="96" alt="Roman Bediner" /><div><a class="resource-text-cta" href="/about/">Roman Bediner</a><span>Fractional COO, Agentic Society</span><span><time datetime="${p.date}">${formatDate(p.date)}</time> · ${p.minutes} min read</span></div></div>
+<p class="resources-label">${escape(p.eyebrow || "BUSINESS OWNERS + AI COMMUNITY")}</p><h1>${escape(p.displayTitle || p.title)}</h1><p class="fleet-title-deck">${escape(p.subtitle || '')}</p><div class="section-accent" aria-hidden="true"></div>${intro(escape(p.deck), 'Article introduction')}<div class="blog-pills"><span class="resource-meta">${escape(p.category)}</span>${p.series ? `<span class="resource-meta">${escape(p.series)}</span>` : ''}</div><div class="article-byline"><img src="/assets/images/website-photo.jpg" width="72" height="96" alt="Roman Bediner" /><div><a class="resource-text-cta" href="/about/">Roman Bediner</a><span>Fractional COO, Agentic Society</span><span><time datetime="${p.date}">${formatDate(p.date)}</time> · ${p.minutes} min read</span></div></div>
 <details class="blog-contents"><summary>In this article</summary><nav class="fleet-section-nav" data-section-nav aria-label="In this article">${p.toc.map(([id,label])=>`<a href="#${escape(id)}">${escape(label)}</a>`).join('')}</nav></details>
 <article class="article-body">${content}</article>
 <section class="blog-author"><img src="/assets/images/website-photo.jpg" width="72" height="96" alt="Roman Bediner" loading="lazy" /><div><span class="resource-meta">About the author</span><h2>Roman Bediner</h2><p>Fractional COO and AI Architect. I help connect business priorities, people, and systems so useful work gets done.</p><a class="resource-text-cta" href="/about/">More about my work <span aria-hidden="true">&rarr;</span></a></div></section>

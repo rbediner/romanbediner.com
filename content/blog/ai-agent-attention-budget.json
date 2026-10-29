@@ -1,0 +1,62 @@
+{
+  "slug": "ai-agent-attention-budget",
+  "title": "Your next AI agent needs an attention budget",
+  "seoTitle": "AI Agent ROI: Count the Human Attention It Takes",
+  "description": "Measure review time, corrections, and interruptions before expanding an AI agent. A practical pilot for business owners who want dependable capacity.",
+  "deck": "Before you give an agent more work, measure the review, corrections, and interruptions it asks of your people.",
+  "category": "AI & business",
+  "date": "2026-10-29",
+  "toc": [
+    [
+      "the-cost-beyond-the-subscription",
+      "The cost beyond the subscription"
+    ],
+    [
+      "choose-one-finished-outcome",
+      "Choose one finished outcome"
+    ],
+    [
+      "count-the-human-work",
+      "Count the human work"
+    ],
+    [
+      "set-the-exception-budget",
+      "Set the exception budget"
+    ],
+    [
+      "earn-the-next-responsibility",
+      "Earn the next responsibility"
+    ],
+    [
+      "make-the-next-decision",
+      "Make the next decision"
+    ],
+    [
+      "sources",
+      "Sources and context"
+    ]
+  ],
+  "topics": [
+    "AI agents",
+    "AI ROI",
+    "business operations",
+    "AI oversight",
+    "workflow design"
+  ],
+  "status": "ready",
+  "updated": "2026-10-29",
+  "displayTitle": "AI agents need an attention budget",
+  "subtitle": "Count the human work before expanding the responsibility",
+  "cardTitle": "Your next AI agent needs an attention budget",
+  "eyebrow": "AI + BUSINESS OPERATIONS",
+  "image": "/assets/blog/attention-budget-cover.png",
+  "imageAlt": "Your next AI agent needs an attention budget. Count review, corrections and interruptions.",
+  "diagrams": {
+    "attention-budget": {
+      "label": "Illustrative comparison of human time for the same 40 accepted handoffs: eight hours before AI and five hours with AI, leaving three hours of potential capacity. A separate planning example budgets 90 review minutes at three minutes per handoff.",
+      "caption": "Illustrative example: the same 40 accepted customer handoffs. These are hypothetical figures, not measured client results.",
+      "eyebrow": "COUNT THE HUMAN ATTENTION"
+    }
+  },
+  "cover": "/assets/blog/attention-budget-cover.svg"
+}
