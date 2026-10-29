@@ -1,9 +1,22 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 411
-- Updated At (UTC): 2026-10-27T14:59:49Z
+- Handoff Sequence: 412
+- Updated At (UTC): 2026-10-29T22:28:16Z
 - Source Branch: staging
-- Source Commit: cd62064644809c2bd259bdca7f9cffa6f81d59e8 (pre-handoff baseline)
+- Source Commit: e9a2ac863f4ab79975bcbc9c18f816b18bdeeb48 (pre-handoff baseline)
+
+## Latest: 2026-10-29: Weekly blog pilot verified on staging; owner review pending
+
+Source `e9a2ac863f4ab79975bcbc9c18f816b18bdeeb48` passed [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40965309819) and [Deploy Staging](https://github.com/rbediner/romanbediner.com/actions/runs/40965739742). The deployed [attention-budget article](https://rbediner.github.io/romanbediner-preview/blog/ai-agent-attention-budget/) and [Blog hub](https://rbediner.github.io/romanbediner-preview/blog/) were verified at1440/390px against the exact release token. Production remains `cd62064644809c2bd259bdca7f9cffa6f81d59e8`; this new article has no production approval.
+
+- A genuine complete six-edition AI Daily Brief source window (October22–28, including Sunday; no indexed October24 edition) produced an evergreen owner-facing article about measuring human review, corrections, interruptions and maintenance before expanding AI responsibilities. Underlying sources were independently located where AIDB source arrays were empty. Illustrative numbers are explicitly hypothetical; no client outcomes are invented.
+- Article-specific SVG tokens now use declared accessible descriptions through the existing generator. The original fleet/community article is preserved. The new chart uses the site's loaded fonts, paper/grid palette and existing mobile-fit/fullscreen runtime; actual deployed pinch in/out, pan, Fit, Close, focus and scrolling passed. The new hub card reuses the Resources-derived component.
+- Canonical [Weekly Blog Publishing PRD](../blog/weekly-publishing-prd.md) and portable Research/Build skills are committed under `.agents/skills/`, with the required diagram style in the Build skill's reference. Both skills validate. Research output must be body-only HTML; the builder owns page headers/navigation. The private design mirror and review manifest are reconciled with the Git definitions.
+- Normal full local push gate passed without bypass; all17 focused blog browser checks passed, then the3 affected article checks passed after two independent-review polish changes. Generator/contracts, deterministic output, repo hygiene and JS header checks passed. Independent GPT-6.1 Sol/High review passed for staging. Private evidence: `../evidence/blog-pilot-staging-push.log`, `blog-pilot-browser-final.log`, `blog-pilot-live-verification.log` and `attention-pilot-live-acceptance.json`.
+- GA4 retains one shared bootstrap and `G-DVHD0KL633`; deployed preview marks its analytics environment as preview and uses debug mode. Production-only blog intent events remain fenced. Do not claim preview pageviews are excluded from production reports: report/filter configuration and received analytics remain unverified. Staging is noindex.
+- A real rich-HTML preview email was sent to `roman@romanbediner.com`, message `1a189c65cd9044d8`; native readback verified To, HTML and the preview link. Frozen article/artwork hashes and exact source/base SHA are retained at `../blog-pilot/2026-10-29/review/r1/review-packet.json`. Revision1 awaits Roman's review; approval is null.
+- Wednesday02:00 Eastern start /06:00 delivery and GPT-6.1 Sol/High are approved architecture, not an active routine. Cloud launch/continuation, existing Remy notification, authenticated Approve/Edit controls, revision2/stale-approval refusal, both-machine invocation and owner-approved production proof remain unfinished. Current app automation tools expose local scheduling only; no supported Remy delivery/control route is exposed in this session. Do not substitute a local timer or unrelated Maya notifier, create credentials, activate automatic publication or promote without exact-revision approval.
+- Current product PRD and workflow discussion Google Docs were updated/read back through the self-hosted Workspace MCP as `roman@romanbediner.com`. Keep this Git PRD canonical. Continue from the isolated recovery checkout; do not modify task-2 or the original Drive checkout.
 
 ## Latest: 2026-10-27: Shared Company Brain and Director spacing verified in production
 
