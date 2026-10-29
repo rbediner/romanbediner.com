@@ -27,12 +27,14 @@ test.beforeAll(async()=>{
 });
 test.afterAll(async()=>{if(server)await new Promise(resolve=>server.close(resolve));});
 // A second genuine article exercises the reusable builder, its chart and hub discovery.
-for (const width of [1440,390]) test(`Attention-budget article and site-style chart at ${width}px`, async({page})=>{
+for (const width of [1440,1024,390]) test(`Attention-budget article and site-style chart at ${width}px`, async({page})=>{
   await page.setViewportSize({width,height:900});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`${base}/blog/ai-agent-attention-budget/`);await page.evaluate(()=>document.fonts.ready);
   await expect(page.locator('h1')).toHaveCount(1);
-  await expect(page.locator('h1')).toHaveText('AI agents need an attention budget');
+  await expect(page.locator('h1')).toHaveText('AI agent attention budget');
+  // Desktop title and short deck use the site's natural type size on single lines.
+  if(width>=1024) for(const selector of ['h1','.fleet-title-deck']) expect(await page.locator(selector).evaluate(n=>{const r=document.createRange();r.selectNodeContents(n);return new Set([...r.getClientRects()].map(b=>Math.round(b.top))).size;})).toBe(1);
   await expect(page.locator('meta[name="ga4-measurement-id"]')).toHaveAttribute('content','G-DVHD0KL633');
   await expect(page.locator('script[src*="ga4-bootstrap"]')).toHaveCount(1);
   await expect(page.locator('#sources')).toHaveText('Sources and context');

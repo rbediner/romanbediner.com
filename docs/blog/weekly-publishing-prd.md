@@ -10,7 +10,7 @@ A genuine, sourced AI thought-leadership article for CEOs and business owners, r
 
 - Wednesday start: **02:00 America/New_York**.
 - Verified preview target: **05:45 Eastern**; email and existing Remy delivery deadline: **06:00 Eastern**.
-- Research, writing and build model: **GPT-6.1 Sol, High reasoning**.
+- Research and independent editorial review: **GPT-6.1 Sol, High reasoning**. Mechanical build work: **GPT-6.1 Sol, Medium reasoning**. The reviewer is separate from the producer and cannot supply owner approval.
 - Use an actual cloud execution path that works with both Macs off. A local reminder is not the routine.
 - Read current subscription headroom before admission. The 02:00 start can precede the weekly quota reset; the 06:00 deadline cannot depend on a later reset. Retain the standing admission reserve and report an honest delay if capacity or QA prevents readiness.
 - Source window: previous Wednesday through Tuesday in Eastern time, including Sunday or any other published editions. Use actual coverage, not an assumed five weekdays.
@@ -31,7 +31,7 @@ Choose one lasting business decision or operating principle. News is evidence fo
 
 Research returns the full article, section IDs/TOC, audience/search intent/thesis, SEO suggestions, diagram specification, citation/claim ledger, coverage/hashes and evidence limitations. The builder uses actual content/blog metadata and editorial HTML, generates article/hub/RSS/sitemap, and retains the canonical author identity, GA4 bootstrap, indexability policy and design components.
 
-Staging stays noindex and separate from production analytics. QA covers meaningful claims/citations, source links, metadata/structured data, accessibility, desktop/phone layouts, loaded-font labels and line spacing, shared-state diagram semantics, frame-level fit, visible fullscreen expansion, trusted pinch/pan/Zoom/Fit, keyboard access and focus/scroll return. Normal hooks and CI remain in force. A source-only draft or passing local build is not a verified preview: exact-source CI, Deploy Staging and live inspection must pass before a ready link is delivered.
+Staging stays noindex and marks analytics as preview/debug. Production-only blog intent events remain fenced; report filters must be verified before claiming preview pageviews are excluded from reporting. QA covers meaningful claims/citations, source links, metadata/structured data, accessibility, desktop/phone layouts, loaded-font labels and line spacing, shared-state diagram semantics, frame-level fit, visible fullscreen expansion, trusted pinch/pan/Zoom/Fit, keyboard access and focus/scroll return. Normal hooks and CI remain in force. A source-only draft or passing local build is not a verified preview: exact-source CI, Deploy Staging and live inspection must pass before a ready link is delivered.
 
 ## Review and promotion
 
@@ -64,3 +64,7 @@ The live Blog hub and first article were checked on October 29 for GA4 property 
 ## Design review history
 
 Roman approved the two-skill, single-review-page architecture on October 29 and changed the initial 06:45/09:00 proposal to a 02:00 start and 06:00 delivery deadline. He then authorized a real end-to-end pilot before scheduling and requested this canonical PRD in Git with a README link. The earlier Google Doc is a discussion mirror; this Git document is the maintained implementation contract.
+
+## October 29 owner acceptance
+
+Roman approved the attention-budget article and authorized production after the desktop title correction. The visible title is concise at site-standard typography, with loaded-font one-line checks at1024px and1440px and natural mobile wrapping. He also authorized completing and activating the Wednesday cloud routine with independent review and exact-revision owner approval before each production release. Saved scheduling and actual end-to-end implementation evidence must still be verified before claiming this routine works.

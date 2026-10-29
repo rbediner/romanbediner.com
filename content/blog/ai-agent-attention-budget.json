@@ -43,10 +43,10 @@
     "AI oversight",
     "workflow design"
   ],
-  "status": "ready",
+  "status": "published",
   "updated": "2026-10-29",
-  "displayTitle": "AI agents need an attention budget",
-  "subtitle": "Count the human work before expanding the responsibility",
+  "displayTitle": "AI agent attention budget",
+  "subtitle": "Count the human work first",
   "cardTitle": "Your next AI agent needs an attention budget",
   "eyebrow": "AI + BUSINESS OPERATIONS",
   "image": "/assets/blog/attention-budget-cover.png",
