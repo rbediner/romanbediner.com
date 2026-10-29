@@ -115,6 +115,8 @@ const RELEASE_INFRA_NODE_TESTS = [
   'QA/tests/test-qa-runner-script.js',
   'QA/tests/test-release-sop-automation.js',
   'QA/tests/test-prod-release-verification-automation.js',
+  'QA/tests/test-reviewed-blog-release.js',
+  'QA/tests/test-blog-review-email.js',
   'QA/tests/test-ci-gate-profile-automation.js',
   'QA/tests/test-session-readiness-automation.js',
   'QA/tests/test-repo-contract-automation.js',

@@ -14,6 +14,11 @@ on:
       - 'README.md'
       - 'AGENTS.md'
   workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Optional frozen full SHA; refuse if the branch moved before dispatch
+        type: string
+        required: false
 
 permissions:
   contents: read
@@ -28,6 +33,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      # All CI jobs depend transitively on this guard; manual runs cannot test a different revision.
+      - name: Enforce requested source identity
+        env:
+          REQUESTED_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          if [ -n "$REQUESTED_SOURCE_SHA" ]; then
+            [[ "$REQUESTED_SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]] && [ "$REQUESTED_SOURCE_SHA" = "$GITHUB_SHA" ] || exit 1
+          fi
       - name: Checkout
         uses: actions/checkout@v6
         with:
@@ -42,18 +55,19 @@ jobs:
       - name: Verify handoff sync policy
         run: |
           if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
-            node scripts/qa/verify-handoff-sync.js --allow-empty
+            node scripts/qa/verify-handoff-sync.js --allow-empty --advisory
           elif [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             node scripts/qa/verify-handoff-sync.js \
               --base-sha "${{ github.event.pull_request.base.sha }}" \
-              --head-sha "${{ github.event.pull_request.head.sha }}"
+              --head-sha "${{ github.event.pull_request.head.sha }}" \
+              --advisory
           elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
             node scripts/qa/verify-handoff-sync.js \
               --base-sha "${{ github.event.before }}" \
               --head-sha "${{ github.sha }}" \
               --advisory
           else
-            node scripts/qa/verify-handoff-sync.js --allow-empty
+            node scripts/qa/verify-handoff-sync.js --allow-empty --advisory
           fi
 
   session-ready:

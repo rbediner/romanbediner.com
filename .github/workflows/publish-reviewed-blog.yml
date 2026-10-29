@@ -1,0 +1,84 @@
+name: Publish Reviewed Blog
+run-name: Review blog revision for production
+
+on:
+  workflow_dispatch:
+    inputs:
+      review_packet:
+        description: Frozen JSON packet produced after independent review and verified staging
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: reviewed-blog-production
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: ${{ github.ref == 'refs/heads/staging' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      packet_digest: ${{ steps.review.outputs.packet_digest }}
+      preview_url: ${{ steps.review.outputs.preview_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+      - name: Validate the frozen revision and show the owner its exact diff
+        id: review
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BLOG_REVIEW_PACKET: ${{ inputs.review_packet }}
+        run: node scripts/release/publish-reviewed-blog.js prepare
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frozen-blog-review-${{ github.run_id }}-${{ github.run_attempt }}
+          path: review-packet.json
+          retention-days: 90
+
+  publish:
+    if: ${{ github.ref == 'refs/heads/staging' }}
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment:
+      name: blog-production-review
+      url: ${{ needs.prepare.outputs.preview_url }}
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+      - name: Recheck approval and exact bytes, then fast-forward production
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BLOG_REVIEW_PACKET: ${{ inputs.review_packet }}
+          BLOG_EXPECTED_DIGEST: ${{ needs.prepare.outputs.packet_digest }}
+        run: node scripts/release/publish-reviewed-blog.js publish
+      - name: Verify normal production CI, deployment and live smoke
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BLOG_REVIEW_PACKET: ${{ inputs.review_packet }}
+        run: |
+          SOURCE_SHA=$(node -e 'process.stdout.write(JSON.parse(process.env.BLOG_REVIEW_PACKET).sourceSha)')
+          node scripts/release/verify-prod-release.js --branch prod --sha "$SOURCE_SHA" --interval 30 --timeout 780
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: blog-promotion-${{ github.run_id }}-${{ github.run_attempt }}
+          path: promotion-receipt.json
+          if-no-files-found: ignore
+          retention-days: 90
