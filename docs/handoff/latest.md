@@ -1,11 +1,15 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 414
-- Updated At (UTC): 2026-10-30T00:19:46Z
+- Handoff Sequence: 415
+- Updated At (UTC): 2026-10-30T00:22:42Z
 - Source Branch: staging
-- Source Commit: 2695d8392d37e0378545d6bd5a32d015ad757748 (pre-handoff baseline)
+- Source Commit: cd6514096c5b1a33715092024e79ebc3f1132824 (pre-handoff baseline)
 
 ## Current state: article live; cloud work stopped; GitHub approval cancelled
+
+**Current owner-approved workaround:** deliver future manually requested articles as verified staging previews by rich HTML email, with an editable Codex chat. Roman types edits or “Publish this version” there; the agent deploys manually through normal release gates and verifies live. No automatic email-reply pickup, direct publish button or active weekly routine is claimed. PRD, runbook and README now reflect this choice. Cloud investigations are deferred, not prerequisites for manual article delivery.
+
+Manual review email sent/read back: `1a18a2f6118ab1e7`, subject “Blog review: staging preview + editable Codex chat.” Both Preview staging and Open Codex links and To/HTML verified. No GitHub approval button. The continuation is explicitly labelled; the original article is already live. PRD, runbook and README manual-workflow commit is remotely saved; this handoff remains isolated.
 
 The [attention-budget article](https://romanbediner.com/blog/ai-agent-attention-budget/) is approved and verified live at production `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`. Its concise desktop H1 is “AI agent attention budget”; loaded-font desktop/phone layouts and diagram fit, actual pinch/pan, Fit/Close, focus and scroll restoration passed. Production [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40969172280) and [Deploy Pages](https://github.com/rbediner/romanbediner.com/actions/runs/40969172285) passed. The original Agentic Society article and shared Company Brain diagram remain shipped.
 
