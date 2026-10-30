@@ -1,13 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 415
-- Updated At (UTC): 2026-10-30T00:22:42Z
+- Handoff Sequence: 416
+- Updated At (UTC): 2026-10-30T10:20:21Z
 - Source Branch: staging
-- Source Commit: cd6514096c5b1a33715092024e79ebc3f1132824 (pre-handoff baseline)
+- Source Commit: 031ff7a3e82acbe34aad2bca8fc4e2af62a044de (pre-handoff baseline)
 
-## Current state: article live; cloud work stopped; GitHub approval cancelled
+## Current state: article live; local Wednesday staging/email active; publication manual
 
-**Current owner-approved workaround:** deliver future manually requested articles as verified staging previews by rich HTML email, with an editable Codex chat. Roman types edits or “Publish this version” there; the agent deploys manually through normal release gates and verifies live. No automatic email-reply pickup, direct publish button or active weekly routine is claimed. PRD, runbook and README now reflect this choice. Cloud investigations are deferred, not prerequisites for manual article delivery.
+**Current owner direction October30:** automatic local research/build/staging/email every Wednesday, manual review/edits/publication. Active automation `wednesday-blog-preview-by-6-am-eastern` uses GPT-6.1 Sol High and starts02:00 in the verified host America/New_York timezone, targeting preview email by06:00. The owner confirms this Mac stays awake with Codex running; a locked screen is allowed. Background commands, headless QA and existing Workspace tools avoid cloud blockers. Saved schedule, ACTIVE/local mode and prompt were read back; first scheduled execution November4 is pending. Product instructions and the corrected Build skill are committed/pushed at `031ff7a3e82acbe34aad2bca8fc4e2af62a044de`; skill validation and the unchanged normal full local pre-push gate passed. No production deployment or new article generation was required for this schedule/configuration change. No new article generation or cloud diagnostic job was started to test the timer.
 
 Manual review email sent/read back: `1a18a2f6118ab1e7`, subject “Blog review: staging preview + editable Codex chat.” Both Preview staging and Open Codex links and To/HTML verified. No GitHub approval button. The continuation is explicitly labelled; the original article is already live. PRD, runbook and README manual-workflow commit is remotely saved; this handoff remains isolated.
 
@@ -25,13 +25,13 @@ The [attention-budget article](https://romanbediner.com/blog/ai-agent-attention-
 
 ### Cloud and Wednesday routine
 
-**Weekly recurrence is OFF.** Agreed cadence is Wednesday02:00 America/New_York, verified delivery by06:00; next November4 is EST. Research and independent review use GPT-6.1 Sol High; bounded build may use Medium. Git authority: [PRD](../blog/weekly-publishing-prd.md), [job runbook](../blog/weekly-job.md), `.agents/skills/bediner-blog-research/` and `.agents/skills/bediner-blog-build/`. Website diagram style is required in the Build skill.
+**Local weekly recurrence is ACTIVE; cloud recurrence is OFF.** Agreed cadence is Wednesday02:00 America/New_York, verified delivery by06:00; next November4 is EST. Research and independent review use GPT-6.1 Sol High; bounded build may use Medium. Git authority: [PRD](../blog/weekly-publishing-prd.md), [job runbook](../blog/weekly-job.md), `.agents/skills/bediner-blog-research/` and `.agents/skills/bediner-blog-build/`. Website diagram style is required in the Build skill.
 
 - Published native website cloud environment, actual Node20 execution, Git reads, one phone browser check, identity-bound Workspace read, native scheduled callback and editable chat are proven. The one-off routing test is completed, not a weekly schedule; its displayed run-time metadata was about91seconds early, so minute accuracy is not certified.
 - Existing Remy successfully created the child above and received/read its genuine terminal callback. `parentThreadId:null` did not prevent the callback; use actual receipt, not that field alone. Remy is the existing OpenAI dot, not Maya or a new notifier.
 - Latest same-child preflight stopped before dispatch: live preview fetch got proxy CONNECT HTTP403, curl56. No cloud dispatch POST occurred. Existing GitHub Actions read returned200 and workflow401221221 is registered, but Actions **write** authority is untested. Desktop dispatched the real waiting run above once, using its working existing connection.
 - Cloud account-scoped usage read remains unavailable: CLI app-server failed `read_only_filesystem`, exit1, including one bounded retry with private sqlite_home/log_dir. No new credentials/login/copies/API spend. Desktop51% remaining at00:01UTC is separate scope and cannot stand in for cloud quota.
-- Remaining dependencies: permitted preview access in the exact cloud environment; a supported current cloud usage/admission reading or explicit owner policy decision; prove cloud Actions dispatch/cancel; owner native approval and actual promotion; then save/read back the Wednesday routine and real Remy delivery. Do not admit another research batch or activate recurrence while those remain unresolved.
+- Remaining dependencies: permitted preview access in the exact cloud environment; a supported current cloud usage/admission reading or explicit owner policy decision; prove cloud Actions dispatch/cancel; owner native approval and actual promotion; then save/read back the Wednesday routine and real Remy delivery. Those cloud dependencies do not block the newly authorized local weekly research/build/staging/email job; do not resume cloud investigation.
 
 ### Analytics and source evidence
 
@@ -41,7 +41,7 @@ Shared GA4 `G-DVHD0KL633` is installed; preview environment/debug markers and pr
 
 Use only this isolated Documents recovery checkout, Node20.20.1 and sibling qa-runtime with normal `.husky/_` hooks. Preserve original recovery evidence; do not modify task-2, the original Drive checkout or depend on the stuck old chat. Repository is PUBLIC. Never publish credentials/private diagnostics. Current product Google PRD is [1QPjtqt](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit); old15WTg is an archived pointer. Dashboard unchanged; public dashboard sync is not applicable.
 
-All task-created Chrome tabs were closed and verified absent after extracting the final cloud blocker. No local model workers, review timers or weekly jobs were started during closeout. The GitHub protected run is terminal cancelled; nothing is waiting for Roman to click. The direct approve/edit experience and weekly automation remain unfinished. Preserve this explicit stop; do not silently resume model jobs or substitute more infrastructure work.
+All task-created Chrome tabs were closed and verified absent after extracting the final cloud blocker. The local weekly schedule was activated after Roman explicitly confirmed overnight Mac availability; no immediate model run was started. The GitHub protected run is terminal cancelled; nothing is waiting for Roman to click. The direct approve/edit experience and weekly automation remain unfinished. Keep cloud investigations stopped; only the owner-authorized local Wednesday article routine is active.
 
 ## Release Watcher Hygiene
 
