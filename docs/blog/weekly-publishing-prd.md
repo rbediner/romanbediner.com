@@ -35,7 +35,7 @@ Staging stays noindex and marks analytics as preview/debug. Production-only blog
 
 ## Review and promotion
 
-Email and existing Remy open the same owner-authenticated mobile review page with Preview, Approve, Request edits and Continue in Codex. Email is rich HTML with actual clickable links. Typed edits and device dictation are version-one input; recorded audio upload/transcription is deferred.
+Email and existing Remy expose the same real controls: Preview, Push to prod and Request changes. The production button opens the exact GitHub Actions run waiting for Roman's protected environment approval; the edit button opens the verified editable generating or linked continuation Codex chat. Email is rich HTML with actual clickable links. Typed edits and device dictation are version-one input; recorded audio upload/transcription is deferred. See [the portable job and controls runbook](weekly-job.md).
 
 Durable job state owns article ID, revision, source window/claims, source/base SHA, article/artwork hashes, frozen preview, genuine originating chat/run reference, QA/deploy receipts, exact owner edit words and authenticated approval. State transitions: researching -> draft -> QA -> staging-ready -> awaiting-review -> revision-requested/new revision OR approved -> promoting -> live-verified. One writer and idempotent notification/promotion intents prevent duplicate work.
 
@@ -45,7 +45,7 @@ Promotion uses the existing exact-source gates and verifies current prod ancestr
 
 ## Cloud and notification implementation boundary
 
-The public Pages website stays static. A small private review/control service owns decisions and edit dispatch. Reuse suitable existing authenticated hosting where verified; a Worker/database is an option, not already provisioned infrastructure. No new paid API lane, credential copying, substitute notifier named Remy or automatic publication is implied. Current local automation tooling alone does not prove a cloud routine or Remy push delivery. Verify the actual account connections and native receipts during the pilot before recurring activation.
+The public Pages website stays static. Native GitHub protected-environment approval and durable Git control records own publication; the existing Codex chat owns edits. This uses existing authentication without provisioning a separate review service. No new paid API lane, credential copying, substitute notifier named Remy or automatic publication is implied. Current local automation tooling alone does not prove a cloud routine or Remy push delivery. Verify the actual account connections and native receipts during the pilot before recurring activation.
 
 ## End-to-end acceptance
 

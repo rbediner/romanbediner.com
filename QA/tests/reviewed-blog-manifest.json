@@ -1,0 +1,67 @@
+{
+  "sourceSha": "b49764ea6171337efbfabf121adcaf429cc5b7e6",
+  "baseSha": "e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b",
+  "files": [
+    {
+      "path": ".agents/skills/bediner-blog-build/SKILL.md",
+      "sha256": "9c732bca776fb986770f6190379ceb38a94082e4673132ad4afabcc0f4c9d7a4"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "6dc605777aa7337e8556d91280251155253b0645369335e507cbff70733a3922"
+    },
+    {
+      "path": ".github/workflows/deploy-pages.yml",
+      "sha256": "8316d0bef9d8426084eab5988b928c97b366a5b2529cce6200ddd0313ab9e5d0"
+    },
+    {
+      "path": ".github/workflows/docs-sync.yml",
+      "sha256": "998ddc7439eddb7fe74de43cce4ee79df6bb7b2b5c98ae386a6d1e470261d43b"
+    },
+    {
+      "path": ".github/workflows/publish-reviewed-blog.yml",
+      "sha256": "d8dc4158f958e7bb9e9cb0f7931a361e61341c1f1e71a88552a34d6345fd944d"
+    },
+    {
+      "path": "QA/tests/test-blog-review-email.js",
+      "sha256": "d607db3f7ef32e21686afbb1bff387c1e61cf49f80694020919409eefbadcb56"
+    },
+    {
+      "path": "QA/tests/test-reviewed-blog-release.js",
+      "sha256": "1a783a608f21cd1f6f8763494dbc471d57f135b25a9f2c7cf6fa95e98b42bdb1"
+    },
+    {
+      "path": "README.md",
+      "sha256": "133e3e6548028aa0f105d2a58b20550d03519054d862cdb1497a6b29e3e85374"
+    },
+    {
+      "path": "docs/architecture/workflow-manifest.json",
+      "sha256": "f1921d09bfbcd0609f65db5ccf490a3a4662c3c3dd1505303054333410755c14"
+    },
+    {
+      "path": "docs/blog/weekly-job.md",
+      "sha256": "7d8461695a3e0a8a12ff634308ec09dc57a0636b85d901d9dd99ed4f1af5240a"
+    },
+    {
+      "path": "docs/blog/weekly-publishing-prd.md",
+      "sha256": "a559495f1698a76bbb0970105c4d215fce75783d9c405bd134a4b4e764746bfa"
+    },
+    {
+      "path": "package.json",
+      "sha256": "07f6dfe5f6e364859bc1b395b67ef2f592f54d62c4e4b9b1700e1105ed864474"
+    },
+    {
+      "path": "scripts/content/render-blog-review-email.js",
+      "sha256": "0fd07352f0e995805f6115117e458bc241025e2c7690d8f4813750a9d8a96152"
+    },
+    {
+      "path": "scripts/qa/run-static-contract-suite.js",
+      "sha256": "e39d77fe6ee8bb703013712f8f9e0824c65d16af5aa557ae5e7eafdf26de7e4b"
+    },
+    {
+      "path": "scripts/release/publish-reviewed-blog.js",
+      "sha256": "e369ce80bb7b1e7d2b2c23a7be863f8a2f43cc0a0945c2e90c66109a9003e7fd"
+    }
+  ],
+  "digest": "345139328209826ce05c4deb3db688549f090290cec4cbb235c8c3f1840368ea"
+}
