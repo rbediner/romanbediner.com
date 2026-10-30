@@ -1,8 +1,20 @@
-# Weekly blog job and owner controls
+# Blog delivery and owner review
 
 The canonical product contract is [the PRD](weekly-publishing-prd.md). This runbook is portable Git input, not a claim that scheduling or delivery has been activated.
 
-## Cloud job
+## Current manual process
+
+Owner direction October29: stop the cloud investigation and deliver a verified staging preview by rich HTML email with an editable Codex chat link. No weekly recurrence is active. The cloud design below is deferred and must not override this process.
+
+1. Run the existing Research/Build skills when Roman requests an article. Preserve their source, editorial, diagram-style, metadata/GA4 and QA requirements.
+2. Deploy staging through normal gates, verify the exact source and actual article, and freeze the revision/source and evidence links.
+3. Email roman@romanbediner.com as that same identity: Preview staging and Open Codex for edits or publication. Use an actual verified editable chat; distinguish a continuation from the original producer. Read the sent HTML and links back. No placeholder Publish button or GitHub navigation.
+4. Roman types/dictates edits or “Publish this version” in the linked chat. No automatic email-reply monitoring is active. The agent handles the explicit request manually, preserving exact revision approval, normal release checks and actual production verification.
+5. Return revised preview/evidence after edits; previous approval never carries across changed article bytes. Reconcile unknown publication/notification outcomes instead of repeating writes.
+
+Run40978446937 was cancelled and its controls email superseded. The attention-budget article is already live at production e2c8cbe; it needs no further owner click. Keep cloud preview403, quota-reader failure, Actions-write proof and scheduled Remy delivery as deferred work, not reasons to delay another manually requested article.
+
+## Deferred cloud design
 
 Run Wednesday at 02:00 in **America/New_York**, including daylight saving changes. Aim for verified staging by 05:45 and email plus the existing Remy notification by 06:00. Use the published **romanbediner.com** cloud environment and existing GitHub / Roman Google Workspace connections. Never use an unrelated project's environment, a Mac relay, new credentials or paid API billing.
 
@@ -30,14 +42,4 @@ For recovery, run the same script's **read-only `reconcile` phase** with the fro
 
 ## Email and edits
 
-Render with `scripts/content/render-blog-review-email.js` using a coordinator-verified delivery packet. Send rich HTML through the existing identity-safe Workspace connection as **roman@romanbediner.com**, to that same address. Verify Sent identity, HTML bytes/links and message receipt. Fence notification delivery by article/revision/channel; reconcile an unknown send from Sent before any retry.
-
-The email has three real controls:
-
-- **Preview the article** — the verified staging article.
-- **Push to prod** — the exact waiting GitHub Actions run. Roman selects **Review deployments → Approve**. Merely visiting the link cannot publish.
-- **Request changes** — the verified editable generating or linked continuation chat, where Roman can type or use device dictation. Label a continuation honestly; do not call it the original producer.
-
-All referenced source, PR, CI, deployment and PRD links are clickable. The existing Remy notification points to the same real controls; do not provision a substitute notifier.
-
-On any edit, first cancel the prior pending approval run and verify cancellation. Preserve Roman's exact words, revise the same slug, rerun affected review/QA, and return a new frozen revision and new waiting approval run. An old email cannot approve newer bytes. Use the actual session URL exposed by the platform; never invent one from an internal ID. A one-off scheduled cloud routing proof, actual message delivery and owner approval/edit proof must pass before weekly activation.
+Use the current manual process above. The existing automated email renderer expects a real protected GitHub approval run and is not the manual email template; do not invoke it or create a waiting run just to send a review email. Construct plain, rich HTML with only real verified links. A chat link is sufficient for changes and publication requests. No new service, credentials, recurring model jobs or automatic production are needed.

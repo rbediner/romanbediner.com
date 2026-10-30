@@ -1,12 +1,12 @@
 # Weekly AI Blog Publishing PRD
 
-**Owner-approved architecture: October 29, 2026. Implementation and end-to-end pilot in progress; recurring schedule is not active.**
+**Current owner direction: October 29, 2026 — manual staging review by email and linked Codex chat. Cloud automation is deferred; no recurring schedule is active.**
 
 ## Outcome
 
 A genuine, sourced AI thought-leadership article for CEOs and business owners, rendered in the existing site design with a useful original diagram, Blog hub card, search/social metadata, internal links and production analytics. Every article is reviewed by Roman before production. Newsletter signup is out of scope for this release.
 
-## Schedule and model
+## Deferred schedule and model
 
 - Wednesday start: **02:00 America/New_York**.
 - Verified preview target: **05:45 Eastern**; email and existing Remy delivery deadline: **06:00 Eastern**.
@@ -35,15 +35,13 @@ Staging stays noindex and marks analytics as preview/debug. Production-only blog
 
 ## Review and promotion
 
-Email and existing Remy expose the same real controls: Preview, Push to prod and Request changes. The production button opens the exact GitHub Actions run waiting for Roman's protected environment approval; the edit button opens the verified editable generating or linked continuation Codex chat. Email is rich HTML with actual clickable links. Typed edits and device dictation are version-one input; recorded audio upload/transcription is deferred. See [the portable job and controls runbook](weekly-job.md).
+The working process is manual. Build and independently review the article, run required QA, deploy staging, verify the exact source and actual desktop/phone preview, then send Roman a rich HTML email. Include the verified staging link, the exact source/revision, and a verified editable generating or continuation Codex chat. Label a continuation honestly. The email needs no GitHub navigation and must not call a GitHub run link a direct publication button.
 
-Durable job state owns article ID, revision, source window/claims, source/base SHA, article/artwork hashes, frozen preview, genuine originating chat/run reference, QA/deploy receipts, exact owner edit words and authenticated approval. State transitions: researching -> draft -> QA -> staging-ready -> awaiting-review -> revision-requested/new revision OR approved -> promoting -> live-verified. One writer and idempotent notification/promotion intents prevent duplicate work.
+Roman enters edits or “Publish this version” in that linked chat. This is a manual request handled by the agent; no automatic email-reply pickup, background edit execution or publication service is claimed. The agent uses the existing release process, binds approval to the exact reviewed revision, checks current production ancestry and the complete release delta, promotes only the approved version, and verifies CI/deployment and the live article. Changed article bytes invalidate prior approval. Unknown external writes are reconciled, never blindly replayed.
 
-A global mutable staging URL alone is not durable approval evidence. Freeze each reviewed revision. Changed content invalidates its previous approval. Approval is an explicit authenticated action bound to Roman and that exact revision; visiting a GET link cannot publish. Continue the original cloud chat when the platform supports it, with a linked replacement run from the same durable packet when needed. Prove the supported dispatch/resume/result path; do not invent session links or treat launch as execution.
+An email “Publish” button is optional future work only if a real supported authenticated action can be provided simply. The current email uses Preview and Open Codex. Research, source attribution, site styling, metadata, GA4, diagram behavior and release QA remain required. Newsletter signup and scheduled delivery are deferred.
 
-Promotion uses the existing exact-source gates and verifies current prod ancestry plus the reviewed release delta so unrelated pending staging content does not enter production. Article approval authorizes that promotion without a second generic confirmation. Production CI/deploy and actual live revision verification are required before reporting publication. Unknown writes are reconciled from receipts instead of replayed.
-
-## Cloud and notification implementation boundary
+## Deferred cloud and notification implementation boundary
 
 The public Pages website stays static. Native GitHub protected-environment approval and durable Git control records own publication; the existing Codex chat owns edits. This uses existing authentication without provisioning a separate review service. No new paid API lane, credential copying, substitute notifier named Remy or automatic publication is implied. Current local automation tooling alone does not prove a cloud routine or Remy push delivery. Verify the actual account connections and native receipts during the pilot before recurring activation.
 
