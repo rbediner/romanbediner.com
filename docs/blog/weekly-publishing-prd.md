@@ -1,17 +1,18 @@
 # Weekly AI Blog Publishing PRD
 
-**Current owner direction: October 29, 2026 — manual staging review by email and linked Codex chat. Cloud automation is deferred; no recurring schedule is active.**
+**Current owner direction: October 30, 2026 — automatic local Wednesday research/build/staging/email; manual review, edits and production publication. The local schedule is active; its first scheduled end-to-end run is not yet verified. Cloud scheduling is deferred.**
 
 ## Outcome
 
 A genuine, sourced AI thought-leadership article for CEOs and business owners, rendered in the existing site design with a useful original diagram, Blog hub card, search/social metadata, internal links and production analytics. Every article is reviewed by Roman before production. Newsletter signup is out of scope for this release.
 
-## Deferred schedule and model
+## Active local schedule and model
 
 - Wednesday start: **02:00 America/New_York**.
 - Verified preview target: **05:45 Eastern**; email and existing Remy delivery deadline: **06:00 Eastern**.
 - Research and independent editorial review: **GPT-6.1 Sol, High reasoning**. Mechanical build work: **GPT-6.1 Sol, Medium reasoning**. The reviewer is separate from the producer and cannot supply owner approval.
-- Use an actual cloud execution path that works with both Macs off. A local reminder is not the routine.
+- Run the actual article job locally on the owner-confirmed Mac, using background commands, headless browser QA and the existing Workspace email connection. The Mac must remain powered, awake, connected and running Codex Wednesday02:00–06:00 Eastern; its screen may be locked. This is not a cloud or both-Macs-off guarantee.
+- App automation: `wednesday-blog-preview-by-6-am-eastern`, active, GPT-6.1 Sol High, Wednesday02:00 in the host America/New_York timezone. Saved schedule/model/local execution were read back. First scheduled run: November4,2026. No extra full article is generated merely to test the scheduler. A missed job while the Mac is unavailable cannot send its own failure email.
 - Read current subscription headroom before admission. The 02:00 start can precede the weekly quota reset; the 06:00 deadline cannot depend on a later reset. Retain the standing admission reserve and report an honest delay if capacity or QA prevents readiness.
 - Source window: previous Wednesday through Tuesday in Eastern time, including Sunday or any other published editions. Use actual coverage, not an assumed five weekdays.
 
@@ -35,11 +36,11 @@ Staging stays noindex and marks analytics as preview/debug. Production-only blog
 
 ## Review and promotion
 
-The working process is manual. Build and independently review the article, run required QA, deploy staging, verify the exact source and actual desktop/phone preview, then send Roman a rich HTML email. Include the verified staging link, the exact source/revision, and a verified editable generating or continuation Codex chat. Label a continuation honestly. The email needs no GitHub navigation and must not call a GitHub run link a direct publication button.
+Article production and staging/email delivery run automatically every Wednesday. Owner review, edits and publication are manual. Build and independently review the article, run required QA, deploy staging, verify the exact source and actual desktop/phone preview, then send Roman a rich HTML email. Include the verified staging link, the exact source/revision, and a verified editable generating or continuation Codex chat. Label a continuation honestly. The email needs no GitHub navigation and must not call a GitHub run link a direct publication button.
 
 Roman enters edits or “Publish this version” in that linked chat. This is a manual request handled by the agent; no automatic email-reply pickup, background edit execution or publication service is claimed. The agent uses the existing release process, binds approval to the exact reviewed revision, checks current production ancestry and the complete release delta, promotes only the approved version, and verifies CI/deployment and the live article. Changed article bytes invalidate prior approval. Unknown external writes are reconciled, never blindly replayed.
 
-An email “Publish” button is optional future work only if a real supported authenticated action can be provided simply. The current email uses Preview and Open Codex. Research, source attribution, site styling, metadata, GA4, diagram behavior and release QA remain required. Newsletter signup and scheduled delivery are deferred.
+An email “Publish” button is optional future work only if a real supported authenticated action can be provided simply. The current email uses Preview and Open Codex. Research, source attribution, site styling, metadata, GA4, diagram behavior and release QA remain required. Newsletter signup and cloud execution are deferred; the local Wednesday staging/email job is active.
 
 ## Deferred cloud and notification implementation boundary
 

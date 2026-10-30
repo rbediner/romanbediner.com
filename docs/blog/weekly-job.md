@@ -2,17 +2,24 @@
 
 The canonical product contract is [the PRD](weekly-publishing-prd.md). This runbook is portable Git input, not a claim that scheduling or delivery has been activated.
 
-## Current manual process
+## Current weekly local job; manual review and publishing
 
-Owner direction October29: stop the cloud investigation and deliver a verified staging preview by rich HTML email with an editable Codex chat link. No weekly recurrence is active. The cloud design below is deferred and must not override this process.
+Owner direction October30: automate research, writing, build, staging and the preview email every Wednesday; keep review, revisions and publication manual. Use the existing local tools and do not investigate cloud blockers.
 
-1. Run the existing Research/Build skills when Roman requests an article. Preserve their source, editorial, diagram-style, metadata/GA4 and QA requirements.
-2. Deploy staging through normal gates, verify the exact source and actual article, and freeze the revision/source and evidence links.
-3. Email roman@romanbediner.com as that same identity: Preview staging and Open Codex for edits or publication. Use an actual verified editable chat; distinguish a continuation from the original producer. Read the sent HTML and links back. No placeholder Publish button or GitHub navigation.
-4. Roman types/dictates edits or “Publish this version” in the linked chat. No automatic email-reply monitoring is active. The agent handles the explicit request manually, preserving exact revision approval, normal release checks and actual production verification.
-5. Return revised preview/evidence after edits; previous approval never carries across changed article bytes. Reconcile unknown publication/notification outcomes instead of repeating writes.
+- Active app automation: `wednesday-blog-preview-by-6-am-eastern`.
+- Start Wednesday02:00 America/New_York; target ready email05:45, deadline06:00 Eastern. The host timezone is verified America/New_York; the next scheduled Wednesday is November4,2026 (EST).
+- Model: GPT-6.1 Sol High for the primary research/writing job. One bounded independent editorial/source reviewer is permitted; no parallel fan-out. Mechanical work may use Medium when a separate bounded helper is useful.
+- Run locally on the owner-confirmed Mac. It must stay powered, awake, connected and running Codex from02:00–06:00. The screen may be locked: background commands, headless browser QA and existing authenticated Workspace MCP only. No interactive Chrome, screen unlocking, Remy or cloud worker is required.
+- Read current local-account usage before admission; preserve the standing reserve. An unavailable usage read or failed dependency gets a concise failure email, not more infrastructure diagnosis. If the Mac/app cannot start the job, the job cannot send a failure email itself; this availability limitation is explicit.
+- The saved schedule/model/local mode and prompt were read back. First scheduled execution is still pending. Existing article build/staging/email evidence is reused; do not spend another research generation solely to exercise the timer.
 
-Run40978446937 was cancelled and its controls email superseded. The attention-budget article is already live at production e2c8cbe; it needs no further owner click. Keep cloud preview403, quota-reader failure, Actions-write proof and scheduled Remy delivery as deferred work, not reasons to delay another manually requested article.
+1. In the local configured isolated checkout, read current Git instructions, then run both repository Research/Build skills for one new article. Cache the actual AIDB source window once, cite primary sources, and preserve the website voice, diagram style, SEO and shared GA4.
+2. Resolve editorial/source review and required local QA; batch the normal staging release. Verify CI and Deploy Staging for the exact product SHA, then inspect the actual article/hub, desktop/mobile diagram and metadata. Freeze revision/source/hash evidence.
+3. Email roman@romanbediner.com as that same identity using rich HTML: Preview staging and Open Codex for edits or publication, editorial summary, source/revision and evidence. Use an actual exposed editable generating chat; label a continuation honestly. Never invent a session URL. Read the sent To/HTML/links back and retain the receipt. No misleading Publish button or GitHub approval navigation.
+4. Roman types/dictates edits or “Publish this version” in that linked chat. No automatic email-reply monitoring is active. The agent handles the request manually, preserving exact revision approval and normal release gates, then verifies production.
+5. Return a new preview/revision after edits; old approval does not authorize changed bytes. Reconcile unknown notification/publication outcomes without repeating writes. If required gates fail, send an honest failure notice by06:00 with the precise blocker and retained draft, rather than an unverified preview.
+
+Run40978446937 was cancelled and its controls email superseded. The attention-budget article is already live at e2c8cbe and needs no further click. Manual-workflow email1a18a2f6118ab1e7 has the verified staging and editable-continuation links. Cloud preview403, quota-reader failure and cloud Actions write proof are deferred and are not prerequisites for this local routine.
 
 ## Deferred cloud design
 
@@ -42,4 +49,4 @@ For recovery, run the same script's **read-only `reconcile` phase** with the fro
 
 ## Email and edits
 
-Use the current manual process above. The existing automated email renderer expects a real protected GitHub approval run and is not the manual email template; do not invoke it or create a waiting run just to send a review email. Construct plain, rich HTML with only real verified links. A chat link is sufficient for changes and publication requests. No new service, credentials, recurring model jobs or automatic production are needed.
+Use the current weekly local production and manual review process above. The existing automated email renderer expects a real protected GitHub approval run and is not the manual email template; do not invoke it or create a waiting run just to send a review email. Construct plain, rich HTML with only real verified links. A chat link is sufficient for changes and publication requests. Use only the one owner-authorized local weekly job; no new service, credentials, cloud model jobs or automatic production are needed.
