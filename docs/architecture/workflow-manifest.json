@@ -4,7 +4,8 @@
     "docs-sync.yml",
     "deploy-pages.yml",
     "deploy-staging.yml",
-    "rollback.yml"
+    "rollback.yml",
+    "publish-reviewed-blog.yml"
   ],
   "required_jobs": {
     "ci.yml": [
@@ -33,6 +34,10 @@
     ],
     "rollback.yml": [
       "rollback-deploy"
+    ],
+    "publish-reviewed-blog.yml": [
+      "prepare",
+      "publish"
     ]
   }
 }

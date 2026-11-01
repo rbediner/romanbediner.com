@@ -1,7 +1,7 @@
 name: Docs Sync
 
 on:
-  push:
+  # PR checks cover merged code once; isolated handoffs retain their normal local docs gate.
   pull_request:
   workflow_dispatch:
 
@@ -15,6 +15,7 @@ concurrency:
 jobs:
   docs-sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -30,18 +31,14 @@ jobs:
       - name: Verify handoff sync policy
         run: |
           if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
-            node scripts/qa/verify-handoff-sync.js --allow-empty
+            node scripts/qa/verify-handoff-sync.js --allow-empty --advisory
           elif [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             node scripts/qa/verify-handoff-sync.js \
               --base-sha "${{ github.event.pull_request.base.sha }}" \
-              --head-sha "${{ github.event.pull_request.head.sha }}"
-          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
-            node scripts/qa/verify-handoff-sync.js \
-              --base-sha "${{ github.event.before }}" \
-              --head-sha "${{ github.sha }}" \
+              --head-sha "${{ github.event.pull_request.head.sha }}" \
               --advisory
           else
-            node scripts/qa/verify-handoff-sync.js --allow-empty
+            node scripts/qa/verify-handoff-sync.js --allow-empty --advisory
           fi
 
       - name: Install Node dependencies

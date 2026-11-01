@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Your next AI agent needs an attention budget.">
+<title>Your next AI agent needs an attention budget.</title>
+<defs><pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#eef1e6"/></pattern></defs>
+<rect width="1200" height="630" fill="#fcfbf3"/><rect x="12" y="12" width="1176" height="606" fill="url(#grid)"/>
+<text x="80" y="83" font-family="Arial,sans-serif" fill="#104275" font-size="19" letter-spacing="3">AI + BUSINESS OPERATIONS</text>
+<g font-family="Georgia,serif" fill="#16222e" font-size="82"><text x="80" y="218">Your next AI agent</text><text x="80" y="310">needs an attention</text><text x="80" y="402" fill="#104275">budget.</text></g>
+<text x="80" y="480" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="27">Count review, corrections and interruptions.</text>
+<path d="M80 524H1120" stroke="#b7a369"/>
+<text x="80" y="574" font-family="Arial,sans-serif" fill="#16222e" font-size="22">Roman Bediner | AI-enabled operations</text>
+</svg>

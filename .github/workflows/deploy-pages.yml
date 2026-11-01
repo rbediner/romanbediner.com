@@ -9,6 +9,11 @@ on:
       - 'README.md'
       - 'AGENTS.md'
   workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Optional frozen full SHA; refuse if the branch moved before dispatch
+        type: string
+        required: false
 
 permissions:
   contents: read
@@ -37,7 +42,14 @@ jobs:
     steps:
       - name: Resolve source commit + branch
         id: source
+        env:
+          REQUESTED_SOURCE_SHA: ${{ inputs.source_sha }}
         run: |
+          # Refuse branch drift before checkout, artifact creation or deployment.
+          if [ -n "$REQUESTED_SOURCE_SHA" ]; then
+            [[ "$REQUESTED_SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]] && [ "$REQUESTED_SOURCE_SHA" = "$GITHUB_SHA" ] || exit 1
+          fi
+          [ "$GITHUB_REF_NAME" = "prod" ] || exit 1
           echo "source_sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
           echo "source_branch=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
 
@@ -47,10 +59,11 @@ jobs:
           ref: ${{ steps.source.outputs.source_sha }}
 
       - name: Wait for matching prod CI success
-        if: ${{ github.event_name == 'push' && github.ref_name == 'prod' }}
+        # The CI gate applies equally to native pushes and approved manual publication.
+        if: ${{ github.ref_name == 'prod' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/release/watch-ci-run.js --branch prod --sha ${{ steps.source.outputs.source_sha }} --workflow "CI" --timeout 3600 --interval 15
+        run: node scripts/release/watch-ci-run.js --branch prod --sha ${{ steps.source.outputs.source_sha }} --workflow "CI" --timeout 780 --interval 30
 
       - name: Setup Node
         uses: actions/setup-node@v6

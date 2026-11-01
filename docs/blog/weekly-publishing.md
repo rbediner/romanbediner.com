@@ -1,6 +1,6 @@
 # Weekly publishing workflow
 
-**Owner decision, October 26, 2026:** This is a proposed workflow, not an approved pipeline PRD. Scheduling and further automation work are deferred until the first blog hub and Agentic Society article have been reviewed. Next: discuss the complete research-to-draft-to-review pipeline, document the agreed PRD, and only then decide whether to schedule a routine.
+**Owner decision, October 29, 2026:** The architecture is approved in the [canonical Weekly Blog Publishing PRD](weekly-publishing-prd.md). A real research-to-staging pilot is now authorized. Target: Wednesdays 02:00 Eastern start, 06:00 delivery. The recurring cloud routine remains inactive until the complete end-to-end acceptance passes. This document describes the existing offline brief utility and editorial background; it is not the scheduler.
 
 The goal is a useful body of operator knowledge that attracts the right readers and gives them an honest next step: evaluate Agentic Society, use Roman’s Framework, or start a conversation with Roman. Roman’s title is **Fractional COO at Agentic Society**. Publishing frequency is a working cadence, not a reason to ship weak or unsupported content.
 
