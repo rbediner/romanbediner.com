@@ -1296,3 +1296,7 @@ This repository is checked out inside Google Drive and synced across machines. G
 - `scripts/clean-drive-drift.sh --fix` — remove conflict-copies then verify with `git fsck` (`--check` to only report).
 - Runs automatically via git hooks (`pre-commit`, `post-merge`, `post-checkout`) and, for Claude, on session start via `.claude/settings.json`.
 - Never commit a file whose name ends in ` 2`/` 3` — it is Google Drive junk, not a real file.
+
+## CI standard refresh (2026-11-01)
+
+The estate installer refreshed the CI standard files (`.github/ci-standard/`, `.github/workflows/ci-standard.yml`, `CI-STANDARD.md`). No site behaviour changed.
