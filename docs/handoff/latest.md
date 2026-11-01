@@ -1,9 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 416
-- Updated At (UTC): 2026-10-30T10:20:21Z
-- Source Branch: staging
-- Source Commit: 031ff7a3e82acbe34aad2bca8fc4e2af62a044de (pre-handoff baseline)
+- Handoff Sequence: 417
+- Updated At (UTC): 2026-11-01T15:53:19Z
+- Source Branch: ci-standard-install
+- Source Commit: 075b406acdbbd48bd3ea7abe063289f2cae097f1 (pre-handoff baseline)
+
+## 2026-11-01: CI standard workflow tidy-up (pull request 18)
+
+Estate session Automation Estate 5 (worker 10) rebased the CI standard installer's pull request 18 onto staging. It changes only `.github/workflows/ci-standard.yml`: the push trigger also covers `prod`, and `actions/checkout` is pinned to the v5.1.0 commit. No site, content, schedule or deploy change. Estate ticket rbediner/automation-estate#970.
 
 ## Current state: article live; local Wednesday staging/email active; publication manual
 
