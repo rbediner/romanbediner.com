@@ -482,7 +482,7 @@ This section documents what's *built on top of* the raw GA4 events above, not th
 
 ## Continuous Integration
 
-- **CI/CD standard (2026-10-23):** `CI-STANDARD.md` at the repository root states the workflow rules (CI001 to CI008) and `.github/workflows/ci-standard.yml` runs the required check `ci-standard` on every pull request. It lints only the workflow files the pull request changes, using the base branch's checker in `.github/ci-standard/`. Run `python3 .github/ci-standard/ci-cost-lint.py --changed` before pushing a workflow change.
+- **CI/CD standard (2026-10-23):** `CI-STANDARD.md` at the repository root states the workflow rules (CI001 to CI008) and `.github/workflows/ci-standard.yml` runs the required check `ci-standard` on every pull request. It lints only the workflow files the pull request changes, using the base branch's checker in `.github/ci-standard/`. Run `python3 .github/ci-standard/ci-cost-lint.py --changed` before pushing a workflow change. Since 2026-11-01 its push trigger covers `staging` and `prod`, and `actions/checkout` in it is pinned to the v5.1.0 commit.
 - Node is pinned to version 20.
 - Local development should use the same version via `.nvmrc`.
 - Recommended operator tooling:
