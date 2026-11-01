@@ -52,3 +52,7 @@ All task-created Chrome tabs were closed and verified absent after extracting th
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
+## CI standard refresh (2026-11-01)
+
+The estate installer refreshed the CI standard files (`.github/ci-standard/`, `.github/workflows/ci-standard.yml`, `CI-STANDARD.md`). No site behaviour changed.
