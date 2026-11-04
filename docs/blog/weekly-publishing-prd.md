@@ -1,6 +1,6 @@
 # Weekly AI Blog Publishing PRD
 
-**Current owner direction: October 30, 2026 — automatic local Wednesday research/build/staging/email; manual review, edits and production publication. The first scheduled local article/staging/email delivery was verified November 4, 2026 at 02:39:30 Eastern. Owner review, edit and publication roundtrips remain manual and separate. Cloud scheduling is deferred.**
+**Current owner direction: November 4, 2026. Research, several documented editorial iterations and actual independent LLM council with material findings resolved must precede staging. Deliver exact article and hub previews here and by email before 06:00 Eastern. Roman reviews, requests changes and explicitly approves the exact revision before production. The historical November 4 single-reviewer delivery does not establish this strengthened workflow.**
 
 ## Outcome
 
@@ -27,6 +27,10 @@ Enumerate editions through https://aidailybrief.ai/agent.json and read every act
 Follow the underlying sources AI Daily Brief supplies, open and verify them, and place direct citations beside claims plus a Sources section. Credit AIDB and the relevant editions as the research starting point. Some current source arrays are empty; independently locate the named original reports/primary documentation and record that provenance honestly. Never fabricate citations or say AIDB supplied an independently found URL. Qualify or omit unsupported claims and preserve material disagreements between secondary and primary reporting.
 
 Choose one lasting business decision or operating principle. News is evidence for Roman's original argument, not a chronological roundup or a rewrite of the host's argument. Read approved site copy for voice: plain connected prose, clear judgment, concrete responsibilities, practical examples and tradeoffs. Do not invent Roman's clients, tests, deployments or numerical results. Label illustrative examples. Avoid private member/client evidence and assumptions that one repository contains every agent he built. Link existing fleet/PM/framework guides rather than duplicate them. Use the referral only where relevant, with the existing disclosure requirements.
+
+## Required pre-staging quality and delivery gate
+
+The binding [November 4 owner rule](weekly-job.md#november-4-owner-rule-iterations-council-and-dual-delivery) requires at least three documented editorial passes, the actual five-advisor/anonymized-peer-review/chairman council, repaired material findings, exact article and hub QA, separate email/main-chat receipts and awaiting-owner-review state. It supersedes older one-reviewer-only and email-only language. Preserve subscription spending/reserve and production approval boundaries. A saved procedure is not execution proof. The current delegated environment cannot update the local-only automation tool; its prepared prompt is pending a supported local update. Main-chat transport remains the root coordinator responsibility.
 
 ## Research-to-staging handoff
 

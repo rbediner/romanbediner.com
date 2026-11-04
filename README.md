@@ -2,6 +2,8 @@
 
 ## Blog and weekly editorial workflow
 
+November 4 owner correction: the [weekly job quality and dual-delivery gate](docs/blog/weekly-job.md#november-4-owner-rule-iterations-council-and-dual-delivery) now requires several documented passes and actual independent LLM council before staging, article plus hub preview, email plus main-chat receipts, feedback revisions and exact-version manual production approval. Revision 2 remains historical single-reviewer evidence. Current usage at 20% is below the preserved reserve; new article/council admission is blocked. The local automation update and supported coordinator callback remain unverified.
+
 The November 4 weekly candidate is `/blog/make-judgment-reusable/`: a sourced business argument about retaining reviewed decisions, scoped exceptions and current standards. It adds one site-style SVG, social PNG, compact hub card and focused desktop/phone/touch checks through the existing generator. Revision 2 has independent editorial/source PASS, exact-source staging verification and rich HTML email delivery at02:39:30EST on November4. The current handoff retains the release and notification receipts; publication remains manual. Raw publisher research is retained privately in Git state, outside website-file scans, with exact byte hashes.
 
 Blog diagrams fit the article width without an internal horizontal scroller. A visible `Expand to full screen` button opens a viewport-filling viewer with two-finger pinch zoom, drag to pan, accessible Zoom in/out and Fit controls, keyboard equivalents and Close/Escape focus return. Zoom affects the diagram while the toolbar stays reachable. Browser QA checks each diagram frame's scroll width and trusted touch gestures, not only page-level overflow.

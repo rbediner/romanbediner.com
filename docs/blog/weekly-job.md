@@ -2,6 +2,27 @@
 
 The canonical product contract is [the PRD](weekly-publishing-prd.md). This runbook is portable Git input, not a claim that scheduling or delivery has been activated.
 
+## November 4 owner rule: iterations, council and dual delivery
+
+This owner instruction supersedes older one-reviewer-only and email-only language in this runbook, the saved job prompt and repository skills. Existing subscription-only spending, 30% admission cutoff, 25% reserve floor, manual production approval and normal release gates remain binding.
+
+Before staging a new or revised review candidate:
+
+1. Complete the full actual AIDB window and underlying-source checks. Retain exact private source bytes, claim ledger and evidence limits. Keep source-array and retrieval mechanics in private research records rather than public prose.
+2. Complete at least three documented editorial passes: source/thesis and audience; adversarial argument, practical usefulness and voice; council-driven correction. Retain frozen versions and a concise change/findings log. Do not count QA retries as editorial iterations or manufacture changes for a count.
+3. Run the actual existing LLM council skill: five independent advisor perspectives, anonymized peer review and chairman synthesis. Retain framed question, exact frozen input hashes, actual reviewer/model identities, outputs and actionable findings per round. Clearly state when all reviewers use the same model. Multiple independent reviewers of one model are not multiple model families; one producer simulating five voices is not an independent council.
+4. Resolve material factual, argument, audience and usability findings before staging. Independently recheck affected claims and final bytes. A completed council with unresolved material findings is blocked, not ready. Preserve separate source/editorial review and all normal QA.
+5. Apply Roman's established first-person voice using the available write-like-me skill and a documented humanizer pass with actual supported capability. Preserve factual qualifications and never invent personal experience. For the current article, replace the rejected simplistic diagram with meaningful labeled flow/feedback and clean arrowheads; inspect loaded-font desktop/phone renders for clipping, labels and arrows. Do not call unavailable humanizer tooling executed.
+6. Build and verify the exact rendered article and compact Blog hub card through the existing generator, discovery files and site design. After exact-source CI/Deploy Staging, inspect article and hub plus desktop/phone diagram behavior and metadata. Freeze source, revision, file hashes and preview evidence. A mutable URL alone is insufficient approval evidence.
+
+Deliver the same final verified article and hub links, exact revision/source, brief research/iteration/council summary and real edit destination to Roman by rich HTML email at roman@romanbediner.com and in the main Remy chat. Target both by 05:45, deadline 06:00 America/New_York. Verify and save Sent To/HTML/links and the actual main-chat receipt separately. Sending is not proof Roman read either destination. Keep a durable awaiting-owner-review state; no automatic production follows silence.
+
+The current local job has no verified Remy callback. Its Scheduled result is not main-chat delivery. Root/coordinator owns a supported main-chat path; report a routing gap until actual delivery is proved. Do not invent a transport, notification receipt or push-delivery claim, and do not create a duplicate job. Keep prompt changes in the existing supported automation tool. If that tool says local threads only, report the limitation and retain an exact prepared update; never hand-edit scheduler TOML as a workaround.
+
+Roman reviews staging, gives feedback and receives a newly verified revision after edits. Changed bytes invalidate prior approval. Production requires his explicit approval of the exact reviewed revision, complete approved release delta and normal production verification. Preserve unrelated pending staging maintenance outside production scope.
+
+If usage cannot admit the complete council above the reserve or any gate fails, retain the work and deliver a truthful blocked report, not a ready review email. Do not spend API credits or lower the quality/reserve gate. The November 4 revision 2 is historical single-reviewer evidence and has not passed this strengthened council gate.
+
 ## Current weekly local job; manual review and publishing
 
 Owner direction October30: automate research, writing, build, staging and the preview email every Wednesday; keep review, revisions and publication manual. Use the existing local tools and do not investigate cloud blockers.
