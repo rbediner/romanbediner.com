@@ -2,6 +2,8 @@
 
 ## Blog and weekly editorial workflow
 
+The November 4 weekly candidate is `/blog/make-judgment-reusable/`: a sourced business argument about retaining reviewed decisions, scoped exceptions and current standards. It adds one site-style SVG, social PNG, compact hub card and focused desktop/phone/touch checks through the existing generator. Revision 2 has independent editorial/source PASS; exact-source staging and email delivery remain gated until their receipts appear in the current handoff. Raw publisher research is retained privately in Git state, outside website-file scans, with exact byte hashes.
+
 Blog diagrams fit the article width without an internal horizontal scroller. A visible `Expand to full screen` button opens a viewport-filling viewer with two-finger pinch zoom, drag to pan, accessible Zoom in/out and Fit controls, keyboard equivalents and Close/Escape focus return. Zoom affects the diagram while the toolbar stays reachable. Browser QA checks each diagram frame's scroll width and trusted touch gestures, not only page-level overflow.
 
 CI browser jobs and production post-deploy browser smoke use Ubuntu 24.04, matching the pinned Playwright 1.58 runtime; Ubuntu latest may select an unsupported newer image. CI push triggers are restricted to staging/prod, PR checks remain available, push runs retain their artifact work, and each job has a 15-minute ceiling. Production deploys retain their deployment and post-deploy proof under one uncancelled release, with 15-minute job ceilings.
