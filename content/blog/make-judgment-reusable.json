@@ -1,0 +1,35 @@
+{
+  "slug": "make-judgment-reusable",
+  "title": "Make judgment reusable: help your business learn from AI work",
+  "seoTitle": "Make Judgment Reusable: Better AI Workflows for Business Owners",
+  "displayTitle": "Make judgment reusable",
+  "subtitle": "Keep the reasoning behind the review",
+  "cardTitle": "Make judgment reusable",
+  "description": "Turn recurring AI corrections into clear standards, examples and decisions. A practical approach for CEOs who want the business to learn from reviewed work.",
+  "deck": "When your team corrects AI work, preserve the decision behind the edit. Give the next person and the next workflow a better place to begin.",
+  "category": "AI & business",
+  "eyebrow": "AI + BUSINESS OPERATIONS",
+  "date": "2026-11-04",
+  "updated": "2026-11-04",
+  "status": "ready",
+  "topics": ["AI workflow design", "business judgment", "organizational learning", "AI quality", "decision records"],
+  "image": "/assets/blog/reusable-judgment-cover.png",
+  "imageAlt": "Make judgment reusable. Keep the reasoning behind the review. Roman Bediner.",
+  "cover": "/assets/blog/reusable-judgment-cover.svg",
+  "toc": [
+    ["keep-the-reason", "Keep the reason behind the edit"],
+    ["review-is-business-work", "Review is business work"],
+    ["build-a-small-decision-record", "Build a small decision record"],
+    ["test-the-standard", "Test whether the standard travels"],
+    ["keep-room-for-a-new-answer", "Keep room for a new answer"],
+    ["start-with-one-correction", "Start with one correction"],
+    ["sources", "Sources and context"]
+  ],
+  "diagrams": {
+    "reusable-judgment": {
+      "label": "Proposed learning loop: current standards inform preparation, review checks evidence and a named owner accepts or returns the work. The owner records scoped decisions in shared standards, so future preparation and review use them. Exceptions require a fresh decision.",
+      "caption": "A proposed operating loop, not a measured result. Keep a decision's reason, scope and owner. Verify that the next different case actually uses it.",
+      "eyebrow": "LET THE BUSINESS RETAIN THE LEARNING"
+    }
+  }
+}
