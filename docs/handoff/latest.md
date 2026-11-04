@@ -1,13 +1,13 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 420
-- Updated At (UTC): 2026-11-04T20:41:57Z
+- Handoff Sequence: 421
+- Updated At (UTC): 2026-11-04T21:04:15Z
 - Source Branch: staging
-- Source Commit: f9af1fde5a999a8bd3549ba4db95245c26e68948 (pre-handoff baseline)
+- Source Commit: adda60e123ddea92853935d515823eb2b30af4ed (pre-handoff baseline)
 
-## Current state: revision 5 staged and emailed; Roman review next
+## Current state: Roman approved revision 5; isolated production release in progress
 
-The revised **Make judgment reusable** article is ready for full-site owner review. Roman liked the new diagram and explicitly requested staging links here and by email. This is not production approval.
+The revised **Make judgment reusable** article is ready for full-site owner review. Roman liked the new diagram and explicitly requested staging links here and by email. Roman subsequently explicitly instructed “push this to Prod” for this exact staged revision, after council and voice review. The approved article/diagram bytes must remain unchanged.
 
 - Article: https://rbediner.github.io/romanbediner-preview/blog/make-judgment-reusable/
 - Blog hub: https://rbediner.github.io/romanbediner-preview/blog/
@@ -39,7 +39,7 @@ Roman explicitly authorized a one-task exception to complete this existing blog 
 
 Existing local generator id `wednesday-blog-preview-by-6-am-eastern` remains unchanged: the supported tool returned local-threads-only error in this delegated context. Exact prepared update is retained in the November4 task workspace; apply via supported local tool, never raw TOML. The saved prompt already reads current Git rules, which explicitly supersede the old one-reviewer/email-only restriction. Parent-owned Wednesday06:00Eastern delivery check id `6aeb930782808191bd76e3cefefe633c` is recorded in the runbook; it reports existing proof/blockers, without duplicate generation/publication. Configuration is not future-execution proof. Root owns supported main-chat delivery; local generation alone does not prove its callback.
 
-Production remains `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`. Current staging includes older unapproved publication-control maintenance. On a later exact-version publish instruction, isolate/reconcile the complete approved release delta and rerun any necessary exact-source staging evidence; do not blindly promote current staging HEAD. Active local manual release accepts explicit revision approval in chat plus normal gates; the separate deferred protected GitHub workflow still requires rbediner environment approval with no bypass. Do not activate automatic production.
+Production is still `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b` while its isolated release is validated. Candidate branch `codex/publish-judgment-v5` starts from that production base and includes only the approved article, artwork, hub/discovery, focused QA and required documentation. Its approved content hashes match staged source69070eab7b047acbe65646cec04014810bb45da7. A native manual CI attempt stopped at the required handoff guard; this staging-first handoff will accompany the complete candidate delta in its PR checks. No gate was weakened. Current staging includes older unapproved publication-control maintenance. On a later exact-version publish instruction, isolate/reconcile the complete approved release delta and rerun any necessary exact-source staging evidence; do not blindly promote current staging HEAD. Active local manual release accepts explicit revision approval in chat plus normal gates; the separate deferred protected GitHub workflow still requires rbediner environment approval with no bypass. Do not activate automatic production.
 
 ## Cost and cleanup
 
