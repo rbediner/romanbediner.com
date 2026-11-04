@@ -1,63 +1,49 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 419
-- Updated At (UTC): 2026-11-04T20:13:25Z
+- Handoff Sequence: 420
+- Updated At (UTC): 2026-11-04T20:41:57Z
 - Source Branch: staging
-- Source Commit: 02a6985d787b7e989e771d6060d19c031948c20e (pre-handoff baseline)
+- Source Commit: f9af1fde5a999a8bd3549ba4db95245c26e68948 (pre-handoff baseline)
 
-## November 4 workflow audit and strengthened owner requirement
+## Current state: revision 5 staged and emailed; Roman review next
 
-Audit confirms the scheduled email was sent at 02:39:30 EST, ahead of deadline. The later 06:38 main-chat message does not mean the entire job was late. Native Sent proves sent, not read. Five complete AIDB editions/companions and three primary source caches are intact. Independent reviewer session 01a1a55c-1cf8-76c2-b5ea-67010fca1e5e caught missing October 30 attribution and checked revised frozen bytes before PASS. Two frozen revisions and one reviewer do not constitute several editorial iterations or LLM council.
+The revised **Make judgment reusable** article is ready for full-site owner review. Roman liked the new diagram and explicitly requested staging links here and by email. This is not production approval.
 
-Canonical weekly-job/PRD now require documented passes, actual independent council and resolved material findings before staging, exact article and hub preview, separately verified main-chat/email delivery, feedback versions and exact-revision production approval. These procedure changes do not establish execution. Existing automation is unchanged: its supported view returned "Automations are only supported for local threads." Apply the prepared prompt through that supported local tool, preserving the existing id/schedule/model/target and spending reserve; never edit raw scheduler TOML. Root owns main-chat delivery; no callback is proved here.
+- Article: https://rbediner.github.io/romanbediner-preview/blog/make-judgment-reusable/
+- Blog hub: https://rbediner.github.io/romanbediner-preview/blog/
+- Source: `69070eab7b047acbe65646cec04014810bb45da7`.
+- Frozen revision5 manifest SHA256: `9522fe5398bf01e82e234b01e107f022a40f0fed368402675b26fba83ba7943e`.
+- Native screenshot Library file: `libfile_73a125f289388191a71d4e37746b51f2` (diagram-1440.png). Parent/root owns delivery into main chat.
+- Rich HTML email to/from roman@romanbediner.com: `1a1a849d20720f69`, November4 at15:39:32EST. Full body/To/From/links matched; one matching Sent message. Sent does not prove owner read. No automatic email-reply monitoring.
 
-Current supported usage read showed 80% used/20% remaining, below 30% admission cutoff and 25% floor. No revision or council was admitted. Article, product source and production were unchanged. Current article still needs public source-jargon removal, recurring/consequential scope, compact usable record example and a measurable cost-versus-repeat-correction trial before final review. Historical preview and hub fetched HTTP 200 during audit; existing screenshots inspected. Next action: local coordinator applies the existing-job update; root resolves budget admission and supported chat delivery, then revisions/council/staging can proceed without weakening gates.
+## Research, iterations and review
 
-## Current state: November 4 preview and email delivered; owner review is next
+Five full AIDB editions/companions for October28-November3 and three underlying source caches were hash-verified. October31/November3 were unlisted at original retrieval. Primary source qualifications retained; no invented personal outcomes. The original scheduled revision2 email really was sent02:39:30EST before deadline; later main-chat follow-up did not prove a missed generation deadline.
 
-**The first scheduled local article/staging/email delivery is verified.** New article: **Make judgment reusable**, revision2. The rich HTML email reached roman@romanbediner.com at **02:39:30 EST on November4,2026**, before the05:45 target. It was read back for Sent, To/From, HTML and exact links. Production publication remains manual; no automatic email-reply pickup is active.
+Revision3 added first-person recommendations, recurring/consequential scope, usable decision example and measurable review/maintenance trial; removed public internal-research jargon and replaced the rejected graph. Five separate advisors configured Sol High independently critiqued it. Five separate anonymous peer reviewers surfaced delivery/approval/exception topology, obsolete versions and candidate-before-standard risks. Revision4 repaired those findings; normal loaded-font bounds caught a title-line gap. Revision5 corrected spacing and joined every explicit triangle arrowhead to its shaft, with a focused regression. Contrarian, outsider/humanizing prose reviewer and chairman independently checked exact final hashes and actual desktop/phone screenshots and returned PASS for staging. Same model family, not five model families. Source voice uses the owner-approved core draft and explicit first-person direction; no unavailable style-retrieval or separate humanizer service is claimed.
 
-- [Verified article preview](https://rbediner.github.io/romanbediner-preview/blog/make-judgment-reusable/)
-- [Verified compact Blog hub](https://rbediner.github.io/romanbediner-preview/blog/)
-- [Generating local Codex chat](codex://threads/01a1a559-1533-7021-a9ff-ac01f644b9e0). This is the actual native local chat ID, bound through list/read tools and the documented deep-link format. It requires this Mac and a mail client that permits app links. No public editable web-session URL was exposed. Fallback: Codex > Scheduled > Wednesday blog preview by 6 AM Eastern > November4 result.
-- [Verified email receipt](https://mail.google.com/mail/u/0/#all/1a1a57fad3f51294), subject “Wednesday blog preview: Make judgment reusable (revision 2)”. Exactly one matching Sent message was found.
+The graph separates delegated acceptance and delivered work from recurring/consequential learning, customer-only records from general candidates, bounded trials and approved general updates. Current-rule version/effective date, superseded records, conflict ownership and failed-trial withdrawal are explicit in prose.
 
-Roman requests changes or says **“Publish this version”** in Codex. No production approval, promotion or approval request was created.
+## Exact-source release and destination proof
 
-## Exact source and verification
+- Normal full pre-push gate passed in144.695seconds;43runtime tests passed and required visual/contract checks passed unchanged.
+- CI41907352676: attempt1 failed one unchanged Resources pill-height assertion; all revised blog tests passed. Failure retained. Only failed jobs were rerun once without source changes; attempt2 passed. No assertions weakened.
+- Initial staging41907352518 cancelled by normal workflow concurrency; failed-CI event41907839163 skipped. Successful replacement Deploy Staging41908236042 serves the exact product source.
+- Actual deployed article/hub passed6/6 five-width/touch checks, joined-head/label bounds, expansion/pinch/pan/Fit/Escape/focus/scroll restoration.24served files equal real preview transforms of exact Git source. Actual deployed desktop/phone screenshots inspected.
+- Full article and hub have clean browser console, loaded site fonts, noindex, shared GA4 preview/debug markers. Reporting-filter exclusion remains unverified.
+- Retained private evidence/frozen preview/email/council receipts: `QA/results/weekly-blog/2026-11-04/revision5`. Raw publisher caches remain only in Git-private source custody. Do not publish those caches.
 
-Product source: `42af6b12b9eb93336c48f7332f79974d6ac9402f`. Article-only source commit `a55ad219b9449e41a1eedaf63215e758081b5f31` was created from production `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`, then merged onto observed staging `58d463dc1b691fb7ccf36f41014d7336621b89c6`, preserving all concurrent CI-standard and publishing-control work. The final staging delta is14files: article/artwork/discovery/QA plus source-custody instructions and README. Handoff/status commits are separate from the deployed product SHA.
+## Owner authority, schedule and remaining routing gap
 
-- [Exact-source CI41791885357](https://github.com/rbediner/romanbediner.com/actions/runs/41791885357): success, all12jobs successful. Its CLI watcher timed out on one network read; a direct terminal native read confirmed success. No CI rerun was triggered.
-- [Exact-source Deploy Staging41792277611](https://github.com/rbediner/romanbediner.com/actions/runs/41792277611): success. Initial push deploy41791885364 was cancelled by the successful CI-completion replacement; this was not a failed release.
-- Existing blog contracts passed. All6 focused local checks passed; normal full pre-push gate passed in131.420seconds with unchanged normal hooks. Test-header/README/source-cache refusals were corrected before the first remote product upload, without weakening gates.
-- All6 focused checks passed against the actual deployed article/hub:1440,1024,768,390,320px, concise desktop H1, natural phone wrapping, loaded-font label bounds/gaps, no page/frame overflow, real touch pinch in/out and pan, Zoom/Fit, keyboard, focus and scroll return. Actual desktop/phone screenshots were inspected.
--24served files match byte-for-byte the actual repository preview transforms of the exact Git source, including article/hub, diagram, social artwork, CSS, runtime and fonts. Frozen ZIP has28files and SHA256 `87b8b69b3c5005f184157e04f58878fa2f52d8859520e8e785cfe36e25f47386`.
-- Canonical/Article/Breadcrumb, RSS/sitemap, source links, social metadata/artwork and shared GA4 verified. Preview noindex, environment=preview, debug_mode=true, one GA bootstrap, zero CSP errors. Analytics reporting filters and received traffic are unverified; do not claim preview pageviews are excluded from reports.
+Roman explicitly authorized a one-task exception to complete this existing blog with20% native weekly allowance remaining. Permanent30%admission/25%floor unchanged. No API credits/new services/credentials used.
 
-## Editorial/source custody
+Existing local generator id `wednesday-blog-preview-by-6-am-eastern` remains unchanged: the supported tool returned local-threads-only error in this delegated context. Exact prepared update is retained in the November4 task workspace; apply via supported local tool, never raw TOML. The saved prompt already reads current Git rules, which explicitly supersede the old one-reviewer/email-only restriction. Parent-owned Wednesday06:00Eastern delivery check id `6aeb930782808191bd76e3cefefe633c` is recorded in the runbook; it reports existing proof/blockers, without duplicate generation/publication. Configuration is not future-execution proof. Root owns supported main-chat delivery; local generation alone does not prove its callback.
 
-The article argues for retaining the reason, scope, examples and authority behind reviewed decisions, then checking a different later case. It is distinct from the attention-budget article. The sales-team scenario and operating loop are explicitly illustrative/proposed; no client results or measured gains are invented.
+Production remains `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`. Current staging includes older unapproved publication-control maintenance. On a later exact-version publish instruction, isolate/reconcile the complete approved release delta and rerun any necessary exact-source staging evidence; do not blindly promote current staging HEAD. Active local manual release accepts explicit revision approval in chat plus normal gates; the separate deferred protected GitHub workflow still requires rbediner environment approval with no bypass. Do not activate automatic production.
 
-Source window October28 through November3 America/New_York. All5indexed editions were consumed in complete transcript/companion form, including Sunday: October28,29,30 and November1,2. October31 and November3 were unlisted at retrieval. Primary BetterUp/Stanford survey, Microsoft/CMU CHI research and Rao essay were independently located, verified and cited with their limits. Unsupported model/IPO/science/Spawn metrics and the overstated Glean never-read statistic were omitted. AIDB October30 precedent inspiration is credited inline and in Sources.
+## Cost and cleanup
 
-One independent GPT-6.1 Sol High reviewer verified full source consumption, original argument, factual limits, artwork, screenshots and revision2. Frozen editorial manifest SHA256 `67e0b8b220e09a2ab465dbca5b64b8f30331e293541570d034c8f2f59ba06a00`. Later test-file changes were header comments only, checked by the actual header gate and normal full QA; article and artwork review bytes did not change.
-
-Private evidence: `QA/results/weekly-blog/2026-11-04/`. Raw23source files live under the Git-private path returned by `git rev-parse --git-path weekly-blog/2026-11-04/sources`; all exact hashes preserved. The deployed frozen bytes and expected transforms are also under that Git-private weekly directory. Do not commit publisher caches or email/PRD readbacks to this PUBLIC repository. Raw source pages in ignored QA/results were scanned as website files, and changing .html to.txt was insufficient. Research skill and AGENTS now prescribe private custody and actual-scanner inspection. Both original source-evidence/reuse safeguards were preserved. [Shared register correction](https://github.com/alliance-properties/sunset-grove-social-engine/issues/338#issuecomment-6625068553) saved/read back; register open.
-
-## Current schedule, manual publication and limits
-
-Automation `wednesday-blog-preview-by-6-am-eastern` remains ACTIVE/local, configured GPT-6.1 Sol High, Wednesday02:00 America/New_York. Current local-account usage was read before admission:43% remaining, refreshed42% during review;30% admission cutoff/25% floor retained. No paid API credits, new credentials/services, Chrome UI, Remy or cloud workers used. First observed setup clock01:57:33EST; minute-accurate02:00 start timing is not certified. This proves one local delivery, not every future run or availability with the Mac off/asleep.
-
-Production remains unchanged at `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`; attention-budget and Agentic Society articles remain live. Staging also contains earlier PR19 publishing-control maintenance that Roman did not approve for production. A later publication request must reconcile the complete prod-to-reviewed-source range and isolate/review that scope; do not silently fast-forward unapproved maintenance. If isolation changes source, obtain the corresponding exact-source QA/preview and owner approval. Do not revive cancelled approval run40978446937 or deferred cloud diagnostics.
-
-The canonical Git PRD and [live Google PRD mirror](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit) reflect this delivery; the Google write/readback verified roman@romanbediner.com. Dashboard unchanged; its public sync is not applicable.
-
-## Cleanup and cost
-
-No task worktree or Chrome UI tab was created. Every task-owned headless browser/server/watch reached terminal completion and closed through its normal cleanup. The owned article branch was deleted only after proving its commit is retained on remote staging; upstream was unset first because its production-base tracking correctly prevented ordinary deletion. The primary scheduled checkout and irreplaceable private research/review/email evidence are retained. Disk headroom was checked during work, approximately47GiB shown free; no reclaimed-space amount is claimed.
-
-Cost: configured Sol High subscription primary and one separate Sol High reviewer; no paid API-credit spend.3hosted runs (CI success, staging success, one superseded cancelled staging), 10.28 summed job-elapsed minutes. This is not billed-minute/dollar proof. GitHub API call count is unmetered; shared budget remaining is not per-task attribution. Normal local full gate131.420seconds.
+Subscription model calls only under the one-task exception. Four native Actions runs: one CI with two attempts; initial staging cancelled; failed-CI event staging skipped; replacement staging succeeded. Billed minutes/dollars and per-task API usage unverified. Passing evidence reused; no new article or paid model API generation. Task-owned headless browsers/servers and release watchers reached terminal state; primary checkout and required private evidence retained. Dashboard unchanged.
 
 ## Release Watcher Hygiene
 
