@@ -1,58 +1,58 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 417
-- Updated At (UTC): 2026-11-01T15:53:19Z
-- Source Branch: ci-standard-install
-- Source Commit: 075b406acdbbd48bd3ea7abe063289f2cae097f1 (pre-handoff baseline)
+- Handoff Sequence: 418
+- Updated At (UTC): 2026-11-04T07:47:04Z
+- Source Branch: staging
+- Source Commit: ca5c392807f81093bc8672af6cfc073fdeb22b72 (pre-handoff baseline)
 
-## 2026-11-01: CI standard workflow tidy-up (pull request 18)
+## Current state: November 4 preview and email delivered; owner review is next
 
-Estate session Automation Estate 5 (worker 10) rebased the CI standard installer's pull request 18 onto staging. It changes only `.github/workflows/ci-standard.yml`: the push trigger also covers `prod`, and `actions/checkout` is pinned to the v5.1.0 commit. No site, content, schedule or deploy change. Estate ticket rbediner/automation-estate#970.
+**The first scheduled local article/staging/email delivery is verified.** New article: **Make judgment reusable**, revision2. The rich HTML email reached roman@romanbediner.com at **02:39:30 EST on November4,2026**, before the05:45 target. It was read back for Sent, To/From, HTML and exact links. Production publication remains manual; no automatic email-reply pickup is active.
 
-## Current state: article live; local Wednesday staging/email active; publication manual
+- [Verified article preview](https://rbediner.github.io/romanbediner-preview/blog/make-judgment-reusable/)
+- [Verified compact Blog hub](https://rbediner.github.io/romanbediner-preview/blog/)
+- [Generating local Codex chat](codex://threads/01a1a559-1533-7021-a9ff-ac01f644b9e0). This is the actual native local chat ID, bound through list/read tools and the documented deep-link format. It requires this Mac and a mail client that permits app links. No public editable web-session URL was exposed. Fallback: Codex > Scheduled > Wednesday blog preview by 6 AM Eastern > November4 result.
+- [Verified email receipt](https://mail.google.com/mail/u/0/#all/1a1a57fad3f51294), subject “Wednesday blog preview: Make judgment reusable (revision 2)”. Exactly one matching Sent message was found.
 
-**Current owner direction October30:** automatic local research/build/staging/email every Wednesday, manual review/edits/publication. Active automation `wednesday-blog-preview-by-6-am-eastern` uses GPT-6.1 Sol High and starts02:00 in the verified host America/New_York timezone, targeting preview email by06:00. The owner confirms this Mac stays awake with Codex running; a locked screen is allowed. Background commands, headless QA and existing Workspace tools avoid cloud blockers. Saved schedule, ACTIVE/local mode and prompt were read back; first scheduled execution November4 is pending. Product instructions and the corrected Build skill are committed/pushed at `031ff7a3e82acbe34aad2bca8fc4e2af62a044de`; skill validation and the unchanged normal full local pre-push gate passed. No production deployment or new article generation was required for this schedule/configuration change. No new article generation or cloud diagnostic job was started to test the timer.
+Roman requests changes or says **“Publish this version”** in Codex. No production approval, promotion or approval request was created.
 
-Manual review email sent/read back: `1a18a2f6118ab1e7`, subject “Blog review: staging preview + editable Codex chat.” Both Preview staging and Open Codex links and To/HTML verified. No GitHub approval button. The continuation is explicitly labelled; the original article is already live. PRD, runbook and README manual-workflow commit is remotely saved; this handoff remains isolated.
+## Exact source and verification
 
-The [attention-budget article](https://romanbediner.com/blog/ai-agent-attention-budget/) is approved and verified live at production `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`. Its concise desktop H1 is “AI agent attention budget”; loaded-font desktop/phone layouts and diagram fit, actual pinch/pan, Fit/Close, focus and scroll restoration passed. Production [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40969172280) and [Deploy Pages](https://github.com/rbediner/romanbediner.com/actions/runs/40969172285) passed. The original Agentic Society article and shared Company Brain diagram remain shipped.
+Product source: `42af6b12b9eb93336c48f7332f79974d6ac9402f`. Article-only source commit `a55ad219b9449e41a1eedaf63215e758081b5f31` was created from production `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`, then merged onto observed staging `58d463dc1b691fb7ccf36f41014d7336621b89c6`, preserving all concurrent CI-standard and publishing-control work. The final staging delta is14files: article/artwork/discovery/QA plus source-custody instructions and README. Handoff/status commits are separate from the deployed product SHA.
 
-### Publishing controls
+- [Exact-source CI41791885357](https://github.com/rbediner/romanbediner.com/actions/runs/41791885357): success, all12jobs successful. Its CLI watcher timed out on one network read; a direct terminal native read confirmed success. No CI rerun was triggered.
+- [Exact-source Deploy Staging41792277611](https://github.com/rbediner/romanbediner.com/actions/runs/41792277611): success. Initial push deploy41791885364 was cancelled by the successful CI-completion replacement; this was not a failed release.
+- Existing blog contracts passed. All6 focused local checks passed; normal full pre-push gate passed in131.420seconds with unchanged normal hooks. Test-header/README/source-cache refusals were corrected before the first remote product upload, without weakening gates.
+- All6 focused checks passed against the actual deployed article/hub:1440,1024,768,390,320px, concise desktop H1, natural phone wrapping, loaded-font label bounds/gaps, no page/frame overflow, real touch pinch in/out and pan, Zoom/Fit, keyboard, focus and scroll return. Actual desktop/phone screenshots were inspected.
+-24served files match byte-for-byte the actual repository preview transforms of the exact Git source, including article/hub, diagram, social artwork, CSS, runtime and fonts. Frozen ZIP has28files and SHA256 `87b8b69b3c5005f184157e04f58878fa2f52d8859520e8e785cfe36e25f47386`.
+- Canonical/Article/Breadcrumb, RSS/sitemap, source links, social metadata/artwork and shared GA4 verified. Preview noindex, environment=preview, debug_mode=true, one GA bootstrap, zero CSP errors. Analytics reporting filters and received traffic are unverified; do not claim preview pageviews are excluded from reports.
 
-[PR19](https://github.com/rbediner/romanbediner.com/pull/19) merged to staging `f256814f41c20652f1e0bb9c8e434b615428221f`. Its independent native Codex App review has zero findings at feature head `55e6ed3ffea13392a418431e0249b44c6dd959b3`; full feature/staging Git trees match. Forty focused publication/email checks and normal full local push gates passed. Exact-source [CI](https://github.com/rbediner/romanbediner.com/actions/runs/40976877235) and [Deploy Staging](https://github.com/rbediner/romanbediner.com/actions/runs/40977217214) passed; preview HTTP200, source token and noindex verified. An earlier duplicate staging deploy was cancelled by the newer successful run; retain both receipts.
+## Editorial/source custody
 
-- The real [Publish Reviewed Blog run40978446937](https://github.com/rbediner/romanbediner.com/actions/runs/40978446937) passed prepare, then was **cancelled**, terminal status verified. Roman rejected the GitHub-page shortcut as the requested simple approval experience. The controls email is superseded; do not ask Roman to approve that cancelled run. Production remains E2. No new cloud/model jobs or diagnostic retries during wind-down.
-- Exact [revision3 packet](https://github.com/rbediner/romanbediner.com/pull/19#issuecomment-6511536758): maintenance/publishing controls, source F256, base E2,17 hashed files; digest `991b11d2ee2fbee0878a562aa89e937b12116c24878e22ff439a1ceca63d1fbd`. Article copy is unchanged. This is not a new editorial draft.
-- Rich HTML controls email sent/read back as roman@romanbediner.com, message `1a18a2931b67137c`, subject “Your blog controls: Push to prod and request changes.” To, HTML, actual approval URL and all three controls verified. [Editable cloud continuation](https://chatgpt.com/local/01a18a01-7ae4-74fb-b24c-17c89e1fe00e) is genuine and clearly distinct from the original desktop authoring session.
-- Existing implementation opens a native GitHub run and requires Review deployments/Approve; this is not the owner-requested direct approval UX and remains incomplete. GET never publishes. The controller revalidates exact bytes/native review/CI/staging, atomically fast-forwards against the frozen old prod ref, then verifies actual live article and release token. Per-source dispatch fences prevent replay of unknown writes. Owner approval and real promotion/live readback remain acceptance requirements.
-- Request changes opens the continuation. Cancel the prior pending run before editing; return a new frozen revision, preview and approval. Actual cloud cancel/dispatch write capability remains unverified. Do not claim the complete edit cycle has passed.
+The article argues for retaining the reason, scope, examples and authority behind reviewed decisions, then checking a different later case. It is distinct from the attention-budget article. The sales-team scenario and operating loop are explicitly illustrative/proposed; no client results or measured gains are invented.
 
-### Cloud and Wednesday routine
+Source window October28 through November3 America/New_York. All5indexed editions were consumed in complete transcript/companion form, including Sunday: October28,29,30 and November1,2. October31 and November3 were unlisted at retrieval. Primary BetterUp/Stanford survey, Microsoft/CMU CHI research and Rao essay were independently located, verified and cited with their limits. Unsupported model/IPO/science/Spawn metrics and the overstated Glean never-read statistic were omitted. AIDB October30 precedent inspiration is credited inline and in Sources.
 
-**Local weekly recurrence is ACTIVE; cloud recurrence is OFF.** Agreed cadence is Wednesday02:00 America/New_York, verified delivery by06:00; next November4 is EST. Research and independent review use GPT-6.1 Sol High; bounded build may use Medium. Git authority: [PRD](../blog/weekly-publishing-prd.md), [job runbook](../blog/weekly-job.md), `.agents/skills/bediner-blog-research/` and `.agents/skills/bediner-blog-build/`. Website diagram style is required in the Build skill.
+One independent GPT-6.1 Sol High reviewer verified full source consumption, original argument, factual limits, artwork, screenshots and revision2. Frozen editorial manifest SHA256 `67e0b8b220e09a2ab465dbca5b64b8f30331e293541570d034c8f2f59ba06a00`. Later test-file changes were header comments only, checked by the actual header gate and normal full QA; article and artwork review bytes did not change.
 
-- Published native website cloud environment, actual Node20 execution, Git reads, one phone browser check, identity-bound Workspace read, native scheduled callback and editable chat are proven. The one-off routing test is completed, not a weekly schedule; its displayed run-time metadata was about91seconds early, so minute accuracy is not certified.
-- Existing Remy successfully created the child above and received/read its genuine terminal callback. `parentThreadId:null` did not prevent the callback; use actual receipt, not that field alone. Remy is the existing OpenAI dot, not Maya or a new notifier.
-- Latest same-child preflight stopped before dispatch: live preview fetch got proxy CONNECT HTTP403, curl56. No cloud dispatch POST occurred. Existing GitHub Actions read returned200 and workflow401221221 is registered, but Actions **write** authority is untested. Desktop dispatched the real waiting run above once, using its working existing connection.
-- Cloud account-scoped usage read remains unavailable: CLI app-server failed `read_only_filesystem`, exit1, including one bounded retry with private sqlite_home/log_dir. No new credentials/login/copies/API spend. Desktop51% remaining at00:01UTC is separate scope and cannot stand in for cloud quota.
-- Remaining dependencies: permitted preview access in the exact cloud environment; a supported current cloud usage/admission reading or explicit owner policy decision; prove cloud Actions dispatch/cancel; owner native approval and actual promotion; then save/read back the Wednesday routine and real Remy delivery. Those cloud dependencies do not block the newly authorized local weekly research/build/staging/email job; do not resume cloud investigation.
+Private evidence: `QA/results/weekly-blog/2026-11-04/`. Raw23source files live under the Git-private path returned by `git rev-parse --git-path weekly-blog/2026-11-04/sources`; all exact hashes preserved. The deployed frozen bytes and expected transforms are also under that Git-private weekly directory. Do not commit publisher caches or email/PRD readbacks to this PUBLIC repository. Raw source pages in ignored QA/results were scanned as website files, and changing .html to.txt was insufficient. Research skill and AGENTS now prescribe private custody and actual-scanner inspection. Both original source-evidence/reuse safeguards were preserved. [Shared register correction](https://github.com/alliance-properties/sunset-grove-social-engine/issues/338#issuecomment-6625068553) saved/read back; register open.
 
-### Analytics and source evidence
+## Current schedule, manual publication and limits
 
-Shared GA4 `G-DVHD0KL633` is installed; preview environment/debug markers and production event fencing verified. Received GA4 reports/filter configuration remain unverified. Six genuine AI Daily Brief editions October22–28 informed the evergreen essay; underlying primary sources cited. No invented client outcomes/private evidence. Private research, frozen packets, full hook logs and deployed receipts remain in sibling `../blog-pilot/`, `../blog-workflow-design/` and `../evidence/`.
+Automation `wednesday-blog-preview-by-6-am-eastern` remains ACTIVE/local, configured GPT-6.1 Sol High, Wednesday02:00 America/New_York. Current local-account usage was read before admission:43% remaining, refreshed42% during review;30% admission cutoff/25% floor retained. No paid API credits, new credentials/services, Chrome UI, Remy or cloud workers used. First observed setup clock01:57:33EST; minute-accurate02:00 start timing is not certified. This proves one local delivery, not every future run or availability with the Mac off/asleep.
 
-### Operator boundaries
+Production remains unchanged at `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`; attention-budget and Agentic Society articles remain live. Staging also contains earlier PR19 publishing-control maintenance that Roman did not approve for production. A later publication request must reconcile the complete prod-to-reviewed-source range and isolate/review that scope; do not silently fast-forward unapproved maintenance. If isolation changes source, obtain the corresponding exact-source QA/preview and owner approval. Do not revive cancelled approval run40978446937 or deferred cloud diagnostics.
 
-Use only this isolated Documents recovery checkout, Node20.20.1 and sibling qa-runtime with normal `.husky/_` hooks. Preserve original recovery evidence; do not modify task-2, the original Drive checkout or depend on the stuck old chat. Repository is PUBLIC. Never publish credentials/private diagnostics. Current product Google PRD is [1QPjtqt](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit); old15WTg is an archived pointer. Dashboard unchanged; public dashboard sync is not applicable.
+The canonical Git PRD and [live Google PRD mirror](https://docs.google.com/document/d/1QPjtqtAVFdhFZUPXl0hvJULNTSnpD4-bzXYeIp7Oigo/edit) reflect this delivery; the Google write/readback verified roman@romanbediner.com. Dashboard unchanged; its public sync is not applicable.
 
-All task-created Chrome tabs were closed and verified absent after extracting the final cloud blocker. The local weekly schedule was activated after Roman explicitly confirmed overnight Mac availability; no immediate model run was started. The GitHub protected run is terminal cancelled; nothing is waiting for Roman to click. The direct approve/edit experience and weekly automation remain unfinished. Keep cloud investigations stopped; only the owner-authorized local Wednesday article routine is active.
+## Cleanup and cost
+
+No task worktree or Chrome UI tab was created. Every task-owned headless browser/server/watch reached terminal completion and closed through its normal cleanup. The owned article branch was deleted only after proving its commit is retained on remote staging; upstream was unset first because its production-base tracking correctly prevented ordinary deletion. The primary scheduled checkout and irreplaceable private research/review/email evidence are retained. Disk headroom was checked during work, approximately47GiB shown free; no reclaimed-space amount is claimed.
+
+Cost: configured Sol High subscription primary and one separate Sol High reviewer; no paid API-credit spend.3hosted runs (CI success, staging success, one superseded cancelled staging), 10.28 summed job-elapsed minutes. This is not billed-minute/dollar proof. GitHub API call count is unmetered; shared budget remaining is not per-task attribution. Normal local full gate131.420seconds.
 
 ## Release Watcher Hygiene
 
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
-
-## CI standard refresh (2026-11-01)
-
-The estate installer refreshed the CI standard files (`.github/ci-standard/`, `.github/workflows/ci-standard.yml`, `CI-STANDARD.md`). No site behaviour changed.
