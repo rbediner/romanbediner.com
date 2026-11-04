@@ -30,7 +30,7 @@ Choose one lasting business decision or operating principle. News is evidence fo
 
 ## Required pre-staging quality and delivery gate
 
-The binding [November 4 owner rule](weekly-job.md#november-4-owner-rule-iterations-council-and-dual-delivery) requires at least three documented editorial passes, the actual five-advisor/anonymized-peer-review/chairman council, repaired material findings, exact article and hub QA, separate email/main-chat receipts and awaiting-owner-review state. It supersedes older one-reviewer-only and email-only language. Preserve subscription spending/reserve and production approval boundaries. A saved procedure is not execution proof. The current delegated environment cannot update the local-only automation tool; its prepared prompt is pending a supported local update. Main-chat transport remains the root coordinator responsibility.
+The binding [November 4 owner rule](weekly-job.md#november-4-owner-rule-iterations-council-and-dual-delivery) requires two or three documented editorial passes, the actual five-advisor/anonymized-peer-review/chairman council, repaired material findings, exact article and hub QA, separate email/main-chat receipts and awaiting-owner-review state. It supersedes older one-reviewer-only and email-only language. Preserve subscription spending/reserve and production approval boundaries. A saved procedure is not execution proof. The current delegated environment cannot update the local-only automation tool; its prepared prompt is pending a supported local update. Main-chat transport remains the root coordinator responsibility.
 
 ## Research-to-staging handoff
 
