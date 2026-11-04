@@ -1,9 +1,17 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 418
-- Updated At (UTC): 2026-11-04T07:47:04Z
+- Handoff Sequence: 419
+- Updated At (UTC): 2026-11-04T20:13:25Z
 - Source Branch: staging
-- Source Commit: ca5c392807f81093bc8672af6cfc073fdeb22b72 (pre-handoff baseline)
+- Source Commit: 02a6985d787b7e989e771d6060d19c031948c20e (pre-handoff baseline)
+
+## November 4 workflow audit and strengthened owner requirement
+
+Audit confirms the scheduled email was sent at 02:39:30 EST, ahead of deadline. The later 06:38 main-chat message does not mean the entire job was late. Native Sent proves sent, not read. Five complete AIDB editions/companions and three primary source caches are intact. Independent reviewer session 01a1a55c-1cf8-76c2-b5ea-67010fca1e5e caught missing October 30 attribution and checked revised frozen bytes before PASS. Two frozen revisions and one reviewer do not constitute several editorial iterations or LLM council.
+
+Canonical weekly-job/PRD now require documented passes, actual independent council and resolved material findings before staging, exact article and hub preview, separately verified main-chat/email delivery, feedback versions and exact-revision production approval. These procedure changes do not establish execution. Existing automation is unchanged: its supported view returned "Automations are only supported for local threads." Apply the prepared prompt through that supported local tool, preserving the existing id/schedule/model/target and spending reserve; never edit raw scheduler TOML. Root owns main-chat delivery; no callback is proved here.
+
+Current supported usage read showed 80% used/20% remaining, below 30% admission cutoff and 25% floor. No revision or council was admitted. Article, product source and production were unchanged. Current article still needs public source-jargon removal, recurring/consequential scope, compact usable record example and a measurable cost-versus-repeat-correction trial before final review. Historical preview and hub fetched HTTP 200 during audit; existing screenshots inspected. Next action: local coordinator applies the existing-job update; root resolves budget admission and supported chat delivery, then revisions/council/staging can proceed without weakening gates.
 
 ## Current state: November 4 preview and email delivered; owner review is next
 
