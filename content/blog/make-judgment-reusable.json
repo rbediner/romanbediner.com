@@ -1,0 +1,62 @@
+{
+  "slug": "make-judgment-reusable",
+  "title": "Make judgment reusable: help your business learn from AI work",
+  "seoTitle": "Make Judgment Reusable: Better AI Workflows for Business Owners",
+  "displayTitle": "Make judgment reusable",
+  "subtitle": "Keep the reasoning behind the review",
+  "cardTitle": "Make judgment reusable",
+  "description": "Turn recurring AI corrections into clear standards, examples and decisions. A practical approach for CEOs who want the business to learn from reviewed work.",
+  "deck": "When your team corrects AI work, preserve the decision behind the edit. Give the next person and the next workflow a better place to begin.",
+  "category": "AI & business",
+  "eyebrow": "AI + BUSINESS OPERATIONS",
+  "date": "2026-11-04",
+  "updated": "2026-11-04",
+  "status": "ready",
+  "topics": [
+    "AI workflow design",
+    "business judgment",
+    "organizational learning",
+    "AI quality",
+    "decision records"
+  ],
+  "image": "/assets/blog/reusable-judgment-cover.png",
+  "imageAlt": "Make judgment reusable. Keep the reasoning behind the review. Roman Bediner.",
+  "cover": "/assets/blog/reusable-judgment-cover.svg",
+  "toc": [
+    [
+      "keep-the-reason",
+      "Keep the reason behind the edit"
+    ],
+    [
+      "review-is-business-work",
+      "Review is business work"
+    ],
+    [
+      "build-a-small-decision-record",
+      "Build a small decision record"
+    ],
+    [
+      "test-the-standard",
+      "Test whether the standard travels"
+    ],
+    [
+      "keep-room-for-a-new-answer",
+      "Keep room for a new answer"
+    ],
+    [
+      "start-with-one-correction",
+      "Start with one correction"
+    ],
+    [
+      "sources",
+      "Sources and context"
+    ]
+  ],
+  "diagrams": {
+    "reusable-judgment": {
+      "label": "Shared current standards support preparation, review and acceptance within delegated authority. Review and owner findings can return work for correction. Accepted work goes to delivery. Only recurring or consequential learning enters scope approval. Customer exceptions stay in a customer-only record. A general candidate is tried on different cases; the owner keeps, revises or retires it, and only approved general changes update shared standards.",
+      "caption": "Keep the work moving and capture only decisions worth reusing. A scoped decision becomes a current standard only through its owner; the next different case tests whether maintaining it is worthwhile.",
+      "eyebrow": "FROM A CORRECTION TO A TESTED STANDARD"
+    }
+  }
+}

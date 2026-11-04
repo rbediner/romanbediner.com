@@ -2,6 +2,8 @@
 
 ## Blog and weekly editorial workflow
 
+November 4: Roman approved Make judgment reusable revision 5 for production after its staged council and voice review. The release isolates the approved article, diagram, hub, RSS/sitemap, metadata and focused QA from unrelated staging publication-control maintenance. The article and artwork bytes match reviewed source69070eab7b047acbe65646cec04014810bb45da7; the production candidate receives its own exact-source CI and preview verification. Weekly production remains manual after owner review.
+
 Blog diagrams fit the article width without an internal horizontal scroller. A visible `Expand to full screen` button opens a viewport-filling viewer with two-finger pinch zoom, drag to pan, accessible Zoom in/out and Fit controls, keyboard equivalents and Close/Escape focus return. Zoom affects the diagram while the toolbar stays reachable. Browser QA checks each diagram frame's scroll width and trusted touch gestures, not only page-level overflow.
 
 CI browser jobs and production post-deploy browser smoke use Ubuntu 24.04, matching the pinned Playwright 1.58 runtime; Ubuntu latest may select an unsupported newer image. CI push triggers are restricted to staging/prod, PR checks remain available, push runs retain their artifact work, and each job has a 15-minute ceiling. Production deploys retain their deployment and post-deploy proof under one uncancelled release, with 15-minute job ceilings.

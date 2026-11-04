@@ -1,0 +1,72 @@
+<p>A useful AI draft often ends with a manager making it useful. Someone removes the promise the business cannot keep, notices the customer constraint the model missed, or changes the recommendation because the evidence does not support it.</p>
+<p>The immediate work gets better. Then the next request arrives, and the same correction happens again.</p>
+<p>I want CEOs and owners to look at what the business retains from that review. A recurring correction or a decision with real consequences deserves more attention than a one-off wording change. It can become a clear standard, an example with an explanation, or a decision the next person and the next AI workflow can find.</p>
+
+<section aria-labelledby="keep-the-reason">
+  <h2 id="keep-the-reason">Keep the reason behind the edit</h2>
+  <p>Consider an illustrative sales team using AI to prepare proposals. A salesperson asks for a draft. The owner changes the delivery date, removes an unsupported savings claim, and adds a dependency on the customer's data. The final document is good enough to send.</p>
+  <p>If the team saves only that final document, the useful reasoning is easy to lose. Was the date wrong because capacity was unavailable, because approval was missing, or because the customer had not supplied something? A future draft can imitate the wording while repeating the mistake.</p>
+  <p>Save the decision in language another person can apply: delivery dates require confirmation from the delivery lead; savings claims need an identified source; work dependent on customer data must say what is needed before the timeline begins. Keep the original context beside the rule so people can recognize where it applies.</p>
+  <p>I would start with a correction that keeps coming back or prevents a serious commitment error. Recording every edit would create another administrative job. The extra effort needs to earn its place by making later work easier to review.</p>
+</section>
+
+<section aria-labelledby="review-is-business-work">
+  <h2 id="review-is-business-work">Review is business work</h2>
+  <p>The risk of polished but unfinished work is already visible in research. In a September 2025 survey of 1,150 full-time US desk workers, <a href="https://www.betterup.com/workslop">BetterUp Labs and Stanford Social Media Lab</a> reported that 40% had received what the researchers called workslop in the previous month. Respondents reported roughly two hours to resolve an incident. These are survey findings, not a measured cost estimate for your company.</p>
+  <p>The problem can survive a better-looking draft. A proposal can read smoothly and still commit the company to something it cannot deliver. Someone has to connect the words to the facts, the commercial relationship, and the people who will do the work.</p>
+  <p>A <a href="https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/">CHI 2025 study of 319 knowledge workers</a> found an association between greater confidence in generative AI and less reported critical thinking. The authors also describe a shift toward verification, integration, and stewardship of the task. The study concerns self-reported behavior; it does not establish that AI inevitably weakens people's judgment.</p>
+  <p>I would name the person responsible for checking and accepting the work. Be clear about what they check and which decisions they can make. Give them a way to record a correction that deserves to become a shared standard.</p>
+</section>
+
+<section aria-labelledby="build-a-small-decision-record">
+  <h2 id="build-a-small-decision-record">Build a small decision record</h2>
+  <p>The AI Daily Brief's <a href="https://aidailybrief.ai/e/2026-10-30">October 30 discussion of turning decisions into precedent</a> prompted this question of what a company retains. The practical approach I recommend is to start with one recurring responsibility. For the proposal team, a short decision record can capture the situation, the choice, the reason, and the person with authority to change it. Link it to an approved example and, where helpful, a rejected example explaining the difference.</p>
+  <p>Here is the short record I would give that proposal team:</p>
+  <ul>
+    <li><strong>Situation:</strong> a customer wants a launch date before delivery capacity is confirmed.</li>
+    <li><strong>Decision and reason:</strong> sales can share an estimated sequence. The delivery lead must confirm capacity before anyone commits to a date.</li>
+    <li><strong>Scope:</strong> all new proposals. Any owner-approved exception is recorded against that customer only.</li>
+    <li><strong>Owner and review trigger:</strong> the delivery lead maintains the capacity rule and reviews it when the staffing plan changes.</li>
+    <li><strong>Example:</strong> “Estimated sequence, subject to delivery confirmation” is acceptable while capacity is unknown. An unconditional launch promise is not.</li>
+  </ul>
+  <p>That last distinction matters. An exception should remain an exception until someone decides otherwise. Feeding every accepted document back into a system as a universal example can quietly turn a negotiated concession into the company's default offer.</p>
+  <p>Keep current standards in one place your team can use, with access suited to the information. A small business can begin with an existing shared document. The important work is keeping the current rule, when it applies, and who can change it clear. A larger knowledge platform can wait until the need is clear.</p>
+  <p>Give the approved rule a version and effective date. Mark replaced guidance as superseded so people can find the current answer. The named owner resolves conflicting records. A proposed change can be tried within agreed limits before it replaces the current rule. If that trial fails, withdraw the proposed guidance and retain the last approved version while the owner decides what to change.</p>
+  {{diagram:reusable-judgment}}
+</section>
+
+<section aria-labelledby="test-the-standard">
+  <h2 id="test-the-standard">Test whether the standard travels</h2>
+  <p>A saved rule has value when it changes a later result. Give the next proposal writer, whether a person using AI or an automated workflow, the current standard before drafting. Then inspect whether the draft handles the delivery commitment correctly.</p>
+  <p>Try an ordinary case and an exception. Include a case with missing information. The system should know when it can prepare work and when a decision still belongs to someone else. Reproducing the approved example word for word tells you little about a new customer with different constraints.</p>
+  <p>Ask the reviewer to record whether the same correction was needed, whether a new exception emerged, and whether the final proposal was accepted. Keep checking important claims against their actual sources. A collection of prior decisions can itself become stale or wrong.</p>
+  <p>I would run a small trial before expanding it. For one recurring proposal type, record how often the delivery-date correction is needed and how much review time it takes. Then use the decision record on the next few comparable proposals, tracking the same measures and the time spent maintaining the record. This is a practical check, not a controlled experiment: differences in customer complexity can affect the result.</p>
+  <p>Keep the record if it reduces repeated corrections or review effort enough to justify its upkeep. Revise or retire it if it creates more work, spreads an exception, or keeps being overridden for good reasons. A serious commitment error can justify a safeguard even when it is rare. I would judge that risk explicitly rather than count instructions as progress.</p>
+</section>
+
+<section aria-labelledby="keep-room-for-a-new-answer">
+  <h2 id="keep-room-for-a-new-answer">Keep room for a new answer</h2>
+  <p>Making judgment reusable comes with a tradeoff. A business needs consistency, but customers, capacity, and strategy change. A system that reproduces yesterday's decisions perfectly can still be wrong for today's situation.</p>
+  <p>Venkatesh Rao's <a href="https://contraptions.venkateshrao.com/p/cognitive-mercantilism">Cognitive Mercantilism</a> offers a useful broader provocation: cheaper intelligence may create new demand and possibilities. That is an argument about how to think about abundance, not proof of any company's future results.</p>
+  <p>My recommendation is to preserve room for a new question. Use past decisions to explain the business, then ask what has changed. Let people challenge an inherited standard, identify an outdated assumption, and propose an alternative before the company repeats an old answer at greater speed.</p>
+  <p>Reserve fresh human judgment for commitments with meaningful consequences and for situations the existing standard does not cover. Clear routine decisions can be delegated within agreed limits. The authority to change those limits should stay visible.</p>
+</section>
+
+<section aria-labelledby="start-with-one-correction">
+  <h2 id="start-with-one-correction">Start with one correction</h2>
+  <p>I would begin at the next review with one recurring or consequential correction. Ask the responsible person to turn it into a short, usable decision record. Put it where the next task begins, then check whether it helped on the next different case.</p>
+  <p>The <a href="/resources/ai-project-manager/">AI Project Manager guide</a> covers commitments and ownership. The <a href="/resources/agentic-ai-employees/">Agentic Fleet Build Guide</a> connects shared knowledge with the controls behind a team of AI employees.</p>
+  <p>Last week's <a href="/blog/ai-agent-attention-budget/">attention-budget article</a> asked how much human work an AI responsibility consumes. This adds a learning question: when your people apply that attention, what does the business retain?</p>
+  <p>If the same correction keeps returning to your desk, <a href="/connect/" data-blog-contact="closing">bring that recurring decision to a conversation</a>. It is a concrete place to start building a company that learns from the work it already does.</p>
+</section>
+
+<section aria-labelledby="sources">
+  <h2 id="sources">Sources and context</h2>
+  <p>Research began with Nathaniel Whittemore's <a href="https://aidailybrief.ai/">The AI Daily Brief</a>, covering the editions listed for October 28 through November 3, 2026, including Sunday. The most relevant discussions were <a href="https://aidailybrief.ai/e/2026-10-30">October 30 on making decisions reusable as precedent</a>, <a href="https://aidailybrief.ai/e/2026-11-02">November 2 on the quality of AI-assisted work</a>, and <a href="https://aidailybrief.ai/e/2026-11-01">November 1 on cognitive abundance</a>. The scoped decision-record workflow and sales-team example developed here are recommendations and illustration, not reported client results.</p>
+  <ul>
+    <li>BetterUp Labs and Stanford Social Media Lab, <a href="https://www.betterup.com/workslop">Workslop: the hidden cost of AI-generated busywork</a>. Primary research summary; September 2025 survey and its stated limitations.</li>
+    <li>Hao-Ping Lee and coauthors, <a href="https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/">The Impact of Generative AI on Critical Thinking</a>, CHI 2025. Self-reported associations and changes in the nature of knowledge work.</li>
+    <li>Venkatesh Rao, <a href="https://contraptions.venkateshrao.com/p/cognitive-mercantilism">Cognitive Mercantilism</a>, October 25, 2026. An interpretive essay, used as an argument rather than empirical evidence.</li>
+  </ul>
+  <p>The underlying research and essay were checked on November 4, 2026. The research findings above retain their stated limits; the workflow is my recommendation for testing in your own business.</p>
+</section>
