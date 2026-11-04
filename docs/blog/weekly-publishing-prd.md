@@ -1,6 +1,6 @@
 # Weekly AI Blog Publishing PRD
 
-**Current owner direction: October 30, 2026 — automatic local Wednesday research/build/staging/email; manual review, edits and production publication. The local schedule is active; its first scheduled end-to-end run is not yet verified. Cloud scheduling is deferred.**
+**Current owner direction: October 30, 2026 — automatic local Wednesday research/build/staging/email; manual review, edits and production publication. The first scheduled local article/staging/email delivery was verified November 4, 2026 at 02:39:30 Eastern. Owner review, edit and publication roundtrips remain manual and separate. Cloud scheduling is deferred.**
 
 ## Outcome
 
@@ -9,10 +9,10 @@ A genuine, sourced AI thought-leadership article for CEOs and business owners, r
 ## Active local schedule and model
 
 - Wednesday start: **02:00 America/New_York**.
-- Verified preview target: **05:45 Eastern**; email and existing Remy delivery deadline: **06:00 Eastern**.
+- Verified preview email target: **05:45 Eastern**; delivery deadline: **06:00 Eastern**. This local job does not depend on Remy.
 - Research and independent editorial review: **GPT-6.1 Sol, High reasoning**. Mechanical build work: **GPT-6.1 Sol, Medium reasoning**. The reviewer is separate from the producer and cannot supply owner approval.
 - Run the actual article job locally on the owner-confirmed Mac, using background commands, headless browser QA and the existing Workspace email connection. The Mac must remain powered, awake, connected and running Codex Wednesday02:00–06:00 Eastern; its screen may be locked. This is not a cloud or both-Macs-off guarantee.
-- App automation: `wednesday-blog-preview-by-6-am-eastern`, active, GPT-6.1 Sol High, Wednesday02:00 in the host America/New_York timezone. Saved schedule/model/local execution were read back. First scheduled run: November4,2026. No extra full article is generated merely to test the scheduler. A missed job while the Mac is unavailable cannot send its own failure email.
+- App automation: `wednesday-blog-preview-by-6-am-eastern`, active, GPT-6.1 Sol High, Wednesday02:00 in the host America/New_York timezone. Saved schedule/model/local execution were read back. First scheduled local run: November4,2026, delivered a new verified article preview and HTML email at02:39:30EST. First observed setup clock was01:57:33EST; exact02:00 start accuracy is not certified. No extra full article is generated merely to test the scheduler. A missed job while the Mac is unavailable cannot send its own failure email.
 - Read current subscription headroom before admission. The 02:00 start can precede the weekly quota reset; the 06:00 deadline cannot depend on a later reset. Retain the standing admission reserve and report an honest delay if capacity or QA prevents readiness.
 - Source window: previous Wednesday through Tuesday in Eastern time, including Sunday or any other published editions. Use actual coverage, not an assumed five weekdays.
 
@@ -46,15 +46,18 @@ An email “Publish” button is optional future work only if a real supported a
 
 The public Pages website stays static. Native GitHub protected-environment approval and durable Git control records own publication; the existing Codex chat owns edits. This uses existing authentication without provisioning a separate review service. No new paid API lane, credential copying, substitute notifier named Remy or automatic publication is implied. Current local automation tooling alone does not prove a cloud routine or Remy push delivery. Verify the actual account connections and native receipts during the pilot before recurring activation.
 
-## End-to-end acceptance
+## Active local delivery acceptance
 
-1. Run the research skill on one complete real source window and build a genuine new article, original diagram and hub card.
-2. Pass the actual required local/hosted checks and verify the exact staging preview, source links, SEO and GA4 behavior.
-3. Deliver that real preview through Roman's selected email and existing Remy, with verified receipts.
-4. Accept one typed/dictated edit, return revision 2, and refuse approval of superseded revision 1.
-5. On Roman's explicit approval of revision 2, promote only its reviewed change and verify production.
-6. Prove duplicate notification/promotion handling, actual cloud execution without a Mac dependency, and same-version skill discovery on both machines.
-7. Activate the Wednesday 02:00/06:00 routine only after the complete proof passes. Until then report implemented, tested, delivered and unverified parts separately.
+The November 4 scheduled local run completed the currently authorized delivery scope:
+
+1. Complete source intake: all five editions indexed for October28 through November3, including Sunday, with complete transcripts/companions, private hashes and primary-source claim checks. October31 and November3 were unlisted at retrieval.
+2. Original article: **Make judgment reusable**, revision2, with scoped decision records, an illustrative sales-team example, sources, site-style diagram, compact card, social artwork, metadata, RSS/sitemap and shared GA4.
+3. Independent editorial/source PASS and relevant local checks, plus the normal full pre-push gate (131.420 seconds). Existing policy gates remained intact.
+4. Exact source `42af6b12b9eb93336c48f7332f79974d6ac9402f`: [CI passed](https://github.com/rbediner/romanbediner.com/actions/runs/41791885357) and [Deploy Staging passed](https://github.com/rbediner/romanbediner.com/actions/runs/41792277611). The initial push deploy was superseded by the successful CI-completion deploy.
+5. [Actual preview](https://rbediner.github.io/romanbediner-preview/blog/make-judgment-reusable/) passed all six desktop/phone/touch checks. Twenty-four served files match the actual repository preview transforms of the exact source. Preview noindex, GA4 preview/debug markers and zero CSP errors are verified; reporting-filter exclusion is not.
+6. One [rich HTML email](https://mail.google.com/mail/u/0/#all/1a1a57fad3f51294) delivered to roman@romanbediner.com at02:39:30EST. Sent, To/From, HTML and exact preview/source/chat links were read back. The [genuine generating chat](codex://threads/01a1a559-1533-7021-a9ff-ac01f644b9e0) is local to this Mac; no public editable web-session URL was exposed.
+
+Roman now reviews the preview and requests changes or says “Publish this version” in Codex. No automatic email-reply pickup is active. Production remains unchanged at `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`. Exact-revision owner approval, any future revision, production release verification, cloud execution and cross-machine skill discovery are not established by this local delivery. The earlier cloud/Remy pilot acceptance is deferred, not a prerequisite for the active local routine.
 
 ## Measurement
 
