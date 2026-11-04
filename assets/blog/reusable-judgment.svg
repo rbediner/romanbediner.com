@@ -1,41 +1,96 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="810" viewBox="0 0 1080 810" role="img" aria-label="A proposed loop for making business judgment reusable.">
-<title>Let the next case use what you learned.</title>
-<desc>Current standards support preparation and review. A named owner accepts work or returns it for correction. Decisions, reasons and exceptions are retained in the shared standards with their scope and owner. New circumstances require fresh judgment.</desc>
-<!-- All three responsibilities sit inside the same shared-knowledge enclosure. Gold marks decision authority; red marks evidence review. -->
-<defs>
-  <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#eef1e6"/></pattern>
-  <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="none" stroke="#104275" stroke-width="1.4"/></marker>
-</defs>
-<rect width="1080" height="810" fill="#fcfbf3"/><rect x="10" y="10" width="1060" height="790" fill="url(#grid)"/>
-<text x="42" y="62" font-family="Georgia,serif" fill="#16222e" font-size="36">Let the next case use what you learned.</text>
-<text x="42" y="100" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="19">A proposed operating loop for people and AI workflows</text>
-<rect x="42" y="140" width="996" height="552" rx="12" fill="#fff" fill-opacity=".75" stroke="#a4bdd3"/>
-<text x="68" y="181" font-family="Arial,sans-serif" fill="#104275" font-size="17" letter-spacing="1.4">SHARED CURRENT STANDARDS</text>
-<text x="68" y="218" font-family="Georgia,serif" fill="#16222e" font-size="28">Approved examples, reasons, scope and decision owners</text>
-<!-- The common bar supplies preparation, review and the owner; no one role is the sole consumer. -->
-<g stroke="#104275" stroke-width="2" fill="none"><path d="M220 246H860"/><path d="M220 246V286" marker-end="url(#arrow)"/><path d="M540 246V286" marker-end="url(#arrow)"/><path d="M860 246V286" marker-end="url(#arrow)"/></g>
-<g data-diagram-panel="prepare"><rect x="68" y="294" width="280" height="170" rx="9" fill="#fff" stroke="#104275"/>
-<text x="92" y="336" font-family="Georgia,serif" fill="#104275" font-size="30">Prepare</text>
-<text x="92" y="376" font-family="Arial,sans-serif" fill="#16222e" font-size="19">Use the current standard.</text>
-<text x="92" y="410" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="18">Flag missing information.</text>
-<text x="92" y="444" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="18">Keep sources attached.</text></g>
-<g data-diagram-panel="review"><rect x="400" y="294" width="280" height="170" rx="9" fill="#fff" stroke="#ab1d37"/>
-<text x="424" y="336" font-family="Georgia,serif" fill="#ab1d37" font-size="30">Review</text>
-<text x="424" y="376" font-family="Arial,sans-serif" fill="#16222e" font-size="19">Check evidence and fit.</text>
-<text x="424" y="410" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="18">Explain the correction.</text>
-<text x="424" y="444" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="18">Surface exceptions.</text></g>
-<g data-diagram-panel="decide"><rect x="732" y="294" width="280" height="170" rx="9" fill="#fff" stroke="#b7a369" stroke-width="2"/>
-<text x="756" y="336" font-family="Georgia,serif" fill="#806522" font-size="30">Named owner</text>
-<text x="756" y="376" font-family="Arial,sans-serif" fill="#16222e" font-size="19">Accept or return work.</text>
-<text x="756" y="410" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="18">Approve scoped changes.</text>
-<text x="756" y="444" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="18">Retain decision authority.</text></g>
-<g fill="none" stroke="#104275" stroke-width="2" marker-end="url(#arrow)"><path d="M348 378H390"/><path d="M680 378H722"/></g>
-<g data-diagram-panel="retain"><rect x="68" y="528" width="944" height="132" rx="9" fill="#fcfbf3" stroke="#b7a369"/>
-<text x="92" y="566" font-family="Georgia,serif" fill="#16222e" font-size="28">Record the reason, then test a different case</text>
-<text x="92" y="603" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="19">An exception stays an exception. A saved rule still needs proof of use.</text>
-<text x="92" y="640" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="17">The owner updates shared standards only where the decision applies.</text></g>
-<path d="M872 464V516" fill="none" stroke="#104275" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M68 587H54V202H60" fill="none" stroke="#104275" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="42" y="741" font-family="Georgia,serif" fill="#16222e" font-size="28">Changed circumstances require fresh judgment.</text>
-<text x="42" y="779" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="18">Keep the current decision visible to everyone doing, checking and accepting the work.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="1430" viewBox="0 0 1140 1430" role="img" aria-label="How reviewed work becomes a scoped, tested business standard.">
+<title>Make the next decision better.</title><desc>A proposal moves from preparation to review to acceptance within delegated authority. Unknown cases escalate to the owner. Accepted work exits to delivery. Review can return it for correction. Everyone uses shared current standards. Only recurring or consequential learning enters an owner-scoped branch. Customer exceptions stay with that customer; general candidates receive a bounded trial before any shared standard changes. The next different case tests the record against repeat corrections, review effort and upkeep. The owner keeps, revises or retires it, rather than treating every accepted edit as a universal rule.</desc>
+<!-- Blue: work and current standards. Red: review and correction. Gold: human authority. Arrowheads use explicit fixed-size triangles, never clipped SVG markers. -->
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#eef1e6"/></pattern></defs><rect width="1140" height="1430" fill="#fcfbf3"/><rect x="10" y="10" width="1120" height="1410" fill="url(#grid)"/>
+<text x="48" y="62" font-family="Georgia,serif" font-size="40" fill="#16222e" >Make the next decision better.</text>
+<text x="48" y="103" font-family="Arial,sans-serif" font-size="21" fill="#5b6b7a" >A proposed system for reviewed work, scoped learning and fresh judgment.</text>
+<g data-diagram-panel="shared"><rect x="48" y="138" width="984" height="170" rx="10" fill="#fff" stroke="#104275" stroke-width="1.5"/>
+<text x="72" y="180" font-family="Georgia,serif" font-size="29" fill="#104275" >Shared current standards</text>
+<text x="72" y="224" font-family="Arial,sans-serif" font-size="20" fill="#16222e" >Approved examples, decision reasons, scope and named owners.</text>
+<text x="72" y="260" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Preparation, review and acceptance all use the same current version.</text>
+</g>
+<path d="M540 308V344M208 344H872" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M208 344V369" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="down" points="208,380 202,369 214,369" fill="#104275"/>
+<path d="M540 344V369" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="down" points="540,380 534,369 546,369" fill="#104275"/>
+<path d="M872 344V369" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="down" points="872,380 866,369 878,369" fill="#104275"/>
+<text x="564" y="333" font-family="Arial,sans-serif" font-size="17" fill="#104275" >Use the current standard</text>
+<g data-diagram-panel="prepare"><rect x="64" y="384" width="280" height="190" rx="10" fill="#fff" stroke="#104275" stroke-width="1.5"/>
+<text x="88" y="426" font-family="Georgia,serif" font-size="29" fill="#104275" >Prepare</text>
+<text x="88" y="470" font-family="Arial,sans-serif" font-size="20" fill="#16222e" >Apply the standard.</text>
+<text x="88" y="506" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Attach the evidence.</text>
+<text x="88" y="542" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Flag missing inputs.</text>
+</g>
+<g data-diagram-panel="review"><rect x="400" y="384" width="280" height="190" rx="10" fill="#fff" stroke="#ab1d37" stroke-width="1.5"/>
+<text x="424" y="426" font-family="Georgia,serif" font-size="29" fill="#ab1d37" >Review</text>
+<text x="424" y="470" font-family="Arial,sans-serif" font-size="20" fill="#16222e" >Check evidence and fit.</text>
+<text x="424" y="506" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Explain the correction.</text>
+<text x="424" y="542" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Surface exceptions.</text>
+</g>
+<g data-diagram-panel="owner"><rect x="736" y="384" width="280" height="190" rx="10" fill="#fff" stroke="#b7a369" stroke-width="1.5"/>
+<text x="760" y="426" font-family="Georgia,serif" font-size="29" fill="#b7a369" >Accept or escalate</text>
+<text x="760" y="470" font-family="Arial,sans-serif" font-size="20" fill="#16222e" >Use delegated authority.</text>
+<text x="760" y="506" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Escalate unknown cases.</text>
+<text x="760" y="542" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Owner sets the limits.</text>
+</g>
+<path d="M344 474H381" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="right" points="392,474 381,468 381,480" fill="#104275"/>
+<path d="M680 474H717" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="right" points="728,474 717,468 717,480" fill="#104275"/>
+
+
+<path d="M540 574V622H208V593" fill="none" stroke="#ab1d37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="up" points="208,582 202,593 214,593" fill="#ab1d37"/>
+<text x="236" y="610" font-family="Arial,sans-serif" font-size="18" fill="#ab1d37" >Return review or owner findings</text>
+<text x="64" y="661" font-family="Arial,sans-serif" font-size="16" fill="#104275" letter-spacing="1.3">ONLY RECURRING OR CONSEQUENTIAL DECISIONS</text>
+<path d="M912 574V601" fill="none" stroke="#104275" stroke-width="2"/>
+<polygon data-arrowhead="down" points="912,612 906,601 918,601" fill="#104275"/>
+<g data-diagram-panel="deliver"><rect x="736" y="616" width="280" height="52" rx="8" fill="#fff" stroke="#104275"/>
+<text x="760" y="651" font-family="Georgia,serif" font-size="25" fill="#104275">Deliver accepted work</text></g>
+<path d="M800 574V594H708V740H717" fill="none" stroke="#b7a369" stroke-width="2" stroke-linejoin="round"/>
+<polygon data-arrowhead="right" points="728,740 717,734 717,746" fill="#b7a369"/>
+<g data-diagram-panel="record"><rect x="64" y="684" width="616" height="208" rx="10" fill="#fff" stroke="#104275" stroke-width="1.5"/>
+<text x="88" y="726" font-family="Georgia,serif" font-size="29" fill="#104275" >Prepare a candidate record</text>
+<text x="88" y="770" font-family="Arial,sans-serif" font-size="20" fill="#16222e" >Situation, decision, reason and example.</text>
+<text x="88" y="806" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Scope, owner, version and review trigger.</text>
+<text x="88" y="842" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Owner authorizes a bounded trial.</text>
+</g>
+<g data-diagram-panel="scope"><rect x="736" y="684" width="280" height="208" rx="10" fill="#fff" stroke="#b7a369" stroke-width="1.5"/>
+<text x="760" y="726" font-family="Georgia,serif" font-size="29" fill="#b7a369" >Scope the change</text>
+<text x="760" y="770" font-family="Arial,sans-serif" font-size="20" fill="#16222e" >General change: test it.</text>
+<text x="760" y="806" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Exception: customer only.</text>
+<text x="760" y="842" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Owner approves its scope.</text>
+</g>
+<path d="M736 790H699" fill="none" stroke="#b7a369" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="left" points="688,790 699,784 699,796" fill="#b7a369"/>
+<path d="M876 892V917" fill="none" stroke="#b7a369" stroke-width="2"/>
+<polygon data-arrowhead="down" points="876,928 870,917 882,917" fill="#b7a369"/>
+<g data-diagram-panel="customer"><rect x="736" y="932" width="280" height="88" rx="8" fill="#fff" stroke="#b7a369"/>
+<text x="760" y="968" font-family="Georgia,serif" font-size="25" fill="#806522">Customer-only record</text>
+<text x="760" y="1006" font-family="Arial,sans-serif" font-size="18" fill="#5b6b7a">No shared-rule update.</text></g>
+<path d="M372 892V1077" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="down" points="372,1088 366,1077 378,1077" fill="#104275"/>
+<text x="96" y="1040" font-family="Arial,sans-serif" font-size="17" fill="#104275" >Try it at the next comparable task</text>
+<g data-diagram-panel="trial"><rect x="64" y="1100" width="616" height="196" rx="10" fill="#fff" stroke="#104275" stroke-width="1.5"/>
+<text x="88" y="1142" font-family="Georgia,serif" font-size="29" fill="#104275" >Test a different case</text>
+<text x="88" y="1186" font-family="Arial,sans-serif" font-size="20" fill="#16222e" >Try ordinary, exception and missing-input cases.</text>
+<text x="88" y="1222" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Compare repeat corrections and review effort</text>
+<text x="88" y="1258" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >with the time spent maintaining the record.</text>
+</g>
+<g data-diagram-panel="renew"><rect x="736" y="1100" width="280" height="196" rx="10" fill="#fff" stroke="#b7a369" stroke-width="1.5"/>
+<text x="760" y="1142" font-family="Georgia,serif" font-size="29" fill="#806522">Keep, revise</text>
+<text x="760" y="1196" font-family="Georgia,serif" font-size="29" fill="#806522">or retire</text>
+<text x="760" y="1242" font-family="Arial,sans-serif" font-size="20" fill="#16222e">Does the record help?</text>
+
+<text x="760" y="1278" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a" >Owner decides next.</text>
+</g>
+<path d="M680 1194H717" fill="none" stroke="#104275" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="right" points="728,1194 717,1188 717,1200" fill="#104275"/>
+<path d="M1016 1194H1092V224H1051" fill="none" stroke="#b7a369" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon data-arrowhead="left" points="1040,224 1051,218 1051,230" fill="#b7a369"/>
+<text x="1073" y="900" font-family="Arial,sans-serif" font-size="18" fill="#806522" transform="rotate(-90 1073 900)">Approved general changes only</text>
+<text x="48" y="1352" font-family="Georgia,serif" font-size="27" fill="#16222e" >Accepted work moves on. Only useful learning becomes a shared standard.</text>
+<text x="48" y="1396" font-family="Arial,sans-serif" font-size="19" fill="#5b6b7a" >Keep a customer exception local. Change or retire an inherited rule when its reason no longer holds.</text>
 </svg>

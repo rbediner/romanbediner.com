@@ -63,6 +63,10 @@ The November 4 scheduled local run completed the currently authorized delivery s
 
 Roman now reviews the preview and requests changes or says “Publish this version” in Codex. No automatic email-reply pickup is active. Production remains unchanged at `e2c8cbe8c565fccdc98a00293eb1fd318ea01b2b`. Exact-revision owner approval, any future revision, production release verification, cloud execution and cross-machine skill discovery are not established by this local delivery. The earlier cloud/Remy pilot acceptance is deferred, not a prerequisite for the active local routine.
 
+## Current article revision work
+
+Roman explicitly authorized a one-task exception to the native local usage reserve for completing this existing article. The permanent reserve is unchanged. Revision 5 resolves council findings on delivery versus learning, delegated authority, scoped candidate trials and customer-only exceptions, and replaces the rejected diagram arrowheads. Five independent advisor critiques and five anonymous peer reviews preceded correction and final independent checks. The editorial humanization review uses the owner-approved core draft and first-person direction; no unavailable writing-retrieval or separate humanizer service is claimed. Exact-source staging verification and final review email remain required before ready delivery.
+
 ## Measurement
 
 The live Blog hub and first article were checked on October 29 for GA4 property G-DVHD0KL633 with one shared bootstrap each. Received GA4 reports and Search Console access remain unverified. Track organic landing sessions, engagement and relevant guide/contact actions by article; use Search Console for impressions, queries and clicks once access is verified. Traffic/ranking are measured outcomes, not guaranteed by publishing volume.

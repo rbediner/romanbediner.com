@@ -74,6 +74,16 @@ for (const width of [1440,1024,768,390,320]) test(`Reusable judgment article at 
     return bad;
   });
   expect(issues).toEqual([]);
+  // Fixed triangle heads must meet the end of a shaft; detached heads caused the owner rejection.
+  const detachedHeads = await figure.locator('svg').evaluate(svg => {
+    const ends = [...svg.querySelectorAll('path[stroke]')].map(path => path.getPointAtLength(path.getTotalLength()));
+    return [...svg.querySelectorAll('[data-arrowhead]')].filter(head => {
+      const points = [...head.points];
+      const base = {x:(points[1].x+points[2].x)/2,y:(points[1].y+points[2].y)/2};
+      return !ends.some(end => Math.hypot(end.x-base.x,end.y-base.y) <= 1);
+    }).map(head => head.getAttribute('points'));
+  });
+  expect(detachedHeads).toEqual([]);
   expect(await figure.locator('.diagram-serif').first().evaluate(n=>getComputedStyle(n).fontFamily)).toContain('Cormorant Garamond');
   const opener=page.locator('[data-expand-diagram]');
   await opener.click();await expect(page.locator('dialog')).toBeVisible();
@@ -86,8 +96,10 @@ for (const width of [1440,1024,768,390,320]) test(`Reusable judgment article at 
   if(process.env.RB_JUDGMENT_CAPTURE && [1440,390].includes(width)) {
     const dir=path.join(root,process.env.RB_JUDGMENT_CAPTURE);fs.mkdirSync(dir,{recursive:true});
     await page.evaluate(()=>window.scrollTo(0,0));
-    await page.screenshot({path:path.join(dir,`article-${width}.png`)});
-    await figure.screenshot({path:path.join(dir,`diagram-${width}.png`)});
+    await page.screenshot({path:path.join(dir,`article-${width}.png`),fullPage:true});
+    // Capture the below-fold diagram without moving it underneath the sticky header.
+    const diagramBox = await figure.boundingBox();
+    await page.screenshot({path:path.join(dir,`diagram-${width}.png`),clip:diagramBox,fullPage:true});
   }
   await page.goto(`${base}/blog/`);
   const card=page.locator('article').filter({has:page.locator('h2 a[href$="/blog/make-judgment-reusable/"]')});
