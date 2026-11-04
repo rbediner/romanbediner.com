@@ -1,7 +1,11 @@
 /**
- * Verify the actual weekly article, metadata and diagram at its local or deployed
- * destination. Trusted touch input exercises the reader's real pinch/pan path.
- * Reuse the same checks after staging; always close the owned server and contexts.
+ * Invariant:
+ * - The weekly article, metadata and diagram work at the actual destination.
+ * Why this exists:
+ * - Trusted touch input must exercise the reader's real pinch/pan path.
+ * What breaks if it fails:
+ * - Staging delivery stops before a preview with broken reading controls is sent.
+ * Reuse these checks after staging; always close owned servers and contexts.
  */
 const fs = require('fs');
 const path = require('path');
