@@ -1,27 +1,25 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 424
-- Updated At (UTC): 2026-11-08T17:51:29Z
+- Handoff Sequence: 425
+- Updated At (UTC): 2026-11-08T20:04:59Z
 - Source Branch: staging
-- Source Commit: 16fa67eada10291c365ccc5d01b525c190f15c21 (pre-handoff baseline)
+- Source Commit: d36e8d38c79f1a72a13bac7c0abd075fe1c3fd85 (pre-handoff baseline)
 
-## Current work: November11 early revision3 verified on isolated staging
+## Current work: November11 early revision3 published and verified
 
-Continue the SAME `what-ai-spend-buys` candidate for the November11 editorial week. Do not generate a second article. This is an early partial-week review of the available November4–6 editions retrieved November8, not complete November4–10 coverage. No schedule or automation settings changed.
+Roman explicitly approved this exact early staging revision with “Push to Prod” on November8. The unchanged article is now live at https://romanbediner.com/blog/what-ai-spend-buys/ and listed at https://romanbediner.com/blog/ . Do not generate or publish a duplicate Wednesday article.
 
-- Frozen revision3 source SHA256: `936d60b80657ca9d0dd751616f5509cc8e78e93dd1baf91d33ce65889a0ce84e`.
-- Isolated base: production `b8b7bec067f80678195a75535ecc824efaa70c93`; candidate branch `codex/preview-ai-spend-v3`. Current staging still contains unrelated unapproved publication-control maintenance. Do not promote staging wholesale.
-- The same weekly QA packet contains five advisor reviews, five anonymous peer reviews, chairman PASS and independent final source/arithmetic PASS. Revision3 preserves the final reviewed article bytes. Public article dates are November8; the intended week remains November11 in private state.
-- Local build and site-style cover/two-bar SVG complete. The bars distinguish wage-valued resource cost from cash and hypothetical incremental value. No payroll saving or six-hour economic approval rule is claimed. Safeguards remain in article prose.
-- Unchanged local full-regression/CI-parity gate passed in135.472seconds, including51Playwright tests; focused new article checks passed8/8 at seven widths with trusted phone pinch/pan/Fit, loaded-font containment and focus/scroll return. Initial line-gap failure retained; spacing corrected without weakening assertions. Coordinator inspected actual desktop diagram, phone article and desktop hub and returned PASS.
-- Exact tested candidate: `44f9500c176ae0be999bcc4d3911cef306dc3517`. CI [42506519644](https://github.com/rbediner/romanbediner.com/actions/runs/42506519644) passed all12jobs; admitted CI head matches the candidate. Deploy Staging [42506850074](https://github.com/rbediner/romanbediner.com/actions/runs/42506850074) passed with supported explicit source SHA/branch inputs. Workflows remain unchanged.
-- Verified article: https://rbediner.github.io/romanbediner-preview/blog/what-ai-spend-buys/ . Verified Blog hub: https://rbediner.github.io/romanbediner-preview/blog/ . This is staging review only, not production-ready or owner production approval.
-- Frozen transformed preview checksum: `e98faa3b5930a3708a9f7e65dc46f36231c16d8f7d759973989fa783bb6422db`; local and native deployment checksums match. Actual served24/24article/hub/discovery/artwork/font/runtime files match exact-source preview bytes. Live focused browser8/8checks passed across1440/1280/1024/768/430/390/320, including trusted pinch/pan/Fit and focus/scroll restoration. Actual deployed desktop diagram and phone fullscreen inspected.
-- Actual preview metadata/canonical/social image, release token, noindex and loaded site fonts verified. GA4 environment is preview with debug=true on desktop/phone. Reporting-filter exclusion, traffic and indexing outcomes NOT CHECKED. No email, schedule change or production action occurred.
-- Candidate push retained the unchanged normal full pre-push gate (134.830seconds). Current-cycle Actions: one CI, one Deploy Staging and one automatic Docs Sync, all successful; no retries. Subscription only, no paid model APIs; billed minutes and exact model allowance consumption unverified. No repo-owned release watchers remain.
-- This final receipt is a staging-origin documentation-only update; it is intentionally NOT copied onto the frozen candidate and does not require another CI/deploy cycle. Future publication must reconcile current prod ancestry and only this isolated approved article delta, never all pending staging maintenance.
-- Evidence and frozen hashes: `QA/results/weekly-blog/2026-11-11/revision3`; source caches remain Git-private. The same-week state marker must be read before Wednesday resumes this candidate and reconciles newly available later sources.
-- Ordinary editorial content only; no new product behavior, analytics contract or content-system rule. Live PRD update not required for this content-only candidate. Existing production remains unchanged.
+- Production source: `44f9500c176ae0be999bcc4d3911cef306dc3517`, the exact approved candidate. Remote prod fast-forwarded from `b8b7bec067f80678195a75535ecc824efaa70c93`. Its12-file delta contains only this article, artwork, hub/feed/sitemap, focused QA and staging-origin handoff. Unrelated staging publication-control maintenance was NOT promoted.
+- All11 frozen content/artwork/generated/QA hashes match. Article source SHA256 remains `936d60b80657ca9d0dd751616f5509cc8e78e93dd1baf91d33ce65889a0ce84e`. No article, diagram, date, workflow, schedule, settings or dependency lockfile changes.
+- Preserve the public November8 date and explicit partial coverage: available November4–6 editions retrieved November8 at17:21UTC, not a completed November4–10 review. Later sources may be reconciled separately, without silently revising the approved page or creating a duplicate.
+- Original exact-source CI42506519644 and Deploy Staging42506850074 were rechecked successful; staging deploy logs explicitly name the approved source. Original local full gate135.472seconds, pre-push134.830seconds and actual staging8/8browser plus24/24byte parity remain retained.
+- Production CI [42517727944](https://github.com/rbediner/romanbediner.com/actions/runs/42517727944) and Deploy Pages [42517728120](https://github.com/rbediner/romanbediner.com/actions/runs/42517728120) passed for exact source44f9500, including post-deploy validation and release tagging. The normal production verifier passed22routes.
+- Actual live article/hub passed8/8browser checks across1440/1280/1024/768/430/390/320px, including trusted phone pinch/pan/Fit and focus/scroll restoration. All24served files match the frozen production artifact; checksum `7a0f70b9db8764ee147a243d1c6410cb342ab6191c2233e22a7d78c9a3eb7c13`. Actual desktop diagram, phone article and desktop hub screenshots inspected.
+- Production canonical/social metadata, exact release token, loaded site fonts, clean browser console and GA4 production/debug-false passed on desktop/phone. No robots metadata/header indexing block; robots.txt permits crawling. No search indexing, ranking, traffic or reporting-filter outcome claimed.
+- The unchanged new push hook classified the final docs commit as docs-only and warned its Jest cache was missing. Existing locked dependencies were restored with npm ci, without tracked changes; a fresh unchanged full CI-parity run then passed, including51Playwright and73Jest tests plus Python/runtime checks. No gate or assertion was weakened.
+- Evidence: `QA/results/weekly-blog/2026-11-11/production-release` in the isolated candidate worktree. Same-week state markers in the primary checkout and Git-private packet record published state. Source caches remain private. Markers require future workers to read them; no automatic dedup mechanism or scheduler change is claimed.
+- This final documentation receipt originates on staging via isolated `npm run handoff:push`; it is not copied onto the frozen production source. Ordinary editorial content only, so no product-rule or live PRD change. LinkedIn work is separate and was not performed by this release worker.
+- Cost: production CI, Deploy Pages and automatic Docs Sync runs; one final documentation-only handoff/Docs Sync. No paid model API calls. Exact billed Actions minutes and subscription allowance consumption unverified. npm ci reported15existing dependency advisories; no upgrades or audit fixes performed. Release watchers reached terminal state.
 
 ## November4 release history: approved revision5 is live in production
 
