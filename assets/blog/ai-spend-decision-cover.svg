@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="What AI spend buys. Give the next budget increase a test.">
+<title>What AI spend buys</title>
+<!-- Site-native paper, grid, type and blue/gold roles match the article diagram. -->
+<defs><pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#eef1e6"/></pattern></defs>
+<rect width="1200" height="630" fill="#fcfbf3"/><rect x="12" y="12" width="1176" height="606" fill="url(#grid)"/>
+<text x="80" y="83" font-family="Arial,sans-serif" fill="#104275" font-size="19" letter-spacing="3">AI + BUSINESS OPERATIONS</text>
+<g font-family="Georgia,serif" fill="#16222e" font-size="88"><text x="80" y="235">What AI spend</text><text x="80" y="343" fill="#104275">buys.</text></g>
+<text x="80" y="442" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="30">Give the next budget increase a test.</text>
+<path d="M80 510H1120" stroke="#b7a369"/>
+<text x="80" y="574" font-family="Arial,sans-serif" fill="#16222e" font-size="22">Roman Bediner | AI-enabled operations</text>
+</svg>

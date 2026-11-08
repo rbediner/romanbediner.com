@@ -1,0 +1,41 @@
+<p>A larger AI bill can be a good investment. A more capable model might finish work that a cheaper one leaves for people to repair. Before increasing the budget, I want to see what the extra money changes for the business.</p>
+<p>The distinction becomes clearer with a small comparison. More employee time available, lower accounting cost and actual cash savings are different results. An investment decision needs to say which one it promises.</p>
+
+<section aria-labelledby="a-budget-example">
+  <h2 id="a-budget-example">Compare the whole job</h2>
+  <p>Consider an illustrative service business receiving 100 comparable support cases a week. These are hypothetical figures, not client results. Assume both approaches resolve all 100 within the same service target, with a responsible person accepting each resolution and no reopening during a seven-day follow-up. A real business should choose a follow-up period suited to its risks.</p>
+  <p>The current setup costs $200 a week in AI charges and needs 20 employee hours. Those hours include preparation, review, retries, correction, manual fallback and upkeep. At an assumed $50 hourly employment cost, including benefits and other employment costs, that is $1,000. Add $100 for supporting tools: the recurring resource cost is $1,300, or $13 per completed case.</p>
+  <p>The alternative costs $500 in AI charges and needs 10 employee hours for the same accepted work. Supporting tools remain $100. Its resource cost is $1,100, or $11 per case. Every attempt and fallback stays in the accounting, including work the AI could not finish.</p>
+  <p>The AI bill rises $300 while modeled resource cost falls $200. Payroll has not necessarily changed. The business has bought 10 available employee hours for another $300 in cash.</p>
+  {{diagram:ai-spend-decision}}
+</section>
+
+<section aria-labelledby="value-the-difference">
+  <h2 id="value-the-difference">Put a value on the difference</h2>
+  <p>At the assumed $50 employment cost, six hours offset the extra $300 in this accounting comparison. That is not an economic approval rule. Even genuinely usable time does not automatically create value equal to someone's wage.</p>
+  <p>If each available hour produces a defensible $25 of additional net value, 10 hours yield $250. Covering the extra $300 would require 12 hours, more than this example releases. With unchanged payroll and no valuable redeployment, the recurring cash bill simply rises.</p>
+  <p>My recommendation is to name the work those hours will receive, the constraint it addresses and the result someone can verify. Avoided overtime or an external expense may produce a cash saving. Clearing a backlog or meeting a missed service target may justify spending without reducing payroll. Additional sales should be judged by incremental contribution after delivery costs, not hoped-for revenue.</p>
+  <p>Compare that defensible benefit with the additional spending, setup investment and material risks over an agreed period. A quality or coverage improvement can justify a purchase under its own stated objective. It should not be relabeled an unproven cost saving.</p>
+</section>
+
+<section aria-labelledby="test-a-fixed-cohort">
+  <h2 id="test-a-fixed-cohort">Keep unfinished work in view</h2>
+  <p>The example assumes all 100 cases finish. A trial must test that assumption. Counting only completed cases can hide difficult work accumulating in the queue while the easy cases make the averages look better.</p>
+  <p>Give the support manager responsibility for a fixed intake cohort and observation period. Allocate comparable cases between the current and proposed approaches, retaining their case mix and unchanged quality and service standards. Customers should not receive duplicate answers merely to create a comparison. A manual process or fixed automation may also be a realistic alternative.</p>
+  <p>At review, show total intake, accepted resolutions, unresolved cases, reopened cases and manual completions, alongside charges and employee hours. Manual completions can also be accepted resolutions; report them as a breakdown, not extra output. Show the age of unfinished work. Wait until the last assigned case has completed its follow-up window, and keep tracking later failures.</p>
+  <p>Retain human responsibility for acceptance, a retry limit and escalation for consequential errors. A small trial cannot establish the absence of rare serious failures. Check what the available hours actually accomplished as well as whether they appeared on the schedule.</p>
+</section>
+
+<section aria-labelledby="buy-the-next-increment">
+  <h2 id="buy-the-next-increment">Check the commitment you are buying</h2>
+  <p>A favorable weekly example does not establish the economics of a monthly subscription or a larger rollout. Recalculate at expected volume and a plausible low-volume case over the actual commitment period. Include subscription minimums, pricing tiers, usage charges, setup and continuing oversight. Fewer cases may leave the fixed bill unchanged; harder cases may increase retries and review.</p>
+  <p>Name a change that sends the decision back for review, such as a higher price, lower demand or rising exception rate. A spending ceiling, review date and stop condition keep a promising result from becoming an open-ended commitment.</p>
+  <p>Ask whether this is the best use of the next $300. Removing a real support bottleneck may matter more than reducing another workflow's apparent cost. If the evidence is insufficient, fund a capped learning trial with a deadline and a specific question to answer. Renewing that experiment requires a review of what was learned, not an assumption of operating success. Redirecting the budget to another workflow is also a legitimate result.</p>
+  <p>My earlier <a href="/blog/ai-agent-attention-budget/">attention-budget article</a> addressed the human work AI consumes. This adds a spending decision: what additional benefit warrants the next commitment? The <a href="/framework/">AI-Enabled Operations Framework</a> connects that decision to ownership and execution. If you are weighing an increase, <a href="/connect/" data-blog-contact="closing">bring the workflow and its costs to a conversation</a>.</p>
+</section>
+
+<section aria-labelledby="sources">
+  <h2 id="sources">Sources and context</h2>
+  <p>Research began with Nathaniel Whittemore's <a href="https://aidailybrief.ai/">The AI Daily Brief</a>, particularly its <a href="https://aidailybrief.ai/e/2026-11-06">November 6 enterprise-spending discussion</a>. This early candidate covers the available November 4, 5 and 6 editions, retrieved November 8 at 17:21 UTC. It is partial coverage of the planned November 4 to 10 window.</p>
+  <p><a href="https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/">Menlo Ventures' 2026 report</a> puts average spending at 4.7 times the prior year's level against a planned 1.9 times; the median was 2.2 times against 1.8 times. Its methodology combines market modeling with a survey of nearly 400 US enterprise decision-makers, fielded September 8 to 26. Menlo invests in the sector. Spending growth does not demonstrate buyers' returns. The comparisons and recommendations here are original illustration, not measured company outcomes.</p>
+</section>

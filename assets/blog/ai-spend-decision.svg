@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1110" viewBox="0 0 1120 1110" role="img" aria-label="Illustrative alternatives each receive and resolve the same 100 comparable support cases. Current resource cost is 1300 dollars; alternative resource cost is 1100 dollars. Another 300 dollars cash makes ten employee hours available. Wage valuation alone does not approve the spending.">
+<title>Compare the whole job</title>
+<desc>Hypothetical weekly alternatives, not client results or 200 real cases. Each accepts all 100 cases to the same service target, with responsible human acceptance and no reopening in seven days. Current: AI 200 dollars, employee effort 20 hours at an assumed 50 dollars employment cost equals 1000 dollars, tools 100 dollars, total 1300 dollars or 13 per case. Alternative: AI 500 dollars, employee effort 10 hours at 50 dollars equals 500 dollars, tools 100 dollars, total 1100 dollars or 11 per case. All AI attempts, human review, retries, correction, manual fallback and upkeep remain counted. Payroll does not automatically fall. Six hours at 50 dollars is accounting break-even only. At an assumed defensible incremental net value of 25 dollars per hour, ten available hours yield 250 dollars, below the extra 300 dollars cash; twelve hours would be required. Economic approval also needs setup, commitment-period and risk review by the responsible person.</desc>
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#eef1e6"/></pattern></defs>
+<rect width="1120" height="1110" fill="#fcfbf3"/><rect x="12" y="12" width="1096" height="1086" fill="url(#grid)"/>
+<text x="44" y="62" font-family="Georgia,serif" fill="#16222e" font-size="42">Compare the whole job</text>
+<text x="44" y="102" font-family="Arial,sans-serif" fill="#104275" font-size="19" letter-spacing="1.8">ILLUSTRATIVE WEEKLY ALTERNATIVES</text>
+<text x="44" y="143" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="24">Same 100 intake cases. Each setup accepts all 100.</text>
+<text x="44" y="178" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="22">Same service target, human acceptance and seven-day follow-up.</text>
+<g data-diagram-panel="current">
+<rect x="28" y="207" width="1064" height="214" rx="12" fill="#fff" stroke="#dce3ea"/>
+<text x="52" y="247" font-family="Georgia,serif" fill="#16222e" font-size="32">Current setup</text>
+<text x="1068" y="247" text-anchor="end" font-family="Arial,sans-serif" fill="#16222e" font-size="25">$1,300 · $13 / accepted case</text>
+<g data-cost-bar="current"><rect x="52" y="274" width="156" height="45" fill="#104275"/><rect x="208" y="274" width="780" height="45" fill="#b7a369"/><rect x="988" y="274" width="78" height="45" fill="#dce3ea"/></g>
+<text x="52" y="360" font-family="Arial,sans-serif" fill="#104275" font-size="24">AI $200</text>
+<text x="252" y="360" font-family="Arial,sans-serif" fill="#16222e" font-size="24">Employee effort $1,000</text>
+<text x="916" y="360" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="24">Tools $100</text>
+<text x="252" y="398" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="23">20 hours × assumed $50 employment cost</text>
+</g>
+<g data-diagram-panel="alternative">
+<rect x="28" y="441" width="1064" height="214" rx="12" fill="#fff" stroke="#dce3ea"/>
+<text x="52" y="481" font-family="Georgia,serif" fill="#16222e" font-size="32">Alternative setup</text>
+<text x="1068" y="481" text-anchor="end" font-family="Arial,sans-serif" fill="#16222e" font-size="25">$1,100 · $11 / accepted case</text>
+<g data-cost-bar="alternative"><rect x="52" y="508" width="390" height="45" fill="#104275"/><rect x="442" y="508" width="390" height="45" fill="#b7a369"/><rect x="832" y="508" width="78" height="45" fill="#dce3ea"/></g>
+<text x="52" y="594" font-family="Arial,sans-serif" fill="#104275" font-size="24">AI $500</text>
+<text x="252" y="594" font-family="Arial,sans-serif" fill="#16222e" font-size="24">Employee effort $500</text>
+<text x="916" y="594" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="24">Tools $100</text>
+<text x="252" y="632" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="23">10 hours × assumed $50 employment cost</text>
+</g>
+<text x="44" y="697" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="22">AI: every attempt. Effort: preparation, review, retries, correction,</text>
+<text x="44" y="730" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="22">manual fallback and upkeep. Bars share one dollar scale.</text>
+<text x="44" y="777" font-family="Georgia,serif" fill="#16222e" font-size="31">+$300 AI cash buys 10 available employee hours</text>
+<text x="44" y="814" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="23">$200 lower modeled resource cost ≠ automatic cash savings.</text>
+<g data-diagram-panel="conditional">
+<rect x="28" y="845" width="1064" height="238" rx="12" fill="#fff" stroke="#dce3ea"/>
+<text x="52" y="883" font-family="Georgia,serif" fill="#16222e" font-size="30">Value the hours separately</text>
+<text x="52" y="924" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="23">$300 ÷ $50 = 6 hours: accounting break-even only.</text>
+<text x="52" y="965" font-family="Arial,sans-serif" fill="#16222e" font-size="24">If assumed net value is $25 / hour: 10 hours = $250.</text>
+<text x="52" y="1006" font-family="Arial,sans-serif" fill="#ab1d37" font-size="24">Below $300. Covering it needs 12 hours; only 10 are available.</text>
+<text x="52" y="1054" font-family="Arial,sans-serif" fill="#5b6b7a" font-size="22">Illustrative assumptions. Wage valuation is not spending approval.</text>
+</g>
+</svg>
