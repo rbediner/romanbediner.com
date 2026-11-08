@@ -1,9 +1,22 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 422
-- Updated At (UTC): 2026-11-04T21:26:35Z
+- Handoff Sequence: 423
+- Updated At (UTC): 2026-11-08T17:42:20Z
 - Source Branch: staging
-- Source Commit: c71568404b2fc5b7829572f3da38b2f78e9f6974 (pre-handoff baseline)
+- Source Commit: 47a4a8b52c45a7c725e78d096c66a2f3bf66eba3 (pre-handoff baseline)
+
+## Current work: November11 early candidate, local review passed
+
+Continue the SAME `what-ai-spend-buys` candidate for the November11 editorial week. Do not generate a second article. This is an early partial-week review of the available November4–6 editions retrieved November8, not complete November4–10 coverage. No schedule or automation settings changed.
+
+- Frozen revision3 source SHA256: `936d60b80657ca9d0dd751616f5509cc8e78e93dd1baf91d33ce65889a0ce84e`.
+- Isolated base: production `b8b7bec067f80678195a75535ecc824efaa70c93`; candidate branch `codex/preview-ai-spend-v3`. Current staging still contains unrelated unapproved publication-control maintenance. Do not promote staging wholesale.
+- The same weekly QA packet contains five advisor reviews, five anonymous peer reviews, chairman PASS and independent final source/arithmetic PASS. Revision3 preserves the final reviewed article bytes. Public article dates are November8; the intended week remains November11 in private state.
+- Local build and site-style cover/two-bar SVG complete. The bars distinguish wage-valued resource cost from cash and hypothetical incremental value. No payroll saving or six-hour economic approval rule is claimed. Safeguards remain in article prose.
+- Unchanged local full-regression/CI-parity gate passed in135.472seconds, including51Playwright tests; focused new article checks passed8/8 at seven widths with trusted phone pinch/pan/Fit, loaded-font containment and focus/scroll return. Initial line-gap failure retained; spacing corrected without weakening assertions. Coordinator inspected actual desktop diagram, phone article and desktop hub and returned PASS.
+- Remote exact-head CI, Deploy Staging and destination artifact/browser parity are PENDING. Local screenshots alone do not establish preview readiness. No production action, email or owner production approval.
+- Evidence and frozen hashes: `QA/results/weekly-blog/2026-11-11/revision3`; source caches remain Git-private. The same-week state marker must be read before Wednesday resumes this candidate and reconciles newly available later sources.
+- Ordinary editorial content only; no new product behavior, analytics contract or content-system rule. Live PRD update not required for this content-only candidate. Existing production remains unchanged.
 
 ## Current state: approved revision 5 is verified live in production
 
