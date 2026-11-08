@@ -1,11 +1,11 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 423
-- Updated At (UTC): 2026-11-08T17:42:20Z
+- Handoff Sequence: 424
+- Updated At (UTC): 2026-11-08T17:51:29Z
 - Source Branch: staging
-- Source Commit: 47a4a8b52c45a7c725e78d096c66a2f3bf66eba3 (pre-handoff baseline)
+- Source Commit: 16fa67eada10291c365ccc5d01b525c190f15c21 (pre-handoff baseline)
 
-## Current work: November11 early candidate, local review passed
+## Current work: November11 early revision3 verified on isolated staging
 
 Continue the SAME `what-ai-spend-buys` candidate for the November11 editorial week. Do not generate a second article. This is an early partial-week review of the available November4–6 editions retrieved November8, not complete November4–10 coverage. No schedule or automation settings changed.
 
@@ -14,11 +14,16 @@ Continue the SAME `what-ai-spend-buys` candidate for the November11 editorial we
 - The same weekly QA packet contains five advisor reviews, five anonymous peer reviews, chairman PASS and independent final source/arithmetic PASS. Revision3 preserves the final reviewed article bytes. Public article dates are November8; the intended week remains November11 in private state.
 - Local build and site-style cover/two-bar SVG complete. The bars distinguish wage-valued resource cost from cash and hypothetical incremental value. No payroll saving or six-hour economic approval rule is claimed. Safeguards remain in article prose.
 - Unchanged local full-regression/CI-parity gate passed in135.472seconds, including51Playwright tests; focused new article checks passed8/8 at seven widths with trusted phone pinch/pan/Fit, loaded-font containment and focus/scroll return. Initial line-gap failure retained; spacing corrected without weakening assertions. Coordinator inspected actual desktop diagram, phone article and desktop hub and returned PASS.
-- Remote exact-head CI, Deploy Staging and destination artifact/browser parity are PENDING. Local screenshots alone do not establish preview readiness. No production action, email or owner production approval.
+- Exact tested candidate: `44f9500c176ae0be999bcc4d3911cef306dc3517`. CI [42506519644](https://github.com/rbediner/romanbediner.com/actions/runs/42506519644) passed all12jobs; admitted CI head matches the candidate. Deploy Staging [42506850074](https://github.com/rbediner/romanbediner.com/actions/runs/42506850074) passed with supported explicit source SHA/branch inputs. Workflows remain unchanged.
+- Verified article: https://rbediner.github.io/romanbediner-preview/blog/what-ai-spend-buys/ . Verified Blog hub: https://rbediner.github.io/romanbediner-preview/blog/ . This is staging review only, not production-ready or owner production approval.
+- Frozen transformed preview checksum: `e98faa3b5930a3708a9f7e65dc46f36231c16d8f7d759973989fa783bb6422db`; local and native deployment checksums match. Actual served24/24article/hub/discovery/artwork/font/runtime files match exact-source preview bytes. Live focused browser8/8checks passed across1440/1280/1024/768/430/390/320, including trusted pinch/pan/Fit and focus/scroll restoration. Actual deployed desktop diagram and phone fullscreen inspected.
+- Actual preview metadata/canonical/social image, release token, noindex and loaded site fonts verified. GA4 environment is preview with debug=true on desktop/phone. Reporting-filter exclusion, traffic and indexing outcomes NOT CHECKED. No email, schedule change or production action occurred.
+- Candidate push retained the unchanged normal full pre-push gate (134.830seconds). Current-cycle Actions: one CI, one Deploy Staging and one automatic Docs Sync, all successful; no retries. Subscription only, no paid model APIs; billed minutes and exact model allowance consumption unverified. No repo-owned release watchers remain.
+- This final receipt is a staging-origin documentation-only update; it is intentionally NOT copied onto the frozen candidate and does not require another CI/deploy cycle. Future publication must reconcile current prod ancestry and only this isolated approved article delta, never all pending staging maintenance.
 - Evidence and frozen hashes: `QA/results/weekly-blog/2026-11-11/revision3`; source caches remain Git-private. The same-week state marker must be read before Wednesday resumes this candidate and reconciles newly available later sources.
 - Ordinary editorial content only; no new product behavior, analytics contract or content-system rule. Live PRD update not required for this content-only candidate. Existing production remains unchanged.
 
-## Current state: approved revision 5 is verified live in production
+## November4 release history: approved revision5 is live in production
 
 The revised **Make judgment reusable** article is ready for full-site owner review. Roman liked the new diagram and explicitly requested staging links here and by email. Roman subsequently explicitly instructed “push this to Prod” for this exact staged revision, after council and voice review. The approved article/diagram bytes must remain unchanged.
 
@@ -38,7 +43,7 @@ The revised **Make judgment reusable** article is ready for full-site owner revi
 - Actual production article/hub passed all6desktop/mobile/touch tests and24exact-file artifact parity. Production fonts loaded, console clean, GA4 production/debug-false verified; robots metadata/headers contain no indexing block and robots.txt permits crawling. Indexing or ranking outcomes are not asserted.
 - Private native release receipts and browser/byte/runtime proofs are retained under QA/results/weekly-blog/2026-11-04/production-release.
 - Weekly Git contract now says two or three actual editorial passes, actual council, voice/humanization review, staging, owner review, then explicit exact-version production approval. No automatic publication.
-- Saved local app prompt remains unchanged: API rejected the delegated context as non-local; Computer Use refused com.openai.codex for safety reasons. No UI action or raw TOML/DB workaround executed. Open existing local generating chat01a1a559-1533-7021-a9ff-ac01f644b9e0 to apply the prepared prompt through the supported automation tool. Schedule/model/cwd/reserves remain unchanged. Parent06:00check remains separately configured.
+- Historical November4 prompt update attempts were blocked in that delegated context. Superseding coordinator verification during November8: the native saved prompt was successfully updated November6 and read back at7,136characters; existing scheduled chat is idle. Do not reapply the old prepared prompt. No schedule/model/cwd/reserve settings changed in this task; the parent06:00check remains separate.
 
 ## Research, iterations and review
 
@@ -61,11 +66,11 @@ The graph separates delegated acceptance and delivered work from recurring/conse
 
 Roman explicitly authorized a one-task exception to complete this existing blog with20% native weekly allowance remaining. Permanent30%admission/25%floor unchanged. No API credits/new services/credentials used.
 
-Existing local generator id `wednesday-blog-preview-by-6-am-eastern` remains unchanged: the supported tool returned local-threads-only error in this delegated context. Exact prepared update is retained in the November4 task workspace; apply via supported local tool, never raw TOML. The saved prompt already reads current Git rules, which explicitly supersede the old one-reviewer/email-only restriction. Parent-owned Wednesday06:00Eastern delivery check id `6aeb930782808191bd76e3cefefe633c` is recorded in the runbook; it reports existing proof/blockers, without duplicate generation/publication. Configuration is not future-execution proof. Root owns supported main-chat delivery; local generation alone does not prove its callback.
+Existing local generator id `wednesday-blog-preview-by-6-am-eastern` retains its schedule and settings. Historical November4 tool failures no longer imply its saved prompt is stale: coordinator verified the November6 updated7,136-character prompt and idle scheduled chat during this task. Do not reapply the historical prepared prompt or edit raw scheduler files. The current prompt reads the Git rules, which supersede the old one-reviewer/email-only restriction. Before Wednesday work, read this handoff and the same-week marker, resume revision3 and reconcile newly available later sources rather than generate another article. Parent-owned Wednesday06:00Eastern delivery check id `6aeb930782808191bd76e3cefefe633c` is recorded in the runbook; it reports existing proof/blockers, without duplicate generation/publication. Configuration is not future-execution proof. Root owns supported main-chat delivery; local generation alone does not prove its callback.
 
 Production is now `b8b7bec067f80678195a75535ecc824efaa70c93`, fast-forwarded from e2c8cbe after the exact isolated candidate passed CI and preview verification. PR22 is merged. The complete13-file release excludes unrelated staging workflow/scripts/package/skill changes. Candidate branch `codex/publish-judgment-v5` starts from that production base and includes only the approved article, artwork, hub/discovery, focused QA and required documentation. Its approved content hashes match staged source69070eab7b047acbe65646cec04014810bb45da7. The initial manual CI attempt stopped at the required handoff guard; the staging-first handoff then accompanied the complete production-base-to-head PR delta. All12PRCI jobs and the isolated preview passed, its test-merge tree equaled the candidate, and the normal full production push hook passed139.544seconds. No gate was weakened. Current staging includes older unapproved publication-control maintenance. On a later exact-version publish instruction, isolate/reconcile the complete approved release delta and rerun any necessary exact-source staging evidence; do not blindly promote current staging HEAD. Active local manual release accepts explicit revision approval in chat plus normal gates; the separate deferred protected GitHub workflow still requires rbediner environment approval with no bypass. Do not activate automatic production.
 
-## Cost and cleanup
+## November4 historical cost and cleanup
 
 Subscription model calls only under the one-task exception. Four native Actions runs: one CI with two attempts; initial staging cancelled; failed-CI event staging skipped; replacement staging succeeded. Billed minutes/dollars and per-task API usage unverified. Passing evidence reused; no new article or paid model API generation. Task-owned headless browsers/servers and release watchers reached terminal state; primary checkout and required private evidence retained. Dashboard unchanged.
 
