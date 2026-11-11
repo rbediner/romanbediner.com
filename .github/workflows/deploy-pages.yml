@@ -74,6 +74,10 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
+      # Roman, 2026-11-11: test every change locally, test once on GitHub when publishing (CI-STANDARD.md step 5).
+      - name: Release check (CI standard, test once before publishing)
+        run: bash .github/ci-standard/local-gate.sh --all
+
       - name: Build deploy artifact from current prod commit
         id: build
         run: node scripts/build/create-artifact.js --out /tmp/rb-site-artifact
