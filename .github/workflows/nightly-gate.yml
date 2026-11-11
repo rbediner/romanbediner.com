@@ -1,0 +1,85 @@
+name: Nightly gate
+
+# The safety net for CI010 (CI-STANDARD.md, Roman 2026-11-11): checks run on the agent's machine before the push, never
+# on GitHub per pull request. Once a night this job re-runs the same local gate on the default branch and checks that
+# every pull request merged in the last day carried a "Local-Gate: pass <its head>" line. It does nothing (one short
+# step) on a day with no change. Anything red opens ONE issue, which the morning fixer repairs; nothing emails Roman.
+# Installed only in repositories whose config.json declares local_gate commands (real tests); the CI standard lint alone
+# does not need a nightly run. Template: rbediner/automation-estate .github/ci-standard/nightly-gate.yml.tmpl.
+on:
+  schedule:
+    - cron: '43 7 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: nightly-gate
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  nightly-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Anything changed on the default branch in the last day
+        id: changed
+        run: |
+          n=$(git log --since='26 hours ago' --oneline | wc -l | tr -d ' ')
+          echo "commits=$n" >> "$GITHUB_OUTPUT"
+          echo "commits on the default branch in the last 26 hours: $n"
+      - uses: actions/setup-node@v4
+        if: steps.changed.outputs.commits != '0' || github.event_name == 'workflow_dispatch'
+        with:
+          node-version: 22
+      - name: Re-run the local gate on the default branch
+        id: gate
+        if: steps.changed.outputs.commits != '0' || github.event_name == 'workflow_dispatch'
+        continue-on-error: true
+        run: bash .github/ci-standard/local-gate.sh --all 2>&1 | tee "$RUNNER_TEMP/gate.log"
+      - name: Every merged pull request carried a local pass for its head
+        id: proof
+        if: steps.changed.outputs.commits != '0' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          since=$(date -u -d '26 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+          gh pr list --repo "$GITHUB_REPOSITORY" --state merged --search "merged:>=$since" --limit 100 \
+            --json number,headRefOid,body,title > "$RUNNER_TEMP/prs.json"
+          python3 - "$RUNNER_TEMP/prs.json" > "$RUNNER_TEMP/missing.txt" <<'PY'
+          import json, re, sys
+          for pr in json.load(open(sys.argv[1])):
+              shas = re.findall(r"Local-Gate: pass ([0-9a-f]{7,40})", pr.get("body") or "")
+              head = pr["headRefOid"]
+              if not any(head.startswith(s) for s in shas):
+                  print("#%d %s" % (pr["number"], pr["title"]))
+          PY
+          cat "$RUNNER_TEMP/missing.txt"
+          echo "missing=$(grep -c . "$RUNNER_TEMP/missing.txt" || true)" >> "$GITHUB_OUTPUT"
+      - name: Open or update one issue when anything is red
+        if: steps.gate.outcome == 'failure' || (steps.proof.outputs.missing != '' && steps.proof.outputs.missing != '0')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GATE: ${{ steps.gate.outcome }}
+        run: |
+          missing=$(cat "$RUNNER_TEMP/missing.txt" 2>/dev/null)
+          if [ "$GATE" != "failure" ] && [ -z "$missing" ]; then echo "all green"; exit 0; fi
+          title="[nightly-gate] $GITHUB_REPOSITORY: main failed its local gate or a merge skipped it"
+          {
+            echo "The nightly gate (CI-STANDARD.md, CI010) found a problem on $(date -u +%Y-%m-%d)."
+            echo
+            [ "$GATE" = "failure" ] && { echo "**The local gate failed on the default branch.** Last lines:"; echo '```'; tail -40 "$RUNNER_TEMP/gate.log"; echo '```'; }
+            [ -n "$missing" ] && { echo "**Merged without a Local-Gate pass line for their head commit:**"; echo "$missing"; }
+            echo
+            echo "[Run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)"
+          } > "$RUNNER_TEMP/body.md"
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"[nightly-gate]\"" --json number -q '.[0].number')
+          if [ -n "$existing" ]; then gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/body.md"
+          else gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body-file "$RUNNER_TEMP/body.md"; fi
+          exit 1

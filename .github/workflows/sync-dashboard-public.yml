@@ -15,9 +15,14 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: sync-dashboard-public
+  cancel-in-progress: false
+
 jobs:
   sync-dashboard:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout romanbediner.com (source)
         uses: actions/checkout@v6

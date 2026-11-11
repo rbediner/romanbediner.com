@@ -30,6 +30,7 @@ concurrency:
 
 jobs:
   handoff-sync:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -71,6 +72,7 @@ jobs:
           fi
 
   session-ready:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: handoff-sync
@@ -96,6 +98,7 @@ jobs:
         run: npm run session:ready
 
   gate-profile:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: session-ready
@@ -168,6 +171,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
   repo-contract:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs:
@@ -190,6 +194,7 @@ jobs:
         run: npm run verify:repo-contract
 
   workflow-integrity:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs:
@@ -212,7 +217,7 @@ jobs:
         run: npm run verify:workflow-integrity
 
   unit-tests:
-    if: needs.gate-profile.outputs.run_unit_tests == 'true'
+    if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_unit_tests == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs:
@@ -236,7 +241,7 @@ jobs:
         run: ${{ needs.gate-profile.outputs.unit_command }}
 
   qa-tests:
-    if: needs.gate-profile.outputs.run_qa_tests == 'true'
+    if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_qa_tests == 'true')
     # Playwright 1.58 supports Ubuntu 24.04; ubuntu-latest can select 26.04.
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -274,7 +279,7 @@ jobs:
         run: npm run test:python
 
   regression-tests:
-    if: needs.gate-profile.outputs.run_regression_tests == 'true'
+    if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_regression_tests == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs:
@@ -298,7 +303,7 @@ jobs:
         run: ${{ needs.gate-profile.outputs.regression_command }}
 
   browser-tests:
-    if: needs.gate-profile.outputs.run_browser_tests == 'true'
+    if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_browser_tests == 'true')
     # Playwright 1.58 supports Ubuntu 24.04; ubuntu-latest can select 26.04.
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -326,7 +331,7 @@ jobs:
         run: ${{ needs.gate-profile.outputs.browser_command }}
 
   lighthouse-validation:
-    if: needs.gate-profile.outputs.run_lighthouse_validation == 'true'
+    if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_lighthouse_validation == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs:
@@ -373,7 +378,7 @@ jobs:
           fi
 
   link-validation:
-    if: needs.gate-profile.outputs.run_link_validation == 'true'
+    if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_link_validation == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs:
@@ -411,6 +416,7 @@ jobs:
 
   build-artifact:
     if: |
+      github.event_name != 'pull_request' &&
       always() &&
       needs.gate-profile.outputs.run_build_artifact == 'true' &&
       needs.repo-contract.result == 'success' &&
