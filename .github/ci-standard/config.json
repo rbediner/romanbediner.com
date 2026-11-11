@@ -5,7 +5,14 @@
   ],
   "deploy_workflows": [],
   "weekly_minute_budget": 300,
-  "exceptions": [],
+  "exceptions": [
+    {
+      "rule": "CI009",
+      "file": "config.json",
+      "reason": "Branch hygiene (allowlist, janitor workflow, release gate) is not installed in this repository yet; the release check would otherwise fail on this one rule and block every deploy. The install is a separate change.",
+      "expires": "2027-01-31"
+    }
+  ],
   "local_gate": [
     "[ -d node_modules ] || npm ci",
     "npm run test:node",
