@@ -5,5 +5,11 @@
   ],
   "deploy_workflows": [],
   "weekly_minute_budget": 300,
-  "exceptions": []
+  "exceptions": [],
+  "local_gate": [
+    "[ -d node_modules ] || npm ci",
+    "npm run test:node",
+    "npm run test:jest",
+    "a=\"${TMPDIR:-/tmp}/rb-site-artifact-localgate\"; node scripts/build/create-artifact.js --out \"$a\" && node scripts/qa/verify-artifact-integrity.js --artifact \"$a\" --expect-commit \"$(git rev-parse HEAD)\""
+  ]
 }

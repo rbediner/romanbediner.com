@@ -40,12 +40,12 @@ assert(ciText.includes('run_build_artifact'), 'ci.yml gate-profile job must expo
 assert(ciText.includes('## CI Gate Profile'), 'ci.yml gate-profile job must publish a readable job summary');
 
 const selectiveJobGuards = [
-  "if: needs.gate-profile.outputs.run_unit_tests == 'true'",
-  "if: needs.gate-profile.outputs.run_regression_tests == 'true'",
-  "if: needs.gate-profile.outputs.run_link_validation == 'true'",
-  "if: needs.gate-profile.outputs.run_browser_tests == 'true'",
-  "if: needs.gate-profile.outputs.run_qa_tests == 'true'",
-  "if: needs.gate-profile.outputs.run_lighthouse_validation == 'true'"
+  "if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_unit_tests == 'true')",
+  "if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_regression_tests == 'true')",
+  "if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_link_validation == 'true')",
+  "if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_browser_tests == 'true')",
+  "if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_qa_tests == 'true')",
+  "if: github.event_name != 'pull_request' && (needs.gate-profile.outputs.run_lighthouse_validation == 'true')"
 ];
 
 for (const guard of selectiveJobGuards) {
