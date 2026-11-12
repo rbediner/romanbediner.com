@@ -1,6 +1,6 @@
 /**
  * Invariant:
- * - The PULSE article, metadata and interactive illustration work at the actual destination.
+ * - The PULSE article, metadata and development dashboard work at the actual destination.
  * Why this exists:
  * - Trusted touch input must exercise the reader's real pinch/pan path.
  * What breaks if it fails:
@@ -43,7 +43,9 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`Pulse reading and co
  const f=page.frameLocator('iframe');await expect(f.locator('#board [role=button]').first()).toBeVisible();
  await expect(page.locator('iframe')).toHaveAttribute('sandbox','allow-scripts');
  await expect(f.locator('#viewerSel')).toHaveCount(0);
- await expect(f.locator('.note')).toContainText('not live business activity');
+ await expect(f.locator('.note')).toContainText('PULSE is the dashboard being built for Maya');
+ await expect(f.locator('.note')).toContainText('sample posts and messages, not live campaign data');
+ await expect(page.locator('.article-body')).toContainText('it is not connected to live campaign data');
  for(const mode of ['idle','night','wed']){await f.locator(`[data-mode=${mode}]`).click();await expect(f.locator(`[data-mode=${mode}]`)).toHaveAttribute('aria-pressed','true');}
  for(const n of ['12','17','21','28']){await f.locator('#slots').selectOption(n);await expect(f.locator('[data-id^="p_"]')).toHaveCount(Number(n));}
  await f.locator('#pause').click();await expect(f.locator('#pause')).toHaveText('Resume');const board=await f.locator('#board').innerHTML();const clock=await f.locator('#clock').innerText();await page.waitForTimeout(1100);expect(await f.locator('#board').innerHTML()).toBe(board);expect(await f.locator('#clock').innerText()).toBe(clock);
@@ -61,7 +63,7 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`Pulse reading and co
  await page.locator('[data-pulse-zoom=in]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('150%');expect(await f.locator('.boardwrap').evaluate(e=>e.scrollWidth>e.clientWidth)).toBe(true);await page.locator('[data-pulse-zoom=out]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('100%');await page.locator('[data-pulse-zoom=in]').click();await page.locator('[data-pulse-zoom=fit]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('100%');
  await page.evaluate(()=>window.postMessage({type:'pulse:escape'},'*'));await page.waitForTimeout(50);expect(await page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(true);await f.locator('#slots').selectOption('21');await f.locator('#slots').press('Escape');await expect.poll(()=>page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(false);await expect(full).toBeFocused();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(savedY);await expect(f.locator('#slots')).toHaveValue('21');
  await full.click();await page.getByRole('button',{name:'Close expanded PULSE',exact:true}).click();await expect(full).toBeFocused();
- await expect(page.getByRole('link',{name:'Discuss your business workflow',exact:true})).toHaveAttribute('href',/\/connect\/$/);
+ await expect(page.getByRole('link',{name:'Talk with me about it',exact:false})).toHaveAttribute('href',/\/connect\/$/);
  await expect(page.locator('.agency-role-table tbody tr')).toHaveCount(8);expect(await page.locator('.agency-role-table').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
  const chart=page.locator('.blog-diagram-scroll');expect(await chart.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
  await page.locator('[data-expand-diagram]').click();await expect(page.locator('.blog-diagram-dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('.blog-diagram-dialog')).not.toBeVisible();
@@ -99,4 +101,18 @@ test('PULSE viewer uses the diagram toolbar and trusted phone pinch',async({brow
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points(30)});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:points(80)});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect.poll(async()=>parseInt(await toolbar.locator('output').innerText())).toBeGreaterThan(200);
  await toolbar.getByRole('button',{name:'Fit',exact:true}).tap();await expect(toolbar.locator('output')).toHaveText('100%');await page.locator('[data-pulse-close]').tap();await page.locator('[data-expand-diagram]').tap();const reference=await page.locator('.blog-diagram-dialog .diagram-zoom-controls button').first().evaluate((e,k)=>Object.fromEntries(k.map(x=>[x,getComputedStyle(e)[x]])),properties);expect(pulseStyles).toEqual(reference);await page.getByRole('button',{name:'Close diagram',exact:true}).tap();
  }finally{await context.close();}
+});
+
+for (const slug of ['agentic-society','ai-agent-attention-budget','make-judgment-reusable','what-ai-spend-buys','sunset-grove-ai-creative-agency']) test(`Tailored referral card: ${slug}`,async({page})=>{
+ for (const width of [1440,390,320]) {
+  await page.setViewportSize({width,height:1000});await page.goto(`${base}/blog/${slug}/`);
+  const card=page.locator('.article-close.ui-surface--editorial');await expect(card).toHaveCount(1);
+  const primary=card.locator('[data-partner-cta="closing"]');await expect(primary).toContainText('Learn more about Agentic Society');
+  await expect(primary).toHaveAttribute('href','https://agenticsociety.com?ref=roman-967464');await expect(primary).toHaveAttribute('rel','sponsored noopener');
+  await expect(card.locator('.affiliate-disclosure')).toHaveText('I’m Agentic Society’s Fractional COO and may earn a commission if you join through this link.');
+  await expect(card.locator('[data-blog-contact="closing"]')).toHaveAttribute('href',/\/connect\/$/);
+  await expect(page.locator('.referral-note')).toHaveCount(0);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect(await primary.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+ }
 });
