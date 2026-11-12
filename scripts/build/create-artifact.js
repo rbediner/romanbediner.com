@@ -33,6 +33,8 @@ const INCLUDE_PATHS = [
   'framework',
   'resources',
   'blog',
+  // Isolated interactive article illustrations.
+  'embeds',
   'insights',
   'connect',
   // Privacy is a canonical public route and must ship with every artifact.

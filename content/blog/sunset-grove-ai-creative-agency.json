@@ -1,0 +1,68 @@
+{
+  "slug": "sunset-grove-ai-creative-agency",
+  "title": "How to Build an AI Creative Agency That Works for You",
+  "seoTitle": "How to Build an AI Creative Agency That Works for You",
+  "displayTitle": "How to Build an AI Creative Agency That Works for You",
+  "subtitle": "The decisions, roles and handoffs behind Maya.",
+  "cardTitle": "How to Build an AI Creative Agency That Works for You",
+  "description": "How Maya was designed to handle Sunset Grove’s Airbnb and Vrbo marketing, with 16 defined AI roles, shared business knowledge and accountable handoffs.",
+  "deck": "Sunset Grove needed a sustained marketing service. Building Maya meant defining the agency’s jobs and making the work travel between AI systems.",
+  "category": "AI & business",
+  "eyebrow": "AI + BUSINESS OPERATIONS",
+  "date": "2026-11-12",
+  "updated": "2026-11-12",
+  "status": "ready",
+  "topics": [
+    "AI creative agencies",
+    "Airbnb and Vrbo marketing",
+    "Maya and multi-model workflows"
+  ],
+  "image": "/assets/blog/sunset-grove-agency-cover.png",
+  "imageAlt": "An AI creative agency: strategy, production, independent review and publishing.",
+  "cover": "/assets/blog/sunset-grove-agency-cover.svg",
+  "toc": [
+    [
+      "meet-the-creative-agency",
+      "Meet the creative agency"
+    ],
+    [
+      "pulse-makes-the-workflow-visible",
+      "Watch the work move"
+    ],
+    [
+      "sell-the-reason-for-the-trip",
+      "Sell the reason for the trip"
+    ],
+    [
+      "build-the-agency-the-client-would-expect-to-hire",
+      "Build the agency the client would expect to hire"
+    ],
+    [
+      "give-the-ai-employees-actual-jobs",
+      "Give the AI employees actual jobs"
+    ],
+    [
+      "the-difficult-part-is-getting-the-work-to-travel",
+      "The difficult part is getting the work to travel"
+    ],
+    [
+      "keep-the-property-recognizable",
+      "Keep the property recognizable"
+    ],
+    [
+      "learn-from-the-marketing-without-inventing-the-result",
+      "Learn from the marketing, without inventing the result"
+    ],
+    [
+      "agency-next-step",
+      "Have a business workflow worth rebuilding?"
+    ]
+  ],
+  "diagrams": {
+    "maya-agency-roles": {
+      "label": "Maya CMO and sixteen direct-report agency roles",
+      "caption": "All 16 roles report to Maya. Grouping shows responsibilities, not another reporting hierarchy. Claude, Codex and Gemini are shared execution resources, not fixed role assignments.",
+      "eyebrow": "The agency team"
+    }
+  }
+}

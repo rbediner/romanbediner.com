@@ -1297,3 +1297,7 @@ This repository is checked out inside Google Drive and synced across machines. G
 - `scripts/clean-drive-drift.sh --fix` — remove conflict-copies then verify with `git fsck` (`--check` to only report).
 - Runs automatically via git hooks (`pre-commit`, `post-merge`, `post-checkout`) and, for Claude, on session start via `.claude/settings.json`.
 - Never commit a file whose name ends in ` 2`/` 3` — it is Google Drive junk, not a real file.
+
+## Sunset Grove AI creative agency article
+
+The owner-reviewed V7 article uses the full visible how-to title and two documented editorial passes. Maya’s sourced sixteen-role organization diagram and the PULSE static simulation are included; PULSE has no authentication or agency backend connection. Both graphics use the same expansion pill and zoom controls. The same-page sandboxed PULSE viewer preserves state and restores focus/scroll on X or Escape. Its narrowly source-checked messages control board-only zoom. The focused Playwright suite verifies responsive titles, controls, privacy, real pinch, and context restoration.

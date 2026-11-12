@@ -1,4 +1,5 @@
 [
+  "blog/sunset-grove-ai-creative-agency/index.html",
   "blog/what-ai-spend-buys/index.html",
   "blog/make-judgment-reusable/index.html",
   "blog/ai-agent-attention-budget/index.html",

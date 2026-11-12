@@ -73,7 +73,7 @@ ${body}
 ${footer}
 <dialog class="blog-diagram-dialog" aria-label="Full screen diagram"><div class="blog-diagram-toolbar"><div class="diagram-zoom-controls" role="group" aria-label="Diagram zoom"><button type="button" data-diagram-zoom="out">Zoom out</button><output aria-label="Zoom level">100%</output><button type="button" data-diagram-zoom="in">Zoom in</button><button type="button" data-diagram-zoom="fit">Fit</button></div><form method="dialog"><button class="resource-primary-cta" autofocus>Close diagram</button></form></div><p class="diagram-zoom-help" id="diagram-zoom-help">Pinch to zoom in or out. Drag to move when zoomed. Use Fit to see the whole diagram.</p><div class="blog-diagram-expanded" tabindex="0" aria-label="Zoomable diagram" aria-describedby="diagram-zoom-help"></div></dialog>
 <script src="${article ? '../../' : '../'}scripts/runtime/site-navigation.js?v=20261026"></script><script src="/scripts/runtime/blog.js?v=20261027a" defer></script>
-${article ? '<script src="/scripts/runtime/section-nav.js?v=20260824a" defer></script>' : ''}
+${article ? '<script src="/scripts/runtime/section-nav.js?v=20260824a" defer></script>' : ''}${body.includes('data-pulse-dialog') ? '<script src="/scripts/runtime/pulse-dialog.js" defer></script>' : ''}
 </body></html>\n`;
 }
 function cta(p, position) {
