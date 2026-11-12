@@ -1,11 +1,21 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 427
-- Updated At (UTC): 2026-11-12T14:55:15Z
+- Handoff Sequence: 428
+- Updated At (UTC): 2026-11-12T15:10:35Z
 - Source Branch: staging
-- Source Commit: f9c8bca2be6379504615b06c860bdaaf8d4f4cb0 (pre-handoff baseline)
+- Source Commit: e8ce9aec2114e56ddbe5a8c6b131abd1378e3532 (pre-handoff baseline)
 
-## Current work: November11 early revision3 published and verified
+## Current work: November12 Sunset Grove PULSE staging verified
+
+- Owner requested staging review only. Article: https://rbediner.github.io/romanbediner-preview/blog/sunset-grove-ai-creative-agency/ ; hub: https://rbediner.github.io/romanbediner-preview/blog/ . Actual live HTTP 200, noindex and clean console verified November12, 2026 after downstream Pages deployment. No production publication or email authorized.
+- Exact product source `f9c8bca2be6379504615b06c860bdaaf8d4f4cb0`; preview repository commit `99453148d9d5ebe3deb2fe21946398ff52ec264d`. CI43242134489 and Deploy Staging43242134441 passed. Downstream Pages43242864198 deploy succeeded15:07:32UTC. Initial404 was retained and resolved only after the downstream Pages queue completed; no blind republish or retry.
+- Live five retained PULSE tests passed, including three scenarios,12/17/21/28weekly selector, pause/resume, keyboard selection, reduced motion and sandbox/privacy contracts. Seven loaded-font widths1440/1280/1024/768/430/390/320 showed no page overflow; desktop H1 one line, phone natural wrap. Actual desktop article and phone embed screenshots inspected. Wide agency board pans inside its frame and has a full-window link. Zero console/runtime errors.
+- All16 served files match the frozen preview bytes. Preview checksum `054741b93ac2b7135bc879a7c8c745f930b73cc5e31dd727cccb3ebff4c54189`. Private native receipts: `/tmp/pulse-qa.ZvTQJ1/live-pulse-tests.log`, `live-parity.json`, `live-layout.json`, and inspected screenshots. Root retains the exact remote source/artifact and council evidence in cloud custody.
+- IMPORTANT future publication: do not fast-forward prod to the entire staging lane, which contains unrelated earlier policy work. Isolate only the approved PULSE delta atop then-current prod and verify exact release contents. Six files in f9c8bca are byte-identical restorations of already-published What AI Spend Buys assets/source; do not duplicate or regress them. Prod remains `44f9500c176ae0be999bcc4d3911cef306dc3517`.
+- Core third-person article, Airbnb/Vrbo wording, simulation disclaimer and no ownership claim preserved. Five actual independent advisors, five new anonymous peers and chairman used the same model family; no multi-family review claimed. Root verified append-only SEO Authority PRD addendum and preserved prior body. No end-to-end agency or booking gains asserted.
+- Cost: subscription-only model use, no paid API calls. Normal unchanged local gates, CI and staging/Pages jobs ran; exact billed Actions minutes unverified. Final handoff is documentation-only and staging-origin; no source changes after f9c8bca.
+
+## Prior production release: November11 early revision3 published and verified
 
 Roman explicitly approved this exact early staging revision with “Push to Prod” on November8. The unchanged article is now live at https://romanbediner.com/blog/what-ai-spend-buys/ and listed at https://romanbediner.com/blog/ . Do not generate or publish a duplicate Wednesday article.
 
@@ -85,6 +95,6 @@ Third-person Sunset Grove article integrates the owner-supplied PULSE illustrati
 
 Five independent advisors, five new anonymized peers and chairman completed using one model family. Core article source SHA256 8fdaaf83808bf335b8d838fff019a787a22aefd2da2da6a24e48dd85858a056c. Chairman final editorial PASS conditional on PNG, normal gate and live verification. Subscription usage read1%used/99%remaining on Nov12. Private council transcripts retained by root, not public site.
 
-Staging drift repair restores exact already-published What AI Spend Buys article/source/artwork from prod44f9500c176ae0be999bcc4d3911cef306dc3517; unrelated staging workflows are preserved. Initial exact-staging gate caught generated-file drift and required architecture README update. Both repaired without weakening checks. Prod-base full-regression passed145.747seconds; final exact-source staging full-regression passed140.180seconds and normal pre-push passed146.479seconds. Product source f9c8bca2be6379504615b06c860bdaaf8d4f4cb0 is remote staging verified. CI43242134489 running; live staging receipts pending. Focused transformed-preview26/26 checks passed and5 retained PULSE regression tests passed. Production remains44f9500 unchanged. No claim of live readiness yet.
+Staging drift repair restores exact already-published What AI Spend Buys article/source/artwork from prod44f9500c176ae0be999bcc4d3911cef306dc3517; unrelated staging workflows are preserved. Initial exact-staging gate caught generated-file drift and required architecture README update. Both repaired without weakening checks. Prod-base full-regression passed145.747seconds; final exact-source staging full-regression passed140.180seconds and normal pre-push passed146.479seconds. Product source f9c8bca2be6379504615b06c860bdaaf8d4f4cb0 is remote staging verified. CI43242134489 passed; superseding live staging receipts are recorded at the top. Focused transformed-preview26/26 checks passed and5 retained PULSE regression tests passed. Production remains44f9500 unchanged. The initial candidate was not yet live; the top receipt supersedes this historical checkpoint.
 
 SEO Authority PRD append-only Nov12 staging-candidate addendum verified by root; no production or email authorized. Keep release watcher hygiene in place. Handoff is an isolated staging-origin commit.
