@@ -1,0 +1,54 @@
+{
+  "slug": "what-ai-spend-buys",
+  "title": "What did your AI spend actually buy?",
+  "seoTitle": "What Did Your AI Spend Buy? Budget for Useful Business Results",
+  "displayTitle": "What AI spend buys",
+  "subtitle": "Give the next budget increase a test",
+  "cardTitle": "What AI spend buys",
+  "description": "Compare the next AI dollar with completed work, usable capacity and total workflow cost. A practical budget test for CEOs and business owners.",
+  "deck": "A bigger AI bill can be a good investment. Compare what the extra spending changes, distinguish available hours from economic value and test the actual commitment.",
+  "category": "AI & business",
+  "eyebrow": "AI + BUSINESS OPERATIONS",
+  "date": "2026-11-08",
+  "updated": "2026-11-08",
+  "status": "ready",
+  "topics": [
+    "AI budgeting",
+    "AI return on investment",
+    "AI workflow economics",
+    "business operations",
+    "AI costs"
+  ],
+  "image": "/assets/blog/ai-spend-decision-cover.png",
+  "imageAlt": "What AI spend buys. Give the next budget increase a test. Roman Bediner.",
+  "cover": "/assets/blog/ai-spend-decision-cover.svg",
+  "toc": [
+    [
+      "a-budget-example",
+      "Compare the whole job"
+    ],
+    [
+      "value-the-difference",
+      "Put a value on the difference"
+    ],
+    [
+      "test-a-fixed-cohort",
+      "Keep unfinished work in view"
+    ],
+    [
+      "buy-the-next-increment",
+      "Check the commitment you are buying"
+    ],
+    [
+      "sources",
+      "Sources and context"
+    ]
+  ],
+  "diagrams": {
+    "ai-spend-decision": {
+      "label": "Illustrative weekly alternatives each resolve 100 comparable cases. Current recurring resource cost is 1,300 dollars: 200 dollars AI, 1,000 dollars employee effort and 100 dollars tools. The alternative totals 1,100 dollars: 500 dollars AI, 500 dollars employee effort and 100 dollars tools. All attempts, review and fallback remain counted. Another 300 dollars of cash buys ten available employee hours. Six hours at the assumed 50 dollar employment cost is accounting break-even only. If defensible incremental net value is instead 25 dollars per hour, ten hours yield 250 dollars; twelve would be required to cover 300 dollars. No economic approval follows from wage valuation alone.",
+      "caption": "Illustrative assumptions, not client results. Compare the same accepted work and count every attempt and fallback. Resource-cost improvement is not an automatic cash saving or economic approval.",
+      "eyebrow": "THE NEXT BUDGET DECISION"
+    }
+  }
+}
