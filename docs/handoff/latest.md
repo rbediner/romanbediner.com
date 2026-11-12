@@ -1,9 +1,18 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 432
-- Updated At (UTC): 2026-11-12T23:18:51Z
+- Handoff Sequence: 433
+- Updated At (UTC): 2026-11-12T23:44:32Z
 - Source Branch: staging
-- Source Commit: e0d7b5adf6acb399749b9e3583983ecee20f8f0b (pre-handoff baseline)
+- Source Commit: 65a5bd7c7469bd987e71d4fa6aa39cf0f856d02a (pre-handoff baseline)
+
+## Production publication: approved V7 now live; V8 remains staging-only
+
+- Roman explicitly approved reviewed V7 with “push to prod!” in user message Sentinel_6ae40884545081918804ed9714f5232e, replying to V7 delivery. Isolated production commit `30310ba05d477dd6ad050456e79bd25d3a2b6bc7` atop `44f9500c176ae0be999bcc4d3911cef306dc3517` includes17 files byte-identical to approved staging product e0d7b5a plus a four-line scoped README append. No unrelated staging CI/workflows/package/policy or prior-test deletion was promoted. Independent exact-diff review PASS. Normal existing production lint passed0blocking with9preexisting untouched-workflow warnings; installed unchanged full-regression push hook passed154.016seconds.
+- Production push was already accepted before the later PULSE-dashboard/referral correction arrived. Reported exact acceptance immediately; no retry/revert. That later request is separately authorized staging-only V8 and has not been published. Current live https://romanbediner.com/blog/sunset-grove-ai-creative-agency/ and https://romanbediner.com/blog/ contain precisely approved V7, not those subsequent edits.
+- Production CI43330249442 and Deploy Pages43330249207 including post-deploy validation SUCCESS. Native release:verify-prod passed23critical routes. Actual11production tests passed26.5seconds; seven widths preserve full-title natural wrapping/nooverflow and correct production indexability. Native HTML test helper initially expected staging's robots meta; corrected the helper to treat absent noindex as production default, no product source change. Production raw Python requests may return403 while actual Chrome navigation returns200; do not confuse bot-response behavior with unavailable site.
+- Frozen production artifact `/tmp/pulse-qa.ZvTQJ1/frozen-prod-v7`, checksum `753d7589e70d097f3e355488eb161b6e2413be553e720cac7a12b4befb212024`. Four HTML responses carry Cloudflare's host-injected beacon;14other servedfiles raw exact. All18 source-match after narrowly removing only that observed beacon line. Independent reviewer inspected exact retained Chrome response bodies and actual production pixels, confirming approved V7. This is bounded normalized parity, not raw18file equality. Receipts `/tmp/pulse-qa.ZvTQJ1/prod-v7-served-bodies/`, `prod-v7-browser-parity.json`, `prod-v7-release.log`, `prod-v7-live-tests.log`, `prod-v7-live-layout.json` and screenshots; independent diff receipt chair-v7-production-diff.md.
+- Known hosting/security caveat: Cloudflare injects its analytics beacon into the sandboxed PULSE HTML too. The embed's deliberately strict script-src self blocks it, producing CSP console warnings. Interactive controls pass; no source mismatch. Do not claim zero consoleerrors, loosen CSP or change Cloudflare settings without separate scope/authorization. Preserved for follow-up.
+- Production verification watchers terminal, isolated production worktree clean. No screenshots uploaded. No social publication/email sent. Subscription-only model work; actual billed Actions cost unverified. Root owns PRD release receipt. V8 pending: actual PULSE dashboard-in-development/sample-data framing and consistent source-native Agentic Society referral cards across existing blog articles, with clear relationship/commission disclosure. V8 staging only until separate production approval.
 
 ## Current work: November12 creative agency v7 staging independently verified
 
