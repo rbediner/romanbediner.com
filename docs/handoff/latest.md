@@ -1,9 +1,9 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 426
-- Updated At (UTC): 2026-11-08T20:06:27Z
+- Handoff Sequence: 427
+- Updated At (UTC): 2026-11-12T14:55:15Z
 - Source Branch: staging
-- Source Commit: 78914de3f2dbfa4116aff785cbd94fb402f22bfe (pre-handoff baseline)
+- Source Commit: f9c8bca2be6379504615b06c860bdaaf8d4f4cb0 (pre-handoff baseline)
 
 ## Current work: November11 early revision3 published and verified
 
@@ -77,3 +77,14 @@ Subscription model calls only under the one-task exception. Four native Actions 
 Keep release watcher hygiene in place for this repo.
 - Use `npm run release:watchers:status` and `npm run release:watchers:cleanup`
 - Do not use ad-hoc shell polling loops for CI or preview monitoring.
+
+
+## November12 Sunset Grove PULSE staging candidate
+
+Third-person Sunset Grove article integrates the owner-supplied PULSE illustration. Airbnb and Vrbo marketing, not owner ownership; no proven booking or end-to-end autonomy claims. Reader-facing simulation banner, three scenarios, workload selector, keyboard inspection, pause/resume and reduced-motion startup preserved. Removed sign-in/viewer switch; no backend connection or submission. PNG social cover matches image/png metadata. Added focused Playwright regression checks and artifact embed inclusion.
+
+Five independent advisors, five new anonymized peers and chairman completed using one model family. Core article source SHA256 8fdaaf83808bf335b8d838fff019a787a22aefd2da2da6a24e48dd85858a056c. Chairman final editorial PASS conditional on PNG, normal gate and live verification. Subscription usage read1%used/99%remaining on Nov12. Private council transcripts retained by root, not public site.
+
+Staging drift repair restores exact already-published What AI Spend Buys article/source/artwork from prod44f9500c176ae0be999bcc4d3911cef306dc3517; unrelated staging workflows are preserved. Initial exact-staging gate caught generated-file drift and required architecture README update. Both repaired without weakening checks. Prod-base full-regression passed145.747seconds; final exact-source staging full-regression passed140.180seconds and normal pre-push passed146.479seconds. Product source f9c8bca2be6379504615b06c860bdaaf8d4f4cb0 is remote staging verified. CI43242134489 running; live staging receipts pending. Focused transformed-preview26/26 checks passed and5 retained PULSE regression tests passed. Production remains44f9500 unchanged. No claim of live readiness yet.
+
+SEO Authority PRD append-only Nov12 staging-candidate addendum verified by root; no production or email authorized. Keep release watcher hygiene in place. Handoff is an isolated staging-origin commit.
