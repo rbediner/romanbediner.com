@@ -66,8 +66,8 @@ h1{font-family:var(--font-display);font-weight:400;font-size:1.7rem;line-height:
 .clock{font-variant-numeric:tabular-nums;font-weight:600;font-size:.88rem}
 .note{grid-column:1 / -1;padding:5px 20px;font-size:.74rem;color:var(--muted);border-bottom:1px solid var(--border)}
 .note strong{color:var(--gold);font-weight:600}
-.boardwrap{overflow:auto;padding:6px 8px 16px;min-width:0}
-svg#board{display:block;width:100%;min-width:1240px;height:auto}
+.boardwrap{overflow-y:auto;overflow-x:hidden;padding:6px 8px 16px;min-width:0}
+svg#board{display:block;width:100%;min-width:0;height:auto}
 aside{border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;min-width:0;min-height:0}
 .who{padding:8px 12px 8px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.78rem;font-weight:700;color:var(--muted)}
 #side{padding:16px 16px 24px;overflow-y:scroll;min-height:0;flex:1;scrollbar-color:var(--border2) var(--surface);scrollbar-width:thin}
@@ -186,7 +186,7 @@ aside{border-left:1px solid var(--border);background:var(--surface);display:flex
 </header>
 <div class="note"><strong>Explore the agency workflow.</strong> Choose a scenario, adjust the weekly workload and select a part to see its role. This interactive illustration uses sample posts and messages, not live business activity.</div>
 <div id="attn"></div>
-<div class="boardwrap" tabindex="0" role="region" aria-label="Agency workflow. Scroll horizontally to explore the full diagram."><svg id="board" viewBox="0 0 1600 1210" role="group" aria-label="Pulse board"></svg></div>
+<div class="boardwrap" tabindex="0" role="region" aria-label="Agency workflow. The complete diagram fits this frame. Select a role or post for details."><svg id="board" viewBox="0 0 1600 1210" role="group" aria-label="Pulse board"></svg></div>
 <aside>
   <div class="who"><span id="panelLabel">Activity</span><button type="button" class="hidebtn" id="hide2">Hide panel</button></div>
   <div id="side" tabindex="0"></div>

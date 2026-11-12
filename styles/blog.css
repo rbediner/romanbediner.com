@@ -104,3 +104,14 @@ body:has(.section-nav-fab) .blog-contents { display: none; }
 .pulse-embed{width:100%;height:min(82vh,860px);min-height:560px;border:1px solid #26335f;border-radius:14px;overflow:hidden;background:#060a16}
 .pulse-embed iframe{width:100%;height:100%;border:0;display:block}
 @media(max-width:700px){.pulse-embed{height:70vh;min-height:460px}}
+
+/* Reuse the Resources dashboard pill; normalize anchor inheritance to its button.
+   PULSE expansion remains available on phones, unlike the dashboard fallback. */
+.article-body .pulse-expand{display:inline-block;font-family:Arial;line-height:normal;text-decoration:none}
+
+/* Keep the agency roster readable in the article column without sideways scrolling. */
+.agency-role-table{width:100%;table-layout:fixed;border-collapse:collapse;margin:24px 0;font-size:16px;line-height:1.55}
+.agency-role-table caption{text-align:left;font-weight:600;margin-bottom:10px}
+.agency-role-table th,.agency-role-table td{text-align:left;vertical-align:top;padding:12px 10px;border-bottom:1px solid var(--border-color);overflow-wrap:anywhere}
+.agency-role-table th:first-child{width:38%}
+@media(max-width:430px){.agency-role-table{font-size:14px}.agency-role-table th,.agency-role-table td{padding:10px 6px}}

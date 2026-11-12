@@ -32,7 +32,7 @@ test.beforeAll(async () => {
 });
 test.afterAll(async () => { if (server) await new Promise(resolve => server.close(resolve)); });
 
-for (const width of [1440,390,320]) test(`Pulse reading and controls at ${width}px`,async({page})=>{
+for (const width of [1440,1280,1024,768,430,390,320]) test(`Pulse reading and controls at ${width}px`,async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.setViewportSize({width,height:900});
  await page.goto(`${base}/blog/sunset-grove-ai-creative-agency/`);
@@ -48,9 +48,13 @@ for (const width of [1440,390,320]) test(`Pulse reading and controls at ${width}
  const node=f.locator('[data-id="e_ops"]').first();await node.focus();await node.press('Enter');await expect(f.locator('#panelLabel')).toHaveText('Scenario details');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  expect(await f.locator('html').evaluate(e=>e.scrollWidth<=window.innerWidth)).toBe(true);
- const pan=f.locator('.boardwrap');await expect(pan).toHaveAttribute('tabindex','0');await expect(pan).toHaveAttribute('aria-label',/Scroll horizontally/);
- await pan.focus();await pan.press('ArrowRight');await expect.poll(()=>pan.evaluate(e=>e.scrollLeft)).toBeGreaterThan(0);
- const full=page.getByRole('link',{name:'Explore Pulse in a full window'});await expect(full).toHaveAttribute('href',/\/embeds\/pulse\.html$/);
+ const boardFrame=f.locator('.boardwrap');expect(await boardFrame.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+ const aspect=await f.locator('#board').evaluate(e=>{const r=e.getBoundingClientRect();return r.width/r.height;});expect(aspect).toBeCloseTo(1600/1210,2);
+ const full=page.getByRole('link',{name:'Expand Pulse to full window (opens a new tab)',exact:true});await expect(full).toHaveAttribute('href',/\/embeds\/pulse\.html$/);await expect(full).toBeVisible();
+ const keys=['fontFamily','fontSize','fontWeight','padding','borderRadius','backgroundColor','color','letterSpacing','textTransform','textDecoration','lineHeight'];
+ const actual=await full.evaluate((e,keys)=>Object.fromEntries(keys.map(k=>[k,getComputedStyle(e)[k]])),keys);
+ const ref=await page.context().newPage();await ref.setViewportSize({width,height:900});await ref.goto(`${base}/resources/ai-enabled-operations-dashboard/`);
+ const expected=await ref.locator('.resource-dashboard-expand-cta').evaluate((e,keys)=>Object.fromEntries(keys.map(k=>[k,getComputedStyle(e)[k]])),keys);expect(actual).toEqual(expected);await ref.close();
  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content',/sunset-grove-agency-cover\.png$/);
  expect(errors).toEqual([]);
  await page.goto(`${base}/blog/`);await expect(page.locator('a[href$="/blog/sunset-grove-ai-creative-agency/"]').first()).toBeVisible();

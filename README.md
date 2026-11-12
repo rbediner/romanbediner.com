@@ -1308,3 +1308,5 @@ This repository is checked out inside Google Drive and synced across machines. G
 ## CI standard refresh (2026-11-01)
 
 The estate installer refreshed the CI standard files (`.github/ci-standard/`, `.github/workflows/ci-standard.yml`, `CI-STANDARD.md`). No site behaviour changed.
+
+Sunset Grove article v4 is organized around the small-business marketing need, Maya’s broader agency product, sixteen defined roles and coordination; PULSE is an illustrative interface, not the product. The proportional embedded overview and full-window anchor reuse the Resources dashboard expansion pill. The roster remains a semantic width-fitting table.

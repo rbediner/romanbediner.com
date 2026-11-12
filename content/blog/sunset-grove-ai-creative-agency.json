@@ -1,12 +1,12 @@
 {
   "slug": "sunset-grove-ai-creative-agency",
-  "title": "An AI creative agency for Sunset Grove",
-  "seoTitle": "An AI Creative Agency for Sunset Grove: Airbnb and Vrbo Marketing",
-  "displayTitle": "An AI creative agency",
-  "subtitle": "The marketing job behind Sunset Grove\u2019s multi-model workflow",
-  "cardTitle": "An AI creative agency for Sunset Grove",
-  "description": "How an Airbnb and Vrbo marketing assignment shaped the design of an AI-powered creative agency, with independent review and accountable handoffs.",
-  "deck": "Sunset Grove needed consistent marketing for two vacation homes. Explore the agency workflow designed to carry the assignment from brief through review.",
+  "title": "Sunset Grove needed a creative agency. Roman built one with AI.",
+  "seoTitle": "Building Maya: an AI Creative Agency for Sunset Grove",
+  "displayTitle": "Building an AI agency",
+  "subtitle": "Sunset Grove needed a creative agency. Roman built Maya with AI.",
+  "cardTitle": "Building an AI agency for Sunset Grove",
+  "description": "Why Roman built Maya to handle Sunset Grove’s Airbnb and Vrbo marketing, with 16 defined AI roles, shared business knowledge and accountable handoffs.",
+  "deck": "Sunset Grove needed a sustained marketing service. Building Maya meant defining the agency’s jobs and making the work travel between AI systems.",
   "category": "AI & business",
   "eyebrow": "AI + BUSINESS OPERATIONS",
   "date": "2026-11-12",
@@ -15,43 +15,39 @@
   "topics": [
     "AI creative agencies",
     "Airbnb and Vrbo marketing",
-    "Multi-model workflows"
+    "Maya and multi-model workflows"
   ],
   "image": "/assets/blog/sunset-grove-agency-cover.png",
   "imageAlt": "An AI creative agency: strategy, production, independent review and publishing.",
   "cover": "/assets/blog/sunset-grove-agency-cover.svg",
   "toc": [
     [
-      "start-with-the-marketing-job",
-      "Start with the marketing job"
+      "sell-the-reason-for-the-trip",
+      "Sell the reason for the trip"
     ],
     [
-      "give-the-business-one-lead-to-work-with",
-      "Give the business one lead to work with"
+      "build-the-agency-the-client-would-expect-to-hire",
+      "Build the agency the client would expect to hire"
     ],
     [
-      "divide-the-work-without-multiplying-the-overhead",
-      "Divide the work without multiplying the overhead"
+      "give-the-ai-employees-actual-jobs",
+      "Give the AI employees actual jobs"
     ],
     [
-      "use-a-message-bus-to-carry-the-handoffs",
-      "Use a message bus to carry the handoffs"
+      "the-difficult-part-is-getting-the-work-to-travel",
+      "The difficult part is getting the work to travel"
     ],
     [
-      "protect-the-truth-of-the-property",
-      "Protect the truth of the property"
+      "keep-the-property-recognizable",
+      "Keep the property recognizable"
     ],
     [
-      "make-learning-useful-and-keep-it-honest",
-      "Make learning useful, and keep it honest"
+      "pulse-makes-the-workflow-visible",
+      "PULSE makes the workflow visible"
     ],
     [
-      "judge-the-agency-by-a-complete-piece-of-work",
-      "Judge the agency by a complete piece of work"
-    ],
-    [
-      "sources",
-      "Project context"
+      "learn-from-the-marketing-without-inventing-the-result",
+      "Learn from the marketing, without inventing the result"
     ]
   ]
 }
