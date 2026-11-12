@@ -55,7 +55,7 @@ const words=html=>html.replace(/<[^>]*>/g,' ').split(/\s+/).filter(Boolean).leng
 const example=source.match(/<section id="examples">([\s\S]*?)<\/section>/)[1];
 assert(words(example)/words(source)<0.35, 'The fleet supports the community story');
 assert(!source.includes('starting point for the room') && !source.includes('{{workDiagram}}'), 'Retired solution-preparation detour');
-assert(source.includes('Bring your business. Build with people who understand the work.'), 'Preserve owner-selected closing invitation');
+assert(source.includes('Bring your business. Find people to build with.'), 'Preserve revised owner-selected closing invitation');
 assert(source.includes('AZ Moyer') && source.includes('Adelle Archer'), 'Attributed public examples');
 assert(article.includes('blog-contents') && article.includes('section-nav.js'), 'Compact progressive navigation');
 assert(hub.includes('<h1>Blog</h1>') && hub.includes('resource-card resource-card--compact'), 'Blog uses the Resources landing and compact card components');

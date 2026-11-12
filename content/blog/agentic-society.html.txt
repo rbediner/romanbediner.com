@@ -66,11 +66,10 @@
 </section>
 
 <section id="next" class="article-close ui-surface ui-surface--editorial is-static">
-<p class="blog-eyebrow">Build your next useful thing</p>
-<h2>Bring your business. Build with people who understand the work.</h2>
-<p>If you want a Company Brain, useful AI employees, and a community to build with, explore the current membership through my referral link. Read the offer, consider the time you can commit, and apply if it fits. If you want to talk first, tell me what you are trying to solve. I can explain how we approach the work and help you think through a useful starting point.</p>
+<p class="blog-eyebrow">BUILD WITH PEOPLE</p>
+<h2>Bring your business. Find people to build with.</h2>
+<p>Bring a problem you want to work on, not a finished plan. Explore the current Agentic Society membership and consider how you would participate. If you want to talk first, tell me what you are trying to solve. I can help you think through where to start.</p>
 {{cta:closing}}
-<p class="referral-note">Use my link so your visit carries my referral code, <strong>roman-967464</strong>. If you speak with the team, mention that Roman Bediner referred you.</p>
 </section>
 
 <aside class="article-sources" aria-label="Sources and context"><h2>Sources &amp; context</h2><p>Program details and the two public member accounts were checked October 26, 2026 against the <a href="https://agenticsociety.com/">Agentic Society website</a>, <a href="https://agenticsociety.com/apply">membership overview</a>, and <a href="https://agenticsociety.com/events">events page</a>. This article develops the ideas in <a href="https://www.linkedin.com/posts/romanbediner_agentic-society-ai-keeps-changing-join-ugcPost-7519155978337128448-7nv5/">my original LinkedIn post</a>. My implementation example is described without private member or client records and without claims of measured financial outcomes.</p></aside>

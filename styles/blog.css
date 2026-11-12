@@ -127,3 +127,13 @@ body:has(.section-nav-fab) .blog-contents { display: none; }
 .pulse-dialog::backdrop{background:rgba(11,26,47,.8)}
 
 .agency-social{margin:24px 0}.agency-social .blog-actions a{display:inline-flex;align-items:center;gap:8px;min-height:44px}.agency-social svg{flex:none}
+
+/* Referral labels keep the shared pill treatment while wrapping on narrow screens. */
+.blog-conversion .resource-primary-cta {
+  height: auto;
+  min-height: 48px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  gap: 8px;
+}
+.blog-conversion .resource-primary-cta span[aria-hidden] { flex-shrink: 0; }

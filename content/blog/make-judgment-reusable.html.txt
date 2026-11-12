@@ -57,7 +57,13 @@
   <p>I would begin at the next review with one recurring or consequential correction. Ask the responsible person to turn it into a short, usable decision record. Put it where the next task begins, then check whether it helped on the next different case.</p>
   <p>The <a href="/resources/ai-project-manager/">AI Project Manager guide</a> covers commitments and ownership. The <a href="/resources/agentic-ai-employees/">Agentic Fleet Build Guide</a> connects shared knowledge with the controls behind a team of AI employees.</p>
   <p>Last week's <a href="/blog/ai-agent-attention-budget/">attention-budget article</a> asked how much human work an AI responsibility consumes. This adds a learning question: when your people apply that attention, what does the business retain?</p>
-  <p>If the same correction keeps returning to your desk, <a href="/connect/" data-blog-contact="closing">bring that recurring decision to a conversation</a>. It is a concrete place to start building a company that learns from the work it already does.</p>
+</section>
+
+<section id="next-step" class="article-close ui-surface ui-surface--editorial is-static">
+<p class="blog-eyebrow">KEEP WHAT THE WORK TEACHES YOU</p>
+<h2>Give the next correction somewhere to live.</h2>
+<p>Start with a decision your team keeps revisiting, then work out what the next person or AI workflow needs to know. Explore Agentic Society if you want people to build with. If you would like guidance on your own starting point, bring that recurring decision to a conversation with me.</p>
+{{cta:closing}}
 </section>
 
 <section aria-labelledby="sources">

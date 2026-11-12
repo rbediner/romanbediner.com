@@ -48,10 +48,16 @@
     <h2 id="make-the-next-decision">Make the next decision</h2>
     <p>Your next AI investment can begin with a page of practical questions: what finished outcome needs improving, who accepts it, how much attention can they provide, and what evidence would justify expanding the responsibility? Answer those before adding another agent to the team.</p>
     <p>The <a href="/framework/">AI-Enabled Operations Framework</a> provides the broader approach to ownership, execution, and operating signals. When you are ready to build, the <a href="/resources/agentic-ai-employees/">Agentic Fleet Build Guide</a> covers the implementation and controls. Use those resources rather than starting the operating design from scratch.</p>
-    <p>If you are deciding where to begin, <a href="/connect/">bring one recurring workflow to a conversation</a>. Start with what your people need to complete and the attention they can realistically give it. That is a useful constraint for turning an impressive capability into dependable business capacity.</p>
   </section>
 
-  <section aria-labelledby="sources">
+  <section id="next-step" class="article-close ui-surface ui-surface--editorial is-static">
+<p class="blog-eyebrow">CHOOSE A WORKABLE PILOT</p>
+<h2>Build around the attention your team can give.</h2>
+<p>Pick one recurring responsibility and make room for review, corrections and exceptions before expanding it. Agentic Society is a place to explore building with other owners and operators. If you want to talk through your pilot first, bring the workflow and the demands it already places on your team.</p>
+{{cta:closing}}
+</section>
+
+<section aria-labelledby="sources">
     <h2 id="sources">Sources and context</h2>
     <p>This article's research began with Nathaniel Whittemore's <a href="https://aidailybrief.ai/">The AI Daily Brief</a>. The October 22 through 28, 2026 editions informed the research, including <a href="https://aidailybrief.ai/e/2026-10-25">Sunday's account of his AI workflow</a>. The operating recommendation and hypothetical service-firm example are developed here; they are not reported findings or Roman Bediner client results.</p>
     <ul>

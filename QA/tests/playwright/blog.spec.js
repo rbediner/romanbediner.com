@@ -95,7 +95,7 @@ for(const width of [1440,1280,1024,768,430,390,320])test(`Blog conversion and di
   await page.keyboard.press('Escape');
   await expect(page.locator('.section-nav-sheet')).toBeHidden();
   await expect(page.locator('.article-byline img')).toHaveCSS('object-fit','contain');
-  await expect(page.locator('.affiliate-disclosure').first()).toContainText('I may earn a commission');
+  await expect(page.locator('.affiliate-disclosure').first()).toHaveText('I’m Agentic Society’s Fractional COO and may earn a commission if you join through this link.');
   for(const link of await page.locator('[data-partner-cta]').all()) {
     await expect(link).toHaveAttribute('href','https://agenticsociety.com?ref=roman-967464');
     await expect(link).toHaveAttribute('rel',/sponsored/);

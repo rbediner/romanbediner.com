@@ -77,7 +77,7 @@ ${article ? '<script src="/scripts/runtime/section-nav.js?v=20260824a" defer></s
 </body></html>\n`;
 }
 function cta(p, position) {
-  return `<div class="blog-conversion"><p class="affiliate-disclosure">I serve as Fractional COO at Agentic Society. If you join through my referral link, I may earn a commission.</p><div class="blog-actions"><a class="resource-primary-cta" href="${escape(p.referralUrl)}" rel="sponsored noopener" data-partner-cta="${position}" data-article="${escape(p.slug)}">Explore Agentic Society <span aria-hidden="true">&rarr;</span></a><a class="resource-text-cta" href="/connect/" data-blog-contact="${position}">Talk with me about it <span aria-hidden="true">&rarr;</span></a></div></div>`;
+  return `<div class="blog-conversion"><p class="affiliate-disclosure">I’m Agentic Society’s Fractional COO and may earn a commission if you join through this link.</p><div class="blog-actions"><a class="resource-primary-cta" href="${escape(p.referralUrl)}" rel="sponsored noopener" data-partner-cta="${position}" data-article="${escape(p.slug)}">Learn more about Agentic Society <span aria-hidden="true">&rarr;</span></a><a class="resource-text-cta" href="/connect/" data-blog-contact="${position}">Talk with me about it <span aria-hidden="true">&rarr;</span></a></div></div>`;
 }
 // Inline trusted, source-controlled SVG so diagram text uses the site's real fonts.
 function diagram(file, label, caption, eyebrow) {
