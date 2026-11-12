@@ -36,6 +36,9 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`Pulse reading and co
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.setViewportSize({width,height:900});
  await page.goto(`${base}/blog/sunset-grove-ai-creative-agency/`);
+ // Roman explicitly requested the full visible how-to title, overriding the old one-line preference for this article only.
+ await page.evaluate(()=>document.fonts.ready);await expect(page.locator('h1')).toHaveText('How to Build an AI Creative Agency That Works for You');
+ const lines=await page.locator('h1').evaluate(e=>{const r=document.createRange();r.selectNodeContents(e);return new Set([...r.getClientRects()].map(b=>Math.round(b.top))).size;});if(width===1024||width===1440)expect(lines).toBe(2);
  await page.locator('iframe').scrollIntoViewIfNeeded();
  const f=page.frameLocator('iframe');await expect(f.locator('#board [role=button]').first()).toBeVisible();
  await expect(page.locator('iframe')).toHaveAttribute('sandbox','allow-scripts');
