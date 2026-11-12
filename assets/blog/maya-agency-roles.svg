@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1140" viewBox="0 0 1200 1140" role="img" aria-label="Maya CMO and sixteen direct-report AI employee roles, with shared execution resources.">
+<title>Maya leads the creative agency</title><desc>All sixteen employee roles report directly to Maya CMO. The grid is a readable roster, not an intermediate management hierarchy. Shared business knowledge supports every role. Claude, Codex and Gemini are shared execution resources, not managers or fixed assignments.</desc>
+<defs><pattern id="maya-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#eef1e6"/></pattern></defs>
+<rect width="1200" height="1140" fill="#fcfbf3"/><rect x="12" y="12" width="1176" height="1116" fill="url(#maya-grid)"/>
+<text x="42" y="62" font-family="Georgia,serif" font-size="38" fill="#16222e">One agency lead. Sixteen defined jobs.</text>
+<rect x="400" y="96" width="400" height="105" rx="10" fill="#fff" stroke="#104275"/>
+<text x="600" y="139" text-anchor="middle" font-family="Georgia,serif" font-size="34" fill="#16222e">Maya</text><text x="600" y="172" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Chief Marketing Officer</text>
+<path d="M600 201V254" stroke="#104275" stroke-width="2"/><path d="M594 247L600 254L606 247" stroke="#104275" fill="none" stroke-width="2"/>
+<rect x="30" y="254" width="1140" height="605" rx="12" fill="#fff" stroke="#104275"/><text x="600" y="291" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#104275">All 16 roles report directly to Maya</text>
+<rect x="50" y="318" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="180" y="363" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Agency Operations</text>
+<text x="180" y="391" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Manager</text>
+<rect x="330" y="318" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="460" y="377" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Campaign Strategist</text>
+<rect x="610" y="318" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="740" y="377" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Creative Director</text>
+<rect x="890" y="318" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="1020" y="363" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Local Experience</text>
+<text x="1020" y="391" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Researcher</text>
+<rect x="50" y="442" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="180" y="501" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Brand Copywriter</text>
+<rect x="330" y="442" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="460" y="487" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Photo and Design</text>
+<text x="460" y="515" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Producer</text>
+<rect x="610" y="442" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="740" y="501" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Reel Producer</text>
+<rect x="890" y="442" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="1020" y="501" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#ab1d37">Preflight Specialist</text>
+<rect x="50" y="566" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="180" y="625" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#ab1d37">Creative Critic</text>
+<rect x="330" y="566" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="460" y="611" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#ab1d37">Creative Acceptance</text>
+<text x="460" y="639" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#ab1d37">Manager</text>
+<rect x="610" y="566" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="740" y="611" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Publishing and</text>
+<text x="740" y="639" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Distribution Manager</text>
+<rect x="890" y="566" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="1020" y="611" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Marketing Performance</text>
+<text x="1020" y="639" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Analyst</text>
+<rect x="50" y="690" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="180" y="735" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Research and Learning</text>
+<text x="180" y="763" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Specialist</text>
+<rect x="330" y="690" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="460" y="735" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Community and Inquiry</text>
+<text x="460" y="763" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Manager</text>
+<rect x="610" y="690" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="740" y="735" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Partnerships and</text>
+<text x="740" y="763" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Growth Manager</text>
+<rect x="890" y="690" width="260" height="106" rx="8" fill="#fcfbf3" stroke="#dce3ea"/>
+<text x="1020" y="735" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Storefront and</text>
+<text x="1020" y="763" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#104275">Conversion Manager</text>
+<text x="600" y="841" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#5b6b7a">Operations coordinates handoffs; it is not a second management layer.</text>
+<rect x="30" y="883" width="1140" height="78" rx="10" fill="#fff" stroke="#dce3ea"/><text x="600" y="914" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#104275">Shared business knowledge for every role</text><text x="600" y="943" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#5b6b7a">Property facts · approved assets · current briefs · prior decisions</text>
+<rect x="30" y="985" width="1140" height="120" rx="10" fill="#fff" stroke="#dce3ea"/><text x="600" y="1018" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#104275">Shared AI execution resources</text><text x="600" y="1054" text-anchor="middle" font-family="Georgia,serif" font-size="30" fill="#16222e">Claude · Codex · Gemini</text><text x="600" y="1086" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#5b6b7a">A role is not a dedicated model or a required separate model call.</text>
+</svg>

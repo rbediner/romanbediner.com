@@ -50,11 +50,18 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`Pulse reading and co
  expect(await f.locator('html').evaluate(e=>e.scrollWidth<=window.innerWidth)).toBe(true);
  const boardFrame=f.locator('.boardwrap');expect(await boardFrame.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
  const aspect=await f.locator('#board').evaluate(e=>{const r=e.getBoundingClientRect();return r.width/r.height;});expect(aspect).toBeCloseTo(1600/1210,2);
- const full=page.getByRole('link',{name:'Expand Pulse to full window (opens a new tab)',exact:true});await expect(full).toHaveAttribute('href',/\/embeds\/pulse\.html$/);await expect(full).toBeVisible();
+ const full=page.getByRole('button',{name:'Expand to full window',exact:true});await expect(full).toBeVisible();
  const keys=['fontFamily','fontSize','fontWeight','padding','borderRadius','backgroundColor','color','letterSpacing','textTransform','textDecoration','lineHeight'];
  const actual=await full.evaluate((e,keys)=>Object.fromEntries(keys.map(k=>[k,getComputedStyle(e)[k]])),keys);
  const ref=await page.context().newPage();await ref.setViewportSize({width,height:900});await ref.goto(`${base}/resources/ai-enabled-operations-dashboard/`);
  const expected=await ref.locator('.resource-dashboard-expand-cta').evaluate((e,keys)=>Object.fromEntries(keys.map(k=>[k,getComputedStyle(e)[k]])),keys);expect(actual).toEqual(expected);await ref.close();
+ await full.scrollIntoViewIfNeeded();const savedY=await page.evaluate(()=>scrollY);await full.click();await expect(page.locator('#pulse-dialog')).toHaveJSProperty('open',true);expect(await page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(true);
+ await page.evaluate(()=>window.postMessage({type:'pulse:escape'},'*'));await page.waitForTimeout(50);expect(await page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(true);await f.locator('#slots').selectOption('21');await f.locator('#slots').press('Escape');await expect.poll(()=>page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(false);await expect(full).toBeFocused();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(savedY);await expect(f.locator('#slots')).toHaveValue('21');
+ await full.click();await page.getByRole('button',{name:'Close expanded PULSE',exact:true}).click();await expect(full).toBeFocused();
+ await expect(page.getByRole('link',{name:'Discuss your business workflow',exact:true})).toHaveAttribute('href',/\/connect\/$/);
+ await expect(page.locator('.agency-role-table tbody tr')).toHaveCount(8);expect(await page.locator('.agency-role-table').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+ const chart=page.locator('.blog-diagram-scroll');expect(await chart.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+ await page.locator('[data-expand-diagram]').click();await expect(page.locator('.blog-diagram-dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('.blog-diagram-dialog')).not.toBeVisible();
  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content',/sunset-grove-agency-cover\.png$/);
  expect(errors).toEqual([]);
  await page.goto(`${base}/blog/`);await expect(page.locator('a[href$="/blog/sunset-grove-ai-creative-agency/"]').first()).toBeVisible();
@@ -65,4 +72,18 @@ test('Pulse reduced motion starts paused',async({page})=>{
 test('Pulse artifact and privacy contracts',async()=>{
  const html=fs.readFileSync(path.join(root,'embeds/pulse.html'),'utf8'),js=fs.readFileSync(path.join(root,'embeds/pulse.js'),'utf8'),builder=fs.readFileSync(path.join(root,'scripts/build/create-artifact.js'),'utf8');
  expect(builder).toContain("'embeds'");expect(html).toContain("connect-src 'none'");expect(html).toContain('script src="pulse.js"');expect(js).not.toMatch(/fetch\(|XMLHttpRequest|WebSocket|sendBeacon/);expect(html).not.toContain('viewerSel');
+});
+
+test('Maya organization chart supports trusted phone pinch and restores review context',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  try{const page=await context.newPage();await page.goto(`${base}/blog/sunset-grove-ai-creative-agency/`);const opener=page.locator('[data-expand-diagram]');await opener.tap();
+    const dialog=page.locator('.blog-diagram-dialog');await expect(dialog).toBeVisible();expect(Math.round((await dialog.boundingBox()).width)).toBe(390);
+    const viewport=page.locator('.blog-diagram-expanded'),box=await viewport.boundingBox(),cx=box.x+box.width/2,cy=box.y+box.height/2;
+    const cdp=await context.newCDPSession(page);const points=d=>[{x:cx-d,y:cy,id:1},{x:cx+d,y:cy,id:2}];
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points(30)});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:points(80)});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    await expect.poll(async()=>parseInt(await dialog.locator('output').innerText(),10)).toBeGreaterThan(200);
+    await page.getByRole('button',{name:'Fit',exact:true}).tap();await expect(dialog.locator('output')).toHaveText('100%');
+    await page.getByRole('button',{name:'Close diagram',exact:true}).tap();await expect(dialog).toBeHidden();await expect(opener).toBeFocused();
+    await expect.poll(()=>page.locator('body').evaluate(n=>n.style.overflow)).toBe('');
+  }finally{await context.close();}
 });

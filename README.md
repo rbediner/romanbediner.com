@@ -1310,3 +1310,5 @@ This repository is checked out inside Google Drive and synced across machines. G
 The estate installer refreshed the CI standard files (`.github/ci-standard/`, `.github/workflows/ci-standard.yml`, `CI-STANDARD.md`). No site behaviour changed.
 
 Sunset Grove article v4 is organized around the small-business marketing need, Maya’s broader agency product, sixteen defined roles and coordination; PULSE is an illustrative interface, not the product. The proportional embedded overview and full-window anchor reuse the Resources dashboard expansion pill. The roster remains a semantic width-fitting table.
+
+Maya agency article: neutral site narration, source-backed16-role site-style chart, official Sunset Grove social links, meaningful business contact action, and a same-page PULSE native modal with X/Escape, iframe-state retention and focus/scroll restoration. The sandboxed child can request close only via a narrowly source-checked event.

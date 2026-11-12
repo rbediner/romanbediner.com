@@ -533,3 +533,6 @@ document.getElementById('showSide').addEventListener('click',function(){setSide(
 second();setInterval(second,1000);requestAnimationFrame(frame);start('wed');
 if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.getElementById('pause').click();}
 })();
+
+// Escape returns to the hosting article when this sandboxed illustration is expanded.
+document.addEventListener("keydown",function(event){if(event.key==="Escape"&&window.parent!==window){event.preventDefault();window.parent.postMessage({type:"pulse:escape"},"*");}});

@@ -1,11 +1,11 @@
 {
   "slug": "sunset-grove-ai-creative-agency",
-  "title": "Sunset Grove needed a creative agency. Roman built one with AI.",
+  "title": "Building an AI creative agency for Sunset Grove",
   "seoTitle": "Building Maya: an AI Creative Agency for Sunset Grove",
-  "displayTitle": "Building an AI agency",
-  "subtitle": "Sunset Grove needed a creative agency. Roman built Maya with AI.",
-  "cardTitle": "Building an AI agency for Sunset Grove",
-  "description": "Why Roman built Maya to handle Sunset Grove’s Airbnb and Vrbo marketing, with 16 defined AI roles, shared business knowledge and accountable handoffs.",
+  "displayTitle": "An AI creative agency",
+  "subtitle": "Building Maya for Sunset Grove’s marketing",
+  "cardTitle": "Building an AI creative agency for Sunset Grove",
+  "description": "How Maya was designed to handle Sunset Grove’s Airbnb and Vrbo marketing, with 16 defined AI roles, shared business knowledge and accountable handoffs.",
   "deck": "Sunset Grove needed a sustained marketing service. Building Maya meant defining the agency’s jobs and making the work travel between AI systems.",
   "category": "AI & business",
   "eyebrow": "AI + BUSINESS OPERATIONS",
@@ -49,5 +49,12 @@
       "learn-from-the-marketing-without-inventing-the-result",
       "Learn from the marketing, without inventing the result"
     ]
-  ]
+  ],
+  "diagrams": {
+    "maya-agency-roles": {
+      "label": "Maya CMO and sixteen direct-report agency roles",
+      "caption": "All 16 roles report to Maya. Grouping shows responsibilities, not another reporting hierarchy. Claude, Codex and Gemini are shared execution resources, not fixed role assignments.",
+      "eyebrow": "The agency team"
+    }
+  }
 }
