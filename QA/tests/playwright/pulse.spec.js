@@ -50,12 +50,12 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`Pulse reading and co
  expect(await f.locator('html').evaluate(e=>e.scrollWidth<=window.innerWidth)).toBe(true);
  const boardFrame=f.locator('.boardwrap');expect(await boardFrame.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
  const aspect=await f.locator('#board').evaluate(e=>{const r=e.getBoundingClientRect();return r.width/r.height;});expect(aspect).toBeCloseTo(1600/1210,2);
- const full=page.getByRole('button',{name:'Expand to full window',exact:true});await expect(full).toBeVisible();
+ const full=page.locator('[data-pulse-expand]');await expect(full).toBeVisible();
  const keys=['fontFamily','fontSize','fontWeight','padding','borderRadius','backgroundColor','color','letterSpacing','textTransform','textDecoration','lineHeight'];
  const actual=await full.evaluate((e,keys)=>Object.fromEntries(keys.map(k=>[k,getComputedStyle(e)[k]])),keys);
- const ref=await page.context().newPage();await ref.setViewportSize({width,height:900});await ref.goto(`${base}/resources/ai-enabled-operations-dashboard/`);
- const expected=await ref.locator('.resource-dashboard-expand-cta').evaluate((e,keys)=>Object.fromEntries(keys.map(k=>[k,getComputedStyle(e)[k]])),keys);expect(actual).toEqual(expected);await ref.close();
- await full.scrollIntoViewIfNeeded();const savedY=await page.evaluate(()=>scrollY);await full.click();await expect(page.locator('#pulse-dialog')).toHaveJSProperty('open',true);expect(await page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(true);
+ const expected=await page.locator('[data-expand-diagram]').evaluate((e,keys)=>Object.fromEntries(keys.map(k=>[k,getComputedStyle(e)[k]])),keys);expect(actual).toEqual(expected);
+ await full.evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));const savedY=await page.evaluate(()=>scrollY);await full.click();await expect(page.locator('#pulse-dialog')).toHaveJSProperty('open',true);expect(await page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(true);
+ await page.locator('[data-pulse-zoom=in]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('150%');expect(await f.locator('.boardwrap').evaluate(e=>e.scrollWidth>e.clientWidth)).toBe(true);await page.locator('[data-pulse-zoom=out]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('100%');await page.locator('[data-pulse-zoom=in]').click();await page.locator('[data-pulse-zoom=fit]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('100%');
  await page.evaluate(()=>window.postMessage({type:'pulse:escape'},'*'));await page.waitForTimeout(50);expect(await page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(true);await f.locator('#slots').selectOption('21');await f.locator('#slots').press('Escape');await expect.poll(()=>page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(false);await expect(full).toBeFocused();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(savedY);await expect(f.locator('#slots')).toHaveValue('21');
  await full.click();await page.getByRole('button',{name:'Close expanded PULSE',exact:true}).click();await expect(full).toBeFocused();
  await expect(page.getByRole('link',{name:'Discuss your business workflow',exact:true})).toHaveAttribute('href',/\/connect\/$/);
@@ -86,4 +86,14 @@ test('Maya organization chart supports trusted phone pinch and restores review c
     await page.getByRole('button',{name:'Close diagram',exact:true}).tap();await expect(dialog).toBeHidden();await expect(opener).toBeFocused();
     await expect.poll(()=>page.locator('body').evaluate(n=>n.style.overflow)).toBe('');
   }finally{await context.close();}
+});
+
+test('PULSE viewer uses the diagram toolbar and trusted phone pinch',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+ try{const page=await context.newPage();await page.goto(`${base}/blog/sunset-grove-ai-creative-agency/`);await page.locator('[data-pulse-expand]').tap();const f=page.frameLocator('#pulse-dialog iframe');await expect(f.locator('#board [role=button]').first()).toBeVisible();
+ const toolbar=page.locator('#pulse-dialog .diagram-zoom-controls');const properties=['fontFamily','fontSize','fontWeight','padding','borderRadius','backgroundColor','color','border','minHeight','lineHeight'];const pulseStyles=await toolbar.locator('button').first().evaluate((e,k)=>Object.fromEntries(k.map(x=>[x,getComputedStyle(e)[x]])),properties);
+ await f.locator('.boardwrap').scrollIntoViewIfNeeded();const box=await f.locator('.boardwrap').boundingBox(),cx=box.x+box.width/2,cy=box.y+Math.min(box.height/2,120);const cdp=await context.newCDPSession(page);const points=d=>[{x:cx-d,y:cy,id:1},{x:cx+d,y:cy,id:2}];
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points(30)});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:points(80)});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect.poll(async()=>parseInt(await toolbar.locator('output').innerText())).toBeGreaterThan(200);
+ await toolbar.getByRole('button',{name:'Fit',exact:true}).tap();await expect(toolbar.locator('output')).toHaveText('100%');await page.locator('[data-pulse-close]').tap();await page.locator('[data-expand-diagram]').tap();const reference=await page.locator('.blog-diagram-dialog .diagram-zoom-controls button').first().evaluate((e,k)=>Object.fromEntries(k.map(x=>[x,getComputedStyle(e)[x]])),properties);expect(pulseStyles).toEqual(reference);await page.getByRole('button',{name:'Close diagram',exact:true}).tap();
+ }finally{await context.close();}
 });

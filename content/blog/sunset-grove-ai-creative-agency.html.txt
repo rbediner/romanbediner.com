@@ -1,10 +1,27 @@
-<p>Sunset Grove had a small-business marketing problem. Its vacation homes in Wake Forest are listed on Airbnb and Vrbo. The business needed to give more people a reason to book a stay, and keep doing the work that makes that happen.</p>
+<p>Sunset Grove needed more than a stream of attractive posts. Its vacation homes in Wake Forest are listed on Airbnb and Vrbo. The marketing job is to give the right guests a reason to come together there, then turn that idea into creative work worth their attention.</p>
+<p>That is the work of an agency: understanding the audience, shaping a campaign, producing it, checking it and learning what to do next. Maya was built to take on that service with AI, rather than leave the business coordinating a collection of disconnected tools.</p>
+<p>Two views make the idea easier to explore. The organization chart shows who owns the work. PULSE, the animated illustration below it, shows how that work can move. Maya is the broader agency product; neither graphic is proof of commercial results.</p>
 
-<p>That work extends well beyond posting a photograph. Who is planning a group trip? What brings them to the area? What should a campaign say to a family coming for a wedding, or a group visiting for a sporting event? Which photographs tell that story honestly? How does an idea become a week of finished content, and what should change when the results come back?</p>
 
-<p>A full creative agency could take on those responsibilities. The project took a different approach: building an AI creative agency for Sunset Grove.</p>
+<nav class="agency-social" aria-label="Follow the creative as it develops"><p>Follow Sunset Grove on Instagram and Facebook to see the creative work as it develops. As AI technology advances, these channels offer a way to follow the work itself, alongside the ideas explored here.</p><div class="blog-actions"><a href="https://www.instagram.com/sunsetgrove.nc/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a><a href="https://www.facebook.com/profile.php?id=61580664171187" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg><span>Facebook</span></a></div></nav>
 
-<p>The product is Maya: a client-facing Chief Marketing Officer backed by a team of defined AI employee roles, shared business knowledge and a production system using Claude, Codex and Gemini. PULSE, the animated view in this article, is one interface into that larger product. The reason for building Maya was the marketing work Sunset Grove needed done.</p>
+<section aria-labelledby="meet-the-creative-agency"><h2 id="meet-the-creative-agency">Meet the creative agency</h2>
+<p>Maya is the client-facing Chief Marketing Officer. Sixteen defined employee roles report directly to Maya, covering strategy, creative production, independent review, publishing, research and growth.</p>
+{{diagram:maya-agency-roles}}
+<p>These are responsibilities, not sixteen separate models. Claude, Codex and Gemini are shared execution resources behind the team. The business should be able to discuss a campaign with Maya without deciding which model or worker to ask next.</p>
+</section>
+
+<section aria-labelledby="pulse-makes-the-workflow-visible"><h2 id="pulse-makes-the-workflow-visible">Watch the work move</h2>
+
+<p>Start with a scenario in PULSE, choose a weekly posting volume and select a role or sample post to explore its part in the work. Expand the view for more room, then use the zoom controls to look closer or fit the workflow back into the frame.</p>
+
+<div class="blog-diagram-top"><span class="section-eyebrow">The agency in motion</span><button type="button" class="resource-primary-cta diagram-expand" data-pulse-expand aria-controls="pulse-dialog" aria-expanded="false" aria-label="Expand to full screen: PULSE agency workflow">Expand to full screen <span aria-hidden="true">&rarr;</span></button></div><dialog open id="pulse-dialog" class="pulse-embed pulse-dialog" data-pulse-dialog aria-label="PULSE agency workflow"><div class="pulse-dialog-toolbar"><div class="diagram-zoom-controls" role="group" aria-label="PULSE zoom"><button type="button" data-pulse-zoom="out">Zoom out</button><output aria-label="PULSE zoom level">100%</output><button type="button" data-pulse-zoom="in">Zoom in</button><button type="button" data-pulse-zoom="fit">Fit</button></div><button type="button" data-pulse-close aria-label="Close expanded PULSE">×</button></div><iframe src="/embeds/pulse.html" title="Pulse: an interactive illustration of Maya’s agency workflow" loading="lazy" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></dialog>
+
+<p>The illustration uses simulated activity. It is not a live feed of Sunset Grove&#x27;s campaigns and should not be read as evidence of marketing results.</p>
+
+<p>The controls let readers explore the design, not operate the agency. The business question sits behind the animation: can an idea become reviewed, useful work without the client managing every handoff?</p>
+
+</section>
 
 <section aria-labelledby="sell-the-reason-for-the-trip"><h2 id="sell-the-reason-for-the-trip">Sell the reason for the trip</h2>
 
@@ -38,9 +55,9 @@
 
 <section aria-labelledby="give-the-ai-employees-actual-jobs"><h2 id="give-the-ai-employees-actual-jobs">Give the AI employees actual jobs</h2>
 
-<p>Maya&#x27;s documented team has 16 employee roles. These are defined responsibilities, not 16 interchangeable chatbots.</p>
+<p>The organization chart is easier to judge when each role has a clear job. Here is the documented roster behind Maya.</p>
 
-{{diagram:maya-agency-roles}}
+
 
 <table class="agency-role-table"><caption>Maya’s 16 defined employee roles</caption><thead><tr><th scope="col">Agency responsibility</th><th scope="col">Defined employee roles</th></tr></thead><tbody><tr><th scope="row">Keep the work moving</th><td>Agency Operations Manager</td></tr><tr><th scope="row">Decide the campaign and creative direction</th><td>Campaign Strategist; Creative Director</td></tr><tr><th scope="row">Produce the work</th><td>Brand Copywriter; Photo and Design Producer; Reel Producer</td></tr><tr><th scope="row">Ground the ideas in the area</th><td>Local Experience Researcher</td></tr><tr><th scope="row">Check and accept the creative</th><td>Preflight Specialist; Creative Critic; Creative Acceptance Manager</td></tr><tr><th scope="row">Get approved work out</th><td>Publishing and Distribution Manager</td></tr><tr><th scope="row">Understand results and improve</th><td>Marketing Performance Analyst; Research and Learning Specialist</td></tr><tr><th scope="row">Develop demand and help people take the next step</th><td>Community and Inquiry Manager; Partnerships and Growth Manager; Storefront and Conversion Manager</td></tr></tbody></table>
 
@@ -86,18 +103,6 @@
 
 </section>
 
-<section aria-labelledby="pulse-makes-the-workflow-visible"><h2 id="pulse-makes-the-workflow-visible">PULSE makes the workflow visible</h2>
-
-<p>PULSE is a view into that agency workflow. The interactive illustration lets a reader try different scenarios and posting volumes to see how work moves through the system.</p>
-
-<dialog open id="pulse-dialog" class="pulse-embed pulse-dialog" data-pulse-dialog aria-label="PULSE agency workflow"><div class="pulse-dialog-toolbar"><span>PULSE: agency workflow</span><button type="button" data-pulse-close aria-label="Close expanded PULSE">×</button></div><iframe src="/embeds/pulse.html" title="Pulse: an interactive illustration of Maya’s agency workflow" loading="lazy" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></dialog><button type="button" class="resource-dashboard-expand-cta pulse-expand" data-pulse-expand aria-controls="pulse-dialog" aria-expanded="false">Expand to full window</button>
-
-<p>The illustration uses simulated activity. It is not a live feed of Sunset Grove&#x27;s campaigns and should not be read as evidence of marketing results.</p>
-
-<p>Maya remains the broader product: the agency relationship, the team, the business context, production, review and learning. PULSE helps make its coordination easier to understand.</p>
-
-</section>
-
 <section aria-labelledby="learn-from-the-marketing-without-inventing-the-result"><h2 id="learn-from-the-marketing-without-inventing-the-result">Learn from the marketing, without inventing the result</h2>
 
 <p>The intended learning loop links performance to the next brief. Observe what happened, form a hypothesis, try a change and measure again. Keep enough context to distinguish a promising signal from an established lesson.</p>
@@ -113,7 +118,5 @@
 </section>
 
 <p class="article-source-context">The implementation examples in this article come from dated project records. They describe what was documented at those points, not an independent audit of the agency’s current operation.</p>
-
-<nav class="agency-social" aria-label="See Sunset Grove’s creative"><p>See Sunset Grove’s creative</p><div class="blog-actions"><a href="https://www.instagram.com/sunsetgrove.nc/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a><a href="https://www.facebook.com/profile.php?id=61580664171187" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg><span>Facebook</span></a></div></nav>
 
 <section class="blog-conversion" aria-labelledby="agency-next-step"><h2 id="agency-next-step">Have a business workflow worth rebuilding?</h2><p>Start with the work the business needs done, then decide where AI can take responsibility. The useful outcome is a service people can rely on, not a larger collection of AI tools.</p><div class="blog-actions"><a class="resource-primary-cta" href="/connect/">Discuss your business workflow</a></div></section>

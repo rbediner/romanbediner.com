@@ -107,7 +107,7 @@ body:has(.section-nav-fab) .blog-contents { display: none; }
 
 /* Reuse the Resources dashboard pill; normalize anchor inheritance to its button.
    PULSE expansion remains available on phones, unlike the dashboard fallback. */
-.article-body .pulse-expand{display:inline-block;font-family:Arial;line-height:normal;text-decoration:none}
+
 
 /* Keep the agency roster readable in the article column without sideways scrolling. */
 .agency-role-table{width:100%;table-layout:fixed;border-collapse:collapse;margin:24px 0;font-size:16px;line-height:1.55}
@@ -121,8 +121,8 @@ body:has(.section-nav-fab) .blog-contents { display: none; }
 .pulse-dialog[open]{display:block}
 .pulse-dialog-toolbar{display:none}
 .pulse-dialog.is-expanded[open]{position:fixed;inset:12px;margin:auto;width:calc(100vw - 24px);height:calc(100vh - 24px);height:calc(100dvh - 24px);min-height:0;display:flex;flex-direction:column;max-width:none;max-height:none}
-.pulse-dialog.is-expanded .pulse-dialog-toolbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#0b122b;color:#f4f6ff;flex:none}
-.pulse-dialog-toolbar button{width:44px;height:44px;border:1px solid #8896be;border-radius:8px;background:transparent;color:inherit;font:28px Arial;cursor:pointer}
+.pulse-dialog.is-expanded .pulse-dialog-toolbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:white;color:var(--text-primary);font-size:16px;line-height:var(--body-line);flex:none;flex-wrap:wrap;gap:8px}
+.pulse-dialog-toolbar [data-pulse-close]{width:44px;height:44px;border:1px solid #8896be;border-radius:8px;background:white;color:var(--accent-blue);font:28px Arial;cursor:pointer}
 .pulse-dialog.is-expanded iframe{flex:1;min-height:0;height:0}
 .pulse-dialog::backdrop{background:rgba(11,26,47,.8)}
 
