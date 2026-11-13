@@ -108,7 +108,8 @@ for (const slug of ['agentic-society','ai-agent-attention-budget','make-judgment
   await page.setViewportSize({width,height:1000});await page.goto(`${base}/blog/${slug}/`);
   const card=page.locator('.article-close.ui-surface--editorial');await expect(card).toHaveCount(1);
   const primary=card.locator('[data-partner-cta="closing"]');await expect(primary).toContainText('Learn more about Agentic Society');
-  await expect(primary).toHaveAttribute('href','https://agenticsociety.com?ref=roman-967464');await expect(primary).toHaveAttribute('rel','sponsored noopener');
+  await expect(primary).toHaveAttribute('href',slug==='sunset-grove-ai-creative-agency'?'https://agenticsociety.com/?ref=roman-967464':'https://agenticsociety.com?ref=roman-967464');await expect(primary).toHaveAttribute('rel','sponsored noopener');
+  if(slug==='sunset-grove-ai-creative-agency'){for(const [label,destination] of [['membership','apply'],['events','events']]){const link=card.getByRole('link',{name:label,exact:true});await expect(link).toHaveAttribute('href',`https://agenticsociety.com/${destination}?ref=roman-967464`);await expect(link).toHaveAttribute('rel','sponsored noopener');}}
   await expect(card.locator('.affiliate-role')).toHaveText('I serve as Fractional COO at Agentic Society and can help you think through where to start.');
   await expect(card.locator('.affiliate-disclosure')).toHaveText('Affiliate links: I may receive a commission.');
   await expect(card.locator('[data-blog-contact="closing"]')).toHaveAttribute('href',/\/connect\/$/);

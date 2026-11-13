@@ -36,7 +36,7 @@ const posts = fs.readdirSync(path.join(ROOT, 'content/blog')).filter(f => f.ends
     if (!/^\d{4}-\d{2}-\d{2}$/.test(p[key]) || new Date(`${p[key]}T12:00:00Z`).toISOString().slice(0,10) !== p[key]) throw new Error(`Invalid date: ${file}`);
   }
   if (p.referralUrl) validateUrl(p.referralUrl, file);
-  if (p.referralUrl && p.referralUrl !== 'https://agenticsociety.com?ref=roman-967464') throw new Error('Unexpected referral destination');
+  if (p.referralUrl && !['https://agenticsociety.com?ref=roman-967464', 'https://agenticsociety.com/?ref=roman-967464'].includes(p.referralUrl)) throw new Error('Unexpected referral destination');
   p.body = read(`content/blog/${p.slug}.html.txt`);
   // Fail before writing any output if an article's navigation cannot resolve.
   if (!Array.isArray(p.toc) || !p.toc.length) throw new Error(`Missing article toc: ${file}`);

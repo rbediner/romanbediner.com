@@ -1315,3 +1315,5 @@ Sunset Grove article v4 is organized around the small-business marketing need, M
 Maya agency article: neutral site narration, source-backed16-role site-style chart, official Sunset Grove social links, meaningful business contact action, and a same-page PULSE native modal with X/Escape, iframe-state retention and focus/scroll restoration. The sandboxed child uses narrowly source-checked viewer events for close and board-only zoom; Zoom in/out, Fit, keyboard and real pinch/pan preserve scenario state. The story introduces the official social invitation, org chart and animated illustration before the deeper business explanation.
 
 Sunset Grove article v7 uses the owner-requested full visible how-to title with natural desktop wrapping, an explicit article-only exception to the prior concise single-line preference. Two implemented EBI rounds refine paragraphs in context, preserve useful standalone emphasis, and keep v6 visuals and viewer behavior unchanged.
+
+Sunset Grove’s closing invitation includes contextual membership and events links with the verified referral query; its primary community pill remains the homepage destination.
