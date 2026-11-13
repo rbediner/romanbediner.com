@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 const root = path.resolve(__dirname, '../..');
+require('./test-agentic-referrals.js');
 const read = file => fs.readFileSync(path.join(root,file),'utf8');
 cp.execFileSync(process.execPath,['scripts/content/build-blog.js','--check'],{cwd:root,stdio:'inherit'});
 const article = read('blog/agentic-society/index.html');
@@ -80,7 +81,7 @@ const os = require('os');
 const temp = fs.mkdtempSync(path.join(os.tmpdir(),'rb-blog-contract-'));
 try {
   // A multi-article fixture needs the actual diagram inputs for other ready posts.
-  for (const file of ['index.html','sitemap.xml','scripts/content/build-blog.js','content/blog','assets/blog']) {
+  for (const file of ['index.html','sitemap.xml','scripts/content/build-blog.js','scripts/content/agentic-referrals.js','content/blog','assets/blog']) {
     const target=path.join(temp,file);
     fs.mkdirSync(path.dirname(target),{recursive:true});
     fs.cpSync(path.join(root,file),target,{recursive:true});

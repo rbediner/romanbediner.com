@@ -13,6 +13,7 @@
  */
 const crypto = require('crypto');
 const fs = require('fs');
+const {validateMarkup}=require('../content/agentic-referrals.js');
 const os = require('os');
 const path = require('path');
 const { execSync } = require('child_process');
@@ -201,6 +202,7 @@ function main() {
   fs.mkdirSync(siteDir, { recursive: true });
   copyIncludedPaths(siteDir);
   promoteDashboardDistRoute(siteDir);
+  for (const file of listFilesRecursive(siteDir).filter(file=>file.endsWith('.html'))) validateMarkup(fs.readFileSync(path.join(siteDir,file),'utf8'),file);
 
   const commit = resolveCommitSha();
   const releaseCacheBustToken = applyReleaseCacheBust(siteDir, commit);

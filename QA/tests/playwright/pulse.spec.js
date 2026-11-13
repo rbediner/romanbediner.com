@@ -109,10 +109,25 @@ for (const slug of ['agentic-society','ai-agent-attention-budget','make-judgment
   const card=page.locator('.article-close.ui-surface--editorial');await expect(card).toHaveCount(1);
   const primary=card.locator('[data-partner-cta="closing"]');await expect(primary).toContainText('Learn more about Agentic Society');
   await expect(primary).toHaveAttribute('href','https://agenticsociety.com?ref=roman-967464');await expect(primary).toHaveAttribute('rel','sponsored noopener');
-  await expect(card.locator('.affiliate-disclosure')).toHaveText('I’m Agentic Society’s Fractional COO and may earn a commission if you join through this link.');
+  await expect(card.locator('.affiliate-role')).toHaveText('I serve as Fractional COO at Agentic Society and can help you think through where to start.');
+  await expect(card.locator('.affiliate-disclosure')).toHaveText('Affiliate links: I may receive a commission.');
   await expect(card.locator('[data-blog-contact="closing"]')).toHaveAttribute('href',/\/connect\/$/);
   await expect(page.locator('.referral-note')).toHaveCount(0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect(await primary.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
  }
+});
+
+test('Agentic source citations preserve destinations and referral on navigation',async({page})=>{
+ await page.goto(`${base}/blog/agentic-society/`);
+ const sources=page.locator('.article-sources');
+ for(const [label,path] of [['Agentic Society website','/'],['membership overview','/apply'],['events page','/events']]) {
+  const link=sources.getByRole('link',{name:label,exact:true});
+  await expect(link).toHaveAttribute('href',`https://agenticsociety.com${path}?ref=roman-967464`);
+  await expect(link).toHaveAttribute('rel','sponsored noopener');
+ }
+ let destination;
+ await page.route('https://agenticsociety.com/**',route=>{destination=route.request().url();return route.abort();});
+ await sources.getByRole('link',{name:'membership overview',exact:true}).click().catch(()=>{});
+ expect(destination).toBe('https://agenticsociety.com/apply?ref=roman-967464');
 });
