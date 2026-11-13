@@ -1304,3 +1304,5 @@ This repository is checked out inside Google Drive and synced across machines. G
 The owner-reviewed V7 article uses the full visible how-to title and two documented editorial passes. Maya’s sourced sixteen-role organization diagram and a development preview of Maya’s PULSE dashboard are included; its sample activity has no authentication or agency backend connection. Both graphics use the same expansion pill and zoom controls. The same-page sandboxed PULSE viewer preserves state and restores focus/scroll on X or Escape. Its narrowly source-checked messages control board-only zoom. The focused Playwright suite verifies responsive titles, controls, privacy, real pinch, and context restoration.
 
 Sunset Grove’s closing invitation includes contextual membership and events links with the verified referral query; its primary community pill remains the homepage destination.
+
+Blog modification days follow the verified substantive content-edit day in each article metadata record; publication dates and RSS publication timestamps remain unchanged.
