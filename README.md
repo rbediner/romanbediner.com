@@ -1317,3 +1317,5 @@ Maya agency article: neutral site narration, source-backed16-role site-style cha
 Sunset Grove article v7 uses the owner-requested full visible how-to title with natural desktop wrapping, an explicit article-only exception to the prior concise single-line preference. Two implemented EBI rounds refine paragraphs in context, preserve useful standalone emphasis, and keep v6 visuals and viewer behavior unchanged.
 
 Sunset Grove’s closing invitation includes contextual membership and events links with the verified referral query; its primary community pill remains the homepage destination.
+
+Blog modification days follow the verified substantive content-edit day in each article metadata record; publication dates and RSS publication timestamps remain unchanged.
