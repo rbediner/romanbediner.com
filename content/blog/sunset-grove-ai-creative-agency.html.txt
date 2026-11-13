@@ -120,6 +120,6 @@
 <section id="agency-next-step" class="article-close ui-surface ui-surface--editorial is-static">
 <p class="blog-eyebrow">BUILD YOUR CREATIVE AGENCY</p>
 <h2>Put an AI agency to work on your business.</h2>
-<p>Start with the campaign you need, the work each role should own and the decisions that still need you. Explore Agentic Society if you want people to build alongside. If you would like guidance first, tell me what your marketing needs to accomplish and we can talk through a useful starting point.</p>
+<p>Start with the campaign you need, the work each role should own and the decisions that still need you. If you want people to build alongside, explore Agentic Society’s <a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">membership</a> or start with its <a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">events</a>. If you would like guidance first, tell me what your marketing needs to accomplish and we can talk through a useful starting point.</p>
 {{cta:closing}}
 </section>
