@@ -1,9 +1,20 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 433
-- Updated At (UTC): 2026-11-12T23:44:32Z
+- Handoff Sequence: 434
+- Updated At (UTC): 2026-11-13T00:08:08Z
 - Source Branch: staging
-- Source Commit: 65a5bd7c7469bd987e71d4fa6aa39cf0f856d02a (pre-handoff baseline)
+- Source Commit: 540f1b110123324acdedc664c3028eae45096dff (pre-handoff baseline)
+
+## Current work: V8 five-article referral cards and PULSE development preview, staging only
+
+- Reviewed product `540f1b110123324acdedc664c3028eae45096dff` is staged, not production-approved. Production remains `30310ba05d477dd6ad050456e79bd25d3a2b6bc7`. Do not promote the full staging lane containing unrelated policy changes. A future explicit approval must identify V8 and isolate its reviewed product delta atop current production.
+- PULSE is accurately described as Maya’s dashboard being built. The embedded development preview uses sample posts/messages, disconnected from live campaign data. No live-operation or performance claim added. Full visible how-to title, existing article substance, social links,16-role diagram, modal/zoom/pinch/focus/scroll and runtime scripts remain unchanged. README matches development-preview framing.
+- All five published blog articles now use the existing gradient editorial closing-card component with distinct article-specific copy. Exact primary label “Learn more about Agentic Society”; verified URL `https://agenticsociety.com?ref=roman-967464`, sponsored/noopener and analytics attributes preserved. Secondary /connect/ invitation remains. Readable concise disclosure retains Fractional COO relationship and potential commission. Removed only redundant verbose referral-code instructions and duplicated contact invitation; preserved all non-contact links and substantive conclusions. Existing Agentic opening CTA remains compact. Shared pill’s narrowly scoped automatic height/padding supports the longer label on phones without changing the global component or PULSE controls.
+- Independent exact-source and12actual local screenshot review PASS. Local16browser checks passed28.0seconds; allfive cards checked1440/390/320 and existing11PULSE behavior tests retained. Legacy full-suite disclosure substring was updated to assert the exact new full disclosure, not relaxed/disabled. First push was blocked by that stale assertion; second unpublished test-only commit triggered requiredREADME rule. Consolidated unpublished commits, retained README and stronger assertion, then unchanged exact-SHA standard gate passed23:57:18UTC and installed full-regression pushhook passed177.648seconds. No failed push transmitted, no skip flag or forced remote rewrite.
+- Source CI43333505757 SUCCESS; final Deploy Staging43333954118 SUCCESS. Preview repository830ba652ba1c6e6e10ca6e8f2e33564c6f6d6b4a identifies staging540f1b1; downstream Pages43333994306 SUCCESS. Frozen transformed preview `/tmp/pulse-qa.ZvTQJ1/frozen-v8-540f1b1`, checksum `5a8f03eb4f776b0bce0c879a3e7ac1d6ad0dbb0e614189d2336192dd86e0489f`. Actual live16tests passed28.9seconds. All21servedfiles exactly match frozen transformedbytes; allfive cards at seven widths1440/1280/1024/768/430/390/320 have no page overflow. Staging retains noindex; referral URL presence/query verified, conversion attribution not tested.
+- Staging paths under https://rbediner.github.io/romanbediner-preview/blog/: sunset-grove-ai-creative-agency/, agentic-society/, ai-agent-attention-budget/, make-judgment-reusable/, what-ai-spend-buys/. Production retains prior V7 while owner reviews these new changes.
+- Evidence `/tmp/pulse-qa.ZvTQJ1/`: v8-standard-complete.log, v8-push-complete.log, v8-ci.log, v8-deploy.log, v8-live-tests.log, v8-live-parity.json, v8-live-cards.json, v8-preservation.json, local/live screenshots. Source bundle Library libfile_fde3_f-db910fa486c881919c2d5bfc79ed8ac0_5101a046197c8191ae2fcc6f468d051c predates only README wording and stronger legacy disclosure assertion; exact Git commit is canonical. Screenshots kept local, not Library. Root owns required live PRD update.
+- Independent final live review separately fetched allfive articleHTML plusPULSEHTML and matched exact frozenbytes, then inspected12actual live desktop/phone card/banner screenshots: PASS. Native source watchers terminal; owner8772server stopped after review. Weekly usage86%remaining at latest check, reset1795097038; secondary unavailable. Subscription-only tools, no paidAPI calls; actual billedActions minutes unverified.
 
 ## Production publication: approved V7 now live; V8 remains staging-only
 
