@@ -1,9 +1,25 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 437
-- Updated At (UTC): 2026-11-17T22:26:15Z
+- Handoff Sequence: 439
+- Updated At (UTC): 2026-11-17T23:54:12Z
 - Source Branch: staging
-- Source Commit: 7fc010268e8a177e0ef61b031bd7bfdd066e8458 (pre-handoff baseline)
+- Source Commit: 23c58f207875c9040568454370d87931120795aa (pre-handoff baseline)
+
+## All-blog conversion and SEO rollout: five published pages live
+
+- Roman approved extending the reviewed pattern to all six articles, with article-specific invitation copy and primary Explore Working Together opening mailto:roman@romanbediner.com, verified from Connect. Secondary Agentic Society action and separate community resource list preserve exactly one ref=roman-967464 and sponsored rel. One editorial blue closing surface per article; removed duplicate opening conversion in the community article.
+- Independent evidence remains separate from community resources. Agentic Society article is explicitly an inside perspective; Sunset Grove is labeled Project context and sources with first-person design provenance, not invented independent outcome research. Triple source recheck verified vendor/research caveats; October30 AIDB changed to the working www host, same publisher/page. Private historical Sunset records are not independently reverified in this checkout.
+- Distinct plain-text authorBio/byline/authorJobTitle metadata uses verified experience. No invented Disney tenure/subscriber numbers. Published dates unchanged; older modified dates now November17, latest planned November18. Titles/descriptions/canonical/OG/Twitter/BlogPosting/BreadcrumbList, social-image dimensions, local links, feed/hub/sitemap and real responsive output audited. No ranking guarantee.
+- Canonical portable website skill now .agents/skills/bediner-site/SKILL.md, with page-type/diagram/case-study references. Registered local skill mirrors it. Blog build/research skills inherit website rules and updated owner-approved rollout semantics.
+- Rejected commission boilerplate removed at owner's direction, including generator default. This is draft wording approval, not a finding that material-connection disclosure is unnecessary. Resolve actual relationship, applicable guidance and partner terms before any production publication. Roman subsequently approved production of the existing article footers. The separate November18 article remains staging-only; do not infer permission to publish it. No email sent.
+- Earlier latest-example work completed three documented EBI rounds. Current rollout is implementation plus source/SEO/visual validation, not extra claimed EBI rounds. Staging23c58f2 exact local gate and unchanged full prepush PASS159748ms; CI44198604742, finalDeploy44200043575 and downstreamPages44200054935 SUCCESS. All23frozen files raw-byte match and25live browser/touch/referral tests PASS. Local43rollout checks plus18legacy checks PASS after updating stale exact-copy assertions, not relaxing behavioral gates. Independent reviewer inspected12desktop/phone images and all5production article/source/metadata pairs. Isolated production699175d atopf29163d excludes latest article and unrelated staging history; production CI44200429840 and DeployPages44200429844 including post-deploy smoke SUCCESS. release:verify-prod PASS for699175d and critical routes. All32live browser checks PASS. All21checked files match frozen production after only documented Cloudflare beacon/email-protection transformations (15raw,6normalized); independent reviewer decoded each protected email to the exact approved public email and found no other HTML differences. AllfivecanonicalURLs return200 with no meta or HTTP noindex; robots.txt allows crawling. The new who-owns-ai-work URL remains404 on production, intentionally unpublished.
+- Release procedure correction: the isolated production worktree initially lacked ignored Husky shims, so ref push occurred before the hook ran. This was detected immediately; npm prepare installed normal hooks and the exact699175d full-regression gate passed157256ms while GitHub still held deployment behind CI. Do not label that remedial run a prepush pass. Every future new worktree must run npm prepare and verify its .husky/_/pre-push exists before any push; shared core.hooksPath alone is insufficient. Canonical live PRD append was revision-guarded and read back:376prior paragraphs preserved,385total. No ranking guarantee or unsupported outcome added.
+
+## Verified previous article preview checkpoint
+
+- Source9850b24fbf44651ba165050a77171059d9c6eb5c, PR27 merged by exact fast-forward; branch auto-deleted. Standard local gate/release all pass; installed normal full prepush pass153179ms. CI44190588607, Deploy Staging44190588569and44191703884, downstreamPages44191746531 success. Preview repo f973216 identifies source9850b24.
+- Actual live15file parity and8responsive/touch tests passed. Early fetch caught stalePages404 despite upstream deployment success; receipt retained, not described as ready until downstream actual verification.
+- Current hosted original article https://rbediner.github.io/romanbediner-preview/blog/who-owns-ai-work/ and hub /blog/. Its first version does not contain the new CTA example yet. Production remains f29163d, no production workflow triggered.
 
 ## November18 blog candidate, staging preparation
 
