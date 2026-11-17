@@ -1,0 +1,58 @@
+{
+  "slug": "who-owns-ai-work",
+  "title": "Your company has AI tools. Who owns making them useful?",
+  "seoTitle": "Who Owns AI Work? Operational Leadership Beyond AI Tools",
+  "displayTitle": "Who owns AI work?",
+  "subtitle": "Give useful tools an accountable business outcome",
+  "cardTitle": "Who owns making AI useful?",
+  "description": "AI tools do not settle cross-functional decisions. Give one workflow a responsible owner, clear authority and a practical test before expanding it.",
+  "deck": "The business needs someone who can connect priorities, people, information and technical decisions. Start with one workflow and the authority to improve it.",
+  "category": "AI & business",
+  "eyebrow": "AI + BUSINESS OPERATIONS",
+  "date": "2026-11-18",
+  "updated": "2026-11-18",
+  "status": "ready",
+  "topics": [
+    "AI operating model",
+    "fractional COO",
+    "fractional CTO",
+    "AI workflow ownership",
+    "business operations"
+  ],
+  "image": "/assets/blog/ai-work-ownership-cover.png",
+  "imageAlt": "Who owns AI work? Turn useful tools into accountable work. Roman Bediner.",
+  "cover": "/assets/blog/ai-work-ownership-cover.svg",
+  "toc": [
+    [
+      "start-at-the-handoff",
+      "Start at the handoff"
+    ],
+    [
+      "give-the-outcome-an-owner-with-authority",
+      "Give the outcome an owner with authority"
+    ],
+    [
+      "make-reliable-information-part-of-the-job",
+      "Make reliable information part of the job"
+    ],
+    [
+      "test-one-workflow-before-expanding-it",
+      "Test one workflow before expanding it"
+    ],
+    [
+      "know-when-the-gap-is-leadership",
+      "Know when the gap is leadership"
+    ],
+    [
+      "sources",
+      "Sources and context"
+    ]
+  ],
+  "diagrams": {
+    "ai-work-ownership": {
+      "label": "Illustrative proposal workflow with one accountable owner, an executive escalation route, sales and delivery, finance and technical responsibilities. Current records support all roles within scoped access. The result is a proposal internally approved and ready to send. The owner reviews outcomes and exceptions to change the process.",
+      "caption": "Illustrative operating design, not a client result. The workflow owner coordinates the outcome without replacing functional decision rights. Routine work proceeds within delegated limits; exceptions go to the appropriate decision owner.",
+      "eyebrow": "AUTHORITY BEFORE AUTOMATION"
+    }
+  }
+}
