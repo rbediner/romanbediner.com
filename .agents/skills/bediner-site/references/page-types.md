@@ -1,0 +1,20 @@
+# Page-type routing
+
+Resolve paths relative to the verified site checkout. Preserve existing routes, semantic structure and analytics. Inspect current source before editing; this map is navigation, not a substitute for source.
+
+| Page type | Authoritative source and workflow | Specific verification |
+|---|---|---|
+| Blog article and hub | `content/blog/<slug>.json` plus `<slug>.html.txt`; `scripts/content/build-blog.js`; `npm run blog:build` then `npm run blog:check`. Never hand-edit generated `blog/`, RSS or sitemap to defeat regeneration. Load Blog Research and Blog Build. | Full article, hub card, source/resource blocks, conversion, diagram, metadata, RSS/sitemap and deterministic rebuild. |
+| Framework hub and stages | Hand-authored `framework/index.html` and the nested stage/topic routes and stage `/brief/` routes listed in `production-design-audit.md`; `styles/framework.css`, shared `styles/site.css`, current runtime/tests. | Stage navigation, semantic stage colors/pills, mobile progress, current downloadable artifact packaging and metadata. Do not force blog layout or decorative icon tiles onto stages. |
+| Resources hub and guides | `resources/index.html`, route `index.html`, `styles/resources.css`, existing assets/downloads and artifact generator/manifest where present. | One flagship card, compact supporting rows, unified collapsed preview/download from identical canonical PDF, integrity manifest, keyboard/phone controls. Load case-study and diagram references when applicable. |
+| Home, About, Services, Connect, Insights, Privacy and 404 | Root or respective route `index.html`; corresponding page CSS plus shared tokens/runtime. Main site is static HTML/CSS/JS, not React. Inspect generated insight-link blocks before editing. | Preserve each page's approved narrative and components. Verify contact actions without submitting forms, brand lockup, responsive layout, route metadata and relevant focused tests. |
+| Embedded operations dashboard | `ai-enabled-operations-dashboard/` is a separate React/Vite subproject. Read its own docs and root AGENTS boundary rules. | Build its committed dist; update only dashboard PRD/handoff for dashboard behavior. Never edit its public sync target directly. Do not move website notes into this subtree. |
+| Blog embeds/interactive demonstrations | Inspect actual `/embeds/` source and consumer iframe; preserve sandbox/privacy and sample-data framing. | Interaction, pause/reduced motion, keyboard, mobile containment; never invent backend connectivity or measured outcomes. |
+
+## Shared design and release
+
+Read `docs/design-system/card-surfaces/README.md` before contained-surface work. Use current tokens in `styles/site.css`; blog closing cards use `.article-close.ui-surface.ui-surface--editorial.is-static` with `styles/blog.css`. Compare computed styles with real existing components instead of approximating from memory. Fonts are self-hosted. No new framework, external font import, visual identity or global component rewrite for a local content request.
+
+Read `CI-STANDARD.md` before any push. Run the repository's required local gate after the final commit and retain `Local-Gate: pass <sha> <time>` for that exact SHA; never push a failed gate or weaken thresholds. Coordinate shared-checkout edits. Update durable README rules and isolated staging-origin handoff through the repository's supported process, preserving release watcher hygiene. Root coordinates required live PRD updates.
+
+Staging success requires exact-source CI/deploy, downstream Pages completion, and actual served-byte/browser verification. Local build, an upstream successful job, or mutable URL alone does not prove the preview is current. Before any approved production release, reconcile the approved product delta against current production; never promote unrelated staging drafts or policy maintenance wholesale. Follow exact-version approval and live verification in Blog Build and the current handoff. A skill update grants no release permission.

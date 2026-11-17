@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bediner Site"
+  short_description: "Build consistent Bediner pages, blogs, and resources"
+  default_prompt: "Use bediner-site to design, build, source-check, SEO-check, and stage a Roman Bediner site page; publish only with explicit approval."

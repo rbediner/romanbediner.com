@@ -3,7 +3,7 @@
 <p>You want your people to accomplish more. You want better customer experiences, stronger follow-through, and room to grow. The difficult part is connecting what AI can do to what your particular business needs next.</p>
 <p>That is the conversation I want more CEOs and business owners to have. It is also the reason I want to introduce you to <strong>Agentic Society</strong>: a community of owners, builders, and AI advisors working on those questions together.</p>
 <p>I serve as Fractional COO at Agentic Society. The practical systems I help build matter to me, but so do the people and relationships around the work. You can learn how someone thinks, compare the choices you are making, and have people to return to as your business and the technology evolve.</p>
-{{cta:opening}}
+
 
 <section id="community">
 <p class="blog-eyebrow">The business case for building together</p>
@@ -65,11 +65,21 @@
 <div class="blog-faq"><details><summary>Is Agentic Society for nontechnical business owners?</summary><p>Yes. The current program says you do not need to be a technology founder. Someone needs to own the build, whether that is you or an operator you assign, with help available from advisors and the community.</p></details><details><summary>Can I join Agentic Society online outside Austin?</summary><p>There is a virtual component through online calls, advisors, training, and Slack. Austin hosts the in-person boardrooms and hackathons. Confirm the current schedule with the team.</p></details><details><summary>Will someone build everything for me?</summary><p>Membership is done-with-you. Separate done-for-you services are outside membership and can be discussed with the team.</p></details><details><summary>What should I bring to a first conversation?</summary><p>A business problem you would like to work on and a sense of what a better result would look like. An unfinished question is a useful place to begin.</p></details></div>
 </section>
 
-<section id="next" class="article-close ui-surface ui-surface--editorial is-static">
-<p class="blog-eyebrow">BUILD WITH PEOPLE</p>
-<h2>Bring your business. Find people to build with.</h2>
-<p>Bring a problem you want to work on, not a finished plan. Explore the current Agentic Society membership and consider how you would participate. If you want to talk first, tell me what you are trying to solve. I can help you think through where to start.</p>
+<section id="next" class="article-close ui-surface ui-surface--editorial is-static" aria-labelledby="next-title">
+<p class="blog-eyebrow">BUILD WITH A CLEAR PURPOSE</p>
+<h2 id="next-title">Bring the business problem. Let’s find your starting point.</h2>
+<p>You do not need another AI demonstration. Bring me a decision, a stalled workflow, or an idea you want to put into practice. We can identify what your business needs next and whether hands-on leadership, a focused build, or the right community would help.</p>
 {{cta:closing}}
 </section>
 
-<aside class="article-sources" aria-label="Sources and context"><h2>Sources &amp; context</h2><p>Program details and the two public member accounts were checked October 26, 2026 against the <a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">Agentic Society website</a>, <a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">membership overview</a>, and <a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">events page</a>. This article develops the ideas in <a href="https://www.linkedin.com/posts/romanbediner_agentic-society-ai-keeps-changing-join-ugcPost-7519155978337128448-7nv5/">my original LinkedIn post</a>. My implementation example is described without private member or client records and without claims of measured financial outcomes.</p></aside>
+<section aria-labelledby="sources"><h2 id="sources">Sources and context</h2><p>This is an inside perspective, not an independent review of Agentic Society. Program details and public member accounts come from the community’s own pages, listed separately below. This article develops <a href="https://www.linkedin.com/posts/romanbediner_agentic-society-ai-keeps-changing-join-ugcPost-7519155978337128448-7nv5/">my original LinkedIn post</a>. The implementation example is my own work, described without private member or client records or measured financial-outcome claims.</p></section>
+
+<section class="article-sources" aria-labelledby="agentic-society-resources">
+<h2 id="agentic-society-resources">Agentic Society resources</h2>
+<p>Explore the community, review membership, or see what is on the calendar. These links describe the community; they are not independent evidence for the operating recommendations above.</p>
+<ul>
+<li><a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">How Agentic Society works</a>: the community and its approach.</li>
+<li><a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">Membership and application</a>: review the participation options.</li>
+<li><a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">Events</a>: check the current listings.</li>
+</ul>
+</section>

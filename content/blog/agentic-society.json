@@ -7,7 +7,7 @@
   "deck": "AI keeps changing. Your business still has to grow. How Agentic Society connects CEOs, business owners, builders, and advisors to learn, build, and move forward together.",
   "category": "AI & business",
   "date": "2026-10-26",
-  "updated": "2026-11-12",
+  "updated": "2026-11-17",
   "image": "/assets/blog/agentic-society-cover.png",
   "imageAlt": "People, context, useful work and feedback form a continuous learning loop around your business.",
   "referralUrl": "https://agenticsociety.com?ref=roman-967464",
@@ -53,5 +53,8 @@
     "Business growth"
   ],
   "displayTitle": "Agentic Society",
-  "subtitle": "The business case for building together"
+  "subtitle": "The business case for building together",
+  "byline": "Fractional COO, Agentic Society",
+  "authorJobTitle": "Fractional COO and AI Architect",
+  "authorBio": "I serve as Fractional COO at Agentic Society. My work connects business priorities, people, and systems, with an emphasis on helping leaders turn promising ideas into work their organizations can sustain."
 }

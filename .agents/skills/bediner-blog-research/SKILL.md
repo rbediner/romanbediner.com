@@ -23,7 +23,7 @@ Read the existing blog, About, Framework and relevant Resources copy for Roman's
 
 Use direct, connected prose, concrete responsibilities, practical examples and explicit tradeoffs. Avoid generic AI optimism, forced hooks, repeated filler conclusions and keyword stuffing. Roman's first-person experience must have approved public evidence. Never invent clients, deployments, tests, quotations, numerical outcomes or confidential member evidence; label illustrative examples as illustrative. One repository is not his complete project or agent inventory.
 
-Design a useful original diagram around the thesis. Give the builder its semantics, labels and relationships; shared state must cover every actual consumer. Choose a relevant internal guide and next step rather than forcing the Agentic Society referral into unrelated articles. For relevant affiliate material, preserve the exact referral and disclosure requirements from the repository.
+Design a useful original diagram around the thesis. Give the builder its semantics, labels and relationships; shared state must cover every actual consumer. Choose a relevant internal guide and client-conversation invitation. Include the shared Agentic Society community-resource section separately from independent research on every blog; never force a promotional claim into the argument. Preserve the referral and publication-review requirements in the canonical site skill.
 
 ## Handoff and revisions
 
@@ -32,3 +32,6 @@ Return a durable packet: article ID and revision, source-window coverage, thesis
 Supply article source as a body-only HTML fragment using the repository's current content schema. The builder owns the page header, H1, table of contents and surrounding navigation; do not duplicate them in the research draft. Describe diagrams in the packet and use the builder's supported diagram tokens rather than embedding an unrelated visual template.
 
 For an edit request, retain the original wording, exact reviewed revision and prior evidence. Produce a new revision and concise change summary; never relabel an old approval as approval of changed content. Research readiness does not authorize production.
+
+### Latest owner review guidance (November 17, 2026)
+Follow the November17 owner-review section of `../bediner-blog-build/SKILL.md` for the conversation-first invitation, verified article-specific biography, separate independent citations and Agentic Society resources, rejected boilerplate handling, and full end-of-article visual proof. Preserve real research URLs unchanged; apply Roman's referral only to Agentic Society destinations. Draft-copy instructions do not establish that legal or partner disclosure duties are absent. Resolve that question separately before any publication.

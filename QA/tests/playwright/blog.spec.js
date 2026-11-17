@@ -37,7 +37,7 @@ for (const width of [1440,1024,390]) test(`Attention-budget article and site-sty
   if(width>=1024) for(const selector of ['h1','.fleet-title-deck']) expect(await page.locator(selector).evaluate(n=>{const r=document.createRange();r.selectNodeContents(n);return new Set([...r.getClientRects()].map(b=>Math.round(b.top))).size;})).toBe(1);
   await expect(page.locator('meta[name="ga4-measurement-id"]')).toHaveAttribute('content','G-DVHD0KL633');
   await expect(page.locator('script[src*="ga4-bootstrap"]')).toHaveCount(1);
-  await expect(page.locator('#sources')).toHaveText('Sources and context');
+  await expect(page.locator('#sources')).toHaveText('Independent sources and context');
   expect(await page.locator('.article-body a[href^="https:"]').count()).toBeGreaterThanOrEqual(6);
   const figure=page.locator('.blog-diagram');await expect(figure).toHaveCount(1);
   expect(await figure.locator('.blog-diagram-scroll').evaluate(n=>n.scrollWidth<=n.clientWidth)).toBe(true);
@@ -95,7 +95,12 @@ for(const width of [1440,1280,1024,768,430,390,320])test(`Blog conversion and di
   await page.keyboard.press('Escape');
   await expect(page.locator('.section-nav-sheet')).toBeHidden();
   await expect(page.locator('.article-byline img')).toHaveCSS('object-fit','contain');
-  await expect(page.locator('.affiliate-disclosure').first()).toHaveText('Affiliate links: I may receive a commission.');
+  await expect(page.locator('.affiliate-disclosure')).toHaveCount(0);
+  const contact=page.locator('.article-close .blog-actions a').first();
+  await expect(contact).toContainText('Explore Working Together');
+  await expect(contact).toHaveAttribute('href','mailto:roman@romanbediner.com');
+  await expect(page.locator('[aria-labelledby="sources"]')).toHaveCount(1);
+  await expect(page.locator('[aria-labelledby="agentic-society-resources"] a')).toHaveCount(3);
   for(const link of await page.locator('[data-partner-cta]').all()) {
     await expect(link).toHaveAttribute('href','https://agenticsociety.com?ref=roman-967464');
     await expect(link).toHaveAttribute('rel',/sponsored/);

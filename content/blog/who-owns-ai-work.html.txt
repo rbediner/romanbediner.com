@@ -75,14 +75,20 @@
 
 <p>My <a href="/resources/ai-project-manager/">AI Project Manager guide</a> is a practical starting point for explicit commitments, owners and a shared tracker. It is a skill template and setup guide, not a finished deployment. Use it to make the work visible. Do not expect the template to supply authority the business has not assigned.</p>
 
-<p>Before you add another tool, pick one important workflow and ask: who owns the result, and can that person actually change what is stopping it?</p>
 
-<p><a href="/connect/" data-blog-contact="closing">Talk with me about the workflow you want to improve.</a></p>
+
 
 </section>
 
+<section id="next-step" class="article-close ui-surface ui-surface--editorial is-static" aria-labelledby="next-step-title">
+<p class="blog-eyebrow">TURN USEFUL TOOLS INTO WORK THAT MOVES</p>
+<h2 id="next-step-title">Your team has the tools. Let’s fix the handoff.</h2>
+<p>If work keeps coming back to you, bring me one example. We can trace the stalled decision, clarify who owns it, and decide whether you need a simpler process, better systems, or hands-on operating leadership.</p>
+{{cta:closing}}
+</section>
+
 <section aria-labelledby="sources">
-<h2 id="sources">Sources and context</h2>
+<h2 id="sources">Independent sources and context</h2>
 
 <p>Research began with Nathaniel Whittemore&#x27;s The AI Daily Brief, particularly the November 15 discussion of AI-native companies: <a href="https://aidailybrief.ai/e/2026-11-15">November 15 edition</a>. This early draft reviews the editions available for November 11, 12, 13, 15 and 16, retrieved November 17. The planned research window runs November 11 through 17; a November 17 edition was not yet listed. The workflow and 30-day trial are my recommendations, and the professional-services example is illustrative, not a reported client result.</p>
 
@@ -90,4 +96,14 @@
 
 <p>Uber, “<a href="https://www.uber.com/gb/en/blog/securing-ai-agents/">Securing AI agents</a>,” November 6, 2026. Agent security architecture and its stated limitations, not evidence that safeguards eliminate risk.</p>
 
+</section>
+
+<section class="article-sources" aria-labelledby="agentic-society-resources">
+<h2 id="agentic-society-resources">Agentic Society resources</h2>
+<p>Explore the community, review membership, or see what is on the calendar. These links describe the community; they are not independent evidence for the operating recommendations above.</p>
+<ul>
+<li><a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">How Agentic Society works</a>: the community and its approach.</li>
+<li><a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">Membership and application</a>: review the participation options.</li>
+<li><a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">Events</a>: check the current listings.</li>
+</ul>
 </section>

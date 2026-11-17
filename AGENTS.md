@@ -1,6 +1,7 @@
 # Repo Agent Instructions
 
 ## Startup Requirement
+- For any website page work, read `.agents/skills/bediner-site/SKILL.md`, the canonical shared styling, page-type routing, blog conversion/source and SEO contract. Blog Research/Build skills are its specialized workflows, not competing site standards.
 - Before making changes in this repository, read `/README.md`.
 - Immediately after reading `/README.md`, read `/docs/handoff/latest.md`.
 - Treat `/docs/handoff/latest.md` as the live source of truth for current repo state, branch alignment, and operator notes.

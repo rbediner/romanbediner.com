@@ -58,6 +58,38 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`AI ownership article
     await expect(page.locator(await link.getAttribute('href'))).toHaveCount(1);
   }
   expect(await page.evaluate(()=>document.fonts.check('32px "Cormorant Garamond"') && document.fonts.check('24px "DM Sans"'))).toBe(true);
+  const close = page.locator('.article-close');
+  await expect(close).toHaveCount(1);
+  const actions = close.locator('.blog-actions a');
+  await expect(actions.nth(0)).toHaveText('Explore Working Together →');
+  await expect(actions.nth(0)).toHaveAttribute('href', 'mailto:roman@romanbediner.com');
+  await expect(actions.nth(0)).toHaveClass(/resource-primary-cta/);
+  await expect(actions.nth(1)).toHaveText('Learn more about Agentic Society →');
+  await expect(actions.nth(1)).toHaveClass(/resource-text-cta/);
+  await expect(page.locator('.article-byline')).not.toContainText('Agentic Society');
+  await expect(page.locator('.blog-author')).toContainText('fractional CTO for NC Courage');
+  for (const a of await page.locator('a[href*="agenticsociety.com"]').all()) {
+    const url = new URL(await a.getAttribute('href'));
+    expect(url.searchParams.getAll('ref')).toEqual(['roman-967464']);
+    expect((await a.getAttribute('rel')).split(/\s+/)).toContain('sponsored');
+  }
+  await expect(page.locator('[aria-labelledby="sources"] a[href*="stripe.dev"]')).toHaveAttribute('href','https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents');
+  await expect(page.locator('[aria-labelledby="sources"] a[href*="uber.com"]')).toHaveAttribute('href','https://www.uber.com/gb/en/blog/securing-ai-agents/');
+  await expect(page.locator('[aria-labelledby="agentic-society-resources"] a')).toHaveCount(3);
+  await expect(page.locator('[aria-labelledby="sources"] a[href*="aidailybrief.ai"]')).toHaveAttribute('href','https://aidailybrief.ai/e/2026-11-15');
+  // Owner requested boilerplate removal in this review example; publication disclosure review is separate.
+  await expect(page.locator('.article-body')).not.toContainText('I may receive a commission');
+  for (const action of await actions.all()) {
+    expect(await action.evaluate(n => n.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
+  }
+  expect(await page.evaluate(() => {
+    const independent = document.querySelector('[aria-labelledby="sources"]');
+    const community = document.querySelector('[aria-labelledby="agentic-society-resources"]');
+    return !!(independent.compareDocumentPosition(community) & Node.DOCUMENT_POSITION_FOLLOWING);
+  })).toBe(true);
+  await actions.nth(0).focus();
+  await expect(actions.nth(0)).toBeFocused();
+
   const figure=page.locator('.blog-diagram');
   await expect(figure).toHaveCount(1);
   expect(await figure.locator('.blog-diagram-scroll').evaluate(node=>node.scrollWidth<=node.clientWidth)).toBe(true);
@@ -110,6 +142,7 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`AI ownership article
     // Capture the below-fold diagram without moving it underneath the sticky header.
     const diagramBox = await figure.boundingBox();
     await page.screenshot({path:path.join(dir,`diagram-${width}.png`),clip:diagramBox,fullPage:true});
+    await close.screenshot({path:path.join(dir,`cta-${width}.png`)});
   }
   await page.goto(`${base}/blog/`);
   const card=page.locator('article').filter({has:page.locator('h2 a[href$="/blog/who-owns-ai-work/"]')});
