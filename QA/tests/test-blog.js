@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Invariant:
- * - Generated blog pages preserve referral attribution, disclosure, metadata,
+ * - Generated blog pages preserve referral attribution, owner-reviewed conversion, metadata,
  *   readable diagrams and the reviewed-content boundary.
  * Why this exists:
  * - Weekly editorial work must not leak drafts or silently break conversion.
@@ -27,9 +27,9 @@ for(const [file,html] of [['article',article],['hub',hub]]) {
   assert(!/[\u2013\u2014]/.test(html),'Editorial copy avoids dash punctuation');
 }
 const ctas=[...article.matchAll(/<a[^>]+href="https:\/\/agenticsociety\.com\?ref=roman-967464"[^>]*>/g)];
-assert.equal(ctas.length,2,'Opening and closing referral links');
+assert.equal(ctas.length,1,'One closing conversion CTA');
 ctas.forEach(m=>assert(m[0].includes('rel="sponsored noopener"'),'Sponsored referral relationship'));
-assert(article.indexOf('I may earn a commission')<article.indexOf('data-partner-cta'),'Disclosure before referral CTA');
+assert(!article.includes('I may receive a commission'), 'Owner-rejected boilerplate absent; publication compliance is a separate gate');
 assert(article.includes('Fractional COO') && !article.includes('Fractional CEO'));
 assert.equal((article.match(/data-expand-diagram/g)||[]).length,2);
 assert(article.includes('/resources/agentic-ai-employees/') && article.includes('/resources/ai-project-manager/'));
@@ -56,7 +56,7 @@ const words=html=>html.replace(/<[^>]*>/g,' ').split(/\s+/).filter(Boolean).leng
 const example=source.match(/<section id="examples">([\s\S]*?)<\/section>/)[1];
 assert(words(example)/words(source)<0.35, 'The fleet supports the community story');
 assert(!source.includes('starting point for the room') && !source.includes('{{workDiagram}}'), 'Retired solution-preparation detour');
-assert(source.includes('Bring your business. Find people to build with.'), 'Preserve revised owner-selected closing invitation');
+assert(source.includes('Bring the business problem. Let’s find your starting point.'), 'Preserve revised owner-selected closing invitation');
 assert(source.includes('AZ Moyer') && source.includes('Adelle Archer'), 'Attributed public examples');
 assert(article.includes('blog-contents') && article.includes('section-nav.js'), 'Compact progressive navigation');
 assert(hub.includes('<h1>Blog</h1>') && hub.includes('resource-card resource-card--compact'), 'Blog uses the Resources landing and compact card components');

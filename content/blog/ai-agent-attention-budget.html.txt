@@ -50,15 +50,15 @@
     <p>The <a href="/framework/">AI-Enabled Operations Framework</a> provides the broader approach to ownership, execution, and operating signals. When you are ready to build, the <a href="/resources/agentic-ai-employees/">Agentic Fleet Build Guide</a> covers the implementation and controls. Use those resources rather than starting the operating design from scratch.</p>
   </section>
 
-  <section id="next-step" class="article-close ui-surface ui-surface--editorial is-static">
-<p class="blog-eyebrow">CHOOSE A WORKABLE PILOT</p>
-<h2>Build around the attention your team can give.</h2>
-<p>Pick one recurring responsibility and make room for review, corrections and exceptions before expanding it. Agentic Society is a place to explore building with other owners and operators. If you want to talk through your pilot first, bring the workflow and the demands it already places on your team.</p>
+  <section id="next-step" class="article-close ui-surface ui-surface--editorial is-static" aria-labelledby="next-step-title">
+<p class="blog-eyebrow">PROTECT YOUR TEAM’S ATTENTION</p>
+<h2 id="next-step-title">Your best people should not become a permanent review queue.</h2>
+<p>Bring me one workflow where AI saves drafting time but creates more checking. We can map the full human workload, set an exception budget, and design a pilot that tests whether the team actually gets capacity back.</p>
 {{cta:closing}}
 </section>
 
 <section aria-labelledby="sources">
-    <h2 id="sources">Sources and context</h2>
+    <h2 id="sources">Independent sources and context</h2>
     <p>This article's research began with Nathaniel Whittemore's <a href="https://aidailybrief.ai/">The AI Daily Brief</a>. The October 22 through 28, 2026 editions informed the research, including <a href="https://aidailybrief.ai/e/2026-10-25">Sunday's account of his AI workflow</a>. The operating recommendation and hypothetical service-firm example are developed here; they are not reported findings or Roman Bediner client results.</p>
     <ul>
       <li>Anthropic, <a href="https://claude.com/resources/articles/claude-duet">Introducing Claude Duet</a>, October 21, 2026. Product description and preview limitations; vendor claims are not independent outcome evidence.</li>
@@ -67,3 +67,13 @@
     </ul>
     <p>Underlying sources were independently located and checked October 29, 2026. The inspected AIDB companion records supplied no original-source links.</p>
   </section>
+
+<section class="article-sources" aria-labelledby="agentic-society-resources">
+<h2 id="agentic-society-resources">Agentic Society resources</h2>
+<p>Explore the community, review membership, or see what is on the calendar. These links describe the community; they are not independent evidence for the operating recommendations above.</p>
+<ul>
+<li><a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">How Agentic Society works</a>: the community and its approach.</li>
+<li><a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">Membership and application</a>: review the participation options.</li>
+<li><a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">Events</a>: check the current listings.</li>
+</ul>
+</section>

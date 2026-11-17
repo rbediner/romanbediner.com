@@ -1306,3 +1306,7 @@ The owner-reviewed V7 article uses the full visible how-to title and two documen
 Sunset Grove’s closing invitation includes contextual membership and events links with the verified referral query; its primary community pill remains the homepage destination.
 
 Blog modification days follow the verified substantive content-edit day in each article metadata record; publication dates and RSS publication timestamps remain unchanged.
+
+### Approved blog-footer consistency (November 17, 2026)
+
+The five existing articles use article-specific blue closing invitations with primary Explore Working Together to the verified public email address and secondary Agentic Society referral. Independent research or first-person project context remains separate from community resources. Verified author context varies by article through escaped optional metadata. Published dates are unchanged; modified dates reflect this revision. Canonical, structured data, social metadata, source links and responsive reading are validated. The separate November18 article is not included in this production change.

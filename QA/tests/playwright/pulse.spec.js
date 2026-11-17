@@ -63,7 +63,7 @@ for (const width of [1440,1280,1024,768,430,390,320]) test(`Pulse reading and co
  await page.locator('[data-pulse-zoom=in]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('150%');expect(await f.locator('.boardwrap').evaluate(e=>e.scrollWidth>e.clientWidth)).toBe(true);await page.locator('[data-pulse-zoom=out]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('100%');await page.locator('[data-pulse-zoom=in]').click();await page.locator('[data-pulse-zoom=fit]').click();await expect(page.locator('#pulse-dialog output')).toHaveText('100%');
  await page.evaluate(()=>window.postMessage({type:'pulse:escape'},'*'));await page.waitForTimeout(50);expect(await page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(true);await f.locator('#slots').selectOption('21');await f.locator('#slots').press('Escape');await expect.poll(()=>page.locator('#pulse-dialog').evaluate(e=>e.matches(':modal'))).toBe(false);await expect(full).toBeFocused();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(savedY);await expect(f.locator('#slots')).toHaveValue('21');
  await full.click();await page.getByRole('button',{name:'Close expanded PULSE',exact:true}).click();await expect(full).toBeFocused();
- await expect(page.getByRole('link',{name:'Talk with me about it',exact:false})).toHaveAttribute('href',/\/connect\/$/);
+ await expect(page.getByRole('link',{name:'Explore Working Together',exact:false})).toHaveAttribute('href','mailto:roman@romanbediner.com');
  await expect(page.locator('.agency-role-table tbody tr')).toHaveCount(8);expect(await page.locator('.agency-role-table').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
  const chart=page.locator('.blog-diagram-scroll');expect(await chart.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
  await page.locator('[data-expand-diagram]').click();await expect(page.locator('.blog-diagram-dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('.blog-diagram-dialog')).not.toBeVisible();
@@ -107,12 +107,17 @@ for (const slug of ['agentic-society','ai-agent-attention-budget','make-judgment
  for (const width of [1440,390,320]) {
   await page.setViewportSize({width,height:1000});await page.goto(`${base}/blog/${slug}/`);
   const card=page.locator('.article-close.ui-surface--editorial');await expect(card).toHaveCount(1);
-  const primary=card.locator('[data-partner-cta="closing"]');await expect(primary).toContainText('Learn more about Agentic Society');
-  await expect(primary).toHaveAttribute('href',slug==='sunset-grove-ai-creative-agency'?'https://agenticsociety.com/?ref=roman-967464':'https://agenticsociety.com?ref=roman-967464');await expect(primary).toHaveAttribute('rel','sponsored noopener');
-  if(slug==='sunset-grove-ai-creative-agency'){for(const [label,destination] of [['membership','apply'],['events','events']]){const link=card.getByRole('link',{name:label,exact:true});await expect(link).toHaveAttribute('href',`https://agenticsociety.com/${destination}?ref=roman-967464`);await expect(link).toHaveAttribute('rel','sponsored noopener');}}
-  await expect(card.locator('.affiliate-role')).toHaveText('I serve as Fractional COO at Agentic Society and can help you think through where to start.');
-  await expect(card.locator('.affiliate-disclosure')).toHaveText('Affiliate links: I may receive a commission.');
-  await expect(card.locator('[data-blog-contact="closing"]')).toHaveAttribute('href',/\/connect\/$/);
+  const primary=card.locator('.blog-actions a').nth(0);
+  await expect(primary).toContainText('Explore Working Together');
+  await expect(primary).toHaveClass(/resource-primary-cta/);
+  await expect(primary).toHaveAttribute('href','mailto:roman@romanbediner.com');
+  const secondary=card.locator('.blog-actions a').nth(1);
+  await expect(secondary).toContainText('Learn more about Agentic Society');
+  await expect(secondary).toHaveAttribute('href',/^https:\/\/agenticsociety\.com\/?\?ref=roman-967464$/);
+  await expect(secondary).toHaveAttribute('rel','sponsored noopener');
+  await expect(card.locator('.affiliate-disclosure')).toHaveCount(0);
+  await expect(page.locator('[aria-labelledby="sources"]')).toHaveCount(1);
+  await expect(page.locator('[aria-labelledby="agentic-society-resources"] a')).toHaveCount(3);
   await expect(page.locator('.referral-note')).toHaveCount(0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect(await primary.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
@@ -122,13 +127,13 @@ for (const slug of ['agentic-society','ai-agent-attention-budget','make-judgment
 test('Agentic source citations preserve destinations and referral on navigation',async({page})=>{
  await page.goto(`${base}/blog/agentic-society/`);
  const sources=page.locator('.article-sources');
- for(const [label,path] of [['Agentic Society website','/'],['membership overview','/apply'],['events page','/events']]) {
+ for(const [label,path] of [['How Agentic Society works','/'],['Membership and application','/apply'],['Events','/events']]) {
   const link=sources.getByRole('link',{name:label,exact:true});
   await expect(link).toHaveAttribute('href',`https://agenticsociety.com${path}?ref=roman-967464`);
   await expect(link).toHaveAttribute('rel','sponsored noopener');
  }
  let destination;
  await page.route('https://agenticsociety.com/**',route=>{destination=route.request().url();return route.abort();});
- await sources.getByRole('link',{name:'membership overview',exact:true}).click().catch(()=>{});
+ await sources.getByRole('link',{name:'Membership and application',exact:true}).click().catch(()=>{});
  expect(destination).toBe('https://agenticsociety.com/apply?ref=roman-967464');
 });

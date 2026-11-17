@@ -117,9 +117,21 @@
 
 <p class="article-source-context">The implementation examples in this article come from dated project records. They describe what was documented at those points, not an independent audit of the agency’s current operation.</p>
 
-<section id="agency-next-step" class="article-close ui-surface ui-surface--editorial is-static">
-<p class="blog-eyebrow">BUILD YOUR CREATIVE AGENCY</p>
-<h2>Put an AI agency to work on your business.</h2>
-<p>Start with the campaign you need, the work each role should own and the decisions that still need you. If you want people to build alongside, explore Agentic Society’s <a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">membership</a> or start with its <a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">events</a>. If you would like guidance first, tell me what your marketing needs to accomplish and we can talk through a useful starting point.</p>
+<section id="agency-next-step" class="article-close ui-surface ui-surface--editorial is-static" aria-labelledby="agency-next-step-title">
+<p class="blog-eyebrow">BUILD A MARKETING SYSTEM YOU CAN DIRECT</p>
+<h2 id="agency-next-step-title">You need a working marketing team, not sixteen new tools.</h2>
+<p>Bring me the campaign your business needs and the handoffs that keep slowing it down. We can define the roles, shared context, review decisions, and operating rhythm an AI-assisted agency would need before you invest in a bigger system.</p>
 {{cta:closing}}
+</section>
+
+<section aria-labelledby="sources"><h2 id="sources">Project context and sources</h2><p>This article is a first-person account of my design work for Sunset Grove, not an independent performance study. The <a href="/resources/agentic-ai-employees/">Agentic AI Employees architecture</a> explains the shared-context and role-based approach. The PULSE interface shown here is a development preview with sample activity, not evidence of live campaign results. The recommendations describe design choices; they do not establish marketing returns.</p></section>
+
+<section class="article-sources" aria-labelledby="agentic-society-resources">
+<h2 id="agentic-society-resources">Agentic Society resources</h2>
+<p>Explore the community, review membership, or see what is on the calendar. These links describe the community; they are not independent evidence for the operating recommendations above.</p>
+<ul>
+<li><a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">How Agentic Society works</a>: the community and its approach.</li>
+<li><a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">Membership and application</a>: review the participation options.</li>
+<li><a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">Events</a>: check the current listings.</li>
+</ul>
 </section>

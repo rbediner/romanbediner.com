@@ -32,6 +32,10 @@ const posts = fs.readdirSync(path.join(ROOT, 'content/blog')).filter(f => f.ends
   for (const key of ['title','seoTitle','description','deck','category','date','updated','image','imageAlt']) {
     if (!p[key]) throw new Error(`Missing ${key}: ${file}`);
   }
+  // Optional article-specific credentials are plain text; omitted fields preserve existing pages.
+  for (const key of ['byline','authorJobTitle','authorBio']) {
+    if (p[key] !== undefined && (typeof p[key] !== 'string' || !p[key].trim())) throw new Error(`Invalid ${key}: ${file}`);
+  }
   for (const key of ['date','updated']) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(p[key]) || new Date(`${p[key]}T12:00:00Z`).toISOString().slice(0,10) !== p[key]) throw new Error(`Invalid date: ${file}`);
   }
@@ -79,7 +83,7 @@ ${article ? '<script src="/scripts/runtime/section-nav.js?v=20260824a" defer></s
 </body></html>\n`;
 }
 function cta(p, position) {
-  return `<div class="blog-conversion"><p class="affiliate-role">I serve as Fractional COO at Agentic Society and can help you think through where to start.</p><p class="affiliate-disclosure">Affiliate links: I may receive a commission.</p><div class="blog-actions"><a class="resource-primary-cta" href="${escape(p.referralUrl)}" rel="sponsored noopener" data-partner-cta="${position}" data-article="${escape(p.slug)}">Learn more about Agentic Society <span aria-hidden="true">&rarr;</span></a><a class="resource-text-cta" href="/connect/" data-blog-contact="${position}">Talk with me about it <span aria-hidden="true">&rarr;</span></a></div></div>`;
+  return `<div class="blog-conversion"><div class="blog-actions"><a class="resource-primary-cta" href="mailto:roman@romanbediner.com" data-blog-contact="${position}">Explore Working Together <span aria-hidden="true">&rarr;</span></a><a class="resource-text-cta" href="${escape(p.referralUrl)}" rel="sponsored noopener" data-partner-cta="${position}" data-article="${escape(p.slug)}">Learn more about Agentic Society <span aria-hidden="true">&rarr;</span></a></div></div>`;
 }
 // Inline trusted, source-controlled SVG so diagram text uses the site's real fonts.
 function diagram(file, label, caption, eyebrow) {
@@ -121,13 +125,13 @@ for (const p of posts) {
   validateMarkup(content, p.slug);
   if (/\{\{/.test(content)) throw new Error(`Unresolved template in ${p.slug}`);
   const schema = {'@context':'https://schema.org','@graph':[
-    {'@type':'BlogPosting','@id':`${BASE}${route}#article`,headline:p.title,description:p.description,datePublished:`${p.date}T12:00:00Z`,dateModified:`${p.updated}T12:00:00Z`,image:`${BASE}${p.image}`,mainEntityOfPage:`${BASE}${route}`,author:{'@type':'Person',name:'Roman Bediner',url:`${BASE}/about/`,jobTitle:'Fractional COO and AI Architect'},publisher:{'@type':'Organization',name:'Bediner Advisory LLC',url:BASE},articleSection:p.category,inLanguage:'en-US',isAccessibleForFree:true,keywords:(p.topics || []).join(', '),about:(p.topics || []).map(name=>({'@type':'Thing',name})),isPartOf:{'@type':'Blog','@id':`${BASE}/blog/#blog`,url:`${BASE}/blog/`}},
+    {'@type':'BlogPosting','@id':`${BASE}${route}#article`,headline:p.title,description:p.description,datePublished:`${p.date}T12:00:00Z`,dateModified:`${p.updated}T12:00:00Z`,image:`${BASE}${p.image}`,mainEntityOfPage:`${BASE}${route}`,author:{'@type':'Person',name:'Roman Bediner',url:`${BASE}/about/`,jobTitle:p.authorJobTitle || 'Fractional COO and AI Architect'},publisher:{'@type':'Organization',name:'Bediner Advisory LLC',url:BASE},articleSection:p.category,inLanguage:'en-US',isAccessibleForFree:true,keywords:(p.topics || []).join(', '),about:(p.topics || []).map(name=>({'@type':'Thing',name})),isPartOf:{'@type':'Blog','@id':`${BASE}/blog/#blog`,url:`${BASE}/blog/`}},
     {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Blog',item:`${BASE}/blog/`},{'@type':'ListItem',position:2,name:p.title,item:`${BASE}${route}`}]}]};
   outputs[`blog/${p.slug}/index.html`] = shell({title:p.seoTitle,description:p.description,route,image:p.image,imageAlt:p.imageAlt,schema,article:p,body:`<main id="main" class="page-main resources-main resource-fleet-main blog-main blog-article">
-<p class="resources-label">${escape(p.eyebrow || "BUSINESS OWNERS + AI COMMUNITY")}</p><h1>${escape(p.displayTitle || p.title)}</h1><p class="fleet-title-deck">${escape(p.subtitle || '')}</p><div class="section-accent" aria-hidden="true"></div>${intro(escape(p.deck), 'Article introduction')}<div class="blog-pills"><span class="resource-meta">${escape(p.category)}</span>${p.series ? `<span class="resource-meta">${escape(p.series)}</span>` : ''}</div><div class="article-byline"><img src="/assets/images/website-photo.jpg" width="72" height="96" alt="Roman Bediner" /><div><a class="resource-text-cta" href="/about/">Roman Bediner</a><span>Fractional COO, Agentic Society</span><span><time datetime="${p.date}">${formatDate(p.date)}</time> · ${p.minutes} min read</span></div></div>
+<p class="resources-label">${escape(p.eyebrow || "BUSINESS OWNERS + AI COMMUNITY")}</p><h1>${escape(p.displayTitle || p.title)}</h1><p class="fleet-title-deck">${escape(p.subtitle || '')}</p><div class="section-accent" aria-hidden="true"></div>${intro(escape(p.deck), 'Article introduction')}<div class="blog-pills"><span class="resource-meta">${escape(p.category)}</span>${p.series ? `<span class="resource-meta">${escape(p.series)}</span>` : ''}</div><div class="article-byline"><img src="/assets/images/website-photo.jpg" width="72" height="96" alt="Roman Bediner" /><div><a class="resource-text-cta" href="/about/">Roman Bediner</a><span>${escape(p.byline || 'Fractional COO, Agentic Society')}</span><span><time datetime="${p.date}">${formatDate(p.date)}</time> · ${p.minutes} min read</span></div></div>
 <details class="blog-contents"><summary>In this article</summary><nav class="fleet-section-nav" data-section-nav aria-label="In this article">${p.toc.map(([id,label])=>`<a href="#${escape(id)}">${escape(label)}</a>`).join('')}</nav></details>
 <article class="article-body">${content}</article>
-<section class="blog-author"><img src="/assets/images/website-photo.jpg" width="72" height="96" alt="Roman Bediner" loading="lazy" /><div><span class="resource-meta">About the author</span><h2>Roman Bediner</h2><p>Fractional COO and AI Architect. I help connect business priorities, people, and systems so useful work gets done.</p><a class="resource-text-cta" href="/about/">More about my work <span aria-hidden="true">&rarr;</span></a></div></section>
+<section class="blog-author"><img src="/assets/images/website-photo.jpg" width="72" height="96" alt="Roman Bediner" loading="lazy" /><div><span class="resource-meta">About the author</span><h2>Roman Bediner</h2><p>${escape(p.authorBio || 'Fractional COO and AI Architect. I help connect business priorities, people, and systems so useful work gets done.')}</p><a class="resource-text-cta" href="/about/">More about my work <span aria-hidden="true">&rarr;</span></a></div></section>
 ${reading()}
 </main>`});
 }

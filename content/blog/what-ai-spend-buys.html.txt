@@ -34,15 +34,25 @@
   <p>My earlier <a href="/blog/ai-agent-attention-budget/">attention-budget article</a> addressed the human work AI consumes. This adds a spending decision: what additional benefit warrants the next commitment? The <a href="/framework/">AI-Enabled Operations Framework</a> connects that decision to ownership and execution.</p>
 </section>
 
-<section id="next-step" class="article-close ui-surface ui-surface--editorial is-static">
+<section id="next-step" class="article-close ui-surface ui-surface--editorial is-static" aria-labelledby="next-step-title">
 <p class="blog-eyebrow">MAKE THE NEXT INVESTMENT COUNT</p>
-<h2>Give the next AI dollar a job.</h2>
-<p>Bring the workflow, its full cost and the result that would justify spending more. You can explore Agentic Society as a place to build alongside others, or talk with me first about what a useful trial would need to show. Start with the decision, not a bigger bill.</p>
+<h2 id="next-step-title">Before the next AI renewal, put the business case on the table.</h2>
+<p>Bring me the workflow, its full cost, and the outcome that would justify spending more. We can separate faster activity from useful capacity and design a bounded trial that gives you a clearer renew, change, or stop decision.</p>
 {{cta:closing}}
 </section>
 
 <section aria-labelledby="sources">
-  <h2 id="sources">Sources and context</h2>
+  <h2 id="sources">Independent sources and context</h2>
   <p>Research began with Nathaniel Whittemore's <a href="https://aidailybrief.ai/">The AI Daily Brief</a>, particularly its <a href="https://aidailybrief.ai/e/2026-11-06">November 6 enterprise-spending discussion</a>. This early candidate covers the available November 4, 5 and 6 editions, retrieved November 8 at 17:21 UTC. It is partial coverage of the planned November 4 to 10 window.</p>
   <p><a href="https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/">Menlo Ventures' 2026 report</a> puts average spending at 4.7 times the prior year's level against a planned 1.9 times; the median was 2.2 times against 1.8 times. Its methodology combines market modeling with a survey of nearly 400 US enterprise decision-makers, fielded September 8 to 26. Menlo invests in the sector. Spending growth does not demonstrate buyers' returns. The comparisons and recommendations here are original illustration, not measured company outcomes.</p>
+</section>
+
+<section class="article-sources" aria-labelledby="agentic-society-resources">
+<h2 id="agentic-society-resources">Agentic Society resources</h2>
+<p>Explore the community, review membership, or see what is on the calendar. These links describe the community; they are not independent evidence for the operating recommendations above.</p>
+<ul>
+<li><a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">How Agentic Society works</a>: the community and its approach.</li>
+<li><a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">Membership and application</a>: review the participation options.</li>
+<li><a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">Events</a>: check the current listings.</li>
+</ul>
 </section>
