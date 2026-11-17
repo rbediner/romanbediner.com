@@ -1,15 +1,16 @@
 # Cross-Machine Handoff (Latest)
 
-- Handoff Sequence: 436
-- Updated At (UTC): 2026-11-17T22:22:08Z
+- Handoff Sequence: 437
+- Updated At (UTC): 2026-11-17T22:26:15Z
 - Source Branch: staging
-- Source Commit: 7a8d16e0f6524150569a72ac57e67f0e6aa76078 (pre-handoff baseline)
+- Source Commit: 7fc010268e8a177e0ef61b031bd7bfdd066e8458 (pre-handoff baseline)
 
 ## November18 blog candidate, staging preparation
 
 - Reused independently reviewed revision3 from the November17 cloud task; no duplicate generation. Permanent slug who-owns-ai-work. Prose/artwork preserved; date and updated aligned to November18 before deterministic rebuild.
 - Restored latest staging7a8d16e via verified Git bundle into isolated Mac checkout, preserving existing staging maintenance. Only new article source/artwork/focused QA and generated blog discovery outputs are added. Production remains f29163d and must never receive whole staging history.
 - Actual Chrome local desktop1440/tablet768/phone390 review: loaded fonts, no horizontal overflow; phone diagram contained; fullscreen/Zoom/Fit/close/focus/scroll restoration pass. No browser warnings/errors observed. Full automated gate and hosted preview are still pending at this preparation point.
+- Focused loaded-font geometry found label gaps below the existing8px minimum. Only SVG baselines changed, prose/diagram meaning unchanged; assertions preserved. Rerun8/8PASS across7widths plus trusted phone pinch/pan/context return. Failed and successful receipts retained privately. Standard local gate passed the prior head; final exact-head gate/prepush and hosted deploy verification remain required.
 - No production approval, email, or public publication. Local browser preview is not hosted staging. Private research/review evidence remains outside deployable files. Zero new Actions runs at this checkpoint.
 
 ## Current work: V10 production and all-blog metadata correction
