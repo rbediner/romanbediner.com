@@ -6,12 +6,12 @@
 <text x="40" y="103" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Illustrative proposal workflow. Roles remain accountable for their own decisions.</text>
 
 <g data-panel="Workflow owner"><rect x="40" y="142" width="580" height="143" rx="10" fill="#fff" stroke="#b7a369"/><text x="62" y="182" font-family="Georgia,serif" font-size="30" fill="#16222e">Workflow owner</text>
-<text x="62" y="218" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Coordinates the whole result within agreed authority.</text>
-<text x="62" y="247" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Changes the process with the relevant teams.</text>
+<text x="62" y="220" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Coordinates the whole result within agreed authority.</text>
+<text x="62" y="255" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Changes the process with the relevant teams.</text>
 </g>
 <g data-panel="Executive sponsor"><rect x="684" y="142" width="396" height="143" rx="10" fill="#fff" stroke="#b7a369"/><text x="706" y="182" font-family="Georgia,serif" font-size="30" fill="#16222e">Executive sponsor</text>
-<text x="706" y="218" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Resolves decisions outside</text>
-<text x="706" y="247" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">the owner’s delegated limits.</text>
+<text x="706" y="220" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Resolves decisions outside</text>
+<text x="706" y="255" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">the owner’s delegated limits.</text>
 </g>
 <path d="M620 211H684" stroke="#ab1d37" stroke-width="2" marker-end="url(#risk)"/><text x="650" y="306" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#ab1d37">Escalate unresolved tradeoffs</text>
 <rect x="24" y="336" width="1072" height="398" rx="12" fill="#fff" fill-opacity=".45" stroke="#a4bdd3"/>
@@ -19,20 +19,20 @@
 <text x="48" y="411" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Requirements, capacity, rules, status and exceptions. No unrestricted shared folder.</text>
 
 <g data-panel="Sales and delivery"><rect x="48" y="438" width="494" height="120" rx="10" fill="#fff" stroke="#104275"/><text x="70" y="478" font-family="Georgia,serif" font-size="30" fill="#16222e">Sales and delivery</text>
-<text x="70" y="514" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Customer requirements and feasible capacity.</text>
+<text x="70" y="516" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Customer requirements and feasible capacity.</text>
 </g>
 <g data-panel="Finance"><rect x="578" y="438" width="494" height="120" rx="10" fill="#fff" stroke="#104275"/><text x="600" y="478" font-family="Georgia,serif" font-size="30" fill="#16222e">Finance</text>
-<text x="600" y="514" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Commercial rules and approved exceptions.</text>
+<text x="600" y="516" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Commercial rules and approved exceptions.</text>
 </g>
 <g data-panel="Technical leadership"><rect x="48" y="582" width="494" height="120" rx="10" fill="#fff" stroke="#104275"/><text x="70" y="622" font-family="Georgia,serif" font-size="30" fill="#16222e">Technical leadership</text>
-<text x="70" y="658" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Connections, permissions and failure handling.</text>
+<text x="70" y="660" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Connections, permissions and failure handling.</text>
 </g>
 <g data-panel="Workflow owner"><rect x="578" y="582" width="494" height="120" rx="10" fill="#fff" stroke="#b7a369"/><text x="600" y="622" font-family="Georgia,serif" font-size="30" fill="#16222e">Workflow owner</text>
-<text x="600" y="658" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Reconciles handoffs; preserves decision rights.</text>
+<text x="600" y="660" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Reconciles handoffs; preserves decision rights.</text>
 </g>
 <path d="M330 285V336" stroke="#104275" stroke-width="2" marker-end="url(#arrow)"/>
 <path d="M560 734V789" stroke="#104275" stroke-width="2" marker-end="url(#arrow)"/>
 <g data-panel="Proposal ready to send"><rect x="48" y="800" width="1024" height="120" rx="10" fill="#fff" stroke="#104275"/><text x="70" y="840" font-family="Georgia,serif" font-size="30" fill="#16222e">Proposal ready to send</text>
-<text x="70" y="876" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Required approvals complete; delivery date and terms supported by current evidence.</text>
+<text x="70" y="878" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Required approvals complete; delivery date and terms supported by current evidence.</text>
 </g>
 <text x="48" y="963" font-family="Arial,sans-serif" font-size="21" fill="#104275">Owner reviews elapsed time, rework and exceptions; decides what to change.</text><text x="48" y="1000" font-family="Arial,sans-serif" font-size="20" fill="#5b6b7a">Routine work proceeds within limits. Missing evidence returns for resolution.</text></svg>
