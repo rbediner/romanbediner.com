@@ -1,8 +1,8 @@
-<p>A team can have good AI tools and still leave the CEO doing the same work: chasing a decision, reconciling conflicting updates, or finding out why something that looked finished never reached the customer.</p>
+<p>A team can have good AI tools and still leave the CEO chasing decisions. Updates conflict. Work looks finished but never reaches the customer.</p>
 
 <p>The next purchase may help. First, I would ask who is responsible for making the whole job work.</p>
 
-<p>That is a different responsibility from choosing the software or teaching people how to prompt it. Someone has to connect the business priority, the way work moves, the information people trust, and the decisions they are allowed to make. Otherwise, a faster draft can just reach the same unresolved handoff sooner.</p>
+<p>That job is different from choosing software or teaching people to prompt it. Someone has to link the business goal to how work moves. They need reliable information and clear decision rights. Otherwise, a faster draft reaches the same stalled handoff sooner.</p>
 
 <section aria-labelledby="start-at-the-handoff">
 <h2 id="start-at-the-handoff">Start at the handoff</h2>
@@ -11,24 +11,24 @@
 
 <p>The sales lead cannot approve delivery capacity. The technical team cannot decide which customer commitment should take priority. Giving everyone a better assistant does not resolve that disagreement.</p>
 
-<p>I would start with the unfinished decision: who can commit the company to a date, what evidence do they need, and what happens when sales and delivery disagree? Then I would decide where AI can help. It might assemble the evidence, flag a missing capacity check, or prepare the proposal after approval. It should not quietly invent agreement between departments.</p>
+<p>I would start with the unfinished decision. Who can commit the company to a date? What evidence do they need? Who decides when sales and delivery disagree? Then I would decide where AI can help. It might gather the evidence or flag a missing capacity check. It could prepare the proposal after approval. It should not invent agreement between departments.</p>
 
-<p>That example is not a client result. It is a useful way to test whether an AI initiative addresses an operating constraint or makes one department look faster while the business waits.</p>
+<p>That example is not a client result. It helps test whether AI removes a delay or makes one department look faster while the business waits.</p>
 
 </section>
 
 <section aria-labelledby="give-the-outcome-an-owner-with-authority">
 <h2 id="give-the-outcome-an-owner-with-authority">Give the outcome an owner with authority</h2>
 
-<p>For a cross-functional workflow, I want one named person accountable for the result, with permission to resolve ordinary tradeoffs and a clear route to the executive who can decide the rest. That person does not have to perform every task or approve every output.</p>
+<p>For work that crosses departments, I want one named person accountable for the result. They need permission to resolve routine tradeoffs and a clear route to the executive who can decide the rest. They do not need to perform every task or approve every output.</p>
 
 <p>In the proposal example, delivery still owns its capacity information. Finance still owns the margin rules. Sales still owns the customer conversation. The workflow owner makes sure those responsibilities meet in a proposal the business can stand behind. Unlike the reviewer of an individual proposal, this person can change the handoffs that keep causing the delay.</p>
 
-<p>The owner needs three things agreed with the CEO: the result that matters, the decisions they may make, and the time and people available to change the process. Accountability without those commitments is just another name on a status report.</p>
+<p>The owner and CEO need to agree on the result and the decisions the owner may make. They must also commit the time and people needed to change the process. A name on a status report is not enough.</p>
 
 <p>For example, the CEO could give the operations lead authority to change the proposal handoff and require a capacity check before a promise is made. Delivery and finance retain their approval limits; a request outside those limits goes to the executive sponsor. Routine proposals proceed within the agreed rules without waiting for that sponsor to inspect every draft. The agreement should also name a deputy and a response target for exceptions, so an absent owner does not stop the work.</p>
 
-<p>Some choices must stay with the appropriate executive or specialist. A workflow owner should not waive security requirements, change commercial policy or override professional judgment simply to clear a queue. The escalation route is part of the design, not a sign that the owner has failed.</p>
+<p>The right executive or specialist still owns some decisions. A workflow owner cannot waive security rules or override commercial policy and professional judgment to clear a queue. Escalation is part of the design.</p>
 
 {{diagram:ai-work-ownership}}
 
@@ -37,9 +37,9 @@
 <section aria-labelledby="make-reliable-information-part-of-the-job">
 <h2 id="make-reliable-information-part-of-the-job">Make reliable information part of the job</h2>
 
-<p>Useful automation depends on more than connecting systems. Someone must decide which information is authoritative, who maintains it and how people recognize an exception.</p>
+<p>Useful automation takes more than connected systems. Someone must decide which records people can trust and who keeps them current. People also need to know how to spot an exception.</p>
 
-<p>For the proposal workflow, that might mean one current capacity record, an approved set of commercial rules, and a place to record the actual customer commitment. “One current record” does not mean putting every sensitive document into one shared folder. Access should follow the job, and the minimum necessary information should move with the work.</p>
+<p>The proposal workflow might use one current capacity record and approved commercial rules. It also needs a record of the customer commitment. This does not mean putting every sensitive document into one shared folder. Access should follow the job. Pass along only the information needed for the work.</p>
 
 <p>When sources disagree or a required field is missing, the workflow should surface the conflict rather than manufacture a confident answer. The responsible person can correct the record; only the person with authority over the affected commitment can approve an exception. An approved exception for one customer should not silently become the rule for the next.</p>
 
@@ -54,13 +54,15 @@
 
 <p>I would start with two or three people and one recurring workflow for 30 days. That is a proposed starting point, not evidence that every business can prove a return in a month.</p>
 
-<p>In the first week, follow the work as it happens. Record where it waits, who supplies missing information, and who makes the final decision. Keep the existing process available while the team learns what needs to change.</p>
+<p>In the first week, follow the work as it happens. Record where it waits and who supplies missing information. Name the person who makes the final decision. Keep the existing process available while the team learns what needs to change.</p>
 
-<p>First, test whether clearer ownership and a simple checklist remove the delay without AI. That may be enough. If a specific preparation or checking task still warrants automation, test a narrow intervention in the remaining weeks. In our illustrative example, AI might prepare a proposal readiness check from approved records, while people retain authority over price and delivery commitments. The workflow owner reviews exceptions and agrees any process changes with the relevant teams.</p>
+<p>First, test whether clearer ownership and a simple checklist remove the delay without AI. That may be enough. If a specific preparation or checking task still warrants automation, test a narrow intervention in the remaining weeks. In our illustrative example, AI might prepare a proposal readiness check from approved records. People retain authority over price and delivery commitments. The workflow owner reviews exceptions and agrees any process changes with the relevant teams.</p>
 
-<p>At the end, compare elapsed time from a qualified request to a proposal internally approved and ready to send, rework, and the effort spent reviewing and maintaining the new process. Count unfinished proposals and errors too. A faster draft is not a win if delivery has to repair the promise later. Different deal complexity can change the numbers, so a small pilot should guide a decision rather than pretend to settle every question. If too few comparable cases occur in 30 days, extend a bounded observation period rather than declare success from one easy proposal. Separate what the clearer process fixed from any additional benefit of AI.</p>
+<p>At the end, measure the time from a qualified request to a proposal internally approved and ready to send. Compare rework and the time spent on review and upkeep too. Count unfinished proposals and errors. A faster draft is not a win if delivery has to repair the promise later.</p>
 
-<p>Set the stop conditions before starting. If the system exposes information to the wrong person, invents a commitment, or repeatedly needs more correction than the existing process, pause the affected automation and use the fallback. Notify the responsible security or data owner after an exposure and follow the company&#x27;s incident process. Decide what must be fixed before resuming. Some consequences warrant stopping after one failure, not waiting for the monthly review.</p>
+<p>Deal complexity can change the numbers. Use a small pilot to guide the next decision. If too few comparable cases occur in 30 days, extend a bounded observation period. One easy proposal does not prove success. Separate what the clearer process fixed from any added benefit of AI.</p>
+
+<p>Agree on stop conditions before you start. Pause the affected automation if it exposes information to the wrong person or invents a commitment. Pause it too if it repeatedly needs more correction than the old process. Use the fallback. After an exposure, notify the responsible security or data owner and follow the company&#x27;s incident process. Decide what to fix before resuming. Some failures warrant an immediate stop.</p>
 
 </section>
 
@@ -69,9 +71,9 @@
 
 <p>Not every company needs a new executive to do this. A capable department leader may already have the authority, time and technical partnership the workflow needs. Give that person a bounded job and support it.</p>
 
-<p>The gap is different when the same unresolved decisions keep crossing departments, no leader has capacity to own the change, or technical choices and operating priorities keep pulling apart. Then the question is not which AI tool to buy next. It is who will lead the work of making the business operate differently.</p>
+<p>The gap is different when the same stalled decisions keep crossing departments and no leader has time to own the change. Technical choices and business priorities may also pull apart. Then I would ask who can lead the change in how the business works before choosing another AI tool.</p>
 
-<p>A fractional COO may fit when work keeps breaking between departments; a fractional CTO may fit when the operating goal is clear but systems, data or technical decisions prevent it. Some situations need both perspectives, not two new titles. Agree the result, decisions, executive support, team time and review date before choosing the arrangement. An adviser can recommend a plan. Operating leadership also has to help people carry it through, resolve tradeoffs and leave a process the business can sustain.</p>
+<p>A fractional COO may fit when work keeps breaking between departments. A fractional CTO may fit when the goal is clear but systems or technical decisions get in the way. That includes making data dependable. Some situations need both perspectives rather than two new titles. Name the result and decision rights. Agree the executive support and team time, with a review date. An adviser can recommend a plan. Operating leadership also has to help people carry it through and resolve tradeoffs. The business needs a process it can sustain.</p>
 
 <p>My <a href="/resources/ai-project-manager/">AI Project Manager guide</a> is a practical starting point for explicit commitments, owners and a shared tracker. It is a skill template and setup guide, not a finished deployment. Use it to make the work visible. Do not expect the template to supply authority the business has not assigned.</p>
 
