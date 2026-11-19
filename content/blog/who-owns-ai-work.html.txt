@@ -90,7 +90,7 @@
 <section aria-labelledby="sources">
 <h2 id="sources">Independent sources and context</h2>
 
-<p>Research began with Nathaniel Whittemore&#x27;s The AI Daily Brief, particularly the November 15 discussion of AI-native companies: <a href="https://aidailybrief.ai/e/2026-11-15">November 15 edition</a>. This early draft reviews the editions available for November 11, 12, 13, 15 and 16, retrieved November 17. The planned research window runs November 11 through 17; a November 17 edition was not yet listed. The workflow and 30-day trial are my recommendations, and the professional-services example is illustrative, not a reported client result.</p>
+<p>Research began with Nathaniel Whittemore&#x27;s The AI Daily Brief, particularly the November 15 discussion of AI-native companies: <a href="https://aidailybrief.ai/e/2026-11-15">November 15 edition</a>. The final source-window check covered the November 11, 12, 13, 15, 16 and 17 editions, including their transcripts. No November 14 edition was listed. The workflow and 30-day trial are my recommendations, and the professional-services example is illustrative, not a reported client result.</p>
 
 <p>Stripe, “<a href="https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents">Minions: Stripe&#x27;s one-shot, end-to-end coding agents</a>,” February 9, 2026. Technical implementation example, not a general return-on-investment study.</p>
 
