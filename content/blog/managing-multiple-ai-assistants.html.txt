@@ -1,0 +1,52 @@
+<p>I answer AI agents between sets at the gym. That gap is supposed to be a rest. Apparently my agents see an opening on the calendar.</p>
+
+<p>The better they get, the more work I give them. I get more done. I also spend more time deciding who can move, finding the right version of things and asking what “done” means. I gave the agents more work. They gave me a management job.</p>
+
+<section aria-labelledby="one-run-left-me-with-a-mystery-maya-told-me-to-carry-on"><h2 id="one-run-left-me-with-a-mystery-maya-told-me-to-carry-on">One run left me with a mystery. Maya told me to carry on.</h2>
+<p>An agent picked up the draft for a Wednesday article on my site without its review notes. That run couldn’t verify that the source checks were complete. It stopped before publishing. Good call. A later check verified the exact version in the preview, but the public page still wasn’t live at that check. If you ask me whether to publish, show me the exact page and what’s been checked. I’ll make that call. Hunting for the evidence is a separate job.</p>
+<p>In a demo of the creative agency’s dashboard for <a href="https://sunsetgrovenc.com/">Sunset Grove</a>, the dashboard showed overdue replies and background checks that weren’t running. The screen named Maya as the owner. It showed no action for me. That was enough to tell me where the issue sat. The demo didn’t prove the checks had recovered.</p>
+<p>On the blog, I want the call on whether to publish. On Maya’s screen, I want to see who’s on it and get back to what I was doing. If both show up as “urgent” on my phone, I have to sort them myself.</p>
+{{diagram:part2-decision-not-ping}}
+</section>
+<section aria-labelledby="what-earns-a-ping"><h2 id="what-earns-a-ping">What earns a ping?</h2>
+<p>Put a review on the calendar. Then give agents three ways to bring work back:</p>
+<ul>
+<li><strong>Ping me</strong> if waiting for my decision would put a real deadline at risk or make a serious problem worse. Give me the decision, your recommendation, when you need an answer and what happens if I don’t reply. Silence is not approval.</li>
+<li><strong>Queue it</strong> if I need to decide but the next review is soon enough. Show me the decision and the evidence together. Keep moving on work you already have permission to do.</li>
+<li><strong>Log it</strong> if it’s routine, reversible, and already authorized. Save a receipt so I can check it later. My phone doesn’t need to light up because a check passed.</li>
+</ul>
+<p>For that Wednesday article, here’s the first message I’d want once the work is ready:</p>
+<blockquote>
+<p><strong>Decision: Publish this revision or send it back?</strong> Here’s the exact preview. The source check and editorial review are attached. Nothing has gone live.</p>
+</blockquote>
+<p>Until the evidence is there, the status is “held for review,” not “waiting for Roman.” Someone still owns finding or redoing the review. If I approve, verify that the live page matches what I saw. If the draft changes in a way that affects the decision, send it back for review. If readers are seeing a materially different page, stop any further rollout and alert the person who can fix it. A preview, an approval and a live page are three different things.</p>
+</section>
+<section aria-labelledby="give-the-work-one-thread-not-your-whole-life"><h2 id="give-the-work-one-thread-not-your-whole-life">Give the work one thread, not your whole life</h2>
+<p>I keep client accounts separate. In <a href="/blog/duet-dot-muse-grok-bot-comparison/">The Wrong AI Agent Can Give You the Right Answer</a>, I explain why. Here’s where I would consolidate: one place to see the open decisions <strong>inside each workspace</strong>. That’s what I mean by a mono-thread. The specialist agents keep their jobs. The website queue holds the exact preview, the review record and the next owner. I can make the decision without reading the whole thread. Client files and publishing access stay where they belong. Even a status summary needs permission to leave its workspace.</p>
+<p>There’s an architectural starting point. The open <a href="https://a2a-protocol.org/v1.0.0/specification/">Agent2Agent specification</a> gives systems a way to identify a task and report whether they need input or authorization to proceed. It doesn’t make my apps talk to one another or decide who can approve a release. Try it with a teammate who already has access. Hand them a task record and walk away. If they can pick up the work without calling you, the handoff worked. You didn’t need a new agent to do it.</p>
+</section>
+<section aria-labelledby="count-the-minutes-you-spend-managing-the-agents"><h2 id="count-the-minutes-you-spend-managing-the-agents">Count the minutes you spend managing the agents</h2>
+<p>I’d start with one workflow and one number: <strong>minutes of human attention per finished job</strong>. For a week, have everyone involved log time spent setting up the agent, answering pings, checking work or doing it over. Count the time even when a job doesn’t finish. Divide by the number of jobs that meet your usual quality bar. If nothing finishes, report that and the minutes. Keep a count of open or rejected work. Where you can, track the same batch through completion. Then set up the queue and run the same test for another week. Keep the numbers separate by type of job if the work changes. Fewer pings are only a win if the work still ships. Check that review hasn’t just landed on someone else. I haven’t run that test here. It’s how I’d find out whether I got my time back.</p>
+<p>A <a href="https://arxiv.org/html/2610.33588v1#S4.SS1">small workplace study</a> watched 11 developers use Claude Code or Codex at two companies. On average, they spent about a third of their observed time writing prompts or checking responses. The study didn’t measure how long the work would have taken without AI. Checking may be worth every minute. Count it anyway.</p>
+<p>I’m keeping the agents. I’d like to keep the rest between sets, too.</p>
+</section>
+<section id="next-step" class="article-close ui-surface ui-surface--editorial is-static" aria-labelledby="next-step-title"><p class="blog-eyebrow">KEEP THE WORK MOVING</p><h2 id="next-step-title">Give the next person what they need.</h2><p>Bring me an AI handoff that made you hunt for the evidence. A redacted example is plenty. I can help you redesign that handoff so the right person gets the work, the proof and the decision in one place.</p>
+{{cta:closing}}
+</section>
+<section aria-labelledby="see-what-the-sunset-grove-agency-makes"><h2 id="see-what-the-sunset-grove-agency-makes">See what the Sunset Grove agency makes</h2>
+<p>The dashboard shows who owns the work. The feed shows what actually goes out. See the creative agency’s work on <a href="https://www.instagram.com/sunsetgrove.nc/">Sunset Grove’s Instagram</a> and <a href="https://www.facebook.com/profile.php?id=61580664171187">Facebook</a>, or visit the <a href="https://sunsetgrovenc.com/">Sunset Grove website</a>. For the build behind it, see <a href="/blog/sunset-grove-ai-creative-agency/">How Maya leads the AI creative agency</a>.</p>
+</section>
+<section aria-labelledby="sources"><h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2610.33588v1#S4.SS1">Chou et al., <em>Developers as Managers of AI Agents: A Workplace Shadowing Study</em>, v1, §4.1</a></li>
+<li><a href="https://arxiv.org/html/2607.01904v3">He et al., <em>AI Writes Faster Than Humans Can Review</em>, v3, §§IV-A and IV-C</a>, a separate one-company study on code review coverage as output rose.</li>
+<li><a href="https://a2a-protocol.org/v1.0.0/specification/">Agent2Agent Protocol v1.0 specification</a></li>
+</ul>
+</section>
+<section aria-labelledby="agentic-society-resources" class="article-sources"><h2 id="agentic-society-resources">Agentic Society resources</h2>
+<ul>
+<li><a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">Agentic Society</a></li>
+<li><a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">Membership</a></li>
+<li><a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">Events</a></li>
+</ul>
+</section>

@@ -1,0 +1,44 @@
+<p>I asked my AI assistant why it hadn’t told me about a LinkedIn comment. It had. I missed the alert. The assistant missed the point.</p>
+
+<p>The first drafts could have gone under anybody’s comment. I wanted to make a specific point: if AI makes it cheap to produce more, you can turn your best people into a permanent review team. Remy had done a job I wanted off my plate. I still had to give it an argument worth sending.</p>
+
+<p>I use Remy, my ChatGPT Dot, for LinkedIn and my website. I use Codex for the build work, keep two Meta Muse accounts, and experiment with Grok Bot. I use Claude Duet in three separate Claude accounts: mine and one for each of two clients. Stewart, the Duet in my personal account, is my chief of staff. As much as I’d like fewer tabs, I’m keeping those accounts separate.</p>
+{{diagram:part1-right-account}}
+
+<section aria-labelledby="what-i-won-t-put-in-one-account"><h2 id="what-i-won-t-put-in-one-account">What I won’t put in one account</h2>
+<p>Imagine I ask for “the latest plan.” The assistant sends a useful answer. Then I see another business’s name on the source. The answer can be right and still be wrong for that job. I’ll take the extra sign-in over guessing whose files went into a polished reply.</p>
+<p>Duet has a main chat and topic channels that share memory within that Duet. I can give a project its own thread without having to introduce myself again. But a topic gives the work a name. It doesn’t give it a different set of keys. I use separate accounts for client work. I still check which files, connected apps and browser sessions each assistant can reach. A separate login is a starting point.</p>
+<p>If you’re shopping for a team, check <a href="https://support.claude.com/en/articles/17631495-get-started-with-claude-duet">Duet eligibility</a> first. As of November 20, 2026, Anthropic lists the U.S. preview as invite-only for Pro, Max and Ultra. It isn’t available on Team or Enterprise. “Client account” is how I use it, not a plan tier.</p>
+</section>
+<section aria-labelledby="which-one-would-i-open"><h2 id="which-one-would-i-open">Which one would I open?</h2>
+<p>This is how I divide the work, not a benchmark. I’d judge all four on the same things: can it find the right material, act in the right account and bring the work back to the right person?</p>
+<p><strong>Claude Duet</strong> is where I'd start when the relevant work is already in a Claude account. Ask for a link to a document the account can already read. Open it. You’ll learn more from that than a long answer summarizing a file you can’t find.</p>
+<p><strong>ChatGPT Dot</strong> is where I want the work to come back to me. Remy is useful for a comment I should see and a reply I should review. Codex is where I go to do the build. I don’t need a new assistant for each place I talk to Remy: <a href="https://developers.openai.com/training/walkthroughs/personalize-your-dot">the same Dot can operate across enabled channels</a>. But I still care where it comes back. A private reminder and a message in a team channel have very different audiences.</p>
+<p><strong>Meta Muse</strong> is the one I'd look at if the conversation naturally starts in WhatsApp. Cooper is my personal Muse. He helps me run the household. Maya is the Muse I use for Sunset Grove, my vacation-rental business. A useful trial would be a made-up guest question, with the reply kept in the private chat. That gets you far enough to know if you’d actually use it, without giving a new tool a real guest’s information.</p>
+<p><strong>Grok Bot</strong> is the one I’m experimenting with when I want named specialists. Here’s the detail I’d underline before setting one up for a team: <a href="https://docs.x.ai/grok-bot/faq">xAI says personal Bots on the same account share a cloud computer</a>, including files and signed-in browser sessions. A “Research” bot and a “Sales” bot can have distinct assignments. I wouldn’t make one “Client A” and the other “Client B” and assume the labels keep their work separate.</p>
+<p>In <a href="https://www.chatprd.ai/how-i-ai/grok-vs-dot-vs-muse-vs-claude-duet-nine-tasks-four-agents-no-universal-winner">Claire Vo’s nine-task comparison</a>, Muse sat out the Slack reply because she hadn’t connected it to Slack. Her test is useful precisely because she calls out access and setup differences. I’d check those before I score the answer. A smoother chat doesn’t fix an assistant that can’t see the work.</p>
+</section>
+<section aria-labelledby="see-what-happens-on-the-second-tuesday"><h2 id="see-what-happens-on-the-second-tuesday">See what happens on the second Tuesday</h2>
+<p>My colleague Oscar Hidalgo has a test I keep coming back to: pick the agent your team will use once the novelty wears off.</p>
+<p>Pick one job your team already does, like drafting a reply to a customer question. Before you connect anything, name the account that owns the job and what a good result looks like. Can someone open the material behind the draft? Did the draft stay in the right place? Did anybody have to do it over? Then watch what the team does the second week without a reminder. If someone goes back to doing it by hand, ask: <strong>What did you have to do twice?</strong></p>
+<p>I’m keeping the separate accounts. I don’t want to become their shared task list. I wrote about who gets to interrupt me once work is under way in <a href="/blog/managing-multiple-ai-assistants/">My AI Agents Found My Rest Timer</a>.</p>
+</section>
+<section id="next-step" class="article-close ui-surface ui-surface--editorial is-static" aria-labelledby="next-step-title"><p class="blog-eyebrow">CHOOSE THE WORK BEFORE THE TOOL</p><h2 id="next-step-title">Put the right work in the right account.</h2><p>Bring me one job your team handed to AI and ended up doing by hand. As a fractional CTO and COO, I can help you work out what’s in the way: the account, the access or the handoff. Then we can pick one change to test before you buy more seats.</p>
+{{cta:closing}}
+</section>
+<section aria-labelledby="sources"><h2 id="sources">Sources</h2>
+<ul>
+<li>Anthropic: <a href="https://support.claude.com/en/articles/17631495-get-started-with-claude-duet">Claude Duet setup, eligibility and working model</a>.</li>
+<li>OpenAI: <a href="https://developers.openai.com/training/walkthroughs/personalize-your-dot">Dot and connected channels</a> and <a href="https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex">ChatGPT Work and Codex</a>.</li>
+<li>Meta: <a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/">Muse and WhatsApp</a> and <a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/">Muse for small businesses</a>.</li>
+<li>Claire Vo: <a href="https://www.chatprd.ai/how-i-ai/grok-vs-dot-vs-muse-vs-claude-duet-nine-tasks-four-agents-no-universal-winner">Four personal agents on nine real tasks, with setup limits</a>.</li>
+<li>xAI: <a href="https://docs.x.ai/grok-bot/bots">Creating and managing Bots</a> and <a href="https://docs.x.ai/grok-bot/faq">the shared computer for personal Bots</a>.</li>
+</ul>
+</section>
+<section aria-labelledby="agentic-society-resources" class="article-sources"><h2 id="agentic-society-resources">Agentic Society resources</h2>
+<ul>
+<li><a href="https://agenticsociety.com/?ref=roman-967464" rel="sponsored noopener">Agentic Society</a></li>
+<li><a href="https://agenticsociety.com/apply?ref=roman-967464" rel="sponsored noopener">Membership</a></li>
+<li><a href="https://agenticsociety.com/events?ref=roman-967464" rel="sponsored noopener">Events</a></li>
+</ul>
+</section>
