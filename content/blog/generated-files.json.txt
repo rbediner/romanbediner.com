@@ -1,4 +1,7 @@
 [
+  "blog/duet-dot-muse-grok-bot-comparison/index.html",
+  "blog/managing-multiple-ai-assistants/index.html",
+  "blog/who-owns-ai-work/index.html",
   "blog/sunset-grove-ai-creative-agency/index.html",
   "blog/what-ai-spend-buys/index.html",
   "blog/make-judgment-reusable/index.html",

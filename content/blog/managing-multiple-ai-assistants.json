@@ -1,0 +1,64 @@
+{
+  "slug": "managing-multiple-ai-assistants",
+  "title": "My AI Agents Found My Rest Timer",
+  "displayTitle": "My AI Agents Found My Rest Timer",
+  "seoTitle": "How to Manage Multiple AI Agents Without Constant Pings",
+  "description": "Managing multiple AI agents? See when to send a ping, when to queue a decision, and how to measure the human time it takes to finish an AI-assisted job.",
+  "subtitle": "What earns a ping from an AI agent?",
+  "deck": "I gave the agents more to do. Then I had to decide which of their questions belonged between sets.",
+  "status": "ready",
+  "category": "AI & business",
+  "eyebrow": "PERSONAL AI AGENTS",
+  "date": "2026-11-20",
+  "updated": "2026-11-20",
+  "topics": [
+    "managing multiple AI agents",
+    "AI agent notifications",
+    "decision queues",
+    "agent handoffs",
+    "human review"
+  ],
+  "image": "/assets/blog/managing-multiple-ai-assistants-cover.png",
+  "imageAlt": "My AI Agents Found My Rest Timer. What earns a ping?",
+  "byline": "Fractional CTO and COO",
+  "authorJobTitle": "Fractional CTO and COO",
+  "authorBio": "I help teams design clear ownership, approvals and handoffs for AI-assisted work.",
+  "referralUrl": "https://agenticsociety.com/?ref=roman-967464",
+  "toc": [
+    [
+      "one-run-left-me-with-a-mystery-maya-told-me-to-carry-on",
+      "One run left me with a mystery. Maya told me to carry on."
+    ],
+    [
+      "what-earns-a-ping",
+      "What earns a ping?"
+    ],
+    [
+      "give-the-work-one-thread-not-your-whole-life",
+      "Give the work one thread, not your whole life"
+    ],
+    [
+      "count-the-minutes-you-spend-managing-the-agents",
+      "Count the minutes you spend managing the agents"
+    ],
+    [
+      "see-what-the-sunset-grove-agency-makes",
+      "See what the Sunset Grove agency makes"
+    ],
+    [
+      "sources",
+      "Sources"
+    ],
+    [
+      "agentic-society-resources",
+      "Agentic Society resources"
+    ]
+  ],
+  "diagrams": {
+    "part2-decision-not-ping": {
+      "label": "Illustrative policy for one website article in one workspace. Hold the release while evidence is missing: the current owner remains responsible until a worker accepts the task. Queue the exact preview, source check and editorial review for a decision. Interrupt only if waiting risks a deadline or makes a serious problem worse; silence is not approval. After an approved release, compare the live page with the approved version. Log a receipt only if they match; mismatch is not success. Measure human attention per finished job, including attention spent on unfinished work.",
+      "caption": "A blog release example, not a run log. Missing evidence holds release, a ready decision goes to the queue, and a verified match gets a quiet receipt.",
+      "eyebrow": "A DECISION, NOT ANOTHER PING"
+    }
+  }
+}

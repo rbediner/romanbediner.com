@@ -1,0 +1,56 @@
+{
+  "slug": "duet-dot-muse-grok-bot-comparison",
+  "title": "The Wrong AI Agent Can Give You the Right Answer",
+  "displayTitle": "The Wrong AI Agent Can Give You the Right Answer",
+  "seoTitle": "Claude Duet vs. ChatGPT Dot, Meta Muse and Grok Bot",
+  "description": "How I choose between Claude Duet, ChatGPT Dot, Meta Muse and Grok Bot, and why I check the account and its access before I hand over client work.",
+  "subtitle": "Pick the account before the agent.",
+  "deck": "Where I’d start with Claude Duet, ChatGPT Dot, Meta Muse and Grok Bot, and what I’d check before giving any of them access.",
+  "status": "ready",
+  "category": "AI & business",
+  "eyebrow": "PERSONAL AI AGENTS",
+  "date": "2026-11-20",
+  "updated": "2026-11-20",
+  "topics": [
+    "personal AI agents",
+    "Claude Duet",
+    "ChatGPT Dot",
+    "Meta Muse",
+    "Grok Bot"
+  ],
+  "image": "/assets/blog/duet-dot-muse-grok-bot-comparison-cover.png",
+  "imageAlt": "The Wrong AI Agent Can Give You the Right Answer. Pick the account before the agent.",
+  "byline": "Fractional CTO and COO",
+  "authorJobTitle": "Fractional CTO and COO",
+  "authorBio": "I help teams put AI in the right workflows and accounts.",
+  "referralUrl": "https://agenticsociety.com/?ref=roman-967464",
+  "toc": [
+    [
+      "what-i-won-t-put-in-one-account",
+      "What I won’t put in one account"
+    ],
+    [
+      "which-one-would-i-open",
+      "Which one would I open?"
+    ],
+    [
+      "see-what-happens-on-the-second-tuesday",
+      "See what happens on the second Tuesday"
+    ],
+    [
+      "sources",
+      "Sources"
+    ],
+    [
+      "agentic-society-resources",
+      "Agentic Society resources"
+    ]
+  ],
+  "diagrams": {
+    "part1-right-account": {
+      "label": "Roman’s setup: the same Claude Duet product in three accounts: personal, Client A and Client B. Choose the account allowed to access the work before choosing a topic. Test by finding an exact document. This depicts account choices, not verified security isolation. Dot brings work back to Roman; Codex handles the build work. He also keeps personal and rental-business Muse accounts. Different Grok Bot names do not establish separate client boundaries.",
+      "caption": "First pick the account allowed to see the work. Then choose the tool. The map shows Roman’s choices, not verified security isolation.",
+      "eyebrow": "ONE DUET PER CLAUDE ACCOUNT"
+    }
+  }
+}
